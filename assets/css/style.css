@@ -1,0 +1,282 @@
+@charset "UTF-8";
+@charset "iso-8859-15";
+body {
+	margin: 0;
+    padding: 0;
+    font-family: 'Open Sans Condensed', 'PingFang TC', 'Heiti TC', 'Noto Sans', 'Source Han Sans', 'Verdana', 'Helvetica', 'Microsoft YaHei', 'Microsoft JhengHei', sans-serif;
+    position: relative;
+    background-color: #fff;
+    color: #333;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+a {
+	color: gray;
+    font-weight: bold;
+}
+a:hover {
+	color: #333;
+}
+a._have_underline {
+    text-decoration: underline;
+}
+img {
+    width: 100%;
+}
+body .display-none {
+	display: none;
+}
+
+header,
+main,
+footer {
+    position: relative;
+    max-width: 70%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/** BEGIN header **/
+header {
+
+}
+/** END header **/
+
+/** BEGIN main **/
+main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: 80vh;
+}
+._main ._switch_items section ._part {
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+._main ._switch_items section ._part:last-child {
+    margin-bottom: 0;
+}
+    ._main ._switch_items section ._part > h3 {
+        padding: 0 3px;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #222;
+        border-bottom: 1px dashed #999;
+        display: inline;
+        letter-spacing: -.03em;
+        cursor: pointer;
+    }
+    ._main ._switch_items section ._part:before {
+        content: "\f0d7";
+        display: inline-block;
+        font-family: FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        border-bottom: 0;
+        margin-right: 3px;
+        font-size: 12px;
+        -moz-transform: scale(1.1) rotate(0deg);
+        -webkit-transform: scale(1.1) rotate(0deg);
+        -o-transform: scale(1.1) rotate(0deg);
+        -ms-transform: scale(1.1) rotate(0deg);
+        transform: scale(1.1) rotate(0deg);
+        -moz-transition: all .1s ease-in-out;
+        -webkit-transition: all .1s ease-in-out;
+        -o-transition: all .1s ease-in-out;
+        -ms-transition: all .1s ease-in-out;
+        transition: all .1s ease-in-out;
+        color: #05d;
+        background: transparent;
+    }
+    ._main ._switch_items section ._part > h3:after {
+        content: "";
+        margin-top: -21px;
+        z-index: 10;
+        position: relative;
+        display: flex;
+    }
+    ._main ._switch_items section ._part ul,
+    ._main ._switch_items section ._part ul li {
+        list-style-type: disc;
+        margin-left: .7em;
+        padding-left: 1px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: .5;
+        -moz-transition: all .15s ease-in-out;
+        -webkit-transition: all .15s ease-in-out;
+        -o-transition: all .15s ease-in-out;
+        -ms-transition: all .15s ease-in-out;
+        transition: all .15s ease-in-out;
+    }
+    ._main ._switch_items section ._part ul li._no_list_style {
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    ._main ._switch_items section ._part._show ul,
+    ._main ._switch_items section ._part._show ul li {
+        max-height: 500px;
+        overflow: visible;
+        opacity: 1;
+    }
+    ._main ._switch_items section ._part._show:before {
+        -moz-transform: scale(.85) rotate(-180deg);
+        -webkit-transform: scale(.85) rotate(-180deg);
+        -o-transform: scale(.85) rotate(-180deg);
+        -ms-transform: scale(.85) rotate(-180deg);
+        transform: scale(.85) rotate(-180deg);
+        color: #05a;
+    }
+    ._main ._switch_items section ._part:not(._show):after {
+        content: '點標題查看';
+        color: gray;
+        font-size: 13px;
+    }
+    ._main ._switch_items section ._part ul li ._item {
+        display: inline-flex;
+        width: 100%;
+    }
+    ._main ._switch_items section ._part ul li ._item span._left {
+        width: 14%;
+        margin-right: 9px;
+    }
+    ._main ._switch_items section ._part ul li ._item span._right {
+        width: 86%;
+        padding-left: 23px;
+        border-left: 1px dashed #ccc;
+    }
+
+    /*._main ._switch_items section ._part.__exp ul,
+    ._main ._switch_items section ._part.__exp ul li {
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+    }*/
+    ._main ._switch_items section ._part.__exp ul li {
+        margin-bottom: 9px;
+    }
+    ._main ._switch_items section ._part.__exp ul li:last-child {
+        margin-bottom: 0;
+    }
+    ._main ._switch_items section ._part.__exp ul li img {
+        -webkit-filter: grayscale(15%);
+        filter: grayscale(15%);
+        border-radius: 5px;
+        height: 100%;
+    }
+    ._main ._switch_items section ._part.__exp ul li a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #dc4776;
+    }
+    ._main ._switch_items section ._part.__exp ul li a:before {
+        content: "\f25a";
+        margin-right: 9px;
+        margin-left: -8px;
+        display: inline-block;
+        font-family: FontAwesome;
+        font-size: 12px;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-transition: all .1s ease-in-out;
+        -webkit-transition: all .1s ease-in-out;
+        -o-transition: all .1s ease-in-out;
+        -ms-transition: all .1s ease-in-out;
+        transition: all .1s ease-in-out;
+    }
+    ._main ._switch_items section ._part.__exp ul li a:hover:before {
+        margin-right: 15px;
+        font-size: 15px;
+    }
+    ._main ._switch_items section ._part.__exp ul li a:hover img {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+    }
+    ._main ._switch_items section ._part.__exp ul li a:hover * {
+        opacity: .9;
+    }
+    ._main ._switch_items section ._part.__exp ul li ._logo {
+        width: 45px;
+        display: inherit;
+    }
+    ._main ._switch_items section ._part.__exp ul li ._info {
+        margin-left: 9px;
+        display: flex;
+        flex-direction: column;
+        line-height: 21px;
+    }
+    ._main ._switch_items section ._part.__exp ul li ._info ._subTitle {
+        font-weight: normal;
+    }
+/** END main **/
+
+/** BEGIN footer **/
+footer {
+    margin-top: 30px;
+    margin-bottom: 9px;
+}
+footer ._contact {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+footer ._contact a {
+    border-bottom: 1px dashed #999;
+    line-height: 17px;
+}
+footer ._contact a:before {
+    content: "\f003";
+    margin-right: 5px;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+footer ._contact a:hover:before {
+    content: "\f0e0";
+}
+footer ._copyright {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+/** END footer **/
+
+@media (min-width: 1200px){}
+@media only screen and (max-width: 1100px){}
+@media only screen and (max-width: 768px){
+    header,
+    main,
+    footer {
+        max-width: 95%;
+    }
+}
+@media only screen and (max-width: 670px) and (min-width: 200px){}
+@media only screen and (max-width: 414px){}
+@media only screen and (max-width: 375px){}
+@media only screen and (max-width: 320px){}
+@media only screen and (max-width: 1024px) and (max-height: 768px){ /** ipad mini 橫 **/ }
+@media only screen and (max-width: 768px) and (max-height: 1024px){ /** ipad mini 直 **/ }
+@media only screen and (max-width: 435px) and (max-height: 773px){ /** Nexus 6P **/
+@media only screen and (max-width: 414px) and (max-height: 736px){ /** i6+ **/ }
+@media only screen and (max-width: 411px) and (max-height: 731px){ /** Nexus 5X **/ }
+@media only screen and (max-width: 375px) and (max-height: 667px){ /** i6 **/ }
+@media only screen and (max-width: 360px) and (max-height: 640px){ /** Galaxy S5 **/ }
+@media only screen and (max-width: 320px) and (max-height: 568px){ /** i5 **/ }
