@@ -37,7 +37,7 @@ main ._main {
     }
     ._main .__right ._name h2 {
         font-size: 27px;
-        color: #05a;
+        /*color: #05a;*/
         letter-spacing: .12em;
     }
     ._main .__right ._name h3 {
