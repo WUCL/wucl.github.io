@@ -6,11 +6,11 @@ main ._main {
     width: 100%;
 }
     ._main .__left {
-        width: 39%;
+        width: 30%;
         margin-right: 20px;
     }
     ._main .__right {
-        width: 61%;
+        width: 70%;
     }
 ._main .__left ._selfPhoto {
     width: 100%;

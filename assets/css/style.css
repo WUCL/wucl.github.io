@@ -29,6 +29,7 @@ a._have_underline {
 }
 img {
     width: 100%;
+    vertical-align: middle;
 }
 body .display-none {
 	display: none;
@@ -215,7 +216,7 @@ main {
         text-decoration: underline;
     }
     ._main ._switch_items section ._part.__exp ul li ._logo {
-        width: 45px;
+        width: 38px;
         display: inherit;
     }
     ._main ._switch_items section ._part.__exp ul li ._info {

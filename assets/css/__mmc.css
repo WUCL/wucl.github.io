@@ -42,25 +42,22 @@ main ._main {
         padding: 0 20px;
         margin-right: 20px;
     }
-    ._main .__right {
-        width: 65%;
-    }
     ._main .__left h3 {
         color: #00b900;
     }
     ._main .__left h3 i {
         margin-right: 3px;
     }
-._main .__left ._controller {
-    display: flex;
-    /*justify-content: flex-end;*/
-    /*font-size: 14px;*/
-    cursor: pointer;
-    color: gray;
-}
-._main .__left ._controller:hover {
-    color: #333;
-}
+    ._main .__left ._controller {
+        display: flex;
+        /*justify-content: flex-end;*/
+        /*font-size: 14px;*/
+        cursor: pointer;
+        color: gray;
+    }
+    ._main .__left ._controller:hover {
+        color: #333;
+    }
     ._main .__left ._controller:before {
         content: "\f144";
         display: inline-block;
@@ -88,7 +85,33 @@ main ._main {
         width: 100%;
         min-height: 440px;
         border: 1px solid #eee;
-        border-radius: 2px;
+        border-radius: 5px;
+    }
+    ._main .__left ._screen2 {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 9px;
+    }
+    ._main .__left ._screen2 a {
+        max-height: 250px;
+        overflow-y: scroll;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    ._main .__left ._screen2 a:first-child {
+        margin-right: 9px;
+    }
+    ._main .__left ._screen2 a img {
+        -webkit-filter: grayscale(55%);
+        filter: grayscale(55%);
+    }
+    ._main .__left ._screen2 a:hover img {
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+    }
+
+    ._main .__right {
+        width: 65%;
     }
     ._main ._switch_items section ._part > h3:after {
         margin-top: -26px;
