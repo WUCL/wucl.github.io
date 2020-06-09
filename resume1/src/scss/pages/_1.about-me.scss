@@ -1,0 +1,127 @@
+/* =======================
+   pages/about-me
+   ======================= */
+.main {
+	section.about-me {
+		margin-bottom: 20px;
+		.inner {
+			border-bottom: 1px solid lighten($color-black, 87%);
+			padding-bottom: 20px;
+			.whoisthis {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.left {
+					width: 200px;
+					.avatar {
+						width: 150px;
+						border-radius: 50%;
+						overflow: hidden;
+						margin: 0 auto;
+						background-color: $color-third;
+						background-image: linear-gradient(19deg, lighten($color-second, 25%) 0%, $color-third 70%);
+						img {
+						}
+					}
+				}
+				.right {
+					display: flex;
+					align-items: flex-start;
+					justify-content: center;
+					.introduction {
+						height: 100%;
+						display: flex;
+						flex-direction: column;
+						align-items: flex-start;
+						justify-content: center;
+						letter-spacing: -.5px;
+						.name {
+							font-size: $fontsize-11;
+							font-weight: bold;
+							color: $color-main;
+							line-height: $fontsize-11;
+							letter-spacing: -2px;
+						}
+						.name-en {
+							font-size: $fontsize-9;
+							line-height: normal;
+							letter-spacing: -2px;
+						}
+						.title {
+						}
+					}
+					// .social {
+					// 	height: 100%;
+					// 	border-left: 1px solid #ddd;
+					// 	margin-left: 20px;
+					// 	padding-left: 20px;
+					// 	display: flex;
+					// 	flex-direction: column;
+					// 	align-items: flex-start;
+					// 	justify-content: center;
+					// 	ul {
+					// 		li {
+					// 			list-style: none;
+					// 			display: flex;
+					// 			align-items: center;
+					// 			justify-content: flex-start;
+					// 			line-height: normal;
+					// 			font-size: $fontsize-1;
+					// 			label {
+					// 				width: 30px;
+					// 				text-align: right;
+					// 				i {
+					// 					margin-right: 5px;
+					// 				}
+					// 			}
+					// 			span {
+
+					// 			}
+					// 		}
+					// 	}
+					// }
+				}
+			}
+			.social {
+				margin-top: 15px;
+				ul {
+					width: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					li {
+						list-style: none;
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						line-height: normal;
+						font-size: $fontsize-1;
+						margin-left: 20px;
+						&:first-child {
+							margin-left: 0;
+						}
+						label {
+							width: 30px;
+							text-align: right;
+							i {
+								margin-right: 5px;
+							}
+						}
+						span {
+
+						}
+						a {
+							&:hover {
+								color: nth($color-analogous, 3);
+								border-bottom-color: nth($color-analogous, 3);
+							}
+						}
+					}
+				}
+			}
+			.bio {
+				margin-top: 20px;
+			}
+		}
+	}
+}

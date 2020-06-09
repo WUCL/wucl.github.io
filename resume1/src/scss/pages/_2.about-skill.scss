@@ -1,0 +1,26 @@
+/* =======================
+   pages/about-skill
+   ======================= */
+.main {
+	section.about-skill {
+		.inner {
+			ul {
+				li {
+					margin-bottom: 2px;
+					letter-spacing: 0;
+					> label {
+						display: inline-block;
+						width: 38px;
+					}
+					> span {
+						padding-left: 10px;
+						border-left: 1px dashed lighten($color-black, 87%);
+						mark {
+							background: transparent;
+						}
+					}
+				}
+			}
+		}
+	}
+}
