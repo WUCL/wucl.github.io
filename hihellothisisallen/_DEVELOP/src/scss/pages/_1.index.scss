@@ -10,7 +10,15 @@
 				font-size: inherit;
 				pointer-events: none;
 				&:nth-child(1) {
-					user-select: none;
+					// user-select: none;
+					&::selection {
+						background: transparent !important;
+						color: nth($color-colorful, 4) !important;
+					}
+					&::-moz-selection {
+						background: transparent !important;
+						color: nth($color-colorful, 4) !important;
+					}
 				}
 				&:nth-child(3) {
 					color: $color-black;
@@ -22,6 +30,20 @@
 						background: $color-main !important;
 						color: $color-second !important;
 					}
+				}
+			}
+			img {
+				width: 100px;
+				padding: 10px;
+				object-fit: cover;
+				filter: blur(7px);
+				&::selection {
+					background: $color-black !important;
+					filter: blur(0px) !important;
+				}
+				&::-moz-selection {
+					background: $color-black !important;
+					filter: blur(0px) !important;
 				}
 			}
 		}

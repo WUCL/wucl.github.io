@@ -1,4 +1,5 @@
-$(function() {
+(function() {
+    'use strict';
     var MAIN = {
         env: 'html',
         el: {
@@ -19,4 +20,4 @@ $(function() {
         },
     };
     MAIN.init();
-});
+})();
