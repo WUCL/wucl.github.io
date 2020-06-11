@@ -12,8 +12,8 @@
         <link rel="icon" type="image/png" href="./favicon.png" />
         <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
-		
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+		@@include('../src/tpl/__style.html')
+        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/style.min.css" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55333603-4"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -23,18 +23,9 @@
         </script>
 	</head>
 	<body hi this is allen>
-		<main id="main" class="main">
-		    <section class="index">
-		    	<div class="inner">
-					<p>Hi Hello!</p>
-					<p>Is ME.</p>
-					<p>That's Right is Allen.</p>
-		    	</div>
-		    </section>
-		</main>
+		@@include('../src/tpl/_main.html')
 
-		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="./public/js/custom/eventdevice.js"></script>
-		<script src="./public/js/main.js"></script>
+		@@include('../src/tpl/__script.html')
+		<script src="@@webRoot/public/js/main.js"></script>
 	</body>
 </html>

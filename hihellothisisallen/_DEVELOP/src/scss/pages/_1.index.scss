@@ -1,0 +1,29 @@
+/* =======================
+   pages/index
+   ======================= */
+.main {
+	section.index {
+		font-size: inherit;
+		.inner {
+			font-size: inherit;
+			p {
+				font-size: inherit;
+				pointer-events: none;
+				&:nth-child(1) {
+					user-select: none;
+				}
+				&:nth-child(3) {
+					color: $color-black;
+					&::selection {
+						background: $color-main !important;
+						color: $color-second !important;
+					}
+					&::-moz-selection {
+						background: $color-main !important;
+						color: $color-second !important;
+					}
+				}
+			}
+		}
+	}
+}
