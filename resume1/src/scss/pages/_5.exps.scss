@@ -183,6 +183,22 @@ body.open-exps {
 		}
 		.container {
 			transform: translateX(0);
+			img {
+				width: 87%;
+				max-height: 500px;
+				object-fit: contain;
+			}
+		}
+		&[data-exp="talkux"] {
+			.whatidid {
+				ul {
+					li {
+						list-style: none;
+						margin-left: 0;
+						letter-spacing: 0;
+					}
+				}
+			}
 		}
 	}
 }

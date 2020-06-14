@@ -1,41 +1,5 @@
 (function() {
     "use strict";
-    var MAIN = {
-        env: 'html',
-        el: {
-            $window: $(window),
-            $doc: $(document),
-            $body: $('body'),
-            $header: $('#header'),
-            $main: $('#main'),
-            $footer: $('#footer'),
-
-            $aboutExp: $('.about-exp'),
-
-            $exps: $('#exps'),
-        },
-        var: {
-            epxs: '',
-        },
-        init: function() {
-            this.bindEvent();
-        },
-        bindEvent: function() {
-            // this.el.$aboutExp.on('click', '.seethat', (e) => {
-            //     let $exp = $(e.currentTarget).data('exp');
-            //     window.helper.updateUrlParams(location.href, 'exps', $exp, true);
-            //     this.el.$body.addClass('disableScroll').addClass('open-exps');
-            //     return false;
-            // });
-            // this.el.$exps.on('click', '.overlay', () => {
-            //     window.helper.updateUrlParams(location.href, 'exps', '', true);
-            //     this.el.$body.removeClass('disableScroll').removeClass('open-exps');
-            //     return false;
-            // });
-        },
-    };
-    MAIN.init();
-
     window.el = {
         $window: $(window),
         $doc: $(document),
@@ -60,7 +24,7 @@
                 , "item": [
                     "媽媽的專屬網站"
                     , "解決媽媽生活中的大小識"
-                    , "在職期間為 <a href='https://www.alexa.com/' target='_blank' rel='noreferrer noopener'>Alexa</a> 前 50 大網站"
+                    , "在職期間為 <a href='https://www.alexa.com/' target='_blank' rel='noreferrer noopener'>Alexa</a> 台灣前 50 大網站"
                 ]
             }
             , "myposition": {
@@ -109,7 +73,6 @@
                 , "item": [
                     "<img src='./public/img/exp/talkux-VolunteerCertificate.jpg'>"
                 ]
-                , "listStyle": 0
             }
         },
         "spaceadvisor": {
@@ -121,16 +84,22 @@
             , "abouts": {
                 "title": "關於公司",
                 "item": [
+                    '全新電商平台，也是台灣首創，真正商業運作的專業空間出租平台'
+                    , '集結最豐富、齊全的場地選擇，讓場地精準地被搜尋與預訂'
                 ]
             }
             , "myposition": {
                 "title": "負責職務",
                 "item": [
+                    "產品企劃 - 企劃網站內容、功能測試與主要窗口聯繫"
+                    , "前端 - 主要協助產品於上線前的一置性，並整合與備份"
                 ]
             }
             , "whatidid": {
                 "title": "做過的事",
                 "item": [
+                    "主要從測試階段參與，規劃 User Flow  / Mind Map 以及功能單元測試"
+                    , "協助產品上線前的整合階段，並將產品準時上線"
                 ]
             }
         },
@@ -143,6 +112,10 @@
             , "abouts": {
                 "title": "關於公司",
                 "item": [
+                    '痞客邦為台灣最大興趣社交媒體'
+                    , '為台灣流量最高的原生網站'
+                    , '截至目前擁有累積 8 億篇文章'
+                    , "在職期間為 <a href='https://www.alexa.com/' target='_blank' rel='noreferrer noopener'>Alexa</a> 台灣前 5 大網站（全球前百大）"
                 ]
             }
             , "myposition": {
@@ -205,6 +178,7 @@
                 window.helper.updateUrlParams(location.href, 'exps', $exp, true);
 
                 let $exps = this.exps[$exp];
+                $('#exps').attr('data-exp', $exp);
                 $('#exps').find('.logo img').attr('src', $exps.logo);
                 $('#exps').find('.info time').html($exps.time);
                 $('#exps').find('.info .name').attr('href', $exps.name);
@@ -214,17 +188,17 @@
                 let $abouts = $exps.abouts;
                 let $temp_abouts = '';
                 $abouts.item.forEach(abouts => $temp_abouts += '<li>' + abouts + '</li>');
-                $('#exps').find('.abouts').attr('data-listStyle', $whatidid.listStyle).attr('data-title', $abouts.title).find('ul').html($temp_abouts);
+                $('#exps').find('.abouts').attr('data-title', $abouts.title).find('ul').html($temp_abouts);
 
                 let $myposition = $exps.myposition;
                 let $temp_myposition = '';
                 $myposition.item.forEach(myposition => $temp_myposition += '<li>' + myposition + '</li>');
-                $('#exps').find('.myposition').attr('data-listStyle', $whatidid.listStyle).attr('data-title', $myposition.title).find('ul').html($temp_myposition);
+                $('#exps').find('.myposition').attr('data-title', $myposition.title).find('ul').html($temp_myposition);
 
                 let $whatidid = $exps.whatidid;
                 let $temp_whatidid = '';
                 $whatidid.item.forEach(whatidid => $temp_whatidid += '<li>' + whatidid + '</li>');
-                $('#exps').find('.whatidid').attr('data-listStyle', $whatidid.listStyle).attr('data-title', $whatidid.title).find('ul').html($temp_whatidid);
+                $('#exps').find('.whatidid').attr('data-title', $whatidid.title).find('ul').html($temp_whatidid);
 
                 window.el.$body.addClass('disableScroll').addClass('open-exps');
             },
@@ -241,6 +215,7 @@
             closeExp() {
                 let $target = document.querySelector("#about-exp ul li.active");
                 $target.classList.remove("active");
+                $('#exps').attr('data-exp', '');
                 window.helper.updateUrlParams(location.href, 'exps', '', true);
                 window.el.$body.removeClass('disableScroll').removeClass('open-exps');
             },
