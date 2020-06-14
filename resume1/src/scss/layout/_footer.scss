@@ -5,6 +5,9 @@ footer.footer {
 	width: 100%;
 	margin-top: 30px;
 	margin-bottom: 10px;
+	@include mq($max-width: $bp-2s) {
+		margin-bottom: 50px;
+	}
 	section {
 		line-height: normal;
 		&.copyright {

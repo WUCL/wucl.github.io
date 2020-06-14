@@ -6,18 +6,32 @@
 		.inner {
 			ul {
 				li {
-					margin-bottom: 2px;
+					margin-bottom: 5px;
 					letter-spacing: 0;
 					> label {
 						display: inline-block;
 						width: 38px;
+						padding: 0 3px;
+						@include mq($max-width: $bp-2s) {
+							width: 35px;
+							margin-right: 5px;
+						}
+						&:after {
+							content: "";
+							position: absolute;
+							left: 0;
+							bottom: 1px;
+							width: 100%;
+							height: 11px;
+							background: rgba(nth($color-analogous, 1), .15);
+							@include mq($max-width: $bp-2s) {
+								background: rgba(nth($color-analogous, 1), .10);
+							}
+						}
 					}
 					> span {
 						padding-left: 10px;
 						border-left: 1px dashed lighten($color-black, 87%);
-						mark {
-							background: transparent;
-						}
 					}
 				}
 			}
