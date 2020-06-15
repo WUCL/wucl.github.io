@@ -199,7 +199,7 @@
                 $('#exps').attr('data-exp', $exp);
                 $('#exps').find('.logo img').attr('src', $exps.logo);
                 $('#exps').find('.info time').html($exps.time);
-                $('#exps').find('.info .name').attr('href', $exps.name);
+                $('#exps').find('.info .name').attr('href', $exps.url);
                 $('#exps').find('.info .name').html($exps.name);
                 $('#exps').find('.info .title').html($exps.title);
 
