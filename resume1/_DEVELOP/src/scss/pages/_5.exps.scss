@@ -132,6 +132,12 @@
 			padding-bottom: 125px;
 			overflow-y: scroll;
 			scroll-behavior: smooth;
+			@include mq($max-width: $bp-2) {
+				padding-bottom: 130px;
+			}
+			@include mq($max-width: $bp-2s) {
+				padding-bottom: 150px;
+			}
 			> div {
 				line-height: normal;
 				margin-bottom: 25px;
