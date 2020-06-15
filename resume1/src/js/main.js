@@ -118,14 +118,32 @@
                     , "在職期間為 <a href='https://www.alexa.com/' target='_blank' rel='noreferrer noopener'>Alexa</a> 台灣前 5 大網站（全球前百大）"
                 ]
             }
+            , "abouts": {
+                "title": "關於公司",
+                "item": [
+                    "旗下的 <a href='https://www.pixnet.net/' target='_blank' rel='noreferrer noopener'>痞客邦</a> 為台灣最大興趣社交媒體"
+                    , "為台灣流量最高的原生網站"
+                    , "截至目前擁有累積 8 億篇文章"
+                    , "在職期間為 <a href='https://www.alexa.com/' target='_blank' rel='noreferrer noopener'>Alexa</a> 台灣前 5 大網站（全球前百大）"
+                ]
+            }
             , "myposition": {
                 "title": "負責職務",
                 "item": [
+                    "主要處理核心外的會員活動發想規劃開發以及業務需求製作"
+                    , "同時為公司大型活動的主要負責人（e.g. <a href='http://mol.mcu.edu.tw/pixnet%E8%BF%94%E6%A0%A1%E6%97%A5-%E8%90%AC%E8%81%96%E7%AF%80%E9%87%8D%E7%8F%BE%E7%B6%93%E5%85%B8%E9%9B%BB%E5%BD%B1%E5%A0%B4%E6%99%AF/' target='_blank' rel='noreferrer noopener'>年度萬聖節活動</a>等）"
+                    , "擔任部門數據提供者，提供數據上的變化與方向建議到計畫擬定"
+                    , "共同經營 PIXNET 吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a>"
                 ]
             }
             , "whatidid": {
                 "title": "做過的事",
                 "item": [
+                    "開發規格模組化，使業務案與流程，以便提高機制快速開發和流程一致性"
+                    , "協助完成公司內部 佈告欄系統 規劃與輔助開發，使同仁"
+                    , "運用數據分析經營吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a> 以創造部門價值與訓練小編文字力和自身行銷掌握力"
+                    , "發起製作 User Interface Guideline，並與 UI Team 共同以一年內時間編輯完成"
+                    , "連續 2 年主辦 萬聖節活動，並擔任 PM 角色。擴大同仁參與度與過程趣味程度"
                 ]
             }
         }
