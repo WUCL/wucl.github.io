@@ -1,0 +1,157 @@
+<main id="main" class="main">
+	<section id="weatherbox" class="weatherbox morning noon evening">
+		<div class="inner">
+			<div class="top">
+				<div class="background">
+					<div class="dayandnight"></div>
+				</div>
+				<div class="info">
+					<div class="status">
+						<div class="temp">26°C</div>
+						<div class="position"><span v-for="item in coords">{{ item.toFixed(2) + ' ' }}</span></div>
+						<div class="dateandtime" v-html="dateandtime"></div>
+					</div>
+					<div class="weather">
+						<svg class="icon-weather rain1" viewbox="0 0 100 100">
+							<g>
+								<g class="rain">
+									<line x1="-15" y1="0" x2="-15" y2="10"></line>
+									<line x1="0" y1="-14" x2="0" y2="-4"></line>
+									<line x1="15" y1="-5" x2="15" y2="5"></line>
+								</g>
+								<g class="cloud">
+									<circle cx="-11" cy="-9" r="17"></circle>
+									<circle cx="-7" cy="-5" r="17"></circle>
+									<rect x="-35" y="-9" rx="17"></rect>
+								</g>
+							</g>
+						</svg>
+					</div>
+				</div>
+			</div>
+			<div class="bottom">
+				<ul class="weekly">
+					<li class="day">
+						<div class="week">MON</div>
+						<div class="weather">
+							<svg class="icon-weather rain1" viewbox="0 0 100 100">
+								<g>
+									<g class="rain">
+										<line x1="-15" y1="0" x2="-15" y2="10"></line>
+										<line x1="0" y1="-14" x2="0" y2="-4"></line>
+										<line x1="15" y1="-5" x2="15" y2="5"></line>
+									</g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+					<li class="day">
+						<div class="week">TUE</div>
+						<div class="weather">
+							<svg class="icon-weather cloudy2" viewbox="0 0 100 100">
+								<g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+					<li class="day">
+						<div class="week">WED</div>
+						<div class="weather">
+							<svg class="icon-weather rain1" viewbox="0 0 100 100">
+								<g>
+									<g class="rain">
+										<line x1="-15" y1="0" x2="-15" y2="10"></line>
+										<line x1="0" y1="-14" x2="0" y2="-4"></line>
+										<line x1="15" y1="-5" x2="15" y2="5"></line>
+									</g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+					<li class="day">
+						<div class="week">THU</div>
+						<div class="weather">
+							<svg class="icon-weather cloudy1" viewbox="0 0 100 100">
+								<g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+					<li class="day">
+						<div class="week">FRI</div>
+						<div class="weather">
+							<svg class="icon-weather sun" viewbox="0 0 100 100">
+								<g>
+									<g class="sun">
+										<circle r="20"></circle>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+					<li class="day">
+						<div class="week">SAT</div>
+						<div class="weather">
+							<svg class="icon-weather cloudsun" viewbox="0 0 100 100">
+								<g>
+									<g class="sun">
+										<circle r="20"></circle>
+									</g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+					<li class="day">
+						<div class="week">SUN</div>
+						<div class="weather">
+							<svg class="icon-weather rain1" viewbox="0 0 100 100">
+								<g>
+									<g class="rain">
+										<line x1="-15" y1="0" x2="-15" y2="10"></line>
+										<line x1="0" y1="-14" x2="0" y2="-4"></line>
+										<line x1="15" y1="-5" x2="15" y2="5"></line>
+									</g>
+									<g class="cloud">
+										<circle cx="-11" cy="-9" r="17"></circle>
+										<circle cx="-7" cy="-5" r="17"></circle>
+										<rect x="-35" y="-9" rx="17"></rect>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</main>
