@@ -3,9 +3,13 @@
 	option: infinite forwards alternate
 	animation: keep2scale 1s infinite alternate;
 	======================= */
-@keyframes fadeEffect { // animation: fadeEffect 1s forwards;
+@keyframes fadeInEffect { // animation: fadeEffect 1s forwards;
 	from { opacity: 0; }
 	to { opacity: 1; }
+}
+@keyframes fadeOutEffect {
+	from { opacity: 1; }
+	to { opacity: 0; }
 }
 @keyframes lv1Effect { // for preload use
 	from { opacity: 1; }

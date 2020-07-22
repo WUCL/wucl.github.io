@@ -11,8 +11,8 @@ $haeder_h-m: 50px;
 $haeder_h-s: 60px;
 
 // Font Stacks
-// font-family: "Oswald"; // for Numeric & English
-$fontfamily-primary: "Noto Sans", "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+// font-family: ; // for Numeric & English
+$fontfamily-primary: "Oswald", "Noto Sans", "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $fontfamily-secondary: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Text
@@ -32,17 +32,19 @@ $fontsize-6: 2.2rem; // 35.2
 $fontsize-7: 2.4rem; // 38.4
 $fontsize-8: 2.6rem; // 41.6
 $fontsize-9: 2.8rem; // 44.8
-$fontsize-10: 4rem;
+$fontsize-10: 3rem;
 
 //Colors
 $color-white: #fff;
 $color-black: #000;
-$color-main: #116934;
-$color-second: #ffcc00;
+// $color-main: #116934;
+// $color-second: #ffcc00;
 $color-font: #bdbdbd;
-$color-font2: #646464;
+$color-font-2: #444;
+$color-font-3: #666;
 
-$color-evening: #1c3f5c;
+$color-daynight: [#ddeeff,  #ffddcc, #1c3f5c];
+
 $color-rain: #4dacff;
 $color-cloud: [$color-white, #eee, #ccc];
 $color-sun: [#ffd633, #ff6845];

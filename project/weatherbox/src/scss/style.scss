@@ -7,26 +7,26 @@
 // @import "compass/typography/text/replacement";
 // @import "compass/utilities/sprites";
 
-@import "utilities/_config.scss";
-@import "utilities/_helpers.scss";
-@import "utilities/_mixins.scss";
-@import "utilities/_media-queries.scss";
+@import "utilities/_config";
+@import "utilities/_helpers";
+@import "utilities/_mixins";
+@import "utilities/_media-queries";
 @import "_base";
 //import layout
-// @import "layout/_container.scss";
-@import "layout/_footer.scss";
-@import "layout/_header.scss";
-@import "layout/_layout.scss";
-// @import "layout/_sidebar.scss";
+// @import "layout/_container";
+@import "layout/_footer";
+@import "layout/_header";
+@import "layout/_layout";
+// @import "layout/_sidebar";
 //import modules
-// @import "modules/_btns.scss";
-// @import "modules/_nav.scss";
-@import "modules/_colorbox.scss";
-// @import "modules/_mCustomScrollbar.scss";
-// @import "modules/_pagination.scss";
-// @import "modules/_waterfall-loading.scss";
+// @import "modules/_btns";
+// @import "modules/_nav";
+@import "modules/_colorbox";
+// @import "modules/_mCustomScrollbar";
+// @import "modules/_pagination";
+// @import "modules/_waterfall-loading";
 
 //import pages
-@import "pages/_0.animation.scss";
-@import "pages/_0.common.scss";
-@import "pages/_1.weatherbox.scss";
+@import "pages/_0.animation";
+@import "pages/_0.common";
+@import "pages/_1.wbox";
