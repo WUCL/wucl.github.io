@@ -5,10 +5,6 @@
         }
     };
 
-    const __DEVELOP_MODE = true; // 測試模式
-    const __API_GEOCODE_ID = 'AIzaSyDD_nIoN9l-UtRJWpuA776UmHAwuXFqh7E';
-    const __API_OPENDATA_WEB_GOV_ID = 'CWB-88D7AA92-6D43-431B-9E43-10642FE8C162'
-
     var vm = new Vue({
         el: "#weatherbox",
         data: {
@@ -54,7 +50,7 @@
                     ws: ['', '']
                 },
             },
-            bgChangingActive: false,
+            bgChangingActive: true,
         },
         beforeCreate() {
             if (!__DEVELOP_MODE) console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
@@ -62,23 +58,23 @@
             console.log('== beforeCreate ==');
         },
         created() {
-            if (__DEVELOP_MODE) {
-                this.geocode.coords = ['25.0673297', '121.5274438'];
-                this.geocode.address = [
-                    '10491台灣台北市中山區新生北路三段82-5號',
-                    [
-                        {long_name: "82-5", short_name: "82-5", types: ["street_number"]}
-                        , {long_name: "新生北路三段", short_name: "新生北路三段", types: ["route"]}
-                        , {long_name: "中山區", short_name: "中山區", types: ["administrative_area_level_3", "political"]}
-                        , {long_name: "台北市", short_name: "台北市", types: ["administrative_area_level_1", "political"]}
-                        , {long_name: "台灣", short_name: "TW", types: ["country", "political"]}
-                        , {long_name: "10491", short_name: "10491", types: ["postal_code"]}
-                    ]
-                ];
-                this.live.address.city = this.geocode.address[1][3]['long_name'];
-                this.live.address.dist = this.geocode.address[1][2]['long_name'];
-                this.goGetWeather();
-            } else {
+            // if (__DEVELOP_MODE) {
+            //     this.geocode.coords = ['25.0673297', '121.5274438'];
+            //     this.geocode.address = [
+            //         '10491台灣台北市中山區新生北路三段82-5號',
+            //         [
+            //             {long_name: "82-5", short_name: "82-5", types: ["street_number"]}
+            //             , {long_name: "新生北路三段", short_name: "新生北路三段", types: ["route"]}
+            //             , {long_name: "中山區", short_name: "中山區", types: ["administrative_area_level_3", "political"]}
+            //             , {long_name: "台北市", short_name: "台北市", types: ["administrative_area_level_1", "political"]}
+            //             , {long_name: "台灣", short_name: "TW", types: ["country", "political"]}
+            //             , {long_name: "10491", short_name: "10491", types: ["postal_code"]}
+            //         ]
+            //     ];
+            //     this.live.address.city = this.geocode.address[1][3]['long_name'];
+            //     this.live.address.dist = this.geocode.address[1][2]['long_name'];
+            //     this.goGetWeather();
+            // } else {
                 var $this = this;
 
                 // to get address
@@ -91,12 +87,8 @@
                         var element = document.getElementById('geolocation');
                         $this.geocode.coords[0] = position.coords.latitude;
                         $this.geocode.coords[1] = position.coords.longitude;
-                        // console.log('Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n' + 'Altitude: ' + position.coords.altitude + '\n' + 'Accuracy: ' + position.coords.accuracy + '\n' + 'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' + 'Heading: ' + position.coords.heading + '\n' + 'Speed: ' + position.coords.speed + '\n' + 'Timestamp: ' + position.timestamp);
-                        // console.log($this.geocode.coords[0], $this.geocode.coords[1]); // 25.0673297 121.5274438
                         $this.goGetGeocode($this.geocode.coords[0], $this.geocode.coords[1]);
                     }
-                    // onError Callback receives a PositionError object
-                    //
                     function onError(error) {
                         console.log('onError');
                         console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
@@ -104,7 +96,7 @@
                 } else {
                     console.log('geolocation IS NOT available');
                 }
-            }
+            // }
 
             console.log('== created ==')
             // console.log('this.a: ' + this.a)
@@ -116,25 +108,10 @@
             // console.log('this.$el: ' + this.$el)
 
             // window.el.$body.addClass(deviceObj.name);
-            // this.loadExps();
 
-            if (localStorage.weather) {
-                console.log(localStorage);
-                // this.weather = localStorage.weather;
-            }
-            // else {
-            //     console.log(localStorage);
-            // }
+            if (localStorage.weather) this.weather = JSON.parse(localStorage.weather);
         },
         watch: {
-            weather: {
-                handler: function() {
-                    console.log(localStorage);
-                    // localStorage.weather = JSON.stringify(this.weather);
-                    console.log(localStorage.weather);
-                },
-                deep: true
-            },
             h() {
                 console.log(this.h);
             },
@@ -203,10 +180,10 @@
                 }
             },
             goGetWeather() {
-                // console.log('goGetWeather');
+                console.log('goGetWeather');
                 let $this = this;
+                if (this.weather.update !== '') return this.updateLiveData();
                 if (this.geocode.coords.length !== 2) return;
-                // console.log(this.geocode.coords);
 
                 axios
                 .get('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-091', {
@@ -218,7 +195,6 @@
                 })
                 .then(function (response) {
                     console.log('===== get F-D0047-091 response =====');
-                    // console.log(response);
                     let $data = response.data.cwbopendata;
                     let $loaction = $data.dataset.locations.location;
                     $this.weather.update = $data.dataset.datasetInfo.update
@@ -230,7 +206,6 @@
                             $this.weather.location[$name][e.weatherElement[i]['elementName']] = e.weatherElement[i]['time'];
                         }
                     });
-                    // console.log($this.weather.location);
 
                     axios
                     .get('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-089', {
@@ -250,6 +225,7 @@
                                 $this.weather.location[$name][e.weatherElement[i]['elementName']] = e.weatherElement[i]['time'];
                             }
                         });
+                        localStorage.weather = JSON.stringify($this.weather);
                         $this.updateLiveData();
                     })
                     .catch(function (error) {
@@ -261,7 +237,7 @@
                 });
             },
             updateLiveData() {
-                console.log(this.weather.location);
+                console.log('updateLiveData');
                 let $weather = this.weather.location[this.live.address.city]
                 , $live = this.live;
                 $live.t.min = $weather['MinT'][0]['elementValue'].value;
@@ -279,11 +255,10 @@
                 $live.wind.ws[1] = $weather['WS'][0]['elementValue'][0].measures;
                 $live.description = $weather['WeatherDescription'][0]['elementValue'].value;
                 $live.wx = $weather['Wx'][0]['elementValue'][1].value;
-                // console.log(this.live);
             }
         }
     });
-    var timer = setInterval(function(){
+    var timer = setInterval(() => {
         vm.d = (new Date());
     }, 1000);
 })();

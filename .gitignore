@@ -112,3 +112,7 @@ typings/
 
 # dist/public/*
 # !dist/public/lib/
+
+# hidden project/weatherbox config.js id
+project/weatherbox/src/js/config.js
+project/weatherbox/dist/public/js/config.js
