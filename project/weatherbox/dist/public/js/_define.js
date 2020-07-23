@@ -7,11 +7,16 @@
 // 2. Geocoding資源分享
 // https://medium.com/@shihwenwutw/geocoding%E8%B3%87%E6%BA%90%E5%88%86%E4%BA%AB-2e7614aba49
 
-// google api
+// google api - Google Cloud Platform
 // 1. request count
 // https://console.cloud.google.com/google/maps-apis/apis/geocoding-backend.googleapis.com/metrics?project=dosomethings-193716&hl=zh-tw&supportedpurview=project
 // 2. billing
 // https://console.cloud.google.com/billing/006A84-764CB7-39FF1D/reports/cost-breakdown?project=dosomethings-193716
+// 3. 訂價與方案
+// https://cloud.google.com/maps-platform/pricing?hl=zh-TW
+// 4. 價目表
+// https://cloud.google.com/maps-platform/pricing?hl=zh-TW
+// Geocoding - 每月 $200 美元抵免額 對應的免費用量 - 最多 40,000 次呼叫
 
 // gov opendata
 // 1. 氣象資料開放平臺
