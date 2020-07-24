@@ -279,19 +279,9 @@
                 $live.description = $weather['WeatherDescription'][0]['elementValue'].value;
                 $live.wx = $weather['Wx'][0]['elementValue'][1].value;
             },
-            computeLocalStorageSize() { // 計算 localStorage 目前使用多少；localStorage 最大使用 5MB
-                var _lsTotal = 0,
-                _xLen, _x;
-                for (_x in localStorage) {
-                    if (!localStorage.hasOwnProperty(_x)) {
-                        continue;
-                    }
-                    _xLen = ((localStorage[_x].length + _x.length) * 2);
-                    _lsTotal += _xLen;
-                    console.log("***** " + _x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB")
-                };
-                console.log("***** " + "Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
-                // return;
+            computeLocalStorageSize() { // 計算 localStorage 使用量；localStorage 最大量為 5MB // https://stackoverflow.com/questions/4391575/how-to-find-the-size-of-localstorage
+                var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log("*** " + _x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("*** " + "Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+                return;
             }
         }
     });
