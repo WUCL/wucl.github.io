@@ -1,40 +1,4 @@
-// todo
-// 1. 將座標與對應地區存到 Local Storage 避免重複 request google api
-
-// ref
-// 1. 使用Google Map API (Geocoding API) 得到點位縣市鄉鎮資料
-// https://medium.com/@icelandcheng/%E4%BD%BF%E7%94%A8google-map-api-geocoding-api-%E5%BE%97%E5%88%B0%E9%BB%9E%E4%BD%8D%E7%B8%A3%E5%B8%82%E9%84%89%E9%8E%AE%E8%B3%87%E6%96%99-25bf5f0e4a21
-// 2. Geocoding資源分享
-// https://medium.com/@shihwenwutw/geocoding%E8%B3%87%E6%BA%90%E5%88%86%E4%BA%AB-2e7614aba49
-
-// google api - Google Cloud Platform
-// 1. request count
-// https://console.cloud.google.com/google/maps-apis/apis/geocoding-backend.googleapis.com/metrics?project=dosomethings-193716&hl=zh-tw&supportedpurview=project
-// 2. billing
-// https://console.cloud.google.com/billing/006A84-764CB7-39FF1D/reports/cost-breakdown?project=dosomethings-193716
-// 3. 訂價與方案
-// https://cloud.google.com/maps-platform/pricing?hl=zh-TW
-// 4. 價目表
-// https://cloud.google.com/maps-platform/pricing?hl=zh-TW
-// Geocoding - 每月 $200 美元抵免額 對應的免費用量 - 最多 40,000 次呼叫
-
-// gov opendata
-// 1. 氣象資料開放平臺
-// https://opendata.cwb.gov.tw/index
-// 2. 氣象局 OpenData 抓取「目前天氣」、「天氣預報」
-// https://www.latech.tw/2018/03/opendata.html
-
-// 3. 鄉鎮天氣預報-台灣未來1週天氣預報 - 用到
-// https://opendata.cwb.gov.tw/dataset/statisticDays/F-D0047-091
-// https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-091?Authorization=CWB-88D7AA92-6D43-431B-9E43-10642FE8C162&format=JSON
-// 4. 一般天氣預報-一週縣市天氣預報
-// https://opendata.cwb.gov.tw/dataset/statisticDays/F-C0032-005
-// https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-005?Authorization=CWB-88D7AA92-6D43-431B-9E43-10642FE8C162&format=JSON
-// 5. 鄉鎮天氣預報-台灣未來2天天氣預報 - 用到
-// https://opendata.cwb.gov.tw/dataset/statisticDays/F-D0047-089
-// https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-089?Authorization=CWB-88D7AA92-6D43-431B-9E43-10642FE8C162&format=JSON
-
-// 欄位單詞解釋
+// 中央氣象局 - 欄位單詞解釋
 window.word: {
 	'T': '溫度'
 	'Td': '露點溫度'
@@ -55,6 +19,7 @@ window.word: {
 	'WeatherDescription': '天氣描述'
 };
 
+// 中央氣象局 - 天氣現象 Wx ID 對應代表值
 window.weatherParameter = {
 	1: [['晴天','CLEAR']],
 	2: [['晴時多雲','MOSTLY CLEAR']],
