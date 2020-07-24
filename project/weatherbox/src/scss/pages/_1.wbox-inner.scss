@@ -39,9 +39,15 @@
 			transition: .25s cubic-bezier(.6, .04, .98, .335);
 		}
 		.status {
-			width: 57%;
+			width: 55%;
+			@include mq($max-width: $bp-xl) {
+				width: 51%;
+			}
+			@include mq($max-width: $bp-4l) {
+				width: 50%;
+			}
 			@include mq($max-width: $bp-3l) {
-				width: 54%;
+				width: 49%;
 			}
 			@include mq($max-width: $bp-2l) {
 				width: 47%;
@@ -81,13 +87,22 @@
 			}
 		}
 		.details {
-			width: 43%;
+			width: 45%;
 			height: auto;
-			max-height: 78%;
+			max-height: 81%;
 			overflow: scroll;
 			-webkit-overflow-scrolling: touch;
+			@include mq($max-height: $bp-2m) {
+				max-height: 90%;
+			}
+			@include mq($max-width: $bp-xl) {
+				width: 49%;
+			}
+			@include mq($max-width: $bp-4l) {
+				width: 50%;
+			}
 			@include mq($max-width: $bp-3l) {
-				width: 46%;
+				width: 51%;
 			}
 			@include mq($max-width: $bp-2l) {
 				width: 53%;
