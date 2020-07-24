@@ -5,8 +5,11 @@
 	1. 參考 APPLE iOS 天氣APP 製作
 	2. 顯示 溫度（最大/最小/平均）、體感溫度（最大/最小）、降雨機率、濕度、風、紫外線、天氣描述
 2. 降低 opendata api request 其中包含 Google api /CWB
-	1. 將兩項資訊 1.座標（小數點後4碼判斷）與該對應地區 2.天氣預報 存到 localStorage 降低避免重複 request => 7/24已完成
-	2. 測試壓縮 localStorage 儲存容量
+	1. 將兩項資訊 1.座標（小數點後4碼判斷）與該對應地區 2.天氣預報 存到 localStorage 降低避免重複 request // 0724已完成
+	2. 測試壓縮 localStorage 儲存容量 => 使用 lz-string 壓縮; weather 1687.82 KB -> 62.05 KB // 0724完成
+	https://stackoverflow.com/questions/20773945/storing-compressed-json-data-in-local-storage
+	https://pieroxy.net/blog/pages/lz-string/index.html
+	https://github.com/pieroxy/lz-string/
 3. 新增天氣圖形
 	1. 依照中央氣象局提供的 天氣現象 Wx 代號 判斷如何做天氣圖像顯示
 4. 確認 localStorage 更新頻率，針對 中央氣象局 更新為主
@@ -14,8 +17,8 @@
 	2. 做 按鈕 ，主動 request 更新天氣預報內容
 5. 一週天氣大略溫度與降雨機率
 
-#### optimization todo or not
-1. 測試 vue store 使用，優化 Vue 使用
+#### optimization todo or not - 優化 Vue
+1. 測試 vue store 使用
 https://cn.vuejs.org/v2/guide/state-management.html#%E7%AE%80%E5%8D%95%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E8%B5%B7%E6%AD%A5%E4%BD%BF%E7%94%A8
 
 #### ref

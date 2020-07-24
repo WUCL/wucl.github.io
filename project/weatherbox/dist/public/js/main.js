@@ -9,9 +9,10 @@
             d: (new Date()), // datetime
             h: 0,
             geocode: {
+                latlngFixed: 4, // 存 localStorage 小數後幾碼
                 coords: [],
                 address: {}, // google api callback
-                mapping: {} // from localstorage
+                mapping: {} // if localstorage have than save it
             },
             weather: {
                 update: '',
@@ -45,6 +46,7 @@
                 },
             },
             bgChangingActive: true,
+            storageCompressActive: true,
         },
         beforeCreate() {
             if (!__DEVELOP_MODE) console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
@@ -84,10 +86,16 @@
             // console.log('this.$el: ' + this.$el)
 
             // window.el.$body.addClass(deviceObj.name);
+            if (this.storageCompressActive != localStorage.doCompress) {
+                console.log('hellohellohellohellohellohellohellohellohellohellohello');
+                localStorage.removeItem('geoMapping');
+                localStorage.removeItem('weather');
+            }
+            localStorage.doCompress = (this.storageCompressActive)?1:0;
 
             console.log(this.geocode.mapping);
-            if (localStorage.geoMapping) this.geocode.mapping = JSON.parse(localStorage.geoMapping);
-            if (localStorage.weather) this.weather = JSON.parse(localStorage.weather);
+            if (localStorage.geoMapping) this.geocode.mapping = (this.storageCompressActive)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
+            if (localStorage.weather) this.weather = (this.storageCompressActive)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
             console.log(this.geocode.mapping);
         },
         watch: {
@@ -130,23 +138,15 @@
             }
         },
         methods: {
-            // arrayEquals(a, b) {
-            //     return Array.isArray(a) &&
-            //     Array.isArray(b) &&
-            //     a.length === b.length &&
-            //     a.every((val, index) => val === b[index]);
-            // },
-            // getKeyByValue(object, value) {
-            //     return Object.keys(object).find(key => object[key] === value);
-            // },
             getKeyByObjValue(object, value) {
                 return Object.keys(object).find(key1 => Object.keys(object[key1]).find(key2 => object[key1][key2] === value));
             },
             goGetGeocode(lat, lng) {
                 console.log('goGetGeocode');
                 let $this = this;
-                console.log($this.geocode.mapping);
-                let exist_citydist = $this.getKeyByObjValue($this.geocode.mapping, lat.toFixed(4) + ',' + lng.toFixed(4));
+                let $latlngFixed = $this.geocode.latlngFixed;
+                // console.log($this.geocode.mapping);
+                let exist_citydist = $this.getKeyByObjValue($this.geocode.mapping, lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed));
                 if (!(exist_citydist === undefined)) { // check lat lng mapping address
                     console.log('---------- has addressMapping');
                     let $citydist = exist_citydist.split(',');
@@ -169,7 +169,6 @@
                         if (!localStorage.useGoogleApi) localStorage.useGoogleApi = 0;
                         localStorage.useGoogleApi = Number(localStorage.useGoogleApi) + 1;
 
-
                         // $this.geocode.address['full'] = response.data.results[0].formatted_address;
                         $this.live.address.city = $this.geocode.address['city'] = response.data.results[0].address_components.slice(-3)[0]['long_name'];
                         $this.live.address.dist = $this.geocode.address['dist'] = response.data.results[0].address_components.slice(-4)[0]['long_name']
@@ -182,11 +181,13 @@
                             $this.geocode.mapping[$citydist] = [];
                         }
                         // console.log('_____確認 座標是否已存在 ?');
-                        if (!$this.geocode.mapping[$citydist].includes(lat.toFixed(4) + ',' + lng.toFixed(4))) {
+                        if (!$this.geocode.mapping[$citydist].includes(lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed))) {
                             // console.log('_____否 存在座標，為新座標');
-                            $this.geocode.mapping[$citydist].push(lat.toFixed(4) + ',' + lng.toFixed(4));
+                            $this.geocode.mapping[$citydist].push(lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed));
                         }
-                        localStorage.geoMapping = JSON.stringify($this.geocode.mapping);
+                        // if (this.storageCompressActive) localStorage.geoMapping = LZString.compress(JSON.stringify($this.geocode.mapping));
+                        // else localStorage.geoMapping = JSON.stringify($this.geocode.mapping);
+                        localStorage.geoMapping = ($this.storageCompressActive)?LZString.compress(JSON.stringify($this.geocode.mapping)):JSON.stringify($this.geocode.mapping);
                         $this.goGetWeather(); // 確認是否需要再向 中央氣象局 要資料
                     })
                     .catch(function (error) {
@@ -243,7 +244,9 @@
                                 $this.weather.location[$name][e.weatherElement[i]['elementName']] = e.weatherElement[i]['time'];
                             }
                         });
-                        localStorage.weather = JSON.stringify($this.weather);
+                        // if (this.storageCompressActive) localStorage.weather = LZString.compress(JSON.stringify($this.weather));
+                        // else localStorage.weather = JSON.stringify($this.weather);
+                        localStorage.weather = ($this.storageCompressActive)?LZString.compress(JSON.stringify($this.weather)):JSON.stringify($this.weather);
                         $this.updateLiveData();
                     })
                     .catch(function (error) {
@@ -275,6 +278,20 @@
                 $live.wind.ws[1] = $weather['WS'][0]['elementValue'][0].measures;
                 $live.description = $weather['WeatherDescription'][0]['elementValue'].value;
                 $live.wx = $weather['Wx'][0]['elementValue'][1].value;
+            },
+            computeLocalStorageSize() { // 計算 localStorage 目前使用多少；localStorage 最大使用 5MB
+                var _lsTotal = 0,
+                _xLen, _x;
+                for (_x in localStorage) {
+                    if (!localStorage.hasOwnProperty(_x)) {
+                        continue;
+                    }
+                    _xLen = ((localStorage[_x].length + _x.length) * 2);
+                    _lsTotal += _xLen;
+                    console.log("***** " + _x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB")
+                };
+                console.log("***** " + "Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+                // return;
             }
         }
     });
