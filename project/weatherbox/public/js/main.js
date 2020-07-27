@@ -1,11 +1,11 @@
 (function() {
     "use strict";
-    let old_console_log = console.log;
-    console.log = function(msg) {
-        if (!__DEV_MODE) return;
-        old_console_log(msg);
-        // old_console_log("\u001b[32m" + msg +"\u001b[0m");
-    }
+    // let old_console_log = console.log;
+    // console.log = function(msg) {
+    //     if (!__DEV_MODE) return;
+    //     old_console_log(msg);
+    //     // old_console_log("\u001b[32m" + msg +"\u001b[0m");
+    // }
     var vm = new Vue({
         el: "#weatherbox",
         data: {
@@ -51,10 +51,10 @@
                 },
             },
             bgChangingActive: true,
-            storageCompressActive: true,
+            storageCompressActive: false,
         },
         beforeCreate() {
-            old_console_log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
+            console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             console.log('== beforeCreate ==');
         },
@@ -169,8 +169,10 @@
                     })
                     .then(function (response) {
                         console.log('---------- axios get onSuccess');
-
                         console.log('useGoogleApi + 1');
+
+                        console.log(response);
+
                         if (!localStorage.useGoogleApi) localStorage.useGoogleApi = 0;
                         localStorage.useGoogleApi = Number(localStorage.useGoogleApi) + 1;
 
