@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+        <title>Weather Box</title>
+        <link rel="icon" type="image/png" href="./favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
+		
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+	</head>
+	<body>
+        
+		<main id="main" class="main">
+			<section id="weatherbox" class="weatherbox" :class="{'bg-changing': bgChangingActive }" :data-daynight="daynight" :data-h="h" :data-wx="wxid">
+				<div class="background"></div>
+				<div class="inner">
+					<div class="card">
+						<div class="status">
+							<div class="position" v-html="live.address.city + live.address.dist"></div>
+							<div class="temp" v-html="live.t.avg"></div>
+							<div class="dateandtime" v-html="datetime"></div>
+						</div>
+						<div class="details">
+							<ul>
+								<li v-for="(value, name) in details" :class="'item-' + value[0]">
+									<span>{{ name }}</span><label>{{ value[1] }}</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		
+        
+
+        <script src="./public/js/config.js"></script>
+		<script src="./public/js/_define.js"></script> -->
+
+		<!-- <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script> -->
+		<script src="./public/js/custom/eventdevice.js"></script>
+
+		<!-- development version, includes helpful console warnings -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+		<!-- production version, optimized for size and speed -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="./public/lib/lz-string/lz-string.min.js"></script>
+		<script src="./public/js/main.js"></script>
+	</body>
+</html>
