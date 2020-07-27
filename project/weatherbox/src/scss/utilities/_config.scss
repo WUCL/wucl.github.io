@@ -1,0 +1,68 @@
+@charset "UTF-8";
+// ==========================================================================
+// Global Config
+// ==========================================================================
+
+$pixnavbar_height: 45px;
+$pixnavbar_height_m: 40px;
+
+$haeder_h: 65px;
+$haeder_h-m: 50px;
+$haeder_h-s: 60px;
+
+// Font Stacks
+// font-family: ; // for Numeric & English
+$fontfamily-primary: "Oswald", "Noto Sans", "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$fontfamily-secondary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Text
+$fontsize-f: .7rem; // 11.2
+$fontsize-e: .75rem; // 12
+$fontsize-d: .8rem; // 12.8
+$fontsize-c: .85rem; // 13.6
+$fontsize-b: .9rem; // 14.4
+$fontsize-a: .95rem; // 15.2
+$fontsize: 16px;
+$fontsize-1: 1.2rem; // 19.2
+$fontsize-2: 1.4rem; // 22.4
+$fontsize-3: 1.6rem; // 25.6
+$fontsize-4: 1.8rem; // 28.8
+$fontsize-5: 2rem; // 32
+$fontsize-6: 2.2rem; // 35.2
+$fontsize-7: 2.4rem; // 38.4
+$fontsize-8: 2.6rem; // 41.6
+$fontsize-9: 2.8rem; // 44.8
+$fontsize-10: 3rem;
+
+//Colors
+$color-white: #fff;
+$color-black: #000;
+// $color-main: #116934;
+// $color-second: #ffcc00;
+$color-font: #bdbdbd;
+$color-font-2: #444;
+$color-font-3: #666;
+
+$color-daynight: [#ddeeff,  #ffddcc, #1c3f5c];
+
+$color-rain: #4dacff;
+$color-cloud: [$color-white, #eee, #ccc];
+$color-sun: [#ffd633, #ff6845];
+
+
+// breakpoint
+$bp: 1440px; // 1280px
+$bp-2: 980px;
+
+$bp-xs: 320px;
+$bp-s: 375px;
+$bp-2s: 480px;
+$bp-3s: 560px;
+$bp-m: 640px;
+$bp-2m: 768px;
+$bp-l: 800px;
+$bp-2l: 900px;
+$bp-3l: 1000px;
+$bp-4l: 1100px;
+$bp-xl: 1280px;
+$bp-xxl: 1366px;
