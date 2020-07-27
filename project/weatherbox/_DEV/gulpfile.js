@@ -19,7 +19,7 @@ const gulp = require('gulp')
     ;
 
 const SRC = './src'
-    , DEST = './dist'
+    , DEST = '../'
     , PATH = {
         SRC: {
             HTML: SRC + '/*.html'

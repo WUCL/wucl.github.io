@@ -116,4 +116,6 @@ typings/
 
 # hidden project/weatherbox config.js id
 project/*/dist/public/js/_config.js
+project/*/public/js/_config.js
 project/*/src/js/_config.js
+project/*/*/src/js/_config.js
