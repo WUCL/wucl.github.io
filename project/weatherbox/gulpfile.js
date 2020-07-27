@@ -75,6 +75,7 @@ gulp.task('script', function () {
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish', { verbose: true }))
     .pipe(debug({ title: 'Compile:' }))
+    // .pipe(uglify())                     // 將 JavaScript 做最小化
     .pipe(gulp.dest(PATH.DEST.JS))
     .pipe(bs.stream())
     .pipe(notify({
@@ -179,6 +180,7 @@ gulp.task('build',
     gulp.series(
         gulp.parallel(
             'script'
+            // , 'uglify2'
             , 'style'
             , 'image'
         )

@@ -1,6 +1,11 @@
 (function() {
     "use strict";
-
+    let old_console_log = console.log;
+    console.log = function(msg) {
+        if (!__DEV_MODE) return;
+        old_console_log(msg);
+        // old_console_log("\u001b[32m" + msg +"\u001b[0m");
+    }
     var vm = new Vue({
         el: "#weatherbox",
         data: {
@@ -49,7 +54,7 @@
             storageCompressActive: true,
         },
         beforeCreate() {
-            if (!__DEVELOP_MODE) console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
+            old_console_log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             console.log('== beforeCreate ==');
         },

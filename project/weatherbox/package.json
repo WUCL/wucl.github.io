@@ -34,6 +34,6 @@
     "imagemin-jpegtran": "^6.0.0",
     "imagemin-pngquant": "^8.0.0",
     "jshint": "^2.11.0",
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
   }
 }
