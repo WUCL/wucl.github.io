@@ -6,6 +6,8 @@
 		.inner {
 			ul {
 				margin-top: 10px;
+				display: flex;
+				flex-direction: column-reverse;
 				li {
 					margin-left: 10px;
 					margin-bottom: 15px;
@@ -14,12 +16,22 @@
 					opacity: 1;
 					border-bottom: 0;
 					cursor: pointer;
-					@include mq($max-width: $bp-2s) {
-						padding-left: 25px;
+					overflow: hidden;
+
+					border: 1px solid rgba($color-black, .2);
+					border-radius: 10px;
+					padding: 15px;
+					// background-color: $color-white;
+					background-image: linear-gradient(43deg, rgba($color-white, .1) 0%, rgba($color-white, .5) 100%);
+					transition: .15s;
+					@include mq($max-width: $bp-3s) {
+						// padding-left: 25px;
+						padding: 7px;
+						flex-wrap: wrap;
 					}
 					.logo {
-						width: 54px;
-						height: 54px;
+						width: 64px;
+						height: 64px;
 						border-radius: 10px;
 						overflow: hidden;
 						background: $color-white;
@@ -36,7 +48,7 @@
 						justify-content: center;
 						margin-left: 5px;
 						opacity: .78;
-						transition: .2s .2s;
+						transition: .2s;
 						.name,
 						.title {
 							padding: 0 5px;
@@ -45,6 +57,7 @@
 							color: $color-second;
 							color: nth($color-analogous, 1);
 							font-weight: bold;
+							font-size: $fontsize-1;
 							i {
 								margin-left: 5px;
 								font-size: $fontsize-f;
@@ -61,6 +74,7 @@
 						}
 						.title {
 							overflow: hidden;
+							font-size: $fontsize;
 							&:after {
 								content: "";
 								background: lighten($color-third, 7%);
@@ -82,21 +96,99 @@
 							}
 						}
 					}
-					&:after {
-						content: "\f105";
-						display: inline-block;
-						font-family: "Font Awesome 5 Pro";
-						font-size: $fontsize-1;
-						font-weight: bold;
-						text-rendering: auto;
-						-webkit-font-smoothing: antialiased;
-						-moz-osx-font-smoothing: grayscale;
-						margin-left: 3%;
-						transition: .35s .25s, color .25s .35s;
-						transform: translateX(-100%);
-						opacity: 0;
-						color: nth($color-analogous, 3);
+					.more {
+						position: absolute;
+						right: 0;
+						top: 50%;
+						width: 22%;
+						height: 78%;
+						transform: translateY(-50%);
+						// background: rgba($color-main, .15);
+						border-left: 1px solid rgba($color-black, .2);
+						transition: .15s;
+						@include mq($max-width: $bp-3s) {
+							position: relative;
+							right: 0;
+							width: 100%;
+							height: 100%;
+							border-left: none;
+							border-top: 1px solid rgba($color-black, .1);
+							margin-top: 7px;
+							padding-top: 7px;
+							transform: translateY(0);
+							text-align: right;
+						}
+						span {
+							font-family: "Oswald";
+							display: inline-flex;
+							align-items: center;
+							justify-content: center;
+							background: rgba($color-third, 0);
+							padding: 2px 15px;
+							border-radius: 10px;
+							transition: .2s;
+							@include mq($max-width: $bp-3s) {
+								// width: 30%;
+								padding: 0 9px;
+								// background: rgba($color-third, .6);
+							}
+							&:before,
+							&:after {
+								margin-top: -3px;
+								font-family: inherit;
+								text-rendering: auto;
+								-webkit-font-smoothing: antialiased;
+								-moz-osx-font-smoothing: grayscale;
+								// transition: .35s .25s, color .25s .35s;
+								transition: .25s;
+							}
+							&:before {
+								content: "MORE";
+								font-size: $fontsize-3;
+								@include mq($max-width: $bp-3s) {
+									font-size: $fontsize-1;
+								}
+							}
+							&:after {
+								content: "\f105";
+								display: inline-block;
+								font-family: "Font Awesome 5 Pro";
+								font-size: $fontsize-3;
+								// font-weight: bold;
+								margin-left: 10px;
+								color: nth($color-analogous, 3);
+								margin-top: 2px;
+								@include mq($max-width: $bp-3s) {
+									font-size: $fontsize;
+									margin-top: 0;
+									background: $color-third;
+									width: 18px;
+									height: 18px;
+									text-align: center;
+									padding-top: 1px;
+									padding-left: 1px;
+									border-radius: 50%;
+									overflow: hidden;
+									display: block;
+								}
+							}
+						}
 					}
+					// &:after {
+					// 	content: "\f105";
+					// 	display: inline-block;
+					// 	font-family: "Font Awesome 5 Pro";
+					// 	font-size: $fontsize-1;
+					// 	font-weight: bold;
+					// 	text-rendering: auto;
+					// 	-webkit-font-smoothing: antialiased;
+					// 	-moz-osx-font-smoothing: grayscale;
+					// 	margin-left: 3%;
+					// 	transition: .35s .25s, color .25s .35s;
+					// 	transform: translateX(-100%);
+					// 	opacity: 0;
+					// 	color: nth($color-analogous, 3);
+					// }
 					&.active {
 						.logo {
 							transform: scale(.78);
@@ -109,6 +201,11 @@
 					}
 					@include mq($min-width: $bp-2s) {
 						&:hover {
+							background: $color-white;
+							border-color: rgba($color-black, .5);
+							border-bottom-width: 3px;
+							border-right-width: 3px;
+							transform: translate(-3px, -3px);
 							.logo {
 								img {
 									transform: scale(1.1);
@@ -116,7 +213,7 @@
 							}
 							.info {
 								opacity: 1;
-								margin-left: 20px;
+								// margin-left: 20px;
 								.name {
 									i {
 										opacity: .5;
@@ -128,6 +225,21 @@
 									}
 								}
 							}
+							.more {
+								width: 25%;
+								span {
+									background: rgba($color-third, .87);
+									&:after {
+										transform: scaleX(-1);
+									}
+									&:hover {
+										transform: scale(1.1);
+										&:after {
+											transform: scaleX(1);
+										}
+									}
+								}
+							}
 							&:after {
 								transform: translateX(0);
 								opacity: 1;
@@ -136,16 +248,16 @@
 						}
 					}
 					@include mq($max-width: $bp-2s) {
-						&:after {
-							content: "\f330";
-							position: absolute;
-							left: 0;
-							margin-left: 0;
-							opacity: 1;
-							transform: translateX(0);
-							color: lighten($color-second, 20%);
-							font-size: $fontsize-d;
-						}
+						// &:after {
+						// 	content: "\f330";
+						// 	position: absolute;
+						// 	left: 0;
+						// 	margin-left: 0;
+						// 	opacity: 1;
+						// 	transform: translateX(0);
+						// 	color: lighten($color-second, 20%);
+						// 	font-size: $fontsize-d;
+						// }
 
 					}
 				}

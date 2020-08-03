@@ -103,7 +103,7 @@ window.exps = {
     },
     "pixnet": {
         "logo": "./public/img/exp/pixnet.png"
-        , "time": "201805 - "
+        , "time": "201805 - NOW"
         , "url": "https://www.pixnet.net/"
         , "name": "PIXNET"
         , "title": "F2E"
