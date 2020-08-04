@@ -21,13 +21,14 @@
         <script src="@@webRoot/public/js/trace.js"></script>
 	</head>
 	<body>
-        @@include('../src/tpl/_header.html')
-		@@include('../src/tpl/_main.html')
-		@@include('../src/tpl/_footer.html')
-        @@include('../src/tpl/_aside.html')
-
+        <div id="app">
+            @@include('../src/tpl/_header.html')
+            @@include('../src/tpl/_main.html')
+    		@@include('../src/tpl/_footer.html')
+            @@include('../src/tpl/_aside.html')
+        </div>
 		@@include('../src/tpl/__script.html')
         <script src="@@webRoot/public/js/define.js"></script>
-		<script src="@@webRoot/public/js/main.min.js"></script>
+		<script src="@@webRoot/public/js/main.js"></script>
 	</body>
 </html>

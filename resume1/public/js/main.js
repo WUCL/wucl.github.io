@@ -1,16 +1,18 @@
 (function() {
     "use strict";
-    new Vue({
-        el: "#about-exp",
+    var $app = new Vue({
+        el: "#app",
         data: {
-            exps: window.exps,
-            // exps: ''
+            exps: '',
+            skills: ''
         },
         mounted: function() {
+            console.log(123456);
             console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             window.el.$body.addClass(deviceObj.name);
-            // this.loadExps();
+            console.log(exps);
+            console.log(skills);
         },
         watch: {
             exps: function (val) {
@@ -20,24 +22,6 @@
         created: function () {
         },
         methods: {
-            loadExps() {
-                $.getJSON("public/js/exps.json", function(data) {
-                    // console.log(data);
-                    this.exps = data;
-                })
-                .done(function() {
-                    // console.log("second success");
-                })
-                .fail(function(error) {
-                    // console.log("error");
-                    console.log(error);
-                })
-                .always(function() {
-                    // console.log("complete");
-                    console.log(this.exps);
-                });
-                return;
-            },
             externalLink(url) {
                 window.open(url, '_blank');
             },
@@ -72,16 +56,6 @@
 
                 window.el.$body.addClass('disableScroll').addClass('open-exps');
             },
-        }
-    });
-
-    new Vue({
-        el: "#exps",
-        data: {
-        },
-        mounted: function() {
-        },
-        methods: {
             closeExp() {
                 let $target = document.querySelector("#about-exp ul li.active");
                 $target.classList.remove("active");
@@ -91,4 +65,24 @@
             },
         }
     });
+
+    function loadData() {
+        $.getJSON("public/js/data.json", function(data) {
+            $app.exps = data.exps;
+            $app.skills = data.skills;
+        })
+        .done(function() {
+            console.log("second success");
+        })
+        .fail(function(error) {
+            console.log("error");
+            console.log(error);
+        })
+        .always(function() {
+            console.log("complete");
+            // console.log(this.exps);
+        });
+        return;
+    }
+    loadData();
 })();

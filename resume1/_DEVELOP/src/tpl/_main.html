@@ -42,29 +42,9 @@
 		<div class="inner">
 			<h4 class="title" title="SKILL">擅長技術</h4>
 			<ul class="with-disc">
-				<li>
-					<label>程式</label>
-					<span>HTML、CSS、Javascript、jQuery、PHP、SQL</span>
-				</li>
-				<li>
-					<label>監測</label>
-					<span><mark class="without-bg" title="Google Analytics">GA</mark>、<mark class="without-bg" title="Google Tag Manager">GTM</mark>、<mark class="without-bg" title="Google PageSpeed Insights">GPI</mark>、GTMetrix、WebPagetest、Mixpanel、NewRelic、<a href="https://web.dev/measure/" target="_blank" rel="noreferrer noopener">Google web.dev Measure</a></span>
-				</li>
-				<li>
-					<label>平台</label>
-					<span>Wordpress、Discuz!</span>
-				</li>
-				<li>
-					<label>廣告</label>
-					<span>Google Ad Manage、Google Adsense</span>
-				</li>
-				<li>
-					<label>管理</label>
-					<span>Google Sheets、Asana、Trello、Bitbucket、GitHub、Plesk</span>
-				</li>
-				<li>
-					<label>其他</label>
-					<span>CRM、Slack、LINE Bot、Sublime Text、Notion、macOS、GOV OpenData</span>
+				<li v-bind:data-skill="key" v-for="(skill, key) in skills">
+					<label>{{ key }}</label>
+					<span v-html="skill"></span>
 				</li>
 			</ul>
 		</div>

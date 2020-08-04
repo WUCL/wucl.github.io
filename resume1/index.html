@@ -21,149 +21,130 @@
         <script src="./public/js/trace.js"></script>
 	</head>
 	<body>
-        <header id="header" class="header">
-            <div class="_header"></div>
-        </header>
-		<main id="main" class="main">
-			<section class="about-me">
-				<div class="inner">
-					<div class="whoisthis">
-						<div class="left">
-							<div class="avatar">
-								<img name="CHUNG-LUN WU" title="CHUNG-LUN WU" alt="CHUNG-LUN WU" src="./public/img/avatar.png">
-							</div>
-						</div>
-						<div class="right">
-							<div class="introduction">
-								<h1 class="name" name="吳忠倫 CHUNG-LUN WU" title="吳忠倫">吳忠倫</h1>
-								<h2 class="name-en" name="ALLEN WU" title="ALLEN WU">ALLEN WU</h2>
-								<h3 class="title">F2E / PM / Blogger</h3>
-							</div>
-						</div>
-					</div>
-					<div class="social">
-						<ul>
-							<li>
-								<a href="mailto:wucl98@gmail.com">
-									<label><i class="far fa-envelope"></i></label>
-									<span>wucl98@gmail.com</span>
-								</a>
-							</li>
-							<li>
-								<a href="https://line.me/ti/p/HqGOY5dqYD" target="_blank" rel="noreferrer noopener">
-									<label><i class="fab fa-line"></i></label>
-									<span>wu.cl</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="bio">
-						<p>一個中度蘋果粉 <i class="fab fa-apple"></i>，喜歡蘋果帶給世界的變化。</p>
-						<p>不斷持續從蘋果的設計與體驗中學習，也期待每年蘋果發表會。</p>
-						<p>另外也對新奇產品感到好奇與嘗試，特別愛逛募資平台並在上面買些什麼。（e.g. <a href="https://www.kickstarter.com/" target="_blank" rel="noreferrer noopener">KICKSTARTER</a>、 <a href="https://www.zeczec.com/" target="_blank" rel="noreferrer noopener">嘖嘖</a>）</p>
-					</div>
-				</div>
-			</section>
-			<section class="about-skill">
-				<div class="inner">
-					<h4 class="title" title="SKILL">擅長技術</h4>
-					<ul class="with-disc">
-						<li>
-							<label>程式</label>
-							<span>HTML、CSS、Javascript、jQuery、PHP、SQL</span>
-						</li>
-						<li>
-							<label>監測</label>
-							<span><mark class="without-bg" title="Google Analytics">GA</mark>、<mark class="without-bg" title="Google Tag Manager">GTM</mark>、<mark class="without-bg" title="Google PageSpeed Insights">GPI</mark>、GTMetrix、WebPagetest、Mixpanel、NewRelic、<a href="https://web.dev/measure/" target="_blank" rel="noreferrer noopener">Google web.dev Measure</a></span>
-						</li>
-						<li>
-							<label>平台</label>
-							<span>Wordpress、Discuz!</span>
-						</li>
-						<li>
-							<label>廣告</label>
-							<span>Google Ad Manage、Google Adsense</span>
-						</li>
-						<li>
-							<label>管理</label>
-							<span>Google Sheets、Asana、Trello、Bitbucket、GitHub、Plesk</span>
-						</li>
-						<li>
-							<label>其他</label>
-							<span>CRM、Slack、LINE Bot、Sublime Text、Notion、macOS、GOV OpenData</span>
-						</li>
-					</ul>
-				</div>
-			</section>
-			<section class="about-target">
-				<div class="inner">
-					<h4 class="title" title="TARGET">工作目標</h4>
-					<ul class="with-disc">
-						<li>研究、探討與分析使用者的使用行為</li>
-						<li>拉近與使用者的關係，並使商業模式與價值最大化</li>
-						<li>透過使用者研究或服務設計方法，參與用戶體驗研究</li>
-						<li>規劃偉大產品並參與其中</li>
-					</ul>
-				</div>
-			</section>
-			<section class="about-goodat">
-				<div class="inner">
-					<h4 class="title" title="GOODAT">擅長做的事</h4>
-					<ul class="with-disc">
-						<li>熱愛 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄分析工作樞紐與生活記帳瑣碎等</li>
-						<li>主導企劃產品製成</li>
-						<li>搜集數據與整理分析，並透過報表進而建議與優化產品規劃</li>
-						<li>推理與邏輯判斷力強，喜歡探索使用者行為及心理動機想法</li>
-						<li>科學家精神，喜歡做實驗研究與驗證</li>
-					</ul>
-				</div>
-			</section>
-			<section id="about-exp" class="about-exp">
-				<div class="inner">
-					<h4 class="title" title="exp">經歷</h4>
-		            <ul>
-		                <li class="seethat" v-bind:data-exp="key" v-for="(exp, key) in exps" @click="openExp">
-		                    <div class="logo">
-		                        <img v-bind:src="exp.logo">
-		                    </div>
-		                    <div class="info">
-		                        <span class="name">{{ exp.name }}<i class="far fa-external-link" @click="externalLink(exp.url);"></i></span>
-		                        <span class="title">{{ exp.title }}<time>{{ exp.time }}</time></span>
-		                    </div>
-		                    <button class="more"><span></span></button>
-		                </li>
-		            </ul>
-				</div>
-			</section>
-		</main>
-		<div id="exps" class="exps">
-			<div class="overlay" @click="closeExp"></div>
-			<div class="container">
-				<div class="top">
-			        <div class="logo"><img src></div>
-			        <div class="info"><time></time><a class="name" href="javascript:;" target="_blank" rel="noreferrer noopener"></a><span class="title"></span></div>
-			    </div>
-				<div class="bottom">
-					<div class="abouts"><ul></ul></div>
-					<div class="myposition"><ul></ul></div>
-					<div class="whatidid"><ul></ul></div>
-				</div>
-			</div>
-		</div>
-		<footer id="footer" class="footer">
-			<section class="copyright">
-				<span>© 2017 - 2020 by CHUNGLUNWU all rights reserved</span>
-			</section>
-		</footer>
-        <aside id="aside" class="aside">
-        </aside>
-
+        <div id="app">
+            <header id="header" class="header">
+                <div class="_header"></div>
+            </header>
+            <main id="main" class="main">
+            	<section class="about-me">
+            		<div class="inner">
+            			<div class="whoisthis">
+            				<div class="left">
+            					<div class="avatar">
+            						<img name="CHUNG-LUN WU" title="CHUNG-LUN WU" alt="CHUNG-LUN WU" src="./public/img/avatar.png">
+            					</div>
+            				</div>
+            				<div class="right">
+            					<div class="introduction">
+            						<h1 class="name" name="吳忠倫 CHUNG-LUN WU" title="吳忠倫">吳忠倫</h1>
+            						<h2 class="name-en" name="ALLEN WU" title="ALLEN WU">ALLEN WU</h2>
+            						<h3 class="title">F2E / PM / Blogger</h3>
+            					</div>
+            				</div>
+            			</div>
+            			<div class="social">
+            				<ul>
+            					<li>
+            						<a href="mailto:wucl98@gmail.com">
+            							<label><i class="far fa-envelope"></i></label>
+            							<span>wucl98@gmail.com</span>
+            						</a>
+            					</li>
+            					<li>
+            						<a href="https://line.me/ti/p/HqGOY5dqYD" target="_blank" rel="noreferrer noopener">
+            							<label><i class="fab fa-line"></i></label>
+            							<span>wu.cl</span>
+            						</a>
+            					</li>
+            				</ul>
+            			</div>
+            			<div class="bio">
+            				<p>一個中度蘋果粉 <i class="fab fa-apple"></i>，喜歡蘋果帶給世界的變化。</p>
+            				<p>不斷持續從蘋果的設計與體驗中學習，也期待每年蘋果發表會。</p>
+            				<p>另外也對新奇產品感到好奇與嘗試，特別愛逛募資平台並在上面買些什麼。（e.g. <a href="https://www.kickstarter.com/" target="_blank" rel="noreferrer noopener">KICKSTARTER</a>、 <a href="https://www.zeczec.com/" target="_blank" rel="noreferrer noopener">嘖嘖</a>）</p>
+            			</div>
+            		</div>
+            	</section>
+            	<section class="about-skill">
+            		<div class="inner">
+            			<h4 class="title" title="SKILL">擅長技術</h4>
+            			<ul class="with-disc">
+            				<li v-bind:data-skill="key" v-for="(skill, key) in skills">
+            					<label>{{ key }}</label>
+            					<span v-html="skill"></span>
+            				</li>
+            			</ul>
+            		</div>
+            	</section>
+            	<section class="about-target">
+            		<div class="inner">
+            			<h4 class="title" title="TARGET">工作目標</h4>
+            			<ul class="with-disc">
+            				<li>研究、探討與分析使用者的使用行為</li>
+            				<li>拉近與使用者的關係，並使商業模式與價值最大化</li>
+            				<li>透過使用者研究或服務設計方法，參與用戶體驗研究</li>
+            				<li>規劃偉大產品並參與其中</li>
+            			</ul>
+            		</div>
+            	</section>
+            	<section class="about-goodat">
+            		<div class="inner">
+            			<h4 class="title" title="GOODAT">擅長做的事</h4>
+            			<ul class="with-disc">
+            				<li>熱愛 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄分析工作樞紐與生活記帳瑣碎等</li>
+            				<li>主導企劃產品製成</li>
+            				<li>搜集數據與整理分析，並透過報表進而建議與優化產品規劃</li>
+            				<li>推理與邏輯判斷力強，喜歡探索使用者行為及心理動機想法</li>
+            				<li>科學家精神，喜歡做實驗研究與驗證</li>
+            			</ul>
+            		</div>
+            	</section>
+            	<section id="about-exp" class="about-exp">
+            		<div class="inner">
+            			<h4 class="title" title="exp">經歷</h4>
+                        <ul>
+                            <li class="seethat" v-bind:data-exp="key" v-for="(exp, key) in exps" @click="openExp">
+                                <div class="logo">
+                                    <img v-bind:src="exp.logo">
+                                </div>
+                                <div class="info">
+                                    <span class="name">{{ exp.name }}<i class="far fa-external-link" @click="externalLink(exp.url);"></i></span>
+                                    <span class="title">{{ exp.title }}<time>{{ exp.time }}</time></span>
+                                </div>
+                                <button class="more"><span></span></button>
+                            </li>
+                        </ul>
+            		</div>
+            	</section>
+            </main>
+            <div id="exps" class="exps">
+            	<div class="overlay" @click="closeExp"></div>
+            	<div class="container">
+            		<div class="top">
+            	        <div class="logo"><img src></div>
+            	        <div class="info"><time></time><a class="name" href="javascript:;" target="_blank" rel="noreferrer noopener"></a><span class="title"></span></div>
+            	    </div>
+            		<div class="bottom">
+            			<div class="abouts"><ul></ul></div>
+            			<div class="myposition"><ul></ul></div>
+            			<div class="whatidid"><ul></ul></div>
+            		</div>
+            	</div>
+            </div>
+    		<footer id="footer" class="footer">
+    			<section class="copyright">
+    				<span>© 2017 - 2020 by CHUNGLUNWU all rights reserved</span>
+    			</section>
+    		</footer>
+            <aside id="aside" class="aside">
+            </aside>
+        </div>
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
 		<script src="./public/js/custom/eventdevice.js"></script>
 		<script src="./public/lib/scrollIt/scrollIt.js"></script>
         <script src="./public/js/define.js"></script>
-		<script src="./public/js/main.min.js"></script>
+		<script src="./public/js/main.js"></script>
 	</body>
 </html>

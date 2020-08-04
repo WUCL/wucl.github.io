@@ -9,6 +9,7 @@
 				display: flex;
 				flex-direction: column-reverse;
 				li {
+					z-index: 1;
 					margin-left: 10px;
 					margin-bottom: 15px;
 					display: flex;
@@ -37,6 +38,7 @@
 						background: $color-white;
 						border: 1px solid rgba($color-black, .05);
 						transition: .2s;
+						will-change: transform;
 						img {
 							transition: 2s;
 						}
@@ -63,6 +65,7 @@
 								font-size: $fontsize-f;
 								font-weight: bold;
 								color: lighten(nth($color-analogous, 2), 35%);
+								will-change: transform;
 								transform: scale(.9);
 								transition: .2s;
 								@include mq($min-width: $bp-2s) {
@@ -85,6 +88,7 @@
 								width: 0;
 								height: 100%;
 								transition: .5s;
+								will-change: transform;
 								transform: skewX(-25deg);
 							}
 							time {
@@ -102,6 +106,7 @@
 						top: 50%;
 						width: 22%;
 						height: 78%;
+						will-change: transform;
 						transform: translateY(-50%);
 						// background: rgba($color-main, .15);
 						border-left: 1px solid rgba($color-black, .2);
@@ -202,15 +207,15 @@
 					@include mq($min-width: $bp-2s) {
 						&:hover {
 							background: $color-white;
-							border-color: rgba($color-black, .5);
-							border-bottom-width: 3px;
-							border-right-width: 3px;
-							transform: translate(-3px, -3px);
-							.logo {
-								img {
-									transform: scale(1.1);
-								}
-							}
+							border-color: rgba($color-black, .56);
+							// border-bottom-width: 2px;
+							// border-right-width: 2px;
+							// transform: translate(-2px, -2px);
+							// .logo {
+							// 	img {
+							// 		transform: scale(1.1);
+							// 	}
+							// }
 							.info {
 								opacity: 1;
 								// margin-left: 20px;
@@ -226,7 +231,7 @@
 								}
 							}
 							.more {
-								width: 25%;
+								// width: 25%;
 								span {
 									background: rgba($color-third, .87);
 									&:after {

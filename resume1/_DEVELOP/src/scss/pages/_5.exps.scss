@@ -159,6 +159,9 @@
 						margin-left: 2em;
 						letter-spacing: 1px;
 						list-style-type: square;
+						&:hover {
+							font-weight: 700;
+						}
 					}
 				}
 			}
@@ -179,8 +182,10 @@ body.open-exps {
 			}
 			&:hover {
 				cursor: pointer;
+				background: rgba($color-black, .78);
 				&:before {
-					transform: scale(1.15) translateX(0) scaleX(-1);
+					transform: scale(1.15) translateX(0) scaleX(1);
+					transition: .2s;
 				}
 			}
 			&:active {
