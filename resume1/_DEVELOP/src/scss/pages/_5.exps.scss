@@ -48,6 +48,7 @@
 			}
 		}
 	}
+	$bg_color: lighten($color-black, 87%);
 	.container {
 		// padding: 10px;
 		position: absolute;
@@ -55,7 +56,7 @@
 		right: 0;
 		height: 100%;
 		width: 56%;
-		background: lighten($color-black, 87%);
+		background: $bg_color;
 		transform: translateX(100%);
 		transition: .15s;
 		@include mq($max-width: $bp-2l) {
@@ -78,14 +79,21 @@
 			}
 		}
 		.top {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			@include mq($max-width: $bp-2s) {
+				padding-top: 12px;
+				padding-bottom: 12px;
+			}
 			// height: 100px;
 			display: flex;
 			align-items: center;
 			// padding-bottom: 10px;
 			background: $color-white;
+			border-bottom: 1px solid $bg_color;
 			.logo {
-				width: 70px;
-				height: 70px;
+				width: 63px;
+				height: 63px;
 				border-radius: 10px;
 				overflow: hidden;
 				background: $color-white;
@@ -100,6 +108,9 @@
 				margin-left: 9px;
 				transition: .2s .2s;
 				line-height: normal;
+				time {
+					font-size: $fontsize-c;
+				}
 				.name,
 				.title {
 					// padding: 0 5px;
@@ -155,12 +166,24 @@
 					margin-bottom: 7px;
 				}
 				ul {
+					padding: 10px 0;
+					background: rgba($color-white, .78);
+					border-radius: 10px;
+					// border: 10px solid $color-white;
 					li {
 						margin-left: 2em;
-						letter-spacing: 1px;
+						letter-spacing: 1.2px;
 						list-style-type: square;
 						&:hover {
 							font-weight: 700;
+							color: $color-second;
+						}
+						img {
+							margin: 10px;
+							width: 87%;
+							max-height: 500px;
+							object-fit: contain;
+							border-radius: 10px;
 						}
 					}
 				}
@@ -172,33 +195,28 @@ body.open-exps {
 	.exps {
 		pointer-events: auto;
 		.overlay {
-			background: rgba($color-black, .69);
-			@include mq($max-width: $bp-2) {
-				background: rgba($color-black, .78);
-			}
+			background: rgba($color-black, .83);
+			// @include mq($max-width: $bp-2) {
+			// 	background: rgba($color-black, .78);
+			// }
 			&:before {
 				transform: translateX(0) scaleX(-1);
 				opacity: 1;
 			}
 			&:hover {
 				cursor: pointer;
-				background: rgba($color-black, .78);
+				background: rgba($color-black, .75);
 				&:before {
 					transform: scale(1.15) translateX(0) scaleX(1);
 					transition: .2s;
 				}
 			}
 			&:active {
-				background: rgba($color-black, .87);
+				background: rgba($color-black, .9);
 			}
 		}
 		.container {
 			transform: translateX(0);
-			img {
-				width: 87%;
-				max-height: 500px;
-				object-fit: contain;
-			}
 		}
 		&[data-exp="talkux"] {
 			.whatidid {

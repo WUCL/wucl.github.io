@@ -66,6 +66,7 @@ body {
 		overflow: hidden;
 	}
 	mark {
+		color: inherit;
 		&.without-bg {
 			background: transparent;
 		}

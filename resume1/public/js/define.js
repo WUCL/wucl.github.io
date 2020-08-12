@@ -1,15 +1,3 @@
-window.el = {
-    $window: $(window),
-    $doc: $(document),
-    $body: $('body'),
-    $header: $('#header'),
-    $main: $('#main'),
-    $footer: $('#footer'),
-
-    $aboutExp: $('.about-exp'),
-
-    $exps: $('#exps'),
-};
 /* =======================
 helper
 ======================= */

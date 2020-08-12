@@ -43,8 +43,9 @@
 			<h4 class="title" title="SKILL">擅長技術</h4>
 			<ul class="with-disc">
 				<li v-bind:data-skill="key" v-for="(skill, key) in skills">
-					<label>{{ key }}</label>
-					<span v-html="skill"></span>
+					<h3>{{ key }}</h3>
+					<!-- <span v-html="skill"></span> -->
+					<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
 				</li>
 			</ul>
 		</div>
@@ -97,10 +98,6 @@
 	        <div class="logo"><img src></div>
 	        <div class="info"><time></time><a class="name" href="javascript:;" target="_blank" rel="noreferrer noopener"></a><span class="title"></span></div>
 	    </div>
-		<div class="bottom">
-			<div class="abouts"><ul></ul></div>
-			<div class="myposition"><ul></ul></div>
-			<div class="whatidid"><ul></ul></div>
-		</div>
+		<div class="bottom"></div>
 	</div>
 </div>

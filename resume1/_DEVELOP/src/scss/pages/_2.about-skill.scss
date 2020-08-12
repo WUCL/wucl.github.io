@@ -6,12 +6,16 @@
 		.inner {
 			ul {
 				li {
-					margin-bottom: 5px;
+					margin-bottom: 7px;
 					letter-spacing: 0;
-					> label {
+					// display: flex;
+					// align-items: center;
+					// justify-content: flex-start;
+					h3 {
 						display: inline-block;
-						width: 38px;
+						width: 40px;
 						padding: 0 3px;
+						margin-right: 10px;
 						@include mq($max-width: $bp-2s) {
 							width: 35px;
 							margin-right: 5px;
@@ -29,9 +33,28 @@
 							}
 						}
 					}
-					> span {
+					.labels {
+						display: inline;
+						// width: calc(100% - 40px - 10px);
 						padding-left: 10px;
 						border-left: 1px dashed lighten($color-black, 87%);
+						// @include mq($max-width: $bp-2s) {
+						// 	width: calc(100% - 35px - 5px);
+						// }
+						label {
+							&:after {
+								content: "、";
+							}
+							&:last-child {
+								&:after {
+									content: "";
+								}
+							}
+							&:hover {
+								font-weight: 700;
+								color: $color-second;
+							}
+						}
 					}
 				}
 			}

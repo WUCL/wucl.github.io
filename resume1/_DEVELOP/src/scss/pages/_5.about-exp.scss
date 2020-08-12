@@ -24,7 +24,7 @@
 					padding: 15px;
 					// background-color: $color-white;
 					background-image: linear-gradient(43deg, rgba($color-white, .1) 0%, rgba($color-white, .5) 100%);
-					transition: .15s;
+					// transition: .15s;
 					@include mq($max-width: $bp-3s) {
 						// padding-left: 25px;
 						padding: 7px;
@@ -150,6 +150,7 @@
 							&:before {
 								content: "MORE";
 								font-size: $fontsize-3;
+								border-bottom: 1px dashed $color-font;
 								@include mq($max-width: $bp-3s) {
 									font-size: $fontsize-1;
 								}
@@ -207,18 +208,11 @@
 					@include mq($min-width: $bp-2s) {
 						&:hover {
 							background: $color-white;
+							padding: 14px;
+							border-width: 2px;
 							border-color: rgba($color-black, .56);
-							// border-bottom-width: 2px;
-							// border-right-width: 2px;
-							// transform: translate(-2px, -2px);
-							// .logo {
-							// 	img {
-							// 		transform: scale(1.1);
-							// 	}
-							// }
 							.info {
 								opacity: 1;
-								// margin-left: 20px;
 								.name {
 									i {
 										opacity: .5;
@@ -234,6 +228,9 @@
 								// width: 25%;
 								span {
 									background: rgba($color-third, .87);
+									&:before {
+										border-bottom: 0;
+									}
 									&:after {
 										transform: scaleX(-1);
 									}
