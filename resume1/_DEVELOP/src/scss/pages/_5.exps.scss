@@ -219,8 +219,10 @@ body.open-exps {
 			transform: translateX(0);
 		}
 		&[data-exp="talkux"] {
-			.whatidid {
+			.bottom div[data-title="Volunteer Certificate"] {
 				ul {
+					background: transparent;
+					padding: 0;
 					li {
 						list-style: none;
 						margin-left: 0;

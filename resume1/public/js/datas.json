@@ -137,20 +137,12 @@
             ]
         }
     },
-    "skills1": {
-        "程式": ["HTML","CSS","Javascript","jQuery","PHP","SQL"]
-        , "監測": ["<mark class='without-bg' title='Google Analytics'>GA</mark>","<mark class='without-bg' title='Google Tag Manager'>GTM</mark>","<mark class='without-bg' title='Google PageSpeed Insights'>GPI</mark>","GTMetrix","WebPagetest","Mixpanel","NewRelic","<a href='https://web.dev/measure/' target='_blank' rel='noreferrer noopener'>Google web.dev Measure</a>"]
-        , "平台": ["Wordpress","Discuz"]
-        , "廣告": ["Google Ad Manage","Google Adsense"]
-        , "管理": ["Google Sheets","Asana","Trello","Bitbucket","GitHub","Plesk"]
-        , "其他": ["CRM","Slack","LINE Bot","Sublime Text","Notion","macOS","OpenData"]
-    },
     "skills": {
-        "程式": "HTML、CSS、Javascript、jQuery、PHP、SQL"
-        , "監測": "<mark class='without-bg' title='Google Analytics'>GA</mark>、<mark class='without-bg' title='Google Tag Manager'>GTM</mark>、<mark class='without-bg' title='Google PageSpeed Insights'>GPI</mark>、GTMetrix、WebPagetest、Mixpanel、NewRelic、<a href='https://web.dev/measure/' target='_blank' rel='noreferrer noopener'>Google web.dev Measure</a>"
-        , "平台": "Wordpress、Discuz!"
-        , "廣告": "Google Ad Manage、Google Adsense"
-        , "管理": "Google Sheets、Asana、Trello、Bitbucket、GitHub、Plesk"
-        , "其他": "CRM、Slack、LINE Bot、Sublime Text、Notion、macOS、GOV OpenData"
+        "程式": ["HTML", "CSS", "Javascript", "jQuery", "PHP", "SQL"]
+        , "監測": ["<mark class='without-bg' title='Google Analytics'>GA</mark>", "<mark class='without-bg' title='Google Tag Manager'>GTM</mark>", "<mark class='without-bg' title='Google PageSpeed Insights'>GPI</mark>", "GTMetrix", "WebPagetest", "Mixpanel", "NewRelic", "<a href='https://web.dev/measure/' target='_blank' rel='noreferrer noopener'>Google web.dev Measure</a>"]
+        , "平台": ["Wordpress", "Discuz"]
+        , "廣告": ["Google Ad Manage", "Google Adsense"]
+        , "管理": ["Google Sheets", "Asana", "Trello", "Bitbucket", "GitHub", "Plesk"]
+        , "其他": ["CRM", "Slack", "LINE Bot", "Sublime Text", "Notion","macOS", "OpenData"]
     }
 }

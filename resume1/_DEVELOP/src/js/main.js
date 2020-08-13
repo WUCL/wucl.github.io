@@ -75,23 +75,24 @@
         }
     });
 
-    function loadData() {
-        $.getJSON("public/js/data.json", function(data) {
+    var getJSON = function(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = function() {
+            var status = xhr.status;
+            if (status == 200) { callback(null, xhr.response);
+            } else { callback(status); }
+        };
+        xhr.send();
+    };
+    getJSON('public/js/datas.json', (err, data) => {
+        if (err != null) {
+            console.error(err);
+        } else {
+            // console.log(data);
             $app.exps = data.exps;
-            $app.skills = data.skills1;
-        })
-        .done(function() {
-            console.log("second success");
-        })
-        .fail(function(error) {
-            console.log("error");
-            console.log(error);
-        })
-        .always(function() {
-            console.log("complete");
-            // console.log(this.exps);
-        });
-        return;
-    }
-    loadData();
+            $app.skills = data.skills;
+        }
+    });
 })();
