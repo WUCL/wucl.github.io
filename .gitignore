@@ -103,8 +103,8 @@ typings/
 # TernJS port file
 .tern-port
 
-# you can skip this first one if it is not already excluded by prior patterns
-# 隱藏除了lib資料夾
+## you can skip this first one if it is not already excluded by prior patterns
+## 隱藏除了 lib 資料夾
 # !dist/
 
 # dist/*
@@ -114,8 +114,8 @@ typings/
 # !dist/public/lib/
 
 
-# hidden project/weatherbox config.js id
-project/*/dist/public/js/_config.js
-project/*/public/js/_config.js
-project/*/src/js/_config.js
-project/*/*/src/js/_config.js
+## hidden project/weatherbox config.js id
+# project/*/dist/public/js/_config.js
+# project/*/public/js/_config.js
+# project/*/src/js/_config.js
+# project/*/*/src/js/_config.js

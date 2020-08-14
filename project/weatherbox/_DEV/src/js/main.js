@@ -1,16 +1,11 @@
 (function() {
     "use strict";
-    // let old_console_log = console.log;
-    // console.log = function(msg) {
-    //     if (!__DEV_MODE) return;
-    //     old_console_log(msg);
-    //     // old_console_log("\u001b[32m" + msg +"\u001b[0m");
-    // }
     var vm = new Vue({
         el: "#weatherbox",
         data: {
-            a: 1,
-
+            el: {
+                $body: document.body,
+            },
             d: (new Date()), // datetime
             h: 0,
             geocode: {
@@ -55,50 +50,25 @@
             doStorageCompress: false,
         },
         beforeCreate() {
+            console.info('== beforeCreate ==');
             console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-            console.log('== beforeCreate ==');
         },
         created() {
-            var $this = this;
-
-            // to get address
-            // https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse
-            if ("geolocation" in navigator) {
-                console.log('geolocation IS available');
-                navigator.geolocation.getCurrentPosition(onSuccess, onError);
-                function onSuccess(position) {
-                    console.log('onSuccess');
-                    var element = document.getElementById('geolocation');
-                    $this.geocode.coords[0] = position.coords.latitude;
-                    $this.geocode.coords[1] = position.coords.longitude;
-                    console.log($this.geocode.coords);
-                    $this.goGetGeocode($this.geocode.coords[0], $this.geocode.coords[1]);
-                }
-                function onError(error) {
-                    console.log('onError');
-                    console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-                }
-            } else {
-                console.log('geolocation IS NOT available');
-            }
-
-            console.log('== created ==')
+            console.info('== created ==');
+            this.getGeoLocation();
         },
         mounted() {
-            console.log('== mounted ==')
-            // window.el.$body.addClass(deviceObj.name);
+            console.info('== mounted ==')
+            this.el.$body.classList.add(deviceObj.name);
             if (this.doStorageCompress != localStorage.doCompress) {
-                console.log('hellohellohellohellohellohellohellohellohellohellohello');
                 localStorage.removeItem('geoMapping');
                 localStorage.removeItem('weather');
             }
             localStorage.doCompress = (this.doStorageCompress)?1:0;
 
-            // console.log(this.geocode.mapping);
             if (localStorage.geoMapping) this.geocode.mapping = (this.doStorageCompress)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
             if (localStorage.weather) this.weather = (this.doStorageCompress)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
-            // console.log(this.geocode.mapping);
         },
         watch: {
             h() {
@@ -143,8 +113,31 @@
             getKeyByObjValue(object, value) {
                 return Object.keys(object).find(key1 => Object.keys(object[key1]).find(key2 => object[key1][key2] === value));
             },
-            goGetGeocode(lat, lng) {
-                console.log('goGetGeocode');
+
+            getGeoLocation() {
+                let $this = this;
+                // to get address
+                // https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse
+                if ("geolocation" in navigator) {
+                    console.log('geolocation IS available');
+                    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                    function onSuccess(position) {
+                        console.log('onSuccess');
+                        let element = document.getElementById('geolocation');
+                        $this.geocode.coords[0] = position.coords.latitude;
+                        $this.geocode.coords[1] = position.coords.longitude;
+                        $this.getGeocode($this.geocode.coords[0], $this.geocode.coords[1]);
+                    }
+                    function onError(error) {
+                        console.error('onError', 'code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+                    }
+                } else {
+                    console.log('geolocation IS NOT available');
+                }
+                return;
+            },
+            getGeocode(lat, lng) {
+                console.log('getGeocode');
                 let $this = this;
                 let $latlngFixed = $this.geocode.latlngFixed;
                 // console.log($this.geocode.mapping);
@@ -154,7 +147,7 @@
                     let $citydist = exist_citydist.split(',');
                     $this.live.address.city = $citydist[0];
                     $this.live.address.dist = $citydist[1];
-                    $this.goGetWeather(); // 確認是否需要再向 中央氣象局 要資料
+                    $this.getWeather(); // 確認是否需要再向 中央氣象局 要資料
                 } else {
                     console.log('---------- has NOT addressMapping than reGetting');
 
@@ -171,10 +164,10 @@
                         console.log(response);
 
                         console.log('---------- axios get onSuccess');
-                        console.log('useGoogleApi + 1');
+                        console.log('useGeocodeApi + 1');
 
-                        if (!localStorage.useGoogleApi) localStorage.useGoogleApi = 0;
-                        localStorage.useGoogleApi = Number(localStorage.useGoogleApi) + 1;
+                        if (!localStorage.useGeocodeApi) localStorage.useGeocodeApi = 0;
+                        localStorage.useGeocodeApi = Number(localStorage.useGeocodeApi) + 1;
 
                         if (response.status !== 200) return console.error(response.statusText, ' 資料獲取失敗');
                         else console.log(response.statusText);
@@ -195,22 +188,22 @@
                             $this.geocode.mapping[$citydist].push(lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed));
                         }
                         localStorage.geoMapping = ($this.doStorageCompress)?LZString.compress(JSON.stringify($this.geocode.mapping)):JSON.stringify($this.geocode.mapping);
-                        $this.goGetWeather(); // 確認是否需要再向 中央氣象局 要資料
+                        $this.getWeather(); // 確認是否需要再向 中央氣象局 要資料
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        console.error(error);
                     });
                 }
             },
-            goGetWeather() {
-                console.log('goGetWeather');
+            getWeather() {
+                console.log('getWeather');
                 let $this = this;
                 if (this.weather.update !== '') return this.updateLiveData(); // 確認已有 中央氣象局 資料，即不再次抓取
                 if (this.geocode.coords.length !== 2) return;
 
                 axios.get('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-091', {
                     params: {
-                        Authorization: __API_OPENDATA_WEB_GOV_ID,
+                        Authorization: __API_GOV_ID,
                         format: 'JSON',
                         // locationName: this.live.address.city.replace(/台/i, '臺'),
                     }
@@ -231,7 +224,7 @@
 
                     axios.get('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-089', {
                         params: {
-                            Authorization: __API_OPENDATA_WEB_GOV_ID,
+                            Authorization: __API_GOV_ID,
                             format: 'JSON',
                         }
                     })
@@ -257,11 +250,11 @@
                         $this.updateLiveData();
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        console.error(error);
                     });
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.error(error);
                 });
             },
             updateLiveData() {
