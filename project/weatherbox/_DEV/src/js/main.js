@@ -51,7 +51,8 @@
                 },
             },
             bgChangingActive: true,
-            storageCompressActive: false,
+            doStorage: false,
+            doStorageCompress: false,
         },
         beforeCreate() {
             console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
@@ -71,6 +72,7 @@
                     var element = document.getElementById('geolocation');
                     $this.geocode.coords[0] = position.coords.latitude;
                     $this.geocode.coords[1] = position.coords.longitude;
+                    console.log($this.geocode.coords);
                     $this.goGetGeocode($this.geocode.coords[0], $this.geocode.coords[1]);
                 }
                 function onError(error) {
@@ -82,26 +84,21 @@
             }
 
             console.log('== created ==')
-            // console.log('this.a: ' + this.a)
-            // console.log('this.$el: ' + this.$el)
         },
         mounted() {
             console.log('== mounted ==')
-            // console.log('this.a: ' + this.a)
-            // console.log('this.$el: ' + this.$el)
-
             // window.el.$body.addClass(deviceObj.name);
-            if (this.storageCompressActive != localStorage.doCompress) {
+            if (this.doStorageCompress != localStorage.doCompress) {
                 console.log('hellohellohellohellohellohellohellohellohellohellohello');
                 localStorage.removeItem('geoMapping');
                 localStorage.removeItem('weather');
             }
-            localStorage.doCompress = (this.storageCompressActive)?1:0;
+            localStorage.doCompress = (this.doStorageCompress)?1:0;
 
-            console.log(this.geocode.mapping);
-            if (localStorage.geoMapping) this.geocode.mapping = (this.storageCompressActive)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
-            if (localStorage.weather) this.weather = (this.storageCompressActive)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
-            console.log(this.geocode.mapping);
+            // console.log(this.geocode.mapping);
+            if (localStorage.geoMapping) this.geocode.mapping = (this.doStorageCompress)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
+            if (localStorage.weather) this.weather = (this.doStorageCompress)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
+            // console.log(this.geocode.mapping);
         },
         watch: {
             h() {
@@ -159,26 +156,31 @@
                     $this.live.address.dist = $citydist[1];
                     $this.goGetWeather(); // 確認是否需要再向 中央氣象局 要資料
                 } else {
-                    console.log('---------- has NOT addressMapping');
-                    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                    console.log('---------- has NOT addressMapping than reGetting');
+
+                    // HERE
+                    axios.get('https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json', {
                         params: {
-                            latlng: lat + ',' + lng,
-                            language: 'zh-TW',
-                            key: __API_GEOCODE_ID
+                            prox: lat + ',' + lng,
+                            mode: 'retrieveAreas',
+                            apiKey: __API_GEOCODE_ID
                         }
                     })
                     .then(function (response) {
+                        console.log('HERE response');
+                        console.log(response);
+
                         console.log('---------- axios get onSuccess');
                         console.log('useGoogleApi + 1');
-
-                        console.log(response);
 
                         if (!localStorage.useGoogleApi) localStorage.useGoogleApi = 0;
                         localStorage.useGoogleApi = Number(localStorage.useGoogleApi) + 1;
 
-                        // $this.geocode.address['full'] = response.data.results[0].formatted_address;
-                        $this.live.address.city = $this.geocode.address['city'] = response.data.results[0].address_components.slice(-3)[0]['long_name'];
-                        $this.live.address.dist = $this.geocode.address['dist'] = response.data.results[0].address_components.slice(-4)[0]['long_name']
+                        if (response.status !== 200) return console.error(response.statusText, ' 資料獲取失敗');
+                        else console.log(response.statusText);
+
+                        $this.live.address.city = $this.geocode.address['city'] = response.data.Response.View[0].Result[0].Location.Address.City; // County
+                        $this.live.address.dist = $this.geocode.address['dist'] = response.data.Response.View[0].Result[0].Location.Address.District;
                         let $citydist = $this.live.address.city + ',' + $this.live.address.dist;
                         console.log($this.geocode.mapping);
                         // console.log('_____確認 mapping code ?');
@@ -192,9 +194,7 @@
                             // console.log('_____否 存在座標，為新座標');
                             $this.geocode.mapping[$citydist].push(lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed));
                         }
-                        // if (this.storageCompressActive) localStorage.geoMapping = LZString.compress(JSON.stringify($this.geocode.mapping));
-                        // else localStorage.geoMapping = JSON.stringify($this.geocode.mapping);
-                        localStorage.geoMapping = ($this.storageCompressActive)?LZString.compress(JSON.stringify($this.geocode.mapping)):JSON.stringify($this.geocode.mapping);
+                        localStorage.geoMapping = ($this.doStorageCompress)?LZString.compress(JSON.stringify($this.geocode.mapping)):JSON.stringify($this.geocode.mapping);
                         $this.goGetWeather(); // 確認是否需要再向 中央氣象局 要資料
                     })
                     .catch(function (error) {
@@ -251,9 +251,9 @@
                                 $this.weather.location[$name][e.weatherElement[i]['elementName']] = e.weatherElement[i]['time'];
                             }
                         });
-                        // if (this.storageCompressActive) localStorage.weather = LZString.compress(JSON.stringify($this.weather));
+                        // if (this.doStorageCompress) localStorage.weather = LZString.compress(JSON.stringify($this.weather));
                         // else localStorage.weather = JSON.stringify($this.weather);
-                        localStorage.weather = ($this.storageCompressActive)?LZString.compress(JSON.stringify($this.weather)):JSON.stringify($this.weather);
+                        localStorage.weather = ($this.doStorageCompress)?LZString.compress(JSON.stringify($this.weather)):JSON.stringify($this.weather);
                         $this.updateLiveData();
                     })
                     .catch(function (error) {
