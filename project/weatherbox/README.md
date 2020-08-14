@@ -27,6 +27,10 @@ https://medium.com/@icelandcheng/%E4%BD%BF%E7%94%A8google-map-api-geocoding-api-
 2. Geocoding資源分享
 https://medium.com/@shihwenwutw/geocoding%E8%B3%87%E6%BA%90%E5%88%86%E4%BA%AB-2e7614aba49
 
+因為 google API 應用程式限制 似乎只能綁定ip，先試著改用 HERE
+3. HERE - Reverse Geocode the District containing a Location
+https://developer.here.com/documentation/examples/rest/geocoder/reverse-geocode-district
+
 #### google api - Google Cloud Platform
 1. request count
 https://console.cloud.google.com/google/maps-apis/apis/geocoding-backend.googleapis.com/metrics?project=dosomethings-193716&hl=zh-tw&supportedpurview=project
