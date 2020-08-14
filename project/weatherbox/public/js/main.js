@@ -50,20 +50,18 @@
             compressStorage: __compressStorage,
         },
         beforeCreate() {
-            console.info('== beforeCreate ==');
+            // console.info('== beforeCreate ==');
             console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;");
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         },
         created() {
-            console.info('== created ==');
+            // console.info('== created ==');
             this.getGeoLocation();
         },
         mounted() {
-            console.info('== mounted ==');
+            // console.info('== mounted ==');
             this.el.$body.classList.add(deviceObj.name);
-            console.log(this.doStorage);
             if (this.doStorage) {
-                console.log('yes, `doStorage`');
                 if (this.compressStorage != localStorage.doCompress) {
                     localStorage.removeItem('geoMapping');
                     localStorage.removeItem('weather');
@@ -72,7 +70,6 @@
                 if (localStorage.geoMapping) this.geocode.mapping = (this.compressStorage)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
                 if (localStorage.weather) this.weather = (this.compressStorage)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
             } else {
-                console.log('noooo, do not `doStorage`');
                 localStorage.removeItem('doCompress');
                 localStorage.removeItem('geoMapping');
                 localStorage.removeItem('weather');
@@ -132,7 +129,7 @@
                     console.log('geolocation IS available');
                     navigator.geolocation.getCurrentPosition(onSuccess, onError);
                     function onSuccess(position) {
-                        console.log('onSuccess');
+                        console.log('success to get geolocation');
                         let element = document.getElementById('geolocation');
                         $this.geocode.coords[0] = position.coords.latitude;
                         $this.geocode.coords[1] = position.coords.longitude;
@@ -150,16 +147,15 @@
                 console.log('getGeocode');
                 let $this = this;
                 let $latlngFixed = $this.geocode.latlngFixed;
-                // console.log($this.geocode.mapping);
                 let exist_citydist = $this.getKeyByObjValue($this.geocode.mapping, lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed));
                 if (!(exist_citydist === undefined)) { // check lat lng mapping address
-                    console.log('---------- has addressMapping');
+                    // console.log('---------- has addressMapping');
                     let $citydist = exist_citydist.split(',');
                     $this.live.address.city = $citydist[0];
                     $this.live.address.dist = $citydist[1];
                     $this.getWeather(); // 確認是否需要再向 中央氣象局 要資料
                 } else {
-                    console.log('---------- has NOT addressMapping than reGetting');
+                    // console.log('---------- has NOT addressMapping than reGetting');
 
                     // HERE
                     axios.get('https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json', {
@@ -187,7 +183,7 @@
                         $this.live.address.city = $this.geocode.address['city'] = response.data.Response.View[0].Result[0].Location.Address.City; // County
                         $this.live.address.dist = $this.geocode.address['dist'] = response.data.Response.View[0].Result[0].Location.Address.District;
                         let $citydist = $this.live.address.city + ',' + $this.live.address.dist;
-                        console.log($this.geocode.mapping);
+                        // console.log($this.geocode.mapping);
                         // console.log('_____確認 mapping code ?');
                         if ((!Object.keys($this.geocode.mapping).length > 0)
                         || (!$this.geocode.mapping.hasOwnProperty($citydist))) { // 確認是否有 citydist
@@ -223,7 +219,7 @@
                     }
                 })
                 .then(function (response) {
-                    console.log('===== get F-D0047-091 response =====');
+                    // console.log('===== get F-D0047-091 response =====');
                     let $data = response.data.cwbopendata;
                     let $loaction = $data.dataset.locations.location;
                     $this.weather.update = $data.dataset.datasetInfo.update
@@ -243,8 +239,7 @@
                         }
                     })
                     .then(function (response) {
-                        console.log('===== get F-D0047-089 response =====');
-
+                        // console.log('===== get F-D0047-089 response =====');
                         if ($this.doStorage) {
                             if (!localStorage.useCWB) localStorage.useCWB = 0;
                             localStorage.useCWB = Number(localStorage.useCWB) + 1;
@@ -274,9 +269,7 @@
                 });
             },
             updateLiveData() {
-                console.log('updateLiveData');
-                // console.log(this.weather);
-                // console.log(this.live.address.city);
+                // console.log('updateLiveData');
                 let $weather = this.weather.location[this.live.address.city]
                 , $live = this.live;
                 $live.t.min = $weather['MinT'][0]['elementValue'].value;
