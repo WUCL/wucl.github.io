@@ -24,7 +24,7 @@
 		justify-content: space-between;
 		text-align: center;
 		margin: 0 auto;
-		user-select: none;
+		// user-select: none;
 		@include mq($max-width: $bp-2m) {
 			flex-direction: column;
 			justify-content: center;

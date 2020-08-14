@@ -45,7 +45,7 @@ gulp.task('serve', function(cb) {
             , reloadDebounce: 3000
         }
         , https: true
-        , port: 2234
+        , port: 1234
         , open: 'external'
     });
     cb && cb();

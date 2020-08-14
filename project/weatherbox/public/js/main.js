@@ -45,13 +45,13 @@
                     ws: ['', '']
                 },
             },
-            bgChangingActive: true,
-            doStorage: false,
-            doStorageCompress: false,
+            bgChanging: __bgChanging,
+            doStorage: __doStorage,
+            compressStorage: __compressStorage,
         },
         beforeCreate() {
             console.info('== beforeCreate ==');
-            console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
+            console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;");
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         },
         created() {
@@ -59,16 +59,26 @@
             this.getGeoLocation();
         },
         mounted() {
-            console.info('== mounted ==')
+            console.info('== mounted ==');
             this.el.$body.classList.add(deviceObj.name);
-            if (this.doStorageCompress != localStorage.doCompress) {
+            console.log(this.doStorage);
+            if (this.doStorage) {
+                console.log('yes, `doStorage`');
+                if (this.compressStorage != localStorage.doCompress) {
+                    localStorage.removeItem('geoMapping');
+                    localStorage.removeItem('weather');
+                }
+                localStorage.doCompress = (this.compressStorage)?1:0;
+                if (localStorage.geoMapping) this.geocode.mapping = (this.compressStorage)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
+                if (localStorage.weather) this.weather = (this.compressStorage)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
+            } else {
+                console.log('noooo, do not `doStorage`');
+                localStorage.removeItem('doCompress');
                 localStorage.removeItem('geoMapping');
                 localStorage.removeItem('weather');
+                localStorage.removeItem('useGeocodeApi');
+                localStorage.removeItem('useCWB');
             }
-            localStorage.doCompress = (this.doStorageCompress)?1:0;
-
-            if (localStorage.geoMapping) this.geocode.mapping = (this.doStorageCompress)?JSON.parse(LZString.decompress(localStorage.geoMapping)):JSON.parse(localStorage.geoMapping);
-            if (localStorage.weather) this.weather = (this.doStorageCompress)?JSON.parse(LZString.decompress(localStorage.weather)):JSON.parse(localStorage.weather);
         },
         watch: {
             h() {
@@ -77,14 +87,14 @@
         },
         computed: {
             daynight() {
-                this.bgChangingActive = true;
+                this.bgChanging = true;
                 let $h = this.h
                 , $daynight = '';
                 if ($h < 12 && $h > 6 ) $daynight = 'day';
                 else if ($h < 14) $daynight = 'noon';
                 else if ($h < 17) $daynight = 'afternoon';
                 else $daynight = 'night';
-                this.bgChangingActive = false;
+                this.bgChanging = false;
                 return $daynight;
             },
             datetime() {
@@ -166,8 +176,10 @@
                         console.log('---------- axios get onSuccess');
                         console.log('useGeocodeApi + 1');
 
-                        if (!localStorage.useGeocodeApi) localStorage.useGeocodeApi = 0;
-                        localStorage.useGeocodeApi = Number(localStorage.useGeocodeApi) + 1;
+                        if ($this.doStorage) {
+                            if (!localStorage.useGeocodeApi) localStorage.useGeocodeApi = 0;
+                            localStorage.useGeocodeApi = Number(localStorage.useGeocodeApi) + 1;
+                        }
 
                         if (response.status !== 200) return console.error(response.statusText, ' 資料獲取失敗');
                         else console.log(response.statusText);
@@ -187,7 +199,9 @@
                             // console.log('_____否 存在座標，為新座標');
                             $this.geocode.mapping[$citydist].push(lat.toFixed($latlngFixed) + ',' + lng.toFixed($latlngFixed));
                         }
-                        localStorage.geoMapping = ($this.doStorageCompress)?LZString.compress(JSON.stringify($this.geocode.mapping)):JSON.stringify($this.geocode.mapping);
+                        if ($this.doStorage) {
+                            localStorage.geoMapping = ($this.compressStorage)?LZString.compress(JSON.stringify($this.geocode.mapping)):JSON.stringify($this.geocode.mapping);
+                        }
                         $this.getWeather(); // 確認是否需要再向 中央氣象局 要資料
                     })
                     .catch(function (error) {
@@ -231,9 +245,11 @@
                     .then(function (response) {
                         console.log('===== get F-D0047-089 response =====');
 
-                        console.log('useCWB + 1');
-                        if (!localStorage.useCWB) localStorage.useCWB = 0;
-                        localStorage.useCWB = Number(localStorage.useCWB) + 1;
+                        if ($this.doStorage) {
+                            if (!localStorage.useCWB) localStorage.useCWB = 0;
+                            localStorage.useCWB = Number(localStorage.useCWB) + 1;
+                            console.log('useCWB + 1');
+                        }
 
                         console.log(response);
                         let $data = response.data.cwbopendata;
@@ -244,9 +260,9 @@
                                 $this.weather.location[$name][e.weatherElement[i]['elementName']] = e.weatherElement[i]['time'];
                             }
                         });
-                        // if (this.doStorageCompress) localStorage.weather = LZString.compress(JSON.stringify($this.weather));
-                        // else localStorage.weather = JSON.stringify($this.weather);
-                        localStorage.weather = ($this.doStorageCompress)?LZString.compress(JSON.stringify($this.weather)):JSON.stringify($this.weather);
+                        if ($this.doStorage) {
+                            localStorage.weather = ($this.compressStorage)?LZString.compress(JSON.stringify($this.weather)):JSON.stringify($this.weather);
+                        }
                         $this.updateLiveData();
                     })
                     .catch(function (error) {
