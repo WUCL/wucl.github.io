@@ -20,12 +20,12 @@
                     , "item": [
                         "從後端到前端，並擔任 前端負責人"
                         , "<mark>平台優化</mark>脫離 <a href='https://zh-tw.wordpress.com/' target='_blank' rel='noreferrer noopener'>Wordpress</a> 前台包裝，獨立製作一個符合使用者的前台畫面，優化手機端 150% 效能成長"
-                        , "<mark>SEO優化</mark>與 aWoo 合作，透過建議字與字及段落的整併，提高 SEO 排名，並將其跳出率從 75% 降至 40%"
-                        , "<mark>網站優化</mark>持續追蹤與記錄網站成效，並依照數據變化，調整功能曝光程度做長期優化"
-                        , "<mark>網站優化</mark>主導 File Server 透過 lsync 進行異地備援同步，便於管控與分散風險"
+                        , "<mark>SEO優化</mark>使用符合網站的關鍵字與描述和文章的字級段落重新歸納分配，提高 SEO 排名，並將其跳出率從 75% 降至 40%"
+                        , "<mark>網站優化</mark>持續追蹤功能使用率與記錄網站CTR成效，並依照數據變化，針對功能曝光程度調整"
+                        , "<mark>網站優化</mark>主導 File Server 透過 LSync 進行異地備援同步，便於管控與分散風險"
                         , "<mark>CRM系統開發</mark>建立 使用者輪廓 與 客戶關係 並自動化將數據做整併分析"
                         , "<mark>廣告配置</mark>透過重新編排顯示方式，將廣告最大化，提升 2 倍點擊成長"
-                        , "<mark>平台建置</mark>電商平台系統建置，使達成轉換"
+                        , "<mark>平台建置</mark>電商平台系統建置，透過文章的導流行為轉換並達到三贏"
                     ]
                 }
             ]
@@ -97,7 +97,7 @@
                         , "活動網站 - <a href='https://dinling2019.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>叮寧</a>"
                         , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20200312-coverad-petad/' target='_blank' rel='noreferrer noopener'>麥香校園清潔保衛戰</a>"
                         , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20200312-coverad-tryit2020running' target='_blank' rel='noreferrer noopener'>純喫茶烏龍青茶</a>"
-                        , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20190424-coverad-20190418-coverad-noodles' target='_blank' rel='noreferrer noopener'>統一小時光灰熊失禮</a>"
+                        , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20190418-coverad-noodles' target='_blank' rel='noreferrer noopener'>統一小時光灰熊失禮</a>"
                         , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20190424-coverad-tryit2019basketball' target='_blank' rel='noreferrer noopener'>純喫茶三對三鬥牛霸</a>"
                         , "<a href='https://www.facebook.com/imhappix/posts/294072348634200' target='_blank' rel='noreferrer noopener'>HAPPIX 端午頭很大</a> 濾鏡 - <a href='https://www.facebook.com/fbcameraeffects/tryit/3127206513985036/' target='_blank' rel='noreferrer noopener'>Facebook</a> / <a href='https://www.instagram.com/ar/309494323397377/' target='_blank' rel='noreferrer noopener'>Instagram</a>"
                     ]
