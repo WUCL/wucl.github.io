@@ -1,0 +1,1037 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+* In this file you should write your main styles. (or centralize your imports)
+* Import this file using the following HTML or equivalent:
+* <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+*:focus {
+  outline: none; }
+
+* {
+  -webkit-tap-highlight-color: transparent; }
+
+.display-none {
+  display: none; }
+
+.display-none-i {
+  display: none !important; }
+
+/* =======================
+layout/container
+======================= */
+/* =======================
+layout/_footer
+======================= */
+/* =======================
+layout/_header
+======================= */
+/* =======================
+layout/layout
+======================= */
+html {
+  width: 100%;
+  height: 100%; }
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  -webkit-text-size-adjust: none;
+  font-size: 16px;
+  font-family: "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility; }
+
+/* =======================
+layout/sidebar
+======================= */
+/* ======================
+   modules/btns
+   ======================= */
+/* ======================
+   modules/nav
+   ======================= */
+/*
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+#colorbox, #cboxOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+#cboxWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+  max-width: none; }
+
+#cboxOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%; }
+
+#cboxMiddleLeft, #cboxBottomLeft {
+  clear: left; }
+
+#cboxContent {
+  position: relative; }
+
+#cboxLoadedContent {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; }
+
+#cboxTitle {
+  margin: 0; }
+
+#cboxLoadingOverlay, #cboxLoadingGraphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow {
+  cursor: pointer; }
+
+.cboxPhoto {
+  float: left;
+  margin: auto;
+  border: 0;
+  display: block;
+  max-width: none;
+  -ms-interpolation-mode: bicubic; }
+
+.cboxIframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 16px; }
+
+#colorbox, #cboxContent, #cboxLoadedContent {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; }
+
+/* 
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+#cboxOverlay {
+  background: #000; }
+
+#colorbox {
+  outline: 0; }
+
+#cboxContent {
+  background: transparent;
+  overflow: hidden; }
+
+.cboxIframe {
+  background: transparent; }
+
+#cboxError {
+  padding: 50px;
+  border: 1px solid #ccc; }
+
+#cboxTitle {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  color: #949494; }
+
+#cboxCurrent {
+  position: absolute;
+  bottom: 4px;
+  left: 58px;
+  color: #949494; }
+
+/* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+#cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  width: auto;
+  background: none; }
+
+/* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+#cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {
+  outline: 0; }
+
+#cboxSlideshow {
+  position: absolute;
+  bottom: 4px;
+  right: 30px;
+  color: #0092ef; }
+
+#cboxPrevious {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  text-indent: -9999px; }
+  #cboxPrevious:hover {
+    background-position: -75px -25px; }
+
+#cboxNext {
+  position: absolute;
+  bottom: 0;
+  left: 27px;
+  width: 25px;
+  height: 25px;
+  text-indent: -9999px; }
+  #cboxNext:hover {
+    background-position: -50px -25px; }
+
+#cboxClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red no-repeat 0px 0px;
+  width: 30px;
+  height: 30px;
+  text-indent: -9999px;
+  z-index: 1000;
+  cursor: pointer; }
+
+.article #cboxClose {
+  top: 56px; }
+
+/*
+  The following fixes a problem where IE7 and IE8 replace a PNG's alpha transparency with a black fill
+  when an alpha filter (opacity change) is set on the element or ancestor element.  This style is not applied to or needed in IE9.
+  See: http://jacklmoore.com/notes/ie-transparency-problems/
+*/
+.cboxIE #cboxTopLeft, .cboxIE #cboxTopCenter, .cboxIE #cboxTopRight, .cboxIE #cboxBottomLeft, .cboxIE #cboxBottomCenter, .cboxIE #cboxBottomRight, .cboxIE #cboxMiddleLeft, .cboxIE #cboxMiddleRight {
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endColorstr=#00FFFFFF); }
+
+.mCustomScrollbar {
+  -ms-touch-action: none;
+  touch-action: none; }
+
+.mCustomScrollbar.mCS_no_scrollbar {
+  -ms-touch-action: auto;
+  touch-action: auto; }
+
+.mCustomScrollBox {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  max-width: 100%;
+  outline: 0;
+  direction: ltr; }
+
+.mCSB_container {
+  overflow: hidden;
+  width: auto;
+  height: auto; }
+
+.mCSB_inside > .mCSB_container {
+  margin-right: 20px; }
+
+.tabber-container .mCSB_inside > .mCSB_container {
+  margin-right: 40px; }
+
+.share-article .mCSB_inside > .mCSB_container {
+  margin-right: 25px; }
+
+.mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
+  margin-right: 0; }
+
+.mCS-dir-rtl > .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+  margin-left: 30px; }
+
+.mCS-dir-rtl > .mCSB_inside > .mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
+  margin-left: 0; }
+
+.mCSB_scrollTools {
+  position: absolute;
+  width: 12px;
+  height: auto;
+  left: auto;
+  top: 0;
+  right: 0px;
+  bottom: 0; }
+
+.mCSB_outside + .mCSB_scrollTools {
+  right: -26px; }
+
+.mCS-dir-rtl > .mCSB_inside > .mCSB_scrollTools, .mCS-dir-rtl > .mCSB_outside + .mCSB_scrollTools {
+  right: auto;
+  left: 0; }
+
+.mCS-dir-rtl > .mCSB_outside + .mCSB_scrollTools {
+  left: -26px; }
+
+.mCSB_scrollTools .mCSB_draggerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: auto; }
+
+.mCSB_scrollTools a + .mCSB_draggerContainer {
+  margin: 20px 0; }
+
+.mCSB_scrollTools .mCSB_draggerRail {
+  width: 12px;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 4px; }
+
+.mCSB_scrollTools .mCSB_dragger {
+  cursor: pointer;
+  width: 100%;
+  height: 30px;
+  z-index: 1; }
+
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  position: relative;
+  width: 8px;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 4px; }
+
+.mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_dragger.mCSB_dragger_onDrag_expanded .mCSB_dragger_bar, .mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_draggerContainer:hover .mCSB_dragger .mCSB_dragger_bar {
+  width: 12px; }
+
+.mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_dragger.mCSB_dragger_onDrag_expanded + .mCSB_draggerRail, .mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_draggerContainer:hover .mCSB_draggerRail {
+  width: 8px; }
+
+.mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonUp {
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  cursor: pointer; }
+
+.mCSB_scrollTools .mCSB_buttonDown {
+  bottom: 0; }
+
+.mCSB_horizontal.mCSB_inside > .mCSB_container {
+  margin-right: 0;
+  margin-bottom: 30px; }
+
+.mCSB_horizontal.mCSB_outside > .mCSB_container {
+  min-height: 100%; }
+
+.mCSB_horizontal > .mCSB_container.mCS_no_scrollbar_x.mCS_x_hidden {
+  margin-bottom: 0; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  width: auto;
+  height: 16px;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.mCustomScrollBox + .mCSB_scrollTools + .mCSB_scrollTools.mCSB_scrollTools_horizontal, .mCustomScrollBox + .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  bottom: -26px; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal a + .mCSB_draggerContainer {
+  margin: 0 20px; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+  width: 100%;
+  height: 2px;
+  margin: 7px 0; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger {
+  width: 30px;
+  height: 100%;
+  left: 0; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
+  width: 100%;
+  height: 4px;
+  margin: 6px auto; }
+
+.mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_dragger.mCSB_dragger_onDrag_expanded .mCSB_dragger_bar, .mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_draggerContainer:hover .mCSB_dragger .mCSB_dragger_bar {
+  height: 12px;
+  margin: 2px auto; }
+
+.mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_dragger.mCSB_dragger_onDrag_expanded + .mCSB_draggerRail, .mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_draggerContainer:hover .mCSB_draggerRail {
+  height: 8px;
+  margin: 4px 0; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_buttonLeft, .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_buttonRight {
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  cursor: pointer; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_buttonLeft {
+  left: 0; }
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_buttonRight {
+  right: 0; }
+
+.mCSB_container_wrapper {
+  position: absolute;
+  height: auto;
+  width: auto;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-right: 30px;
+  margin-bottom: 30px; }
+
+.mCSB_container_wrapper > .mCSB_container {
+  padding-right: 30px;
+  padding-bottom: 30px; }
+
+.mCSB_vertical_horizontal > .mCSB_scrollTools.mCSB_scrollTools_vertical {
+  bottom: 20px; }
+
+.mCSB_vertical_horizontal > .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  right: 20px; }
+
+.mCSB_container_wrapper.mCS_no_scrollbar_x.mCS_x_hidden + .mCSB_scrollTools.mCSB_scrollTools_vertical {
+  bottom: 0; }
+
+.mCS-dir-rtl > .mCustomScrollBox.mCSB_vertical_horizontal.mCSB_inside > .mCSB_scrollTools.mCSB_scrollTools_horizontal, .mCSB_container_wrapper.mCS_no_scrollbar_y.mCS_y_hidden + .mCSB_scrollTools ~ .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  right: 0; }
+
+.mCS-dir-rtl > .mCustomScrollBox.mCSB_vertical_horizontal.mCSB_inside > .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  left: 20px; }
+
+.mCS-dir-rtl > .mCustomScrollBox.mCSB_vertical_horizontal.mCSB_inside > .mCSB_container_wrapper.mCS_no_scrollbar_y.mCS_y_hidden + .mCSB_scrollTools ~ .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  left: 0; }
+
+.mCS-dir-rtl > .mCSB_inside > .mCSB_container_wrapper {
+  margin-right: 0;
+  margin-left: 30px; }
+
+.mCSB_container_wrapper.mCS_no_scrollbar_y.mCS_y_hidden > .mCSB_container {
+  padding-right: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.mCSB_container_wrapper.mCS_no_scrollbar_x.mCS_x_hidden > .mCSB_container {
+  padding-bottom: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.mCustomScrollBox.mCSB_vertical_horizontal.mCSB_inside > .mCSB_container_wrapper.mCS_no_scrollbar_y.mCS_y_hidden {
+  margin-right: 0;
+  margin-left: 0; }
+
+.mCustomScrollBox.mCSB_vertical_horizontal.mCSB_inside > .mCSB_container_wrapper.mCS_no_scrollbar_x.mCS_x_hidden {
+  margin-bottom: 0; }
+
+.mCSB_scrollTools, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight, .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  -webkit-transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out; }
+
+.mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_draggerRail, .mCSB_scrollTools_horizontal.mCSB_scrollTools_onDrag_expand .mCSB_dragger_bar, .mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_draggerRail, .mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand .mCSB_dragger_bar {
+  -webkit-transition: width 0.2s ease-out 0.2s, height 0.2s ease-out 0.2s, margin-left 0.2s ease-out 0.2s, margin-right 0.2s ease-out 0.2s, margin-top 0.2s ease-out 0.2s, margin-bottom 0.2s ease-out 0.2s, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  transition: width 0.2s ease-out 0.2s, height 0.2s ease-out 0.2s, margin-left 0.2s ease-out 0.2s, margin-right 0.2s ease-out 0.2s, margin-top 0.2s ease-out 0.2s, margin-bottom 0.2s ease-out 0.2s, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out; }
+
+.mCSB_scrollTools {
+  opacity: 0.75; }
+
+.mCS-autoHide > .mCustomScrollBox > .mCSB_scrollTools, .mCS-autoHide > .mCustomScrollBox ~ .mCSB_scrollTools {
+  opacity: 0; }
+
+.mCS-autoHide:hover > .mCustomScrollBox > .mCSB_scrollTools, .mCS-autoHide:hover > .mCustomScrollBox ~ .mCSB_scrollTools, .mCustomScrollBox:hover > .mCSB_scrollTools, .mCustomScrollBox:hover ~ .mCSB_scrollTools, .mCustomScrollbar > .mCustomScrollBox > .mCSB_scrollTools.mCSB_scrollTools_onDrag, .mCustomScrollbar > .mCustomScrollBox ~ .mCSB_scrollTools.mCSB_scrollTools_onDrag {
+  opacity: 1; }
+
+.mCSB_scrollTools .mCSB_draggerRail {
+  background-color: #0000ff; }
+
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background-color: red; }
+
+.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
+  background-color: #ff0000; }
+
+.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar {
+  background-color: #ff0000; }
+
+.mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight, .mCSB_scrollTools .mCSB_buttonUp {
+  opacity: 1; }
+
+.mCSB_scrollTools .mCSB_buttonUp {
+  background-position: 0 0; }
+
+.mCSB_scrollTools .mCSB_buttonDown {
+  background-position: 0 -20px; }
+
+.mCSB_scrollTools .mCSB_buttonLeft {
+  background-position: 0 -40px; }
+
+.mCSB_scrollTools .mCSB_buttonRight {
+  background-position: 0 -56px; }
+
+.mCSB_scrollTools .mCSB_buttonDown:hover, .mCSB_scrollTools .mCSB_buttonLeft:hover, .mCSB_scrollTools .mCSB_buttonRight:hover, .mCSB_scrollTools .mCSB_buttonUp:hover {
+  opacity: 0.75; }
+
+.mCSB_scrollTools .mCSB_buttonDown:active, .mCSB_scrollTools .mCSB_buttonLeft:active, .mCSB_scrollTools .mCSB_buttonRight:active, .mCSB_scrollTools .mCSB_buttonUp:active {
+  opacity: 0.9; }
+
+/* =======================
+   modules/pagination
+   ======================= */
+/* ------ HTML -------
+
+<div class="pagination-container">
+  <ul>
+    <li>
+      <a href="#">
+        <span class="arrow-prev"></span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#">
+        <span class="arrow-next"></span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+   ------------------- */
+.pagination-container {
+  margin: 10px 0;
+  border-radius: 4px; }
+  .pagination-container > ul {
+    display: inline-block; }
+  .pagination-container li {
+    display: inline; }
+    .pagination-container li a {
+      float: left;
+      position: relative;
+      padding: 6px 12px;
+      margin-left: -1px;
+      color: #337ab7;
+      line-height: 1.5;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      /*@include transition(background-color .2s, color .25s);*/
+      -webkit-transition: all 0.25s;
+      transition: all 0.25s; }
+      .pagination-container li a:hover, .pagination-container li a.active {
+        will-change: background-color, color;
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #337ab7; }
+      .pagination-container li a:hover .arrow-prev {
+        border-right: 5px solid #fff; }
+      .pagination-container li a:hover .arrow-next {
+        border-left: 5px solid #fff; }
+  .pagination-container .arrow-prev {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #337ab7;
+    display: inline-block; }
+  .pagination-container .arrow-next {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #337ab7;
+    display: inline-block; }
+
+/* =======================
+   modules/blogger-author
+   ======================= */
+/* ------ HTML -------
+
+    <div class="waterfall-loading">
+        <div style="text-align:center;padding:10px 0; color:#999;">
+            <img src="data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7" alt="">
+            <br>Loading...</div>
+    </div>
+
+   ------------------- */
+.waterfall-loading {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.15s,visibility 0s 0.15s;
+  transition: opacity 0.15s,visibility 0s 0.15s; }
+  .waterfall-loading.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition-delay: 0s;
+            transition-delay: 0s; }
+
+/* =======================
+   pages/main
+   ======================= */
+body {
+  position: fixed;
+  will-change: transform; }
+
+#PRELOAD_ITEM {
+  position: fixed;
+  z-index: -99999;
+  visibility: hidden;
+  opacity: 0; }
+
+.disable-dbl-tap-zoom {
+  -ms-touch-action: manipulation;
+      touch-action: manipulation; }
+
+.main {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: relative;
+  width: 100vw;
+  height: 100vh; }
+  .main > .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: transparent url(../img/bg_414.png) 0% 0%/100% no-repeat;
+    background-size: cover; }
+  .main .section__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 480px;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    left: 50%;
+    overflow: hidden; }
+    .main .section__item .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%; }
+    .main .section__item .content {
+      height: 100%;
+      width: 100%;
+      max-width: 320px;
+      position: relative;
+      background: transparent;
+      top: 0;
+      margin: 0 auto; }
+      .main .section__item .content img {
+        width: auto; }
+      .main .section__item .content .btns {
+        position: relative;
+        z-index: 1; }
+    .main .section__item--1 {
+      z-index: 1;
+      width: 100%;
+      height: 100%; }
+      .main .section__item--1 .bg:after, .main .section__item--1 .bg:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%; }
+      .main .section__item--1 .bg:before {
+        top: 0;
+        background: transparent url(../img/bg_poto.png) 0% 0%/100% no-repeat;
+        max-height: 80vw; }
+      .main .section__item--1 .bg:after {
+        bottom: 0;
+        background: transparent url(../img/bg_gift.png) 0% 0%/100% no-repeat;
+        max-height: 26vw; }
+      .main .section__item--1 .logo_w {
+        position: absolute;
+        top: 12px;
+        left: 10px;
+        width: 65px;
+        height: 26px;
+        background: transparent url(../img/logo_w.png) 0% 0%/100% no-repeat; }
+      .main .section__item--1 .main_text {
+        position: relative;
+        top: 40vw;
+        left: 5vw;
+        margin: 0 auto;
+        width: 90vw;
+        height: 87vw;
+        background: transparent url(../img/main_text.png) 0% 0%/100% no-repeat; }
+    .main .section__item--2 {
+      z-index: 3;
+      width: 100%;
+      height: 100%; }
+      .main .section__item--2 .bg {
+        background: rgba(0, 0, 0, 0.85); }
+      .main .section__item--2 .content {
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+        z-index: 1;
+        max-width: 100%; }
+        .main .section__item--2 .content .countdown {
+          position: absolute;
+          top: 19vw;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+                  transform: translateX(-50%); }
+        .main .section__item--2 .content .howtoplay {
+          position: relative;
+          top: 89.7vw;
+          left: 2px;
+          margin: 0 auto;
+          width: 191px;
+          height: 122px;
+          background: transparent url(../img/rule.png) 0% 0%/100% no-repeat; }
+      .main .section__item--2[data-countdown='1'] .countdown {
+        width: 56px;
+        height: 171px;
+        background: transparent url(../img/1.png) 0% 0%/100% no-repeat; }
+      .main .section__item--2[data-countdown='2'] .countdown {
+        width: 118px;
+        height: 175px;
+        background: transparent url(../img/2.png) 0% 0%/100% no-repeat; }
+      .main .section__item--2[data-countdown='3'] .countdown {
+        width: 121px;
+        height: 176px;
+        background: transparent url(../img/3.png) 0% 0%/100% no-repeat; }
+    .main .section__item--3 {
+      z-index: 2;
+      width: 100%;
+      overflow: hidden; }
+      .main .section__item--3 .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent url(../img/bg_game.png) bottom center/100% no-repeat; }
+      .main .section__item--3 .content {
+        max-height: 480px; }
+        .main .section__item--3 .content .info {
+          position: absolute;
+          z-index: 3;
+          display: inline-block;
+          top: 0;
+          height: auto;
+          width: 100%;
+          left: 0;
+          margin-top: 0;
+          padding-left: 0;
+          -webkit-box-sizing: border-box;
+                  box-sizing: border-box; }
+          .main .section__item--3 .content .info:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 18px;
+            width: 69px;
+            height: 28px;
+            background: transparent url(../img/logo_r.png) 0% 0%/100% no-repeat; }
+          .main .section__item--3 .content .info .time {
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8); }
+            .main .section__item--3 .content .info .time label {
+              position: relative;
+              color: #fff;
+              font-size: 16px;
+              font-weight: bold;
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              width: 100%;
+              height: 100%;
+              -webkit-box-align: center;
+                  -ms-flex-align: center;
+                      align-items: center;
+              -webkit-box-pack: center;
+                  -ms-flex-pack: center;
+                      justify-content: center; }
+          .main .section__item--3 .content .info .score {
+            position: absolute;
+            top: 47px;
+            left: 12px;
+            width: 86px;
+            height: 19px;
+            background: transparent url(../img/score.png) 0% 0%/100% no-repeat; }
+            .main .section__item--3 .content .info .score label {
+              position: absolute;
+              top: 0;
+              right: 22px;
+              height: 100%;
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-align: center;
+                  -ms-flex-align: center;
+                      align-items: center;
+              -webkit-box-pack: center;
+                  -ms-flex-pack: center;
+                      justify-content: center;
+              color: #fff;
+              font-size: 13px;
+              font-weight: bold; }
+          .main .section__item--3 .content .info ._point {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 0;
+            width: 40px;
+            height: 40px; }
+            .main .section__item--3 .content .info ._point:after {
+              content: "";
+              display: inline-block;
+              position: relative;
+              top: 0;
+              right: 0;
+              width: 100%;
+              height: 100%; }
+            .main .section__item--3 .content .info ._point._y:after {
+              background: transparent url(../img/p_plus.png) 0% 0%/100% no-repeat; }
+            .main .section__item--3 .content .info ._point._n:after {
+              background: transparent url(../img/p_minus.png) 0% 0%/100% no-repeat; }
+        .main .section__item--3 .content .game {
+          height: 100%;
+          max-height: 480px;
+          position: relative;
+          z-index: 2;
+          top: 0;
+          overflow: hidden;
+          margin: 0 auto; }
+          .main .section__item--3 .content .game .stuffs {
+            position: absolute;
+            top: 0;
+            left: 0; }
+            .main .section__item--3 .content .game .stuffs .stuff {
+              position: absolute;
+              top: 0;
+              z-index: 1; }
+              .main .section__item--3 .content .game .stuffs .stuff._no0 {
+                width: 66px;
+                height: 73px;
+                background: transparent url(../img/item_plus_1.png) 0% 0%/100% no-repeat; }
+              .main .section__item--3 .content .game .stuffs .stuff._no1 {
+                width: 69px;
+                height: 82px;
+                background: transparent url(../img/item_plus_2.png) 0% 0%/100% no-repeat; }
+              .main .section__item--3 .content .game .stuffs .stuff._no2 {
+                width: 71px;
+                height: 78px;
+                background: transparent url(../img/item_plus_3.png) 0% 0%/100% no-repeat; }
+              .main .section__item--3 .content .game .stuffs .stuff._no3 {
+                width: 68px;
+                height: 63px;
+                background: transparent url(../img/item_minus_1.png) 0% 0%/100% no-repeat; }
+              .main .section__item--3 .content .game .stuffs .stuff._no4 {
+                width: 71px;
+                height: 68px;
+                background: transparent url(../img/item_minus_2.png) 0% 0%/100% no-repeat; }
+              .main .section__item--3 .content .game .stuffs .stuff._no5 {
+                width: 61px;
+                height: 68px;
+                background: transparent url(../img/item_minus_3.png) 0% 0%/100% no-repeat; }
+          .main .section__item--3 .content .game .catcher_box {
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            z-index: 1; }
+            .main .section__item--3 .content .game .catcher_box .catcher {
+              display: inline-block;
+              position: relative;
+              left: calc(50% - 28px);
+              width: 125px;
+              height: 113px;
+              background: transparent url(../img/mom.png) 0% 0%/100% no-repeat;
+              margin-top: 0;
+              will-change: transform; }
+              .main .section__item--3 .content .game .catcher_box .catcher .points ._point {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 40px;
+                height: 40px; }
+                .main .section__item--3 .content .game .catcher_box .catcher .points ._point:after {
+                  content: "";
+                  display: inline-block;
+                  position: relative;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  -webkit-transition: left .45s ease-in-out, margin-top .45s ease-in-out;
+                  transition: left .45s ease-in-out, margin-top .45s ease-in-out; }
+                .main .section__item--3 .content .game .catcher_box .catcher .points ._point._y {
+                  top: 62px;
+                  left: -45px; }
+                  .main .section__item--3 .content .game .catcher_box .catcher .points ._point._y:after {
+                    background: transparent url(../img/point_plus.png) 0% 0%/100% no-repeat; }
+                .main .section__item--3 .content .game .catcher_box .catcher .points ._point._n {
+                  top: -20px;
+                  left: 68px; }
+                  .main .section__item--3 .content .game .catcher_box .catcher .points ._point._n:after {
+                    background: transparent url(../img/point_minus.png) 0% 0%/100% no-repeat; }
+              .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point {
+                position: absolute;
+                top: -56px;
+                left: -41px; }
+                .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point:after {
+                  content: "";
+                  display: inline-block;
+                  position: relative;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  -webkit-transition: left .45s ease-in-out, margin-top .45s ease-in-out;
+                  transition: left .45s ease-in-out, margin-top .45s ease-in-out; }
+                .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point._y {
+                  width: 110px;
+                  height: 82px; }
+                  .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point._y:after {
+                    background: transparent url(../img/dialog_plus.png) 0% 0%/100% no-repeat; }
+                  .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point._y._1 {
+                    width: 121px;
+                    height: 82px; }
+                    .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point._y._1:after {
+                      background: transparent url(../img/dialog_plus_1.png) 0% 0%/100% no-repeat; }
+                .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point._n {
+                  top: -70px;
+                  left: -51px;
+                  width: 122px;
+                  height: 93px; }
+                  .main .section__item--3 .content .game .catcher_box .catcher .dialogs ._point._n:after {
+                    background: transparent url(../img/dialog_minus.png) 0% 0%/100% no-repeat; }
+    .main .section__item--4 {
+      z-index: 4;
+      width: 100%;
+      height: 100%; }
+      .main .section__item--4 .bg {
+        position: absolute;
+        top: 2px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+        width: 100%;
+        height: 84.5vh;
+        background: transparent url(../img/100.png) 0% 0%/100% no-repeat; }
+      .main .section__item--4 .content .btns {
+        top: 105vw; }
+        .main .section__item--4 .content .btns-item {
+          position: absolute;
+          width: 152px;
+          height: 41px;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+                  transform: translateX(-50%); }
+          .main .section__item--4 .content .btns-item.again {
+            background: transparent url(../img/btn_again.png) 0% 0%/100% no-repeat; }
+          .main .section__item--4 .content .btns-item.link {
+            top: 44px;
+            background: transparent url(../img/btn_more.png) 0% 0%/100% no-repeat; }
+          .main .section__item--4 .content .btns-item.share {
+            top: 91px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+                    transform: translateX(-50%);
+            width: 40px;
+            height: 42px; }
+            .main .section__item--4 .content .btns-item.share.fb {
+              margin-left: -30px;
+              background: transparent url(../img/fb.png) 0% 0%/100% no-repeat; }
+            .main .section__item--4 .content .btns-item.share.line {
+              margin-left: 30px;
+              background: transparent url(../img/line.png) 0% 0%/100% no-repeat; }
+  .main[data-section='1'] .section__item.section__item--2,
+  .main[data-section='1'] .section__item.section__item--3,
+  .main[data-section='1'] .section__item.section__item--4,
+  .main[data-section='2'] .section__item.section__item--1,
+  .main[data-section='2'] .section__item.section__item--4,
+  .main[data-section='3'] .section__item.section__item--1,
+  .main[data-section='3'] .section__item.section__item--2,
+  .main[data-section='3'] .section__item.section__item--4,
+  .main[data-section='4'] .section__item.section__item--1,
+  .main[data-section='4'] .section__item.section__item--2,
+  .main[data-section='4'] .section__item.section__item--3 {
+    display: none !important; }
+  .main[data-result="2"] .section__item--4 .bg {
+    background: transparent url(../img/80.png) 0% 0%/100% no-repeat; }
+  .main[data-result="3"] .section__item--4 .bg {
+    background: transparent url(../img/50.png) 0% 0%/100% no-repeat; }

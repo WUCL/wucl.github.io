@@ -1,0 +1,32 @@
+===================================================               
+NIELSEN Digital Ad Ratings (DAR) TAGS                                                                     
+
+Provided below are distinct tag versions for the campaign. Please only choose one to implement and be sure that the version you select will operate in your ad server.  
+
+
+===================================================                                     
+STANDARD 1x1 PIXELS                                                                                  
+
+Standard 1x1 Pixel for pixnet_plc0001 (PIX_Mobi) Placement:                                                                          
+<!-- Start Standard Pixel Call / pixnet_plc0001 (PIX_Mobi) Placement -->                                                         
+<img src="http://secure-gl.imrworldwide.com/cgi-bin/m?ca=nlsn157106&cr=crtve&ce=pixnet&pc=pixnet_plc0001&ci=nlsnci3152&am=3&at=view&rt=banner&st=image&r=[timestamp]" style="display:none"/> 
+<!-- End Standard Pixel Call / pixnet_plc0001 (PIX_Mobi) Placement -->                                                           
+
+Standard 1x1 Pixel for pixnet_plc0002 (Flybn) Placement:                                                                          
+<!-- Start Standard Pixel Call / pixnet_plc0002 (Flybn) Placement -->                                                         
+<img src="http://secure-gl.imrworldwide.com/cgi-bin/m?ca=nlsn157106&cr=crtve&ce=pixnet&pc=pixnet_plc0002&ci=nlsnci3152&am=3&at=view&rt=banner&st=image&r=[timestamp]" style="display:none"/> 
+<!-- End Standard Pixel Call / pixnet_plc0002 (Flybn) Placement -->                                                           
+
+
+===================================================                                     
+SECURE 1x1 PIXELS                                                                                  
+
+Secure 1x1 Pixel for pixnet_plc0001 (PIX_Mobi) Placement:                                                                          
+<!-- Start Secure Pixel Call / pixnet_plc0001 (PIX_Mobi) Placement -->                                                         
+<img src="https://secure-gl.imrworldwide.com/cgi-bin/m?ca=nlsn157106&cr=crtve&ce=pixnet&pc=pixnet_plc0001&ci=nlsnci3152&am=3&at=view&rt=banner&st=image&r=[timestamp]" style="display:none"/> 
+<!-- End Secure Pixel Call / pixnet_plc0001 (PIX_Mobi) Placement -->                                                           
+
+Secure 1x1 Pixel for pixnet_plc0002 (Flybn) Placement:                                                                          
+<!-- Start Secure Pixel Call / pixnet_plc0002 (Flybn) Placement -->                                                         
+<img src="https://secure-gl.imrworldwide.com/cgi-bin/m?ca=nlsn157106&cr=crtve&ce=pixnet&pc=pixnet_plc0002&ci=nlsnci3152&am=3&at=view&rt=banner&st=image&r=[timestamp]" style="display:none"/> 
+<!-- End Secure Pixel Call / pixnet_plc0002 (Flybn) Placement -->                                                           

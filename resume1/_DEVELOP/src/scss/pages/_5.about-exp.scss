@@ -41,10 +41,11 @@
 						padding: 15px;
 					}
 					.top {
+						// background: lighten($color-second, 50%);
 						display: flex;
 						align-items: center;
 						@include mq($max-width: $bp-2s) {
-							padding: 7px;
+							padding: 12px 7px;
 						}
 					}
 					.bottom {
@@ -73,6 +74,7 @@
 								transition: .2s;
 								@include mq($max-width: $bp-2s) {
 									margin: 9px;
+									letter-spacing: 0;
 								}
 							}
 							> ul {
@@ -100,6 +102,13 @@
 										max-height: 500px;
 										object-fit: contain;
 										border-radius: 10px;
+									}
+									mark {
+										background: lighten($color-third, 9%);
+										font-weight: 500;
+										padding: 0 5px;
+										margin-right: 3px;
+										letter-spacing: 0;
 									}
 								}
 							}
@@ -143,7 +152,7 @@
 						.title {
 						}
 						.name {
-							color: $color-second;
+							// color: $color-second;
 							color: nth($color-analogous, 1);
 							font-weight: bold;
 							font-size: $fontsize-1;
@@ -174,19 +183,20 @@
 							@include mq($max-width: $bp-2s) {
 								line-height: $fontsize-3;
 							}
-							&:after {
-								content: "";
-								background: lighten($color-third, 7%);
-								position: absolute;
-								z-index: -1;
-								top: 0;
-								left: -5%;
-								width: 0;
-								height: 100%;
-								transition: .5s;
-								will-change: transform;
-								transform: skewX(-25deg);
-							}
+							// &:after {
+							// 	content: "";
+							// 	background: lighten($color-third, 7%);
+							// 	position: absolute;
+							// 	z-index: -1;
+							// 	top: 0;
+							// 	left: -5%;
+							// 	width: 0;
+							// 	height: 100%;
+							// 	transition: .5s;
+							// 	will-change: transform;
+							// 	transform: skewX(-25deg);
+							// }
+
 							// time {
 							// 	&:before {
 							// 		content: "|";
@@ -203,8 +213,9 @@
 							right: 10px;
 						}
 						time {
+							color: $color-main;
 							// border-bottom: 1px dashed rgba($color-black, .2);
-							font-weight: 500;
+							font-weight: 600;
 							@include mq($max-width: $bp-2s) {
 								max-width: 43px;
 								text-align: center;
@@ -238,6 +249,54 @@
 									}
 								}
 							}
+						}
+					}
+					&.sideproject {
+						.bottom {
+							ul {
+								li {
+									&.withImg {
+										list-style: none;
+										letter-spacing: 0;
+										margin-left: 0;
+										width: 100%;
+										// white-space: nowrap;
+										// @include mq($max-width: $bp-m) {
+										// 	overflow: scroll;
+										// 	-webkit-overflow-scrolling: touch;
+										// }
+										a {
+											width: 31%;
+											display: inline-block;
+											opacity: 1;
+											border-bottom: 0;
+											// margin: 0 5px;
+											@include mq($max-width: $bp-m) {
+												width: 38%;
+											}
+											@include mq($max-width: $bp-2s) {
+												width: 43%;
+												// margin: 0 1px;
+											}
+											img {
+												width: 100%;
+												display: inline-block;
+											}
+										}
+									}
+								}
+							}
+						 	div[data-title="WeathrBox"] {
+								ul {
+									li {
+										&.withImg {
+											a {
+												width: 87%;
+											}
+										}
+									}
+								}
+						 	}
 						}
 					}
 					// .more {
