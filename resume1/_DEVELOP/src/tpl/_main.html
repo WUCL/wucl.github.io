@@ -4,7 +4,8 @@
 			<div class="whoisthis">
 				<div class="left">
 					<div class="avatar">
-						<img name="CHUNG-LUN WU" title="CHUNG-LUN WU" alt="CHUNG-LUN WU" src="@@webRoot/public/img/avatar.png">
+						<!-- <img name="CHUNG-LUN WU" title="CHUNG-LUN WU" alt="CHUNG-LUN WU" src="@@webRoot/public/img/avatar.png"> -->
+						<img name="CHUNG-LUN WU" title="CHUNG-LUN WU" alt="CHUNG-LUN WU" src="@@webRoot/public/img/avatar1.jpg">
 					</div>
 				</div>
 				<div class="right">
@@ -32,15 +33,46 @@
 				</ul>
 			</div>
 			<div class="bio">
-				<p>一個中度蘋果粉 <i class="fab fa-apple"></i>，喜歡蘋果帶給世界的變化。</p>
-				<p>不斷持續從蘋果的設計與體驗中學習，也期待每年蘋果發表會。</p>
-				<p>另外也對新奇產品感到好奇與嘗試，特別愛逛募資平台並在上面買些什麼。（e.g. <a href="https://www.kickstarter.com/" target="_blank" rel="noreferrer noopener">KICKSTARTER</a>、 <a href="https://www.zeczec.com/" target="_blank" rel="noreferrer noopener">嘖嘖</a>）</p>
+				<p>獨立思考，喜歡搜集數據，並透過自動化報表整併分析</p>
+				<p>喜歡探索使用者行為及預設心理想法動機</p>
+				<p>科學家精神，熱愛做實驗研究與驗證</p>
+				<p>善用 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄工作樞紐與生活與生活瑣碎</p>
 			</div>
+		</div>
+	</section>
+	<section id="about-exp" class="about-exp">
+		<div class="inner">
+			<h4 class="title" title="exp">經歷</h4>
+            <ul>
+                <!-- <li class="seethat" v-bind:data-exp="index" v-for="(exp, index) in exps" @click="openExp"> -->
+                <li class="seethat" v-bind:data-exp="index" v-for="(item, index) in exps">
+                    <div class="top">
+	                    <div class="logo">
+	                        <img v-bind:src="item.logo">
+	                    </div>
+	                    <div class="info">
+	                        <a class="name" v-bind:href="item.url" target="_blank" rel="noreferrer noopener">{{ item.name }}</a>
+	                        <span class="title">{{ item.title }}</span>
+	                    </div>
+	                    <div class="howlong">
+	                    	<time>{{ item.time }}</time>
+	                    </div>
+	                    <!-- <button class="more"><span></span></button> -->
+	                </div>
+                    <div class="bottom">
+                    	<div v-bind:data-title="exp.title" v-for="exp in item.lists">
+                    		<ul>
+                    			<li v-for="value in exp.item" v-html="value"></li>
+                    		</ul>
+                    	</div>
+                    </div>
+                </li>
+            </ul>
 		</div>
 	</section>
 	<section class="about-skill">
 		<div class="inner">
-			<h4 class="title" title="SKILL">擅長技術</h4>
+			<h4 class="title" title="SKILL">技能</h4>
 			<ul class="with-disc">
 				<li v-bind:data-skill="key" v-for="(skill, key) in skills">
 					<h3>{{ key }}</h3>
@@ -50,7 +82,7 @@
 			</ul>
 		</div>
 	</section>
-	<section class="about-target">
+	<!-- <section class="about-target">
 		<div class="inner">
 			<h4 class="title" title="TARGET">工作目標</h4>
 			<ul class="with-disc">
@@ -60,8 +92,8 @@
 				<li>規劃偉大產品並參與其中</li>
 			</ul>
 		</div>
-	</section>
-	<section class="about-goodat">
+	</section> -->
+	<!-- <section class="about-goodat">
 		<div class="inner">
 			<h4 class="title" title="GOODAT">擅長做的事</h4>
 			<ul class="with-disc">
@@ -72,26 +104,9 @@
 				<li>科學家精神，喜歡做實驗研究與驗證</li>
 			</ul>
 		</div>
-	</section>
-	<section id="about-exp" class="about-exp">
-		<div class="inner">
-			<h4 class="title" title="exp">經歷</h4>
-            <ul>
-                <li class="seethat" v-bind:data-exp="key" v-for="(exp, key) in exps" @click="openExp">
-                    <div class="logo">
-                        <img v-bind:src="exp.logo">
-                    </div>
-                    <div class="info">
-                        <span class="name">{{ exp.name }}<i class="far fa-external-link" @click="externalLink(exp.url);"></i></span>
-                        <span class="title">{{ exp.title }}<time>{{ exp.time }}</time></span>
-                    </div>
-                    <button class="more"><span></span></button>
-                </li>
-            </ul>
-		</div>
-	</section>
+	</section> -->
 </main>
-<div id="exps" class="exps">
+<!-- <div id="exps" class="exps">
 	<div class="overlay" @click="closeExp"></div>
 	<div class="container">
 		<div class="top">
@@ -100,4 +115,4 @@
 	    </div>
 		<div class="bottom"></div>
 	</div>
-</div>
+</div> -->

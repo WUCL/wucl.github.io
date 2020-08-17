@@ -1,0 +1,18 @@
+/* =======================
+   pages/about-target
+   ======================= */
+.main {
+	section.about-target {
+		display: none;
+		.inner {
+			ul {
+				li {
+					&:hover {
+						font-weight: 700;
+						color: $color-second;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+/* =======================
+   pages/about-goodat
+   ======================= */
+.main {
+	section.about-goodat {
+		display: none;
+		padding-bottom: 20px;
+		.inner {
+			ul {
+				li {
+					&:hover {
+						font-weight: 700;
+						color: $color-second;
+					}
+				}
+			}
+		}
+	}
+}
