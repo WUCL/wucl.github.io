@@ -19,12 +19,14 @@
                     "title": "事蹟"
                     , "item": [
                         "從後端到前端，並擔任 前端負責人"
+                        , "<mark>平台建置</mark>使用 Wordpress 轉型，讓平台更易於管理 與 更高的擴充性彈性"
                         , "<mark>平台優化</mark>脫離 <a href='https://zh-tw.wordpress.com/' target='_blank' rel='noreferrer noopener'>Wordpress</a> 前台包裝，獨立製作一個符合使用者的前台畫面，優化手機端 150% 效能成長"
                         , "<mark>SEO優化</mark>使用符合網站的關鍵字與描述和文章的字級段落重新歸納分配，提高 SEO 排名，並將其跳出率從 75% 降至 40%"
                         , "<mark>網站優化</mark>持續追蹤功能使用率與記錄網站CTR成效，並依照數據變化，針對功能曝光程度調整"
                         , "<mark>網站優化</mark>主導 File Server 透過 LSync 進行異地備援同步，便於管控與分散風險"
                         , "<mark>CRM系統開發</mark>建立 使用者輪廓 與 客戶關係 並自動化將數據做整併分析"
                         , "<mark>廣告配置</mark>透過重新編排顯示方式，將廣告最大化，提升 2 倍點擊成長"
+                        , "<mark>平台建置</mark>使用 Discuz 建立談心論壇，使原本不適合社群的 Wordpress 平台添加更多操作性"
                         , "<mark>平台建置</mark>電商平台系統建置，透過文章的導流行為轉換並達到三贏"
                     ]
                 }
@@ -82,7 +84,7 @@
                     "item": [
                         "<mark>專案開發</mark>處理核心外的會員活動，發想、規劃、開發 以及 業務需求製作；並模組化系列的開發規格，加速業務案與流程，提高快速產出"
                         , "<mark>活動主導</mark>連續主辦 <a href='http://mol.mcu.edu.tw/pixnet%E8%BF%94%E6%A0%A1%E6%97%A5-%E8%90%AC%E8%81%96%E7%AF%80%E9%87%8D%E7%8F%BE%E7%B6%93%E5%85%B8%E9%9B%BB%E5%BD%B1%E5%A0%B4%E6%99%AF/' target='_blank' rel='noreferrer noopener'>年度萬聖節活動</a>，並擔任專案負責人。目的為 擴大同仁參與認同度 與 增進同仁間合作趣味"
-                        , "<mark>專案主導</mark>協助規劃與開發，完成公司內部 佈告欄系統 ，解決公司內部佈達資訊的缺乏與不即時"
+                        , "<mark>平台主導</mark>協助規劃與開發，完成公司內部平台 佈告欄系統 ，解決公司內部佈達資訊的缺乏與不即時"
                         , "<mark>數據運用</mark>擔任部門數據指導者，教學如何使用透過 GA 來觀察數據變化"
                         , "<mark>UI Guideline</mark>發起 User Interface Guideline 製作，與 UI Team 共同以 1 年時間內編輯完成"
                         , "<mark>經營吉祥物</mark>共同經營 PIXNET 吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a>；透過即時的 <a href='https://trends.google.com.tw/trends/hottrends/visualize?nrow=5&ncol=5&pn=p12&hl=zh_TW' target='_blank' rel='noreferrer noopener'>GOOGLE 熱門關鍵字</a>，與 PIXNET 大數據結合整併分析，目的於 創造公司與部門價值、增廣自身文字力 與 趨勢行銷掌握"
@@ -92,10 +94,8 @@
                     "title": "製作案",
                     "item": [
                         "活動網站 - <a href='https://dysonv8slim.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>Dyson</a>"
-                        , "活動網站 - <a href='https://lrp201910.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>理膚寶水</a>"
                         , "活動網站 - <a href='https://bravecto2019.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>一錠除</a>"
                         , "活動網站 - <a href='https://dinling2019.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>叮寧</a>"
-                        , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20200312-coverad-petad/' target='_blank' rel='noreferrer noopener'>麥香校園清潔保衛戰</a>"
                         , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20200312-coverad-tryit2020running' target='_blank' rel='noreferrer noopener'>純喫茶烏龍青茶</a>"
                         , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20190418-coverad-noodles' target='_blank' rel='noreferrer noopener'>統一小時光灰熊失禮</a>"
                         , "手機蓋板廣告 - <a href='https://wucl.github.io/project/events/20190424-coverad-tryit2019basketball' target='_blank' rel='noreferrer noopener'>純喫茶三對三鬥牛霸</a>"
