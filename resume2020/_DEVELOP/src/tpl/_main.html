@@ -4,8 +4,8 @@
 			<div class="whoisthis">
 				<div class="right">
 					<div class="introduction">
-						<h2 class="name-en" name="ALLEN WU" title="ALLEN WU">ALLEN WU</h2>
-						<h1 class="name" name="吳忠倫 CHUNG-LUN WU" title="吳忠倫">吳忠倫</h1>
+						<h1 class="name-en" name="ALLEN WU" title="ALLEN WU">ALLEN WU</h1>
+						<h2 class="name" name="吳忠倫 CHUNG-LUN WU" title="吳忠倫">吳忠倫</h2>
 						<h3 class="title">F2E / PM / Blogger</h3>
 					</div>
 				</div>
@@ -37,10 +37,10 @@
 	</section>
 	<section class="about-skill">
 		<div class="inner">
-			<h4 class="title" title="SKILL">技能</h4>
+			<h3 class="title" title="SKILL">技能</h3>
 			<ul class="with-disc">
 				<li v-bind:data-skill="key" v-for="(skill, key) in skills">
-					<h3>{{ key }}</h3>
+					<h4>{{ key }}</h4>
 					<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
 				</li>
 			</ul>
@@ -48,7 +48,7 @@
 	</section>
 	<section id="about-exp" class="about-exp">
 		<div class="inner">
-			<h4 class="title" title="exp">經歷</h4>
+			<h3 class="title" title="exp">經歷</h3>
 			<ul>
 				<li class="sideproject">
 					<div class="top">
