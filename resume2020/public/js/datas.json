@@ -50,7 +50,7 @@
                 , {
                     "title": "Volunteer Certificate"
                     , "item": [
-                        "<a href='./public/img/exp/talkux-VolunteerCertificate.jpg' target='_blank' rel='noreferrer noopener'><img src='./public/img/exp/talkux-VolunteerCertificate.jpg'></a>"
+                        "<a href='./public/img/exp/talkux-VolunteerCertificate.jpg' target='_blank' rel='noreferrer noopener'><img alt='志工證明' src='./public/img/exp/talkux-VolunteerCertificate.jpg'></a>"
                     ]
                 }
             ]
@@ -109,10 +109,10 @@
         "程式": ["HTML", "CSS", "Javascript", "jQuery", "VUE", "Gulp", "PHP", "SQL"]
         , "監測": ["<mark class='without-bg' title='Google Analytics'>GA</mark>", "<mark class='without-bg' title='Google Tag Manager'>GTM</mark>", "<mark class='without-bg' title='Google PageSpeed Insights'>GPI</mark>", "GTMetrix", "WebPagetest", "Mixpanel", "NewRelic", "<a href='https://web.dev/measure/' target='_blank' rel='noreferrer noopener'>Google web.dev Measure</a>"]
         , "平台": ["Wordpress", "Discuz"]
-        , "廣告": ["Google Ad Manage", "Google Adsense"]
+        , "廣告": ["Google Ad Manage(DoubleClick)", "Google Adsense"]
         , "專案": ["Asana", "Trello", "Axure", "Xmind", "inVision", "Zeplin", "Sketch"]
         , "管理": ["Google Sheets", "Bitbucket", "GitHub", "Plesk"]
         , "濾鏡": ["Spark AR Studio"]
-        , "其他": ["Slack", "LINE Bot", "Sublime Text", "Notion","macOS", "OpenData"]
+        , "其他": ["Slack", "LINE Bot", "Sublime Text", "Notion","macOS", "OpenData", "Youtube"]
     }
 }

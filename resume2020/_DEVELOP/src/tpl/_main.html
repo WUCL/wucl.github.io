@@ -2,11 +2,6 @@
 	<section class="about-me">
 		<div class="inner">
 			<div class="whoisthis">
-				<!-- <div class="left">
-					<div class="avatar">
-						<img name="CHUNG-LUN WU" title="CHUNG-LUN WU" alt="CHUNG-LUN WU" src="@@webRoot/public/img/avatar1.jpg">
-					</div>
-				</div> -->
 				<div class="right">
 					<div class="introduction">
 						<h2 class="name-en" name="ALLEN WU" title="ALLEN WU">ALLEN WU</h2>
@@ -35,7 +30,7 @@
 				<p>工作總年資：5年</p>
 				<p>獨立思考，喜歡搜集數據，並透過自動化報表整併分析</p>
 				<p>喜歡探索使用者行為及預設心理想法動機</p>
-				<p>科學家精神，熱愛做實驗研究與驗證</p>
+				<p>科學家精神，熱愛實驗研究求證</p>
 				<p>善用 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄工作樞紐與生活與生活瑣碎</p>
 			</div>
 		</div>
@@ -46,35 +41,11 @@
 			<ul class="with-disc">
 				<li v-bind:data-skill="key" v-for="(skill, key) in skills">
 					<h3>{{ key }}</h3>
-					<!-- <span v-html="skill"></span> -->
 					<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
 				</li>
 			</ul>
 		</div>
 	</section>
-	<!-- <section class="about-target">
-		<div class="inner">
-			<h4 class="title" title="TARGET">工作目標</h4>
-			<ul class="with-disc">
-				<li>研究、探討與分析使用者的使用行為</li>
-				<li>拉近與使用者的關係，並使商業模式與價值最大化</li>
-				<li>透過使用者研究或服務設計方法，參與用戶體驗研究</li>
-				<li>規劃偉大產品並參與其中</li>
-			</ul>
-		</div>
-	</section> -->
-	<!-- <section class="about-goodat">
-		<div class="inner">
-			<h4 class="title" title="GOODAT">擅長做的事</h4>
-			<ul class="with-disc">
-				<li>熱愛 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄分析工作樞紐與生活記帳瑣碎等</li>
-				<li>主導企劃產品製成</li>
-				<li>搜集數據與整理分析，並透過報表進而建議與優化產品規劃</li>
-				<li>推理與邏輯判斷力強，喜歡探索使用者行為及心理動機想法</li>
-				<li>科學家精神，喜歡做實驗研究與驗證</li>
-			</ul>
-		</div>
-	</section> -->
 	<section id="about-exp" class="about-exp">
 		<div class="inner">
 			<h4 class="title" title="exp">經歷</h4>
@@ -86,19 +57,13 @@
 						</div>
 					</div>
 					<div class="bottom">
-						<div data-title="LINEBOT">
+						<div data-title="LINEBOT-PM2.5">
 							<ul>
 								<li>加入LINE機器人可直接使用 <i class="fad fa-arrow-alt-circle-right"></i> <a href="https://line.me/ti/p/@lpy5448u" target="_blank" rel="noreferrer noopener">JUST4FUN</a></li>
 								<li>定期拿取 公開天氣資料 並將 PM2.5 做 本地暫存，並先將其地址分類，再轉乘可選取形式供使用者做區域選擇，即提供其資訊。</li>
 								<li class="withImg">
-									<!-- <a href="@@webRoot/public/img/project/linebot/1.png" target="_blank" rel="noreferrer noopener">
-										<img src="@@webRoot/public/img/project/linebot/1.png">
-									</a>
-									<a href="@@webRoot/public/img/project/linebot/2.png" target="_blank" rel="noreferrer noopener">
-										<img src="@@webRoot/public/img/project/linebot/2.png">
-									</a> -->
 									<a href="@@webRoot/public/img/project/linebot/3.png" target="_blank" rel="noreferrer noopener">
-										<img src="@@webRoot/public/img/project/linebot/3.png">
+										<img alt="LINEBOT-PM2.5 畫面截圖" src="@@webRoot/public/img/project/linebot/3.png">
 									</a>
 								</li>
 							</ul>
@@ -109,18 +74,17 @@
 								<li>透過 地理位置定位，取得目前所在座標，再透過公開資料轉換 座標縣市區域，並再拿取 公開天氣資料 進行天氣預報顯示。</li>
 								<li class="withImg">
 									<a href="@@webRoot/public/img/project/weatherbox/1.png" target="_blank" rel="noreferrer noopener">
-										<img src="@@webRoot/public/img/project/weatherbox/1.png">
+										<img alt="WeathrBox 畫面截圖" src="@@webRoot/public/img/project/weatherbox/1.png">
 									</a>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</li>
-				<!-- <li class="seethat" v-bind:data-exp="index" v-for="(exp, index) in exps" @click="openExp"> -->
-				<li class="seethat" v-bind:data-exp="index" v-for="(item, index) in exps">
+				<li class="seethat" v-bind:data-exp="key" v-for="(item, key) in exps">
 					<div class="top">
 						<div class="logo">
-							<img v-bind:src="item.logo">
+							<img v-bind:alt="key" v-bind:src="item.logo">
 						</div>
 						<div class="info">
 							<a class="name" v-bind:href="item.url" target="_blank" rel="noreferrer noopener">{{ item.name }}</a>
@@ -129,7 +93,6 @@
 						<div class="howlong">
 							<time>{{ item.time }}</time>
 						</div>
-						<!-- <button class="more"><span></span></button> -->
 					</div>
 					<div class="bottom">
 						<div v-bind:data-title="exp.title" v-for="exp in item.lists">
@@ -143,13 +106,3 @@
 		</div>
 	</section>
 </main>
-<!-- <div id="exps" class="exps">
-	<div class="overlay" @click="closeExp"></div>
-	<div class="container">
-		<div class="top">
-			<div class="logo"><img src></div>
-			<div class="info"><time></time><a class="name" href="javascript:;" target="_blank" rel="noreferrer noopener"></a><span class="title"></span></div>
-		</div>
-		<div class="bottom"></div>
-	</div>
-</div> -->
