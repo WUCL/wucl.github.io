@@ -115,7 +115,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
         // Function
         init: function() {
             var $this = this;
-            ga_pv("首頁");
+            // ga_pv("首頁");
 
             $this.bindEvent();
             $this.var.$score = this.var.$_gameStartScore;
@@ -209,7 +209,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
         ======================= */
             switchToRulePage: function() {
                 this.switchToSection(2); // changing to section 2
-                ga_pv("倒數畫面");
+                // ga_pv("倒數畫面");
                 this.startToRuleCountdown(); // start to rule countdown
             },
             startToRuleCountdown: function() {
@@ -254,7 +254,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
             beforeGameGo: function() {
                 console.log("beforeGameGo");
                 this.switchToSection(3); // switch to section 3
-                ga_pv("遊戲畫面");
+                // ga_pv("遊戲畫面");
 
                 /********** game start **********/
                 this.gameGo();
@@ -443,13 +443,13 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
                 var $this = this;
                 // count result
                 if ($this.var.$_gameScore > 80) {
-                    ga_pv('結果頁100');
+                    // ga_pv('結果頁100');
                     $this.el.$main.attr('data-result', 1);
                 } else if (this.var.$_gameScore > 50) {
-                    ga_pv('結果頁80');
+                    // ga_pv('結果頁80');
                     $this.el.$main.attr('data-result', 2);
                 } else {
-                    ga_pv('結果頁50');
+                    // ga_pv('結果頁50');
                     $this.el.$main.attr('data-result', 3);
                 }
 
@@ -484,6 +484,42 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
         ======================= */
 
     };
-    main.init();
+    if (deviceObj.isMobile()) {
+        main.init();
+    } else {
+        $('body').append(`
+            <style>
+            #overlay-mb {
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, .95);
+            }
+            #overlay-mb .inner {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #overlay-mb h2 {
+                font-size: 18px;
+                letter-spacing: 1px;
+                color: #fff;
+                margin-bottom: 10px;
+            }
+            #overlay-mb img {
+                width: 230px;
+                height: 230px;
+                object-fit: fill;
+                display: block;
+                margin: 0 auto;
+            }
+            </style>
+            <div id="overlay-mb"><div class="inner"><h2>手機蓋板廣告 - 統一小時光灰熊失禮</h2><img src="qrcode.png"></div></div>
+        `);
+    }
 });
 
