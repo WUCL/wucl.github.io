@@ -23,7 +23,7 @@ const SRC = './src'
     , PATH = {
         SRC: {
             HTML: SRC + '/*.html'
-            , TPL: SRC + '/tpl/*.html'
+            , TPL: SRC + '/tpl/**/*.html'
             , CSS: SRC + '/scss/**/*.scss'
             , JS: SRC + '/js/**/*.js'
             , IMG: SRC + '/img/**/*.{jpg,jpeg,png,gif,svg,ico}'

@@ -1,0 +1,12 @@
+<section class="about-skill">
+	<!-- <i class="fas fa-circle-notch fa-spin" v-if="status.loading.skill"></i> -->
+	<div class="inner" v-if="!status.loading.skill">
+		<h2 class="title" title="SKILL">技能</h2>
+		<ul class="with-disc">
+			<li v-bind:data-skill="key" v-for="(skill, key) in skills">
+				<h4>{{ key }}</h4>
+				<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
+			</li>
+		</ul>
+	</div>
+</section>

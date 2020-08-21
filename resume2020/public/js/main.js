@@ -8,6 +8,12 @@
             },
             exps: '',
             skills: '',
+            status: {
+                loading: {
+                    skill: true,
+                    exp: true,
+                }
+            }
         },
         mounted: function() {
             console.log("%cHi This is Allen", "padding:0 5px;background:#ffcc00;color:#116934;font-weight:bolder;font-size:50px;")
@@ -16,8 +22,17 @@
         },
         watch: {
             exps: function (val) {
-                // console.log(val);
-            }
+                // this.$nextTick(() => {
+                Vue.nextTick(() => {
+                    this.status.loading.exp = false;
+                });
+            },
+            skills: function (val) {
+                // this.$nextTick(() => {
+                Vue.nextTick(() => {
+                    this.status.loading.skill = false;
+                });
+            },
         },
         created: function () {
         },

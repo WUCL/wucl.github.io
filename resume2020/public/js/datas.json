@@ -110,9 +110,9 @@
         , "監測": ["<mark class='without-bg' title='Google Analytics'>GA</mark>", "<mark class='without-bg' title='Google Tag Manager'>GTM</mark>", "<mark class='without-bg' title='Google PageSpeed Insights'>GPI</mark>", "GTMetrix", "WebPagetest", "Mixpanel", "NewRelic", "<a href='https://web.dev/measure/' target='_blank' rel='noreferrer noopener'>Google web.dev Measure</a>"]
         , "平台": ["Wordpress", "Discuz", "AWS", "GCP", "Linode"]
         , "廣告": ["Google Ad Manage(DoubleClick)", "Google Adsense"]
-        , "專案": ["Asana", "Trello", "Axure", "Xmind", "inVision", "Zeplin", "Sketch"]
+        , "專案": ["Asana", "Trello", "Xmind", "inVision", "Zeplin", "Sketch", "Axure"]
         , "管理": ["Google Sheets", "Bitbucket", "GitHub", "Plesk"]
-        , "濾鏡": ["Spark AR Studio"]
+        , "濾鏡": ["Spark AR Studio（FB/IG）"]
         , "其他": ["Slack", "LINE Bot", "Sublime Text", "Notion", "macOS", "OpenData", "Youtube"]
     }
 }
