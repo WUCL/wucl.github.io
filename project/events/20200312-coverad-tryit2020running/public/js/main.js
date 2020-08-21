@@ -75,7 +75,7 @@ $(function() {
 
             // start, section1
             $this.el.$section1.find('.btns').on('click', function() {
-                ck_count('按鈕-開始');
+                // ck_count('按鈕-開始');
                 $this.doRule();
             });
 
@@ -98,14 +98,14 @@ $(function() {
 
             // again
             $this.el.$btnAgain.on('click', function(e) {
-                ck_count('按鈕-再玩一次');
+                // ck_count('按鈕-再玩一次');
                 $this.gameReset();
                 // return $this.doChangeSection(1);
                 return $this.doRule();
             });
             // link
             $this.el.$btnLink.on('click', function(e) {
-                ck_count('按鈕-看更多');
+                // ck_count('按鈕-看更多');
                 return window.open($this.var.$outLink);
             });
         },
@@ -118,7 +118,7 @@ $(function() {
         rule page
         ======================= */
         doRule: function() {
-            ga_pv('畫面-倒數');
+            // ga_pv('畫面-倒數');
             this.doChangeSection(2);
             this.ruleCountDown();
         },
@@ -170,7 +170,7 @@ $(function() {
         },
         gameReady: function() { // gameReady
             console.log('gameReady');
-            ga_pv('畫面-遊戲');
+            // ga_pv('畫面-遊戲');
             this.doChangeSection(3);
 
             // set default game time of the begin
@@ -340,13 +340,13 @@ $(function() {
 
             // count result
             if (this.var.$_gameScore > 90) {
-                ga_pv('畫面-結果1');
+                // ga_pv('畫面-結果1');
                 this.el.$main.attr('data-result', 1);
             } else if (this.var.$_gameScore > 60) {
-                ga_pv('畫面-結果2');
+                // ga_pv('畫面-結果2');
                 this.el.$main.attr('data-result', 2);
             } else {
-                ga_pv('畫面-結果3');
+                // ga_pv('畫面-結果3');
                 this.el.$main.attr('data-result', 3);
             }
 
@@ -469,7 +469,43 @@ $(function() {
             }
         },
     };
-    main.init();
+
+    if (deviceObj.isMobile()) {
+        main.init();
+    } else {
+        $('body').append(`
+            <style>
+            #overlay-mb {
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, .95);
+            }
+            #overlay-mb .inner {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #overlay-mb h2 {
+                font-size: 18px;
+                letter-spacing: 1px;
+                color: #fff;
+                margin: 15px 0;
+            }
+            #overlay-mb img {
+                width: 200px;
+                object-fit: fill;
+                display: block;
+                margin: 0 auto;
+            }
+            </style>
+            <div id="overlay-mb"><div class="inner"><img class="qrcode" src="qrcode.png"><h2>手機蓋板廣告 - 統一小時光灰熊失禮</h2><img class="screen" src="screen.png"></div></div>
+        `);
+    }
 });
 
 /* =======================

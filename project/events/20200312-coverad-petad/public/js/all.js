@@ -1,4 +1,4 @@
-window.__trackdev = false; // is this for dev?
+window.__trackdev = true; // is this for dev?
 if (!window.__trackdev) {
     window.__paId = '90-5e5e14ffd003a'; // 0312 update
     window.__gaId = 'UA-111995344-17'; // 0312 update

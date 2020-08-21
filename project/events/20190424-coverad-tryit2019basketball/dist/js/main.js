@@ -88,7 +88,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
         // Function
         init: function() {
             var $this = this;
-            ga_pv("首頁");
+            // ga_pv("首頁");
             $this.bindEvent();
 
             // dev mode
@@ -101,24 +101,24 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
             var $this = this;
             // start, section_index
             $this.el.$section_index.find(".start_btn").on("click", function() {
-                ck_count("立即挑戰");
+                // ck_count("立即挑戰");
                 $this.switchToRulePage();
             });
 
             // share // 主要分享的元素
                 // OUT
                 $this.el.$section.find(".btns .link").on("click", function(e) {
-                    ck_count("挑戰更多關卡_" + $this.var.$_share.OUT.text);
+                    // ck_count("挑戰更多關卡_" + $this.var.$_share.OUT.text);
                     window.open($this.var.$_share.OUT.link);
                 });
                 // FB
                 $this.el.$section.find(".btns .share.fb").on("click", function(e) {
-                    ck_count("FB");
+                    // ck_count("FB");
                     window.open("http://www.facebook.com/sharer.php?u=" + $this.var.$_share.FB.link);
                 });
                 // LINE
                 $this.el.$section.find(".btns .share.line").on("click", function(e) {
-                    ck_count("Line");
+                    // ck_count("Line");
                     var _text = encodeURIComponent($this.var.$_share.LINE.text);
                     var _url = encodeURIComponent($this.var.$_share.LINE.link);
                     if (_text != "") window.open("http://line.naver.jp/R/msg/text/?" + _text + "%0D%0A" + _url);
@@ -127,7 +127,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
 
             // again
             $this.el.$section.find('.btns .again').on('click', function(e) {
-                ck_count('再Try一次');
+                // ck_count('再Try一次');
                 $this.gameReset();
                 $this.switchToSection(1);
             });
@@ -195,7 +195,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
         ======================= */
             switchToRulePage: function() {
                 this.switchToSection(2); // changing to section 2
-                ga_pv("倒數畫面");
+                // ga_pv("倒數畫面");
                 this.startToRuleCountdown(); // start to rule countdown
                 this.beforeGameGo(); // before game go
             },
@@ -236,7 +236,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
                 var $this = this;
 
                 $this.switchToSection(3); // switch to section 3
-                ga_pv("遊戲畫面");
+                // ga_pv("遊戲畫面");
 
                 $this.var.$_gameStart = true; // game start
 
@@ -495,11 +495,11 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
 
                 // count result
                 if (this.var.$_gameFail) {
-                    ga_pv('結果頁-失敗');
+                    // ga_pv('結果頁-失敗');
                 } else {
                     _result = 'success';
                     _helper.magicNum(this.el.$result_score, this.var.$_gameScore, 3500);
-                    ga_pv('結果頁-成功');
+                    // ga_pv('結果頁-成功');
                 }
                 this.el.$main.attr('data-result', _result);
 
@@ -510,7 +510,43 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
                 // ga_pv("結果畫面");
             },
     };
-    main.init();
+
+    if (deviceObj.isMobile()) {
+        main.init();
+    } else {
+        $('body').append(`
+            <style>
+            #overlay-mb {
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, .95);
+            }
+            #overlay-mb .inner {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #overlay-mb h2 {
+                font-size: 18px;
+                letter-spacing: 1px;
+                color: #fff;
+                margin: 15px 0;
+            }
+            #overlay-mb img {
+                width: 200px;
+                object-fit: fill;
+                display: block;
+                margin: 0 auto;
+            }
+            </style>
+            <div id="overlay-mb"><div class="inner"><img class="qrcode" src="qrcode.png"><h2>手機蓋板廣告 - 統一小時光灰熊失禮</h2><img class="screen" src="screen.png"></div></div>
+        `);
+    }
 
     function preloadImg() {
         var index = 0,
@@ -546,20 +582,3 @@ var _helper = new function() {
         });
     };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

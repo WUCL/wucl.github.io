@@ -1,4 +1,4 @@
-window.__dev = false; // 是否為測試模式
+window.__dev = true; // 是否為測試模式
 if (!window.__dev) {
     window.__paId = '37-5cb68ba1ba520'; // 0315 更新
     window.__gaId = 'UA-80426435-18'; // 0226 更新

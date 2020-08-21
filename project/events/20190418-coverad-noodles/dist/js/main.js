@@ -482,8 +482,8 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
         /* =======================
         Result Page
         ======================= */
-
     };
+
     if (deviceObj.isMobile()) {
         main.init();
     } else {
