@@ -153,24 +153,24 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
             var $this = this;
             // start, section_index
             $this.el.$section_index.find(".main_text").on("click", function() {
-                ck_count("有我！立即協助");
+                // ck_count("有我！立即協助");
                 $this.switchToRulePage();
             });
 
             // share // 主要分享的元素
                 // OUT
                 $this.el.$section.find(".btns .link").on("click", function(e) {
-                    ck_count("更多媽媽的難題_" + $this.var.$_share.OUT.text);
+                    // ck_count("更多媽媽的難題_" + $this.var.$_share.OUT.text);
                     window.open($this.var.$_share.OUT.link);
                 });
                 // FB
                 $this.el.$section.find(".btns .share.fb").on("click", function(e) {
-                    ck_count("FB");
+                    // ck_count("FB");
                     window.open("http://www.facebook.com/sharer.php?u=" + $this.var.$_share.FB.link);
                 });
                 // LINE
                 $this.el.$section.find(".btns .share.line").on("click", function(e) {
-                    ck_count("Line");
+                    // ck_count("Line");
                     var _text = encodeURIComponent($this.var.$_share.LINE.text);
                     var _url = encodeURIComponent($this.var.$_share.LINE.link);
                     if (_text != "") window.open("http://line.naver.jp/R/msg/text/?" + _text + "%0D%0A" + _url);
@@ -179,7 +179,7 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
 
             // again
             $this.el.$section.find(".btns .again").on("click", function(e) {
-                ck_count("再次協助");
+                // ck_count("再次協助");
                 $this.doGameReset();
                 $this.switchToSection(1);
             });
@@ -508,17 +508,16 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
                 font-size: 18px;
                 letter-spacing: 1px;
                 color: #fff;
-                margin-bottom: 10px;
+                margin: 15px 0;
             }
             #overlay-mb img {
-                width: 230px;
-                height: 230px;
+                width: 200px;
                 object-fit: fill;
                 display: block;
                 margin: 0 auto;
             }
             </style>
-            <div id="overlay-mb"><div class="inner"><h2>手機蓋板廣告 - 統一小時光灰熊失禮</h2><img src="qrcode.png"></div></div>
+            <div id="overlay-mb"><div class="inner"><img class="qrcode" src="qrcode.png"><h2>手機蓋板廣告 - 統一小時光灰熊失禮</h2><img class="screen" src="screen.png"></div></div>
         `);
     }
 });
