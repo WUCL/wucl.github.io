@@ -489,33 +489,10 @@ $(function() { // 如要直接使用main的function 把此$(function()背著掉
     } else {
         $('body').append(`
             <style>
-            #overlay-mb {
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(0, 0, 0, .95);
-            }
-            #overlay-mb .inner {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            #overlay-mb h2 {
-                font-size: 18px;
-                letter-spacing: 1px;
-                color: #fff;
-                margin: 15px 0;
-            }
-            #overlay-mb img {
-                width: 200px;
-                object-fit: fill;
-                display: block;
-                margin: 0 auto;
-            }
+            #overlay-mb { position: fixed;z-index: 9;top: 0;left: 0;width: 100vw;height: 100vh;background: rgba(0, 0, 0, .95); }
+            #overlay-mb .inner { position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%); }
+            #overlay-mb h2 { font-size: 18px;letter-spacing: 1px;color: #fff;margin: 15px 0; }
+            #overlay-mb img { width: 200px;object-fit: fill;display: block;margin: 0 auto; }
             </style>
             <div id="overlay-mb"><div class="inner"><img class="qrcode" src="qrcode.png"><h2>手機蓋板廣告 - 統一小時光灰熊失禮</h2><img class="screen" src="screen.png"></div></div>
         `);
