@@ -113,6 +113,6 @@
         , "專案": ["Asana", "Trello", "Xmind", "inVision", "Zeplin", "Sketch", "Axure"]
         , "管理": ["Google Sheets", "Bitbucket", "GitHub", "Plesk"]
         , "濾鏡": ["Spark AR Studio（FB/IG）"]
-        , "其他": ["Slack", "LINE Bot", "Sublime Text", "Notion", "macOS", "OpenData", "Youtube"]
+        , "其他": ["Slack", "LINE Bot", "Sublime Text", "Notion", "macOS", "OpenData", "YouTube"]
     }
 }
