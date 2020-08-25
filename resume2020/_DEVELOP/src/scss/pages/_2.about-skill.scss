@@ -26,7 +26,7 @@
 						margin-right: 10px;
 						font-weight: bold;
 						@include mq($max-width: $bp-2s) {
-							font-size: $fontsize-3;
+							font-size: $fontsize-2;
 							width: 100%;
 							margin-right: 0;
 							margin-bottom: 5px;
@@ -41,9 +41,9 @@
 							background: rgba(nth($color-analogous, 1), .15);
 							@include mq($max-width: $bp-2s) {
 								bottom: 0;
-								width: 16%;
-								height: 15px;
-								background: rgba(nth($color-analogous, 1), .25);
+								width: 14%;
+								height: 13px;
+								background: rgba(nth($color-analogous, 1), .2);
 							}
 						}
 					}
@@ -53,7 +53,7 @@
 						// width: calc(100% - 40px - 10px);
 						padding-left: 10px;
 						border-left: 1px dashed lighten($color-black, 87%);
-						word-break: break-all;
+						word-break: break-word;
 						// @include mq($max-width: $bp-2s) {
 						// 	width: calc(100% - 35px - 5px);
 						// }
@@ -61,6 +61,7 @@
 						@include mq($max-width: $bp-2s) {
 							padding-left: 0;
 							border-left: 0;
+							font-size: $fontsize;
 						}
 						label {
 							font-size: inherit;

@@ -23,7 +23,7 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?20200825" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?20200825a" />
         <script src="./public/js/trace.js"></script>
 	</head>
 	<body>
@@ -60,24 +60,19 @@
                 			</ul>
                 		</div>
                 		<div class="bio">
-                			<p>工作總年資：5年</p>
-                			<p>獨立思考，喜歡搜集數據，並透過自動化報表整併分析</p>
-                			<p>喜歡探索使用者行為及預設心理想法動機</p>
-                			<p>科學家精神，熱愛實驗研究求證</p>
-                			<p>善用 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄工作樞紐與生活與生活瑣碎</p>
+                			<p class="font-bold">工作總年資：5年</p>
+                			<!-- <p>獨立思考，喜歡搜集數據，並透過自動化報表整併分析</p> -->
+                			<!-- <p>喜歡探索使用者行為及預設心理想法動機</p> -->
+                			<!-- <p>科學家精神，熱愛實驗研究求證</p> -->
+                			<!-- <p>善用 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄工作樞紐與生活與生活瑣碎</p> -->
+                			<p>從後端工程到資料庫設計，並接續前端視覺呈現製作；完整專案流程的參與和規劃。</p>
+                			<p>分析數據與使用者關係輪廓的規劃建置，運用於廣告版位設計與產品功能設計。</p>
+                			<br>
+                			<p>專案企劃 / 活動規劃 / 活動場控</p>
+                			<p>樂觀態度 / 團隊合作 / 危機處理</p>
+                			<p>獨立思維 / 數據分析</p>
+                			<p>使用者行為探索與研究</p>
                 		</div>
-                	</div>
-                </section>
-                <section class="about-skill">
-                	<!-- <i class="fas fa-circle-notch fa-spin" v-if="status.loading.skill"></i> -->
-                	<div class="inner" v-if="!status.loading.skill">
-                		<h2 class="title" title="SKILL">技能</h2>
-                		<ul class="with-disc">
-                			<li v-bind:data-skill="key" v-for="(skill, key) in skills">
-                				<h4>{{ key }}</h4>
-                				<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
-                			</li>
-                		</ul>
                 	</div>
                 </section>
                 <section id="about-exp" class="about-exp">
@@ -136,6 +131,18 @@
                 						</ul>
                 					</div>
                 				</div>
+                			</li>
+                		</ul>
+                	</div>
+                </section>
+                <section class="about-skill">
+                	<!-- <i class="fas fa-circle-notch fa-spin" v-if="status.loading.skill"></i> -->
+                	<div class="inner" v-if="!status.loading.skill">
+                		<h2 class="title" title="SKILL">技能</h2>
+                		<ul class="with-disc">
+                			<li v-bind:data-skill="key" v-for="(skill, key) in skills">
+                				<h4>{{ key }}</h4>
+                				<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
                 			</li>
                 		</ul>
                 	</div>

@@ -18,10 +18,10 @@
 			margin: 0 auto;
 			padding: 20px;
 			@include mq($max-width: $bp-2) {
-				padding: 15px;
+				padding: 20px 15px;
 			}
 			@include mq($max-width: $bp-2s) {
-				padding: 10px;
+				padding: 20px 10px;
 			}
 			> .title {
 				display: block;
