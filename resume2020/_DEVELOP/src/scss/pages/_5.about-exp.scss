@@ -1,10 +1,9 @@
 /* =======================
    pages/about-exp
    ======================= */
+$borderR: 9px;
 .main {
 	section.about-exp {
-		// background: rgba($color-black, .05);
-		// background: lighten($color-black, 90%);
 		background: $color-white;
 		.inner {
 			> ul {
@@ -16,79 +15,61 @@
 					margin-bottom: 20px;
 					display: flex;
 					flex-direction: column;
-					// align-items: center;
 					opacity: 1;
 					border-bottom: 0;
-					// cursor: pointer;
 					overflow: hidden;
 
-					// border: 1px solid rgba($color-black, .2);
-					// border-radius: 10px;
 					// background-color: $color-white;
 					background-image: linear-gradient(43deg, rgba($color-white, .1) 0%, rgba($color-white, .5) 100%);
-					// transition: .15s;
-					// @include mq($min-width: $bp-2m) {
-					// 	margin-left: 5px;
-					// }
 					@include mq($max-width: $bp-3s) {
-						// padding-left: 25px;
-						// padding: 7px;
-						// flex-wrap: wrap;
 						margin-bottom: 30px;
 					}
 					.top,
 					.bottom {
-						border-radius: 10px;
 					}
 					.top {
 						padding: 12px 0 12px 12px;
 						margin-bottom: 10px;
-						background: lighten($color-second, 53%);
+						background: lighten($color-second, 50%);
 						display: flex;
 						align-items: center;
+						border-radius: $borderR;
 						@include mq($max-width: $bp-2s) {
 							padding: 7px 0 7px 7px;
 						}
 					}
 					.bottom {
-						padding: 15px;
-						margin-left: 8%;
-						background: lighten($color-black, 90%);
-						margin-bottom: 30px;
+						margin-left: 4%;
+						margin-bottom: 15px;
 						@include mq($max-width: $bp-2s) {
-							padding: 0;
-							margin-left: 4%;
-							border-radius: 3px;
+							margin-left: 3%;
 							margin-top: 5px;
-							margin-bottom: 20px;
 						}
 						&:before {
 							content: "";
 							position: absolute;
+							z-index: 1;
 							top: 0;
-							// left: calc(-4.5% + 1px);
-							left: -4.5%;
+							left: -2%;
 							background: lighten($color-black, 90%);
-							// background: lighten($color-second, 53%);
 							width: 2px;
 							height: 100%;
 							padding-bottom: 10%;
 							@include mq($max-width: $bp-2s) {
 								top: -5px;
-								left: -2%;
-								// width: 1px;
-								background: lighten($color-black, 56%);
-								// background: lighten($color-main, 35%);
+								left: 0;
+								background: lighten($color-black, 78%);
 							}
 						}
 						> div {
 							line-height: normal;
-							margin-bottom: 20px;
+							margin-top: 20px;
+							opacity: .87;
 							@include mq($max-width: $bp-2s) {
 								margin-bottom: 0;
 							}
-							&:last-child {
-								margin-bottom: 0;
+							&:first-child {
+								margin-top: 0;
 							}
 							&:before {
 								content: attr(data-title);
@@ -100,24 +81,28 @@
 								display: block;
 								margin-bottom: 5px;
 								transition: .2s;
+								background: lighten($color-black, 90%);
+								line-height: normal;
+								border-radius: 0 $borderR $borderR 0;
 								@include mq($max-width: $bp-2s) {
-									margin: 9px;
+									margin: 0 0 0 13px;
 									letter-spacing: 0;
+									padding: 5px 10px;
 								}
 							}
 							> ul {
 								padding: 10px 10px 10px 5px;
-								background: rgba($color-white, .78);
-								border-radius: 10px;
-								// border: 10px solid $color-white;
 								@include mq($max-width: $bp-2s) {
-									border-radius: 0;
 									padding: 10px 5px 10px 0;
 								}
 								> li {
 									margin-left: 2em;
+									margin-bottom: 7px;
 									letter-spacing: 1.2px;
 									list-style-type: square;
+									&:last-child {
+										margin-bottom: 0;
+									}
 									@include mq($max-width: $bp-2s) {
 										font-size: $fontsize-1;
 									}
@@ -130,11 +115,12 @@
 										width: 56%;
 										max-height: 500px;
 										object-fit: contain;
-										border-radius: 10px;
+										border-radius: $borderR;
+										transition: .2s;
 									}
 									mark {
-										background: lighten($color-third, 9%);
-										font-weight: 500;
+										background: lighten($color-third, 3%);
+										font-weight: 700;
 										padding: 0 5px;
 										margin-right: 3px;
 										letter-spacing: 0;
@@ -142,6 +128,7 @@
 								}
 							}
 							&:hover {
+								opacity: 1;
 								&:before {
 									border-left-width: 14px;
 									border-left-color: rgba($color-main, .87);
@@ -149,20 +136,26 @@
 								ul {
 									background: $color-white;
 								}
+								> ul {
+									> li {
+										img {
+											transform: scale(1.03);
+										}
+									}
+								}
 							}
 						}
 					}
 					.logo {
 						width: 64px;
 						height: 64px;
-						border-radius: 10px;
+						border-radius: $borderR;
 						overflow: hidden;
 						background: $color-white;
 						border: 1px solid rgba($color-black, .05);
 						transition: .2s;
 						will-change: transform;
 						margin-right: 5px;
-						// margin-left: 15px;
 						img {
 							transition: 2s;
 						}
@@ -182,30 +175,12 @@
 						.title {
 						}
 						.name {
-							// color: $color-second;
 							color: nth($color-analogous, 1);
 							font-weight: bold;
 							font-size: $fontsize-1;
 							opacity: 1;
 							line-height: $fontsize-3;
 							margin-bottom: 3px;
-							// i {
-							// 	margin-left: 5px;
-							// 	font-size: $fontsize-f;
-							// 	font-weight: bold;
-							// 	color: lighten(nth($color-analogous, 2), 35%);
-							// 	will-change: transform;
-							// 	transform: scale(.9);
-							// 	transition: .2s;
-							// 	@include mq($min-width: $bp-2s) {
-							// 		&:hover {
-							// 			opacity: 1 !important;
-							// 		}
-							// 	}
-							// 	&.far.fa-external-link {
-							// 		cursor: pointer;
-							// 	}
-							// }
 						}
 						.title {
 							overflow: hidden;
@@ -213,27 +188,6 @@
 							@include mq($max-width: $bp-2s) {
 								line-height: $fontsize-3;
 							}
-							// &:after {
-							// 	content: "";
-							// 	background: lighten($color-third, 7%);
-							// 	position: absolute;
-							// 	z-index: -1;
-							// 	top: 0;
-							// 	left: -5%;
-							// 	width: 0;
-							// 	height: 100%;
-							// 	transition: .5s;
-							// 	will-change: transform;
-							// 	transform: skewX(-25deg);
-							// }
-
-							// time {
-							// 	&:before {
-							// 		content: "|";
-							// 		padding: 0 5px;
-							// 		font-weight: 100;
-							// 	}
-							// }
 						}
 					}
 					.howlong {
@@ -281,6 +235,11 @@
 							}
 						}
 					}
+					&[data-exp="pixnet"] {
+						.bottom div[data-title="製作案"] {
+							display: none;
+						}
+					}
 					&.sideproject {
 						.top {
 							.name {
@@ -295,11 +254,6 @@
 										letter-spacing: 0;
 										margin-left: 0;
 										width: 100%;
-										// white-space: nowrap;
-										// @include mq($max-width: $bp-m) {
-										// 	overflow: scroll;
-										// 	-webkit-overflow-scrolling: touch;
-										// }
 										a {
 											width: 31%;
 											display: inline-block;
@@ -311,7 +265,6 @@
 											}
 											@include mq($max-width: $bp-2s) {
 												width: 43%;
-												// margin: 0 1px;
 											}
 											img {
 												width: 100%;
@@ -334,104 +287,14 @@
 						 	}
 						}
 					}
-					// .more {
-					// 	position: absolute;
-					// 	right: 0;
-					// 	top: 50%;
-					// 	width: 22%;
-					// 	height: 78%;
-					// 	will-change: transform;
-					// 	transform: translateY(-50%);
-					// 	// background: rgba($color-main, .15);
-					// 	border-left: 1px solid rgba($color-black, .2);
-					// 	transition: .15s;
-					// 	@include mq($max-width: $bp-3s) {
-					// 		position: relative;
-					// 		right: 0;
-					// 		width: 100%;
-					// 		height: 100%;
-					// 		border-left: none;
-					// 		border-top: 1px solid rgba($color-black, .1);
-					// 		margin-top: 7px;
-					// 		padding-top: 7px;
-					// 		transform: translateY(0);
-					// 		text-align: right;
-					// 	}
-					// 	span {
-					// 		font-family: "Oswald";
-					// 		display: inline-flex;
-					// 		align-items: center;
-					// 		justify-content: center;
-					// 		background: rgba($color-third, 0);
-					// 		padding: 2px 15px;
-					// 		border-radius: 10px;
-					// 		transition: .2s;
-					// 		@include mq($max-width: $bp-3s) {
-					// 			// width: 30%;
-					// 			padding: 0 9px;
-					// 			// background: rgba($color-third, .6);
-					// 		}
-					// 		&:before,
-					// 		&:after {
-					// 			margin-top: -3px;
-					// 			font-family: inherit;
-					// 			text-rendering: auto;
-					// 			-webkit-font-smoothing: antialiased;
-					// 			-moz-osx-font-smoothing: grayscale;
-					// 			// transition: .35s .25s, color .25s .35s;
-					// 			transition: .25s;
-					// 		}
-					// 		&:before {
-					// 			content: "MORE";
-					// 			font-size: $fontsize-3;
-					// 			border-bottom: 1px dashed $color-font;
-					// 			@include mq($max-width: $bp-3s) {
-					// 				font-size: $fontsize-1;
-					// 			}
-					// 		}
-					// 		&:after {
-					// 			content: "\f105";
-					// 			display: inline-block;
-					// 			font-family: "Font Awesome 5 Pro";
-					// 			font-size: $fontsize-3;
-					// 			// font-weight: bold;
-					// 			margin-left: 10px;
-					// 			color: nth($color-analogous, 3);
-					// 			margin-top: 2px;
-					// 			@include mq($max-width: $bp-3s) {
-					// 				font-size: $fontsize;
-					// 				margin-top: 0;
-					// 				background: $color-third;
-					// 				width: 18px;
-					// 				height: 18px;
-					// 				text-align: center;
-					// 				padding-top: 1px;
-					// 				padding-left: 1px;
-					// 				border-radius: 50%;
-					// 				overflow: hidden;
-					// 				display: block;
-					// 			}
-					// 		}
-					// 	}
-					// }
 					@include mq($min-width: $bp-2s) {
 						&:hover {
-							// background: $color-white;
-							// border-width: 2px;
-							// border-color: rgba($color-black, .56);
 							.top {
-								// padding: 14px 14px 15px;
 							}
 							.bottom {
-								// padding: 15px 14px 14px;
 							}
 							.info {
 								opacity: 1;
-								// .name {
-								// 	i {
-								// 		opacity: .5;
-								// 	}
-								// }
 								.title {
 									&:after {
 										width: 56%;
@@ -441,68 +304,8 @@
 							.howlong {
 								margin-right: -1px;
 							}
-							// .more {
-							// 	// width: 25%;
-							// 	span {
-							// 		background: rgba($color-third, .87);
-							// 		&:before {
-							// 			border-bottom: 0;
-							// 		}
-							// 		&:after {
-							// 			transform: scaleX(-1);
-							// 		}
-							// 		&:hover {
-							// 			transform: scale(1.1);
-							// 			&:after {
-							// 				transform: scaleX(1);
-							// 			}
-							// 		}
-							// 	}
-							// }
-							// &:after {
-							// 	transform: translateX(0);
-							// 	opacity: 1;
-							// 	color: $color-main;
-							// }
 						}
 					}
-
-
-					// &.active {
-					// 	.logo {
-					// 		transform: scale(.78);
-					// 		filter: grayscale(1);
-					// 	}
-					// 	&:after {
-					// 		transform: scaleX(-1);
-					// 		color: $color-black;
-					// 	}
-					// }
-					// &:after {
-					// 	content: "\f105";
-					// 	display: inline-block;
-					// 	font-family: "Font Awesome 5 Pro";
-					// 	font-size: $fontsize-1;
-					// 	font-weight: bold;
-					// 	text-rendering: auto;
-					// 	-webkit-font-smoothing: antialiased;
-					// 	-moz-osx-font-smoothing: grayscale;
-					// 	margin-left: 3%;
-					// 	transition: .35s .25s, color .25s .35s;
-					// 	transform: translateX(-100%);
-					// 	opacity: 0;
-					// 	color: nth($color-analogous, 3);
-					// 	@include mq($max-width: $bp-2s) {
-					// 		content: "\f330";
-					// 		position: absolute;
-					// 		left: 0;
-					// 		margin-left: 0;
-					// 		opacity: 1;
-					// 		transform: translateX(0);
-					// 		color: lighten($color-second, 20%);
-					// 		font-size: $fontsize-d;
-					// 	}
-					// }
 				}
 			}
 		}
