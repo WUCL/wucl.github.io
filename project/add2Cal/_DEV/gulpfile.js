@@ -19,7 +19,7 @@ const gulp = require('gulp')
     ;
 
 const SRC = './src'
-    , DEST = './dist'
+    , DEST = '../'
     , PATH = {
         SRC: {
             HTML: SRC + '/*.html'
@@ -44,7 +44,7 @@ gulp.task('serve', function(cb) {
             baseDir: DEST
             , reloadDebounce: 3000
         }
-        , https: true
+        // , https: true
         , port: 1234
         , open: 'external'
     });
@@ -75,6 +75,8 @@ gulp.task('script', function () {
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish', { verbose: true }))
     .pipe(debug({ title: 'Compile:' }))
+    // .pipe(gulpUglify())                     // 將 JavaScript 做最小化
+    // .pipe(gulp.dest('javascript/minify'));  // 指定最小化後的 JavaScript 檔案目錄
     .pipe(gulp.dest(PATH.DEST.JS))
     .pipe(bs.stream())
     .pipe(notify({
