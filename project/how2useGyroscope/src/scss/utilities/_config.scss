@@ -1,0 +1,45 @@
+@charset "UTF-8";
+// ==========================================================================
+// Global Config
+// ==========================================================================
+
+$pixnavbar_height: 45px;
+$pixnavbar_height_m: 40px;
+
+$haeder_h: 65px;
+$haeder_h-m: 50px;
+$haeder_h-s: 60px;
+
+// Font Stacks
+// $fontfamily-primary: "Noto Sans";
+$fontfamily-primary: "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$fontfamily-secondary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Text
+$fontsize: 16px;
+$fontsize-main: 26px;
+
+//Colors
+$color-white: #fff;
+$color-black: #000;
+$color-main: #116934;
+$color-second: #ffcc00;
+$color-font: #484848;
+$color-font2: #646464;
+
+// breakpoint
+$bp: 1440px; // 1280px
+$bp2: 980px;
+
+$bp_xs: 320px;
+$bp_s: 375px;
+$bp_2s: 480px;
+$bp_3s: 560px;
+$bp_m: 640px;
+$bp_2m: 768px;
+$bp_l: 800px;
+$bp_2l: 900px;
+$bp_3l: 1000px;
+$bp_4l: 1100px;
+$bp_xl: 1280px;
+$bp_xxl: 1366px;
