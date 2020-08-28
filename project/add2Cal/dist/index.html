@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Calendar 🗓</title>
+        <link rel="icon" type="image/png" href="./favicon.ico" />
+        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+	</head>
+	<body>
+        
+		<main id="main" class="main">
+			<h1>Calendar Creator</h2>
+			<section class="_1_form">
+				<div class="inner">
+					<h2 class="title">Step1. Setting ⚙️</h2>
+					<ul>
+						<li>
+							<label>Summary</label>
+							<input class="summary" type="text" name="cal-summary" v-model="form.$summary">
+						</li>
+						<li>
+							<label>Details</label>
+							<input class="details" type="text" name="cal-details" v-model="form.$details">
+						</li>
+						<li>
+							<label>Location</label>
+							<input class="location" type="text" name="cal-location" v-model="form.$location">
+						</li>
+						<li>
+							<label>Start Time</label>
+							<input class="datetime-1" type="datetime-local" name="cal-time-1" v-model="form.$startTime" @focus="timeOnClick1">
+						</li>
+						<li>
+							<label>End Time</label>
+							<input class="datetime-2" type="datetime-local" name="cal-time-2" v-model="form.$endTime" @focus="timeOnClick2">
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="_2_result">
+				<div class="inner">
+					<h2 class="title">Step2. Add to Your Calendar 🗓</h2>
+					<div class="buttons">
+						<a class="cal-google" target="_blank" :href="cal$google">Google</a>
+						<a class="cal-yahoo" target="_blank" :href="cal$yahoo">Yahoo!</a>
+						<a class="cal-apple" target="_blank" :href="cal$apple">Apple</a>
+						<a class="cal-outlook" target="_blank" :href="cal$outlook">Outlook</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		
+
+        <script src="./public/js/define.js"></script>
+		<!-- <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script> -->
+		<script src="./public/js/custom/eventdevice.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+		<!-- <script src="./public/lib/ouical/ouical.min.js"></script> -->
+		<script src="./public/js/main.js"></script>
+	</body>
+</html>
