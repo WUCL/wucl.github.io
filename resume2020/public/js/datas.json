@@ -5,7 +5,7 @@
             , "time": "201501 - 201706"
             , "url": "https://mamaclub.com/"
             , "name": "MamaClub 媽媽經"
-            , "title": "Backend Engineer / Frontend Engineer / UX Engineer"
+            , "title": "B2E / F2E / PM"
             , "lists": [
                 {
                     "title": "工作職掌"
@@ -13,21 +13,16 @@
                         "前端 - PC/Mobile/APP Webview 的開發製作與優化、廣告版位配置優化、產品功能轉換追蹤與頁面好感度提升等"
                         , "產品規劃 - 企劃網站內容、功能開發主導、APP 內容等追蹤與檢討"
                         , "MIS - 內部網站與主機的維護和障礙排除"
-                    ]
-                }
-                , {
-                    "title": "事蹟"
-                    , "item": [
-                        "從後端到前端，並擔任 前端負責人"
-                        , "<mark>平台建置</mark>使用 Wordpress 轉型，讓平台更易於管理 與 更高的擴充性彈性"
-                        , "<mark>平台優化</mark>脫離 <a href='https://zh-tw.wordpress.com/' target='_blank' rel='noreferrer noopener'>Wordpress</a> 前台包裝，使優化手機端 150% 效能改善"
-                        , "<mark>SEO優化</mark>提高 SEO 排名，並將其跳出率從 75% 降至 40%"
-                        , "<mark>網站優化</mark>透過數據追蹤與CTR成效記錄，依照變化，針對功能做持續調整"
-                        , "<mark>網站優化</mark>主導 File Server 透過 LSync 進行異地備援同步，便於管控與分散風險"
-                        , "<mark>CRM系統開發</mark>建立 使用者輪廓 與 客戶關係 並自動化將數據做整併分析"
-                        , "<mark>廣告配置</mark>將廣告最大化，提升 2 倍點擊成長"
-                        , "<mark>平台建置</mark>使用 Discuz! 建立論壇，新增適合社群行為的平台使添加更多操作性"
-                        , "<mark>平台建置</mark>電商平台系統建置，透過精準CTA，導流轉換並取得三贏合作"
+                        , "<mark title='平台轉型'>平台轉型</mark>將平台改用 <a href='https://zh-tw.wordpress.com/' target='_blank' rel='noreferrer noopener'>Wordpress</a>，讓平台更易於管理與更高的擴充性彈性"
+                        , "<mark title='行動裝置優化'>行動裝置優化</mark>將手機版脫離 Wordpress 前台包裝，使優化手機端 150% 效能改善"
+                        , "<mark title='功能測試'>功能測試</mark>透過 A/B Test 與分流機制，找到最佳適合甜蜜點"
+                        , "<mark title='SEO優化'>SEO優化</mark>提高 SEO 排名，並將其跳出率從 75% 降至 40%"
+                        , "<mark title='網站優化'>網站優化</mark>透過數據追蹤與CTR成效記錄，依照變化，針對功能做持續調整"
+                        , "<mark title='系統優化'>系統優化</mark>主導 File Server 透過 LSync 進行異地備援同步，便於管控與分散風險"
+                        , "<mark title='CRM系統開發'>CRM系統開發</mark>建立使用者輪廓與客戶關係並自動化將數據做整併分析"
+                        , "<mark title='廣告配置'>廣告配置</mark>不斷測試將廣告無限最大化，使目標廣告提升 2 倍成長"
+                        , "<mark title='論壇建置'>論壇建置</mark>使用 Discuz!，建立社群行為，使添加更多操作性"
+                        , "<mark title='電商'>電商</mark>規劃建置電商平台系統，透過內部數據推薦與精準 CTA，導流轉換並取得三贏"
                     ]
                 }
             ]
@@ -43,14 +38,8 @@
                     "title": "志工動機"
                     , "item": [
                         "由全球性女性社團 <a href='https://www.ladiesthatux.com/' target='_blank' rel='noreferrer noopener'>Ladies that UX（LTUX）</a> 所主辦"
-                        , "抱著參與這次活動，與更接近 UX 其工作及相關領域，而加入志工"
-                        , "主要負責 2017 年 <a href='https://www.facebook.com/ltuxtaipei/' target='_blank' rel='noreferrer noopener'>Talk UX 台灣站</a>，主題為 “她說” 的網站建置與更新"
-                    ]
-                }
-                , {
-                    "title": "Volunteer Certificate"
-                    , "item": [
-                        "<a href='./public/img/exp/talkux-VolunteerCertificate.jpg' target='_blank' rel='noreferrer noopener'><img alt='志工證明' src='./public/img/exp/talkux-VolunteerCertificate.jpg'></a>"
+                        , "志工動機為參與此全球性活動，與更接近 UX 其工作及相關領域"
+                        , "負責 2017 年 <a href='https://www.facebook.com/ltuxtaipei/' target='_blank' rel='noreferrer noopener'>Talk UX 台灣站</a>，主題為“她說”的網站建置"
                     ]
                 }
             ]
@@ -65,9 +54,9 @@
                 {
                     "title": "工作職掌",
                     "item": [
-                        "<mark>對外合作洽談</mark>與開發窗口溝通，透過線上合作平台，提供必要資訊和即時測試記錄"
-                        , "<mark>平台測試</mark>主要記錄當前開發平台，功能測試 以及 產品一置性的整合 與 備份"
-                        , "<mark>文件製作</mark>提供產品 Roadmap / User Flow / Mind Map / Function Map"
+                        "<mark title='對外合作洽談'>對外合作洽談</mark>與開發窗口溝通，透過線上合作平台，提供必要資訊和即時測試記錄"
+                        , "<mark title='文件製作'>文件製作</mark>提供產品 Roadmap / User Flow / Mind Map / Function Map"
+                        , "<mark title='平台測試'>平台測試</mark>主要記錄當前開發平台，功能測試以及產品一置性的整合與備份"
                     ]
                 }
             ]
@@ -77,30 +66,18 @@
             , "time": "201805 - NOW"
             , "url": "https://www.pixnet.net/"
             , "name": "PIXNET"
-            , "title": "Frontend Engineer"
+            , "title": "F2E / PM"
             , "lists": [
                 {
                     "title": "工作職掌",
                     "item": [
-                        "<mark>專案開發</mark>處理核心外的會員活動，發想規劃開發 以及 業務需求製作；模組化的開發規格，以加速流程"
-                        , "<mark>數據運用</mark>業務案過程與結案的數據搜集，以利回饋與優化專案需求"
-                        , "<mark>活動主導</mark>連續主辦 年度萬聖節活動，擔任專案負責人；並擴大同仁參與認同度 與 增進同仁間工作外的合作趣味"
-                        , "<mark>平台主導</mark>公司內部平台 佈告欄系統 規劃與開發，解決公司內部佈達資訊的缺乏與不即時"
-                        , "<mark>數據運用</mark>擔任部門數據指導者，分享如何運用 GA 數據與內部大數據來觀察功能使用"
-                        , "<mark>UI Guideline</mark>發起 User Interface Guideline 製作，與團隊共同以 1 年時間內編製完成"
-                        , "<mark>經營吉祥物</mark>共同經營 PIXNET 吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a>；透過即時的 <a href='https://trends.google.com.tw/trends/hottrends/visualize?nrow=5&ncol=5&pn=p12&hl=zh_TW' target='_blank' rel='noreferrer noopener'>GOOGLE 熱門關鍵字</a>，與 PIXNET 大數據結合整併分析，目的於 創造公司與部門價值、增廣自身文字力 與 趨勢行銷掌握"
-                    ]
-                }
-                , {
-                    "title": "製作案",
-                    "item": [
-                        "活動網站 - <a href='https://dysonv8slim.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>Dyson</a>"
-                        , "活動網站 - <a href='https://bravecto2019.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>一錠除</a>"
-                        , "活動網站 - <a href='https://dinling2019.events.pixnet.net/' target='_blank' rel='noreferrer noopener'>叮寧</a>"
-                        , "手機蓋板廣告 - <a href='https://wucl.github.io/project/pixnet-events/20200312-coverad-tryit2020running' target='_blank' rel='noreferrer noopener'>純喫茶烏龍青茶</a>"
-                        , "手機蓋板廣告 - <a href='https://wucl.github.io/project/pixnet-events/20190418-coverad-noodles' target='_blank' rel='noreferrer noopener'>統一小時光灰熊失禮</a>"
-                        , "手機蓋板廣告 - <a href='https://wucl.github.io/project/pixnet-events/20190424-coverad-tryit2019basketball' target='_blank' rel='noreferrer noopener'>純喫茶三對三鬥牛霸</a>"
-                        , "<a href='https://www.facebook.com/imhappix/posts/294072348634200' target='_blank' rel='noreferrer noopener'>HAPPIX 端午頭很大</a> 濾鏡 - <a href='https://www.facebook.com/fbcameraeffects/tryit/3127206513985036/' target='_blank' rel='noreferrer noopener'>Facebook</a> / <a href='https://www.instagram.com/ar/309494323397377/' target='_blank' rel='noreferrer noopener'>Instagram</a>"
+                        "<mark title='專案開發'>專案開發</mark>處理核心外的會員活動，發想規劃開發以及業務需求製作；模組化的開發規格，以加速流程"
+                        , "<mark title='數據追蹤運用'>數據追蹤運用</mark>業務案過程與結案的數據搜集，以利回饋與優化專案需求"
+                        , "<mark title='活動主導'>活動主導</mark>連續負責公司年度萬聖節活動；並擴大同仁參與認同度 與 增進同仁間工作外的合作趣味"
+                        , "<mark title='公司內平台'>公司內平台</mark>規劃與建置平台佈告欄系統，解決公司內部佈達資訊的缺乏與不即時"
+                        , "<mark title='數據指導者'>數據指導者</mark>分享與提供部門內，如何透過 GA 與 PIXNET Data 來運用於產品設計與優化改善"
+                        , "<mark title='UI Guideline'>UI Guideline</mark>共同與團隊以 1 年時間內從發起到規劃並完成 User Interface Guideline"
+                        , "<mark title='吉祥物經營'>吉祥物經營</mark>共同規劃 PIXNET 吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a>；透過 GOOGLE Trends 與 PIXNET Data 結合整併分析，目的於創造公司與部門價值、增廣自身文字力與趨勢行銷掌握"
                     ]
                 }
             ]
@@ -108,11 +85,12 @@
     },
     "skills": {
         "程式": ["HTML", "CSS", "Javascript", "jQuery", "VUE", "Gulp", "PHP", "SQL"]
-        , "監測": ["<mark class='without-bg' title='Google Analytics'>GA</mark>", "<mark class='without-bg' title='Google Tag Manager'>GTM</mark>", "<mark class='without-bg' title='Google PageSpeed Insights'>GPI</mark>", "GTMetrix", "WebPagetest", "Mixpanel", "NewRelic", "<a href='https://web.dev/measure/' target='_blank' rel='noreferrer noopener'>Google web.dev Measure</a>"]
-        , "平台": ["Wordpress", "Discuz", "AWS", "GCP", "Linode"]
+        , "監測": ["GA", "GTM", "Mixpanel", "NewRelic", "Google Data Studio"]
+        , "測試": ["Google PageSpeed Insights", "GTMetrix", "WebPagetest", "Google Measure(web.dev)"]
+        , "平台": ["Wordpress", "Discuz!", "AWS", "GCP", "Linode"]
         , "廣告": ["Google Ad Manage(DoubleClick)", "Google Adsense"]
         , "專案": ["Asana", "Trello", "Xmind", "inVision", "Zeplin", "Sketch", "Axure"]
-        , "管理": ["Google Sheets", "Bitbucket", "GitHub", "Plesk"]
+        , "管理": ["Google Sheets", "SourceTree", "BitBucket", "GitHub", "Plesk"]
         , "濾鏡": ["Spark AR Studio（FB/IG）"]
         , "其他": ["Slack", "LINE Bot", "Sublime Text", "Notion", "macOS", "OpenData", "YouTube"]
     }

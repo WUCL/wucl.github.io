@@ -5,7 +5,7 @@
 		<ul class="with-disc">
 			<li v-bind:data-skill="key" v-for="(skill, key) in skills">
 				<h4>{{ key }}</h4>
-				<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
+				<div class="labels"><label v-for="val in skill" v-bind:title="val" v-html="val"></label></div>
 			</li>
 		</ul>
 	</div>

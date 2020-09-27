@@ -3,7 +3,7 @@
 	<div class="inner" v-if="!status.loading.exp">
 		<h2 class="title" title="exp">經歷</h2>
 		<ul>
-			<li class="sideproject">
+			<!-- <li class="sideproject">
 				<div class="top">
 					<div class="info">
 						<span class="name">Side Project</span>
@@ -33,24 +33,24 @@
 						</ul>
 					</div>
 				</div>
-			</li>
+			</li> -->
 			<li class="seethat" v-bind:data-exp="key" v-for="(item, key) in exps">
 				<div class="top">
-					<div class="logo">
+					<!-- <div class="logo">
 						<img v-bind:alt="key" v-bind:src="item.logo">
-					</div>
+					</div> -->
 					<div class="info">
-						<a class="name" v-bind:href="item.url" target="_blank" rel="noreferrer noopener">{{ item.name }}</a>
-						<span class="title">{{ item.title }}</span>
+						<a class="name" v-bind:href="item.url" v-bind:title="item.name" target="_blank" rel="noreferrer noopener">{{ item.name }}</a>
+						<span class="title" v-bind:title="item.title">{{ item.title }}</span>
 					</div>
 					<div class="howlong">
-						<time>{{ item.time }}</time>
+						<time v-bind:title="item.time">{{ item.time }}</time>
 					</div>
 				</div>
 				<div class="bottom">
 					<div v-bind:data-title="exp.title" v-for="exp in item.lists">
 						<ul>
-							<li v-for="value in exp.item" v-html="value"></li>
+							<li v-for="value in exp.item"><p v-html="value"></p></li>
 						</ul>
 					</div>
 				</div>

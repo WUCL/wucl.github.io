@@ -21,7 +21,7 @@
 				padding: 20px 15px;
 			}
 			@include mq($max-width: $bp-2s) {
-				padding: 20px 10px;
+				// padding: 20px 10px;
 			}
 			> .title {
 				display: block;

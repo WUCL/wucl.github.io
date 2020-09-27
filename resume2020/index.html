@@ -6,12 +6,12 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CHUNGLUN.WU</title>
+        <title>CHUNGLUN.WU's Resume</title>
         <meta name="keywords" content="吳忠倫, ChungLun WU, AllenWu, 使用者體驗, 前端工程師, UX, F2E, PM" />
         <meta name="description" content="嗨！我是 Allen 很高興認識你" />
         <meta property="og:url" content="https://wucl.github.io/resume2020/" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="CHUNGLUN.WU" />
+        <meta property="og:title" content="CHUNGLUN.WU's Resume" />
         <meta property="og:description" content="嗨！我是 Allen 很高興認識你" />
         <meta property="og:image" content="https://wucl.github.io/resume2020/public/img/avatar.png" />
 
@@ -23,7 +23,7 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?20200825a" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?20200927" />
         <script src="./public/js/trace.js"></script>
 	</head>
 	<body>
@@ -39,7 +39,7 @@
                 				<div class="introduction">
                 					<h1 class="name-en" name="ALLEN WU" title="ALLEN WU">ALLEN WU</h1>
                 					<h2 class="name" name="吳忠倫 CHUNG-LUN WU" title="吳忠倫">吳忠倫</h2>
-                					<h3 class="title">F2E / PM / Blogger</h3>
+                					<h3 class="title" title="F2E / PM / Blogger">F2E / PM / Blogger</h3>
                 				</div>
                 			</div>
                 		</div>
@@ -52,13 +52,13 @@
                 					</a>
                 				</li>
                 				<li>
-                					<a href="https://line.me/ti/p/HqGOY5dqYD" target="_blank" rel="noreferrer noopener">
+                					<a href="https://line.me/ti/p/HqGOY5dqYD" target="_blank" rel="noreferrer noopener" title="wu.cl">
                 						<label><i class="fab fa-line"></i></label>
                 						<span>wu.cl</span>
                 					</a>
                 				</li>
                 				<li>
-                					<a href="tel:+886936705765" target="_blank" rel="noreferrer noopener">
+                					<a href="tel:+886936705765" target="_blank" rel="noreferrer noopener" title="0936-705-765">
                 						<label a><i class="fas fa-phone-square-alt"></i></label>
                 						<!-- <label><i class="fas fa-phone"></i></label> -->
                 						<span>0936-705-765</span>
@@ -68,16 +68,12 @@
                 		</div>
                 		<div class="bio">
                 			<p class="font-bold">工作總年資：5年</p>
-                			<!-- <p>獨立思考，喜歡搜集數據，並透過自動化報表整併分析</p> -->
-                			<!-- <p>喜歡探索使用者行為及預設心理想法動機</p> -->
-                			<!-- <p>科學家精神，熱愛實驗研究求證</p> -->
-                			<!-- <p>善用 <mark class="without-bg less-spacing">Google Sheets</mark> 記錄工作樞紐與生活與生活瑣碎</p> -->
-                			<p>從後端工程到資料庫設計，並接續前端視覺呈現製作；完整專案流程的參與和規劃。</p>
-                			<p>分析數據與使用者關係輪廓的規劃建置，運用於廣告版位設計與產品功能設計。</p>
+                            <p>從後端工程到資料庫設計、前端視覺呈現製作；完整專案流程的參與。</p>
+                			<p>分析數據與使用者關係輪廓的建置規劃；並將其運用於設計產品功能與廣告版位等。</p>
                 			<br>
-                			<p>專案企劃 / 活動規劃 / 活動場控</p>
-                			<p>樂觀態度 / 團隊合作 / 危機處理</p>
-                			<p>獨立思維 / 數據分析</p>
+                			<p>專案企劃 / 優化追蹤 / 危機處理</p>
+                			<p>樂觀態度 / 獨立思維 / 團隊合作</p>
+                			<p>數據分析 / Data Driven / OpenData 運用</p>
                 			<p>使用者行為探索與研究</p>
                 		</div>
                 	</div>
@@ -87,7 +83,7 @@
                 	<div class="inner" v-if="!status.loading.exp">
                 		<h2 class="title" title="exp">經歷</h2>
                 		<ul>
-                			<li class="sideproject">
+                			<!-- <li class="sideproject">
                 				<div class="top">
                 					<div class="info">
                 						<span class="name">Side Project</span>
@@ -117,24 +113,24 @@
                 						</ul>
                 					</div>
                 				</div>
-                			</li>
+                			</li> -->
                 			<li class="seethat" v-bind:data-exp="key" v-for="(item, key) in exps">
                 				<div class="top">
-                					<div class="logo">
+                					<!-- <div class="logo">
                 						<img v-bind:alt="key" v-bind:src="item.logo">
-                					</div>
+                					</div> -->
                 					<div class="info">
-                						<a class="name" v-bind:href="item.url" target="_blank" rel="noreferrer noopener">{{ item.name }}</a>
-                						<span class="title">{{ item.title }}</span>
+                						<a class="name" v-bind:href="item.url" v-bind:title="item.name" target="_blank" rel="noreferrer noopener">{{ item.name }}</a>
+                						<span class="title" v-bind:title="item.title">{{ item.title }}</span>
                 					</div>
                 					<div class="howlong">
-                						<time>{{ item.time }}</time>
+                						<time v-bind:title="item.time">{{ item.time }}</time>
                 					</div>
                 				</div>
                 				<div class="bottom">
                 					<div v-bind:data-title="exp.title" v-for="exp in item.lists">
                 						<ul>
-                							<li v-for="value in exp.item" v-html="value"></li>
+                							<li v-for="value in exp.item"><p v-html="value"></p></li>
                 						</ul>
                 					</div>
                 				</div>
@@ -149,7 +145,7 @@
                 		<ul class="with-disc">
                 			<li v-bind:data-skill="key" v-for="(skill, key) in skills">
                 				<h4>{{ key }}</h4>
-                				<div class="labels"><label v-for="val in skill" v-html="val"></label></div>
+                				<div class="labels"><label v-for="val in skill" v-bind:title="val" v-html="val"></label></div>
                 			</li>
                 		</ul>
                 	</div>
@@ -168,6 +164,6 @@
 		<script src="./public/js/custom/eventdevice.js"></script>
 		<!-- <script src="./public/lib/scrollIt/scrollIt.js"></script> -->
         <script src="./public/js/define.js"></script>
-		<script src="./public/js/main.js?20200821"></script>
+		<script src="./public/js/main.min.js?20200927"></script>
 	</body>
 </html>
