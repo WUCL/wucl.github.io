@@ -33,8 +33,8 @@
 			<div class="buttons">
 				<a class="cal-google" target="_blank" :href="cal$google">Google</a>
 				<a class="cal-yahoo" target="_blank" :href="cal$yahoo">Yahoo!</a>
-				<a class="cal-apple" target="_blank" :href="cal$apple">Apple</a>
-				<a class="cal-outlook" target="_blank" :href="cal$outlook">Outlook</a>
+				<a class="cal-apple" target="_blank" v-on:click="icalDownload">Apple</a>
+				<a class="cal-outlook" target="_blank" v-on:click="icalDownload">Outlook</a>
 			</div>
 		</div>
 	</section>
