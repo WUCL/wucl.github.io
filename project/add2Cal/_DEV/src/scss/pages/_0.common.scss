@@ -20,7 +20,7 @@
 		// min-width: 100vw;
 		max-width: 90%;
 		// min-height: 100vh;
-		padding-top: 35px;
+		padding: 35px 0;
 		margin: 0 auto;
 		.inner {
 			max-width: $bp-2;
@@ -29,8 +29,17 @@
 				display: block;
 				margin-bottom: 15px;
 				font-size: $fontsize-3;
+				text-align: left;
 				@include mq($max-width: $bp-3s) {
-					margin-bottom: 15px;
+					// margin-bottom: 15px;
+				}
+				label {
+					font-weight: bold;
+					background: $color-black;
+					color: $color-white;
+					border-radius: 9px;
+					padding: 0 9px 4px;
+					margin-right: 9px;
 				}
 			}
 		}

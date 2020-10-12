@@ -5,6 +5,7 @@ $borderR: 9px;
 .main {
 	font-family: "Oswald";
 	._1_form {
+		padding-bottom: 0;
 		.inner {
 			text-align: center;
 			ul {
@@ -66,11 +67,13 @@ $borderR: 9px;
 				@include mq($max-width: $bp-3s) {
 					grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
 				}
-				a {
+				a,
+				button {
+					font-family: "Oswald";
 					padding: 0 17px 3px;
 					display: inline-block;
 					font-size: $fontsize-5;
-					line-height: normal;
+					line-height: $fontsize-5 * 1.567;
 					border-bottom: 1px dashed rgba($color-black, .5);
 					border: 1px solid rgba($color-black, .5);
 					border-right-width: 3px;

@@ -43,9 +43,6 @@ $color-font2: #646464;
 $color-colorful: [#fcca00, #ffb443, #ff8400, #f34031, #BF0000]; // nth($color-colorful, 1);
 
 // breakpoint
-$bp: 1440px; // 1280px
-$bp-2: 768px;
-
 $bp-xs: 320px;
 $bp-s: 375px;
 $bp-2s: 480px;
@@ -58,3 +55,6 @@ $bp-3l: 1000px;
 $bp-4l: 1100px;
 $bp-xl: 1280px;
 $bp-xxl: 1366px;
+
+$bp: 1440px; // 1280px
+$bp-2: $bp-m;

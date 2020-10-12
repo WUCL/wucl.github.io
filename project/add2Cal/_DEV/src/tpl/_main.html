@@ -1,26 +1,26 @@
 <main id="main" class="main">
-	<h1>Calendar Creator</h2>
+	<h1 title="Calendar Creator">Calendar Creator</h1>
 	<section class="_1_form">
 		<div class="inner">
-			<h2 class="title">Step1. Setting ⚙️</h2>
+			<h2 class="title" title="Step1. Setting"><label>Step1.</label>Setting ⚙️</h2>
 			<ul>
-				<li>
+				<li title="Summary">
 					<label>Summary</label>
 					<input class="summary" type="text" name="cal-summary" v-model="form.$summary">
 				</li>
-				<li>
+				<li title="Details">
 					<label>Details</label>
 					<input class="details" type="text" name="cal-details" v-model="form.$details">
 				</li>
-				<li>
+				<li title="Location">
 					<label>Location</label>
 					<input class="location" type="text" name="cal-location" v-model="form.$location">
 				</li>
-				<li>
+				<li title="Start Time">
 					<label>Start Time</label>
 					<input class="datetime-1" type="datetime-local" name="cal-time-1" v-model="form.$startTime" @focus="timeOnClick1">
 				</li>
-				<li>
+				<li title="End Time">
 					<label>End Time</label>
 					<input class="datetime-2" type="datetime-local" name="cal-time-2" v-model="form.$endTime" @focus="timeOnClick2">
 				</li>
@@ -29,12 +29,12 @@
 	</section>
 	<section class="_2_result">
 		<div class="inner">
-			<h2 class="title">Step2. Add to Your Calendar 🗓</h2>
+			<h2 class="title" title="Step2. Add to Your Calendar"><label>Step2.</label>Add to Your Calendar 🗓</h2>
 			<div class="buttons">
 				<a class="cal-google" target="_blank" :href="cal$google">Google</a>
 				<a class="cal-yahoo" target="_blank" :href="cal$yahoo">Yahoo!</a>
-				<a class="cal-apple" target="_blank" v-on:click="icalDownload">Apple</a>
-				<a class="cal-outlook" target="_blank" v-on:click="icalDownload">Outlook</a>
+				<button class="cal-apple" v-on:click="icalDownload">Apple</button>
+				<button class="cal-outlook" v-on:click="icalDownload">Outlook</button>
 			</div>
 		</div>
 	</section>
