@@ -26,12 +26,16 @@
 			max-width: $bp-2;
 			margin: 0 auto;
 			h2.title {
-				display: block;
+				// display: block;
 				margin-bottom: 15px;
 				font-size: $fontsize-3;
 				text-align: left;
+				line-height: normal;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
 				@include mq($max-width: $bp-3s) {
-					// margin-bottom: 15px;
+					margin-bottom: 10px;
 				}
 				label {
 					font-weight: bold;
