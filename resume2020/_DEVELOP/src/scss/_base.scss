@@ -22,6 +22,7 @@ time, mark, audio, video {
     font-size: $fontsize;
     font: inherit;
     vertical-align: baseline;
+    // color: $color-font-1;
     @include mq($max-width: $bp-l) {
         font-size: $fontsize - .5;
     }

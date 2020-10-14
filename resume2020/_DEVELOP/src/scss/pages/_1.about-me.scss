@@ -47,11 +47,11 @@
 						flex-direction: column;
 						align-items: center;
 						justify-content: center;
-						letter-spacing: -.5px;
+						// letter-spacing: -.5px;
 						.name-en {
-							font-size: $fontsize-11;
-							letter-spacing: -2px;
-							line-height: $fontsize-11;
+							font-size: $fontsize-11 * 1.1;
+							line-height: $fontsize-11 * 1.1;
+							letter-spacing: -1px;
 							color: $color-main;
 							@include mq($max-width: $bp-2s) {
 								// font-size: $fontsize-11;
@@ -59,10 +59,10 @@
 							}
 						}
 						.name {
-							font-size: $fontsize-6;
+							font-size: $fontsize-7;
 							font-weight: bold;
 							line-height: normal;
-							letter-spacing: -2px;
+							letter-spacing: -1px;
 							@include mq($max-width: $bp-2s) {
 								font-size: $fontsize-8;
 								// font-size: $fontsize-7;
@@ -151,6 +151,7 @@
 							font-size: inherit;
 						}
 						a {
+    						user-select: none;
 							&:hover {
 								color: nth($color-analogous, 3);
 								border-bottom-color: nth($color-analogous, 3);
@@ -164,7 +165,7 @@
 				text-align: center;
 				font-size: $fontsize * 1.1;
 				letter-spacing: 1px;
-				background: lighten($color-black, 95%);
+				background: $color-bg;
 				padding: 20px;
 				p {
 					font-size: inherit;

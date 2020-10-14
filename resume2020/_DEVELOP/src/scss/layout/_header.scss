@@ -2,8 +2,34 @@
 layout/_header
 ======================= */
 header.header {
-	.header-inner {
-	}
-	&.open {
+	.downloads {
+		margin: 15px auto 0;
+		background: $color-bg;
+		display: inline-block;
+		padding: 11px 17px;
+		border-radius: 9px;
+		left: 50%;
+		transform: translateX(-50%);
+		border: 1px solid $color-font;
+		@include mq($max-width: $bp-2s) {
+			padding: 11px 20px;
+		}
+		.download-resume {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+    		user-select: none;
+    		font-size: $fontsize-a;
+			i {
+				margin-right: 5px;
+			}
+			span {
+    			font-size: inherit;
+			}
+			@include mq($max-width: $bp-2s) {
+    			font-size: $fontsize;
+    			// font-size: $fontsize-2;
+			}
+		}
 	}
 }

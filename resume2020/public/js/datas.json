@@ -2,7 +2,7 @@
     "exps": {
         "mamaclub": {
             "logo": "./public/img/exp/mamaclub.jpg"
-            , "time": "201501 - 201706"
+            , "time": "2015.01 - 2017.06"
             , "url": "https://mamaclub.com/"
             , "name": "MamaClub 媽媽經"
             , "title": "B2E / F2E / PM"
@@ -10,10 +10,7 @@
                 {
                     "title": "工作職掌"
                     , "item": [
-                        "前端 - PC/Mobile/APP Webview 的開發製作與優化、廣告版位配置優化、產品功能轉換追蹤與頁面好感度提升等"
-                        , "產品規劃 - 企劃網站內容、功能開發主導、APP 內容等追蹤與檢討"
-                        , "MIS - 內部網站與主機的維護和障礙排除"
-                        , "<mark title='平台轉型'>平台轉型</mark>將平台改用 <a href='https://zh-tw.wordpress.com/' target='_blank' rel='noreferrer noopener'>Wordpress</a>，讓平台更易於管理與更高的擴充性彈性"
+                        "<mark title='平台轉型'>平台轉型</mark>將平台改用 <a href='https://zh-tw.wordpress.com/' target='_blank' rel='noreferrer noopener'>Wordpress</a>，讓平台更易於管理與更高的擴充性彈性"
                         , "<mark title='行動裝置優化'>行動裝置優化</mark>將手機版脫離 Wordpress 前台包裝，使優化手機端 150% 效能改善"
                         , "<mark title='功能測試'>功能測試</mark>透過 A/B Test 與分流機制，找到最佳適合甜蜜點"
                         , "<mark title='SEO優化'>SEO優化</mark>提高 SEO 排名，並將其跳出率從 75% 降至 40%"
@@ -23,6 +20,8 @@
                         , "<mark title='廣告配置'>廣告配置</mark>不斷測試將廣告無限最大化，使目標廣告提升 2 倍成長"
                         , "<mark title='論壇建置'>論壇建置</mark>使用 Discuz!，建立社群行為，使添加更多操作性"
                         , "<mark title='電商'>電商</mark>規劃建置電商平台系統，透過內部數據推薦與精準 CTA，導流轉換並取得三贏"
+                        , "<b>主要針對媽媽經品牌端所有運營。</b>"
+                        , "<b>最佳名次Alexa台灣排名38名。</b>"
                     ]
                 }
             ]
@@ -46,7 +45,7 @@
         },
         "spaceadvisor": {
             "logo": "./public/img/exp/spaceadvisor.png"
-            , "time": "201709 - 201803"
+            , "time": "2017.09 - 2018.03"
             , "url": "https://www.spaceadvisor.com/"
             , "name": "SpaceAdvisor 場地家"
             , "title": "PM"
@@ -57,15 +56,16 @@
                         "<mark title='對外合作洽談'>對外合作洽談</mark>與開發窗口溝通，透過線上合作平台，提供必要資訊和即時測試記錄"
                         , "<mark title='文件製作'>文件製作</mark>提供產品 Roadmap / User Flow / Mind Map / Function Map"
                         , "<mark title='平台測試'>平台測試</mark>主要記錄當前開發平台，功能測試以及產品一置性的整合與備份"
+                        , "<b>主要針對場地家官網從開發規劃到完整上線。</b>"
                     ]
                 }
             ]
         },
         "pixnet": {
             "logo": "./public/img/exp/pixnet.png"
-            , "time": "201805 - NOW"
+            , "time": "2018.05 - NOW"
             , "url": "https://www.pixnet.net/"
-            , "name": "PIXNET"
+            , "name": "PIXNET 痞客邦"
             , "title": "F2E / PM"
             , "lists": [
                 {
@@ -73,11 +73,13 @@
                     "item": [
                         "<mark title='專案開發'>專案開發</mark>處理核心外的會員活動，發想規劃開發以及業務需求製作；模組化的開發規格，以加速流程"
                         , "<mark title='數據追蹤運用'>數據追蹤運用</mark>業務案過程與結案的數據搜集，以利回饋與優化專案需求"
-                        , "<mark title='活動主導'>活動主導</mark>連續負責公司年度萬聖節活動；並擴大同仁參與認同度 與 增進同仁間工作外的合作趣味"
+                        , "<mark title='活動主導'>活動主導</mark>連續負責年度萬聖節活動；擴大同仁參與認同度與增進同仁間工作外的合作趣味"
                         , "<mark title='公司內平台'>公司內平台</mark>規劃與建置平台佈告欄系統，解決公司內部佈達資訊的缺乏與不即時"
                         , "<mark title='數據指導者'>數據指導者</mark>分享與提供部門內，如何透過 GA 與 PIXNET Data 來運用於產品設計與優化改善"
-                        , "<mark title='UI Guideline'>UI Guideline</mark>共同與團隊以 1 年時間內從發起到規劃並完成 User Interface Guideline"
-                        , "<mark title='吉祥物經營'>吉祥物經營</mark>共同規劃 PIXNET 吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a>；透過 GOOGLE Trends 與 PIXNET Data 結合整併分析，目的於創造公司與部門價值、增廣自身文字力與趨勢行銷掌握"
+                        , "<mark title='UI Guideline'>UI Guideline</mark>共同與團隊以一年時間內，從0到1的執行並完成 User Interface Guideline"
+                        , "<mark title='吉祥物經營'>吉祥物經營</mark>共同規劃 PIXNET 吉祥物 <a href='https://www.facebook.com/imhappix' target='_blank' rel='noreferrer noopener'>HAPPIX</a>；透過 Trends 與 BIG DATA 結合整併分析，目的於創造公司與部門價值、增廣自身文字力與趨勢行銷掌握"
+                        , "<b>主要以活動案件規劃執行為主，目前共計破百案件。</b>"
+                        , "<b>客戶包含 Dyson / CHANEL / LINE / 3M / Ora² / EVITA / G.U.M / BIOEFFECT / Brita / 理膚寶水 / 食尚玩家 / 大潤發 / 統一企業 / 雄獅 / 寶多福 / 一錠除 等等。</b>"
                     ]
                 }
             ]

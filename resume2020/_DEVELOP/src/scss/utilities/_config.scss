@@ -47,6 +47,7 @@ $color-complementary: #aa5500;
 $color-font: #888;
 $color-font-1: #222;
 $color-analogous: [$color-main, #0000aa, #00aaaa];
+$color-bg: lighten($color-black, 95%);
 
 // breakpoint
 $bp: 1440px; // 1280px

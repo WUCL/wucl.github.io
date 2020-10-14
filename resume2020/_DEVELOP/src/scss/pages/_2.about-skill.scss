@@ -3,16 +3,17 @@
    ======================= */
 .main {
 	section.about-skill {
-		background: lighten($color-black, 95%);
+		background: $color-bg;
 		.inner {
 			ul {
 				li {
-					margin-bottom: 9px;
+					margin-bottom: 12px;
 					letter-spacing: 0;
 					// display: flex;
 					// align-items: center;
 					// justify-content: flex-start;
 					@include mq($max-width: $bp-2s) {
+						margin-bottom: 9px;
 						// margin-bottom: 11px;
 					}
 					&:last-child {
@@ -63,6 +64,7 @@
 						// 	width: calc(100% - 35px - 5px);
 						// }
 						font-size: $fontsize * 1.1;
+						letter-spacing: .5px;
 						@include mq($max-width: $bp-2s) {
 							font-size: $fontsize;
 							padding-left: 0;

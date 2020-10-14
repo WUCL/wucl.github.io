@@ -20,16 +20,22 @@
         <!-- <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" /> -->
         <!-- <script src="https://use.fontawesome.com/ca3d0818cf.js"></script> -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?20200927" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?20201014" />
         <script src="./public/js/trace.js"></script>
+        <style>[v-cloak]{display: none;}</style>
 	</head>
 	<body>
-        <div id="app">
+        <div id="app" v-cloak>
             <header id="header" class="header">
-                <div class="_header"></div>
+                <div class="downloads">
+                	<a class="download-resume" href="./public/吳忠倫_AllenWu_Resume.pdf" download>
+                		<i class="fas fa-file-download"></i><span>Resume Download</span>
+                	</a>
+                </div>
             </header>
             <main id="main" class="main">
                 <section class="about-me">
@@ -153,7 +159,7 @@
             </main>
     		<footer id="footer" class="footer">
     			<section class="copyright">
-    				<span>© 2017 - 2020 by <a href="https://wucl.github.io/resume1/" target="_blank" rel="noreferrer noopener">CHUNGLUNWU</a> all rights reserved</span>
+    				<span>© 2020 by <a href="https://wucl.github.io/resume1/" target="_blank" rel="noreferrer noopener">CHUNGLUNWU</a> all rights reserved</span>
     			</section>
     		</footer>
             <aside id="aside" class="aside"></aside>

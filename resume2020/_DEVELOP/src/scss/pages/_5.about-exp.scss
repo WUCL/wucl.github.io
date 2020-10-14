@@ -32,7 +32,7 @@ $borderR: 9px;
 					.bottom {
 					}
 					.top {
-						padding: 5px 15px;
+						padding: 17px 15px;
 						margin-bottom: 10px;
 						background: lighten($color-second, 50%);
 						display: flex;
@@ -43,8 +43,9 @@ $borderR: 9px;
 						}
 					}
 					.bottom {
-						margin-left: 4%;
-						margin-bottom: 10px;
+						margin-left: 3%;
+						margin-bottom: 25px;
+						// padding-bottom: 5px;
 						@include mq($max-width: $bp-2s) {
 							margin-left: 0; // 3%;
 							margin-top: 0; // 5px;
@@ -106,8 +107,8 @@ $borderR: 9px;
 								// }
 								> li {
 									margin-left: 2em;
-									margin-bottom: 7px;
-									letter-spacing: .5px;
+									margin-bottom: 9px;
+									// letter-spacing: .5px;
 									list-style-type: square;
 									&:last-child {
 										margin-bottom: 0;
@@ -123,6 +124,9 @@ $borderR: 9px;
 											text-align: justify;
 											font-size: $fontsize;
 										}
+										// b {
+										// 	font-weight: bold;
+										// }
 									}
 									&:hover {
 										font-weight: 700;
@@ -137,11 +141,12 @@ $borderR: 9px;
 										transition: .2s;
 									}
 									mark {
-										background: lighten($color-third, 3%);
+										// background: transparent;
+										background: lighten($color-third, 7%);
 										font-weight: 700;
-										padding: 0 5px;
-										margin-right: 3px;
-										letter-spacing: 0;
+										padding: 0 7px;
+										margin-right: 5px;
+										// letter-spacing: 0;
 									}
 								}
 							}
@@ -204,6 +209,7 @@ $borderR: 9px;
 							line-height: $fontsize-3;
 							// margin-bottom: 3px;
 							border-bottom: 0;
+							letter-spacing: .5px;
 							@include mq($max-width: $bp-2s) {
 								font-size: $fontsize-1 * 1.1;
 							}
@@ -228,8 +234,9 @@ $borderR: 9px;
 						// 	right: 10px;
 						// }
 						time {
-							color: $color-main;
+							// color: $color-main;
 							// border-bottom: 1px dashed rgba($color-black, .2);
+							letter-spacing: .3px;
 							font-weight: 600;
 							@include mq($max-width: $bp-2s) {
 								// max-width: 40px;
@@ -237,7 +244,7 @@ $borderR: 9px;
 								word-break: break-word;
 								display: inline-block;
 								font-size: $fontsize-1;
-								letter-spacing: -1px;
+								// letter-spacing: -1px;
 							}
 							@include mq($max-width: $bp-s) {
 								// max-width: 50px;
