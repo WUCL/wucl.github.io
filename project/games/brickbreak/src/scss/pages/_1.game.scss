@@ -1,0 +1,57 @@
+/* =======================
+   pages/game
+   ======================= */
+.main {
+	.game {
+		width: 768px;
+		height: 640px;
+		margin: 0 auto;
+		canvas {
+			background: #eee;
+			display: block;
+			margin: 0 auto;
+		}
+		.status {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			display: flex;
+			width: 100%;
+			align-items: center;
+			justify-content: space-between;
+			background: rgba($color-black, .78);
+			color: $color-white;
+			padding: 10px 15px;
+			.msgbox {
+				font-size: $fontsize-1;
+				font-weight: bold;
+			}
+			.btn-soundmute {
+				background: rgba($color-white, .25);
+				padding: 0 5px;
+				border-radius: 5px;
+				&:before,
+				&:after {
+					font-size: $fontsize-c;
+				}
+				&:before {
+					content: "音量";
+				}
+				&:after {
+					margin-left: 5px;
+					font-weight: bold;
+				}
+				&[data-mute="0"] {
+					&:after {
+						content: "ON";
+					}
+				}
+				&[data-mute="1"] {
+					&:after {
+						content: "OFF";
+					}
+				}
+			}
+		}
+	}
+}

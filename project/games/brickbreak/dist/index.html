@@ -26,11 +26,17 @@
 	<body>
         
 		<main id="main" class="main">
-			<canvas id="myCanvas" width="640" height="480"></canvas>
+			<section id="game" class="game">
+				<canvas id="myCanvas"></canvas>
+				<div id="status" class="status">
+					<div id="msgbox" class="msgbox">Press "SPACE" to Start!</div>
+					<button id="btn-soundmute" class="btn-soundmute" data-mute="0"></div>
+				</div>
+			</section>
 		</main>
 		
 
-		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
         <script src="./public/js/define.js"></script>
 		<script src="./public/js/main.js"></script>
 	</body>
