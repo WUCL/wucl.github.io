@@ -155,7 +155,7 @@ function getRandomColor() {
     return color;
 }
 function playSounds(sound, isBg) {
-    var $path = '/public/sounds/';
+    var $path = './public/sounds/';
     var $sound = _DEFAULT.sounds[sound];
     var $isBg = isBg || false;
     if ($isBg) {

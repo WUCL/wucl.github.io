@@ -27,19 +27,19 @@
 				font-weight: bold;
 			}
 			.btn-soundmute {
+				// @extend %oswald;
 				background: rgba($color-white, .25);
 				padding: 0 5px;
 				border-radius: 5px;
 				&:before,
 				&:after {
 					font-size: $fontsize-c;
+					font-weight: bold;
 				}
 				&:before {
 					content: "音量";
-				}
-				&:after {
-					margin-left: 5px;
-					font-weight: bold;
+					@extend %notoseriftc;
+					margin-right: 5px;
 				}
 				&[data-mute="0"] {
 					&:after {
