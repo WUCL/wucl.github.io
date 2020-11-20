@@ -1,6 +1,6 @@
 # BrickBreak
 ###### 參考製作
-[2D breakout game using pure JavaScript](https://developer.mozilla.org/zh-CN/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript){:target="_blank"}
+[2D breakout game using pure JavaScript](https://developer.mozilla.org/zh-CN/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
 
 ----
 一個古老遊戲，打磚塊。
