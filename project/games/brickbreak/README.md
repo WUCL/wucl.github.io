@@ -1,17 +1,23 @@
 # BrickBreak
 ###### 參考製作
 [2D breakout game using pure JavaScript](https://developer.mozilla.org/zh-CN/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
+[2D breakout game using Phaser](https://developer.mozilla.org/zh-CN/docs/Games/Tutorials/2D_breakout_game_Phaser)
 
 ----
 一個古老遊戲，打磚塊。
 
 #### 遊戲玩法
-以 [左右鍵] 控制 [接板]
-以 [Space] 開啟遊戲 (發球)
+1. [左右鍵] 控制 [接板]
+2. [Space] 開啟遊戲 (發球)
+
 #### 聲音
 1. 音量總開關 on/off
 2. [球] 撞擊 [接板]/[磚] 出音效
-3. 背景音樂
+3. 背景音樂([Youtube 音效庫](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiojoee2ZDtAhWuxIsBHZghBqEQFjAAegQIAxAC&url=https%3A%2F%2Fwww.youtube.com%2Faudiolibrary&usg=AOvVaw36ny28qdIK15fDCOWMG_jQ))
+
+#### 字體
+1. [Oswald](https://fonts.google.com/specimen/Oswald)
+2. [Noto Serif TC](https://fonts.google.com/specimen/Noto+Serif+TC)
 
 #### TODO
 1. 等級選擇
