@@ -11,45 +11,124 @@
 			display: block;
 			margin: 0 auto;
 		}
+		.opening {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: rgba($color-black, .78);
+			color: $color-white;
+			font-size: $fontsize-5;
+			padding: 0 3px;
+			white-space: nowrap;
+			line-height: normal;
+			display: none;
+		}
 		.status {
 			position: absolute;
 			top: 100%;
 			left: 0;
-			display: flex;
 			width: 100%;
+			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			background: rgba($color-black, .78);
 			color: $color-white;
 			padding: 10px 15px;
+			.left,
+			.right {
+				display: flex;
+				align-items: center;
+			}
 			.msgbox {
 				font-size: $fontsize-1;
 				font-weight: bold;
 			}
-			.btn-soundmute {
-				// @extend %oswald;
-				background: rgba($color-white, .25);
-				padding: 0 5px;
-				border-radius: 5px;
-				&:before,
-				&:after {
-					font-size: $fontsize-c;
-					font-weight: bold;
+			.right {
+				[class^="ctrl-"] {
+					background: rgba($color-white, .25);
+					height: 30px;
 				}
-				&:before {
-					content: "音量";
-					@extend %notoseriftc;
-					margin-right: 5px;
-				}
-				&[data-mute="0"] {
-					&:after {
-						content: "ON";
+				.ctrl-lv {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-right: 10px;
+					.level {
+						width: 56px;
+						text-align: center;
+						font-size: $fontsize;
+						font-weight: bold;
+						margin: 0 10px;
+						white-space: nowrap;
+					}
+					[class^="btn-lv-"] {
+						width: 30px;
+						height: 100%;
+						font-size: $fontsize-e;
+						font-weight: bold;
+						padding: 0 10px;
+						&:active {
+							transform: scale(.87);
+						}
+						&.btn-lv-minus {
+						}
+						&.btn-lv-plus {
+							padding-top: 3px;
+						}
+						i {
+							font-size: inherit;
+						}
 					}
 				}
-				&[data-mute="1"] {
-					&:after {
-						content: "OFF";
+				.ctrl-soundmute {
+					.btn-soundmute {
+						// @extend %oswald;
+						// border-radius: 5px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						min-width: 35px;
+						max-width: 35px;
+						&:before {
+							font-size: $fontsize-2;
+							font-family: "Font Awesome 5 Pro";
+							font-weight: 900;
+							-moz-osx-font-smoothing: grayscale;
+							-webkit-font-smoothing: antialiased;
+							display: inline-block;
+							font-style: normal;
+							font-variant: normal;
+							text-rendering: auto;
+							padding: 4px 6px 3px;
+						}
+						&[data-mute="0"] {
+							&:before {
+								content: "\f6a8";
+							}
+						}
+						&[data-mute="1"] {
+							&:before {
+								content: "\f6a9";
+								padding-right: 4.5px;
+							}
+						}
 					}
+				}
+			}
+		}
+	}
+}
+
+body {
+	&[data-status="ready"] {
+		.main {
+			.game {
+				canvas {
+					opacity: .56;
+				}
+				.opening {
+					display: block;
 				}
 			}
 		}

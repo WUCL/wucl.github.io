@@ -1,3 +1,8 @@
+
+buzz.sound.prototype.destroy = function () {
+    this.set('src', '');
+}
+
 const _DEFAULT = { // default
     control: {
         mouse: false,
@@ -34,7 +39,7 @@ const _DEFAULT = { // default
     },
     brick: {
         rowCount: 3,
-        columnCount: 4,
+        columnCount: 5,
         h: 25,
         padding: 7,
         color: "rgba(0, 0, 0, .78)",
@@ -46,19 +51,22 @@ const _DEFAULT = { // default
     "不錯！", "不錯喔！", "欸！不錯", "欸！不錯喔", "喔喔喔喔！",
     "可以可以", "可以欸", "很可以", "有！你有", "有點厲害",
     "繼續", "繼續繼續", "欸欸欸欸欸！繼續", "哇賽", "哇say",
-    "do it!", "just do it!"
     ],
     sounds: {
-        bg: '',
-        lv1: ['lv11', 'lv12'],
-        lv2: ['lv2'],
-        lv3: ['lv31', 'lv32'],
+        lv0: ['lv01', 'lv02'],
+        lv1: ['lv1'],
+        lv2: ['lv21', 'lv22'],
         break: ['break'],
         paddle: ['paddle'],
         wall: ['wall']
     },
     btn: {
         soundmute: document.getElementById('btn-soundmute'),
+        lv: [document.getElementById('btn-lv-minus'), document.getElementById('btn-lv-plus'),]
+    },
+    level: {
+        point: 1,
+        mapping: ["菜逼巴", "正常人", "來自地獄"]
     }
 }
 // ========================================
@@ -84,6 +92,9 @@ var lives = _DEFAULT.lives.point;
 var timer = [_DEFAULT.timer.point, _DEFAULT.timer.second.point];
 var timerSetInterval = '';
 
+// sounds
+var soundBg = '';
+
 // paddle
 var paddle = new function () {
     this.w = canvas.width / 4;
@@ -106,7 +117,7 @@ var bricks;
 var brick = new function () {
     this.rowCount = _DEFAULT.brick.rowCount;
     this.columnCount = _DEFAULT.brick.columnCount;
-    this.count = _DEFAULT.brick.rowCount * _DEFAULT.brick.columnCount;
+    this.count = this.rowCount * this.columnCount;
     this.padding = _DEFAULT.brick.padding;
     this.offsetTop = 30;
     this.offsetLeft = 30;
@@ -133,13 +144,17 @@ buildBricks();
 
 _DEFAULT.btn.soundmute.addEventListener("click", (e) => {
     var $mute = e.target.getAttribute('data-mute');
-    if ($mute == 0) {
-        e.target.setAttribute('data-mute', 1);
-        buzz.all().mute();
-    } else {
-        e.target.setAttribute('data-mute', 0);
-        buzz.all().unmute();
-    }
+    if ($mute == 0) e.target.setAttribute('data-mute', 1);
+    else e.target.setAttribute('data-mute', 0);
+    buzz.all().toggleMute();
+}, false);
+_DEFAULT.btn.lv[0].addEventListener("click", () => {
+    if (_DEFAULT.level.point > 0) _DEFAULT.level.point--;
+    gameLevel(_DEFAULT.level.point);
+}, false);
+_DEFAULT.btn.lv[1].addEventListener("click", () => {
+    if (_DEFAULT.level.point < 2) _DEFAULT.level.point++;
+    gameLevel(_DEFAULT.level.point);
 }, false);
 
 
@@ -160,7 +175,8 @@ function playSounds(sound, isBg) {
     var $isBg = isBg || false;
     if ($isBg) {
         $path += 'bg-' + sound + '.mp3';
-        _DEFAULT.sounds.bg = (new buzz.sound($path)).play().loop().setVolume(0).fadeTo(30, 1000);
+        if (soundBg) soundBg.stop();
+        soundBg = (new buzz.sound($path)).play().loop().setVolume(0).fadeTo(15, 1000);
     } else {
         var $rand = Math.floor((Math.random() * $sound.length));
         $path += $sound[$rand] + '.mp3';
@@ -168,4 +184,3 @@ function playSounds(sound, isBg) {
     }
     // console.log($path);
 }
-playSounds('lv1');

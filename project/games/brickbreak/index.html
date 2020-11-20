@@ -12,11 +12,10 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="" />
         <meta property="og:description" content="" />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="../../favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="../../favicon.png" />
 
-        <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
-        <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
-        <link rel="icon" type="image/png" href="./favicon.ico" />
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
         <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet">
@@ -24,18 +23,38 @@
         <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
 	</head>
 	<body>
-        
-		<main id="main" class="main">
-			<section id="game" class="game">
-				<canvas id="myCanvas"></canvas>
-				<div id="status" class="status">
-					<div id="msgbox" class="msgbox">Press "SPACE" to Start!</div>
-					<button id="btn-soundmute" class="btn-soundmute" data-mute="0"></div>
-				</div>
-			</section>
-		</main>
-		
-
+        <div id="app" v-cloak>
+            
+            <main id="main" class="main">
+            	<section id="game" class="game">
+            		<canvas id="myCanvas"></canvas>
+            		<div id="opening" class="opening">
+            			<p>Press [<] [>] to Move the paddle!</p>
+            			<p>Press [SPACE] to Start!</p>
+            		</div>
+            		<div id="status" class="status">
+            			<div class="left">
+            				<div id="msgbox" class="msgbox">準備好就來吧！</div>
+            			</div>
+            			<div class="right">
+            				<div class="ctrl-lv">
+            					<button id="btn-lv-minus" class="btn-lv-plus"><i class="fas fa-minus"></i></button>
+            					<!-- <button id="btn-lv-minus" class="btn-lv-minus">-</button> -->
+            					<div id="level" class="level"></div>
+            					<button id="btn-lv-plus" class="btn-lv-plus"><i class="fas fa-plus"></i></button>
+            					<!-- <button id="btn-lv-plus" class="btn-lv-plus">+</button> -->
+            				</div>
+            				<div class="ctrl-soundmute">
+            					<button id="btn-soundmute" class="btn-soundmute" data-mute="0"></button>
+            				</div>
+            			</div>
+            		</div>
+            	</section>
+            </main>
+        	
+        </div>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
         <script src="./public/js/define.js"></script>
 		<script src="./public/js/main.js"></script>

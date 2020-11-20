@@ -137,7 +137,7 @@
     }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // 每次清除畫板重新繪製
-        drawTimer();
+        if (game.status == 'start') drawTimer();
         if (_DEFAULT.score.enable) drawScore();
         drawBricks();
         drawPaddle();
@@ -154,6 +154,7 @@
             ball.dy = -ball.dy;
         } else if (ball.y + ball.dy > canvas.height - ball.radius - paddle.h) {
             if (ball.x > (paddle.x - 10) && ball.x < (paddle.x + paddle.w + 10)) { // paddle collision
+                callMsg();
                 playSounds('paddle');
                 // ball.color = getRandomColor();
                 ball.dy = -ball.dy;
@@ -167,7 +168,7 @@
                         // document.location.reload();
                     } else {
                         console.log("GAME again");
-                        game.status = 'again';
+                        gameStatus('again');
                     }
                 } else {
                     gameOver('l');
@@ -228,8 +229,8 @@
     function gameStart() {
         if (game.status != 'start' && game.status != 'over') {
             playSounds('paddle');
-            game.status = 'start';
-            _DEFAULT.msgbox.innerHTML = "來喔！開始！";
+            gameStatus('start');
+            callMsg("來喔！開始！");
             timerSetInterval = setInterval(() => {
                 timer[1]++;
                 if (timer[1] == 100) {
@@ -246,7 +247,7 @@
         playSounds('end', true);
         document.body.setAttribute("data-wl", cmd);
         setTimeout(() => { game.isPaused = true; }, 100)
-        game.status = 'over';
+        gameStatus('over');
         clearInterval(timerSetInterval);
 
         var $msg = '';
@@ -256,16 +257,51 @@
         }
         if (cmd == 'l') {
             console.log("GAME OVER! ");
-            $msg = "居居哭哭輸了Sorry囉！"; // ";
+            $msg = "居居哭哭輸了Sorry"; // ";
         }
         _DEFAULT.msgbox.innerHTML = $msg;
         return;
     }
 
-    // callMsg
-    function callMsg() {
-        _DEFAULT.msgbox.innerHTML = _DEFAULT.msgs[Math.floor(Math.random() * _DEFAULT.msgs.length)];
+    // gameStatus
+    function gameStatus(status) {
+        game.status = status;
+        document.body.setAttribute("data-status", status);
     }
-    draw();
 
+    // gameLevel
+    function gameLevel(lv) {
+        var lvCurrent = document.body.getAttribute("data-lv");
+        document.getElementById("level").innerHTML = _DEFAULT.level.mapping[_DEFAULT.level.point];
+        document.body.setAttribute("data-lv", _DEFAULT.level.point);
+        playSounds('lv' + lv);
+        if (lv != lvCurrent) {
+            playSounds('lv' + lv, true);
+            if (lv == '0') {
+                brick.columnCount = 3;
+            }
+            if (lv == '1') {
+                brick.columnCount = 5;
+            }
+            brick.count = brick.rowCount * brick.columnCount;
+            brick.w = ((canvas.width - ((brick.offsetTop + brick.offsetLeft) + ((brick.padding) * (brick.columnCount - 1)))) / brick.columnCount);
+            buildBricks();
+        }
+    }
+
+    // gameReady
+    function gameReady() {
+        buildBricks();
+        draw();
+        gameStatus('ready');
+        gameLevel(1);
+    }
+
+    // callMsg
+    function callMsg(msg) {
+        var $msg = msg || _DEFAULT.msgs[Math.floor(Math.random() * _DEFAULT.msgs.length)];
+        _DEFAULT.msgbox.innerHTML = $msg;
+    }
+
+    gameReady();
 // })();

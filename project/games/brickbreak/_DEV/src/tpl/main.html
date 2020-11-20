@@ -1,9 +1,26 @@
 <main id="main" class="main">
 	<section id="game" class="game">
 		<canvas id="myCanvas"></canvas>
+		<div id="opening" class="opening">
+			<p>Press [<] [>] to Move the paddle!</p>
+			<p>Press [SPACE] to Start!</p>
+		</div>
 		<div id="status" class="status">
-			<div id="msgbox" class="msgbox">Press "SPACE" to Start!</div>
-			<button id="btn-soundmute" class="btn-soundmute" data-mute="0"></div>
+			<div class="left">
+				<div id="msgbox" class="msgbox">準備好就來吧！</div>
+			</div>
+			<div class="right">
+				<div class="ctrl-lv">
+					<button id="btn-lv-minus" class="btn-lv-plus"><i class="fas fa-minus"></i></button>
+					<!-- <button id="btn-lv-minus" class="btn-lv-minus">-</button> -->
+					<div id="level" class="level"></div>
+					<button id="btn-lv-plus" class="btn-lv-plus"><i class="fas fa-plus"></i></button>
+					<!-- <button id="btn-lv-plus" class="btn-lv-plus">+</button> -->
+				</div>
+				<div class="ctrl-soundmute">
+					<button id="btn-soundmute" class="btn-soundmute" data-mute="0"></button>
+				</div>
+			</div>
 		</div>
 	</section>
 </main>
