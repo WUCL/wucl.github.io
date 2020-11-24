@@ -19,6 +19,7 @@
             pressed.left = true;
         }
         if (e.keyCode == 32) { // space
+            if (game.status == 'over') location.reload();
             gameStart();
         }
     }
@@ -181,14 +182,14 @@
         // paddle move
         if (game.status != 'over') {
             if (pressed.right && paddle.x < canvas.width - paddle.w) {
-                paddle.x += _DEFAULT.paddle.move;
+                paddle.x += paddle.move;
                 if (game.status != 'start') {
-                    ball.x += _DEFAULT.paddle.move;
+                    ball.x += paddle.move;
                 }
             } else if (pressed.left && paddle.x > 0) {
-                paddle.x -= _DEFAULT.paddle.move;
+                paddle.x -= paddle.move;
                 if (game.status != 'start') {
-                    ball.x -= _DEFAULT.paddle.move;
+                    ball.x -= paddle.move;
                 }
             }
         }
@@ -203,6 +204,7 @@
 
     // gameReset
     function gameReset() {
+        console.log('gameReset');
         // reset ball
         ball.x = canvas.width / 2;
         ball.y = canvas.height - paddle.h - ball.radius;
@@ -259,7 +261,8 @@
             console.log("GAME OVER! ");
             $msg = "居居哭哭輸了Sorry"; // ";
         }
-        _DEFAULT.msgbox.innerHTML = $msg;
+        _DEFAULT.msgbox.innerHTML = $msg + ", 按 [空白鍵] 來 重新開始！";
+        // document.getElementById('opening').innerHTML = '<p>Press [SPACE] to Restart!</p>';
         return;
     }
 
@@ -271,18 +274,21 @@
 
     // gameLevel
     function gameLevel(lv) {
-        var lvCurrent = document.body.getAttribute("data-lv");
-        document.getElementById("level").innerHTML = _DEFAULT.level.mapping[_DEFAULT.level.point];
-        document.body.setAttribute("data-lv", _DEFAULT.level.point);
-        playSounds('lv' + lv);
+        var lvCurrent = document.body.getAttribute("data-lv") || '';
+        // document.getElementById("level").innerHTML = _DEFAULT.level.mapping[game.lv - 1];
+        document.getElementById("level").setAttribute("data-lv", _DEFAULT.level.mapping[game.lv - 1]);;
+        document.body.setAttribute("data-lv", game.lv);
+        if (lvCurrent) playSounds('lv' + lv);
         if (lv != lvCurrent) {
-            playSounds('lv' + lv, true);
-            if (lv == '0') {
-                brick.columnCount = 3;
-            }
-            if (lv == '1') {
-                brick.columnCount = 5;
-            }
+            playSounds('lv', true);
+            brick.rowCount = lv + 1;
+            brick.columnCount = lv * 2;
+            ball.dx = _DEFAULT.ball.dx * lv;
+            ball.dy = _DEFAULT.ball.dy * lv;
+            ball.plus = _DEFAULT.ball.plus + ((((_DEFAULT.level.point[0] + _DEFAULT.level.point[1]) / 2) - lv) * .25);
+
+            paddle.move = _DEFAULT.paddle.move * lv;
+
             brick.count = brick.rowCount * brick.columnCount;
             brick.w = ((canvas.width - ((brick.offsetTop + brick.offsetLeft) + ((brick.padding) * (brick.columnCount - 1)))) / brick.columnCount);
             buildBricks();
@@ -294,7 +300,7 @@
         buildBricks();
         draw();
         gameStatus('ready');
-        gameLevel(1);
+        gameLevel(game.lv);
     }
 
     // callMsg

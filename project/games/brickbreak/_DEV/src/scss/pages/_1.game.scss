@@ -1,6 +1,7 @@
 /* =======================
    pages/game
    ======================= */
+$level: 1, 5;
 .main {
 	.game {
 		width: 768px;
@@ -18,7 +19,7 @@
 			transform: translate(-50%, -50%);
 			background: rgba($color-black, .78);
 			color: $color-white;
-			font-size: $fontsize-5;
+			font-size: $fontsize-6;
 			padding: 0 3px;
 			white-space: nowrap;
 			line-height: normal;
@@ -55,12 +56,35 @@
 					justify-content: center;
 					margin-right: 10px;
 					.level {
-						width: 56px;
+						display: flex;
+						align-items: flex-end;
+						justify-content: space-between;
+						width: 78px;
+						height: 100%;
 						text-align: center;
 						font-size: $fontsize;
 						font-weight: bold;
-						margin: 0 10px;
+						margin: 0 3px;
 						white-space: nowrap;
+						&:after {
+							content: attr(data-lv);
+							position: absolute;
+							bottom: 2%;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							background: transparent !important;
+						}
+						> div {
+							background: $color-white;
+							width: (100% - 10%) / nth($level, 2);
+							height: 8.5%;
+							bottom: 0;
+							opacity: .3;
+						}
 					}
 					[class^="btn-lv-"] {
 						width: 30px;
@@ -125,12 +149,40 @@ body {
 		.main {
 			.game {
 				canvas {
-					opacity: .56;
+					opacity: .5;
 				}
 				.opening {
 					display: block;
 				}
 			}
 		}
+	}
+	@for $i from 1 through nth($level, 2) {
+		@for $j from 1 through $i {
+			&[data-lv="#{$i}"] #level > div[data-lv="#{$j}"] {
+				opacity: .87;
+				// background: rgba($color-white, .87);
+			}
+		}
+	}
+	&[data-lv="1"] #level:after,
+	&[data-lv="1"] #level > div {
+		color: lighten(yellow, 25%);
+		background: lighten(yellow, 25%);
+	}
+	&[data-lv="2"] #level:after,
+	&[data-lv="2"] #level > div {
+		color: lighten(yellow, 7%);
+		background: lighten(yellow, 7%);
+	}
+	&[data-lv="4"] #level:after,
+	&[data-lv="4"] #level > div {
+		color: lighten(red, 25%);
+		background: lighten(red, 25%);
+	}
+	&[data-lv="5"] #level:after,
+	&[data-lv="5"] #level > div {
+		color: lighten(red, 7%);
+		background: lighten(red, 7%);
 	}
 }
