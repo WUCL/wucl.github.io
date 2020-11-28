@@ -1,0 +1,60 @@
+/* =======================
+   pages/timer
+   ======================= */
+section.viwer {
+	.inner {
+		text-align: center;
+		.count {
+			padding: 50px 0;
+			font-size: $fontsize-10 * 3;
+		}
+		.progress {
+			width: 100%;
+			max-width: 200px;
+			height: 20px;
+			margin: 10px 0;
+			border-radius: 3px;
+			overflow: hidden;
+			display: inline-block;
+
+			vertical-align: middle;
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			appearance: none;
+			border: none;
+			&::-webkit-progress-bar {
+				background: $color-white;
+			}
+			&::-moz-progress-bar {
+				background: $color-white;
+			}
+			&::-webkit-progress-value {
+				background-color: $color-black;
+				background-image: linear-gradient(90deg, lighten($color-black, 30%) 0%, lighten($color-black, 10%) 100%);
+				border-radius: 0;
+				// border-radius: 20px;
+			}
+		}
+		.countdown {
+			font-size: $fontsize-5;
+		}
+	}
+}
+section.controller {
+	.inner {
+		text-align: center;
+		[class^="btn-"] {
+			background: $color-white;
+			padding: 0 5px;
+			border-radius: 5px;
+			line-height: normal;
+			transition: .2s;
+			&:active {
+				transform: scale(.9);
+			}
+			&.btn-start {
+
+			}
+		}
+	}
+}

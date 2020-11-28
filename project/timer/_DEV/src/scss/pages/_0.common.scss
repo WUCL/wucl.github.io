@@ -1,0 +1,32 @@
+/* =======================
+   pages/common
+   ======================= */
+body {
+	background-color: nth($color-bg, 1);
+	background-image: linear-gradient(135deg, nth($color-bg, 1) 0%, nth($color-bg, 2) 100%);
+	&:after {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: transparent url(../img/bg-blur.png) center center repeat;
+		opacity: .12;
+		user-select: none;
+	}
+	.main {
+		overflow: hidden;
+		max-width: $bp-2;
+		margin: 0 auto;
+		min-height: 100vh;
+		section {
+			width: 100%;
+			height: 100%;
+			padding: 20px 0;
+			.inner {
+			}
+		}
+	}
+}
