@@ -25,23 +25,21 @@
         <style>[v-cloak]{display: none;}</style>
 	</head>
 	<body>
-        <div id="timer" v-cloak>
+        <div id="timer" v-cloak :data-status="project.status.attr[0]" :data-rb="project.status.attr[1]">
             <header id="header" class="header">
-            	<div class="inner">
-            		<div class="datetime" v-html="datetime"></div>
-            	</div>
+            	<section class="datetime" v-html="datetime"></section>
             </header>
             <main id="main" class="main">
                 <section class="viwer">
                 	<div class="inner">
             			<div class="count" v-html="project.count"></div>
-            			<progress id="progress" class="progress"></progress>
+            			<progress id="progress" class="progress" :max="project.progress[0]" :value="project.progress[1]"></progress>
             			<div class="countdown"><time v-html="project.countdown"></time></div>
             		</div>
                 </section>
                 <section class="controller">
                 	<div class="inner">
-                		<button id="btn-start" class="btn-start" v-on:click="hiitstart">開始</button>
+                		<button id="btn-start" class="btn-start" v-on:click="start">開始</button>
                 		<!-- <button id="btn-stop"></button> -->
                 	</div>
                 </section>

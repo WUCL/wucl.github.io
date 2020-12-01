@@ -2,18 +2,22 @@
    pages/timer
    ======================= */
 section.viwer {
+	margin-top: -40px;
 	.inner {
 		text-align: center;
 		.count {
-			padding: 50px 0;
-			font-size: $fontsize-10 * 3;
+			// padding: 50px 0;
+			font-size: $fontsize-11 * 5;
+			line-height: $fontsize-11 * 5;
+			margin-bottom: 20px;
+			transition: .2s;
 		}
 		.progress {
 			width: 100%;
 			max-width: 200px;
 			height: 20px;
 			margin: 10px 0;
-			border-radius: 3px;
+			border-radius: 10px;
 			overflow: hidden;
 			display: inline-block;
 
@@ -33,10 +37,12 @@ section.viwer {
 				background-image: linear-gradient(90deg, lighten($color-black, 30%) 0%, lighten($color-black, 10%) 100%);
 				border-radius: 0;
 				// border-radius: 20px;
+				transition: .2s;
 			}
 		}
 		.countdown {
 			font-size: $fontsize-5;
+			margin-bottom: 30px;
 		}
 	}
 }
@@ -54,6 +60,22 @@ section.controller {
 			}
 			&.btn-start {
 
+			}
+		}
+	}
+}
+#timer {
+	&[data-rb="break"] {
+		section.viwer {
+			.inner {
+				.count {
+					color: rgba($color-white, .6);
+				}
+				.progress {
+					&::-webkit-progress-value {
+						opacity: .78;
+					}
+				}
 			}
 		}
 	}

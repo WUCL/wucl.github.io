@@ -25,7 +25,7 @@
         <style>[v-cloak]{display: none;}</style>
 	</head>
 	<body>
-        <div id="timer" v-cloak>
+        <div id="timer" v-cloak :data-status="project.status.attr[0]" :data-rb="project.status.attr[1]">
             @@include('../src/tpl/_header.html')
             @@include('../src/tpl/_main.html')
     		@@include('../src/tpl/_footer.html')

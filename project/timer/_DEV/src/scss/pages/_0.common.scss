@@ -2,6 +2,7 @@
    pages/common
    ======================= */
 body {
+	user-select: none;
 	background-color: nth($color-bg, 1);
 	background-image: linear-gradient(135deg, nth($color-bg, 1) 0%, nth($color-bg, 2) 100%);
 	&:after {
@@ -16,15 +17,18 @@ body {
 		opacity: .12;
 		user-select: none;
 	}
+	#timer {
+		height: 100vh;
+	}
 	.main {
 		overflow: hidden;
 		max-width: $bp-2;
 		margin: 0 auto;
-		min-height: 100vh;
+		top: 50%;
+		transform: translateY(-50%);
 		section {
 			width: 100%;
 			height: 100%;
-			padding: 20px 0;
 			.inner {
 			}
 		}

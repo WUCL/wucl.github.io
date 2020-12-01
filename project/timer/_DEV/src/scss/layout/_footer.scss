@@ -2,23 +2,18 @@
 layout/_footer
 ======================= */
 footer.footer {
+	position: absolute;
+	bottom: 0;
 	width: 100%;
 	.copyright {
 		width: 100%;
-		background: $color-black;
-		font-size: 14px;
+		background: rgba($color-white, .15);
+		font-size: $fontsize-d;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		color: $color-white;
-		padding: 15px 0;
 		box-sizing: border-box;
-		@include mq($max-width: $bp-2s) {
-			flex-direction: column;
-			padding: 10px 0;
-			span:nth-child(2) {
-				margin: 7px 0;
-			}
-		}
+		padding: 9px 0;
 	}
 }

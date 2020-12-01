@@ -2,12 +2,13 @@
 layout/_header
 ======================= */
 header.header {
-	.inner {
-		padding: 5px;
-		.datetime {
-			letter-spacing: .5px;
-			text-align: center;
-			line-height: normal;
-		}
+	position: absolute;
+	top: 5px;
+	width: 100%;
+	.datetime {
+		font-size: $fontsize-d;
+		letter-spacing: .5px;
+		text-align: center;
+		line-height: normal;
 	}
 }
