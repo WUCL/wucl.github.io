@@ -2,20 +2,22 @@
    pages/timer
    ======================= */
 section.viwer {
-	margin-top: -40px;
 	.inner {
 		text-align: center;
 		.count {
-			// padding: 50px 0;
+			color: $color-black;
 			font-size: $fontsize-11 * 5;
-			line-height: $fontsize-11 * 5;
+			// line-height: $fontsize-11 * 5;
 			margin-bottom: 20px;
 			transition: .2s;
+			&:active {
+				transform: scale(.9);
+			}
 		}
 		.progress {
 			width: 100%;
-			max-width: 200px;
-			height: 20px;
+			max-width: 300px;
+			height: 24px;
 			margin: 10px 0;
 			border-radius: 10px;
 			overflow: hidden;
@@ -27,55 +29,117 @@ section.viwer {
 			appearance: none;
 			border: none;
 			&::-webkit-progress-bar {
-				background: $color-white;
+				background-color: lighten($color-main, 30%);
 			}
 			&::-moz-progress-bar {
-				background: $color-white;
+				background-color: lighten($color-main, 30%);
 			}
 			&::-webkit-progress-value {
-				background-color: $color-black;
-				background-image: linear-gradient(90deg, lighten($color-black, 30%) 0%, lighten($color-black, 10%) 100%);
+				background-color: $color-main;
+				background-image: linear-gradient(90deg, lighten($color-main, 20%) 0%, $color-main 50%, $color-main 100%);
 				border-radius: 0;
 				// border-radius: 20px;
 				transition: .2s;
 			}
 		}
 		.countdown {
+			color: $color-black;
 			font-size: $fontsize-5;
 			margin-bottom: 30px;
+			transition: .2s;
+			time {
+				font-size: inherit;
+			}
 		}
 	}
 }
 section.controller {
 	.inner {
 		text-align: center;
-		[class^="btn-"] {
-			background: $color-white;
-			padding: 0 5px;
-			border-radius: 5px;
-			line-height: normal;
-			transition: .2s;
-			&:active {
-				transform: scale(.9);
+		.lists {
+			display: inline-block;
+			border-radius: 9px;
+			background: rgba($color-white, .3);
+			overflow: hidden;
+			.btn-options {
+				font-size: $fontsize-2;
+				font-family: inherit;
+				padding: 10px 15px;
+				transition: .2s;
+				&.active {
+					background: rgba($color-white, .5);
+				}
 			}
-			&.btn-start {
-
+		}
+		.btns {
+			margin-top: 20px;
+			[class^="btn-"] {
+				// background: rgba($color-white, .5);
+				// padding: 10px 12px;
+				// border-radius: 3px;
+				&:active {
+					transform: scale(.9);
+				}
+				&:before {
+					font-family: "Font Awesome 5 Pro";
+					font-weight: 900;
+					font-size: $fontsize-1;
+				}
+				// &.btn-letsGo {
+				// 	&:before {
+				// 		content: "\f04b";
+				// 	}
+				// }
+				&.btn-letsStop {
+					opacity: 0;
+					transition: .2s;
+					&:before {
+						font-size: $fontsize-3;
+						content: "\f04d";
+					}
+				}
 			}
 		}
 	}
 }
 #timer {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: space-between;
+	&[data-rb="run"] {
+		.count,
+		.countdown {
+			color: $color-main;
+		}
+	}
 	&[data-rb="break"] {
 		section.viwer {
 			.inner {
-				.count {
+				.count,
+				.countdown {
 					color: rgba($color-white, .6);
 				}
 				.progress {
+					&::-webkit-progress-bar {
+						background-color: lighten($color-black, 87%);
+					}
+					&::-moz-progress-bar {
+						background-color: lighten($color-black, 87%);
+					}
 					&::-webkit-progress-value {
-						opacity: .78;
+						background-color: $color-main;
+						background-image: linear-gradient(90deg, lighten($color-black, 70%) 0%, lighten($color-black, 50%) 100%);
 					}
 				}
+			}
+		}
+	}
+	&[data-status="pause"] {
+		section.controller {
+			.btn-letsStop {
+				opacity: 1;
+				animation: fadeUpEffect .2s alternate;
 			}
 		}
 	}

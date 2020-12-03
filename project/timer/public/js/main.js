@@ -17,7 +17,7 @@
                     isPause: false
                 },
                 count: 0,
-                countdown: '00:00',
+                countdown: moment(moment.duration()).format('mm:ss'),
                 timer: '',
                 progress: [],
 
@@ -29,17 +29,27 @@
                     duration: '' //
                 }
             },
-            parts: 1,
-            part: [ // 組合
-                {
-                    sets: 8, // 次數
-                    rb: [20, 10], // run and break, time
-                },
-                {
-                    sets: 2, // 次數
-                    rb: [10, 5], // run and break, time
-                }
-            ]
+            part: { // 組合
+                selected: 1,
+                options: [
+                    {
+                        sets: 2, // 次數
+                        rb: [10, 5], // run and break, time
+                    },
+                    {
+                        name: 'TABATA',
+                        description: '4 Minutes',
+                        sets: 8, // 次數
+                        rb: [20, 10], // run and break, time
+                    },
+                    {
+                        name: '20:20',
+                        description: '10 Minutes',
+                        sets: 15, // 次數
+                        rb: [20, 20], // run and break, time
+                    }
+                ]
+            }
         },
         beforeCreate() {
         },
@@ -59,8 +69,12 @@
             }
         },
         methods: {
-            start() {
-                let $part = this.part[this.parts];
+            optionSelected(e) {
+                let $selected = this.part.selected;
+                return this.part.selected = $selected;
+            },
+            letsGo() {
+                let $part = this.part.options[this.part.selected];
                 let $p = this.project;
                 clearInterval($p.timer);
 
@@ -78,27 +92,22 @@
                 }
 
                 var processProject = () => {
-                    if (!$p.status.isPause) {
+                    if (!$p.status.isPause || !$p.status.running) {
                         $p.$tempo.duration = moment.duration($p.$tempo.duration.asMilliseconds() - this.interval, 'milliseconds');
                         let $ms = $p.$tempo.duration.as('milliseconds');
                         $p.countdown = moment($ms).format('mm:ss');
 
                         if ($p.$tempo.counting[0] == ($part.rb[0] + 1)) {
                             this.updateRB('break');
-                            $p.progress = [$part.rb[1], $p.$tempo.counting[1]++]
+                            $p.progress = [$part.rb[1], $p.$tempo.counting[1]++];
                             if ($p.$tempo.counting[1] == ($part.rb[1] + 1)) $p.$tempo.counting[0] = 1;
                         } else {
                             this.updateRB('run');
                             $p.$tempo.counting[1] = 1;
-                            $p.progress = [$part.rb[0], $p.$tempo.counting[0]++]
+                            $p.progress = [$part.rb[0], $p.$tempo.counting[0]++];
                         }
 
-                        if ($p.$tempo.duration.as('milliseconds') == 0) {
-                            this.updateStatus('stop');
-                            clearInterval($p.timer);
-                            $p.status.running = false;
-                            return;
-                        }
+                        if ($p.$tempo.duration.as('milliseconds') == 0) return this.updateStatus('stop');
                         if (Number.isInteger((($ms / this.interval) + 1) /($part.rb[0] + $part.rb[1]))) $p.count++;
                     }
                 }
@@ -108,28 +117,53 @@
                 }, this.interval);
                 processProject();
             },
+            letsStop() {
+                if (!this.project.status.running) return;
+                return this.updateStatus('stop');
+            },
             updateRB(rb) { // run and break
-                this.project.status.attr[1] = rb;
+                let $rb = rb || '';
+                // if ($rb == '') return;
+                this.project.status.attr[1] = $rb;
+                let $judgment = this.project.progress[0] - this.project.progress[1];
+                if ($judgment < 4) {
+                    if ($judgment == 0) return playSounds('switch');
+                    playSounds('countdown');
+                }
             },
             updateStatus(status) {
                 let $p = this.project;
                 let $status = status || '';
                 if ($status == '') return;
                 $p.status.attr[0] = $status;
+                document.body.setAttribute('data-status', status);
                 switch (status) {
                     case 'running':
+                        playSounds('switch');
                         $p.status.isPause = false;
                         break;
                     case 'pause':
                         $p.status.isPause = true;
                         break;
                     case 'stop':
-                        $p.status.isPause = false;
+                        playSounds('timeup');
                         this.updateRB();
+                        $p.status.isPause = false;
+                        $p.status.running = false;
+                        this.resetProject();
                         break;
                     default:
                         break;
                 }
+            },
+            resetProject() {
+                let $p = this.project;
+                clearInterval($p.timer);
+                $p.countdown = moment(moment.duration()).format('mm:ss');
+                $p.count = 0;
+                $p.progress =  [0, 0];
+                $p.$tempo.counting = [0, 0];
+                return;
             }
         },
     });

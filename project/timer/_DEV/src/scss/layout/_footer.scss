@@ -2,8 +2,6 @@
 layout/_footer
 ======================= */
 footer.footer {
-	position: absolute;
-	bottom: 0;
 	width: 100%;
 	.copyright {
 		width: 100%;
@@ -12,8 +10,12 @@ footer.footer {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: $color-white;
+		color: $color-black;
 		box-sizing: border-box;
 		padding: 9px 0;
+		span,
+		a {
+			font-size: inherit;
+		}
 	}
 }

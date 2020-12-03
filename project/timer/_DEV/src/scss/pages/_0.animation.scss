@@ -15,9 +15,13 @@
 	from { opacity: 1; }
 	to { opacity: 0; }
 }
+@keyframes fadeLeftEffect { // animation: fadeLeftEffect 1s;
+	from { right: -15px; opacity: 0; }
+	to { right: 0; opacity: 1; }
+}
 @keyframes fadeUpEffect { // animation: fadeUpEffect 1s;
-	from { margin-top: 30px; opacity: 0; }
-	to { margin-top: 0; opacity: 1; }
+	from { top: 30px; opacity: 0; }
+	to { top: 0; opacity: 1; }
 }
 @keyframes fadeUpEffect2 { // animation: fadeUpEffect 1s;
 	from { transform: translateY(35px); opacity: 0; }

@@ -1,0 +1,21 @@
+<main id="main" class="main">
+    <section class="viwer">
+    	<div class="inner">
+			<div class="count" v-html="project.count" v-on:click="letsGo"></div>
+			<progress id="progress" class="progress" :max="project.progress[0]" :value="project.progress[1]"></progress>
+			<div class="countdown"><time v-html="project.countdown"></time></div>
+		</div>
+    </section>
+    <section class="controller">
+    	<div class="inner">
+            <div class="lists">
+                <button v-for="(value, index) in part.options" v-if="index !== 0" class="btn-options" :class="{active: part.selected == index}" :value="index" :title="value.description" @click="optionSelected" v-html="value.name"></button>
+            </div>
+            <div class="btns">
+                <!-- <button id="btn-letsGo" class="btn-letsGo" v-on:click="letsGo"></button> -->
+                <!-- <button id="btn-letsStop" class="btn-letsStop" v-on:click="letsStop" v-show="project.status.running"></button> -->
+        		<button id="btn-letsStop" class="btn-letsStop" @click="letsStop"></button>
+            </div>
+    	</div>
+    </section>
+</main>
