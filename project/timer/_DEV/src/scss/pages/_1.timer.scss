@@ -7,11 +7,22 @@ section.viwer {
 		.count {
 			color: $color-black;
 			font-size: $fontsize-11 * 5;
-			// line-height: $fontsize-11 * 5;
 			margin-bottom: 20px;
 			transition: .2s;
 			&:active {
 				transform: scale(.9);
+			}
+			&:after {
+				content: "Start / Pause";
+				position: absolute;
+				top: 12px;
+				width: 100%;
+				height: 100%;
+				font-size: $fontsize-4;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				color: $color-white;
 			}
 		}
 		.progress {
@@ -61,6 +72,7 @@ section.controller {
 			border-radius: 9px;
 			background: rgba($color-white, .3);
 			overflow: hidden;
+			pointer-events: unset;
 			.btn-options {
 				font-size: $fontsize-2;
 				font-family: inherit;
@@ -72,31 +84,29 @@ section.controller {
 			}
 		}
 		.btns {
-			margin-top: 20px;
 			[class^="btn-"] {
-				// background: rgba($color-white, .5);
-				// padding: 10px 12px;
-				// border-radius: 3px;
-				&:active {
-					transform: scale(.9);
-				}
 				&:before {
 					font-family: "Font Awesome 5 Pro";
 					font-weight: 900;
 					font-size: $fontsize-1;
 				}
-				// &.btn-letsGo {
-				// 	&:before {
-				// 		content: "\f04b";
-				// 	}
-				// }
 				&.btn-letsStop {
 					opacity: 0;
+					top: 15px;
 					transition: .2s;
+					width: 100%;
+					padding: 25px 0;
+					pointer-events: none;
 					&:before {
 						font-size: $fontsize-3;
 						content: "\f04d";
 					}
+				}
+				&:active {
+					transform: scale(.9);
+				}
+				&:hover {
+					filter: opacity(.56);
 				}
 			}
 		}
@@ -107,6 +117,20 @@ section.controller {
 	flex-direction: column;
 	align-content: center;
 	justify-content: space-between;
+	&[data-rb="run"],
+	&[data-rb="break"] {
+		section.controller {
+			.lists {
+				opacity: .2;
+				pointer-events: none;
+				button {
+					&:not(.active) {
+						display: none;
+					}
+				}
+			}
+		}
+	}
 	&[data-rb="run"] {
 		.count,
 		.countdown {
@@ -137,9 +161,25 @@ section.controller {
 	}
 	&[data-status="pause"] {
 		section.controller {
-			.btn-letsStop {
+			.lists {
 				opacity: 1;
-				animation: fadeUpEffect .2s alternate;
+			}
+			.btns {
+				.btn-letsStop {
+					opacity: 1;
+					top: 0;
+					pointer-events: unset;
+					// animation: fadeUpEffect .2s alternate;
+				}
+			}
+		}
+	}
+	&:not([data-status]) {
+		.inner {
+			.count {
+				&:after {
+					display: flex;
+				}
 			}
 		}
 	}

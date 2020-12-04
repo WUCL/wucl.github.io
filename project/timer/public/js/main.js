@@ -1,20 +1,18 @@
-// (function() {
+(function() {
     "use strict";
     var $timer = new Vue({
         el: "#timer",
         data: {
-            modal: {
-                open: false,
-                type: '',
-            },
             // d: (new Date()), // datetime
+            title: '',
             interval: 1000,
             d: moment()._d,
             project: {
                 status: {
                     attr: [],
                     running: false,
-                    isPause: false
+                    isPause: false,
+                    first: true
                 },
                 count: 0,
                 countdown: moment(moment.duration()).format('mm:ss'),
@@ -33,17 +31,19 @@
                 selected: 1,
                 options: [
                     {
+                        name: 'TEST',
+                        description: 'JUST TEST',
                         sets: 2, // 次數
-                        rb: [10, 5], // run and break, time
+                        rb: [5, 4], // run and break, time
                     },
                     {
                         name: 'TABATA',
                         description: '4 Minutes',
-                        sets: 8, // 次數
+                        sets: 8, // 8 次數
                         rb: [20, 10], // run and break, time
                     },
                     {
-                        name: '20:20',
+                        name: '20s:30',
                         description: '10 Minutes',
                         sets: 15, // 次數
                         rb: [20, 20], // run and break, time
@@ -52,13 +52,13 @@
             }
         },
         beforeCreate() {
+            if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         },
         created() {
-            // window.addEventListener("resize", this.resizeListen);
-            // this.hiitstart();
         },
-        mounted: function() {
-            // this.project.progress = document.getElementById('progress');
+        mounted() {
+            document.body.classList.add(deviceObj.name);
+            this.title = document.title;
         },
         watch: {
         },
@@ -70,7 +70,7 @@
         },
         methods: {
             optionSelected(e) {
-                let $selected = this.part.selected;
+                let $selected = e.target.value;
                 return this.part.selected = $selected;
             },
             letsGo() {
@@ -122,10 +122,12 @@
                 return this.updateStatus('stop');
             },
             updateRB(rb) { // run and break
+                let $p = this.project;
                 let $rb = rb || '';
-                // if ($rb == '') return;
-                this.project.status.attr[1] = $rb;
-                let $judgment = this.project.progress[0] - this.project.progress[1];
+                let $title = $p.countdown + ' | ' + $p.count;
+                window.helper.updateTitle($title);
+                $p.status.attr[1] = $rb;
+                let $judgment = $p.progress[0] - $p.progress[1];
                 if ($judgment < 4) {
                     if ($judgment == 0) return playSounds('switch');
                     playSounds('countdown');
@@ -139,7 +141,10 @@
                 document.body.setAttribute('data-status', status);
                 switch (status) {
                     case 'running':
-                        playSounds('switch');
+                        if ($p.status.first) {
+                            playSounds('switch');
+                            $p.status.first = !$p.status.first;
+                        }
                         $p.status.isPause = false;
                         break;
                     case 'pause':
@@ -163,6 +168,7 @@
                 $p.count = 0;
                 $p.progress =  [0, 0];
                 $p.$tempo.counting = [0, 0];
+                window.helper.updateTitle(this.title);
                 return;
             }
         },
@@ -170,4 +176,4 @@
     var dTimer = setInterval(() => {
         $timer.d = moment()._d;
     }, $timer.interval);
-// })();
+})();

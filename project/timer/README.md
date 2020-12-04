@@ -1,50 +1,28 @@
-# Module-Gulp
-此為 Gulp 的 Module 開發環境
-
-#### 環境建置
-電腦環境需安裝有 nodejs
-
-- Step1. 於資料夾中執行 `npm install` 安裝套件
-- Step2. 當安裝完成後執行 `gulp`
-- Step3. 將自動開啟頁面，預設 `Port:1234`
-
-#### 資料夾結構為
-`/_ASSETS` ***主要放原始檔（包括設計原始檔、業務原始檔）***
-
-`/dist` ***執行 gulp 最後輸出位置，都於此資料夾***
-```
-/dist/public  主要放靜態檔，會同步於 src 建立而產生內容
-/dist/public/css
-/dist/public/js
-/dist/public/img
-/dist/pubilc/lib  主要放置第三方用檔
-/dist/public/index.html
-```
-`/src` ***gulp 主要讀取資料夾，結束後建立於資料夾 `/dist`***
-```
-/scr/scss 主要使用 scss 來完成 css
-/src/js
-/src/img
-/src/tpl  放置 html 模組化使用
-/src/index.html
-```
-`gulpfile.js`  ***gulp config***
-
-#### 指令使用
-`gulp`
-
-*執行 gulp，開啟網頁並即時監測編譯*
-
-
-`gulp view`
-
-*執行 gulp，純看網頁開啟網頁*
-
-
-`gulp build`
-
-*執行 gulp，純編譯全部 `\src`*
-
+# MyTimer
+###### 參考製作
+APP [HiiTTimer](https://apps.apple.com/tw/app/h-i-i-t-timer/id391275156)
+APP [Interval Timer X - 間隔計時器](https://apps.apple.com/tw/app/interval-timer-x-%E9%96%93%E9%9A%94%E8%A8%88%E6%99%82%E5%99%A8/id1448144846)
 
 ----
-##### by Allen
+Timer 計時器
+
+#### 使用方法
+1. 點擊螢幕可執行 Start / Pause
+2. 可選擇 TABATA 4分鐘 / 20s:30 10分鐘
+3. 可於暫停時 Stop
+
+#### 聲音
+1. 倒數三秒會出音效
+2. run / break 切換時會出音效
+3. 結束時會有音效
+
+#### 字體
+1. [Oswald](https://fonts.google.com/specimen/Oswald)
+
+#### 套件
+1. 音效[ion.sound](http://buzz.jaysalvat.com/)
+2. ~~音效[BUZZ!](http://buzz.jaysalvat.com/)~~
+
+----
+此為 Gulp 的 Module 開發環境([參考](https://github.com/WUCL/wucl.github.io/blob/master/README-env.md))
+###### by Allen
