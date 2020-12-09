@@ -22,7 +22,7 @@ ion.sound({
     path: 'public/sounds/',
     preload: true,
     multiplay: true,
-    volume: 0.9
+    volume: .6
 });
 function playSounds(sound) {
     ion.sound.play(sound);
