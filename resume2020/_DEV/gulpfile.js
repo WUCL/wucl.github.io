@@ -47,6 +47,7 @@ gulp.task('serve', function(cb) {
         // , https: true
         , port: 1234
         , open: 'external'
+        , browser: "google chrome"
     });
     cb && cb();
 });
