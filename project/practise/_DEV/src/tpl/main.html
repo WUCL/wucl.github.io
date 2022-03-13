@@ -1,5 +1,75 @@
 <main id="main" class="main">
-    <section class="kv" data-scroll-index="1">
-    	<div class="inner"></div>
+    <section id="makePic" class="makePic" data-scroll-index="1">
+        <div class="inner">
+            <!-- <div class="img-list">
+                <div><img class="compose" src="https://fakeimg.pl/300x300/" alt="" /></div>
+                <div><img class="compose" src="https://fakeimg.pl/500x500/" alt="" /></div>
+            </div>
+            <canvas id="stockGraph" width="150" height="150"></canvas> -->
+            <img id="img-a" class="compose" src="https://fakeimg.pl/200x200/" alt="" />
+
+            <img id="img-b" class="compose" src="https://fakeimg.pl/100x100/000000/ffffff/" alt="" />
+            <img id="img-c">
+
+            <canvas id="canvas" width="100" height="100"></canvas>
+            <a id="merge" href="javascript:;">合併</a>
+            <!-- <a id="dl" href="javascript:;" download="dl.png">下載</a> -->
+            <a id="dl" href="#" download="dl.png">下載</a>
+
+
+            <script>
+                var canvas = document.getElementById('canvas'),
+                    context = canvas.getContext('2d'),
+                    image = new Image(),
+                    image_b = new Image(),
+                    image_c = new Image(),
+                    base64 = '';
+                
+                image_c = document.getElementById('img-c');
+                image_c.setAttribute("crossOrigin", 'Anonymous');
+
+                // image_b.src = document.getElementById('img-b').src;
+
+                var btn_dl = document.getElementById('dl'),
+                    btn_merge = document.getElementById('merge');
+                // console.log(dl);
+                btn_merge.onclick = function() {
+                    image.src = document.getElementById('img-a').src;
+                    image_b.src = document.getElementById('img-b').src;
+                    image.setAttribute("crossOrigin", 'Anonymous');
+                    image_b.setAttribute("crossOrigin", 'Anonymous');
+                    image.onload = function() {
+                        console.log(image);
+                        console.log(this);
+                        var w = this.width, h = this.height;
+
+
+                        canvas.width = w;
+                        canvas.height = h;
+                        context.drawImage(this, 0, 0, w, h);
+                        context.drawImage(image_b, 0, 0, image_b.width, image_b.height);
+
+                        context.font="30px 微軟正黑體";
+                        context.fillText('你好我阿倫', 50, 50);
+
+                        console.log(canvas);
+                        base64 = canvas.toDataURL("image/png"); 
+                        console.log(base64);
+                        image_c.src = base64;
+                    }
+
+                    // btn_dl.href = canvas.toDataURL();
+                    // console.log('btn_dl: ' + btn_dl.href);
+
+                    // image.onload = function() {
+                    // }
+                }
+
+                btn_dl.onclick = function() {
+                    console.log(base64);
+                    btn_dl.href = base64;
+                }
+            </script>
+        </div>
     </section>
 </main>
