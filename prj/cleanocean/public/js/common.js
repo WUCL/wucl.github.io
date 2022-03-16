@@ -1,5 +1,5 @@
 $(function() {
-    var MAIN = {
+    var COMMON = {
         env: 'html',
         el: {
             $window: $(window),
@@ -22,6 +22,7 @@ $(function() {
             },
         },
         init: function() {
+            console.log('common');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
@@ -54,15 +55,15 @@ $(function() {
                 window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
             });
         },
-        doAos: function() {
-            return AOS.init({
-                duration: 300,
-                offset: 150,
-                delay: 0,
-                once: true,
-                easing: 'ease-in'
-            });
-        },
+        // doAos: function() {
+        //     return AOS.init({
+        //         duration: 300,
+        //         offset: 150,
+        //         delay: 0,
+        //         once: true,
+        //         easing: 'ease-in'
+        //     });
+        // },
         doScrollIt: function() {
             let $this = this;
             $.scrollIt({
@@ -76,5 +77,5 @@ $(function() {
             });
         },
     };
-    MAIN.init();
+    COMMON.init();
 });
