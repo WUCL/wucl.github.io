@@ -10,7 +10,8 @@ $(function() {
             $footer: $('#footer'),
             $nav: $('#nav'),
             $navSwitch: $('#switch'),
-
+            $twimg: $('#twimg'),
+            
             $shareLine: $('.share-line'),
             $shareFacebook: $('.share-facebook'),
         },
@@ -26,6 +27,7 @@ $(function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
+            this.loadTWSvg();
         },
         bindEvent: function() {
             let $this = this;
@@ -54,6 +56,9 @@ $(function() {
                 console.log('share-facebook');
                 window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
             });
+        },
+        loadTWSvg: function() {
+            return this.el.$twimg.load('./public/img/tw.svg');
         },
         // doAos: function() {
         //     return AOS.init({

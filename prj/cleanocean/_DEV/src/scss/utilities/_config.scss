@@ -47,7 +47,9 @@ $color-second: #ffcc00;
 $color-font: #484848;
 $color-font2: #646464;
 $color-colorful: [#fcca00, #ffb443, #ff8400, #f34031, #BF0000]; // nth($color-colorful, 1);
+$color-top-scale: [#B5564F, #E28D4A, #F5DA57, #CCDD60, #64ABFD, #5068FC, #2042A1, #7250FC, #878588];
 $color-afterline: #61BCEC;
+$color-btn: #E8D181;
 
 // breakpoint
 $bp: 1440px; // 1280px
@@ -68,3 +70,6 @@ $bp-xxl: 1366px;
 
 $bp-contain-w: $bp-4l; // 主要內容呈現在多少寬度下
 $bp-w: $bp-2m; // 多少寬度，縮menu
+
+$color-tw-hover: #88C8EF;
+$color-tw-active: #7CCBE9;
