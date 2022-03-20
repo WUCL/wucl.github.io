@@ -1,5 +1,5 @@
 $(function() {
-    var INDEX = {
+    var DATA = {
         el: {
             $window: $(window),
             $doc: $(document),
@@ -11,12 +11,12 @@ $(function() {
         var: {
         },
         init: function() {
-            console.log('index');
+            console.log('data');
             this.bindEvent();
         },
         bindEvent: function() {
             let $this = this;
         },
     };
-    INDEX.init();
+    DATA.init();
 });

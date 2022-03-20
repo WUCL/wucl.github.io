@@ -103,6 +103,7 @@ layout/_header
 					align-items: center;
 					margin: 0 1px;
 					user-select: none;
+					flex-shrink: 0;
 					@include mq($max-width: $bp-w) {
 						width: 100%;
 						font-weight: 500;
@@ -140,14 +141,15 @@ layout/_header
 						}
 					}
 
-					> a {
+					a {
 						position: relative;
-						height: 60px;
+						height: $haeder_h;
 						width: 100%;
 						display: inline-flex;
 						align-items: center;
 						color: rgba($color-black, .9);
 						padding: 0 10px;
+						flex-shrink: 0;
 						@include mq($max-width: $bp-w) {
 							width: 35%;
 							margin: 0 auto;
@@ -171,6 +173,7 @@ layout/_header
 							// letter-spacing: 1.5px;
 							// padding-left: 3px;
 							cursor: pointer;
+							flex-shrink: 0;
 							@include mq($max-width: $bp-w) {
 								text-align: left;
 							}
@@ -197,6 +200,27 @@ layout/_header
 								height: 30px;
 								margin-right: 10px;
 							}
+						}
+					}
+					&.subnav {
+						.subnav-content {
+							display: none;
+							position: absolute;
+							top: $haeder_h;
+							left: 0;
+							width: 100%;
+							z-index: 1;
+							a {
+								// color: inherit;
+								&:hover {
+									color: $color-main;
+									text-decoration: underline;
+								}
+							}
+						}
+						&:hover {
+							.subnav-content {
+								display: block;							}
 						}
 					}
 

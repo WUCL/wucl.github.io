@@ -1,0 +1,37 @@
+/* =======================
+   pages/postcard-builder
+   ======================= */
+.main {
+   section.postcard-builder {
+      background: $color-white;
+      margin-bottom: 50px;
+      .postcard-form {
+         display: grid;
+         grid-template-columns: 40% 60%;
+         color: $color-font;
+         padding: 50px 35px 10px 35px;
+         .postcard-img {
+            display: flex;
+            flex-direction: column;
+            .pc-img-box {
+               background: #efefef;
+               display: flex;
+               flex-direction: column;
+            }
+            .pc-img-tip {
+            }
+            .pc-img-preview {
+               width: 375px;
+               height: 280px;
+               overflow: hidden;
+            }
+         }
+         .postcard-text {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+         }
+      }
+   }
+}

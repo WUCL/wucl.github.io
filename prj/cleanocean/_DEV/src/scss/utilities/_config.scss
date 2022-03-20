@@ -3,10 +3,7 @@
 // Global Config
 // ==========================================================================
 
-$pixnavbar_height: 45px;
-$pixnavbar_height_m: 40px;
-
-$haeder_h: 65px;
+$haeder_h: 50px;
 $haeder_h-m: 50px;
 $haeder_h-s: 60px;
 
@@ -49,7 +46,8 @@ $color-font2: #646464;
 $color-colorful: [#fcca00, #ffb443, #ff8400, #f34031, #BF0000]; // nth($color-colorful, 1);
 $color-top-scale: [#B5564F, #E28D4A, #F5DA57, #CCDD60, #64ABFD, #5068FC, #2042A1, #7250FC, #878588];
 $color-afterline: #61BCEC;
-$color-btn: #E8D181;
+$color-btn: [#E8D181, #C85C5C, #FFF, #F3F04D, #ED6631];
+$color-datas: [#F8F1E9, #EBDFD3, #FFF78A];
 
 // breakpoint
 $bp: 1440px; // 1280px

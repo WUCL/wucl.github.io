@@ -1,5 +1,5 @@
 /* =======================
-   pages/kv
+   pages/index
    ======================= */
 .header {
 	&__inner {
@@ -93,13 +93,8 @@
 			}
 		}
 	}
-	section.annual_datas {
+	section.postcards {
 		.inner {
-		}
-	}
-	section.annual_datas {
-		.inner {
-			// height: 500px;
 		}
 	}
 }

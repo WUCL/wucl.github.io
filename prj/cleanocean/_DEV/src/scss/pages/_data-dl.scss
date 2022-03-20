@@ -1,0 +1,24 @@
+/* =======================
+   pages/data-dl
+   ======================= */
+.main {
+	section.datas {
+		.inner {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			// flex-wrap: wrap;
+			.datas_box {
+				.datas-list.filter-result-list  {
+					.datas-item.filter-result-item {
+						input {
+							margin: 0 7px;
+						}
+						label {
+						}
+					}
+				}
+			}
+		}
+	}
+}

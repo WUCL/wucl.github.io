@@ -1,5 +1,5 @@
 $(function() {
-    var INDEX = {
+    var MEMBER = {
         el: {
             $window: $(window),
             $doc: $(document),
@@ -11,12 +11,12 @@ $(function() {
         var: {
         },
         init: function() {
-            console.log('index');
+            console.log('postcard-builder');
             this.bindEvent();
         },
         bindEvent: function() {
             let $this = this;
         },
     };
-    INDEX.init();
+    MEMBER.init();
 });

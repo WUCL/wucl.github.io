@@ -20,7 +20,7 @@
 				align-items: center;
 				justify-content: space-between;
 				.lists{
-					min-width: 50%;
+					width: 100%;
 					ol {
 						padding: revert;
 						list-style-type: decimal;
@@ -32,7 +32,7 @@
 					}
 				}
 				.qrcode {
-
+					flex-shrink: 0;
 				}
 			}
 			.btns {

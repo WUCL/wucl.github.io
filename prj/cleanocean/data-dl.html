@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>活動相簿</title>
+        <title>This is TITLE</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -24,7 +24,7 @@
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
 		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
-        <link rel="stylesheet" type="text/css" href="./public/css/album.min.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/data-dl.min.css" />
 	</head>
 	<body>
         <header id="header" class="header">
@@ -57,15 +57,15 @@
 		<main id="main" class="main">
 		    <section class="pagename">
 		        <div class="inner">
-		            <img src="public/img/icon-album@2x.png">
-		            <span>活動相簿</span>
-		            <a href="/postcard-builder.html" class="postcard-builder btn-style-3">製作明信片</a>
+		            <img src="public/img/icon-data@2x.png">
+		            <span>數據資料庫/數據下載</span>
 		        </div>
 		    </section>
-		    <section class="albums">
+		    <section class="datas">
+		        <div class="title with_afterline"><span>數據下載</span></div>
 		        <div class="inner">
-		            <div class="albums_box">
-		                <div class="albums-filter">
+		            <div class="datas_box">
+		                <div class="datas-filter">
 		                    <form class="filters-a" name="">
 		                        <div class="filter-time">
 		                            <label for="filter-time-begin">時間</label>
@@ -83,40 +83,83 @@
 		                        </div>
 		                        <button class="btn-style-2" type="submit">搜尋</button>
 		                    </form>
+		                    <form class="filters-b" name="">
+		                        <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
+		                        <button class="btn-style-2" type="submit">下載</button>
+		                    </form>
 		                </div>
-		                <ul class="filter-result-list albums-list">
-		                    <li class="filter-result-item albums-item">
-		                        <div class="f-r-i-name">
+		                <ul class="filter-result-list datas-list">
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-1" id="select-1" value="1">
+		                        <label class="f-r-i-name" for="select-1">
 		                            <span>彰化</span>
 		                            <span>2020/04/24</span>
 		                            <span>王功淨灘</span>
-		                        </div>
-		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="https://fakeimg.pl/400x400/" /></div>
-		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
-		                        </div>
+		                        </label>
 		                    </li>
-		                    <li class="filter-result-item albums-item">
-		                        <div class="f-r-i-name">
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-2" id="select-2" value="2">
+		                        <label class="f-r-i-name" for="select-2">
 		                            <span>彰化</span>
 		                            <span>2020/04/24</span>
 		                            <span>王功淨灘</span>
-		                        </div>
-		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="https://fakeimg.pl/400x400/" /></div>
-		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
-		                        </div>
+		                        </label>
 		                    </li>
-		                    <li class="filter-result-item albums-item">
-		                        <div class="f-r-i-name">
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-3" id="select-3" value="3">
+		                        <label class="f-r-i-name" for="select-3">
 		                            <span>彰化</span>
 		                            <span>2020/04/24</span>
 		                            <span>王功淨灘</span>
-		                        </div>
-		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="https://fakeimg.pl/400x400/" /></div>
-		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
-		                        </div>
+		                        </label>
+		                    </li>
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-4" id="select-4" value="4">
+		                        <label class="f-r-i-name" for="select-4">
+		                            <span>彰化</span>
+		                            <span>2020/04/24</span>
+		                            <span>王功淨灘</span>
+		                        </label>
+		                    </li>
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-5" id="select-5" value="5">
+		                        <label class="f-r-i-name" for="select-5">
+		                            <span>彰化</span>
+		                            <span>2020/04/24</span>
+		                            <span>王功淨灘</span>
+		                        </label>
+		                    </li>
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-6" id="select-6" value="6">
+		                        <label class="f-r-i-name" for="select-6">
+		                            <span>彰化</span>
+		                            <span>2020/04/24</span>
+		                            <span>王功淨灘</span>
+		                        </label>
+		                    </li>
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-7" id="select-7" value="7">
+		                        <label class="f-r-i-name" for="select-7">
+		                            <span>彰化</span>
+		                            <span>2020/04/24</span>
+		                            <span>王功淨灘</span>
+		                        </label>
+		                    </li>
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-8" id="select-8" value="8">
+		                        <label class="f-r-i-name" for="select-8">
+		                            <span>彰化</span>
+		                            <span>2020/04/24</span>
+		                            <span>王功淨灘</span>
+		                        </label>
+		                    </li>
+		                    <li class="filter-result-item datas-item">
+		                        <input type="checkbox" name="select-9" id="select-9" value="9">
+		                        <label class="f-r-i-name" for="select-9">
+		                            <span>彰化</span>
+		                            <span>2020/04/24</span>
+		                            <span>王功淨灘</span>
+		                        </label>
 		                    </li>
 		                </ul>
 		            </div>
@@ -172,6 +215,6 @@
 		<!-- <script src="./public/lib/swiper/swiper.min.js"></script> -->
 
         <script src="./public/js/common.js"></script>
-        <script src="./public/js/album.js"></script>
+        <script src="./public/js/data-dl.js"></script>
 	</body>
 </html>

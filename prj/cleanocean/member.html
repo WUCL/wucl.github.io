@@ -24,7 +24,8 @@
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
 		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
-        <link rel="stylesheet" type="text/css" href="./public/css/style-member.min.css" />
+        <link rel="stylesheet" type="text/css" href="./public/lib/jquery.flipster/jquery.flipster.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/member.min.css" />
 	</head>
 	<body>
         <header id="header" class="header">
@@ -35,7 +36,12 @@
         		<nav class="nav">
         			<ul>
         				<li class="nav-method nav-effect active"><a href="info.html" method><label>海洋資訊</label></a></li>
-        				<li class="nav-data nav-effect"><a href="data.html"><label>數據資料庫</label></a></li>
+        				<li class="nav-data nav-effect subnav">
+        					<a href="data.html"><label>數據資料庫</label></a>
+        					<div class="subnav-content">
+        						<a href="data-dl.html"><label>數據下載</label></a>
+        					</div>
+        				</li>
         				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
         				<li class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
@@ -56,23 +62,78 @@
 		            <span>會員專區</span>
 		        </div>
 		    </section>
-		    <section class="myinfo">
+		    <section class="my-info">
 		        <div class="inner">
-		            <div class="member-name">
-		                <div class="avatar"><img src="">會員頭貼</div>
-		                <div class="name"><input type="text" name="會員名稱"></div>
+		            <div class="m-view">
+		                <div class="m-avatar"><img src="https://fakeimg.pl/100x100/?text=會員頭貼&font=noto"></div>
+		                <div class="m-name"><input type="text" name="m-name" value="會員名稱"></div>
+		                <button id="btn-m-edit"class="btn-m-edit btn-style-2">編輯會員</button>
 		            </div>
-		            <div class="campaigns">活動banner slider</div>
+		            <div class="campaign-view">
+		                <ul class="datas-total-ul">
+		                    <li>
+		                        <div class="total-key" data-text="年度活動"></div>
+		                    </li>
+		                </ul>
+		                <div class="campaigns box-style">
+		                    <div class="campaign"><img src="https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto"></div>
+		                </div>
+		            </div>
 		        </div>
 		    </section>
-		    <section class="mydatas">
+		    <section class="annual_datas">
 		        <div class="title with_afterline"><span>年度數據資料</span></div>
 		        <div class="inner">
+		            <div class="datas-total">
+		                <ul class="datas-total-ul">
+		                    <li>
+		                        <div class="total-key" data-text="淨灘場次"></div>
+		                        <div class="total-value" data-unit="場">15</div>
+		                    </li>
+		                    <li>
+		                        <div class="total-key" data-text="淨灘人數"></div>
+		                        <div class="total-value" data-unit="人">399</div>
+		                    </li>
+		                    <li>
+		                        <div class="total-key" data-text="淨灘長度"></div>
+		                        <div class="total-value" data-unit="公尺">500</div>
+		                    </li>
+		                    <li>
+		                        <div class="total-key" data-text="淨灘重量"></div>
+		                        <div class="total-value" data-unit="公斤">419</div>
+		                    </li>
+		                </ul>
+		            </div>
 		        </div>
 		    </section>
-		    <section class="myrecord">
-		        <div class="title with_afterline"><span>我的淨灘足跡</span></div>
+		    <section class="my-record">
+		        <div class="title with_afterline">
+		            <span>我的淨灘足跡</span>
+		            <button id="btn-myrecord-edit"class="btn-myrecord-edit btn-style-2">編輯</button>
+		        </div>
 		        <div class="inner">
+		            <div class="mycampaign box-style">
+		                <ul class="campaigns">
+		                    <li class="campagin" daat-id="1"><button class="btn-del-campaign btn-style-2" value="1"></button><span>彰化 2020/02/24 王功淨灘</span></li>
+		                    <li class="campagin" daat-id="2"><button class="btn-del-campaign btn-style-2" value="2"></button><span>彰化 2020/02/24 王功淨灘</span></li>
+		                    <li class="campagin" daat-id="3"><button class="btn-del-campaign btn-style-2" value="3"></button><span>彰化 2020/02/24 王功淨灘</span></li>
+		                </ul>
+		                <button class="btn-add-campaign btn-style-2"></button>
+		            </div>
+		            <button id="btn-creat-myrecord" class="btn-creat-myrecord btn-style-2">成果圖產生器</button>
+		        </div>
+		    </section>
+		    <section class="postcards">
+		        <div class="title with_afterline"><span>我的明信片</span></div>
+		        <div class="inner">
+		            <div class="my-flipster">
+		                <ul>
+		                    <li><img src="https://fakeimg.pl/400x400/" /></li>
+		                    <li><img src="https://fakeimg.pl/400x400/" /></li>
+		                    <li><img src="https://fakeimg.pl/400x400/" /></li>
+		                </ul>
+		            </div>
+		            <a href="/postcard-builder.html" class="postcard-builder btn-style">製作明信片</a>
 		        </div>
 		    </section>
 		</main>
@@ -105,8 +166,7 @@
 				</div>
 			</section>
 		</footer>
-        <aside id="aside" class="aside">
-        </aside>
+        
 
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/js/custom/eventdevice.js"></script>
@@ -125,6 +185,7 @@
 		<!-- <script src="./public/lib/slick/slick.min.js"></script> -->
 		<!-- <script src="./public/lib/swiper/swiper.min.js"></script> -->
 
+        <script src="./public/lib/jquery.flipster/jquery.flipster.min.js"></script>
         <script src="./public/js/common.js"></script>
         <script src="./public/js/member.js"></script>
 	</body>

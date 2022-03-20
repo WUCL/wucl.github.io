@@ -25,7 +25,7 @@
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
 		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
         <link rel="stylesheet" type="text/css" href="./public/lib/jquery.flipster/jquery.flipster.css" />
-        <link rel="stylesheet" type="text/css" href="./public/css/style-index.min.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/index.min.css" />
 	</head>
 	<body>
         <header id="header" class="header">
@@ -36,7 +36,12 @@
         		<nav class="nav">
         			<ul>
         				<li class="nav-method nav-effect active"><a href="info.html" method><label>海洋資訊</label></a></li>
-        				<li class="nav-data nav-effect"><a href="data.html"><label>數據資料庫</label></a></li>
+        				<li class="nav-data nav-effect subnav">
+        					<a href="data.html"><label>數據資料庫</label></a>
+        					<div class="subnav-content">
+        						<a href="data-dl.html"><label>數據下載</label></a>
+        					</div>
+        				</li>
         				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
         				<li class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
@@ -132,12 +137,12 @@
 		                            <div>塑膠瓶蓋</div>
 		                        </div>
 		                    </div>
-		                    <div class="locals-data-btn"><a class="btn-style" href="google.com" target="_href">登陸數據</a></div>
+		                    <div class="locals-data-btn"><a class="btn-style" href="/" target="_blank">登陸數據</a></div>
 		                </div>
 		            </div>
 		        </div>
 		    </section>
-		    <section class="annual_datas">
+		    <section class="postcards">
 		        <div class="title with_afterline"><span>旅行明信片</span></div>
 		        <div class="inner">
 		            <div class="my-flipster">
@@ -147,6 +152,7 @@
 		                    <li><img src="https://fakeimg.pl/400x400/" /></li>
 		                </ul>
 		            </div>
+		            <a href="/postcard-builder.html" class="postcard-builder btn-style">製作明信片</a>
 		        </div>
 		    </section>
 		</main>
@@ -179,8 +185,7 @@
 				</div>
 			</section>
 		</footer>
-        <aside id="aside" class="aside">
-        </aside>
+        
 
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/js/custom/eventdevice.js"></script>
