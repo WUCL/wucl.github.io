@@ -5,32 +5,165 @@
    section.postcard-builder {
       background: $color-white;
       margin-bottom: 50px;
-      .postcard-form {
-         display: grid;
-         grid-template-columns: 40% 60%;
-         color: $color-font;
-         padding: 50px 35px 10px 35px;
-         .postcard-img {
+      padding: 100px 100px 30px;
+      [class*="step-"] {
+         display: none;
+      }
+      .step-1 {
+         .postcard-form {
             display: flex;
-            flex-direction: column;
-            .pc-img-box {
-               background: #efefef;
+            align-items: flex-start;
+            justify-content: center;
+            color: $color-font;
+            .postcard-img {
+               width: 40%;
                display: flex;
                flex-direction: column;
+               .pc-img-box {
+                  background: #efefef;
+                  display: flex;
+                  flex-direction: column;
+                  padding: 30px;
+                  margin-right: 30px;
+                  border-radius: 5px;
+                  button {
+                     margin: 10px 0;
+                  }
+               }
+               .pc-img-tip {
+                  margin-top: 15px;
+                  font-size: $fontsize-a;
+               }
+               .pc-img-preview {
+                  width: 375px;
+                  height: 280px;
+                  overflow: hidden;
+                  display: none;
+               }
             }
-            .pc-img-tip {
-            }
-            .pc-img-preview {
-               width: 375px;
-               height: 280px;
-               overflow: hidden;
+            .postcard-text {
+               width: 60%;
+               display: flex;
+               align-content: center;
+               justify-content: center;
+               flex-direction: column;
+               li {
+                  font-size: $fontsize-1;
+                  margin-bottom: 20px;
+                  label,
+                  input,
+                  textarea {
+                     display: block;
+                     width: 100%;
+                     font-size: $fontsize-1;
+                  }
+                  label {
+                     margin-bottom: 10px;
+                  }
+                  input {
+                     height: $fontsize-1 * 2;
+                  }
+                  textarea {
+                     height: $fontsize-1 * 8;
+                  }
+               }
             }
          }
-         .postcard-text {
+         .file-preview {
+            display: block;
+            margin: 30px auto 0;
+         }
+      }
+      .step-2 {
+         [class*="preview-"] {
+            width: calc(1129px / 1.5);
+            margin: 0 auto;
+         }
+         .preview-img {
+            img {
+
+            }
+         }
+         .preview-btns {
             display: flex;
-            align-content: center;
+            align-items: center;
             justify-content: center;
-            flex-direction: column;
+            width: 100%;
+            margin-top: 50px;
+            button {
+               &:last-child {
+                  margin-left: 20px;
+               }
+               &.file-edit {
+                  opacity: .7;
+               }
+            }
+         }
+      }
+      .step-3 {
+         [class*="public-"] {
+            width: calc(1129px / 1.5);
+            margin: 0 auto;
+         }
+         .public-img {
+            img {
+
+            }
+         }
+         .public-shares {
+            .shares-text {
+               margin: 20px 0 10px;
+               font-size: $fontsize-2;
+            }
+            .btn-shares {
+               display: flex;
+               align-items: center;
+               justify-content: flex-start;
+               .btn-icon {
+                  width: calc(65px / 2);
+                  height: calc(65px / 2);
+                  display: block;
+                  &:last-child {
+                     margin-left: 10px;
+                  }
+                  &:before,
+                  &:after {
+                     content: "";
+                     position: absolute;
+                  }
+                  &.btn-share-facebook {
+                     &:before {
+                        width: 100%;
+                        height: 100%;
+                        background: url(../img/icon-facebook.png) left center no-repeat;
+                        background-size: cover;
+                     }
+                  }
+                  &.btn-share-line {
+                     &:before {
+                        width: 100%;
+                        height: 100%;
+                        background: url(../img/icon-line.png) left center no-repeat;
+                        background-size: cover;
+                     }
+                  }
+               }
+            }
+         }
+      }
+      &[data-step="1"] {
+         .step-1 {
+            display: block;
+         }
+      }
+      &[data-step="2"] {
+         .step-2 {
+            display: block;
+         }
+      }
+      &[data-step="3"] {
+         .step-3 {
+            display: block;
          }
       }
    }
