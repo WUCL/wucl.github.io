@@ -10,99 +10,103 @@
         <div class="inner">
             <div class="datas_box">
                 <div class="datas-filter">
-                    <form class="filters-a" name="">
+                    <form class="filters-a" name="filters-a" onsubmit="return false;">
                         <div class="filter-time">
                             <label for="filter-time-begin">時間</label>
-                            <select name="filter-time-begin" id="filter-time-begin"></select>
+                            <input type="date" id="filter-time-begin" name="filter-time-begin">
                             <label for="filter-time-end">至</label>
-                            <select name="filter-time-end" id="filter-time-end"></select>
+                            <input type="date" id="filter-time-end" name="filter-time-end">
                         </div>
-                        <div class="filter-area">
-                            <label for="filter-area">縣市</label>
-                            <select name="filter-area" id="filter-area"></select>
+                        <div class="filter-county">
+                            <label for="filter-county">縣市</label>
+                            <div id="twzipcode" class="twzipcode">
+                                <div data-role="county" data-id="filter-county"></div>
+                                <div data-role="district" data-style="display:none !important;"></div>
+                                <div data-role="zipcode" data-style="display:none !important;"></div>
+                            </div>
                         </div>
                         <div class="filter-campaign">
                             <label for="filter-campaign">淨灘地點</label>
-                            <input type="text" name="filter-campaign" id="filter-campaign">
+                            <input type="text" name="filter-campaign" id="filter-campaign" maxlength="10">
                         </div>
-                        <button class="btn-style-2" type="submit">搜尋</button>
+                        <button id="filter-search" class="btn-style-2" type="submit">搜尋</button>
                     </form>
-                    <form class="filters-b" name="">
+                    <form class="filters-b" name="filters-b" onsubmit="return false;">
                         <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
-                        <button class="btn-style-2" type="submit">下載</button>
+                        <button id="filter-download" class="btn-style-2" type="submit">下載</button>
                     </form>
                 </div>
-                <ul class="filter-result-list datas-list">
+                <ul id="filter-result-list" class="filter-result-list datas-list">
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-1" id="select-1" value="1">
+                        <input type="checkbox" name="resultItem[]" id="select-1" value="1">
                         <label class="f-r-i-name" for="select-1">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-2" id="select-2" value="2">
+                        <input type="checkbox"  name="resultItem[]" id="select-2" value="2">
                         <label class="f-r-i-name" for="select-2">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-3" id="select-3" value="3">
+                        <input type="checkbox"  name="resultItem[]" id="select-3" value="3">
                         <label class="f-r-i-name" for="select-3">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-4" id="select-4" value="4">
+                        <input type="checkbox"  name="resultItem[]" id="select-4" value="4">
                         <label class="f-r-i-name" for="select-4">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-5" id="select-5" value="5">
+                        <input type="checkbox"  name="resultItem[]" id="select-5" value="5">
                         <label class="f-r-i-name" for="select-5">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-6" id="select-6" value="6">
+                        <input type="checkbox"  name="resultItem[]" id="select-6" value="6">
                         <label class="f-r-i-name" for="select-6">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-7" id="select-7" value="7">
+                        <input type="checkbox"  name="resultItem[]" id="select-7" value="7">
                         <label class="f-r-i-name" for="select-7">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-8" id="select-8" value="8">
+                        <input type="checkbox"  name="resultItem[]" id="select-8" value="8">
                         <label class="f-r-i-name" for="select-8">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                     <li class="filter-result-item datas-item">
-                        <input type="checkbox" name="select-9" id="select-9" value="9">
+                        <input type="checkbox"  name="resultItem[]" id="select-9" value="9">
                         <label class="f-r-i-name" for="select-9">
-                            <span>彰化</span>
-                            <span>2020/04/24</span>
-                            <span>王功淨灘</span>
+                            <span class="name-county">彰化</span>
+                            <span class="name-date">2020/04/24</span>
+                            <span class="name-campaign">王功淨灘</span>
                         </label>
                     </li>
                 </ul>

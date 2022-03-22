@@ -13,7 +13,7 @@
         <meta property="og:title" content="" />
         <meta property="og:description" content="" />
         <meta property="og:image" content="" />
-
+        
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./favicon.ico" />
@@ -66,55 +66,59 @@
 		        <div class="inner">
 		            <div class="albums_box">
 		                <div class="albums-filter">
-		                    <form class="filters-a" name="">
+		                    <form class="filters-a" name="filters-a" onsubmit="return false;">
 		                        <div class="filter-time">
 		                            <label for="filter-time-begin">時間</label>
-		                            <select name="filter-time-begin" id="filter-time-begin"></select>
+		                            <input type="date" id="filter-time-begin" name="filter-time-begin">
 		                            <label for="filter-time-end">至</label>
-		                            <select name="filter-time-end" id="filter-time-end"></select>
+		                            <input type="date" id="filter-time-end" name="filter-time-end">
 		                        </div>
-		                        <div class="filter-area">
-		                            <label for="filter-area">縣市</label>
-		                            <select name="filter-area" id="filter-area"></select>
+		                        <div class="filter-county">
+		                            <label for="filter-county">縣市</label>
+		                            <div id="twzipcode" class="twzipcode">
+		                                <div data-role="county" data-id="filter-county"></div>
+		                                <div data-role="district" data-style="display:none !important;"></div>
+		                                <div data-role="zipcode" data-style="display:none !important;"></div>
+		                            </div>
 		                        </div>
 		                        <div class="filter-campaign">
 		                            <label for="filter-campaign">淨灘地點</label>
-		                            <input type="text" name="filter-campaign" id="filter-campaign">
+		                            <input type="text" name="filter-campaign" id="filter-campaign" maxlength="10">
 		                        </div>
-		                        <button class="btn-style-2" type="submit">搜尋</button>
+		                        <button id="filter-search" class="btn-style-2" type="submit">搜尋</button>
 		                    </form>
 		                </div>
-		                <ul class="filter-result-list albums-list">
+		                <ul id="filter-result-list" class="filter-result-list albums-list">
 		                    <li class="filter-result-item albums-item">
 		                        <div class="f-r-i-name">
-		                            <span>彰化</span>
-		                            <span>2020/04/24</span>
-		                            <span>王功淨灘</span>
+		                            <span class="name-county">彰化</span>
+		                            <span class="name-date">2020/04/24</span>
+		                            <span class="name-campaign">王功淨灘</span>
 		                        </div>
 		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="https://fakeimg.pl/400x400/" /></div>
+		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
 		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
 		                        </div>
 		                    </li>
 		                    <li class="filter-result-item albums-item">
 		                        <div class="f-r-i-name">
-		                            <span>彰化</span>
-		                            <span>2020/04/24</span>
-		                            <span>王功淨灘</span>
+		                            <span class="name-county">彰化</span>
+		                            <span class="name-date">2020/04/24</span>
+		                            <span class="name-campaign">王功淨灘</span>
 		                        </div>
 		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="https://fakeimg.pl/400x400/" /></div>
+		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
 		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
 		                        </div>
 		                    </li>
 		                    <li class="filter-result-item albums-item">
 		                        <div class="f-r-i-name">
-		                            <span>彰化</span>
-		                            <span>2020/04/24</span>
-		                            <span>王功淨灘</span>
+		                            <span class="name-county">彰化</span>
+		                            <span class="name-date">2020/04/24</span>
+		                            <span class="name-campaign">王功淨灘</span>
 		                        </div>
 		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="https://fakeimg.pl/400x400/" /></div>
+		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
 		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
 		                        </div>
 		                    </li>
@@ -171,6 +175,7 @@
 		<!-- <script src="./public/lib/slick/slick.min.js"></script> -->
 		<!-- <script src="./public/lib/swiper/swiper.min.js"></script> -->
 
+        <script src="./public/lib/twzipcode/jquery.twzipcode.min.js"></script>
         <script src="./public/js/common.js"></script>
         <script src="./public/js/album.js"></script>
 	</body>

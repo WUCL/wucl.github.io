@@ -191,9 +191,41 @@ body {
 						display: flex;
 						align-items: center;
 						margin-bottom: 15px;
+						label {
+							margin-right: 5px;
+						}
 					}
 					.filters-a {
 						justify-content: space-between;
+						input,
+						select {
+							max-width: 150px;
+							height: 30px;
+							font-size: $fontsize;
+							padding: 1px 3px;
+						}
+						.filter-time {
+							input {
+								max-width: 180px;
+							}
+						}
+						.filter-county {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							.twzipcode {
+								flex-shrink: 0;
+								width: 150px;
+								> div {
+									width: 100%;
+									select {
+										width: 100%;
+									}
+								}
+							}
+						}
+						.filter-campaign {
+						}
 					}
 					.filters-b {
 						justify-content: flex-start;
@@ -445,5 +477,10 @@ body {
 		// 		max-width: 100% !important;
 		// 	}
 		// }
+	}
+	.my-flipster {
+		li {
+			max-width: calc(1129px / 2);
+		}
 	}
 }
