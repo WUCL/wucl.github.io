@@ -378,6 +378,9 @@ body {
 							padding: 20px 50px;
 							font-size: $fontsize-5;
 							margin-bottom: 10px;
+							&:after {
+								content: attr(data-unit);
+							}
 						}
 						&-box {
 							background: $color-white;

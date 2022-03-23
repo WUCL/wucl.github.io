@@ -10,22 +10,23 @@ $(function() {
             $footer: $('#footer'),
             $nav: $('#nav'),
             $navSwitch: $('#switch'),
+            $twimg: $('#twimg'),
             $shareLine: $('.share-line'),
             $shareFacebook: $('.share-facebook'),
         },
         var: {
-            // $share: {
-            //     facebookLink: location.origin,
-            //     lineText: '我是LINE分享\n哈哈哈哈🥺',
-            //     lineLink: location.origin,
-            // },
+            $share: {
+                facebookLink: location.origin,
+                lineText: '我是LINE分享\n哈哈哈哈🥺',
+                lineLink: location.origin,
+            },
         },
         init: function() {
             console.log('common');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
-            // this.loadTWSvg();
+            this.loadTWSvg();
 
             this.builSlider();
 
@@ -58,9 +59,9 @@ $(function() {
                 window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
             });
         },
-        // loadTWSvg: function() {
-        //     return this.el.$twimg.load('./public/img/tw.svg');
-        // },
+        loadTWSvg: function() {
+            return this.el.$twimg.load('./public/img/tw.svg');
+        },
 
         builSlider: function() {
             let $myflipster = $('.my-flipster');

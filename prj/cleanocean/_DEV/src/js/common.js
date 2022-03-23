@@ -10,23 +10,22 @@ $(function() {
             $footer: $('#footer'),
             $nav: $('#nav'),
             $navSwitch: $('#switch'),
-            $twimg: $('#twimg'),
             $shareLine: $('.share-line'),
             $shareFacebook: $('.share-facebook'),
         },
         var: {
-            $share: {
-                facebookLink: location.origin,
-                lineText: '我是LINE分享\n哈哈哈哈🥺',
-                lineLink: location.origin,
-            },
+            // $share: {
+            //     facebookLink: location.origin,
+            //     lineText: '我是LINE分享\n哈哈哈哈🥺',
+            //     lineLink: location.origin,
+            // },
         },
         init: function() {
             console.log('common');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
-            this.loadTWSvg();
+            // this.loadTWSvg();
 
             this.builSlider();
 
@@ -59,9 +58,9 @@ $(function() {
                 window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
             });
         },
-        loadTWSvg: function() {
-            return this.el.$twimg.load('./public/img/tw.svg');
-        },
+        // loadTWSvg: function() {
+        //     return this.el.$twimg.load('./public/img/tw.svg');
+        // },
 
         builSlider: function() {
             let $myflipster = $('.my-flipster');
@@ -172,6 +171,41 @@ $(function() {
     COMMON.init();
 });
 
+window.mappingTW = {
+    'ttt': '台東',
+    'khh': '高雄',
+    'pif': '屏東',
+    'cyi': '嘉義',
+    'yun': '雲林',
+    'chw': '彰化',
+    'txg': '台中',
+    'ntc': '南投',
+    'tyn': '桃園',
+    'zmi': '苗栗',
+    'hsz': '新竹',
+    'tpe': '台北',
+    'tnn': '台南',
+    'ila': '宜蘭',
+    'hun': '花蓮'
+};
+window.annualDatas = {
+        '台南': {
+            freq: 10,
+            top: ['塑膠瓶蓋1', '寶特瓶2', '煙蒂3'],
+        },
+        '高雄': {
+            freq: 11,
+            top: ['寶特瓶1', '塑膠瓶蓋2', '煙蒂3'],
+        },
+        '台北': {
+            freq: 12,
+            top: ['煙蒂1', '寶特瓶2', '塑膠瓶蓋3'],
+        },
+        '新竹': {
+            freq: 13,
+            top: ['塑膠瓶蓋1', '煙蒂2', '寶特瓶3'],
+        },
+};
 
 window.album = [
     {
