@@ -7,17 +7,17 @@
 			.m-view {
 				display: flex;
 				align-items: flex-end;
-				.m-avatar {
-					width: 100px;
+				.m-avatar-box {
 					max-height: 100px;
 					border-radius: 50%;
 					overflow: hidden;
 					flex-shrink: 0;
 					img {
-
+						width: 100px;
+						height: 100px;
 					}
 				}
-				.m-name {
+				.m-name-box {
 					width: 100%;
 					margin: 0 15px;
 					input {
@@ -91,6 +91,40 @@
 				display: block;
 				margin: 20px auto;
 				font-size: $fontsize-2;
+			}
+		}
+	}
+}
+.popup_content {
+	.form_edit-member {
+		#preview_avatar {
+			margin-top: 10px;
+			height: 70px;
+			width: 70px;
+			border-radius: 50%;
+			&[src=""] {
+				display: none;
+			}
+		}
+		button {
+			display: block;
+			margin: 0 auto;
+		}
+		ul {
+			li {
+				margin-bottom: 20px;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				label {
+					margin-right: 10px;
+					font-size: $fontsize;
+					font-weight: 500;
+				}
+				input {
+					font-size: $fontsize;
+				}
+
 			}
 		}
 	}

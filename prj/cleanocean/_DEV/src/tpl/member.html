@@ -8,9 +8,9 @@
     <section class="my-info">
         <div class="inner">
             <div class="m-view">
-                <div class="m-avatar"><img src="https://fakeimg.pl/100x100/?text=會員頭貼&font=noto"></div>
-                <div class="m-name"><input type="text" name="m-name" value="會員名稱"></div>
-                <button id="btn-m-edit"class="btn-m-edit btn-style-2">編輯會員</button>
+                <div class="m-avatar-box"><img id="m-avatar" class="m-avatar" src="https://fakeimg.pl/100x100/?text=會員頭貼&font=noto"></div>
+                <div class="m-name-box"><input id="m-name" class="m-name" type="text" name="m-name" value="會員名稱"></div>
+                <button id="btn-m-edit" class="btn-m-edit btn-style-2 edit-member_open">編輯會員</button>
             </div>
             <div class="campaign-view">
                 <ul class="datas-total-ul">
@@ -82,3 +82,4 @@
         </div>
     </section>
 </main>
+@@include('../tpl/popup-member.html')

@@ -187,7 +187,7 @@ body {
 				> [class$="-filter"] {
 					border-bottom: 2px solid #7A97A2;
 					margin-bottom: 15px;
-					[class*="filters-"] {
+					[class*="form_filters-"] {
 						display: flex;
 						align-items: center;
 						margin-bottom: 15px;
@@ -195,7 +195,7 @@ body {
 							margin-right: 5px;
 						}
 					}
-					.filters-a {
+					.form_filters-a {
 						justify-content: space-between;
 						input,
 						select {
@@ -227,7 +227,7 @@ body {
 						.filter-campaign {
 						}
 					}
-					.filters-b {
+					.form_filters-b {
 						justify-content: flex-start;
 						// margin: 15px auto;
 						.btn-style-2 {

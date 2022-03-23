@@ -65,9 +65,9 @@
 		    <section class="my-info">
 		        <div class="inner">
 		            <div class="m-view">
-		                <div class="m-avatar"><img src="https://fakeimg.pl/100x100/?text=會員頭貼&font=noto"></div>
-		                <div class="m-name"><input type="text" name="m-name" value="會員名稱"></div>
-		                <button id="btn-m-edit"class="btn-m-edit btn-style-2">編輯會員</button>
+		                <div class="m-avatar-box"><img id="m-avatar" class="m-avatar" src="https://fakeimg.pl/100x100/?text=會員頭貼&font=noto"></div>
+		                <div class="m-name-box"><input id="m-name" class="m-name" type="text" name="m-name" value="會員名稱"></div>
+		                <button id="btn-m-edit" class="btn-m-edit btn-style-2 edit-member_open">編輯會員</button>
 		            </div>
 		            <div class="campaign-view">
 		                <ul class="datas-total-ul">
@@ -139,6 +139,21 @@
 		        </div>
 		    </section>
 		</main>
+		<section id="edit-member">
+		    <h2>修改會員資料</h2>
+		    <form id="form_edit-member" class="form_edit-member" name="form_edit-member" onsubmit="return false;">
+		        <ul>
+		            <li>
+		                <label for="m-editor-avatar">頭像</label><input type="file" name="m-editor-avatar" id="m-editor-avatar" accept="image/*">
+		                <img id="preview_avatar" class="preview_avatar" src="">
+		            </li>
+		            <li>
+		                <label for="m-name">姓名</label><input type="text" name="m-name" id="m-editor-name" value="會員名稱">
+		            </li>
+		        </ul>
+		        <button type="submit" id="btn-m-editor-update" class="btn-m-editor-update btn-style-2">更新</button>
+		    </form>
+		</section>
 		<footer id="footer" class="footer">
 			<section class="menus">
 				<div class="menus__inner">
@@ -187,6 +202,9 @@
 		<!-- <script src="./public/lib/slick/slick.min.js"></script> -->
 		<!-- <script src="./public/lib/swiper/swiper.min.js"></script> -->
 
+		<!-- Include jQuery Popup Overlay -->
+		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
+		</script>
         <script src="./public/lib/jquery.flipster/jquery.flipster.min.js"></script>
         <script src="./public/js/common.js"></script>
         <script src="./public/js/member.js"></script>
