@@ -7,6 +7,10 @@ $(function() {
             $header: $('#header'),
             $main: $('#main'),
             $footer: $('#footer'),
+            $mycampaign: $('#mycampaign'),
+            $btnCreatMyrecord: $('#btn-creat-myrecord'),
+            $btnAddCampaignUpdate: $('#btn-add-campaign-update')
+            
         },
         var: {
             $m: {
@@ -41,9 +45,41 @@ $(function() {
                 }
                 $('#edit-member').popup('hide');
             });
+            $('#btn-myrecord-edit').on('click', function() {
+                return;
+            });
+            $this.el.$mycampaign.on('click', '.campaign .btn-del-campaign', function(e) {
+                let _id = e.target.value;
+                let text = "";
+
+                if (confirm("確定刪除嗎？") == true) {
+                    text = '確定刪除 ID: ' + _id;
+                    $this.el.$mycampaign.find('.campaign[data-id="' + _id + '"]').remove();
+                    // API send id to del
+                } else {
+                    text = "取消刪除";
+                    return;
+                }
+                console.log(text);
+            });
+            $this.el.$mycampaign.on('click', '.campaign .btn-add-campaign', function(e) {
+                console.log('add campaign')
+            });
+            $this.el.$btnAddCampaignUpdate.on('click', function() {
+                console.log('send to update');
+            });
+
+            $this.el.$btnCreatMyrecord.on('click', function () {
+                return console.log("btn-creat-myrecord");
+            })
         },
         setPopup: function() {
             $('#edit-member').popup({
+                escape: false,
+                closebutton: true,
+                scrolllock: true,
+            });
+            $('#add-campaign').popup({
                 escape: false,
                 closebutton: true,
                 scrolllock: true,

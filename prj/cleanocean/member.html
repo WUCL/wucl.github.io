@@ -109,16 +109,16 @@
 		    <section class="my-record">
 		        <div class="title with_afterline">
 		            <span>我的淨灘足跡</span>
-		            <button id="btn-myrecord-edit"class="btn-myrecord-edit btn-style-2">編輯</button>
+		            <!-- <button id="btn-myrecord-edit"class="btn-myrecord-edit btn-style-2">編輯</button> -->
 		        </div>
 		        <div class="inner">
-		            <div class="mycampaign box-style">
+		            <div id="mycampaign" class="mycampaign box-style">
 		                <ul class="campaigns">
-		                    <li class="campagin" daat-id="1"><button class="btn-del-campaign btn-style-2" value="1"></button><span>彰化 2020/02/24 王功淨灘</span></li>
-		                    <li class="campagin" daat-id="2"><button class="btn-del-campaign btn-style-2" value="2"></button><span>彰化 2020/02/24 王功淨灘</span></li>
-		                    <li class="campagin" daat-id="3"><button class="btn-del-campaign btn-style-2" value="3"></button><span>彰化 2020/02/24 王功淨灘</span></li>
+		                    <li class="campaign" data-id="1"><button class="btn-del-campaign btn-style-2" value="1"></button><span>彰化 2020/02/24 王功淨灘</span></li>
+		                    <li class="campaign" data-id="2"><button class="btn-del-campaign btn-style-2" value="2"></button><span>彰化 2020/02/24 王功淨灘</span></li>
+		                    <li class="campaign" data-id="3"><button class="btn-del-campaign btn-style-2" value="3"></button><span>彰化 2020/02/24 王功淨灘</span></li>
 		                </ul>
-		                <button class="btn-add-campaign btn-style-2"></button>
+		                <button class="btn-add-campaign btn-style-2 add-campaign_open"></button>
 		            </div>
 		            <button id="btn-creat-myrecord" class="btn-creat-myrecord btn-style-2">成果圖產生器</button>
 		        </div>
@@ -152,6 +152,17 @@
 		            </li>
 		        </ul>
 		        <button type="submit" id="btn-m-editor-update" class="btn-m-editor-update btn-style-2">更新</button>
+		    </form>
+		</section>
+		<section id="add-campaign">
+		    <form id="form_add-campaign" class="form_add-campaign" name="form_add-campaign" onsubmit="return false;">
+		        <select>
+		            <option>1111</option>
+		            <option>222</option>
+		            <option>333</option>
+		            <option>555</option>
+		        </select>
+		        <button type="submit" id="btn-add-campaign-update" class="btn-add-campaign-update btn-style-2">更新</button>
 		    </form>
 		</section>
 		<footer id="footer" class="footer">

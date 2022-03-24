@@ -68,7 +68,7 @@
 					display: grid;
 					grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
 					row-gap: 12px;
-					.campagin {
+					.campaign {
 						font-size: $fontsize-2;
 						letter-spacing: 1px;
 						color: $color-font;
@@ -76,6 +76,10 @@
 							padding: 1px 5px;
 							margin: 0 5px;
 							box-shadow: none;
+							width: calc(40px / 3);
+							height: calc(40px / 3);
+                     background: url(../img/icon-delete@2x.png) left center no-repeat;
+                     background-size: cover;
 						}
 					}
 				}
@@ -83,8 +87,18 @@
 					padding: 1px 5px;
 					margin: 20px auto;
 					box-shadow: none;
-					background: green;
 					display: block;
+					width: calc(40px / 3);
+					height: calc(40px / 3);
+               background: url(../img/icon-add@2x.png) left center no-repeat;
+               background-size: cover;
+				}
+				#form_add-campaign {
+					display: block;
+					width: 640px;
+					.btn-add-campaign-update {
+						margin-top: 10px;
+					}
 				}
 			}
 			.btn-creat-myrecord {
