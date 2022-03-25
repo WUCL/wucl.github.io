@@ -43,7 +43,7 @@
         				</li>
         				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
-        				<li class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
+        				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
         				<!-- <li class="nav-login nav-effect"><a href="javascript:;"><img class="avatar" src="https://fakeimg.pl/40x40/"><label>登出</label></a></li> -->
         			</ul>
         		</nav>
@@ -89,33 +89,33 @@
 		                    </form>
 		                </div>
 		                <ul id="filter-result-list" class="filter-result-list albums-list">
-		                    <li class="filter-result-item albums-item">
+		                    <li class="filter-result-item albums-item view-album_open" data-id="1">
 		                        <div class="f-r-i-name">
 		                            <span class="name-county">彰化</span>
 		                            <span class="name-date">2020/04/24</span>
-		                            <span class="name-campaign">王功淨灘</span>
+		                            <span class="name-campaign">王功淨灘1</span>
 		                        </div>
 		                        <div class="f-r-i-album">
 		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
 		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
 		                        </div>
 		                    </li>
-		                    <li class="filter-result-item albums-item">
+		                    <li class="filter-result-item albums-item view-album_open" data-id="3">
 		                        <div class="f-r-i-name">
 		                            <span class="name-county">彰化</span>
 		                            <span class="name-date">2020/04/24</span>
-		                            <span class="name-campaign">王功淨灘</span>
+		                            <span class="name-campaign">王功淨灘2</span>
 		                        </div>
 		                        <div class="f-r-i-album">
 		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
 		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
 		                        </div>
 		                    </li>
-		                    <li class="filter-result-item albums-item">
+		                    <li class="filter-result-item albums-item view-album_open" data-id="2">
 		                        <div class="f-r-i-name">
 		                            <span class="name-county">彰化</span>
 		                            <span class="name-date">2020/04/24</span>
-		                            <span class="name-campaign">王功淨灘</span>
+		                            <span class="name-campaign">王功淨灘3</span>
 		                        </div>
 		                        <div class="f-r-i-album">
 		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
@@ -127,6 +127,31 @@
 		        </div>
 		    </section>
 		</main>
+		<section id="view-album">
+		    <h2>彰化2020/04/24王功淨灘</h2>
+		    <form class="form_filters-b" name="form_filters-album" onsubmit="return false;">
+		        <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
+		        <button id="filter-download" class="btn-style-2" type="submit">下載</button>
+		    </form>
+		    <ul id="view-album-list" class="view-album-list">
+		        <li class="view-album-item" data-view-album-pic="1">
+		            <input type="checkbox" name="albumPic[]" id="view-album-pic-1" value="1">
+		            <label for="view-album-pic-1"><img src="public/img/album-pic-b.png"></label>
+		        </li>
+		        <li class="view-album-item" data-view-album-pic="2">
+		            <input type="checkbox" name="albumPic[]" id="view-album-pic-2" value="2">
+		            <label for="view-album-pic-2"><img src="public/img/album-pic-b.png"></label>
+		        </li>
+		        <li class="view-album-item" data-view-album-pic="3">
+		            <input type="checkbox" name="albumPic[]" id="view-album-pic-3" value="3">
+		            <label for="view-album-pic-3"><img src="public/img/album-pic-b.png"></label>
+		        </li>
+		        <li class="view-album-item" data-view-album-pic="4">
+		            <input type="checkbox" name="albumPic[]" id="view-album-pic-4" value="4">
+		            <label for="view-album-pic-4"><img src="public/img/album-pic-b.png"></label>
+		        </li>
+		    </ul>
+		</section>
 		<footer id="footer" class="footer">
 			<section class="menus">
 				<div class="menus__inner">

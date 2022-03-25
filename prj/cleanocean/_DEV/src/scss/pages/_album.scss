@@ -57,3 +57,23 @@
 		}
 	}
 }
+.popup_content#view-album {
+	.form_filters-b {
+	}
+	ul.view-album-list {
+		border-top: 2px solid #7a97a2;
+		padding-top: 15px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		max-height: 66vh;
+		max-width: 66vw;
+		overflow: scroll;
+		display: grid;
+		grid-template-columns: 33% 33% 33%;
+		grid-gap: 20px;
+		// row-gap: 12px;
+		li.view-album-item {
+
+		}
+	}
+}

@@ -66,7 +66,9 @@ $(function() {
                 console.log('add campaign')
             });
             $this.el.$btnAddCampaignUpdate.on('click', function() {
-                console.log('send to update');
+                console.log('add campaign, need to update');
+                $('#add-campaign').popup('hide');
+                return;
             });
 
             $this.el.$btnCreatMyrecord.on('click', function () {

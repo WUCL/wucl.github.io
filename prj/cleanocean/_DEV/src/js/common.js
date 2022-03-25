@@ -12,6 +12,8 @@ $(function() {
             $navSwitch: $('#switch'),
             $shareLine: $('.share-line'),
             $shareFacebook: $('.share-facebook'),
+
+            $btnLogin: $('#btn-login'),
         },
         var: {
             // $share: {
@@ -28,7 +30,6 @@ $(function() {
             // this.loadTWSvg();
 
             this.builSlider();
-
         },
         bindEvent: function() {
             let $this = this;
@@ -42,21 +43,26 @@ $(function() {
             });
 
             // shares
-            $this.el.$shareLine.on('click', function() {
-                console.log('share-line');
-                let url = encodeURIComponent($this.var.$share.lineLink);
+            // $this.el.$shareLine.on('click', function() {
+            //     console.log('share-line');
+            //     let url = encodeURIComponent($this.var.$share.lineLink);
 
-                // 1. link with text
-                let text = encodeURIComponent($this.var.$share.lineText);
-                window.open('http://line.naver.jp/R/msg/text/?' + text + "%0D%0A" + url);
+            //     // 1. link with text
+            //     let text = encodeURIComponent($this.var.$share.lineText);
+            //     window.open('http://line.naver.jp/R/msg/text/?' + text + "%0D%0A" + url);
 
-                // 2. only link
-                // window.open('http://line.naver.jp/R/msg/text/?' + _url);
-            });
-            $this.el.$shareFacebook.on('click', function() {
-                console.log('share-facebook');
-                window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
-            });
+            //     // 2. only link
+            //     // window.open('http://line.naver.jp/R/msg/text/?' + _url);
+            // });
+            // $this.el.$shareFacebook.on('click', function() {
+            //     console.log('share-facebook');
+            //     window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
+            // });
+            $this.el.$btnLogin.on('click', function() {
+                console.log('how to login?');
+                alert('how to login?');
+                return;
+            })
         },
         // loadTWSvg: function() {
         //     return this.el.$twimg.load('./public/img/tw.svg');

@@ -14,6 +14,9 @@ $(function() {
 
             $selectAll: $('#select-all'),
             $filterResultList: $('#filter-result-list'),
+
+            $filterSearch: $('#filter-search'),
+            $filterDownload: $('#filter-download'),
         },
         var: {
             $api: {
@@ -37,14 +40,14 @@ $(function() {
             let $this = this;
             let $filterVal = $this.var.$filter;
             let $dl = $this.var.$dl;
-            $('#filter-search').on('click', function() {
+            $this.el.$filterSearch.on('click', function() {
                 if (($filterVal.timeBegin.length + $filterVal.timeEnd.length + $filterVal.county.length + $filterVal.campaign.length) > 0) {
                     $this.goFilter();
                 } else {
                     return alert('請設定搜尋內容');
                 }
             });
-            $('#filter-download').on('click', function() {
+            $this.el.$filterDownload.on('click', function() {
                 console.log('download');
                 if ($this.var.$dl.length > 0) {
                     $this.goDownload();
@@ -139,6 +142,8 @@ $(function() {
         },
         goDownload: function() {
             console.log("goDownload");
+            console.log(this.var.$dl);
+            return;
         },
     };
     DATA.init();

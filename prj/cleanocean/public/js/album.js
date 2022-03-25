@@ -13,6 +13,13 @@ $(function() {
             $filterCampaign: $('#filter-campaign'),
 
             $filterResultList: $('#filter-result-list'),
+            $filterResultItem: $('.filter-result-item'),
+
+            $viewAlbumList: $('#view-album-list'),
+            $selectAll: $('#select-all'),
+
+            $filterSearch: $('#filter-search'),
+            $filterDownload: $('#filter-download'),
         },
         var: {
             $api: {
@@ -24,23 +31,60 @@ $(function() {
                 county: '',
                 campaign: ''
             },
+            $popup: {
+                album: '',
+                pic: [],
+            },
         },
         init: function() {
             console.log('album');
             this.bindEvent();
+            this.setPopup();
             this.goInitial(); // 先 ajax 拿到資料先builder
             this.listenFilter();
         },
         bindEvent: function() {
             let $this = this;
             let $filterVal = $this.var.$filter;
-            $('#filter-search').on('click', function() {
+            $this.el.$filterSearch.on('click', function() {
                 if (($filterVal.timeBegin.length + $filterVal.timeEnd.length + $filterVal.county.length + $filterVal.campaign.length) > 0) {
                     $this.goFilter();
                 } else {
                     return alert('請設定搜尋內容');
                 }
             });
+            $this.el.$filterDownload.on('click', function() {
+                console.log('download');
+                if ($this.var.$popup.pic.length > 0) {
+                    $this.goDownload();
+                } else {
+                    return alert('請勾選欲下載數據');
+                }
+            });
+            $this.el.$filterResultItem.on('click', function(e) {
+                let _id = $(e.currentTarget).data('id');
+                $this.var.$popup.album = _id;
+                console.log($this.var.$popup.album);
+                return;
+            });
+            $this.el.$viewAlbumList.on("change", "input[type=checkbox]", function(e) {
+                console.log(e);
+                $this.updateDLCheckedList();
+            });
+            $this.el.$selectAll.on("change", function(e) {
+                $this.el.$viewAlbumList.find('input[type=checkbox]').prop('checked', e.target.checked);
+                $this.updateDLCheckedList();
+            });
+        },
+        updateDLCheckedList: function() {
+            console.log('updateDLCheckedList');
+            let $this = this;
+            $this.var.$popup.pic = [];
+            $this.el.$viewAlbumList.find('input[type=checkbox]:checked').each(function () {
+                $this.var.$popup.pic.push(this.value);
+            });
+            console.log($this.var.$popup.pic);
+            return;
         },
         goInitial: function() {
             let $this = this;
@@ -107,6 +151,26 @@ $(function() {
 
                 return $this.buildAlbum($response);
             };
+        },
+        setPopup: function() {
+            let $this = this;
+            $('#view-album').popup({
+                escape: false,
+                closebutton: true,
+                scrolllock: true,
+                // onopen: function() {
+                //     onOpenAlbum()
+                // }
+            });
+            // function onOpenAlbum() {
+            //     console.log("onOpenAlbum");
+            //     console.log($this.el.$selectAll);
+            // }
+        },
+        goDownload: function() {
+            console.log("goDownload");
+            console.log(this.var.$popup);
+            return;
         },
     };
     ALBUM.init();

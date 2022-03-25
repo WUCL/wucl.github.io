@@ -93,13 +93,6 @@
                background: url(../img/icon-add@2x.png) left center no-repeat;
                background-size: cover;
 				}
-				#form_add-campaign {
-					display: block;
-					width: 640px;
-					.btn-add-campaign-update {
-						margin-top: 10px;
-					}
-				}
 			}
 			.btn-creat-myrecord {
 				display: block;
@@ -140,6 +133,24 @@
 				}
 
 			}
+		}
+	}
+	.form_add-campaign {
+		display: block;
+		font-size: $fontsize-1;
+		padding: 10px;
+		.btn-add-campaign-select {
+			font-size: inherit;
+			display: block;
+			margin: 0 auto;
+			padding: 3px 5px;
+			border-radius: 9px;
+			overflow: hidden;
+		}
+		.btn-add-campaign-update {
+			// font-size: inherit;
+			display: block;
+			margin: 10px auto 0;
 		}
 	}
 }
