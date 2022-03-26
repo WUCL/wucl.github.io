@@ -3,7 +3,7 @@ layout/_popup
 ======================= */
 .popup_content {
 	min-height: 20px;
-	padding: 19px;
+	padding: 15px;
 	margin-bottom: 20px;
 	background-color: #f5f5f5;
 	border: 1px solid #e3e3e3;
@@ -19,6 +19,13 @@ layout/_popup
 		font-size: 25px;
 		padding: 0 10px;
 	}
+	.popup_inner {
+		position: relative;
+		max-height: 66vh;
+		max-width: 66vw;
+		overflow: scroll;
+		padding: 5px;
+	}
 	h2 {
 		font-size: $fontsize-3;
 		font-weight: bold;
@@ -29,6 +36,47 @@ layout/_popup
 			padding-bottom: 10px;
 			border-bottom: 1px solid #ccc;
 			display: block;
+		}
+	}
+
+	&#view-album {
+		.form_filters-b {
+		}
+		ul.va-pic-list {
+			// border-top: 2px solid #7a97a2;
+			// padding-top: 15px;
+			// margin-top: 15px;
+			margin-bottom: 15px;
+			height: 100%;
+			width: 100%;
+			// max-height: 66vh;
+			// max-width: 66vw;
+			overflow: scroll;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-gap: 20px;
+			// row-gap: 12px;
+			li.va-pic-item {
+				width: 100%;
+				display: block;
+				> input {
+					position: absolute;
+					z-index: 1;
+					top: 0;
+					left: 0;
+					margin: 10px;
+					&:checked {
+						& + label {
+							padding: 1px;
+							border-color: $color-main;
+						}
+					}
+				}
+				> label {
+					display: inline-block;
+					border: 1px solid transparent;
+				}
+			}
 		}
 	}
 }

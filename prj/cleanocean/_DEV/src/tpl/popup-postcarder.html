@@ -1,0 +1,87 @@
+<section id="view-album" data-va="1">
+    <div class="popup_inner">
+        <div class="albums_box va-step-1 withfilter-box" data-va-step="1">
+            <div class="albums-filter in-filter">
+                <form class="form_filters-a" name="form_filters-a" onsubmit="return false;">
+                    <div class="filter-time">
+                        <label for="filter-time-begin">時間</label>
+                        <input type="date" id="filter-time-begin" name="filter-time-begin">
+                        <label for="filter-time-end">至</label>
+                        <input type="date" id="filter-time-end" name="filter-time-end">
+                    </div>
+                    <div class="filter-county">
+                        <label for="filter-county">縣市</label>
+                        <div id="twzipcode" class="twzipcode">
+                            <div data-role="county" data-id="filter-county"></div>
+                            <div data-role="district" data-style="display:none !important;"></div>
+                            <div data-role="zipcode" data-style="display:none !important;"></div>
+                        </div>
+                    </div>
+                    <div class="filter-campaign">
+                        <label for="filter-campaign">淨灘地點</label>
+                        <input type="text" name="filter-campaign" id="filter-campaign" maxlength="10">
+                    </div>
+                    <button id="filter-search" class="btn-style-2" type="button">搜尋</button>
+                </form>
+            </div>
+            <ul id="filter-result-list" class="filter-result-list albums-list">
+                <li class="filter-result-item albums-item" data-id="1">
+                    <div class="f-r-i-name">
+                        <span class="name-county">彰化</span>
+                        <span class="name-date">2020/04/24</span>
+                        <span class="name-campaign">王功淨灘1</span>
+                    </div>
+                    <div class="f-r-i-album">
+                        <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
+                        <div class="album-source">尼古拉拉科技股份有限公司</div>
+                    </div>
+                </li>
+                <li class="filter-result-item albums-item" data-id="3">
+                    <div class="f-r-i-name">
+                        <span class="name-county">彰化</span>
+                        <span class="name-date">2020/04/24</span>
+                        <span class="name-campaign">王功淨灘2</span>
+                    </div>
+                    <div class="f-r-i-album">
+                        <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
+                        <div class="album-source">尼古拉拉科技股份有限公司</div>
+                    </div>
+                </li>
+                <li class="filter-result-item albums-item" data-id="2">
+                    <div class="f-r-i-name">
+                        <span class="name-county">彰化</span>
+                        <span class="name-date">2020/04/24</span>
+                        <span class="name-campaign">王功淨灘3</span>
+                    </div>
+                    <div class="f-r-i-album">
+                        <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
+                        <div class="album-source">尼古拉拉科技股份有限公司</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="va-step-2" data-va-step="2">
+            <button id="btn-backToAlbum" class="btn-backToAlbum btn-style-2" type="button">回相簿</button>
+            <button id="btn-confirmPic" class="btn-confirmPic btn-style-2" type="button">確定選取</button>
+            <h2>彰化2020/04/24王功淨灘</h2>
+            <ul id="va-pic-list" class="va-pic-list">
+                <li class="va-pic-item" data-va-pic="1">
+                    <input type="radio" name="albumPic[]" id="va-pic-1" value="1">
+                    <label for="va-pic-1"><img src="public/img/album-pic-b.png"></label>
+                </li>
+                <li class="va-pic-item" data-va-pic="2">
+                    <input type="radio" name="albumPic[]" id="va-pic-2" value="2">
+                    <label for="va-pic-2"><img src="public/img/album-pic-b.png"></label>
+                </li>
+                <li class="va-pic-item" data-va-pic="3">
+                    <input type="radio" name="albumPic[]" id="va-pic-3" value="3">
+                    <label for="va-pic-3"><img src="public/img/album-pic-b.png"></label>
+                </li>
+                <li class="va-pic-item" data-va-pic="4">
+                    <input type="radio" name="albumPic[]" id="va-pic-4" value="4">
+                    <label for="va-pic-4"><img src="public/img/album-pic-b.png"></label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

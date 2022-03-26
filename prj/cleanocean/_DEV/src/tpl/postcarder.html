@@ -1,0 +1,64 @@
+<main id="main" class="main">
+    <section class="pagename">
+        <div class="inner">
+            <img src="public/img/icon-album@2x.png">
+            <span>明信片製作</span>
+        </div>
+    </section>
+    <section id="postcarder" class="postcarder" data-step="1">
+        <div class="inner">
+            <div class="step-1">
+                <form class="postcard-form" onsubmit="return false;">
+                    <div class="postcard-img">
+                        <div class="postcard-img-box">
+                            <label class="btn-style-4 file-upload" for="postcard-img-upload">上傳照片</label>
+                            <input id="postcard-img-upload" style="display:none;" type="file" accept="image/*">
+                            <button id="postcard-img-album" class="btn-style-4 file-album view-album_open">相簿中照片</button>
+                        </div>
+                        <div class="postcard-img-tip">檔案限制2M以下，過大會造成上傳無效。</div>
+                        <img id="postcard-img-preview" class="postcard-img-preview" src />
+                        <img id="postcard-img-bg" class="postcard-img-bg" src="/public/img/postcard.png" />
+                    </div>
+                    <ul id="postcard-text" class="postcard-text">
+                        <li>
+                            <label for="postcard-title">明信片標題（有20個字元可以填寫，目前剩餘<span>20</span>個字）</label>
+                            <input type="text" id="postcard-title" name="postcard-title" maxlength="20" data-postcard="title">
+                        </li>
+                        <li>
+                            <label for="postcard-content">內文（有70個字元可以填寫，目前剩餘<span>70</span>個字）</label>
+                            <textarea type="text" id="postcard-content" name="postcard-content" maxlength="70" data-postcard="content"></textarea>
+                        </li>
+                        <li>
+                            <label for="postcard-writer">作者署名（有9個字元可以填寫，目前剩餘<span>9</span>個字）</label>
+                            <input type="text" id="postcard-writer" name="postcard-writer" maxlength="9" data-postcard="writer">
+                        </li>
+                    </ul>
+                </form>
+                <button id="btn-file-preview" class="btn-style-5 btn-file-preview">預覽</button>
+            </div>
+            <div class="step-2">
+                <div class="preview-img">
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <img id="preview-img" src />
+                </div>
+                <div class="preview-btns">
+                    <button id="btn-file-edit" class="btn-style-5 btn-file-edit">修改</button>
+                    <button id="btn-file-public" class="btn-style-5 btn-file-public">發佈</button>
+                </div>
+            </div>
+            <div class="step-3">
+                <div class="public-img">
+                    <img id="public-img" src />
+                </div>
+                <div class="public-shares">
+                    <div class="shares-text">分享到</div>
+                    <div class="btn-shares">
+                        <a id="btn-share-facebook" class="btn-icon btn-share-facebook" href="javascript:console.log('facebook');">F</a>
+                        <a id="btn-share-line" class="btn-icon btn-share-line" href="javascript:console.log('LINE');">L</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@@include('../tpl/popup-postcarder.html')

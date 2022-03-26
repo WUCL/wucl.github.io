@@ -9,8 +9,9 @@ $(function() {
             $footer: $('#footer'),
             $mycampaign: $('#mycampaign'),
             $btnCreatMyrecord: $('#btn-creat-myrecord'),
-            $btnAddCampaignUpdate: $('#btn-add-campaign-update')
+            $btnAddCampaignUpdate: $('#btn-add-campaign-update'),
             
+            $myrecordImg: $('#myrecord-img'),
         },
         var: {
             $m: {
@@ -72,6 +73,7 @@ $(function() {
             });
 
             $this.el.$btnCreatMyrecord.on('click', function () {
+                $this.el.$myrecordImg.attr('src', 'public/img/result.png');
                 return console.log("btn-creat-myrecord");
             })
         },

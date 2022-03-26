@@ -61,6 +61,11 @@
 			right: 10px;
 			z-index: 2;
 		}
+		#myrecord-img {
+			&[src=""] {
+				display: none;
+			}
+		}
 		.inner {
 			.mycampaign {
 				padding: 15px 50px;
@@ -129,6 +134,7 @@
 					font-weight: 500;
 				}
 				input {
+					padding: 3px 5px;
 					font-size: $fontsize;
 				}
 
@@ -144,7 +150,7 @@
 			display: block;
 			margin: 0 auto;
 			padding: 3px 5px;
-			border-radius: 9px;
+			// border-radius: 9px;
 			overflow: hidden;
 		}
 		.btn-add-campaign-update {

@@ -1,6 +1,5 @@
 $(function() {
     var COMMON = {
-        env: 'html',
         el: {
             $window: $(window),
             $doc: $(document),
@@ -9,7 +8,7 @@ $(function() {
             $main: $('#main'),
             $footer: $('#footer'),
             $nav: $('#nav'),
-            $navSwitch: $('#switch'),
+            $navSwitch: $('#hamburger'),
             $shareLine: $('.share-line'),
             $shareFacebook: $('.share-facebook'),
 
@@ -26,20 +25,27 @@ $(function() {
             console.log('common');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
+            this.processNavActive();
             this.bindEvent();
             // this.loadTWSvg();
 
             this.builSlider();
+        },
+        processNavActive: function() {
+            let $this = this;
+            let _page = this.el.$body.data('page');
+            console.log(_page);
+            return $('.nav-' + _page).addClass('active');
         },
         bindEvent: function() {
             let $this = this;
 
             // switch menu
             $this.el.$navSwitch.on('click', function() {
-                $this.el.$body.toggleClass('openheader');
+                $this.el.$header.toggleClass('open');
             });
             $this.el.$nav.on('click', function() {
-                $this.el.$body.removeClass('openheader');
+                $this.el.$header.removeClass('open');
             });
 
             // shares

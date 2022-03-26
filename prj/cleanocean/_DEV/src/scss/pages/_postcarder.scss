@@ -1,8 +1,8 @@
 /* =======================
-   pages/postcard-builder
+   pages/postcarder
    ======================= */
 .main {
-   section.postcard-builder {
+   section.postcarder {
       background: $color-white;
       margin-bottom: 50px;
       padding: 100px 100px 30px;
@@ -19,26 +19,31 @@
                width: 40%;
                display: flex;
                flex-direction: column;
-               .pc-img-box {
+               margin-right: 30px;
+               .postcard-img-box {
                   background: #efefef;
                   display: flex;
                   flex-direction: column;
                   padding: 30px;
-                  margin-right: 30px;
                   border-radius: 5px;
                   button {
                      margin: 10px 0;
                   }
                }
-               .pc-img-tip {
+               .postcard-img-tip {
                   margin-top: 15px;
                   font-size: $fontsize-a;
                }
-               .pc-img-preview {
-                  width: 375px;
-                  height: 280px;
-                  overflow: hidden;
-                  display: none;
+               .postcard-img-preview {
+                  margin-top: 10px;
+                  max-width: 87%;
+                  &[src=""] {
+                     margin-top: 0;
+                  }
+               }
+               .postcard-img-bg {
+                  display: none !important;
+                  visibility: hidden;
                }
             }
             .postcard-text {
@@ -56,20 +61,29 @@
                      display: block;
                      width: 100%;
                      font-size: $fontsize-1;
+                     font-family: inherit;
                   }
                   label {
                      margin-bottom: 10px;
+                     span {
+                        color: $color-main;
+                        margin: 0 5px;
+                        letter-spacing: -1px;
+                        font-weight: bold;
+                     }
                   }
                   input {
                      height: $fontsize-1 * 2;
+                     padding: 0 5px;
                   }
                   textarea {
+                     padding: 5px;
                      height: $fontsize-1 * 8;
                   }
                }
             }
          }
-         .file-preview {
+         .btn-file-preview {
             display: block;
             margin: 30px auto 0;
          }
@@ -94,7 +108,7 @@
                &:last-child {
                   margin-left: 20px;
                }
-               &.file-edit {
+               &.btn-file-edit {
                   opacity: .7;
                }
             }
@@ -152,6 +166,7 @@
          }
       }
       &[data-step="1"] {
+         // .step-2,
          .step-1 {
             display: block;
          }
@@ -163,6 +178,23 @@
       }
       &[data-step="3"] {
          .step-3 {
+            display: block;
+         }
+      }
+   }
+}
+.popup_content {
+   &#view-album {
+      [class*="step-"] {
+         display: none;
+      }
+      &[data-va="1"] {
+         .va-step-1 {
+            display: block;
+         }
+      }
+      &[data-va="2"] {
+         .va-step-2 {
             display: block;
          }
       }

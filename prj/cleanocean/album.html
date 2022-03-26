@@ -34,10 +34,10 @@
         		</div>
         		<nav class="nav">
         			<ul>
-        				<li class="nav-method nav-effect active"><a href="info.html" method><label>海洋資訊</label></a></li>
-        				<li class="nav-data nav-effect subnav">
+        				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
+        				<li class="nav-data nav-effect subnav nav-data-dl">
         					<a href="data.html"><label>數據資料庫</label></a>
-        					<div class="subnav-content">
+        					<div class="nav-data-dl subnav-content">
         						<a href="data-dl.html"><label>數據下載</label></a>
         					</div>
         				</li>
@@ -59,13 +59,13 @@
 		        <div class="inner">
 		            <img src="public/img/icon-album@2x.png">
 		            <span>活動相簿</span>
-		            <a href="/postcard-builder.html" class="postcard-builder btn-style-3">製作明信片</a>
+		            <a href="/postcarder.html" class="postcarder btn-style-3">製作明信片</a>
 		        </div>
 		    </section>
 		    <section class="albums">
 		        <div class="inner">
-		            <div class="albums_box">
-		                <div class="albums-filter">
+		            <div class="albums_box withfilter-box">
+		                <div class="albums-filter in-filter">
 		                    <form class="form_filters-a" name="form_filters-a" onsubmit="return false;">
 		                        <div class="filter-time">
 		                            <label for="filter-time-begin">時間</label>
@@ -128,29 +128,35 @@
 		    </section>
 		</main>
 		<section id="view-album">
-		    <h2>彰化2020/04/24王功淨灘</h2>
-		    <form class="form_filters-b" name="form_filters-album" onsubmit="return false;">
-		        <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
-		        <button id="filter-download" class="btn-style-2" type="submit">下載</button>
-		    </form>
-		    <ul id="view-album-list" class="view-album-list">
-		        <li class="view-album-item" data-view-album-pic="1">
-		            <input type="checkbox" name="albumPic[]" id="view-album-pic-1" value="1">
-		            <label for="view-album-pic-1"><img src="public/img/album-pic-b.png"></label>
-		        </li>
-		        <li class="view-album-item" data-view-album-pic="2">
-		            <input type="checkbox" name="albumPic[]" id="view-album-pic-2" value="2">
-		            <label for="view-album-pic-2"><img src="public/img/album-pic-b.png"></label>
-		        </li>
-		        <li class="view-album-item" data-view-album-pic="3">
-		            <input type="checkbox" name="albumPic[]" id="view-album-pic-3" value="3">
-		            <label for="view-album-pic-3"><img src="public/img/album-pic-b.png"></label>
-		        </li>
-		        <li class="view-album-item" data-view-album-pic="4">
-		            <input type="checkbox" name="albumPic[]" id="view-album-pic-4" value="4">
-		            <label for="view-album-pic-4"><img src="public/img/album-pic-b.png"></label>
-		        </li>
-		    </ul>
+		    <div class="popup_inner">
+		        <h2>彰化2020/04/24王功淨灘</h2>
+		        <div class="va-pic_box withfilter-box">
+		            <div class="va-pic-filter in-filter">
+		                <form class="form_filters-b" name="form_filters-album" onsubmit="return false;">
+		                    <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
+		                    <button id="filter-download" class="btn-style-2" type="submit">下載</button>
+		                </form>
+		            </div>
+		            <ul id="va-pic-list" class="va-pic-list">
+		                <li class="va-pic-item" data-va-pic="1">
+		                    <input type="checkbox" name="albumPic[]" id="va-pic-1" value="1">
+		                    <label for="va-pic-1"><img src="public/img/album-pic-b.png"></label>
+		                </li>
+		                <li class="va-pic-item" data-va-pic="2">
+		                    <input type="checkbox" name="albumPic[]" id="va-pic-2" value="2">
+		                    <label for="va-pic-2"><img src="public/img/album-pic-b.png"></label>
+		                </li>
+		                <li class="va-pic-item" data-va-pic="3">
+		                    <input type="checkbox" name="albumPic[]" id="va-pic-3" value="3">
+		                    <label for="va-pic-3"><img src="public/img/album-pic-b.png"></label>
+		                </li>
+		                <li class="va-pic-item" data-va-pic="4">
+		                    <input type="checkbox" name="albumPic[]" id="va-pic-4" value="4">
+		                    <label for="va-pic-4"><img src="public/img/album-pic-b.png"></label>
+		                </li>
+		            </ul>
+		        </div>
+		    </div>
 		</section>
 		<footer id="footer" class="footer">
 			<section class="menus">

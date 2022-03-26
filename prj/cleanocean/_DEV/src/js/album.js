@@ -12,10 +12,10 @@ $(function() {
             $filterTimeEnd: $('#filter-time-end'),
             $filterCampaign: $('#filter-campaign'),
 
-            $filterResultList: $('#filter-result-list'),
+            // $filterResultList: $('#filter-result-list'),
             $filterResultItem: $('.filter-result-item'),
 
-            $viewAlbumList: $('#view-album-list'),
+            $viewAlbumList: $('#va-pic-list'),
             $selectAll: $('#select-all'),
 
             $filterSearch: $('#filter-search'),

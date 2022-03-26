@@ -4,76 +4,24 @@
 .main {
 	section.pagename {
 		.inner {
-			a.postcard-builder {
+			a.postcarder {
 				margin-top: 30px;
 			}
 		}
 	}
 	section.albums {
 		.inner {
-			.albums_box {
-
-				.albums-list.filter-result-list  {
-					padding: 0 30px;
-					.albums-item.filter-result-item {
-						flex-direction: column;
-						cursor: pointer;
-						.f-r-i-name {
-
-						}
-						.f-r-i-album {
-							width: 100%;
-							margin-top: 10px;
-							background: $color-white;
-							padding: 10px 15px;
-							border-radius: 9px;
-							.album-featured {
-								height: 250px;
-								overflow: hidden;
-								> img {
-									transform: scale(1);
-									transition: .2s;
-								}
-							}
-							.album-source {
-								width: 100%;
-								margin-top: 10px;
-								font-size: $fontsize-c;
-								text-align: right;
-							}
-						}
-						&:hover {
-							.f-r-i-album {
-								.album-featured {
-									> img {
-										transform: scale(1.1);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
 		}
 	}
 }
 .popup_content#view-album {
-	.form_filters-b {
-	}
-	ul.view-album-list {
-		border-top: 2px solid #7a97a2;
-		padding-top: 15px;
-		margin-top: 15px;
-		margin-bottom: 15px;
-		max-height: 66vh;
-		max-width: 66vw;
-		overflow: scroll;
-		display: grid;
-		grid-template-columns: 33% 33% 33%;
-		grid-gap: 20px;
-		// row-gap: 12px;
-		li.view-album-item {
-
-		}
+	.va-pic_box {
+		background: none;
+		padding: 0;
 	}
 }
+// .form_filters-b {
+// 	border-bottom: 2px solid $color-main;
+// 	padding-bottom: 15px;
+// 	margin-bottom: 15px;
+// }

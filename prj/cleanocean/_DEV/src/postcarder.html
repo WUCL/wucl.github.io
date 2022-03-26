@@ -21,16 +21,19 @@
         <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
         <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
 		@@include('../src/tpl/_style.html')
-        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/postcard-builder.min.css" />
+        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/postcarder.min.css" />
 	</head>
 	<body data-page="postercard-builder">
         @@include('../src/tpl/_header.html')
-		@@include('../src/tpl/postcard-builder.html')
+		@@include('../src/tpl/postcarder.html')
 		@@include('../src/tpl/_footer.html')
         <!-- @@include('../src/tpl/_aside.html') -->
 
 		@@include('../src/tpl/_script.html')
+        <script src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+        <script src="@@webRoot/public/lib/twzipcode/jquery.twzipcode.min.js"></script>
         <script src="@@webRoot/public/js/common.js"></script>
-        <script src="@@webRoot/public/js/postcard-builder.js"></script>
+        <script src="@@webRoot/public/js/postcarder.js"></script>
 	</body>
 </html>
