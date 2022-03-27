@@ -20,17 +20,20 @@ $(function() {
             $btnFilePreview: $('#btn-file-preview'),
             $btnFileEdit: $('#btn-file-edit'),
             $btnFilePublic: $('#btn-file-public'),
+            $btnFileDl: $('#btn-file-dl'),
             // $btnFilePreview: $('#btn-file-preview'),
 
+            $resizeImg: $('#resize-img'),
             $previewImg: $('#preview-img'),
             $publicImg: $('#public-img'),
         },
         var: {
             $postcard: {
                 img: '',
-                title: 'a',
-                content: 'b',
-                writer: '123456789',
+                title: '',
+                content: '',
+                writer: '',
+                result: ''
             },
 
             $api: {
@@ -53,19 +56,20 @@ $(function() {
             this.bindEvent();
             this.postcardMaker();
             this.setPopup();
-
-            // test
-            this.el.$postcardImgPreview.attr('src', window.test);
         },
         postcardMaker: function() {
             let $this = this;
             let canvas = document.getElementById('canvas'),
-                context = canvas.getContext('2d'),
+                ctx = canvas.getContext('2d'),
                 image_a = new Image(),
                 image_b = new Image(),
+                _resize_img = new Image(),
+                _resize = '',
                 result_img = new Image(),
                 base64 = '';
 
+            _resize_img = document.getElementById('resize-img');
+            _resize_img.setAttribute("crossOrigin", 'Anonymous');
             result_img = document.getElementById('preview-img');
             result_img.setAttribute("crossOrigin", 'Anonymous');
 
@@ -77,48 +81,61 @@ $(function() {
             btn_merge.onclick = function() {
                 image_a.src = document.getElementById('postcard-img-bg').src;
                 image_b.src = document.getElementById('postcard-img-preview').src;
+
                 image_a.setAttribute("crossOrigin", 'Anonymous');
                 image_b.setAttribute("crossOrigin", 'Anonymous');
+
                 image_a.onload = function() {
-                    console.log(image_a);
-                    console.log(this);
                     var w = this.width, // 1129
                         h = this.height, // 608
+
+                        target_w = 658, // 658
+                        target_h = 464, // 464
                         w2 = image_b.width,
                         h2 = image_b.height,
-                        _scale = 5,
-                        _unit = 100;
+                        resize_w = target_w,
+                        resize_h = target_h
+                        ;
 
-                    canvas.width = w;
-                    canvas.height = h;
-                    context.drawImage(this, 0, 0, w, h);
+                    // Step1. resize te selected image
+                    canvas.width = target_w;
+                    canvas.height = target_h;
+                    if (w2 > h2) { resize_w = target_h*w2/h2; }
+                    else { resize_h = target_w*h2/w2; }
 
-                    // setting position
-                    context.drawImage(image_b,
-                        0, 0,
-                        // 660, 462,
-                        w2, h2,
-                        // _scale * _unit, _scale * _unit * h2 / w2,
+                    ctx.drawImage(image_b, 0, 0, resize_w, resize_h);
+                    _resize = canvas.toDataURL("image/png");
+                    _resize_img.src = _resize;
 
-                        50, 40,
-                        660, 462,
-                    );
+                    // Step2. merge step1 to background
+                    _resize_img.onload = function() {
+                        // background
+                        canvas.width = w;
+                        canvas.height = h;
+                        ctx.drawImage(image_a, 0, 0, w, h);
+                        ctx.drawImage(this, 50, 40, target_w, target_h);
 
-                    // title
-                    context.font="30px 微軟正黑體";
-                    context.fillText($this.var.$postcard.title, 70, 545);
+                        // title
+                        ctx.font="30px 微軟正黑體";
+                        ctx.fillStyle = "white";
+                        ctx.fillText($this.var.$postcard.title, 70, 545);
 
-                    // content
-                    context.fillText($this.var.$postcard.content, 750, 180);
+                        // content
+                        ctx.fillStyle = "#484848";
+                        let _substr = ($this.var.$postcard.content.match(/.{1,10}/g));
+                        for (let i = 0; i < _substr.length; i++) {
+                            ctx.fillText(_substr[i], 750, 183 + (i*52));
+                        }
 
-                    // writer
-                    context.textAlign = "right";
-                    context.fillText('by ' + $this.var.$postcard.writer, 1080, 545);
+                        // writer
+                        ctx.textAlign = "right";
+                        ctx.fillText('by ' + $this.var.$postcard.writer, 1080, 545);
 
-                    console.log(canvas);
-                    base64 = canvas.toDataURL("image/png");
-                    console.log(base64);
-                    result_img.src = base64;
+                        // result
+                        base64 = canvas.toDataURL("image/png");
+                        result_img.src = base64;
+                        $this.var.$postcard.result = base64;
+                    }
                 }
             }
         },
@@ -138,7 +155,7 @@ $(function() {
                 } else {
                     $this.el.$postcardImgUpload.val('');
                     $this.el.$postcardImgPreview.attr('src', '');
-                    return;
+                    return alert('請上傳小於 2 MB圖片');
                 }
             });
 
@@ -159,9 +176,27 @@ $(function() {
             });
 
             // step1 file preview
-            $this.el.$btnFilePreview.on('click', function() {
+            $this.el.$btnFilePreview.on('click', function(e) {
                 console.log('btnFilePreview');
-                $this.el.$postcarder.attr('data-step', 2);
+                // check content
+                let _postcard = $this.var.$postcard;
+                console.log(_postcard);
+                if (_postcard.img == '') {
+                    e.preventDefault();
+                    return alert('請上傳圖片');
+                } else if (_postcard.title == '') {
+                    e.preventDefault();
+                    return alert('請輸入明信片標題');
+                } else if (_postcard.content == '') {
+                    e.preventDefault();
+                    return alert('請輸入明信片內容');
+                } else if (_postcard.writer == '') {
+                    e.preventDefault();
+                    return alert('請輸入明信片作者');
+                } else {
+                    // $this.postcardMaker();
+                    return $this.el.$postcarder.attr('data-step', 2);
+                }
             });
 
             // step2 go back to edit
@@ -172,8 +207,8 @@ $(function() {
             // step2 go to public
             $this.el.$btnFilePublic.on('click', function() {
                 console.log('btnFilePublic');
-                $this.el.$publicImg.attr('src', $this.el.$previewImg.attr('src'));
-
+                $this.el.$publicImg.attr('src', $this.var.$postcard.result);
+                $this.el.$btnFileDl.href = $this.var.$postcard.result;
                 $this.el.$postcarder.attr('data-step', 3);
             })
         },

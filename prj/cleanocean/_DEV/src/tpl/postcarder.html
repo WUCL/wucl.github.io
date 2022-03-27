@@ -38,12 +38,13 @@
             </div>
             <div class="step-2">
                 <div class="preview-img">
-                    <canvas id="canvas" style="display: none;"></canvas>
+                    <canvas id="canvas" class="display-none-i"></canvas>
+                    <img id="resize-img" class="display-none-i" src />
                     <img id="preview-img" src />
                 </div>
                 <div class="preview-btns">
-                    <button id="btn-file-edit" class="btn-style-5 btn-file-edit">修改</button>
-                    <button id="btn-file-public" class="btn-style-5 btn-file-public">發佈</button>
+                    <button type="button" id="btn-file-edit" class="btn-style-5 btn-file-edit">修改</button>
+                    <button type="button" id="btn-file-public" class="btn-style-5 btn-file-public">發佈</button>
                 </div>
             </div>
             <div class="step-3">
@@ -51,11 +52,12 @@
                     <img id="public-img" src />
                 </div>
                 <div class="public-shares">
-                    <div class="shares-text">分享到</div>
+                    <a id="btn-file-dl" class="btn-style-5 btn-file-dl">明信片下載</a>
+                    <!-- <div class="shares-text">分享到</div>
                     <div class="btn-shares">
                         <a id="btn-share-facebook" class="btn-icon btn-share-facebook" href="javascript:console.log('facebook');">F</a>
                         <a id="btn-share-line" class="btn-icon btn-share-line" href="javascript:console.log('LINE');">L</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
