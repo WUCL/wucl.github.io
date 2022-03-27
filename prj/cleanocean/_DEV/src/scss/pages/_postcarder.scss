@@ -34,11 +34,15 @@
                   margin-top: 15px;
                   font-size: $fontsize-a;
                }
-               .postcard-img-preview {
-                  margin-top: 10px;
-                  max-width: 87%;
-                  &[src=""] {
-                     margin-top: 0;
+               .postcard-img-preview-box {
+                  max-height: 190px;
+                  overflow: hidden;
+                  width: 100%;
+                  .postcard-img-preview {
+                     margin-top: 10px;
+                     &[src=""] {
+                        margin-top: 0;
+                     }
                   }
                }
                .postcard-img-bg {
@@ -125,8 +129,9 @@
             }
          }
          .public-shares {
+            margin-top: 10px;
             .shares-text {
-               margin: 20px 0 10px;
+               margin: 10px 0;
                font-size: $fontsize-2;
             }
             .btn-shares {

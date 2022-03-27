@@ -33,7 +33,8 @@ $(function() {
                 title: '',
                 content: '',
                 writer: '',
-                result: ''
+                result: '',
+                checkisok: false
             },
 
             $api: {
@@ -79,6 +80,7 @@ $(function() {
                 btn_merge = document.getElementById('btn-file-preview');
             // console.log(dl);
             btn_merge.onclick = function() {
+                if (!$this.var.$postcard.checkisok) return;
                 image_a.src = document.getElementById('postcard-img-bg').src;
                 image_b.src = document.getElementById('postcard-img-preview').src;
 
@@ -172,7 +174,7 @@ $(function() {
                 let _current = _maxLength - _length;
                 $(e.target).closest('li').find('label > span').html(_current);
                 $this.var.$postcard[_postcard] = _value;
-                console.log($this.var.$postcard);
+                // console.log($this.var.$postcard);
             });
 
             // step1 file preview
@@ -180,23 +182,22 @@ $(function() {
                 console.log('btnFilePreview');
                 // check content
                 let _postcard = $this.var.$postcard;
-                console.log(_postcard);
+                let _notify = '';
+                // console.log(_postcard);
                 if (_postcard.img == '') {
-                    e.preventDefault();
-                    return alert('請上傳圖片');
+                    _notify = '請上傳圖片';
                 } else if (_postcard.title == '') {
-                    e.preventDefault();
-                    return alert('請輸入明信片標題');
+                    _notify = '請輸入明信片標題';
                 } else if (_postcard.content == '') {
-                    e.preventDefault();
-                    return alert('請輸入明信片內容');
+                    _notify = '請輸入明信片內容';
                 } else if (_postcard.writer == '') {
-                    e.preventDefault();
-                    return alert('請輸入明信片作者');
+                    _notify = '請輸入明信片作者';
                 } else {
-                    // $this.postcardMaker();
+                    $this.var.$postcard.checkisok = true;
                     return $this.el.$postcarder.attr('data-step', 2);
                 }
+                e.preventDefault();
+                return alert(_notify);
             });
 
             // step2 go back to edit
@@ -208,7 +209,8 @@ $(function() {
             $this.el.$btnFilePublic.on('click', function() {
                 console.log('btnFilePublic');
                 $this.el.$publicImg.attr('src', $this.var.$postcard.result);
-                $this.el.$btnFileDl.href = $this.var.$postcard.result;
+                $this.el.$btnFileDl.attr('download',  $this.var.$postcard.title.replace(/ /g, "") + '.png');
+                $this.el.$btnFileDl.attr('href', $this.var.$postcard.result);
                 $this.el.$postcarder.attr('data-step', 3);
             })
         },

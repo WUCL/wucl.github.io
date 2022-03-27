@@ -61,9 +61,20 @@
 			right: 10px;
 			z-index: 2;
 		}
-		#myrecord-img {
-			&[src=""] {
-				display: none;
+		.recorder-img-box {
+ 			text-align: center;
+			#recorder-img {
+				border-radius: 8px;
+				&[src=""] {
+					display: none;
+					& + .btn-recorder-dl {
+						display: none;
+						margin-top: 0;
+					}
+				}
+			}
+			.btn-recorder-dl {
+				margin-top: 10px;
 			}
 		}
 		.inner {
@@ -99,7 +110,7 @@
                background-size: cover;
 				}
 			}
-			.btn-creat-myrecord {
+			.btn-creat-recorder {
 				display: block;
 				margin: 20px auto;
 				font-size: $fontsize-2;

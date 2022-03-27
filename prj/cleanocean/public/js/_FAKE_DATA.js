@@ -12,13 +12,11 @@ $(function() {
             $btnAddCampaignUpdate: $('#btn-add-campaign-update'),
             
             $recoderImg: $('#recorder-img'),
-            $btnFileDl: $('#btn-recorder-dl'),
         },
         var: {
             $m: {
-                name: '吳阿倫',
+                name: '',
                 avatar: '',
-                kg: 0,
             },
         },
         init: function() {
@@ -33,35 +31,26 @@ $(function() {
                 ctx = canvas.getContext('2d'),
                 image_bg = new Image(),
                 image_pin = new Image(),
-                image_avatar = new Image(),
                 base64 = '';
 
-            let btn_merge = document.getElementById('btn-creat-recorder');
-
-            function getRandomArbitrary(min, max) {
-                return Math.round(Math.random() * (max - min) + min);
-            }
+            let btn_dl = document.getElementById('dl'),
+                btn_merge = document.getElementById('btn-creat-recorder');
 
             btn_merge.onclick = function() {
-                $this.var.$m.kg = 0; // clean first
-
                 // if (!$this.var.$postcard.checkisok) return;
                 image_bg.src = 'public/img/recorder-bg.png';
                 image_pin.src = 'public/img/recorder-pin.png';
-                image_avatar.src = document.getElementById('m-avatar').src;
+                // image_recorder = document.getElementById('recorder-img');
 
                 image_bg.setAttribute("crossOrigin", 'Anonymous');
                 image_pin.setAttribute("crossOrigin", 'Anonymous');
-                image_avatar.setAttribute("crossOrigin", 'Anonymous');
+                // image_recorder.setAttribute("crossOrigin", 'Anonymous');
 
                 image_bg.onload = function() {
-                    console.log('image_bg');
                     var w = this.width,
                         h = this.height,
-                        pin_w = image_pin.width / 2.3,
-                        pin_h = image_pin.height / 2.3,
-                        avatar_w = 240,
-                        avatar_h = 240
+                        pin_w = image_pin.width,
+                        pin_2 = image_pin.height
                         ;
 
                     // Step1. setting background
@@ -70,40 +59,14 @@ $(function() {
 
                     ctx.drawImage(this, 0, 0, w, h);
 
-                    console.log('Step2');
                     // Step2. setting pin in tw map
-                    // image_pin.onload = function() {
-                        console.log('image_pin');
-                        $.each(window.myCampaign, function(index, item) {
-                            let _campaign = window.campaigns[item];
-                            let _area = _campaign.area;
-                            let _x = window.tw_xy[_area][0] + (getRandomArbitrary(-15, 15));
-                            let _y = window.tw_xy[_area][1] + (getRandomArbitrary(-15, 15));
-                            $this.var.$m.kg += _campaign.kg;
-                            ctx.drawImage(image_pin, _x, _y, pin_w, pin_h);
-                        })
+                    // ctx.drawImage(image_a, 0, 0, w, h);
+                    // ctx.drawImage(this, 50, 40, target_w, target_h);
 
-                        // avatar
-                        ctx.drawImage(image_avatar, 870, 710, avatar_w, avatar_h);
-
-                        // name
-                        ctx.fillStyle = "white";
-                        ctx.font="75px 微軟正黑體";
-                        ctx.fillText($this.var.$m.name, 870, 1050);
-
-                        // kg
-                        ctx.font="75px 微軟正黑體";
-                        ctx.fillText('KG', 1410, 1315);
-
-                        ctx.font="140px 微軟正黑體";
-                        ctx.textAlign = "right";
-                        ctx.fillText($this.var.$m.kg, 1400, 1315);
-
-                        // result
-                        base64 = canvas.toDataURL("image/png");
-                        $this.el.$btnFileDl.attr('href', base64);
-                        $this.el.$recoderImg.attr('src', base64);
-                    // }
+                    // result
+                    base64 = canvas.toDataURL("image/png");
+                    $this.el.$recoderImg.attr('src', base64);
+                    // $this.var.$postcard.result = base64;
                 }
             }
         },
