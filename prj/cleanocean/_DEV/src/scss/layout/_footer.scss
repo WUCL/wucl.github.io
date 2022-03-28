@@ -19,6 +19,10 @@ footer.footer {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			@include mq($max-width: $bp-mobile) {
+			    flex-direction: column;
+			    max-width: 90%;
+			}
 		}
 	}
 	.menus {
@@ -33,10 +37,16 @@ footer.footer {
 			// 		margin: -9px auto;
 			// 	}
 			// }
+			@include mq($max-width: $bp-mobile) {
+				padding: 30px 2%;
+			}
 		}
 		.logo,
 		.menu {
 			width: 50%;
+			@include mq($max-width: $bp-mobile) {
+				width: 100%;
+			}
 		}
 		.logo {
 			position: relative;
@@ -45,6 +55,11 @@ footer.footer {
 				width: 100%;
 				min-width: calc(546px / 2.4);
 				max-width: calc(546px / 2.4);
+				@include mq($max-width: $bp-mobile) {
+					min-width: calc(546px / 3);
+					max-width: calc(546px / 3);
+					margin: 0 auto;
+				}
 			}
 		}
 		.menu {
@@ -54,6 +69,9 @@ footer.footer {
 		    flex-direction: column;
 			.nav {
 				width: 100%;
+				@include mq($max-width: $bp-mobile) {
+					margin: 25px 0 15px;
+				}
 				ul {
 					display: flex;
 					align-items: center;
@@ -81,19 +99,33 @@ footer.footer {
 				align-items: center;
 				justify-content: space-between;
 				margin-top: 10px;
+				@include mq($max-width: $bp-mobile) {
+					flex-direction: column;
+				}
 				.logo-see,
 				.logo-sow {
 					width: 100%;
+					@include mq($max-width: $bp-mobile) {
+						margin: 10px 0;
+					}
 				}
 				.logo-sow {
 					min-width: calc(450px / 2);
 					max-width: calc(450px / 2);
 					margin-lerightft: 10px;
+					@include mq($max-width: $bp-mobile) {
+						min-width: calc(450px / 3);
+						max-width: calc(450px / 3);
+					}
 				}
 				.logo-see {
 					min-width: calc(450px / 2.5);
 					max-width: calc(450px / 2.5);
 					margin-left: 10px;
+					@include mq($max-width: $bp-mobile) {
+						min-width: calc(450px / 3.5);
+						max-width: calc(450px / 3.5);
+					}
 				}
 			}
 		}

@@ -6,6 +6,9 @@
       background: $color-white;
       margin-bottom: 50px;
       padding: 100px 100px 30px;
+      @include mq($max-width: $bp-mobile) {
+         padding: 20px;
+      }
       [class*="step-"] {
          display: none;
       }
@@ -15,11 +18,21 @@
             align-items: flex-start;
             justify-content: center;
             color: $color-font;
+            @include mq($max-width: $bp-mobile) {
+               flex-direction: column;
+            }
             .postcard-img {
                width: 40%;
                display: flex;
                flex-direction: column;
                margin-right: 30px;
+               @include mq($max-width: $bp-mobile) {
+                  width: 100%;
+                  margin-right: 0;
+                  border-bottom: 1px solid #ddd;
+                  padding: 10px 0;
+                  margin-bottom: 10px;
+               }
                .postcard-img-box {
                   background: #efefef;
                   display: flex;
@@ -56,19 +69,29 @@
                align-content: center;
                justify-content: center;
                flex-direction: column;
+               @include mq($max-width: $bp-mobile) {
+                  width: 100%;
+               }
                li {
                   font-size: $fontsize-1;
                   margin-bottom: 20px;
+                  @include mq($max-width: $bp-mobile) {
+                     font-size: $fontsize-2;
+                     line-height: normal;
+                  }
                   label,
                   input,
                   textarea {
                      display: block;
                      width: 100%;
-                     font-size: $fontsize-1;
+                     font-size: inherit;
                      font-family: inherit;
                   }
                   label {
                      margin-bottom: 10px;
+                     @include mq($max-width: $bp-mobile) {
+                        margin-bottom: 5px;
+                     }
                      span {
                         color: $color-main;
                         margin: 0 5px;
@@ -96,6 +119,9 @@
          [class*="preview-"] {
             width: calc(1129px / 1.5);
             margin: 0 auto;
+            max-width: 100%;
+            @include mq($max-width: $bp-mobile) {
+            }
          }
          .preview-img {
             img {
@@ -108,9 +134,17 @@
             justify-content: center;
             width: 100%;
             margin-top: 50px;
+            @include mq($max-width: $bp-mobile) {
+               margin-top: 25px;
+               flex-direction: column;
+            }
             button {
                &:last-child {
                   margin-left: 20px;
+                  @include mq($max-width: $bp-mobile) {
+                     margin-left: 0;
+                     margin-top: 20px;
+                  }
                }
                &.btn-file-edit {
                   opacity: .7;
@@ -122,6 +156,7 @@
          [class*="public-"] {
             width: calc(1129px / 1.5);
             margin: 0 auto;
+            width: 100%;
          }
          .public-img {
             img {

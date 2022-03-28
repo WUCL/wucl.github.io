@@ -25,6 +25,11 @@ layout/_popup
 		max-width: 66vw;
 		overflow: scroll;
 		padding: 5px;
+		@include mq($max-width: $bp-mobile) {
+		    height: 100%;
+			max-height: 87vh;
+			max-width: 78vw;
+		}
 	}
 	h2 {
 		font-size: $fontsize-3;

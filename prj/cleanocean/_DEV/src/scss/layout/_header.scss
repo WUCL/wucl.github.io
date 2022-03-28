@@ -12,9 +12,11 @@ layout/_header
 	// border-bottom: 1px solid $color-main;
 	box-sizing: border-box;
 	// background: $color-white;
-	@include mq($max-width: $bp-w) {
-		height: 0;
-		border-bottom: 0;
+    overflow: hidden;
+	@include mq($max-width: $bp-mobile) {
+		margin-top: 25px;
+		// height: 0;
+		// border-bottom: 0;
 	}
 	&__inner {
 		position: relative;
@@ -28,14 +30,18 @@ layout/_header
 		box-sizing: border-box;
 		// background: $color-white;
 		// transition: padding .2s ease;
-		@include mq($max-width: $bp-contain-w) {
-			padding: 0 4%;
+		// @include mq($max-width: $bp-contain-w) {
+		// 	padding: 0 4%;
+		// }
+		@include mq($max-width: $bp-mobile) {
+			display: block;
 		}
 		.logo {
 			position: relative;
 			width: 100%;
 			min-width: calc(546px / 3);
 			max-width: calc(546px / 3);
+			margin: 0 auto;
 			// @include mq($max-width: $bp-w) {
 			// 	display: none;
 			// }
@@ -368,14 +374,14 @@ layout/_header
 	// 		}
 	// 	}
 	// }
-	@include mq($max-width: $bp_m) {
-		opacity: 1;
-		transform: translateY(0%);
-		box-shadow: 0 0 5px 0 rgba(16, 26, 173, .33);
-		.header__inner {
-			border-top: 0;
-		}
-	}
+	// @include mq($max-width: $bp_m) {
+	// 	opacity: 1;
+	// 	transform: translateY(0%);
+	// 	box-shadow: 0 0 5px 0 rgba(16, 26, 173, .33);
+	// 	.header__inner {
+	// 		border-top: 0;
+	// 	}
+	// }
 	&.open {
 		margin-top: 0;
 		@include mq($max-width: $bp-w) {

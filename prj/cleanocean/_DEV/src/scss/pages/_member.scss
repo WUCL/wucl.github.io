@@ -7,6 +7,9 @@
 			.m-view {
 				display: flex;
 				align-items: flex-end;
+				@include mq($max-width: $bp-mobile) {
+		    		flex-wrap: wrap;
+		    	}
 				.m-avatar-box {
 					max-height: 100px;
 					border-radius: 50%;
@@ -15,11 +18,18 @@
 					img {
 						width: 100px;
 						height: 100px;
+						@include mq($max-width: $bp-mobile) {
+							width: 87px;
+							height: 87px;
+						}
 					}
 				}
 				.m-name-box {
 					width: 100%;
 					margin: 0 15px;
+					@include mq($max-width: $bp-mobile) {
+						margin: 15px 0;
+					}
 					input {
 						color: $color-font;
 						width: 100%;
@@ -80,14 +90,24 @@
 		.inner {
 			.mycampaign {
 				padding: 15px 50px;
+				@include mq($max-width: $bp-mobile) {
+					padding: 15px 15px;
+				}
 				.campaigns {
 					display: grid;
 					grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
 					row-gap: 12px;
+					@include mq($max-width: $bp-mobile) {
+						grid-template-columns: 1fr;
+						row-gap: 12px;
+					}
 					.campaign {
 						font-size: $fontsize-2;
 						letter-spacing: 1px;
 						color: $color-font;
+						span {
+							font-size: inherit;
+						}
 						.btn-del-campaign {
 							padding: 1px 5px;
 							margin: 0 5px;

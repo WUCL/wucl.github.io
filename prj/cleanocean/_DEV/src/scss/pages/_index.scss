@@ -9,6 +9,10 @@
 		.logo {
 			min-width: calc(546px / 1.2);
 			max-width: calc(546px / 1.2);
+			@include mq($max-width: $bp-mobile) {
+				min-width: calc(546px / 3);
+				max-width: calc(546px / 3);
+			}
 		}
 		.nav {
 			margin-top: 10px;
@@ -30,6 +34,10 @@
 					line-height: $fontsize * 2;
 					letter-spacing: 1px;
 					text-align: center;
+					@include mq($max-width: $bp-mobile) {
+						letter-spacing: 0;
+						text-align: left;
+					}
 					span {
 						font-size: $fontsize-3;
 						font-weight: 500;
@@ -39,6 +47,13 @@
 			.menuicon {
 				margin: 100px auto 50px;
 				display: flex;
+				@include mq($max-width: $bp-mobile) {
+					margin: 25px auto;
+					// display: flex;
+					// flex-direction: column;
+					display: grid;
+					grid-template-columns: 50% 50%;
+				}
 				a {
 					display: flex;
 					align-items: center;
@@ -48,6 +63,9 @@
 					padding: 0 30px;
 					// min-width: calc(624px / 2);
 					// max-width: calc(624px / 2);
+					@include mq($max-width: $bp-mobile) {
+						padding: 20px;
+					}
 					img {
 
 					}
@@ -57,6 +75,11 @@
 						color: $color-black;
 						font-weight: 400;
 						letter-spacing: 2px;
+						@include mq($max-width: $bp-mobile) {
+							margin-top: 15px;
+							font-size: $fontsize-1;
+							letter-spacing: 0;
+						}
 					}
 				}
 			}
@@ -72,6 +95,9 @@
 			// background: rgba($color-white ,.45);
 			img {
 				width: auto;
+				@include mq($max-width: $bp-mobile) {
+					width: 100%;
+				}
 			}
 			&:before,
 			&:after {

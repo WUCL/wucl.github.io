@@ -16,6 +16,9 @@ body {
 	max-height: 100vh;
 	background: url(../img/bg@2x.jpg) top left no-repeat;
 	background-size: cover;
+	@include mq($max-width: $bp-mobile) {
+		background-size: auto;
+	}
 
 	[class*="btn-style"] {
 		border-radius: 6px;
@@ -94,6 +97,9 @@ body {
 	max-width: $bp-contain-w;
 	margin: 0 auto;
 	overflow: hidden;
+	@include mq($max-width: $bp-mobile) {
+		margin: 30px 20px;
+	}
 	section {
 		width: 100%;
 		height: 100%;
@@ -102,6 +108,9 @@ body {
 		margin-left: auto;
 		margin-right: auto;
 		padding: 50px 0;
+		@include mq($max-width: $bp-mobile) {
+			padding: 25px 0;
+		}
 		> .title {
 			padding-bottom: 35px;
 			&.with_afterline {
@@ -109,9 +118,13 @@ body {
 				font-size: $fontsize-4;
 				width: 100%;
 				font-weight: 500;
+				@include mq($max-width: $bp-mobile) {
+					font-size: $fontsize-5;
+				}
 				span {
 					display: block;
 					min-width: max-content;
+					font-size: inherit;
 				}
 				&:after {
 					content: "";
@@ -137,16 +150,28 @@ body {
 				align-items: center;
 				justify-content: space-between;
 				width: 100%;
+				@include mq($max-width: $bp-mobile) {
+					flex-wrap: wrap;
+				}
 				li {
 					position: relative;
 					display: inline-flex;
 					align-items: center;
 					justify-content: center;
+					@include mq($max-width: $bp-mobile) {
+						width: 100%;
+						padding: 5px 0;
+						justify-content: flex-start;
+					}
 					.total-key {
 						position: relative;
+						display: block;
 						width: calc(286px / 3);
 						height: calc(284px / 3);
-						display: block;
+						@include mq($max-width: $bp-mobile) {
+							width: calc(286px / 3.5);
+							height: calc(284px / 3.5);
+						}
 						&:before {
 							content: "";
 							display: block;
@@ -168,6 +193,10 @@ body {
 							width: 100%;
 							height: 100%;
 							margin: 0 auto;
+							@include mq($max-width: $bp-mobile) {
+								font-size: $fontsize-2;
+								line-height: normal;
+							}
 						}
 					}
 					.total-value {
@@ -178,11 +207,20 @@ body {
 						align-items: flex-end;
 						justify-content: center;
 						padding-left: 5px;
+						@include mq($max-width: $bp-mobile) {
+							font-size: $fontsize-10;
+							padding-left: 15px;
+						}
 						&:after {
 							content: attr(data-unit);
 							font-size: $fontsize-3;
 							white-space: nowrap;
 							padding-bottom: 5px;
+							@include mq($max-width: $bp-mobile) {
+								padding-bottom: 3px;
+								padding-left: 3px;
+								font-size: $fontsize-2;
+							}
 						}
 					}
 				}
@@ -190,6 +228,9 @@ body {
 		}
 		&.pagename {
 			margin-top: 100px;
+			@include mq($max-width: $bp-mobile) {
+				margin-top: 25px;
+			}
 			.inner {
 				display: flex;
 				align-items: center;
@@ -200,6 +241,10 @@ body {
 				width: 100%;
 				min-width: calc(624px / 1.5);
 				max-width: calc(624px / 1.5);
+				@include mq($max-width: $bp-mobile) {
+					min-width: calc(624px / 3.5);
+					max-width: calc(624px / 3.5);
+				}
 				img {
 				}
 				span {
@@ -207,6 +252,10 @@ body {
 					margin: 20px auto 0;
 					font-size: $fontsize-10;
 					width: max-content;
+					@include mq($max-width: $bp-mobile) {
+						font-size: $fontsize-3;
+						margin-top: 15px;
+					}
 				}
 			}
 		}
@@ -214,6 +263,9 @@ body {
 			> .inner {
 			 	> [class*="datas-"] {
 					margin-bottom: 50px;
+					@include mq($max-width: $bp-mobile) {
+						margin-bottom: 25px;
+					}
 				}
 				.datas-total {
 				}
@@ -229,9 +281,15 @@ body {
 							font-weight: 500;
 							line-height: normal;
 							color: $color-font;
+							@include mq($max-width: $bp-mobile) {
+								font-size: $fontsize-2;
+							}
 							&:before {
 								content: "";
 								display: inline-block;
+								@include mq($max-width: $bp-mobile) {
+									display: block;
+								}
 							}
 							&:nth-child(1):before {
 								content: "TOP1";
@@ -287,9 +345,16 @@ body {
 					display: flex;
 					align-items: center;
 					justify-content: center;
+					@include mq($max-width: $bp-mobile) {
+						flex-direction: column;
+					}
 					.locals-taiwan {
 						min-width: 350px;
-						margin-right: 35px;
+						padding-right: 35px;
+				    	margin: 0 auto;
+						@include mq($max-width: $bp-mobile) {
+							padding-right: 0;
+						}
 					}
 					.locals-data {
 						width: 100%;
@@ -299,6 +364,10 @@ body {
 							padding: 20px 50px;
 							font-size: $fontsize-5;
 							margin-bottom: 10px;
+							@include mq($max-width: $bp-mobile) {
+								font-size: $fontsize-4;
+								padding: 15px 50px;
+							}
 							&:after {
 								content: attr(data-unit);
 							}
@@ -306,6 +375,9 @@ body {
 						&-box {
 							background: $color-white;
 							padding: 50px 20px 10px;
+							@include mq($max-width: $bp-mobile) {
+								padding: 10px 20px;
+							}
 							.local-freq {
 								border-bottom: 2px solid nth($color-top-scale, 2);
 								padding-bottom: 20px;
@@ -324,6 +396,9 @@ body {
 									width: 100%;
 									font-size: $fontsize-4;
 									text-align: center;
+									@include mq($max-width: $bp-mobile) {
+										font-size: $fontsize-2;
+									}
 									&:before {
 										content: "";
 										width: 100%;
@@ -339,6 +414,9 @@ body {
 										text-align: center;
 										width: 100%;
 										margin-bottom: 5px;
+										@include mq($max-width: $bp-mobile) {
+											font-size: $fontsize-2;
+										}
 									}
 									&:nth-child(1) {
 										order: 2;
@@ -403,9 +481,18 @@ body {
 	.my-flipster {
 		li {
 			max-width: calc(1129px / 2);
+			@include mq($max-width: $bp-mobile) {
+				max-width: 100%;
+			}
 		}
 	}
 }
+
+/* BEGIN flipster */
+.flipster__button svg {
+	width: 1.5em;
+}
+/* END flipster */
 
 /* BEGIN filter */
 .withfilter-box {
@@ -421,16 +508,33 @@ body {
 			margin-bottom: 15px;
 			label {
 				margin-right: 5px;
+				font-size: $fontsize-2;
+				flex-shrink: 0;
 			}
 		}
 		.form_filters-a {
 			justify-content: space-between;
+			@include mq($max-width: $bp-mobile) {
+				flex-direction: column;
+				align-items: flex-start;
+			}
 			input,
 			select {
 				max-width: 150px;
 				height: 30px;
 				font-size: $fontsize;
 				padding: 1px 3px;
+				@include mq($max-width: $bp-mobile) {
+					font-size: $fontsize-2;
+				}
+			}
+			.filter-time,
+			.filter-county,
+			.filter-campaign {
+				@include mq($max-width: $bp-mobile) {
+					width: 100%;
+					margin: 5px 0;
+				}
 			}
 			.filter-time {
 				input {
@@ -441,6 +545,9 @@ body {
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				@include mq($max-width: $bp-mobile) {
+					justify-content: flex-start;
+				}
 				.twzipcode {
 					flex-shrink: 0;
 					width: 150px;
@@ -458,6 +565,10 @@ body {
 		.form_filters-b {
 			justify-content: flex-start;
 			// margin: 15px auto;
+			@include mq($max-width: $bp-mobile) {
+				// border-top: 1px solid #ddd;
+				padding-top: 15px;
+			}
 			.btn-style-2 {
 				margin-left: 15px;
 			}
@@ -467,6 +578,9 @@ body {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		row-gap: 12px;
+		@include mq($max-width: $bp-mobile) {
+			grid-template-columns: 1fr;
+		}
 		.filter-result-item {
 			display: inline-flex;
 			align-items: center;
@@ -480,8 +594,13 @@ body {
 				height: 30px;
 				background: nth($color-datas, 2);
 				box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+				@include mq($max-width: $bp-mobile) {
+					// font-size: $fontsize;
+				}
 				span {
 					padding: 5px;
+					font-size: inherit;
+					flex-shrink: 0;
 					&:nth-child(1) {
 						background: nth($color-datas, 3);
 						height: 100%;
@@ -499,6 +618,9 @@ body {
 .albums_box {
 	.albums-list.filter-result-list  {
 		padding: 0 30px;
+		@include mq($max-width: $bp-mobile) {
+			padding: 0;
+		}
 		.albums-item.filter-result-item {
 			flex-direction: column;
 			cursor: pointer;
@@ -514,6 +636,9 @@ body {
 				.album-featured {
 					height: 250px;
 					overflow: hidden;
+					@include mq($max-width: $bp-mobile) {
+						height: auto;
+					}
 					> img {
 						transform: scale(1);
 						transition: .2s;
