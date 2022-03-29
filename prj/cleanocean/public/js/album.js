@@ -18,8 +18,8 @@ $(function() {
             $viewAlbumList: $('#va-pic-list'),
             $selectAll: $('#select-all'),
 
-            $filterSearch: $('#filter-search'),
-            $filterDownload: $('#filter-download'),
+            $btnFilterSearch: $('#btn-filter-search'),
+            $btnFilterDownload: $('#btn-filter-download'),
         },
         var: {
             $api: {
@@ -46,14 +46,14 @@ $(function() {
         bindEvent: function() {
             let $this = this;
             let $filterVal = $this.var.$filter;
-            $this.el.$filterSearch.on('click', function() {
+            $this.el.$btnFilterSearch.on('click', function() {
                 if (($filterVal.timeBegin.length + $filterVal.timeEnd.length + $filterVal.county.length + $filterVal.campaign.length) > 0) {
                     $this.goFilter();
                 } else {
                     return alert('請設定搜尋內容');
                 }
             });
-            $this.el.$filterDownload.on('click', function() {
+            $this.el.$btnFilterDownload.on('click', function() {
                 console.log('download');
                 if ($this.var.$popup.pic.length > 0) {
                     $this.goDownload();

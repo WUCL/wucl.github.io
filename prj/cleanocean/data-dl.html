@@ -35,14 +35,21 @@
         		<nav class="nav">
         			<ul>
         				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
-        				<li class="nav-data nav-effect subnav nav-data-dl">
+        				<li class="nav-data nav-effect nav-data-dl subnav">
         					<a href="data.html"><label>數據資料庫</label></a>
-        					<div class="nav-data-dl subnav-content">
-        						<a href="data-dl.html"><label>數據下載</label></a>
+        					<div class="subnav-content">
+        						<a class="nav-data nav-effect" href="data.html"><label>數據資料庫</label></a>
+        						<a class="nav-data-dl nav-effect" href="data-dl.html"><label>數據下載</label></a>
         					</div>
         				</li>
         				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
-        				<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
+        				<li class="nav-album nav-effect nav-postcarder subnav">
+        					<a href="album.html"><label>活動項目</label></a>
+        					<div class="subnav-content">
+        						<a class="nav-album nav-effect" href="album.html"><label>活動相簿</label></a>
+        						<a class="nav-postcarder nav-effect" href="postcarder.html"><label>明信片製作</label></a>
+        					</div>
+        				</li>
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
         				<!-- <li class="nav-login nav-effect"><a href="javascript:;"><img class="avatar" src="https://fakeimg.pl/40x40/"><label>登出</label></a></li> -->
         			</ul>
@@ -85,11 +92,11 @@
 		                            <label for="filter-campaign">淨灘地點</label>
 		                            <input type="text" name="filter-campaign" id="filter-campaign" maxlength="10">
 		                        </div>
-		                        <button id="filter-search" class="btn-style-2" type="submit">搜尋</button>
+		                        <button id="btn-filter-search" class="btn-filter-search btn-style-2" type="submit">搜尋</button>
 		                    </form>
 		                    <form class="form_filters-b" name="form_filters-b" onsubmit="return false;">
 		                        <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
-		                        <button id="filter-download" class="btn-style-2" type="submit">下載</button>
+		                        <button id="btn-filter-download" class="btn-filter-download btn-style-2" type="submit">下載</button>
 		                    </form>
 		                </div>
 		                <ul id="filter-result-list" class="filter-result-list datas-list">

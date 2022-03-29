@@ -53,7 +53,7 @@ $(function() {
             },
         },
         init: function() {
-            console.log('postcard-builder');
+            console.log('postcarder');
             this.bindEvent();
             this.postcardMaker();
             this.setPopup();
@@ -250,7 +250,7 @@ $(function() {
             let _filterTimeBegin = $('#filter-time-begin');
             let _filterTimeEnd = $('#filter-time-end');
             let _filterCampaign = $('#filter-campaign');
-            let _filterSearch = $('#filter-search');
+            let _filterSearch = $('#btn-filter-search');
 
             $('#twzipcode').twzipcode({
                 onCountySelect: function(e) {
@@ -317,7 +317,7 @@ $(function() {
             let $this = this;
             // let _filterResultList: $('#filter-result-list');
             let _filterResultItem = $('.filter-result-item');
-            let _backToAlbum = $('#btn-backToAlbum');
+            let _backToAlbum = $('#btn-back-to-album');
 
             _filterResultItem.on('click', function(e) {
                 let _id = $(e.currentTarget).data('id');
@@ -334,7 +334,7 @@ $(function() {
             console.log('switchInAlbum');
             let $this = this;
             let _viewAlbumList = $('#va-pic-list');
-            let _confirmPic = $('#btn-confirmPic');
+            let _confirmPic = $('#btn-confirm-pic');
             console.log($this.var.$popup.album);
             $this.el.$viewAlbum.attr('data-va', 2);
 

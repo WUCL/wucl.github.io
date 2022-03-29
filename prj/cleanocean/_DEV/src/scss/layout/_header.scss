@@ -12,7 +12,6 @@ layout/_header
 	// border-bottom: 1px solid $color-main;
 	box-sizing: border-box;
 	// background: $color-white;
-    overflow: hidden;
 	@include mq($max-width: $bp-mobile) {
 		margin-top: 25px;
 		// height: 0;
@@ -42,7 +41,7 @@ layout/_header
 			min-width: calc(546px / 3);
 			max-width: calc(546px / 3);
 			margin: 0 auto;
-			// @include mq($max-width: $bp-w) {
+			// @include mq($max-width: $bp-mobile) {
 			// 	display: none;
 			// }
 		}
@@ -51,7 +50,7 @@ layout/_header
 			max-width: 1060px;
 			display: flex;
 			justify-content: flex-end;
-			@include mq($max-width: $bp-w) {
+			@include mq($max-width: $bp-mobile) {
 				max-width: 100%;
 				z-index: 1;
 			}
@@ -65,11 +64,11 @@ layout/_header
 				width: 100%;
 				margin-left: 25px;
 				font-size: $fontsize-1;
-				@include mq($max-width: $bp-w) {
+				@include mq($max-width: $bp-mobile) {
 					overflow-y: scroll;
 					position: absolute;
 					top: 0;
-					background: $color-main;
+					background: $color-white;
 					font-size: 20px;
 					margin: 0;
 					right: 0;
@@ -83,17 +82,17 @@ layout/_header
 						position: relative;
 						margin: 30px auto;
 						display: block;
-						width: calc(660px / 3);
-						height: calc(294px / 3);
-						background: url('../img/navagation_logo_m.png') 100% 100%/100% no-repeat;
+						width: calc(1380px / 9);
+						height: calc(546px / 9);
+						background: url('../img/logo@2x.png') 100% 100%/100% no-repeat;
 						background-size: contain;
 						@include mq($max-width: $bp_2s) {
-							width: calc(660px / 4);
-							height: calc(294px / 4);
+							width: calc(1380px / 12);
+							height: calc(546px / 12);
 						}
 						@include mq($max-width: $bp_xs) {
-							width: calc(660px / 4.5);
-							height: calc(294px / 4.5);
+							width: calc(1380px / 13.5);
+							height: calc(546px / 13.5);
 							margin-bottom: 20px;
 						}
 					}
@@ -110,12 +109,15 @@ layout/_header
 					margin: 0 1px;
 					user-select: none;
 					flex-shrink: 0;
-					@include mq($max-width: $bp-w) {
+					font-size: inherit;
+					@include mq($max-width: $bp-mobile) {
+						flex-direction: column;
 						width: 100%;
 						font-weight: 500;
 						margin: 0;
-						height: 12vw;
-						max-height: 55px;
+						// height: 12vw;
+					    height: auto;
+						// max-height: 55px;
 					}
 					&.nav-effect {
 						// &:before {
@@ -128,10 +130,11 @@ layout/_header
 						// 	background: $color-white;
 						// 	transition: height .2s, background .5s;
 						// }
-						@include mq($max-width: $bp-w) {
+						@include mq($max-width: $bp-mobile) {
 							label {
 								display: inline-flex;
 								align-items: center;
+								justify-content: flex-start;
 								padding: 0;
 								// &:after {
 								// 	content: "";
@@ -154,20 +157,14 @@ layout/_header
 						display: inline-flex;
 						align-items: center;
 						color: rgba($color-black, .9);
-						padding: 0 10px;
+						padding: 0 12px;
 						flex-shrink: 0;
-						@include mq($max-width: $bp-w) {
-							width: 35%;
-							margin: 0 auto;
-							color: $color-white;
-							padding: 0;
-							height: 100%;
-						}
-						@include mq($max-width: $bp_2s) {
+						@include mq($max-width: $bp-mobile) {
 							width: 50%;
-						}
-						@include mq($max-width: $bp_xs) {
-							width: 54%;
+							margin: 0 auto;
+							color: $color-main;
+							padding: 15px 0;
+							height: 100%;
 						}
 						label {
 							transform: rotateY(0);
@@ -180,7 +177,8 @@ layout/_header
 							// padding-left: 3px;
 							cursor: pointer;
 							flex-shrink: 0;
-							@include mq($max-width: $bp-w) {
+							font-size: inherit;
+							@include mq($max-width: $bp-mobile) {
 								text-align: left;
 							}
 						}
@@ -201,7 +199,7 @@ layout/_header
 							margin-right: 5px;
 							border: 1px solid $color-main;
 							box-sizing: border-box;
-							@include mq($max-width: $bp-w) {
+							@include mq($max-width: $bp-mobile) {
 								width: 30px;
 								height: 30px;
 								margin-right: 10px;
@@ -216,21 +214,43 @@ layout/_header
 							left: 0;
 							width: 100%;
 							z-index: 1;
+							@include mq($max-width: $bp-mobile) {
+								margin-bottom: 15px;
+								display: block;
+								position: relative;
+								top: 0;
+								height: auto;
+								text-align: center;
+							}
 							a {
-								// color: inherit;
-								&:hover {
+								white-space: nowrap;
+								height: 40px;
+								@include mq($max-width: $bp-mobile) {
+									padding: 7px 0;
+									&:before {
+										content: "";
+										padding: 0 15px;
+										font-size: $fontsize-2;
+										// margin-right: 0;
+										text-decoration: none;
+									}
+								}
+								&:hover,
+								&.active {
 									color: $color-main;
 									text-decoration: underline;
 								}
 							}
 						}
-						&:hover {
-							.subnav-content {
-								display: block;							}
+						@include mq($min-width: $bp-mobile) {
+							&:hover {
+								.subnav-content {
+									display: block;							}
+							}
 						}
 					}
 
-					@include mq($min-width: $bp-w) {
+					// @include mq($min-width: $bp-mobile) {
 					// 	&:after {
 					// 		content: "|";
 					// 		color: rgba($color-black, .2);
@@ -260,7 +280,7 @@ layout/_header
 								}
 							}
 						}
-					}
+					// }
 				}
 			}
 		}
@@ -274,22 +294,17 @@ layout/_header
 			justify-content: center;
 			cursor: pointer;
 			display: none;
-			@include mq($max-width: $bp-w) {
+			@include mq($max-width: $bp-mobile) {
 				position: absolute;
-				top: 20px;
 				right: 20px;
-				width: 70px;
-				height: 70px;
+				width: 50px;
+				height: 50px;
 				display: flex;
 				background: $color-white;
-				padding: 15px;
-				border-radius: 50%;
-				border: 2px solid $color-main;
+				padding: 10px;
+				// border-radius: 0;
+				border: 1px solid $color-main;
 				box-sizing: border-box;
-			}
-			@include mq($max-width: $bp_m) {
-				width: 60px;
-				height: 60px;
 				opacity: .93;
 			}
 			&__inner {
@@ -307,21 +322,22 @@ layout/_header
 					content: "MENU";
 					position: relative;
 					top: 22px;
-					font-size: 13px;
+					font-size: 12px;
 					color: $color-main;
 					text-align: justify;
 					display: inline-block;
-					@include mq($max-width: $bp_m) {
-						left: -4px;
-						font-size: 12px;
-						letter-spacing: -.5px;
-						top: 18px;
-					}
+					text-align: center;
+					// @include mq($max-width: $bp_m) {
+					// 	left: -4px;
+					// 	font-size: 12px;
+					// 	letter-spacing: -.5px;
+					// 	top: 18px;
+					// }
 				}
-				@include mq($max-width: $bp_m) {
-					width: 24px;
-					height: 24px;
-				}
+				// @include mq($max-width: $bp_m) {
+				// 	width: 24px;
+				// 	height: 24px;
+				// }
 				span {
 					display: block;
 					position: absolute;
@@ -384,26 +400,30 @@ layout/_header
 	// }
 	&.open {
 		margin-top: 0;
-		@include mq($max-width: $bp-w) {
+    	overflow: hidden;
+    	position: fixed;
+		@include mq($max-width: $bp-mobile) {
 			.header__inner {
 				display: block;
 				height: 100vh;
 				background: rgba($color-black, .78);
 				padding: 0;
+				.logo {
+					display: none;
+				}
 				.nav {
 					margin-top: 0;
 					ul {
 						opacity: 1;
 						transform: translateX(0%);
-						width: 380px;
+						width: 300px;
 						max-width: 69%;
 						box-shadow: -1px 0 4px 1px rgba(0, 0, 0, .3);
 					}
 				}
 				.hamburger {
-					right: 380px;
-					border-width: 1px;
-					border-radius: 50% 0 0 50%;
+					right: 300px;
+					border-radius: 0;
 					border-right: 0;
 					transform: translateX(100vw);
 					animation: hamburgerout .25s .25s ease-in-out forwards running;

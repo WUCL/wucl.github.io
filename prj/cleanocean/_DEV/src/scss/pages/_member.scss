@@ -93,6 +93,12 @@
 				@include mq($max-width: $bp-mobile) {
 					padding: 15px 15px;
 				}
+				&[data-edit-mode="0"] {
+					.btn-del-campaign,
+					.btn-add-campaign {
+						display: none !important;
+					}
+				}
 				.campaigns {
 					display: grid;
 					grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));

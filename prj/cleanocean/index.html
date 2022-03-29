@@ -40,14 +40,21 @@
         		<nav class="nav">
         			<ul>
         				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
-        				<li class="nav-data nav-effect subnav nav-data-dl">
+        				<li class="nav-data nav-effect nav-data-dl subnav">
         					<a href="data.html"><label>數據資料庫</label></a>
-        					<div class="nav-data-dl subnav-content">
-        						<a href="data-dl.html"><label>數據下載</label></a>
+        					<div class="subnav-content">
+        						<a class="nav-data nav-effect" href="data.html"><label>數據資料庫</label></a>
+        						<a class="nav-data-dl nav-effect" href="data-dl.html"><label>數據下載</label></a>
         					</div>
         				</li>
         				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
-        				<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
+        				<li class="nav-album nav-effect nav-postcarder subnav">
+        					<a href="album.html"><label>活動項目</label></a>
+        					<div class="subnav-content">
+        						<a class="nav-album nav-effect" href="album.html"><label>活動相簿</label></a>
+        						<a class="nav-postcarder nav-effect" href="postcarder.html"><label>明信片製作</label></a>
+        					</div>
+        				</li>
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
         				<!-- <li class="nav-login nav-effect"><a href="javascript:;"><img class="avatar" src="https://fakeimg.pl/40x40/"><label>登出</label></a></li> -->
         			</ul>
@@ -81,7 +88,7 @@
 		            <img src="https://fakeimg.pl/400x400/" />
 		        </div>
 		    </section>
-		    <section class="annual_datas">
+		    <section id="annual_datas" class="annual_datas">
 		        <div class="title with_afterline"><span>年度數據資料</span></div>
 		        <div class="inner">
 		            <div class="datas-total">
@@ -104,13 +111,13 @@
 		                    </li>
 		                </ul>
 		            </div>
-		            <div class="datas-color">
-		                <div class="top-123">
+		            <div class="datas-rank">
+		                <div class="rank-top">
 		                    <div id="annual-top1">寶特瓶</div>
 		                    <div id="annual-top2">煙蒂</div>
 		                    <div id="annual-top3">塑膠瓶蓋</div>
 		                </div>
-		                <ul id="annual-top-scale" class="top-scale">
+		                <ul id="annual-rank-scale" class="rank-scale">
 		                    <!--
 		                    <li style="width: 30%;"></li>
 		                    <li style="width: 17%;"></li>
@@ -220,7 +227,7 @@
 
         <!-- <script src="./public/lib/idangerous.swiper/idangerous.swiper.min.js"></script> -->
         <!-- <script src="./public/lib/idangerous.swiper/idangerous.swiper.3dflow.js"></script> -->
-        
+
         <script src="./public/js/common.js"></script>
         <script src="./public/js/annual-datas.js"></script>
 		<script src="./public/js/index.js"></script>

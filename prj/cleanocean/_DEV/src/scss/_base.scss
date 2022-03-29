@@ -22,21 +22,21 @@ time, mark, audio, video {
     font-size: $fontsize;
     font: inherit;
     vertical-align: baseline;
-    @include mq($max-width: $bp-l) {
-        font-size: $fontsize - .5;
-    }
-    @include mq($max-width: $bp-m) {
-        font-size: $fontsize - 2;
-    }
-    @include mq($max-width: $bp-2s) {
-        font-size: $fontsize - 2.8;
-    }
-    @include mq($max-width: $bp-s) {
-        font-size: $fontsize - 2.4;
-    }
-    @include mq($max-width: $bp-xs) {
-        font-size: $fontsize - 2;
-    }
+    // @include mq($max-width: $bp-l) {
+    //     font-size: $fontsize - .5;
+    // }
+    // @include mq($max-width: $bp-m) {
+    //     font-size: $fontsize - 2;
+    // }
+    // @include mq($max-width: $bp-2s) {
+    //     font-size: $fontsize - 2.8;
+    // }
+    // @include mq($max-width: $bp-s) {
+    //     font-size: $fontsize - 2.4;
+    // }
+    // @include mq($max-width: $bp-xs) {
+    //     font-size: $fontsize - 2;
+    // }
 }
 
 /* HTML5 display-role reset for older browsers */

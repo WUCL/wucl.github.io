@@ -26,7 +26,7 @@
 		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
         <link rel="stylesheet" type="text/css" href="./public/css/postcarder.min.css" />
 	</head>
-	<body data-page="postercard-builder">
+	<body data-page="postcarder">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
@@ -35,14 +35,21 @@
         		<nav class="nav">
         			<ul>
         				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
-        				<li class="nav-data nav-effect subnav nav-data-dl">
+        				<li class="nav-data nav-effect nav-data-dl subnav">
         					<a href="data.html"><label>數據資料庫</label></a>
-        					<div class="nav-data-dl subnav-content">
-        						<a href="data-dl.html"><label>數據下載</label></a>
+        					<div class="subnav-content">
+        						<a class="nav-data nav-effect" href="data.html"><label>數據資料庫</label></a>
+        						<a class="nav-data-dl nav-effect" href="data-dl.html"><label>數據下載</label></a>
         					</div>
         				</li>
         				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
-        				<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
+        				<li class="nav-album nav-effect nav-postcarder subnav">
+        					<a href="album.html"><label>活動項目</label></a>
+        					<div class="subnav-content">
+        						<a class="nav-album nav-effect" href="album.html"><label>活動相簿</label></a>
+        						<a class="nav-postcarder nav-effect" href="postcarder.html"><label>明信片製作</label></a>
+        					</div>
+        				</li>
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
         				<!-- <li class="nav-login nav-effect"><a href="javascript:;"><img class="avatar" src="https://fakeimg.pl/40x40/"><label>登出</label></a></li> -->
         			</ul>
@@ -144,7 +151,7 @@
 		                        <label for="filter-campaign">淨灘地點</label>
 		                        <input type="text" name="filter-campaign" id="filter-campaign" maxlength="10">
 		                    </div>
-		                    <button id="filter-search" class="btn-style-2" type="button">搜尋</button>
+		                    <button id="btn-filter-search" class="btn-style-2 btn-filter-search" type="button">搜尋</button>
 		                </form>
 		            </div>
 		            <ul id="filter-result-list" class="filter-result-list albums-list">
@@ -184,8 +191,8 @@
 		            </ul>
 		        </div>
 		        <div class="va-step-2" data-va-step="2">
-		            <button id="btn-backToAlbum" class="btn-backToAlbum btn-style-2" type="button">回相簿</button>
-		            <button id="btn-confirmPic" class="btn-confirmPic btn-style-2" type="button">確定選取</button>
+		            <button id="btn-back-to-album" class="btn-back-to-album btn-style-2" type="button">回相簿</button>
+		            <button id="btn-confirm-pic" class="btn-confirm-pic btn-style-2" type="button">確定選取</button>
 		            <h2>彰化2020/04/24王功淨灘</h2>
 		            <ul id="va-pic-list" class="va-pic-list">
 		                <li class="va-pic-item" data-va-pic="1">

@@ -7,7 +7,9 @@ $(function() {
             $header: $('#header'),
             $main: $('#main'),
             $footer: $('#footer'),
+            $btnMEditorUpdate: $('#btn-m-editor-update'),
             $mycampaign: $('#mycampaign'),
+            $btnMyrecordEdit: $('#btn-myrecord-edit'),
             $btnCreatRecorder: $('#btn-creat-recorder'),
             $btnAddCampaignUpdate: $('#btn-add-campaign-update'),
             
@@ -117,7 +119,7 @@ $(function() {
                 }
                 reader.readAsDataURL(event.target.files[0]);
             });
-            $('#btn-m-editor-update').on('click', function() {
+            $this.el.$btnMEditorUpdate.on('click', function() {
                 $this.var.$m.avatar = $('#preview_avatar').attr('src');
                 $this.var.$m.name = $('#m-editor-name').val();
                 console.log($this.var.$m);
@@ -129,7 +131,8 @@ $(function() {
                 }
                 $('#edit-member').popup('hide');
             });
-            $('#btn-myrecord-edit').on('click', function() {
+            $this.el.$btnMyrecordEdit.on('click', function() {
+                $this.el.$mycampaign.attr('data-edit-mode', 1);
                 return;
             });
             $this.el.$mycampaign.on('click', '.campaign .btn-del-campaign', function(e) {

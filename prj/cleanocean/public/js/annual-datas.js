@@ -13,7 +13,7 @@ $(function() {
                 top1: $('#annual-top1'),
                 top2: $('#annual-top2'),
                 top3: $('#annual-top3'),
-                topScale: $('#annual-top-scale')
+                topScale: $('#annual-rank-scale')
             },
             $area: {
                 name: $('#goUpdateTWDatas-name'),
@@ -43,7 +43,7 @@ $(function() {
                 $this.var.$area = _target.attr('data-area');
 
                 let $name = window.mappingTWName[$this.var.$area];
-                let $mappingData = window.annualDatas.area[$name];
+                let $mappingData = window.annualArea[$name];
                 if ($mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
                     _target.addClass('active');
@@ -80,7 +80,8 @@ $(function() {
             doSuccess(window.annualDatas);
             function doSuccess(response) {
                 let $response = response;
-                window.annualDatas = $response;
+                console.log($response);
+                // window.annualDatas = $response;
                 $this.loadTWSvg();
                 $this.goUpdateAnnual();
             }
@@ -92,7 +93,7 @@ $(function() {
         goUpdateAnnual: function() {
             console.log("goUpdateAnnual");
             let $this = this;
-            let $annualDatas = window.annualDatas.annual;
+            let $annualDatas = window.annualDatas;
             console.log($annualDatas);
             $this.el.$annual.freq.html($annualDatas['freq']);
             $this.el.$annual.people.html($annualDatas['people']);
@@ -102,16 +103,16 @@ $(function() {
             $this.el.$annual.top2.html($annualDatas['top'][1]);
             $this.el.$annual.top3.html($annualDatas['top'][2]);
 
-            let $topScaleLength = $annualDatas['topScale'].length;
+            let $topScaleLength = $annualDatas['scale'].length;
             for (let i = 0; i < $topScaleLength; i++ ) {
-                $this.el.$annual.topScale.append('<li style="width: ' + $annualDatas['topScale'][i] + '%;"></li>');
+                $this.el.$annual.topScale.append('<li style="width: ' + $annualDatas['scale'][i] + '%;"></li>');
             }
         },
         goUpdateTWDatas: function() {
             console.log("goUpdateTWDatas");
             let $this = this;
             let $area = window.mappingTWName[$this.var.$area];
-            let $mappingData = window.annualDatas.area[$area];
+            let $mappingData = window.annualArea[$area];
             console.log($this.var.$area);
             console.log($mappingData);
             $this.el.$area.name.html($area);
@@ -124,35 +125,6 @@ $(function() {
     };
     ANNUALDATAS.init();
 });
-
-window.annualDatas = {
-    annual: {
-        freq: 99,
-        people: 1111,
-        meter: 2222,
-        kg: 3333,
-        top: ['寶特瓶A', '煙蒂B', '塑膠瓶蓋C'],
-        topScale: ['30', '17', '15', '12', '9', '6', '4', '4', '3']
-    },
-    area: {
-        '台南': {
-            freq: 10,
-            top: ['塑膠瓶蓋1', '寶特瓶2', '煙蒂3'],
-        },
-        '高雄': {
-            freq: 11,
-            top: ['寶特瓶1', '塑膠瓶蓋2', '煙蒂3'],
-        },
-        '台北': {
-            freq: 12,
-            top: ['煙蒂1', '寶特瓶2', '塑膠瓶蓋3'],
-        },
-        '新竹': {
-            freq: 13,
-            top: ['塑膠瓶蓋1', '煙蒂2', '寶特瓶3'],
-        },
-    }
-};
 
 window.mappingTWName = {
     'ttt': '台東',

@@ -269,9 +269,9 @@ body {
 				}
 				.datas-total {
 				}
-				.datas-color {
+				.datas-rank {
 					background: $color-white;
-					.top-123 {
+					.rank-top {
 						display: flex;
 						align-items: center;
 						justify-content: space-between;
@@ -302,7 +302,7 @@ body {
 							}
 						}
 					}
-					.top-scale {
+					.rank-scale {
 						height: 35px;
 						display: flex;
 						align-items: center;
@@ -312,31 +312,31 @@ body {
 							height: 100%;
 							display: block;
 							&:nth-child(1) {
-								background: nth($color-top-scale, 1);
+								background: nth($color-rank-scale, 1);
 							}
 							&:nth-child(2) {
-								background: nth($color-top-scale, 2);
+								background: nth($color-rank-scale, 2);
 							}
 							&:nth-child(3) {
-								background: nth($color-top-scale, 3);
+								background: nth($color-rank-scale, 3);
 							}
 							&:nth-child(4) {
-								background: nth($color-top-scale, 4);
+								background: nth($color-rank-scale, 4);
 							}
 							&:nth-child(5) {
-								background: nth($color-top-scale, 5);
+								background: nth($color-rank-scale, 5);
 							}
 							&:nth-child(6) {
-								background: nth($color-top-scale, 6);
+								background: nth($color-rank-scale, 6);
 							}
 							&:nth-child(7) {
-								background: nth($color-top-scale, 7);
+								background: nth($color-rank-scale, 7);
 							}
 							&:nth-child(8) {
-								background: nth($color-top-scale, 8);
+								background: nth($color-rank-scale, 8);
 							}
 							&:nth-child(9) {
-								background: nth($color-top-scale, 9);
+								background: nth($color-rank-scale, 9);
 							}
 						}
 					}
@@ -379,7 +379,7 @@ body {
 								padding: 10px 20px;
 							}
 							.local-freq {
-								border-bottom: 2px solid nth($color-top-scale, 2);
+								border-bottom: 2px solid nth($color-rank-scale, 2);
 								padding-bottom: 20px;
 								margin-bottom: 20px;
 								.datas-total-ul {
@@ -422,7 +422,7 @@ body {
 										order: 2;
 										&:before {
 											height: 75%;
-											background: nth($color-top-scale, 1);
+											background: nth($color-rank-scale, 1);
 										}
 										&:after {
 											content: "TOP1";
@@ -432,7 +432,7 @@ body {
 										order: 1;
 										&:before {
 											height: 55%;
-											background: nth($color-top-scale, 2);
+											background: nth($color-rank-scale, 2);
 										}
 										&:after {
 											content: "TOP2";
@@ -442,7 +442,7 @@ body {
 										order: 3;
 										&:before {
 											height: 35%;
-											background: nth($color-top-scale, 3);
+											background: nth($color-rank-scale, 3);
 										}
 										&:after {
 											content: "TOP3";
@@ -510,6 +510,10 @@ body {
 				margin-right: 5px;
 				font-size: $fontsize-2;
 				flex-shrink: 0;
+				@include mq($max-width: $bp-mobile) {
+					font-size: $fontsize-1;
+					line-height: normal;
+				}
 			}
 		}
 		.form_filters-a {
@@ -517,6 +521,7 @@ body {
 			@include mq($max-width: $bp-mobile) {
 				flex-direction: column;
 				align-items: flex-start;
+			    align-items: flex-end;
 			}
 			input,
 			select {
@@ -525,7 +530,9 @@ body {
 				font-size: $fontsize;
 				padding: 1px 3px;
 				@include mq($max-width: $bp-mobile) {
-					font-size: $fontsize-2;
+					font-size: $fontsize-1;
+					width: 100%;
+					max-width: 100%;
 				}
 			}
 			.filter-time,
@@ -534,11 +541,18 @@ body {
 				@include mq($max-width: $bp-mobile) {
 					width: 100%;
 					margin: 5px 0;
+					display: grid;
+					grid-template-columns: .18fr 1fr;
+					row-gap: 10px;
+					align-items: center;
 				}
 			}
 			.filter-time {
 				input {
 					max-width: 180px;
+					@include mq($max-width: $bp-mobile) {
+						max-width: 100%;
+					}
 				}
 			}
 			.filter-county {
@@ -546,11 +560,15 @@ body {
 				align-items: center;
 				justify-content: center;
 				@include mq($max-width: $bp-mobile) {
-					justify-content: flex-start;
+					// justify-content: flex-start;
+					display: grid;
 				}
 				.twzipcode {
 					flex-shrink: 0;
 					width: 150px;
+					@include mq($max-width: $bp-mobile) {
+						width: 100%;
+					}
 					> div {
 						width: 100%;
 						select {
@@ -560,6 +578,9 @@ body {
 				}
 			}
 			.filter-campaign {
+			}
+			.btn-filter-search {
+				margin-top: 10px;
 			}
 		}
 		.form_filters-b {
