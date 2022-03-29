@@ -508,7 +508,7 @@ body {
 			margin-bottom: 15px;
 			label {
 				margin-right: 5px;
-				font-size: $fontsize-2;
+				font-size: $fontsize;
 				flex-shrink: 0;
 				@include mq($max-width: $bp-mobile) {
 					font-size: $fontsize-1;
@@ -549,7 +549,7 @@ body {
 			}
 			.filter-time {
 				input {
-					max-width: 180px;
+					max-width: 160px;
 					@include mq($max-width: $bp-mobile) {
 						max-width: 100%;
 					}
@@ -579,8 +579,10 @@ body {
 			}
 			.filter-campaign {
 			}
-			.btn-filter-search {
-				margin-top: 10px;
+			@include mq($max-width: $bp-mobile) {
+				.btn-filter-search {
+					margin-top: 10px;
+				}
 			}
 		}
 		.form_filters-b {
