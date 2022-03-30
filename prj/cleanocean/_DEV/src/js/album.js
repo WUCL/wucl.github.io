@@ -12,8 +12,10 @@ $(function() {
             $filterTimeEnd: $('#filter-time-end'),
             $filterCampaign: $('#filter-campaign'),
 
-            // $filterResultList: $('#filter-result-list'),
-            $filterResultItem: $('.filter-result-item'),
+            $filterResultList: $('#filter-result-list'),
+            // $filterResultItem: $('.filter-result-item'),
+
+            $vaName: $('#va-name'),
 
             $viewAlbumList: $('#va-pic-list'),
             $selectAll: $('#select-all'),
@@ -38,9 +40,10 @@ $(function() {
         },
         init: function() {
             console.log('album');
+            this.goInitial(); // 先 ajax 拿到資料先builder
+            this.loadAlbum();
             this.bindEvent();
             this.setPopup();
-            this.goInitial(); // 先 ajax 拿到資料先builder
             this.listenFilter();
         },
         bindEvent: function() {
@@ -61,10 +64,15 @@ $(function() {
                     return alert('請勾選欲下載數據');
                 }
             });
-            $this.el.$filterResultItem.on('click', function(e) {
+            $this.el.$filterResultList.on('click', '.filter-result-item', function(e) {
                 let _id = $(e.currentTarget).data('id');
                 $this.var.$popup.album = _id;
                 console.log($this.var.$popup.album);
+                let _album = window.albums[_id];
+                let _name = _album['area'] + _album['date'][0] + _album['date'][1] + _album['date'][2] + _album['campaign'];
+                $this.el.$vaName.html(_name);
+
+                $this.loadAlbumPic();
                 return;
             });
             $this.el.$viewAlbumList.on("change", "input[type=checkbox]", function(e) {
@@ -76,6 +84,46 @@ $(function() {
                 $this.updateDLCheckedList();
             });
         },
+        goInitial: function() {
+            let $this = this;
+            console.log('goInitial');
+            // $this.buildAlbum(window.album);
+        },
+        loadAlbum: function() { // window.albums
+            let $this = this;
+            let _source = window.albums;
+            let _target = $this.el.$filterResultList;
+            let _template_album = window.helper.getTemplate('album__result');
+            let _templates = '';
+            for (let i = 0; i < _source.length; i++) {
+                _template_album = _template_album.replace(/\[ID\]/g,  _source[i]['id']);
+                _template_album = _template_album.replace(/\[COUNTY\]/g,  _source[i]['area']);
+                _template_album = _template_album.replace(/\[DATA_Y\]/g,  _source[i]['date'][0]);
+                _template_album = _template_album.replace(/\[DATA_M\]/g,  _source[i]['date'][1]);
+                _template_album = _template_album.replace(/\[DATA_D\]/g,  _source[i]['date'][2]);
+                _template_album = _template_album.replace(/\[CAMPAIGN\]/g,  _source[i]['campaign']);
+                _template_album = _template_album.replace(/\[FEATURED\]/g,  _source[i]['featured']);
+                _template_album = _template_album.replace(/\[OWNER\]/g,  _source[i]['owner']);
+                _template_album = _template_album.replace(/data-src/g,  'src');
+                _templates += _template_album;
+            }
+            _target.html(_templates);
+        },
+        loadAlbumPic: function() { // window.albumPics
+            let $this = this;
+            let _source = window.albumPics;
+            let _target = $this.el.$viewAlbumList;
+            let _id = $this.var.$popup.album;
+            let _template_pics = window.helper.getTemplate('album__pics');
+            let _templates = '';
+            for (let i = 0; i < _source[_id].length; i++) {
+                _template_pics = _template_pics.replace(/\[ID\]/g,  _id);
+                _template_pics = _template_pics.replace(/\[PIC\]/g,  _source[_id][i]);
+                _template_pics = _template_pics.replace(/data-src/g,  'src');
+                _templates += _template_pics;
+            }
+            _target.html(_templates);
+        },
         updateDLCheckedList: function() {
             console.log('updateDLCheckedList');
             let $this = this;
@@ -85,11 +133,6 @@ $(function() {
             });
             console.log($this.var.$popup.pic);
             return;
-        },
-        goInitial: function() {
-            let $this = this;
-            console.log('goInitial');
-            // $this.buildAlbum(window.album);
         },
         buildAlbum: function(list) {
             let $list = list;

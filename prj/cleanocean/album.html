@@ -95,41 +95,7 @@
 		                        <button id="btn-filter-search" class="btn-filter-search btn-style-2" type="submit">搜尋</button>
 		                    </form>
 		                </div>
-		                <ul id="filter-result-list" class="filter-result-list albums-list">
-		                    <li class="filter-result-item albums-item view-album_open" data-id="1">
-		                        <div class="f-r-i-name">
-		                            <span class="name-county">彰化</span>
-		                            <span class="name-date">2020/04/24</span>
-		                            <span class="name-campaign">王功淨灘1</span>
-		                        </div>
-		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
-		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
-		                        </div>
-		                    </li>
-		                    <li class="filter-result-item albums-item view-album_open" data-id="3">
-		                        <div class="f-r-i-name">
-		                            <span class="name-county">彰化</span>
-		                            <span class="name-date">2020/04/24</span>
-		                            <span class="name-campaign">王功淨灘2</span>
-		                        </div>
-		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
-		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
-		                        </div>
-		                    </li>
-		                    <li class="filter-result-item albums-item view-album_open" data-id="2">
-		                        <div class="f-r-i-name">
-		                            <span class="name-county">彰化</span>
-		                            <span class="name-date">2020/04/24</span>
-		                            <span class="name-campaign">王功淨灘3</span>
-		                        </div>
-		                        <div class="f-r-i-album">
-		                            <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
-		                            <div class="album-source">尼古拉拉科技股份有限公司</div>
-		                        </div>
-		                    </li>
-		                </ul>
+		                <ul id="filter-result-list" class="filter-result-list albums-list"></ul>
 		            </div>
 		        </div>
 		    </section>
@@ -137,7 +103,7 @@
 		<section id="view-album">
 		    <div class="popup_inner">
 		        <div class="popup_header">
-		            <h2>彰化2020/04/24王功淨灘</h2>
+		            <h2 id="va-name" class="va-name">allen</h2>
 		        </div>
 		        <div class="va-pic_box withfilter-box">
 		            <div class="va-pic-filter in-filter">
@@ -146,24 +112,7 @@
 		                    <button id="filter-download" class="btn-style-2" type="submit">下載</button>
 		                </form>
 		            </div>
-		            <ul id="va-pic-list" class="va-pic-list">
-		                <li class="va-pic-item" data-va-pic="1">
-		                    <input type="checkbox" name="albumPic[]" id="va-pic-1" value="1">
-		                    <label for="va-pic-1"><img src="public/img/album-pic-a.png"></label>
-		                </li>
-		                <li class="va-pic-item" data-va-pic="2">
-		                    <input type="checkbox" name="albumPic[]" id="va-pic-2" value="2">
-		                    <label for="va-pic-2"><img src="public/img/album-pic-a.png"></label>
-		                </li>
-		                <li class="va-pic-item" data-va-pic="3">
-		                    <input type="checkbox" name="albumPic[]" id="va-pic-3" value="3">
-		                    <label for="va-pic-3"><img src="public/img/album-pic-a.png"></label>
-		                </li>
-		                <li class="va-pic-item" data-va-pic="4">
-		                    <input type="checkbox" name="albumPic[]" id="va-pic-4" value="4">
-		                    <label for="va-pic-4"><img src="public/img/album-pic-a.png"></label>
-		                </li>
-		            </ul>
+		            <ul id="va-pic-list" class="va-pic-list"></ul>
 		        </div>
 		    </div>
 		</section>
@@ -196,11 +145,57 @@
 				</div>
 			</section>
 		</footer>
+		<div id="templates" class="display-none-i">
+		    <div id="template_index__postcards">
+		        <li><img data-src="[POSTCARD_IMG]"></li>
+		    </div>
+
+		    <div id="template_data__result">
+		        <li class="filter-result-item datas-item">
+		            <input type="checkbox" name="resultItem[]" id="select-[ID]" value="[ID]">
+		            <label class="f-r-i-name" for="select-[ID]">
+		                <span class="name-county">[COUNTY]</span>
+		                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+		                <span class="name-campaign">[CAMPAIGN]</span>
+		            </label>
+		        </li>
+		    </div>
+
+		    <div id="template_member__postcards">
+		        <li><img data-src="[POSTCARD_IMG]"></li>
+		    </div>
+
+		    <div id="template_member__campaigns">
+		        <li class="campaign" data-id="[ID]"><button class="btn-del-campaign btn-style-2" value="[ID]"></button><span>[COUNTY] [DATA_Y]/[DATA_M]/[DATA_D] [CAMPAIGN]</span></li>
+		    </div>
+
+		    <div id="template_album__result">
+		        <li class="filter-result-item albums-item view-album_open" data-id="[ID]">
+		            <div class="f-r-i-name">
+		                <span class="name-county">[COUNTY]</span>
+		                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+		                <span class="name-campaign">[CAMPAIGN]</span>
+		            </div>
+		            <div class="f-r-i-album">
+		                <div class="album-featured"><img data-src="[FEATURED]" /></div>
+		                <div class="album-source">[OWNER]</div>
+		            </div>
+		        </li>
+		    </div>
+
+		    <div id="template_album__pics">
+		        <li class="va-pic-item" data-va-pic="[ID]">
+		            <input type="checkbox" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+		            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+		        </li>
+		    </div>
+		</div>
         
 
 		<script src="./public/js/_DATA.js"></script>
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/js/custom/eventdevice.js"></script>
+		<script src="./public/js/helper.js"></script>
 
 		<!-- development version, includes helpful console warnings -->
 		<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->

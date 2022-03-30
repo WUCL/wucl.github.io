@@ -70,6 +70,9 @@
 			position: absolute;
 			right: 10px;
 			z-index: 2;
+			&:before {
+				content: "關閉";
+			}
 		}
 		.recorder-img-box {
  			text-align: center;
@@ -92,12 +95,6 @@
 				padding: 15px 50px;
 				@include mq($max-width: $bp-mobile) {
 					padding: 15px 15px;
-				}
-				&[data-edit-mode="0"] {
-					.btn-del-campaign,
-					.btn-add-campaign {
-						display: none !important;
-					}
 				}
 				.campaigns {
 					display: grid;
@@ -140,6 +137,19 @@
 				display: block;
 				margin: 20px auto;
 				font-size: $fontsize-2;
+			}
+		}
+		&[data-edit-mode="0"] {
+			.btn-myrecord-edit {
+				&:before {
+					display: none !important;
+				}
+			}
+			.mycampaign {
+				.btn-del-campaign,
+				.btn-add-campaign {
+					display: none !important;
+				}
 			}
 		}
 	}

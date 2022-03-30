@@ -53,6 +53,10 @@ layout/_popup
 		.popup_header.va-pic-header {
 			.btns {
 				text-align: right;
+				.btn-back-to-album {
+					opacity: .7;
+					margin-right: 10px;
+				}
 			}
 		}
 		ul.va-pic-list {

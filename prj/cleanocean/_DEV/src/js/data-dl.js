@@ -32,8 +32,9 @@ $(function() {
         },
         init: function() {
             console.log('data-dl');
-            this.bindEvent();
             this.goInitial(); // 先 ajax 拿到資料先builder
+            this.bindEvent();
+            this.loadResult();
             this.listenFilter();
         },
         bindEvent: function() {
@@ -59,7 +60,24 @@ $(function() {
         goInitial: function() {
             let $this = this;
             console.log('goInitial');
-            // $this.buildResult(window.dataDl);
+        },
+        loadResult: function() { // window.datas
+            let $this = this;
+            let _source = window.datas;
+            let _target = $this.el.$filterResultList;
+            let _template_result = window.helper.getTemplate('data__result');
+            let _templates = '';
+            for (let i = 0; i < _source.length; i++) {
+                 _template_result = _template_result.replace(/\[ID\]/g,  _source[i]['id']);
+                _template_result = _template_result.replace(/\[COUNTY\]/g,  _source[i]['area']);
+                _template_result = _template_result.replace(/\[DATA_Y\]/g,  _source[i]['date'][0]);
+                _template_result = _template_result.replace(/\[DATA_M\]/g,  _source[i]['date'][1]);
+                _template_result = _template_result.replace(/\[DATA_D\]/g,  _source[i]['date'][2]);
+                _template_result = _template_result.replace(/\[CAMPAIGN\]/g,  _source[i]['campaign']);
+                _templates += _template_result;
+            }
+            _target.html(_templates);
+            // this.builSlider();
         },
         buildResult: function(list) {
             let $list = list;

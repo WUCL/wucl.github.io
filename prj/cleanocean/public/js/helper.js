@@ -3,6 +3,7 @@ helper
 ======================= */
 window.helper = {
     magicNum: function(_target, _endNum, _duration) {
+        console.log(_target.text());
         $({Counter: _target.text()}).animate({
             Counter: _endNum
         }, {
@@ -10,10 +11,10 @@ window.helper = {
             easing: 'swing',
             step: function() {
                 _target.text(Math.floor(this.Counter));
+                console.log(this.Counter)
             },
             complete: function () {
                 _target.html(this.Counter);
-                // alert('finished');
             }
         });
     },
@@ -55,73 +56,9 @@ window.helper = {
         else return $newUrl;
         return;
     },
+
+    // 取得template
+    getTemplate: (template_type) => {
+        return $('#template_' + template_type).html();
+    }
 };
-
-
-/** BEGIN openAlert **/
-/**
-REF: https://sweetalert2.github.io/#usage
-
-USAGE:
-window.openAlert({
-    title: '標題是我', // title,text,html，三擇一輸入即可
-    text: '內容是我', // title,text,html，三擇一輸入即可
-    html: '', // title,text,html，三擇一輸入即可
-    showConfirm: true, // 顯示確認鈕 | #非必填，預設 true
-    showCancel: true, // 顯示取消鈕 | #非必填
-    showClose: true, // 顯示關閉鈕 | #非必填
-
-    confirmBtnText: '確認', // 確定鈕的名稱 | #非必填
-    cancelBtnText: '取消', // 取消鈕的名稱 | #非必填
-    confirmBtnLink: ["1", "https://google.com"], // 確定按鈕的連結 | #非必填 | ['0/1(另開)', link]
-
-    confirmBtnColor: '#e7415e',
-    cancelBtnColor: '',
-});
-**/
-window.openAlert = (msg) => {
-    let $msg = msg
-    , $text = $msg.text || ''
-    , $title = $msg.title || ''
-    , $html = $msg.html || ''
-    ;
-
-    if (!($text != '' || $title != '' ||  $html != '' )) { return; }
-    let $showCancel = $msg.showCancel || false
-    , $showConfirm = (typeof $msg.showConfirm == 'undefined')?true:$msg.showConfirm
-    , $showClose = $msg.showClose || false
-    , $confirmBtn = $msg.confirmBtnText || ''
-    , $cancelBtn = $msg.cancelBtnText || ''
-    , $confirmBtnColor = $msg.confirmBtnColor || ''
-    , $cancelBtnColor = $msg.cancelBtnColor || ''
-    , $confirmBtnLink = $msg.confirmBtnLink || ''
-    ;
-
-    let $msgs = {
-        title: $title,
-        text: $text,
-        html: $html,
-        confirmButtonColor: $confirmBtnColor,
-        cancelButtonColor: $cancelBtnColor,
-    };
-    if ($confirmBtn != '') $msgs.confirmButtonText = $confirmBtn;
-    else $showConfirm = false;
-    if ($cancelBtn != '') $msgs.cancelButtonText = $cancelBtn;
-    else $showCancel = false;
-
-    $msgs.showCloseButton = $showClose;
-    $msgs.showCancelButton = $showCancel;
-    $msgs.showConfirmButton = $showConfirm;
-    // console.log($msgs);
-
-    Swal.fire($msgs)
-    .then((result) => {
-        if (result.value) {
-            if ($confirmBtnLink != '' && $confirmBtnLink[1] != '') {
-                if ($confirmBtnLink[0] == '1') return window.open($confirmBtnLink[1]);
-                else return window.location.assign($confirmBtnLink[1]);
-            }
-        }
-    });;
-}
-/** END openAlert **/

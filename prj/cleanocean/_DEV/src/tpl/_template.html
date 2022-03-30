@@ -1,0 +1,45 @@
+<div id="templates" class="display-none-i">
+    <div id="template_index__postcards">
+        <li><img data-src="[POSTCARD_IMG]"></li>
+    </div>
+
+    <div id="template_data__result">
+        <li class="filter-result-item datas-item">
+            <input type="checkbox" name="resultItem[]" id="select-[ID]" value="[ID]">
+            <label class="f-r-i-name" for="select-[ID]">
+                <span class="name-county">[COUNTY]</span>
+                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                <span class="name-campaign">[CAMPAIGN]</span>
+            </label>
+        </li>
+    </div>
+
+    <div id="template_member__postcards">
+        <li><img data-src="[POSTCARD_IMG]"></li>
+    </div>
+
+    <div id="template_member__campaigns">
+        <li class="campaign" data-id="[ID]"><button class="btn-del-campaign btn-style-2" value="[ID]"></button><span>[COUNTY] [DATA_Y]/[DATA_M]/[DATA_D] [CAMPAIGN]</span></li>
+    </div>
+
+    <div id="template_album__result">
+        <li class="filter-result-item albums-item view-album_open" data-id="[ID]">
+            <div class="f-r-i-name">
+                <span class="name-county">[COUNTY]</span>
+                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                <span class="name-campaign">[CAMPAIGN]</span>
+            </div>
+            <div class="f-r-i-album">
+                <div class="album-featured"><img data-src="[FEATURED]" /></div>
+                <div class="album-source">[OWNER]</div>
+            </div>
+        </li>
+    </div>
+
+    <div id="template_album__pics">
+        <li class="va-pic-item" data-va-pic="[ID]">
+            <input type="checkbox" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+        </li>
+    </div>
+</div>

@@ -21,17 +21,19 @@ $(function() {
                 top1: $('#goUpdateTWDatas-top1'),
                 top2: $('#goUpdateTWDatas-top2'),
                 top3: $('#goUpdateTWDatas-top3'),
-            }
+            },
         },
         var: {
-            $area: '',
+            $area: 'tpe', // defaul setting
             $api: {
-
             },
         },
         init: function() {
             console.log('ANNUALDATAS');
+            this.goInitial(); // 先 ajax 拿到資料先builder
+            this.loadTWSvg();
             this.getAnnualDatas();
+            this.goUpdateTWDatas();
             this.bindEvent();
         },
         bindEvent: function() {
@@ -41,10 +43,11 @@ $(function() {
                 let _currentTarget = $(e.currentTarget);
                 // console.log(_target.attr('data-area'));
                 $this.var.$area = _target.attr('data-area');
+                console.log($this.var.$area);
 
-                let $name = window.mappingTWName[$this.var.$area];
-                let $mappingData = window.annualArea[$name];
-                if ($mappingData !== undefined) { // check if data exist
+                let _name = window.mappingTWName[$this.var.$area];
+                let _mappingData = window.annualArea[_name];
+                if (_mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
                     _target.addClass('active');
                     $this.goUpdateTWDatas();
@@ -54,9 +57,9 @@ $(function() {
                 return;
             })
         },
-        getAnnualDatas: function() {
-            console.log('getAnnualDatas');
+        goInitial: function() {
             let $this = this;
+            console.log('goInitial');
 
             // // ajax url
             // let _url = $this.var.api + '&__r=' + (new Date()).getTime();
@@ -77,49 +80,59 @@ $(function() {
             //         console.log(response);
             //     }
             // });
+        },
+        getAnnualDatas: function() {
+            console.log('getAnnualDatas');
+            let $this = this;
+
             doSuccess(window.annualDatas);
             function doSuccess(response) {
                 let $response = response;
-                console.log($response);
+                // console.log($response);
                 // window.annualDatas = $response;
-                $this.loadTWSvg();
                 $this.goUpdateAnnual();
             }
             return;
         },
         loadTWSvg: function() {
-            return this.el.$twimg.load('./public/img/tw.svg');
+            let $this = this;
+            return $this.el.$twimg.load('./public/img/tw.svg', function() {
+                $this.el.$twimg.find('#svg-tw path.' + $this.var.$area).addClass('active');
+            });
         },
         goUpdateAnnual: function() {
             console.log("goUpdateAnnual");
             let $this = this;
-            let $annualDatas = window.annualDatas;
-            console.log($annualDatas);
-            $this.el.$annual.freq.html($annualDatas['freq']);
-            $this.el.$annual.people.html($annualDatas['people']);
-            $this.el.$annual.meter.html($annualDatas['meter']);
-            $this.el.$annual.kg.html($annualDatas['kg']);
-            $this.el.$annual.top1.html($annualDatas['top'][0]);
-            $this.el.$annual.top2.html($annualDatas['top'][1]);
-            $this.el.$annual.top3.html($annualDatas['top'][2]);
+            let _annualDatas = window.annualDatas;
+            // console.log(_annualDatas);
+            $this.el.$annual.freq.html(_annualDatas['freq']);
+            $this.el.$annual.people.html(_annualDatas['people']);
+            $this.el.$annual.meter.html(_annualDatas['meter']);
+            $this.el.$annual.kg.html(_annualDatas['kg']);
+            if (window.page == 'member') return;
 
-            let $topScaleLength = $annualDatas['scale'].length;
-            for (let i = 0; i < $topScaleLength; i++ ) {
-                $this.el.$annual.topScale.append('<li style="width: ' + $annualDatas['scale'][i] + '%;"></li>');
+            $this.el.$annual.top1.html(_annualDatas['top'][0]);
+            $this.el.$annual.top2.html(_annualDatas['top'][1]);
+            $this.el.$annual.top3.html(_annualDatas['top'][2]);
+
+            let _topScaleLength = _annualDatas['scale'].length;
+            for (let i = 0; i < _topScaleLength; i++ ) {
+                $this.el.$annual.topScale.append('<li style="width: ' + _annualDatas['scale'][i] + '%;"></li>');
             }
         },
         goUpdateTWDatas: function() {
             console.log("goUpdateTWDatas");
+            if (window.page == 'member') return;
             let $this = this;
-            let $area = window.mappingTWName[$this.var.$area];
-            let $mappingData = window.annualArea[$area];
-            console.log($this.var.$area);
-            console.log($mappingData);
-            $this.el.$area.name.html($area);
-            $this.el.$area.freq.html($mappingData['freq']);
-            $this.el.$area.top1.html($mappingData['top'][0]);
-            $this.el.$area.top2.html($mappingData['top'][1]);
-            $this.el.$area.top3.html($mappingData['top'][2]);
+            let _area = window.mappingTWName[$this.var.$area];
+            let _mappingData = window.annualArea[_area];
+            // console.log($this.var.$area);
+            // console.log(_mappingData);
+            $this.el.$area.name.html(_area);
+            $this.el.$area.freq.html(_mappingData['freq']);
+            $this.el.$area.top1.html(_mappingData['top'][0]);
+            $this.el.$area.top2.html(_mappingData['top'][1]);
+            $this.el.$area.top3.html(_mappingData['top'][2]);
             return;
         },
     };

@@ -1,14 +1,14 @@
 // annual Banner /* [PAGE]index */
-window.annualBanner = {
-    topic: 'https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto',
-    campaign: ['https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto', 'https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto']
-}
+// window.annualBanner = {
+//     topic: 'https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto',
+//     campaign: ['https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto', 'https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto']
+// }
 
 
 // annual Datas /* [PAGE]index/data/member */
 window.annualDatas = {
-    freq: 15,
-    people: 399,
+    freq: 17,
+    people: 389,
     meter: 500,
     kg: 419,
     top: ['寶特瓶', '煙蒂', '塑膠瓶蓋'],
@@ -18,19 +18,19 @@ window.annualDatas = {
 
 // annual Area /* [PAGE]index/data */
 window.annualArea = {
-    '台南': {
+    '台南': { // tnn
         freq: 10,
         top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
     },
-    '高雄': {
+    '高雄': { // khh
         freq: 11,
         top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
     },
-    '台北': {
+    '台北': { // tpe
         freq: 12,
         top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
     },
-    '新竹': {
+    '新竹': { // hsz
         freq: 13,
         top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
     },
@@ -43,10 +43,10 @@ window.postcards = ['public/img/postcard-demo.png', 'public/img/postcard-demo.pn
 
 // member data /* [PAGE]member */
 window.member = {
-    avatar: 'https://fakeimg.pl/100x100/?text=會員頭貼&font=noto',
+    avatar: 'https://fakeimg.pl/100x100/?text=會員頭照&font=noto',
     name: '阿倫',
     campaign: [1, 3, 4, 6],
-    postcard: ['public/img/postcard-demo.png', 'public/img/postcard-demo.png', 'public/img/postcard-demo.png', 'public/img/postcard-demo.png', 'public/img/postcard-demo.png']
+    postcard: ['public/img/postcard-demo.png', 'public/img/postcard-demo.png', 'public/img/postcard-demo.png', 'public/img/postcard-demo.png']
 };
 
 

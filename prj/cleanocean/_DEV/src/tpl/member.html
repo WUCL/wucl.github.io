@@ -31,36 +31,32 @@
                 <ul class="datas-total-ul">
                     <li>
                         <div class="total-key" data-text="淨灘場次"></div>
-                        <div class="total-value" data-unit="場">15</div>
+                        <div id="annual-freq" class="total-value" data-unit="場">0</div>
                     </li>
                     <li>
                         <div class="total-key" data-text="淨灘人數"></div>
-                        <div class="total-value" data-unit="人">399</div>
+                        <div id="annual-people" class="total-value" data-unit="人">0</div>
                     </li>
                     <li>
                         <div class="total-key" data-text="淨灘長度"></div>
-                        <div class="total-value" data-unit="公尺">500</div>
+                        <div id="annual-meter" class="total-value" data-unit="公尺">0</div>
                     </li>
                     <li>
                         <div class="total-key" data-text="淨灘重量"></div>
-                        <div class="total-value" data-unit="公斤">419</div>
+                        <div id="annual-kg" class="total-value" data-unit="公斤">0</div>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
-    <section class="my-record">
+    <section id="my-record" class="my-record" data-edit-mode="0">
         <div class="title with_afterline">
             <span>我的淨灘足跡</span>
             <button id="btn-myrecord-edit"class="btn-myrecord-edit btn-style-2">編輯</button>
         </div>
         <div class="inner">
-            <div id="mycampaign" class="mycampaign box-style" data-edit-mode="0">
-                <ul class="campaigns">
-                    <li class="campaign" data-id="1"><button class="btn-del-campaign btn-style-2" value="1"></button><span>彰化 2020/02/24 王功淨灘</span></li>
-                    <li class="campaign" data-id="2"><button class="btn-del-campaign btn-style-2" value="2"></button><span>彰化 2020/02/24 王功淨灘</span></li>
-                    <li class="campaign" data-id="3"><button class="btn-del-campaign btn-style-2" value="3"></button><span>彰化 2020/02/24 王功淨灘</span></li>
-                </ul>
+            <div id="mycampaign" class="mycampaign box-style">
+                <ul class="campaigns"></ul>
                 <button class="btn-add-campaign btn-style-2 add-campaign_open"></button>
             </div>
             <button id="btn-creat-recorder" class="btn-creat-recorder btn-style-2">成果圖產生器</button>
@@ -76,13 +72,7 @@
         <div class="title with_afterline"><span>我的明信片</span></div>
         <div class="inner">
             <div id="my-flipster" class="my-flipster">
-                <ul>
-                    <li><img src="public/img/postcard-demo.png" /></li>
-                    <li><img src="public/img/postcard-demo.png" /></li>
-                    <li><img src="public/img/postcard-demo.png" /></li>
-                    <li><img src="public/img/postcard-demo.png" /></li>
-                    <li><img src="public/img/postcard-demo.png" /></li>
-                </ul>
+                <ul id="postcard-list" class="postcard-list"></ul>
             </div>
             <a href="postcarder.html" class="postcarder btn-style">製作明信片</a>
         </div>
