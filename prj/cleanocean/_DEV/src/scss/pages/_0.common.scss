@@ -525,7 +525,7 @@ body {
 			}
 			input,
 			select {
-				max-width: 150px;
+				max-width: 140px;
 				height: 30px;
 				font-size: $fontsize;
 				padding: 1px 3px;
@@ -565,7 +565,7 @@ body {
 				}
 				.twzipcode {
 					flex-shrink: 0;
-					width: 150px;
+					width: 140px;
 					@include mq($max-width: $bp-mobile) {
 						width: 100%;
 					}
@@ -657,7 +657,7 @@ body {
 				padding: 10px 15px;
 				border-radius: 9px;
 				.album-featured {
-					height: 250px;
+					max-height: 250px;
 					overflow: hidden;
 					@include mq($max-width: $bp-mobile) {
 						height: auto;

@@ -67,8 +67,7 @@ $(function() {
             $this.el.$filterResultList.on('click', '.filter-result-item', function(e) {
                 let _id = $(e.currentTarget).data('id');
                 $this.var.$popup.album = _id;
-                console.log($this.var.$popup.album);
-                let _album = window.albums[_id];
+                let _album = window.campaigns[_id];
                 let _name = _album['area'] + _album['date'][0] + _album['date'][1] + _album['date'][2] + _album['campaign'];
                 $this.el.$vaName.html(_name);
 
@@ -89,23 +88,25 @@ $(function() {
             console.log('goInitial');
             // $this.buildAlbum(window.album);
         },
-        loadAlbum: function() { // window.albums
+        loadAlbum: function() {
+            console.log('loadAlbum');
             let $this = this;
-            let _source = window.albums;
+            let _source = window.campaigns;
             let _target = $this.el.$filterResultList;
             let _template_album = window.helper.getTemplate('album__result');
             let _templates = '';
-            for (let i = 0; i < _source.length; i++) {
-                _template_album = _template_album.replace(/\[ID\]/g,  _source[i]['id']);
-                _template_album = _template_album.replace(/\[COUNTY\]/g,  _source[i]['area']);
-                _template_album = _template_album.replace(/\[DATA_Y\]/g,  _source[i]['date'][0]);
-                _template_album = _template_album.replace(/\[DATA_M\]/g,  _source[i]['date'][1]);
-                _template_album = _template_album.replace(/\[DATA_D\]/g,  _source[i]['date'][2]);
-                _template_album = _template_album.replace(/\[CAMPAIGN\]/g,  _source[i]['campaign']);
-                _template_album = _template_album.replace(/\[FEATURED\]/g,  _source[i]['featured']);
-                _template_album = _template_album.replace(/\[OWNER\]/g,  _source[i]['owner']);
-                _template_album = _template_album.replace(/data-src/g,  'src');
-                _templates += _template_album;
+            for ($prop in _source) {
+                let _template = _template_album;
+                _template = _template.replace(/\[ID\]/g,  _source[$prop]['id']);
+                _template = _template.replace(/\[COUNTY\]/g,  _source[$prop]['area']);
+                _template = _template.replace(/\[DATA_Y\]/g,  _source[$prop]['date'][0]);
+                _template = _template.replace(/\[DATA_M\]/g,  _source[$prop]['date'][1]);
+                _template = _template.replace(/\[DATA_D\]/g,  _source[$prop]['date'][2]);
+                _template = _template.replace(/\[CAMPAIGN\]/g,  _source[$prop]['campaign']);
+                _template = _template.replace(/\[FEATURED\]/g,  _source[$prop]['featured']);
+                _template = _template.replace(/\[OWNER\]/g,  _source[$prop]['owner']);
+                _template = _template.replace(/data-src/g,  'src');
+                _templates += _template;
             }
             _target.html(_templates);
         },
@@ -113,14 +114,15 @@ $(function() {
             let $this = this;
             let _source = window.albumPics;
             let _target = $this.el.$viewAlbumList;
-            let _id = $this.var.$popup.album;
+            let _aid = $this.var.$popup.album;
             let _template_pics = window.helper.getTemplate('album__pics');
             let _templates = '';
-            for (let i = 0; i < _source[_id].length; i++) {
-                _template_pics = _template_pics.replace(/\[ID\]/g,  _id);
-                _template_pics = _template_pics.replace(/\[PIC\]/g,  _source[_id][i]);
-                _template_pics = _template_pics.replace(/data-src/g,  'src');
-                _templates += _template_pics;
+            for ($prop in _source[_aid]) {
+                let _template = _template_pics;
+                _template = _template.replace(/\[ID\]/g,  _source[_aid][$prop]['id']);
+                _template = _template.replace(/\[PIC\]/g,  _source[_aid][$prop]['src']);
+                _template = _template.replace(/data-src/g,  'src');
+                _templates += _template;
             }
             _target.html(_templates);
         },

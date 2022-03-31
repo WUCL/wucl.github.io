@@ -104,9 +104,11 @@ $(function() {
             let _template_postcards = window.helper.getTemplate('member__postcards');
             let _templates = '';
             for (let i = 0; i < _source.length; i++) {
-                _template_postcards = _template_postcards.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
-                _template_postcards = _template_postcards.replace(/data-src/g,  'src');
-                _templates += _template_postcards;
+                console.log(_source);
+                let _template = _template_postcards;
+                _template = _template.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
+                _template = _template.replace(/data-src/g,  'src');
+                _templates += _template;
             }
             _target.html(_templates);
             this.builSlider();
@@ -240,7 +242,7 @@ $(function() {
                     // Step2. setting pin in tw map
                     // image_pin.onload = function() {
                         console.log('image_pin');
-                        $.each(window.myCampaign, function(index, item) {
+                        $.each(window.member.campaign, function(index, item) {
                             let _campaign = window.campaigns[item];
                             let _area = _campaign.area;
                             let _x = window.tw_xy[_area][0] + (getRandomArbitrary(-15, 15));
@@ -300,15 +302,16 @@ $(function() {
             let _target = $this.el.$mycampaign.find('ul')
             let _template_campaigns = window.helper.getTemplate('member__campaigns');
             let _templates = '';
-            for (let i = 0; i < _source.length; i++) {
-                let _id = _source[i];
-                _template_campaigns = _template_campaigns.replace(/\[ID\]/g,  _source2[_id]['id']);
-                _template_campaigns = _template_campaigns.replace(/\[COUNTY\]/g,  _source2[_id]['area']);
-                _template_campaigns = _template_campaigns.replace(/\[DATA_Y\]/g,  _source2[_id]['date'][0]);
-                _template_campaigns = _template_campaigns.replace(/\[DATA_M\]/g,  _source2[_id]['date'][1]);
-                _template_campaigns = _template_campaigns.replace(/\[DATA_D\]/g,  _source2[_id]['date'][2]);
-                _template_campaigns = _template_campaigns.replace(/\[CAMPAIGN\]/g,  _source2[_id]['campaign']);
-                _templates += _template_campaigns;
+            for ($prop in _source) {
+                let _id = _source[$prop];
+                let _template = _template_campaigns;
+                _template = _template.replace(/\[ID\]/g,  _source2[_id]['id']);
+                _template = _template.replace(/\[COUNTY\]/g,  _source2[_id]['area']);
+                _template = _template.replace(/\[DATA_Y\]/g,  _source2[_id]['date'][0]);
+                _template = _template.replace(/\[DATA_M\]/g,  _source2[_id]['date'][1]);
+                _template = _template.replace(/\[DATA_D\]/g,  _source2[_id]['date'][2]);
+                _template = _template.replace(/\[CAMPAIGN\]/g,  _source2[_id]['campaign']);
+                _templates += _template;
             }
             _target.html(_templates);
             return;

@@ -1,4 +1,4 @@
-<section id="view-album" data-va="1">
+<section id="view-album" data-va-steps="1">
     <div class="popup_inner">
         <div class="albums_box va-step-1 withfilter-box" data-va-step="1">
             <div class="albums-filter in-filter">
@@ -24,68 +24,17 @@
                     <button id="btn-filter-search" class="btn-style-2 btn-filter-search" type="button">搜尋</button>
                 </form>
             </div>
-            <ul id="filter-result-list" class="filter-result-list albums-list">
-                <li class="filter-result-item albums-item" data-id="1">
-                    <div class="f-r-i-name">
-                        <span class="name-county">彰化</span>
-                        <span class="name-date">2020/04/24</span>
-                        <span class="name-campaign">王功淨灘1</span>
-                    </div>
-                    <div class="f-r-i-album">
-                        <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
-                        <div class="album-source">尼古拉拉科技股份有限公司</div>
-                    </div>
-                </li>
-                <li class="filter-result-item albums-item" data-id="3">
-                    <div class="f-r-i-name">
-                        <span class="name-county">彰化</span>
-                        <span class="name-date">2020/04/24</span>
-                        <span class="name-campaign">王功淨灘2</span>
-                    </div>
-                    <div class="f-r-i-album">
-                        <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
-                        <div class="album-source">尼古拉拉科技股份有限公司</div>
-                    </div>
-                </li>
-                <li class="filter-result-item albums-item" data-id="2">
-                    <div class="f-r-i-name">
-                        <span class="name-county">彰化</span>
-                        <span class="name-date">2020/04/24</span>
-                        <span class="name-campaign">王功淨灘3</span>
-                    </div>
-                    <div class="f-r-i-album">
-                        <div class="album-featured"><img src="public/img/album-pic-a.png" /></div>
-                        <div class="album-source">尼古拉拉科技股份有限公司</div>
-                    </div>
-                </li>
-            </ul>
+            <ul id="filter-result-list" class="filter-result-list albums-list"></ul>
         </div>
-        <div class="va-step-2" data-va-step="2">
+        <div class="va-step-2 into-album" data-va-step="2">
             <div class="popup_header va-pic-header">
-                <h2>彰化2020/04/24王功淨灘</h2>
+                <h2 id="va-name" class="va-name"></h2>
                 <div class="btns">
                     <button id="btn-back-to-album" class="btn-back-to-album btn-style-2" type="button">回相簿</button>
                     <button id="btn-confirm-pic" class="btn-confirm-pic btn-style-2" type="button">確定選取</button>
                 </div>
             </div>
-            <ul id="va-pic-list" class="va-pic-list">
-                <li class="va-pic-item" data-va-pic="1">
-                    <input type="radio" name="albumPic[]" id="va-pic-1" value="1">
-                    <label for="va-pic-1"><img src="public/img/album-pic-b.png"></label>
-                </li>
-                <li class="va-pic-item" data-va-pic="2">
-                    <input type="radio" name="albumPic[]" id="va-pic-2" value="2">
-                    <label for="va-pic-2"><img src="public/img/album-pic-b.png"></label>
-                </li>
-                <li class="va-pic-item" data-va-pic="3">
-                    <input type="radio" name="albumPic[]" id="va-pic-3" value="3">
-                    <label for="va-pic-3"><img src="public/img/album-pic-b.png"></label>
-                </li>
-                <li class="va-pic-item" data-va-pic="4">
-                    <input type="radio" name="albumPic[]" id="va-pic-4" value="4">
-                    <label for="va-pic-4"><img src="public/img/album-pic-b.png"></label>
-                </li>
-            </ul>
+            <ul id="va-pic-list" class="va-pic-list"></ul>
         </div>
     </div>
 </section>

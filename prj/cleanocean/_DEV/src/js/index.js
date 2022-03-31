@@ -30,9 +30,10 @@ $(function() {
             let _template_postcards = window.helper.getTemplate('index__postcards');
             let _templates = '';
             for (let i = 0; i < _source.length; i++) {
-                _template_postcards = _template_postcards.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
-                _template_postcards = _template_postcards.replace(/data-src/g,  'src');
-                _templates += _template_postcards;
+                let _template = _template_postcards;
+                _template = _template.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
+                _template = _template.replace(/data-src/g,  'src');
+                _templates += _template;
             }
             _target.html(_templates);
             this.builSlider();

@@ -228,12 +228,12 @@
       [class*="step-"] {
          display: none;
       }
-      &[data-va="1"] {
+      &[data-va-steps="1"] {
          .va-step-1 {
             display: block;
          }
       }
-      &[data-va="2"] {
+      &[data-va-steps="2"] {
          .va-step-2 {
             display: block;
          }
