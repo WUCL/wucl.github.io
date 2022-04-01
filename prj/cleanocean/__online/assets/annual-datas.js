@@ -100,7 +100,7 @@ $(function() {
         },
         loadTWSvg: function() {
             let $this = this;
-            return $this.el.$twimg.load('./public/img/tw.svg', function() {
+            return $this.el.$twimg.loadd('/wp-content/assets/img/tw.svg', function() {
                 $this.el.$twimg.find('#svg-tw path.' + $this.var.$area).addClass('active');
             });
         },

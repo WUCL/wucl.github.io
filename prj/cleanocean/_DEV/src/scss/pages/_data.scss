@@ -7,7 +7,9 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			// flex-wrap: wrap;
+			@include mq($max-width: $bp-mobile) {
+				flex-wrap: wrap;
+			}
 			img {
 				// margin: 0 10px;
 			}
@@ -47,8 +49,14 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				@include mq($max-width: $bp-mobile) {
+				   justify-content: space-between;
+				}
 				a {
 					margin: 0 50px;
+					@include mq($max-width: $bp-mobile) {
+						margin: 0;
+					}
 				}
 			}
 		}

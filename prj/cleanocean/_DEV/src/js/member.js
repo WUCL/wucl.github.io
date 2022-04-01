@@ -104,7 +104,6 @@ $(function() {
             let _template_postcards = window.helper.getTemplate('member__postcards');
             let _templates = '';
             for (let i = 0; i < _source.length; i++) {
-                console.log(_source);
                 let _template = _template_postcards;
                 _template = _template.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
                 _template = _template.replace(/data-src/g,  'src');

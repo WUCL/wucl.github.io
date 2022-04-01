@@ -1,0 +1,37 @@
+=-=-=-=-=-=
+1.
+取代 全部 template頁面，靜態檔連結
+./public/
+/public/
+public/
+
+取代為
+/wp-content/assets/
+
+=-=-=-=-=-=
+2.
+取代 全部 template頁面，分頁超連結
+.html"
+
+取代為
+空
+
+=-=-=-=-=-=
+3.
+更改超連結 全部 template頁面，分頁超連結
+一個一個加上前綴/
+
+=-=-=-=-=-=
+4.
+改data路徑 _DATA.js
+public/
+
+取代為
+/wp-content/assets/
+
+5.
+取代 全部 annual-datas.js，svg路及
+./public/
+
+取代為
+/wp-content/assets/

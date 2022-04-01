@@ -42,17 +42,21 @@ $(function() {
                 let _target = $(e.target);
                 let _currentTarget = $(e.currentTarget);
                 // console.log(_target.attr('data-area'));
+                let _targetArea = _target.attr('data-area');
+                if (_targetArea == $this.var.$area) return;
+
                 $this.var.$area = _target.attr('data-area');
-                console.log($this.var.$area);
 
                 let _name = window.mappingTWName[$this.var.$area];
                 let _mappingData = window.annualArea[_name];
+                console.log(_mappingData);
                 if (_mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
                     _target.addClass('active');
                     $this.goUpdateTWDatas();
                 } else {
                     console.log('no area');
+                    alert('此地區尚無資料');
                 }
                 return;
             })

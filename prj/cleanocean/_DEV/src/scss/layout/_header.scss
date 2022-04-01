@@ -14,8 +14,7 @@ layout/_header
 	// background: $color-white;
 	@include mq($max-width: $bp-mobile) {
 		margin-top: 25px;
-		// height: 0;
-		// border-bottom: 0;
+		overflow: hidden;
 	}
 	&__inner {
 		position: relative;

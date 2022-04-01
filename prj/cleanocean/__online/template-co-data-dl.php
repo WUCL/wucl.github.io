@@ -1,3 +1,11 @@
+<?php
+/* Template Name: template-co-data-dl
+* 數據下載
+*/
+/**
+* @package Make
+*/
+?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
     <head>
@@ -5,7 +13,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>海洋資訊</title>
+        <title>數據下載</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -17,31 +25,31 @@
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./favicon.ico" />
-        <!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="./public/css/info.min.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="/wp-content/assets/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="/wp-content/assets/css/data-dl.min.css" />
 	</head>
-	<body data-page="info">
+	<body data-page="data-dl">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="index.html"><img src="public/img/logo@2x.png"></a>
+        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
-        				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
+        				<li class="nav-info nav-effect"><a href="/info"><label>海洋資訊</label></a></li>
         				<li class="nav-data nav-effect nav-data-dl subnav">
-        					<a href="data.html"><label>數據資料庫</label></a>
+        					<a href="/data"><label>數據資料庫</label></a>
         					<div class="subnav-content">
-        						<a class="nav-data nav-effect" href="data.html"><label>數據資料庫</label></a>
-        						<a class="nav-data-dl nav-effect" href="data-dl.html"><label>數據下載</label></a>
+        						<a class="nav-data nav-effect" href="/data"><label>數據資料庫</label></a>
+        						<a class="nav-data-dl nav-effect" href="/data-dl"><label>數據下載</label></a>
         					</div>
         				</li>
-        				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
+        				<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect nav-postcarder subnav">
-        					<a href="album.html"><label>活動相簿</label></a>
+        					<a href="/album"><label>活動項目</label></a>
         					<div class="subnav-content">
-        						<a class="nav-album nav-effect" href="album.html"><label>活動相簿</label></a>
-        						<a class="nav-postcarder nav-effect" href="postcarder.html"><label>明信片製作</label></a>
+        						<a class="nav-album nav-effect" href="/album"><label>活動相簿</label></a>
+        						<a class="nav-postcarder nav-effect" href="/postcarder"><label>明信片製作</label></a>
         					</div>
         				</li>
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
@@ -58,8 +66,44 @@
 		<main id="main" class="main">
 		    <section class="pagename">
 		        <div class="inner">
-		            <img src="public/img/icon-info@2x.png">
-		            <span>海洋資訊</span>
+		            <img src="/wp-content/assets/img/icon-data@2x.png">
+		            <span>數據資料庫/數據下載</span>
+		        </div>
+		    </section>
+		    <section class="datas">
+		        <div class="title with_afterline"><span>數據下載</span></div>
+		        <div class="inner">
+		            <div class="datas_box withfilter-box">
+		                <div class="datas-filter in-filter">
+		                    <form class="form_filters-a" name="form_filters-a" onsubmit="return false;">
+		                        <div class="filter-time">
+		                            <label for="filter-time-begin">時間</label>
+		                            <input type="date" id="filter-time-begin" name="filter-time-begin">
+		                            <label for="filter-time-end">至</label>
+		                            <input type="date" id="filter-time-end" name="filter-time-end">
+		                        </div>
+		                        <div class="filter-county">
+		                            <label for="filter-county">縣市</label>
+		                            <div id="twzipcode" class="twzipcode">
+		                                <div data-role="county" data-id="filter-county"></div>
+		                                <div data-role="district" data-style="display:none !important;"></div>
+		                                <div data-role="zipcode" data-style="display:none !important;"></div>
+		                            </div>
+		                        </div>
+		                        <div class="filter-campaign">
+		                            <label for="filter-campaign">淨灘地點</label>
+		                            <input type="text" name="filter-campaign" id="filter-campaign" maxlength="10">
+		                        </div>
+		                        <button id="btn-filter-search" class="btn-filter-search btn-style-2" type="submit">搜尋</button>
+		                    </form>
+		                    <form class="form_filters-b" name="form_filters-b" onsubmit="return false;">
+		                        <input type="checkbox" name="select-all" id="select-all"  value="0"><label for="select-all">全選</label>
+		                        <button id="btn-filter-download" class="btn-filter-download btn-style-2" type="submit">下載</button>
+		                    </form>
+		                </div>
+		                <ul id="filter-result-list" class="filter-result-list datas-list">
+		                </ul>
+		            </div>
 		        </div>
 		    </section>
 		</main>
@@ -67,20 +111,20 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="index.html"><img src="public/img/logo@2x.png"></a>
+						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
 							<ul>
-								<li class="nav-method nav-effect active"><a href="info.html" method><label>海洋資訊</label></a></li>
-								<li class="nav-data nav-effect"><a href="data.html"><label>數據資料庫</label></a></li>
-								<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
-								<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
+								<li class="nav-method nav-effect active"><a href="/info" method><label>海洋資訊</label></a></li>
+								<li class="nav-data nav-effect"><a href="/data"><label>數據資料庫</label></a></li>
+								<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
+								<li class="nav-album nav-effect"><a href="/album"><label>活動相簿</label></a></li>
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="public/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="public/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>
@@ -146,15 +190,16 @@
 		</div>
         
 
-		<script src="./public/js/_DATA.js"></script>
-		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="./public/js/custom/eventdevice.js"></script>
-		<script src="./public/js/helper.js"></script>
+		<script src="/wp-content/assets/js/_DATA.js"></script>
+		<script src="/wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="/wp-content/assets/js/custom/eventdevice.js"></script>
+		<script src="/wp-content/assets/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
-        <script src="./public/js/common.js"></script>
-        <script src="./public/js/info.js"></script>
+        <script src="/wp-content/assets/lib/twzipcode/jquery.twzipcode.min.js"></script>
+        <script src="/wp-content/assets/js/common.js"></script>
+        <script src="/wp-content/assets/js/data-dl.js"></script>
 	</body>
 </html>

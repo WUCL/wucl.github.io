@@ -88,7 +88,7 @@ $(function() {
             });
 
             $this.el.$btnCreatRecorder.on('click', function () {
-                // $this.el.$recorderImg.attr('src', 'public/img/result.png');
+                // $this.el.$recorderImg.attr('src', '/wp-content/assets/img/result.png');
                 return console.log("btn-creat-recorder");
             })
         },
@@ -213,8 +213,8 @@ $(function() {
                 $this.var.$m.kg = 0; // clean first
 
                 // if (!$this.var.$postcard.checkisok) return;
-                image_bg.src = 'public/img/recorder-bg.png';
-                image_pin.src = 'public/img/recorder-pin.png';
+                image_bg.src = '/wp-content/assets/img/recorder-bg.png';
+                image_pin.src = '/wp-content/assets/img/recorder-pin.png';
                 image_avatar.src = document.getElementById('m-avatar').src;
 
                 image_bg.setAttribute("crossOrigin", 'Anonymous');

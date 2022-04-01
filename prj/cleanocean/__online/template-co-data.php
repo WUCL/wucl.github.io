@@ -1,3 +1,11 @@
+<?php
+/* Template Name: template-co-data
+* 數據資料庫
+*/
+/**
+* @package Make
+*/
+?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
     <head>
@@ -17,31 +25,31 @@
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./favicon.ico" />
-		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="./public/css/data.min.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="/wp-content/assets/t/assets/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="/wp-content/assets/css/data.min.css" />
 	</head>
 	<body data-page="data">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="index.html"><img src="public/img/logo@2x.png"></a>
+        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
-        				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
+        				<li class="nav-info nav-effect"><a href="/info"><label>海洋資訊</label></a></li>
         				<li class="nav-data nav-effect nav-data-dl subnav">
-        					<a href="data.html"><label>數據資料庫</label></a>
+        					<a href="/data"><label>數據資料庫</label></a>
         					<div class="subnav-content">
-        						<a class="nav-data nav-effect" href="data.html"><label>數據資料庫</label></a>
-        						<a class="nav-data-dl nav-effect" href="data-dl.html"><label>數據下載</label></a>
+        						<a class="nav-data nav-effect" href="/data"><label>數據資料庫</label></a>
+        						<a class="nav-data-dl nav-effect" href="/data-dl"><label>數據下載</label></a>
         					</div>
         				</li>
-        				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
+        				<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect nav-postcarder subnav">
-        					<a href="album.html"><label>活動相簿</label></a>
+        					<a href="/album"><label>活動項目</label></a>
         					<div class="subnav-content">
-        						<a class="nav-album nav-effect" href="album.html"><label>活動相簿</label></a>
-        						<a class="nav-postcarder nav-effect" href="postcarder.html"><label>明信片製作</label></a>
+        						<a class="nav-album nav-effect" href="/album"><label>活動相簿</label></a>
+        						<a class="nav-postcarder nav-effect" href="/postcarder"><label>明信片製作</label></a>
         					</div>
         				</li>
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
@@ -58,7 +66,7 @@
 		<main id="main" class="main">
 		    <section class="pagename">
 		        <div class="inner">
-		            <img src="public/img/icon-data@2x.png">
+		            <img src="/wp-content/assets/img/icon-data@2x.png">
 		            <span>數據資料庫</span>
 		        </div>
 		    </section>
@@ -147,7 +155,7 @@
 		            </div>
 		            <div class="btns">
 		                <a class="btn-style" href="" target="_blank">登陸數據</a>
-		                <a class="btn-style" href="data-dl.html" target="_blank">數據下載</a>
+		                <a class="btn-style" href="/data-dl" target="_blank">數據下載</a>
 		            </div>
 		        </div>
 		    </section>
@@ -156,20 +164,20 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="index.html"><img src="public/img/logo@2x.png"></a>
+						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
 							<ul>
-								<li class="nav-method nav-effect active"><a href="info.html" method><label>海洋資訊</label></a></li>
-								<li class="nav-data nav-effect"><a href="data.html"><label>數據資料庫</label></a></li>
-								<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
-								<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
+								<li class="nav-method nav-effect active"><a href="/info" method><label>海洋資訊</label></a></li>
+								<li class="nav-data nav-effect"><a href="/data"><label>數據資料庫</label></a></li>
+								<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
+								<li class="nav-album nav-effect"><a href="/album"><label>活動相簿</label></a></li>
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="public/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="public/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>
@@ -235,16 +243,16 @@
 		</div>
         
 
-		<script src="./public/js/_DATA.js"></script>
-		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="./public/js/custom/eventdevice.js"></script>
-		<script src="./public/js/helper.js"></script>
+		<script src="/wp-content/assets/js/_DATA.js"></script>
+		<script src="/wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="/wp-content/assets/js/custom/eventdevice.js"></script>
+		<script src="/wp-content/assets/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
-        <script src="./public/js/common.js"></script>
-        <script src="./public/js/annual-datas.js"></script>
-        <script src="./public/js/data.js"></script>
+        <script src="/wp-content/assets/js/common.js"></script>
+        <script src="/wp-content/assets/js/annual-datas.js"></script>
+        <script src="/wp-content/assets/js/data.js"></script>
 	</body>
 </html>

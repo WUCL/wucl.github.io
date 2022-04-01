@@ -1,3 +1,11 @@
+<?php
+/* Template Name: template-co-index
+* 首頁
+*/
+/**
+* @package Make
+*/
+?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
     <head>
@@ -5,7 +13,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>數據資料庫</title>
+        <title>首頁</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -17,31 +25,32 @@
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./favicon.ico" />
-		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="./public/css/data.min.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="/wp-content/assets/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="/wp-content/assets/lib/jquery.flipster/jquery.flipster.css" />
+        <link rel="stylesheet" type="text/css" href="/wp-content/assets/css/index.min.css" />
 	</head>
-	<body data-page="data">
+	<body data-page="index">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="index.html"><img src="public/img/logo@2x.png"></a>
+        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
-        				<li class="nav-info nav-effect"><a href="info.html"><label>海洋資訊</label></a></li>
+        				<li class="nav-info nav-effect"><a href="/info"><label>海洋資訊</label></a></li>
         				<li class="nav-data nav-effect nav-data-dl subnav">
-        					<a href="data.html"><label>數據資料庫</label></a>
+        					<a href="/data"><label>數據資料庫</label></a>
         					<div class="subnav-content">
-        						<a class="nav-data nav-effect" href="data.html"><label>數據資料庫</label></a>
-        						<a class="nav-data-dl nav-effect" href="data-dl.html"><label>數據下載</label></a>
+        						<a class="nav-data nav-effect" href="/data"><label>數據資料庫</label></a>
+        						<a class="nav-data-dl nav-effect" href="/data-dl"><label>數據下載</label></a>
         					</div>
         				</li>
-        				<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
+        				<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect nav-postcarder subnav">
-        					<a href="album.html"><label>活動相簿</label></a>
+        					<a href="/album"><label>活動項目</label></a>
         					<div class="subnav-content">
-        						<a class="nav-album nav-effect" href="album.html"><label>活動相簿</label></a>
-        						<a class="nav-postcarder nav-effect" href="postcarder.html"><label>明信片製作</label></a>
+        						<a class="nav-album nav-effect" href="/album"><label>活動相簿</label></a>
+        						<a class="nav-postcarder nav-effect" href="/postcarder"><label>明信片製作</label></a>
         					</div>
         				</li>
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
@@ -56,40 +65,55 @@
         	</div>
         </header>
 		<main id="main" class="main">
-		    <section class="pagename">
-		        <div class="inner">
-		            <img src="public/img/icon-data@2x.png">
-		            <span>數據資料庫</span>
+		    <section class="beginning">
+		    	<div class="inner">
+		            <div class="describe">
+		                <p>熱愛大海的你/妳，對『海』有什像呢？<br/>火烤的烈日下，到海邊戲水、衝浪、風帆、浮淺來消暑？<br/>星空下與親密伴赤腳走在沙灘上，享受兩人時光？<br/>除此之外，到海邊小旅行之餘，還可以有另外一個愛海的選項：</p>
+		                <p><span>『淨灘』多撿一公斤</span><br/>淨灘是目前全球最熱門的愛地球行動。</p>
+		                <p>到海邊遊憩之後，不帶走自己製造的垃圾，也順手撿起沙灘上的垃圾，<br/>在指責任何人之前，我們先動手吧！<br/>因為我們都希望『乾淨的大海』。<br/>只有一個人做得到嗎？別擔心，你/並不孤單一人。<br/>我們就你/妳的旅伴！</p>
+		            </div>
+		            <div class="menuicon">
+		                <a class="menuicon-info" href="/info"><img src="/wp-content/assets/img/icon-info@2x.png"><span>海洋資訊</span></a>
+		                <a class="menuicon-data" href="/data"><img src="/wp-content/assets/img/icon-data@2x.png"><span>數據資料庫</span></a>
+		                <a class="menuicon-member" href="/member"><img src="/wp-content/assets/img/icon-member@2x.png"><span>會員專區</span></a>
+		                <a class="menuicon-album" href="/album"><img src="/wp-content/assets/img/icon-album@2x.png"><span>活動相簿</span></a>
+		            </div>
 		        </div>
 		    </section>
-		    <section class="annual_datas">
+		    <section class="annual_topics">
+		        <div class="title with_afterline"><span>年度倡議主題</span></div>
+		        <div class="inner">
+		            <img src="https://fakeimg.pl/400x400/" />
+		        </div>
+		    </section>
+		    <section id="annual_datas" class="annual_datas">
 		        <div class="title with_afterline"><span>年度數據資料</span></div>
 		        <div class="inner">
 		            <div class="datas-total">
 		                <ul class="datas-total-ul">
 		                    <li>
 		                        <div class="total-key" data-text="淨灘場次"></div>
-		                        <div id="annual-freq" class="total-value" data-unit="場"></div>
+		                        <div id="annual-freq" class="total-value" data-unit="場">0</div>
 		                    </li>
 		                    <li>
 		                        <div class="total-key" data-text="淨灘人數"></div>
-		                        <div id="annual-people" class="total-value" data-unit="人"></div>
+		                        <div id="annual-people" class="total-value" data-unit="人">0</div>
 		                    </li>
 		                    <li>
 		                        <div class="total-key" data-text="淨灘長度"></div>
-		                        <div id="annual-meter" class="total-value" data-unit="公尺"></div>
+		                        <div id="annual-meter" class="total-value" data-unit="公尺">0</div>
 		                    </li>
 		                    <li>
 		                        <div class="total-key" data-text="淨灘重量"></div>
-		                        <div id="annual-kg" class="total-value" data-unit="公斤"></div>
+		                        <div id="annual-kg" class="total-value" data-unit="公斤">0</div>
 		                    </li>
 		                </ul>
 		            </div>
 		            <div class="datas-rank">
 		                <div class="rank-top">
-		                    <div id="annual-top1"></div>
-		                    <div id="annual-top2"></div>
-		                    <div id="annual-top3"></div>
+		                    <div id="annual-top1">寶特瓶</div>
+		                    <div id="annual-top2">煙蒂</div>
+		                    <div id="annual-top3">塑膠瓶蓋</div>
 		                </div>
 		                <ul id="annual-rank-scale" class="rank-scale"></ul>
 		            </div>
@@ -112,43 +136,18 @@
 		                            <div id="goUpdateTWDatas-top3"></div>
 		                        </div>
 		                    </div>
-		                    <div class="locals-data-btn"><a class="btn-style" href="" target="_blank">登陸數據</a></div>
+		                    <div class="locals-data-btn"><a class="btn-style" href="/" target="_blank">登陸數據</a></div>
 		                </div>
 		            </div>
 		        </div>
 		    </section>
-		    <section class="annual_dataresult">
-		        <div class="title with_afterline"><span>數據成果</span></div>
+		    <section class="postcards">
+		        <div class="title with_afterline"><span>旅行明信片</span></div>
 		        <div class="inner">
-		            <img src="https://fakeimg.pl/400x400/" />
-		            <img src="https://fakeimg.pl/400x400/" />
-		        </div>
-		    </section>
-		    <section class="annual_resultlogin">
-		        <div class="title with_afterline"><span>成果登記須知</span></div>
-		        <div class="inner">
-		            <div class="notices">
-		                <div class="lists">
-		                    <ol>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                        <li>　</li>
-		                    </ol>
-		                </div>
-		                <div class="qrcode">
-		                    <img src="https://fakeimg.pl/200x200/" />
-		                </div>
+		            <div id="my-flipster" class="my-flipster">
+		                <ul id="postcard-list" class="postcard-list"></ul>
 		            </div>
-		            <div class="btns">
-		                <a class="btn-style" href="" target="_blank">登陸數據</a>
-		                <a class="btn-style" href="data-dl.html" target="_blank">數據下載</a>
-		            </div>
+		            <a href="/postcarder" class="postcarder btn-style">製作明信片</a>
 		        </div>
 		    </section>
 		</main>
@@ -156,20 +155,20 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="index.html"><img src="public/img/logo@2x.png"></a>
+						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
 							<ul>
-								<li class="nav-method nav-effect active"><a href="info.html" method><label>海洋資訊</label></a></li>
-								<li class="nav-data nav-effect"><a href="data.html"><label>數據資料庫</label></a></li>
-								<li class="nav-member nav-effect"><a href="member.html"><label>會員專區</label></a></li>
-								<li class="nav-album nav-effect"><a href="album.html"><label>活動相簿</label></a></li>
+								<li class="nav-method nav-effect active"><a href="/info" method><label>海洋資訊</label></a></li>
+								<li class="nav-data nav-effect"><a href="/data"><label>數據資料庫</label></a></li>
+								<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
+								<li class="nav-album nav-effect"><a href="/album"><label>活動相簿</label></a></li>
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="public/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="public/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>
@@ -235,16 +234,17 @@
 		</div>
         
 
-		<script src="./public/js/_DATA.js"></script>
-		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="./public/js/custom/eventdevice.js"></script>
-		<script src="./public/js/helper.js"></script>
+		<script src="/wp-content/assets/js/_DATA.js"></script>
+		<script src="/wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="/wp-content/assets/js/custom/eventdevice.js"></script>
+		<script src="/wp-content/assets/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
-        <script src="./public/js/common.js"></script>
-        <script src="./public/js/annual-datas.js"></script>
-        <script src="./public/js/data.js"></script>
+        <script src="/wp-content/assets/lib/jquery.flipster/jquery.flipster.min.js"></script>
+        <script src="/wp-content/assets/js/common.js"></script>
+        <script src="/wp-content/assets/js/annual-datas.js"></script>
+		<script src="/wp-content/assets/js/index.js"></script>
 	</body>
 </html>
