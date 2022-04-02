@@ -23,16 +23,16 @@
         <meta property="og:image" content="" />
 
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
-        <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
-        <link rel="icon" type="image/png" href="./favicon.ico" />
-		<!-- <link rel="stylesheet" type="text/css" href="wp-content/assets/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="wp-content/assets/css/data-dl.min.css" />
+        <!-- <link rel="icon" type="image/png" href="../favicon.png" /> -->
+        <link rel="icon" type="image/png" href="../favicon.ico" />
+		<!-- <link rel="stylesheet" type="text/css" href="../public/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="../wp-content/assets/css/data-dl.min.css" />
 	</head>
 	<body data-page="data-dl">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="/index"><img src="wp-content/assets/img/logo@2x.png"></a>
+        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
@@ -66,7 +66,7 @@
 		<main id="main" class="main">
 		    <section class="pagename">
 		        <div class="inner">
-		            <img src="wp-content/assets/img/icon-data@2x.png">
+		            <img src="/wp-content/assets/img/icon-data@2x.png">
 		            <span>數據資料庫/數據下載</span>
 		        </div>
 		    </section>
@@ -111,7 +111,7 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="index.html"><img src="wp-content/assets/img/logo@2x.png"></a>
+						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
@@ -123,8 +123,8 @@
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="wp-content/assets/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="wp-content/assets/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 			<section class="copyright">
 				<div class="copyright__inner">
 					<span>Copyright 荒野保護協會版權所有 Design by 築筠文創</span>
-					<span>使用條款|Email-<a href="sow@sow.org.tw">sow@sow.org.tw</a></span>
+					<span>使用條款|Email-<a href="mailto:sow@sow.org.tw">sow@sow.org.tw</a></span>
 				</div>
 			</section>
 		</footer>
@@ -190,16 +190,16 @@
 		</div>
         
 
-		<script src="wp-content/assets/js/_DATA.js"></script>
-		<script src="wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="wp-content/assets/js/custom/eventdevice.js"></script>
-		<script src="wp-content/assets/js/helper.js"></script>
+		<script src="../wp-content/assets/js/_DATA.js"></script>
+		<script src="../wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="../wp-content/assets/js/custom/eventdevice.js"></script>
+		<script src="../wp-content/assets/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
-        <script src="wp-content/assets/lib/twzipcode/jquery.twzipcode.min.js"></script>
-        <script src="wp-content/assets/js/common.js"></script>
-        <script src="wp-content/assets/js/data-dl.js"></script>
+        <script src="../wp-content/assets/lib/twzipcode/jquery.twzipcode.min.js"></script>
+        <script src="../wp-content/assets/js/common.js"></script>
+        <script src="../wp-content/assets/js/data-dl.js"></script>
 	</body>
 </html>
