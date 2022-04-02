@@ -7,6 +7,9 @@ $(function() {
             $header: $('#header'),
             $main: $('#main'),
             $footer: $('#footer'),
+
+            $postcardList: $('#postcard-list'),
+            $topicsSwiper: $('#topics-swiper'),
         },
         var: {
         },
@@ -14,6 +17,7 @@ $(function() {
             console.log('index');
             this.goInitial(); // 先 ajax 拿到資料先builder
             this.bindEvent();
+            this.loadTopics();
             this.loadPostcard();
         },
         bindEvent: function() {
@@ -23,10 +27,32 @@ $(function() {
             let $this = this;
             console.log('goInitial');
         },
+        loadTopics: function() {
+            console.log('loadTopics');
+            let $this = this;
+
+            let _source = window.annualTopic;
+            let _target = $this.el.$topicsSwiper.find('.swiper-wrapper');
+            let _templates = '';
+            for (let i = 0; i < _source.length; i++) {
+                let _template = '<div class="topic swiper-slide"><img src="' + _source[i] + '"></div>';
+                _templates += _template;
+            }
+            _target.html(_templates);
+
+            // build swiper
+            var swiper = new Swiper("#topics-swiper", {
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    dynamicBullets: true,
+                },
+            });
+        },
         loadPostcard: function() { // window.postcards
             let $this = this;
             let _source = window.postcards;
-            let _target = $('#postcard-list');
+            let _target = $this.el.$postcardList;
             let _template_postcards = window.helper.getTemplate('index__postcards');
             let _templates = '';
             for (let i = 0; i < _source.length; i++) {
@@ -39,9 +65,9 @@ $(function() {
             this.builSlider();
         },
         builSlider: function() {
-            let $myflipster = $('.my-flipster');
-            if ($myflipster.length) {
-                $myflipster.flipster({
+            let $flipster = $('.postcard-flipster');
+            if ($flipster.length) {
+                $flipster.flipster({
                     itemContainer: 'ul',
                     // [string|object]
                     // Selector for the container of the flippin' items.

@@ -19,6 +19,7 @@
         <link rel="icon" type="image/png" href="../favicon.ico" />
         <!-- <link rel="stylesheet" type="text/css" href="../public/lib/aos/aos.css" /> -->
         <link rel="stylesheet" type="text/css" href="../wp-content/assets/lib/jquery.flipster/jquery.flipster.css" />
+        <link rel="stylesheet" type="text/css" href="../wp-content/assets/lib/swiper/swiper.min.css" />
         <link rel="stylesheet" type="text/css" href="../wp-content/assets/css/member.min.css" />
 	</head>
 	<body data-page="member">
@@ -76,8 +77,9 @@
 		                        <div class="total-key" data-text="年度活動"></div>
 		                    </li>
 		                </ul>
-		                <div class="campaigns box-style">
-		                    <div class="campaign"><img src="https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto"></div>
+		                <div id="campaigns-swiper" class="campaigns box-style campaigns-swiper">
+		                    <div class="swiper-wrapper"></div>
+		                    <div class="swiper-pagination"></div>
 		                </div>
 		            </div>
 		        </div>
@@ -129,7 +131,7 @@
 		    <section class="postcards">
 		        <div class="title with_afterline"><span>我的明信片</span></div>
 		        <div class="inner">
-		            <div id="my-flipster" class="my-flipster">
+		            <div id="postcard-flipster" class="postcard-flipster">
 		                <ul id="postcard-list" class="postcard-list"></ul>
 		            </div>
 		            <a href="postcarder.html" class="postcarder btn-style">製作明信片</a>
@@ -157,13 +159,8 @@
 		</section>
 		<section id="add-campaign">
 		    <div class="popup_inner">
-		        <form id="form_add-campaign" class="form_add-campaign" name="form_add-campaign" onsubmit="return false;">
-		            <select class="btn-add-campaign-select">
-		                <option>彰化 2020/02/24 王功淨灘1</option>
-		                <option>彰化 2020/02/24 王功淨灘2</option>
-		                <option>彰化 2020/02/24 王功淨灘3</option>
-		                <option>彰化 2020/02/24 王功淨灘4</option>
-		            </select>
+		        <form id="form_add-campaign" class="form_add-campaign" name="form_add-campaign" onsubmit="return false;" data-ifempty="0">
+		            <select id="btn-add-campaign-select" class="btn-add-campaign-select"></select>
 		            <button type="submit" id="btn-add-campaign-update" class="btn-add-campaign-update btn-style-2">更新</button>
 		        </form>
 		    </div>
@@ -262,6 +259,7 @@
         <script src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
         <script src="../wp-content/assets/lib/jquery.flipster/jquery.flipster.min.js"></script>
+        <script src="../wp-content/assets/lib/swiper/swiper.min.js"></script>
         <script src="../wp-content/assets/js/common.js"></script>
         <script src="../wp-content/assets/js/annual-datas.js"></script>
         <script src="../wp-content/assets/js/member.js"></script>

@@ -1,9 +1,5 @@
 // annual Banner /* [PAGE]index */
-// window.annualBanner = {
-//     topic: 'https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto',
-//     campaign: ['https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto', 'https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto']
-// }
-
+window.annualTopic = ['https://fakeimg.pl/1100x400/?text=年度倡議主題A&font=noto', 'https://fakeimg.pl/1100x400/?text=年度倡議主題B&font=noto']
 
 // annual Datas /* [PAGE]index/data/member */
 window.annualDatas = {
@@ -45,8 +41,9 @@ window.postcards = ['/wp-content/assets/img/postcard-demo.png?1', '/wp-content/a
 window.member = {
     avatar: 'https://fakeimg.pl/100x100/?text=會員頭照&font=noto',
     name: '阿倫',
-    campaign: [1, 3, 6, 8],
-    postcard: ['/wp-content/assets/img/postcard-demo.png?a', '/wp-content/assets/img/postcard-demo.png?bb', '/wp-content/assets/img/postcard-demo.png?ccc', '/wp-content/assets/img/postcard-demo.png?dd']
+    campaign: ['1', '3', '6', '8'],
+    postcard: ['/wp-content/assets/img/postcard-demo.png?a', '/wp-content/assets/img/postcard-demo.png?bb', '/wp-content/assets/img/postcard-demo.png?ccc', '/wp-content/assets/img/postcard-demo.png?dd'],
+    banner: ['https://fakeimg.pl/900x350/fff/?text=年度活動A&font=noto', 'https://fakeimg.pl/900x350/fff/?text=年度活動B&font=noto'],
 };
 
 

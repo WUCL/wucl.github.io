@@ -47,7 +47,7 @@
 			.campaign-view {
 				.datas-total-ul {
 					li {
-						z-index: 1;
+						z-index: 2;
 						margin: 0 auto;
 						transform: translateY(50%);
 					}
@@ -192,6 +192,8 @@
 		display: block;
 		font-size: $fontsize-1;
 		padding: 10px;
+		&[data-ifempty='1'] {
+		}
 		.btn-add-campaign-select {
 			font-size: inherit;
 			display: block;
@@ -204,6 +206,15 @@
 			// font-size: inherit;
 			display: block;
 			margin: 10px auto 0;
+		}
+		&[data-ifempty='1'] {
+			> [class*="btn-add-campaign"] {
+				display: none;
+			}
+			&:before {
+				content: "目前沒有任何新活動";
+				display: block;
+			}
 		}
 	}
 }

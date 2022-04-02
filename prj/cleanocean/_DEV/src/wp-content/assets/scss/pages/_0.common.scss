@@ -98,7 +98,7 @@ body {
 .main {
 	max-width: $bp-contain-w;
 	margin: 0 auto;
-	overflow: hidden;
+	// overflow: hidden;
 	@include mq($max-width: $bp-mobile) {
 		margin: 30px 20px;
 	}
@@ -480,7 +480,7 @@ body {
 		// 	}
 		// }
 	}
-	.my-flipster {
+	.postcard-flipster {
 		li {
 			max-width: calc(1129px / 2);
 			@include mq($max-width: $bp-mobile) {
@@ -689,3 +689,13 @@ body {
 	}
 }
 /* END album layout */
+.icon-crab {
+	width: calc(247px / 3);
+	height: calc(257px / 3);
+	background: url(../img/icon-crab@2x.png) left center no-repeat;
+	background-size: cover;
+	@include mq($max-width: $bp-mobile) {
+		width: calc(247px / 6);
+		height: calc(257px / 6);
+	}
+}

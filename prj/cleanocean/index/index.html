@@ -19,6 +19,7 @@
         <link rel="icon" type="image/png" href="../favicon.ico" />
 		<!-- <link rel="stylesheet" type="text/css" href="../public/lib/aos/aos.css" /> -->
         <link rel="stylesheet" type="text/css" href="../wp-content/assets/lib/jquery.flipster/jquery.flipster.css" />
+        <link rel="stylesheet" type="text/css" href="../wp-content/assets/lib/swiper/swiper.min.css" />
         <link rel="stylesheet" type="text/css" href="../wp-content/assets/css/index.min.css" />
 	</head>
 	<body data-page="index">
@@ -75,7 +76,10 @@
 		    <section class="annual_topics">
 		        <div class="title with_afterline"><span>年度倡議主題</span></div>
 		        <div class="inner">
-		            <img src="https://fakeimg.pl/400x400/" />
+		            <div id="topics-swiper" class="topics topics-swiper">
+		                <div class="swiper-wrapper"></div>
+		                <div class="swiper-pagination"></div>
+		            </div>
 		        </div>
 		    </section>
 		    <section id="annual_datas" class="annual_datas">
@@ -136,7 +140,7 @@
 		    <section class="postcards">
 		        <div class="title with_afterline"><span>旅行明信片</span></div>
 		        <div class="inner">
-		            <div id="my-flipster" class="my-flipster">
+		            <div id="postcard-flipster" class="postcard-flipster">
 		                <ul id="postcard-list" class="postcard-list"></ul>
 		            </div>
 		            <a href="/postcarder" class="postcarder btn-style">製作明信片</a>
@@ -235,6 +239,7 @@
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
         <script src="../wp-content/assets/lib/jquery.flipster/jquery.flipster.min.js"></script>
+        <script src="../wp-content/assets/lib/swiper/swiper.min.js"></script>
         <script src="../wp-content/assets/js/common.js"></script>
         <script src="../wp-content/assets/js/annual-datas.js"></script>
 		<script src="../wp-content/assets/js/index.js"></script>

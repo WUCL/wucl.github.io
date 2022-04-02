@@ -12,6 +12,9 @@ $(function() {
             $mycampaign: $('#mycampaign'),
             $btnMyrecordEdit: $('#btn-myrecord-edit'),
             $btnCreatRecorder: $('#btn-creat-recorder'),
+
+            $formAddCampaign: $('#form_add-campaign'),
+            $btnAddCampaignSelect: $('#btn-add-campaign-select'),
             $btnAddCampaignUpdate: $('#btn-add-campaign-update'),
 
             $recoderImg: $('#recorder-img'),
@@ -19,6 +22,9 @@ $(function() {
 
             $mName: $('#m-name'),
             $mAvatar: $('#m-avatar'),
+
+            $postcardList: $('#postcard-list'),
+            $campaignsSwiper: $('#campaigns-swiper'),
         },
         var: {
             $m: {
@@ -30,6 +36,7 @@ $(function() {
         init: function() {
             console.log('member');
             this.goInitial(); // 先 ajax 拿到資料先builder
+            this.loadCampaignBanner();
             this.loadPostcard();
             this.bindEvent();
             this.goUpdateMember();
@@ -71,6 +78,8 @@ $(function() {
                 if (confirm("確定刪除嗎？") == true) {
                     text = '確定刪除 ID: ' + _id;
                     $this.el.$mycampaign.find('.campaign[data-id="' + _id + '"]').remove();
+                    window.member.campaign.shift(_id);
+                    console.log(window.member.campaign);
                     // API send id to del
                 } else {
                     text = "取消刪除";
@@ -78,11 +87,14 @@ $(function() {
                 }
                 console.log(text);
             });
-            $this.el.$mycampaign.on('click', '.campaign .btn-add-campaign', function(e) {
-                console.log('add campaign')
-            });
+            // $this.el.$mycampaign.on('click', '.campaign .btn-add-campaign', function(e) {
+            //     console.log('add campaign');
+            // });
             $this.el.$btnAddCampaignUpdate.on('click', function() {
                 console.log('add campaign, need to update');
+                let _selectCampaign = $('#btn-add-campaign-select').val();
+                window.member.campaign.push(_selectCampaign);
+                $this.updateMyCampaign();
                 $('#add-campaign').popup('hide');
                 return;
             });
@@ -97,10 +109,32 @@ $(function() {
             console.log('goInitial');
             // $this.buildAlbum(window.album);
         },
+        loadCampaignBanner: function() {
+            console.log('loadCampaignBanner');
+            let $this = this;
+
+            let _source = window.member.banner;
+            let _target = $this.el.$campaignsSwiper.find('.swiper-wrapper');
+            let _templates = '';
+            for (let i = 0; i < _source.length; i++) {
+                let _template = '<div class="campaign swiper-slide"><img src="' + _source[i] + '"></div>';
+                _templates += _template;
+            }
+            _target.html(_templates);
+
+            // build swiper
+            var swiper = new Swiper("#campaigns-swiper", {
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    dynamicBullets: true,
+                },
+            });
+        },
         loadPostcard: function() { // window.member
             let $this = this;
             let _source = window.member.postcard;
-            let _target = $('#postcard-list');
+            let _target = $this.el.$postcardList;
             let _template_postcards = window.helper.getTemplate('member__postcards');
             let _templates = '';
             for (let i = 0; i < _source.length; i++) {
@@ -113,9 +147,9 @@ $(function() {
             this.builSlider();
         },
         builSlider: function() {
-            let $myflipster = $('.my-flipster');
-            if ($myflipster.length) {
-                $myflipster.flipster({
+            let $flipster = $('.postcard-flipster');
+            if ($flipster.length) {
+                $flipster.flipster({
                     itemContainer: 'ul',
                     // [string|object]
                     // Selector for the container of the flippin' items.
@@ -275,6 +309,7 @@ $(function() {
             }
         },
         setPopup: function() {
+            let $this = this;
             $('#edit-member').popup({
                 escape: false,
                 closebutton: true,
@@ -284,37 +319,70 @@ $(function() {
                 escape: false,
                 closebutton: true,
                 scrolllock: true,
+                onopen: function() {
+                    $this.loadCampaigns();
+                },
             });
+        },
+        loadCampaigns: function() {
+            console.log('loadCampaigns');
+            let $this = this;
+            let _campaigns = window.campaigns;
+            let _campaignsAry = Object.keys(_campaigns);
+            let _source = _campaignsAry.filter(n => !window.member.campaign.includes(n));
+            if (_source.length < 1) {
+                $this.el.$formAddCampaign.attr('data-ifempty', 1);
+            } else {
+                let _target = $this.el.$btnAddCampaignSelect;
+                let _templates = '';
+                for (let i = 0; i < _source.length; i++) {
+                    let _name = _campaigns[_source[i]]['area']
+                    + '&nbsp' + _campaigns[_source[i]]['date'][0]
+                    + _campaigns[_source[i]]['date'][1]
+                    + _campaigns[_source[i]]['date'][2]
+                    + '&nbsp' + _campaigns[_source[i]]['campaign'];
+
+                    let _template = '<option value="' + _source[i] + '">' + _name + '</option>';
+                    _templates += _template;
+                }
+                _target.html(_templates);
+            }
         },
         goUpdateMember: function() {
             if (window.page !== 'member') return;
             console.log('goUpdateMember');
             let $this = this;
 
+            // avatar name
             let _member = window.member;
             $this.el.$mName.val(_member['name']);
             $this.el.$mAvatar.attr('src', _member['avatar']);
 
-            // my camaign
-            let _source = _member['campaign'];
-            let _source2 = window.campaigns;
+            $this.updateMyCampaign();
+            return;
+        },
+        updateMyCampaign: function() { // my camaign
+            let $this = this;
+            let _member = window.member;
+            let _myCampaign = _member['campaign'];
+            let _source = window.campaigns;
             let _target = $this.el.$mycampaign.find('ul')
             let _template_campaigns = window.helper.getTemplate('member__campaigns');
             let _templates = '';
-            for ($prop in _source) {
-                let _id = _source[$prop];
+            for ($prop in _myCampaign) {
+                let _id = _myCampaign[$prop];
                 let _template = _template_campaigns;
-                _template = _template.replace(/\[ID\]/g,  _source2[_id]['id']);
-                _template = _template.replace(/\[COUNTY\]/g,  _source2[_id]['area']);
-                _template = _template.replace(/\[DATA_Y\]/g,  _source2[_id]['date'][0]);
-                _template = _template.replace(/\[DATA_M\]/g,  _source2[_id]['date'][1]);
-                _template = _template.replace(/\[DATA_D\]/g,  _source2[_id]['date'][2]);
-                _template = _template.replace(/\[CAMPAIGN\]/g,  _source2[_id]['campaign']);
+                _template = _template.replace(/\[ID\]/g,  _source[_id]['id']);
+                _template = _template.replace(/\[COUNTY\]/g,  _source[_id]['area']);
+                _template = _template.replace(/\[DATA_Y\]/g,  _source[_id]['date'][0]);
+                _template = _template.replace(/\[DATA_M\]/g,  _source[_id]['date'][1]);
+                _template = _template.replace(/\[DATA_D\]/g,  _source[_id]['date'][2]);
+                _template = _template.replace(/\[CAMPAIGN\]/g,  _source[_id]['campaign']);
                 _templates += _template;
             }
             _target.html(_templates);
             return;
-        },
+        }
     };
     MEMBER.init();
 });
