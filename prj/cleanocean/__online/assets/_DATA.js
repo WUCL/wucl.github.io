@@ -38,7 +38,7 @@ window.annualArea = {
 
 
 // postcards /* [PAGE]index */
-window.postcards = ['/wp-content/assets/img/postcard-demo.png?1', '/wp-content/assets/img/postcard-demo.png?2', '/wp-content/assets/img/postcard-demo.png?3', '/wp-content/assets/img/postcard-demo.png?4', '/wp-content/assets/img/postcard-demo.png?8'];
+window.postcards = ['/wp-content/assets//img/postcard-demo.png?1', '/wp-content/assets//img/postcard-demo.png?2', '/wp-content/assets//img/postcard-demo.png?3', '/wp-content/assets//img/postcard-demo.png?4', '/wp-content/assets//img/postcard-demo.png?8'];
 
 
 // member data /* [PAGE]member */
@@ -46,7 +46,7 @@ window.member = {
     avatar: 'https://fakeimg.pl/100x100/?text=會員頭照&font=noto',
     name: '阿倫',
     campaign: [1, 3, 6, 8],
-    postcard: ['/wp-content/assets/img/postcard-demo.png?a', '/wp-content/assets/img/postcard-demo.png?bb', '/wp-content/assets/img/postcard-demo.png?ccc', '/wp-content/assets/img/postcard-demo.png?dd']
+    postcard: ['/wp-content/assets//img/postcard-demo.png?a', '/wp-content/assets//img/postcard-demo.png?bb', '/wp-content/assets//img/postcard-demo.png?ccc', '/wp-content/assets//img/postcard-demo.png?dd']
 };
 
 
@@ -59,7 +59,7 @@ window.campaigns = {
         kg: 50,
         campaign: '王功淨灘',
         owner: '尼古拉拉科技股份有限公司',
-        featured: '/wp-content/assets/img/album-pic-a.png'
+        featured: '/wp-content/assets//img/album-pic-a.png'
     },
     '3': {
         id: 3,
@@ -68,7 +68,7 @@ window.campaigns = {
         kg: 101,
         campaign: '烏石港淨灘',
         owner: '尼古拉拉科技股份有限公司',
-        featured: '/wp-content/assets/img/album-pic-a.png'
+        featured: '/wp-content/assets//img/album-pic-a.png'
     },
     '5': {
         id: 5,
@@ -77,7 +77,7 @@ window.campaigns = {
         kg: 78,
         campaign: '白沙灣淨灘',
         owner: '尼古拉拉科技股份有限公司',
-        featured: '/wp-content/assets/img/album-pic-a.png'
+        featured: '/wp-content/assets//img/album-pic-a.png'
     },
     '6': {
         id: 6,
@@ -86,7 +86,7 @@ window.campaigns = {
         kg: 99,
         campaign: '高雄港淨灘',
         owner: '尼古拉拉科技股份有限公司',
-        featured: '/wp-content/assets/img/album-pic-a.png'
+        featured: '/wp-content/assets//img/album-pic-a.png'
     },
     '7': {
         id: 7,
@@ -95,7 +95,7 @@ window.campaigns = {
         kg: 87,
         campaign: '竹圍漁港 淨灘',
         owner: '尼古拉拉科技股份有限公司',
-        featured: '/wp-content/assets/img/album-pic-a.png'
+        featured: '/wp-content/assets//img/album-pic-a.png'
     },
     '8': {
         id: 8,
@@ -104,7 +104,7 @@ window.campaigns = {
         kg: 66,
         campaign: '淡水淨灘',
         owner: '尼古拉拉科技股份有限公司',
-        featured: '/wp-content/assets/img/album-pic-a.png'
+        featured: '/wp-content/assets//img/album-pic-a.png'
     },
 };
 
@@ -112,105 +112,105 @@ window.albumPics = {
     '1': {
         '22': {
             id: '22',
-            src: '/wp-content/assets/img/album-pic-a.png?22'
+            src: '/wp-content/assets//img/album-pic-a.png?22'
         },
         '27': {
             id: '27',
-            src: '/wp-content/assets/img/album-pic-a.png?27'
+            src: '/wp-content/assets//img/album-pic-a.png?27'
         },
         '89': {
             id: '89',
-            src: '/wp-content/assets/img/album-pic-a.png?89'
+            src: '/wp-content/assets//img/album-pic-a.png?89'
         },
         '32': {
             id: '32',
-            src: '/wp-content/assets/img/album-pic-a.png?32'
+            src: '/wp-content/assets//img/album-pic-a.png?32'
         },
         '9': {
             id: '9',
-            src: '/wp-content/assets/img/album-pic-a.png?9'
+            src: '/wp-content/assets//img/album-pic-a.png?9'
         }
     },
     '3': {
         '71': {
             id: '71',
-            src: '/wp-content/assets/img/album-pic-a.png?71'
+            src: '/wp-content/assets//img/album-pic-a.png?71'
         },
         '32': {
             id: '32',
-            src: '/wp-content/assets/img/album-pic-a.png?32'
+            src: '/wp-content/assets//img/album-pic-a.png?32'
         }
     },
     '5': {
         '19': {
             id: '19',
-            src: '/wp-content/assets/img/album-pic-a.png?19'
+            src: '/wp-content/assets//img/album-pic-a.png?19'
         },
         '18': {
             id: '18',
-            src: '/wp-content/assets/img/album-pic-a.png?18'
+            src: '/wp-content/assets//img/album-pic-a.png?18'
         },
         '61': {
             id: '61',
-            src: '/wp-content/assets/img/album-pic-a.png?61'
+            src: '/wp-content/assets//img/album-pic-a.png?61'
         },
         '2': {
             id: '2',
-            src: '/wp-content/assets/img/album-pic-a.png?2'
+            src: '/wp-content/assets//img/album-pic-a.png?2'
         },
         '3': {
             id: '3',
-            src: '/wp-content/assets/img/album-pic-a.png?3'
+            src: '/wp-content/assets//img/album-pic-a.png?3'
         }
     },
     '6': {
         '8': {
             id: '8',
-            src: '/wp-content/assets/img/album-pic-a.png?8'
+            src: '/wp-content/assets//img/album-pic-a.png?8'
         },
         '7': {
             id: '7',
-            src: '/wp-content/assets/img/album-pic-a.png?7'
+            src: '/wp-content/assets//img/album-pic-a.png?7'
         },
         '88': {
             id: '88',
-            src: '/wp-content/assets/img/album-pic-a.png?88'
+            src: '/wp-content/assets//img/album-pic-a.png?88'
         },
         '87': {
             id: '87',
-            src: '/wp-content/assets/img/album-pic-a.png?87'
+            src: '/wp-content/assets//img/album-pic-a.png?87'
         }
     },
     '7': {
         '11': {
             id: '11',
-            src: '/wp-content/assets/img/album-pic-a.png?11'
+            src: '/wp-content/assets//img/album-pic-a.png?11'
         }
     },
     '8': {
         '12': {
             id: '12',
-            src: '/wp-content/assets/img/album-pic-a.png?12'
+            src: '/wp-content/assets//img/album-pic-a.png?12'
         },
         '13': {
             id: '13',
-            src: '/wp-content/assets/img/album-pic-a.png?13'
+            src: '/wp-content/assets//img/album-pic-a.png?13'
         },
         '20': {
             id: '20',
-            src: '/wp-content/assets/img/album-pic-a.png?20'
+            src: '/wp-content/assets//img/album-pic-a.png?20'
         },
         '51': {
             id: '51',
-            src: '/wp-content/assets/img/album-pic-a.png?51'
+            src: '/wp-content/assets//img/album-pic-a.png?51'
         },
         '66': {
             id: '66',
-            src: '/wp-content/assets/img/album-pic-a.png?66'
+            src: '/wp-content/assets//img/album-pic-a.png?66'
         },
         '78': {
             id: '78',
-            src: '/wp-content/assets/img/album-pic-a.png?78'
+            src: '/wp-content/assets//img/album-pic-a.png?78'
         }
     }
 };

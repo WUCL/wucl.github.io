@@ -32,7 +32,7 @@
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+        			<a href="/index"><img src="wp-content/assets/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
@@ -46,7 +46,7 @@
         				</li>
         				<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect nav-postcarder subnav">
-        					<a href="/album"><label>活動項目</label></a>
+        					<a href="/album"><label>活動相簿</label></a>
         					<div class="subnav-content">
         						<a class="nav-album nav-effect" href="/album"><label>活動相簿</label></a>
         						<a class="nav-postcarder nav-effect" href="/postcarder"><label>明信片製作</label></a>
@@ -66,7 +66,7 @@
 		<main id="main" class="main">
 		    <section class="pagename">
 		        <div class="inner">
-		            <img src="/wp-content/assets/img/icon-album@2x.png">
+		            <img src="wp-content/assets/img/icon-album@2x.png">
 		            <span>活動相簿</span>
 		            <a href="/postcarder" class="postcarder btn-style-3">製作明信片</a>
 		        </div>
@@ -122,7 +122,7 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+						<a href="/index"><img src="wp-content/assets/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
@@ -134,8 +134,8 @@
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="wp-content/assets/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="wp-content/assets/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>

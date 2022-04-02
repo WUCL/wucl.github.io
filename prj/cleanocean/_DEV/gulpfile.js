@@ -22,17 +22,17 @@ const SRC = './src'
     , DEST = '../'
     , PATH = {
         SRC: {
-            HTML: SRC + '/*.html'
-            , TPL: SRC + '/tpl/*.html'
-            , CSS: SRC + '/scss/**/*.scss'
-            , JS: SRC + '/js/**/*.js'
-            , IMG: SRC + '/img/**/*.{jpg,jpeg,png,gif,svg,ico}'
+            HTML: SRC + '/**/*.html'
+            , TPL: SRC + '/wp-content/assets/tpl/*.html'
+            , CSS: SRC + '/wp-content/assets/scss/**/*.scss'
+            , JS: SRC + '/wp-content/assets/js/**/*.js'
+            , IMG: SRC + '/wp-content/assets/img/**/*.{jpg,jpeg,png,gif,svg,ico}'
         }
         , DEST: {
             HTML: DEST
-            , CSS: DEST + '/public/css/'
-            , JS: DEST + '/public/js/'
-            , IMG: DEST + '/public/img/'
+            , CSS: DEST + '/wp-content/assets/css/'
+            , JS: DEST + '/wp-content/assets/js/'
+            , IMG: DEST + '/wp-content/assets/img/'
         }
     };
 

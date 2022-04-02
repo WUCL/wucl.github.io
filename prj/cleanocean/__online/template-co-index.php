@@ -25,15 +25,15 @@
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./favicon.ico" />
-		<!-- <link rel="stylesheet" type="text/css" href="/wp-content/assets/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="/wp-content/assets/lib/jquery.flipster/jquery.flipster.css" />
-        <link rel="stylesheet" type="text/css" href="/wp-content/assets/css/index.min.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="wp-content/assets/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="wp-content/assets/lib/jquery.flipster/jquery.flipster.css" />
+        <link rel="stylesheet" type="text/css" href="wp-content/assets/css/index.min.css" />
 	</head>
 	<body data-page="index">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+        			<a href="/index"><img src="wp-content/assets/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
@@ -47,7 +47,7 @@
         				</li>
         				<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect nav-postcarder subnav">
-        					<a href="/album"><label>活動項目</label></a>
+        					<a href="/album"><label>活動相簿</label></a>
         					<div class="subnav-content">
         						<a class="nav-album nav-effect" href="/album"><label>活動相簿</label></a>
         						<a class="nav-postcarder nav-effect" href="/postcarder"><label>明信片製作</label></a>
@@ -73,10 +73,10 @@
 		                <p>到海邊遊憩之後，不帶走自己製造的垃圾，也順手撿起沙灘上的垃圾，<br/>在指責任何人之前，我們先動手吧！<br/>因為我們都希望『乾淨的大海』。<br/>只有一個人做得到嗎？別擔心，你/並不孤單一人。<br/>我們就你/妳的旅伴！</p>
 		            </div>
 		            <div class="menuicon">
-		                <a class="menuicon-info" href="/info"><img src="/wp-content/assets/img/icon-info@2x.png"><span>海洋資訊</span></a>
-		                <a class="menuicon-data" href="/data"><img src="/wp-content/assets/img/icon-data@2x.png"><span>數據資料庫</span></a>
-		                <a class="menuicon-member" href="/member"><img src="/wp-content/assets/img/icon-member@2x.png"><span>會員專區</span></a>
-		                <a class="menuicon-album" href="/album"><img src="/wp-content/assets/img/icon-album@2x.png"><span>活動相簿</span></a>
+		                <a class="menuicon-info" href="/info"><img src="wp-content/assets/img/icon-info@2x.png"><span>海洋資訊</span></a>
+		                <a class="menuicon-data" href="/data"><img src="wp-content/assets/img/icon-data@2x.png"><span>數據資料庫</span></a>
+		                <a class="menuicon-member" href="/member"><img src="wp-content/assets/img/icon-member@2x.png"><span>會員專區</span></a>
+		                <a class="menuicon-album" href="/album"><img src="wp-content/assets/img/icon-album@2x.png"><span>活動相簿</span></a>
 		            </div>
 		        </div>
 		    </section>
@@ -155,7 +155,7 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+						<a href="/index"><img src="wp-content/assets/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
@@ -167,8 +167,8 @@
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="wp-content/assets/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="wp-content/assets/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>
@@ -234,17 +234,17 @@
 		</div>
         
 
-		<script src="/wp-content/assets/js/_DATA.js"></script>
-		<script src="/wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="/wp-content/assets/js/custom/eventdevice.js"></script>
-		<script src="/wp-content/assets/js/helper.js"></script>
+		<script src="wp-content/assets/js/_DATA.js"></script>
+		<script src="wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="wp-content/assets/js/custom/eventdevice.js"></script>
+		<script src="wp-content/assets/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
-        <script src="/wp-content/assets/lib/jquery.flipster/jquery.flipster.min.js"></script>
-        <script src="/wp-content/assets/js/common.js"></script>
-        <script src="/wp-content/assets/js/annual-datas.js"></script>
-		<script src="/wp-content/assets/js/index.js"></script>
+        <script src="wp-content/assets/lib/jquery.flipster/jquery.flipster.min.js"></script>
+        <script src="wp-content/assets/js/common.js"></script>
+        <script src="wp-content/assets/js/annual-datas.js"></script>
+		<script src="wp-content/assets/js/index.js"></script>
 	</body>
 </html>

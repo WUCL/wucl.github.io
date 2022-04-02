@@ -1,0 +1,81 @@
+<footer id="footer" class="footer">
+	<section class="menus">
+		<div class="menus__inner">
+			<div class="logo">
+				<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+			</div>
+			<div class="menu">
+				<nav class="nav">
+					<ul>
+						<li class="nav-method nav-effect active"><a href="/info" method><label>海洋資訊</label></a></li>
+						<li class="nav-data nav-effect"><a href="/data"><label>數據資料庫</label></a></li>
+						<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
+						<li class="nav-album nav-effect"><a href="/album"><label>活動相簿</label></a></li>
+					</ul>
+				</nav>
+				<div class="sponsor">
+					<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
+					<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="copyright">
+		<div class="copyright__inner">
+			<span>Copyright 荒野保護協會版權所有 Design by 築筠文創</span>
+			<span>使用條款|Email-<a href="sow@sow.org.tw">sow@sow.org.tw</a></span>
+		</div>
+	</section>
+</footer>
+<div id="templates" class="display-none-i">
+    <div id="template_index__postcards">
+        <li><img data-src="[POSTCARD_IMG]"></li>
+    </div>
+
+    <div id="template_data__result">
+        <li class="filter-result-item datas-item">
+            <input type="checkbox" name="resultItem[]" id="select-[ID]" value="[ID]">
+            <label class="f-r-i-name" for="select-[ID]">
+                <span class="name-county">[COUNTY]</span>
+                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                <span class="name-campaign">[CAMPAIGN]</span>
+            </label>
+        </li>
+    </div>
+
+    <div id="template_member__postcards">
+        <li><img data-src="[POSTCARD_IMG]"></li>
+    </div>
+
+    <div id="template_member__campaigns">
+        <li class="campaign" data-id="[ID]"><button class="btn-del-campaign btn-style-2" value="[ID]"></button><span>[COUNTY] [DATA_Y]/[DATA_M]/[DATA_D] [CAMPAIGN]</span></li>
+    </div>
+
+    <div id="template_album__result">
+        <li class="filter-result-item albums-item view-album_open" data-id="[ID]">
+            <div class="f-r-i-name">
+                <span class="name-county">[COUNTY]</span>
+                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                <span class="name-campaign">[CAMPAIGN]</span>
+            </div>
+            <div class="f-r-i-album">
+                <div class="album-featured"><img data-src="[FEATURED]" /></div>
+                <div class="album-source">[OWNER]</div>
+            </div>
+        </li>
+    </div>
+
+    <div id="template_album__pics">
+        <li class="va-pic-item" data-va-pic="[ID]">
+            <input type="checkbox" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+        </li>
+    </div>
+
+    <div id="template_album__pics-radio">
+        <li class="va-pic-item" data-va-pic="[ID]">
+            <input type="radio" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+        </li>
+    </div>
+</div>

@@ -25,14 +25,14 @@
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./favicon.ico" />
-        <!-- <link rel="stylesheet" type="text/css" href="/wp-content/assets/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="/wp-content/assets/css/postcarder.min.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="wp-content/assets/lib/aos/aos.css" /> -->
+        <link rel="stylesheet" type="text/css" href="wp-content/assets/css/postcarder.min.css" />
 	</head>
 	<body data-page="postcarder">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
-        			<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+        			<a href="/index"><img src="public/img/logo@2x.png"></a>
         		</div>
         		<nav class="nav">
         			<ul>
@@ -46,7 +46,7 @@
         				</li>
         				<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
         				<li class="nav-album nav-effect nav-postcarder subnav">
-        					<a href="/album"><label>活動項目</label></a>
+        					<a href="/album"><label>活動相簿</label></a>
         					<div class="subnav-content">
         						<a class="nav-album nav-effect" href="/album"><label>活動相簿</label></a>
         						<a class="nav-postcarder nav-effect" href="/postcarder"><label>明信片製作</label></a>
@@ -66,7 +66,7 @@
 		<main id="main" class="main">
 		    <section class="pagename">
 		        <div class="inner">
-		            <img src="/wp-content/assets/img/icon-album@2x.png">
+		            <img src="public/img/icon-album@2x.png">
 		            <span>明信片製作</span>
 		        </div>
 		    </section>
@@ -84,7 +84,7 @@
 		                        <div class="postcard-img-preview-box">
 		                            <img id="postcard-img-preview" class="postcard-img-preview" src />
 		                        </div>
-		                        <img id="postcard-img-bg" class="postcard-img-bg display-none-i" src="/wp-content/assets/img/postcard.png" />
+		                        <img id="postcard-img-bg" class="postcard-img-bg display-none-i" src="public/img/postcard.png" />
 		                    </div>
 		                    <ul id="postcard-text" class="postcard-text">
 		                        <li>
@@ -174,7 +174,7 @@
 			<section class="menus">
 				<div class="menus__inner">
 					<div class="logo">
-						<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+						<a href="/index"><img src="public/img/logo@2x.png"></a>
 					</div>
 					<div class="menu">
 						<nav class="nav">
@@ -186,8 +186,8 @@
 							</ul>
 						</nav>
 						<div class="sponsor">
-							<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
-							<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
+							<div class="logo-sow"><img src="public/img/logo-sow@2x.png"></div>
+							<div class="logo-see"><img src="public/img/logo-see@2x.png"></div>
 						</div>
 					</div>
 				</div>
@@ -253,18 +253,18 @@
 		</div>
         
 
-		<script src="/wp-content/assets/js/_DATA.js"></script>
-		<script src="/wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="/wp-content/assets/js/custom/eventdevice.js"></script>
-		<script src="/wp-content/assets/js/helper.js"></script>
+		<script src="wp-content/assets/js/_DATA.js"></script>
+		<script src="wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="wp-content/assets/js/custom/eventdevice.js"></script>
+		<script src="wp-content/assets/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js">
 		</script>
         <script src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
-        <script src="/wp-content/assets/lib/twzipcode/jquery.twzipcode.min.js"></script>
-        <script src="/wp-content/assets/js/common.js"></script>
-        <script src="/wp-content/assets/js/postcarder.js"></script>
+        <script src="wp-content/assets/lib/twzipcode/jquery.twzipcode.min.js"></script>
+        <script src="wp-content/assets/js/common.js"></script>
+        <script src="wp-content/assets/js/postcarder.js"></script>
 	</body>
 </html>

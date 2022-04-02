@@ -1,0 +1,81 @@
+<main id="main" class="main">
+    <section class="pagename">
+        <div class="inner">
+            <img src="/wp-content/assets//img/icon-member@2x.png">
+            <span>會員專區</span>
+        </div>
+    </section>
+    <section class="my-info">
+        <div class="inner">
+            <div class="m-view">
+                <div class="m-avatar-box"><img id="m-avatar" class="m-avatar" src="https://fakeimg.pl/100x100/?text=會員頭貼&font=noto"></div>
+                <div class="m-name-box"><input id="m-name" class="m-name" type="text" name="m-name" value="會員名稱"></div>
+                <button id="btn-m-edit" class="btn-m-edit btn-style-2 edit-member_open">編輯會員</button>
+            </div>
+            <div class="campaign-view">
+                <ul class="datas-total-ul">
+                    <li>
+                        <div class="total-key" data-text="年度活動"></div>
+                    </li>
+                </ul>
+                <div class="campaigns box-style">
+                    <div class="campaign"><img src="https://fakeimg.pl/900x350/fff/?text=活動banner&font=noto"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="annual_datas">
+        <div class="title with_afterline"><span>年度數據資料</span></div>
+        <div class="inner">
+            <div class="datas-total">
+                <ul class="datas-total-ul">
+                    <li>
+                        <div class="total-key" data-text="淨灘場次"></div>
+                        <div id="annual-freq" class="total-value" data-unit="場">0</div>
+                    </li>
+                    <li>
+                        <div class="total-key" data-text="淨灘人數"></div>
+                        <div id="annual-people" class="total-value" data-unit="人">0</div>
+                    </li>
+                    <li>
+                        <div class="total-key" data-text="淨灘長度"></div>
+                        <div id="annual-meter" class="total-value" data-unit="公尺">0</div>
+                    </li>
+                    <li>
+                        <div class="total-key" data-text="淨灘重量"></div>
+                        <div id="annual-kg" class="total-value" data-unit="公斤">0</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="my-record" class="my-record" data-edit-mode="0">
+        <div class="title with_afterline">
+            <span>我的淨灘足跡</span>
+            <button id="btn-myrecord-edit"class="btn-myrecord-edit btn-style-2">編輯</button>
+        </div>
+        <div class="inner">
+            <div id="mycampaign" class="mycampaign box-style">
+                <ul class="campaigns"></ul>
+                <button class="btn-add-campaign btn-style-2 add-campaign_open"></button>
+            </div>
+            <button id="btn-creat-recorder" class="btn-creat-recorder btn-style-2">成果圖產生器</button>
+            <div class="recorder-img-box">
+                <canvas id="canvas" class="display-none-i"></canvas>
+                <img id="recorder-img" src>
+                <a id="btn-recorder-dl" class="btn-style-5 btn-recorder-dl" download="recorder.png">成果圖下載</a>
+                <!-- <img id="recorder-pin" class="display-none-i" src="/wp-content/assets//img/recorder-pin.png" > -->
+            </div>
+        </div>
+    </section>
+    <section class="postcards">
+        <div class="title with_afterline"><span>我的明信片</span></div>
+        <div class="inner">
+            <div id="my-flipster" class="my-flipster">
+                <ul id="postcard-list" class="postcard-list"></ul>
+            </div>
+            <a href="postcarder.html" class="postcarder btn-style">製作明信片</a>
+        </div>
+    </section>
+</main>
+@@include('../tpl/popup-member.html')
