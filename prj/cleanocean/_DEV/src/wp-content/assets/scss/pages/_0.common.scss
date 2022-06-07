@@ -124,6 +124,7 @@ body {
 					font-size: $fontsize-5;
 				}
 				span {
+					padding: 0 10px 0 5px;
 					display: block;
 					min-width: max-content;
 					font-size: inherit;
@@ -170,6 +171,7 @@ body {
 						display: block;
 						width: calc(286px / 3);
 						height: calc(284px / 3);
+						transition: .2s;
 						@include mq($max-width: $bp-mobile) {
 							width: calc(286px / 3.5);
 							height: calc(284px / 3.5);
@@ -223,6 +225,11 @@ body {
 								padding-left: 3px;
 								font-size: $fontsize-2;
 							}
+						}
+					}
+					&:hover {
+						.total-key {
+							transform: scale(.9);
 						}
 					}
 				}
@@ -313,6 +320,7 @@ body {
 							width: auto;
 							height: 100%;
 							display: block;
+							transition: .2s;
 							&:nth-child(1) {
 								background: nth($color-rank-scale, 1);
 							}
@@ -339,6 +347,9 @@ body {
 							}
 							&:nth-child(9) {
 								background: nth($color-rank-scale, 9);
+							}
+							&:hover {
+								opacity: .78;
 							}
 						}
 					}
@@ -392,20 +403,23 @@ body {
 								display: flex;
 								width: 100%;
 								height: 150px;
-								> div {
+								> .goUpdateTWDatas {
 									display: flex;
 									flex-direction: column-reverse;
 									width: 100%;
 									font-size: $fontsize-4;
 									text-align: center;
+									overflow: hidden;
 									@include mq($max-width: $bp-mobile) {
 										font-size: $fontsize-2;
 									}
 									&:before {
 										content: "";
+										height: 0;
 										width: 100%;
 										display: block;
 										margin-top: 5px;
+										transition: .9s;
 									}
 									&:after {
 										content: "";
@@ -416,6 +430,8 @@ body {
 										text-align: center;
 										width: 100%;
 										margin-bottom: 5px;
+										transform: translateY(100%);
+										transition: .35s;
 										@include mq($max-width: $bp-mobile) {
 											font-size: $fontsize-2;
 										}
@@ -423,31 +439,62 @@ body {
 									&:nth-child(1) {
 										order: 2;
 										&:before {
-											height: 75%;
+											// height: 75%;
 											background: nth($color-rank-scale, 1);
+											transition-delay: .4s;
 										}
 										&:after {
 											content: "TOP1";
+											transition-delay: 1s;
 										}
 									}
 									&:nth-child(2) {
 										order: 1;
 										&:before {
-											height: 55%;
+											// height: 55%;
 											background: nth($color-rank-scale, 2);
+											transition-delay: .7s;
 										}
 										&:after {
 											content: "TOP2";
+											transition-delay: 1.5s;
 										}
 									}
 									&:nth-child(3) {
 										order: 3;
 										&:before {
-											height: 35%;
+											// height: 35%;
 											background: nth($color-rank-scale, 3);
+											transition-delay: .55s;
 										}
 										&:after {
 											content: "TOP3";
+											transition-delay: 1.3s;
+										}
+									}
+									&.magicing {
+										&:after {
+											transform: translateY(0%);
+										}
+										&:nth-child(1) {
+											&:before {
+												height: 75%;
+											}
+										}
+										&:nth-child(2) {
+											&:before {
+												height: 55%;
+											}
+										}
+										&:nth-child(3) {
+											&:before {
+												height: 35%;
+											}
+										}
+									}
+									&:hover {
+										&:before {
+											opacity: .78;
 										}
 									}
 								}
@@ -694,6 +741,7 @@ body {
 	height: calc(257px / 3);
 	background: url(../img/icon-crab@2x.png) left center no-repeat;
 	background-size: cover;
+	animation: crabMove 2s cubic-bezier(.5, 0, .5, 1) alternate infinite;
 	@include mq($max-width: $bp-mobile) {
 		width: calc(247px / 6);
 		height: calc(257px / 6);

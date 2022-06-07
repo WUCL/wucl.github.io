@@ -2,20 +2,25 @@
 	<section class="menus">
 		<div class="menus__inner">
 			<div class="logo">
-				<a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+                <ul>
+                    <li>
+                        <a href="/index"><img src="/wp-content/assets/img/logo@2x.png"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.sow.org.tw/" target="_blank"><img src="/wp-content/assets/img/logo-sow.png"></a>
+                    </li>
+                </ul>
 			</div>
 			<div class="menu">
 				<nav class="nav">
 					<ul>
-						<li class="nav-method nav-effect active"><a href="/info" method><label>海洋資訊</label></a></li>
-						<li class="nav-data nav-effect"><a href="/data"><label>數據資料庫</label></a></li>
-						<li class="nav-member nav-effect"><a href="/member"><label>會員專區</label></a></li>
-						<li class="nav-album nav-effect"><a href="/album"><label>活動相簿</label></a></li>
+						<li class="nav-method nav-effect"><a href="https://www.sow.org.tw/" target="_blank"><label>荒野保護協會</label></a></li>
+						<li class="nav-data nav-effect view-terms_open"><a href="javascript:;"><label>使用條款</label></a></li>
+						<li class="nav-member nav-effect"><a href="mailto:oceanday@wilderness.tw"><label>聯絡我們</label></a></li>
 					</ul>
 				</nav>
-				<div class="sponsor">
-					<div class="logo-sow"><img src="/wp-content/assets/img/logo-sow@2x.png"></div>
-					<div class="logo-see"><img src="/wp-content/assets/img/logo-see@2x.png"></div>
+				<div class="subnav">
+					<div>本網站由統一零錢捐贊助（2022-）</div>
 				</div>
 			</div>
 		</div>
@@ -23,8 +28,9 @@
 	<section class="copyright">
 		<div class="copyright__inner">
 			<span>Copyright 荒野保護協會版權所有 Design by 築筠文創</span>
-			<span>使用條款|Email-<a href="mailto:sow@sow.org.tw">sow@sow.org.tw</a></span>
+			<span>Email-<a href="mailto:sow@sow.org.tw">sow@sow.org.tw</a></span>
 		</div>
 	</section>
 </footer>
+@@include('../tpl/popup-terms.html')
 @@include('_template.html')

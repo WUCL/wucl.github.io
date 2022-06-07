@@ -96,4 +96,33 @@ layout/_popup
 			}
 		}
 	}
+
+	&#view-terms {
+		.popup_list {
+			line-height: normal;
+			font-size: $fontsize-a;
+			p {
+				text-align: justify;
+				letter-spacing: .5px;
+				color: $color-font;
+			}
+			.p-title {
+				font-size: $fontsize;
+				color: $color-footer;
+				margin: 12px 0 5px;
+				font-weight: bold;
+			}
+			.p-sub {
+				margin: .5em 0 0 2em;
+				label {
+					color: $color-font3;
+					margin-bottom: 5px;
+				}
+				span {
+					display: inline-block;
+					margin-top: 3px;
+				}
+			}
+		}
+	}
 }

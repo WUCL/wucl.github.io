@@ -3,19 +3,33 @@ helper
 ======================= */
 window.helper = {
     magicNum: function(_target, _endNum, _duration) {
-        console.log(_target.text());
+        // console.log(_target.text());
         $({Counter: _target.text()}).animate({
             Counter: _endNum
         }, {
-            duration: _duration || 200,
+            duration: _duration || 800,
             easing: 'swing',
             step: function() {
                 _target.text(Math.floor(this.Counter));
-                console.log(this.Counter)
-            },
-            complete: function () {
-                _target.html(this.Counter);
+                // console.log(this.Counter)
             }
+            ,complete: function () {
+                _target.html(this.Counter);
+                _target.addClass('magic-done');
+            }
+        });
+    },
+    magicNum2: function(_target, _endNum, _duration) {
+        _target.each(function () {
+            $(this).prop('Counter', $(this).val()).animate({
+                Counter: jQuery(this).text()
+            }, {
+                duration: 1000,
+                easing: 'swing',
+                step: function (now) {
+                    jQuery(this).text(Math.ceil(now));
+                }
+            });
         });
     },
     getRandom: function(min, max) {

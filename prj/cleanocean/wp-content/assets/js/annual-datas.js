@@ -109,10 +109,18 @@ $(function() {
             let $this = this;
             let _annualDatas = window.annualDatas;
             // console.log(_annualDatas);
-            $this.el.$annual.freq.html(_annualDatas['freq']);
-            $this.el.$annual.people.html(_annualDatas['people']);
-            $this.el.$annual.meter.html(_annualDatas['meter']);
-            $this.el.$annual.kg.html(_annualDatas['kg']);
+            // $this.el.$annual.freq.html(_annualDatas['freq']);
+            $this.el.$annual.freq.attr('data-endnum', _annualDatas['freq']);
+
+            // $this.el.$annual.people.html(_annualDatas['people']);
+            $this.el.$annual.people.attr('data-endnum', _annualDatas['people']);
+
+            // $this.el.$annual.meter.html(_annualDatas['meter']);
+            $this.el.$annual.meter.attr('data-endnum', _annualDatas['meter']);
+
+            // $this.el.$annual.kg.html(_annualDatas['kg']);
+            $this.el.$annual.kg.attr('data-endnum', _annualDatas['kg']);
+
             if (window.page == 'member') return;
 
             $this.el.$annual.top1.html(_annualDatas['top'][0]);
@@ -133,7 +141,10 @@ $(function() {
             // console.log($this.var.$area);
             // console.log(_mappingData);
             $this.el.$area.name.html(_area);
-            $this.el.$area.freq.html(_mappingData['freq']);
+
+            // $this.el.$area.freq.html(_mappingData['freq']);
+            $this.el.$area.freq.attr('data-endnum', _mappingData['freq']);
+
             $this.el.$area.top1.html(_mappingData['top'][0]);
             $this.el.$area.top2.html(_mappingData['top'][1]);
             $this.el.$area.top3.html(_mappingData['top'][2]);

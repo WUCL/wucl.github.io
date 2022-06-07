@@ -28,6 +28,8 @@ $(function() {
             this.el.$body.addClass(deviceObj.name);
             this.processNavActive();
             this.bindEvent();
+            this.detectScroll();
+            this.setPopup();
         },
         processNavActive: function() {
             let $this = this;
@@ -67,6 +69,51 @@ $(function() {
                 alert('how to login?');
                 return;
             })
+        },
+        detectScroll: function() {
+            let $this = this;
+            let lastScrollTop = 0;
+            $(window).scroll(function(event) {
+                let st = $(this).scrollTop();
+                if (st > lastScrollTop) {
+                    // console.log('downscroll');
+                    $this.el.$body.attr('data-scroll', 'downscroll');
+                } else {
+                    // console.log('upscroll');
+                    $this.el.$body.attr('data-scroll', 'upscroll');
+                }
+                lastScrollTop = st; // initial
+                // stopscroll
+                // clearTimeout($.data(this, 'scrollTimer'));
+                // $.data(this, 'scrollTimer', setTimeout(function() {
+                //     // do something
+                //     console.log("Haven't scrolled in 250ms!");
+                // }, 250));
+
+                // detect element in view
+                //
+                if ($('.total-value:not(".magin-done")').inView('topOnly')) {
+                    $('.total-value:not(".magin-done")').each(function () {
+                        window.helper.magicNum($(this), $(this).attr('data-endnum'));
+                    })
+                }
+                //
+                if ($('#goUpdateTWDatas-freq:not(".magin-done")').inView('topOnly')) {
+                    window.helper.magicNum($('#goUpdateTWDatas-freq'), $('#goUpdateTWDatas-freq').attr('data-endnum'));
+                }
+                //
+                if ($('.goUpdateTWDatas').inView('topOnly')) {
+                    $('.goUpdateTWDatas').addClass('magicing');
+                }
+            });
+        },
+        setPopup: function() {
+            // let $this = this;
+            $('#view-terms').popup({
+                escape: false,
+                closebutton: true,
+                scrolllock: true,
+            });
         },
         doScrollIt: function() {
             let $this = this;
