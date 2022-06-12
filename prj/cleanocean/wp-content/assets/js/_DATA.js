@@ -211,3 +211,87 @@ window.albumPics = {
         }
     }
 };
+
+
+// info post /* [PAGE]info */
+window.info = {
+    'articles': [
+        {
+            id: '1',
+            link: '#p1',
+            featured: '/wp-content/assets/img/post-background.png',
+            title: '我是標題我是標題我是標題我是標題我是標題我是標題我是標題',
+            cat: '分類1',
+            author: 'Allen',
+            date: '2022.06.11',
+            description: '我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要',
+        },
+        {
+            id: '2',
+            link: '#p2',
+            featured: '/wp-content/assets/img/post-background.png',
+            title: '22我是標題我是標題我是標題我是標題我是標題我是標題我是標題',
+            cat: '分類3',
+            author: 'Jerry',
+            date: '2022.06.09',
+            description: '22我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要',
+        },
+        {
+            id: '3',
+            link: '#p3',
+            featured: '/wp-content/assets/img/post-background.png',
+            title: '33我是標題我是標題我是標題我是標題我是標題我是標題我是標題',
+            cat: '分類2',
+            author: 'Allen',
+            date: '2021.10.30',
+            description: '33我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要我是摘要',
+        },
+    ],
+    'hots': [
+        {
+            id: '11',
+            title: '標題',
+            link: '#hotp1',
+        },
+        {
+            id: '23',
+            title: '標題標',
+            link: '#hotp2',
+        },
+        {
+            id: '33',
+            title: '標題題',
+            link: '#hotp3',
+        },
+        {
+            id: '45',
+            title: '標題標題',
+            link: '#hotp4',
+        },
+        {
+            id: '55',
+            title: '標題題標',
+            link: '#hotp5',
+        },
+    ],
+    'cats': [
+        {
+            id: '333',
+            title: '分類1',
+            link: '#cat1',
+            total: '11',
+        },
+        {
+            id: '666',
+            title: '分類2',
+            link: '#cat2',
+            total: '1',
+        },
+        {
+            id: '987',
+            title: '分類3',
+            link: '#cat3',
+            total: '9',
+        },
+    ]
+};

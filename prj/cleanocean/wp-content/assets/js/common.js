@@ -32,8 +32,8 @@ $(function() {
             this.setPopup();
         },
         processNavActive: function() {
-            let $this = this;
-            let _page = this.el.$body.data('page');
+            let $this = this
+            , _page = this.el.$body.data('page');
             console.log(_page);
             return $('.nav-' + _page).addClass('active');
         },
@@ -71,8 +71,8 @@ $(function() {
             })
         },
         detectScroll: function() {
-            let $this = this;
-            let lastScrollTop = 0;
+            let $this = this
+            , lastScrollTop = 0;
             $(window).scroll(function(event) {
                 let st = $(this).scrollTop();
                 if (st > lastScrollTop) {
@@ -92,18 +92,24 @@ $(function() {
 
                 // detect element in view
                 //
-                if ($('.total-value:not(".magin-done")').inView('topOnly')) {
-                    $('.total-value:not(".magin-done")').each(function () {
-                        window.helper.magicNum($(this), $(this).attr('data-endnum'));
-                    })
+                if ($('.total-value:not(".magin-done")').length > 0) {
+                    if ($('.total-value:not(".magin-done")').inView('topOnly')) {
+                        $('.total-value:not(".magin-done")').each(function () {
+                            window.helper.magicNum($(this), $(this).attr('data-endnum'));
+                        })
+                    }
                 }
                 //
-                if ($('#goUpdateTWDatas-freq:not(".magin-done")').inView('topOnly')) {
-                    window.helper.magicNum($('#goUpdateTWDatas-freq'), $('#goUpdateTWDatas-freq').attr('data-endnum'));
+                if ($('#goUpdateTWDatas-freq:not(".magin-done")').length > 0) {
+                    if ($('#goUpdateTWDatas-freq:not(".magin-done")').inView('topOnly')) {
+                        window.helper.magicNum($('#goUpdateTWDatas-freq'), $('#goUpdateTWDatas-freq').attr('data-endnum'));
+                    }
                 }
                 //
-                if ($('.goUpdateTWDatas').inView('topOnly')) {
-                    $('.goUpdateTWDatas').addClass('magicing');
+                if ($('.goUpdateTWDatas').length > 0) {
+                    if ($('.goUpdateTWDatas').inView('topOnly')) {
+                        $('.goUpdateTWDatas').addClass('magicing');
+                    }
                 }
             });
         },

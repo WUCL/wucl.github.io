@@ -39,16 +39,15 @@ $(function() {
         bindEvent: function() {
             let $this = this;
             $this.el.$twimg.on('click', '#svg-tw', function(e) {
-                let _target = $(e.target);
-                let _currentTarget = $(e.currentTarget);
-                // console.log(_target.attr('data-area'));
-                let _targetArea = _target.attr('data-area');
+                let _target = $(e.target)
+                , _currentTarget = $(e.currentTarget)
+                , _targetArea = _target.attr('data-area');
                 if (_targetArea == $this.var.$area) return;
 
                 $this.var.$area = _target.attr('data-area');
 
-                let _name = window.mappingTWName[$this.var.$area];
-                let _mappingData = window.annualArea[_name];
+                let _name = window.mappingTWName[$this.var.$area]
+                , _mappingData = window.annualArea[_name];
                 console.log(_mappingData);
                 if (_mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
@@ -106,8 +105,8 @@ $(function() {
         },
         goUpdateAnnual: function() {
             console.log("goUpdateAnnual");
-            let $this = this;
-            let _annualDatas = window.annualDatas;
+            let $this = this
+            , _annualDatas = window.annualDatas;
             // console.log(_annualDatas);
             // $this.el.$annual.freq.html(_annualDatas['freq']);
             $this.el.$annual.freq.attr('data-endnum', _annualDatas['freq']);
@@ -135,9 +134,9 @@ $(function() {
         goUpdateTWDatas: function() {
             console.log("goUpdateTWDatas");
             if (window.page == 'member') return;
-            let $this = this;
-            let _area = window.mappingTWName[$this.var.$area];
-            let _mappingData = window.annualArea[_area];
+            let $this = this
+            , _area = window.mappingTWName[$this.var.$area]
+            , _mappingData = window.annualArea[_area];
             // console.log($this.var.$area);
             // console.log(_mappingData);
             $this.el.$area.name.html(_area);

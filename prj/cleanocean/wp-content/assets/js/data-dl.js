@@ -38,9 +38,9 @@ $(function() {
             this.listenFilter();
         },
         bindEvent: function() {
-            let $this = this;
-            let $filterVal = $this.var.$filter;
-            let $dl = $this.var.$dl;
+            let $this = this
+            , $filterVal = $this.var.$filter
+            , $dl = $this.var.$dl;
             $this.el.$btnFilterSearch.on('click', function() {
                 if (($filterVal.timeBegin.length + $filterVal.timeEnd.length + $filterVal.county.length + $filterVal.campaign.length) > 0) {
                     $this.goFilter();
@@ -62,11 +62,11 @@ $(function() {
             console.log('goInitial');
         },
         loadResult: function() {
-            let $this = this;
-            let _source = window.campaigns;
-            let _target = $this.el.$filterResultList;
-            let _template_result = window.helper.getTemplate('data__result');
-            let _templates = '';
+            let $this = this
+            , _source = window.campaigns
+            , _target = $this.el.$filterResultList
+            , _template_result = window.helper.getTemplate('data__result')
+            , _templates = '';
             for ($prop in _source) {
                 let _template = _template_result;
                 _template = _template.replace(/\[ID\]/g,  _source[$prop]['id']);

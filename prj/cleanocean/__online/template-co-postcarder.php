@@ -299,9 +299,32 @@
 		            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
 		        </li>
 		    </div>
-		</div>
-        
 
+		    <div id="template_info__article">
+		        <article class="article" data-pid="[PID]">
+		            <a href="[LINK]">
+		                <div class="article-featured"><img data-src="[FEATURED]"></div>
+		                <div class="article-text">
+		                    <div class="article-title"><h1>[TITLE]</h1></div>
+		                    <div class="article-content">
+		                        <div class="article-cat">[CAT]</div>
+		                        <div class="article-autohr">[AUTHOR]</div>
+		                        <div class="article-date">[DATE]</div>
+		                    </div>
+		                    <div class="article-description">[DESCRIPTION]</div>
+		                </div>
+		            </a>
+		        </article>
+		    </div>
+
+		    <div id="template_info__article-hot">
+		        <li class="post-hot-item" data-pid="[PID]"><a href="[HREF]">[TITLE]</a></li>
+		    </div>
+
+		    <div id="template_info__article-cat">
+		        <li class="post-cat-item" data-catid="[CID]"><a href="[HREF]">[CAT]<label>[CAT_TOTAL]</label></a></li>
+		    </div>
+		</div>
 		<script src="../wp-content/assets/js/_DATA.js"></script>
 		<script src="../wp-content/assets/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="../wp-content/assets/lib/jquery.inView/jQuery-inView.min.js"></script>

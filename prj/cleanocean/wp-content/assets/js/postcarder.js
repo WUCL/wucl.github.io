@@ -253,11 +253,11 @@ $(function() {
         },
         loadAlbum: function() {
             console.log('loadAlbum');
-            let $this = this;
-            let _source = window.campaigns;
-            let _target = $this.el.$filterResultList;
-            let _template_album = window.helper.getTemplate('album__result');
-            let _templates = '';
+            let $this = this
+            , _source = window.campaigns
+            , _target = $this.el.$filterResultList
+            , _template_album = window.helper.getTemplate('album__result')
+            , _templates = '';
             for ($prop in _source) {
                 let _template = _template_album;
                 _template = _template.replace(/\[ID\]/g,  _source[$prop]['id']);
@@ -350,9 +350,9 @@ $(function() {
         },
         listenAlbum: function() {
             console.log("listenAlbum");
-            let $this = this;
-            let _filterResultItem = $('.filter-result-item');
-            let _backToAlbum = $('#btn-back-to-album');
+            let $this = this
+            , _filterResultItem = $('.filter-result-item')
+            , _backToAlbum = $('#btn-back-to-album');
 
             _filterResultItem.on('click', function(e) {
                 let _id = $(e.currentTarget).data('id');
@@ -368,8 +368,8 @@ $(function() {
         },
         listenAlbumPic: function() {
             console.log('listenAlbumPic');
-            let $this = this;
-            let _confirmPic = $('#btn-confirm-pic');
+            let $this = this
+            , _confirmPic = $('#btn-confirm-pic');
 
             $this.el.$vaPicList.on("change", "input[type=radio]", function(e) {
                 let _value = e.target.value;
@@ -378,8 +378,8 @@ $(function() {
             });
             _confirmPic.on("click", function(e) {
                 console.log('doSetPriview');
-                let _popup = $this.var.$popup;
-                let _src = window.albumPics[_popup.album][_popup.pic]['src'];
+                let _popup = $this.var.$popup
+                , _src = window.albumPics[_popup.album][_popup.pic]['src'];
                 $this.el.$postcardImgPreview.attr('src', _src);
                 $this.var.$postcard['img'] = _src;
                 return $this.el.$viewAlbum.popup('hide');
@@ -387,22 +387,21 @@ $(function() {
         },
         loadAlbumPic: function() {
             console.log('loadAlbumPic');
-            let $this = this;
-            let _source = window.albumPics;
-            let _target = $this.el.$vaPicList;
-            let _aid = $this.var.$popup.album;
-            let _template_pics = window.helper.getTemplate('album__pics-radio');
-            let _templates = '';
-
-            let _album = window.campaigns[$this.var.$popup.album];
-            let _name = _album['area'] + _album['date'][0] + _album['date'][1] + _album['date'][2] + _album['campaign'];
+            let $this = this
+            , _source = window.albumPics
+            , _target = $this.el.$vaPicList
+            , _aid = $this.var.$popup.album
+            , _template_pics = window.helper.getTemplate('album__pics-radio')
+            , _templates = ''
+            , _album = window.campaigns[$this.var.$popup.album]
+            , _name = _album['area'] + _album['date'][0] + _album['date'][1] + _album['date'][2] + _album['campaign'];
             $this.el.$vaName.html(_name);
 
             for ($prop in _source[_aid]) {
                 let _template = _template_pics;
-                _template = _template.replace(/\[ID\]/g,  _source[_aid][$prop]['id']);
-                _template = _template.replace(/\[PIC\]/g,  _source[_aid][$prop]['src']);
-                _template = _template.replace(/data-src/g,  'src');
+                _template = _template.replace(/\[ID\]/g, _source[_aid][$prop]['id']);
+                _template = _template.replace(/\[PIC\]/g, _source[_aid][$prop]['src']);
+                _template = _template.replace(/data-src/g, 'src');
                 _templates += _template;
             }
             _target.html(_templates);

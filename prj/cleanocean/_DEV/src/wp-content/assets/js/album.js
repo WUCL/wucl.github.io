@@ -47,8 +47,8 @@ $(function() {
             this.listenFilter();
         },
         bindEvent: function() {
-            let $this = this;
-            let $filterVal = $this.var.$filter;
+            let $this = this
+            , $filterVal = $this.var.$filter;
             $this.el.$btnFilterSearch.on('click', function() {
                 if (($filterVal.timeBegin.length + $filterVal.timeEnd.length + $filterVal.county.length + $filterVal.campaign.length) > 0) {
                     $this.goFilter();
@@ -90,11 +90,11 @@ $(function() {
         },
         loadAlbum: function() {
             console.log('loadAlbum');
-            let $this = this;
-            let _source = window.campaigns;
-            let _target = $this.el.$filterResultList;
-            let _template_album = window.helper.getTemplate('album__result');
-            let _templates = '';
+            let $this = this
+            , _source = window.campaigns
+            , _target = $this.el.$filterResultList
+            , _template_album = window.helper.getTemplate('album__result')
+            , _templates = '';
             for ($prop in _source) {
                 let _template = _template_album;
                 _template = _template.replace(/\[ID\]/g,  _source[$prop]['id']);
@@ -111,12 +111,12 @@ $(function() {
             _target.html(_templates);
         },
         loadAlbumPic: function() { // window.albumPics
-            let $this = this;
-            let _source = window.albumPics;
-            let _target = $this.el.$viewAlbumList;
-            let _aid = $this.var.$popup.album;
-            let _template_pics = window.helper.getTemplate('album__pics');
-            let _templates = '';
+            let $this = this
+            , _source = window.albumPics
+            , _target = $this.el.$viewAlbumList
+            , _aid = $this.var.$popup.album
+            , _template_pics = window.helper.getTemplate('album__pics')
+            , _templates = '';
             for ($prop in _source[_aid]) {
                 let _template = _template_pics;
                 _template = _template.replace(/\[ID\]/g,  _source[_aid][$prop]['id']);

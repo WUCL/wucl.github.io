@@ -72,8 +72,8 @@ $(function() {
                 return $this.el.$myRecord.attr('data-edit-mode', _mode);
             });
             $this.el.$mycampaign.on('click', '.campaign .btn-del-campaign', function(e) {
-                let _id = e.target.value;
-                let text = "";
+                let _id = e.target.value
+                , text = "";
 
                 if (confirm("確定刪除嗎？") == true) {
                     text = '確定刪除 ID: ' + _id;
@@ -111,11 +111,10 @@ $(function() {
         },
         loadCampaignBanner: function() {
             console.log('loadCampaignBanner');
-            let $this = this;
-
-            let _source = window.member.banner;
-            let _target = $this.el.$campaignsSwiper.find('.swiper-wrapper');
-            let _templates = '';
+            let $this = this
+            , _source = window.member.banner
+            , _target = $this.el.$campaignsSwiper.find('.swiper-wrapper')
+            , _templates = '';
             for (let i = 0; i < _source.length; i++) {
                 let _template = '<div class="campaign swiper-slide"><img src="' + _source[i] + '"></div>';
                 _templates += _template;
@@ -132,11 +131,11 @@ $(function() {
             });
         },
         loadPostcard: function() { // window.member
-            let $this = this;
-            let _source = window.member.postcard;
-            let _target = $this.el.$postcardList;
-            let _template_postcards = window.helper.getTemplate('member__postcards');
-            let _templates = '';
+            let $this = this
+            , _source = window.member.postcard
+            , _target = $this.el.$postcardList
+            , _template_postcards = window.helper.getTemplate('member__postcards')
+            , _templates = '';
             for (let i = 0; i < _source.length; i++) {
                 let _template = _template_postcards;
                 _template = _template.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
@@ -326,10 +325,10 @@ $(function() {
         },
         loadCampaigns: function() {
             console.log('loadCampaigns');
-            let $this = this;
-            let _campaigns = window.campaigns;
-            let _campaignsAry = Object.keys(_campaigns);
-            let _source = _campaignsAry.filter(n => !window.member.campaign.includes(n));
+            let $this = this
+            , _campaigns = window.campaigns
+            , _campaignsAry = Object.keys(_campaigns)
+            , _source = _campaignsAry.filter(n => !window.member.campaign.includes(n));
             if (_source.length < 1) {
                 $this.el.$formAddCampaign.attr('data-ifempty', 1);
             } else {
@@ -362,13 +361,13 @@ $(function() {
             return;
         },
         updateMyCampaign: function() { // my camaign
-            let $this = this;
-            let _member = window.member;
-            let _myCampaign = _member['campaign'];
-            let _source = window.campaigns;
-            let _target = $this.el.$mycampaign.find('ul')
-            let _template_campaigns = window.helper.getTemplate('member__campaigns');
-            let _templates = '';
+            let $this = this
+            , _member = window.member
+            , _myCampaign = _member['campaign']
+            , _source = window.campaigns
+            , _target = $this.el.$mycampaign.find('ul')
+            , _template_campaigns = window.helper.getTemplate('member__campaigns')
+            , _templates = '';
             for ($prop in _myCampaign) {
                 let _id = _myCampaign[$prop];
                 let _template = _template_campaigns;

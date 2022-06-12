@@ -29,11 +29,10 @@ $(function() {
         },
         loadTopics: function() {
             console.log('loadTopics');
-            let $this = this;
-
-            let _source = window.annualTopic;
-            let _target = $this.el.$topicsSwiper.find('.swiper-wrapper');
-            let _templates = '';
+            let $this = this
+            , _source = window.annualTopic
+            , _target = $this.el.$topicsSwiper.find('.swiper-wrapper')
+            , _templates = '';
             for (let i = 0; i < _source.length; i++) {
                 let _template = '<div class="topic swiper-slide"><img src="' + _source[i] + '"></div>';
                 _templates += _template;
@@ -50,14 +49,14 @@ $(function() {
             });
         },
         loadPostcard: function() { // window.postcards
-            let $this = this;
-            let _source = window.postcards;
-            let _target = $this.el.$postcardList;
-            let _template_postcards = window.helper.getTemplate('index__postcards');
-            let _templates = '';
+            let $this = this
+            , _source = window.postcards
+            , _target = $this.el.$postcardList
+            , _template_postcards = window.helper.getTemplate('index__postcards')
+            , _templates = '';
             for (let i = 0; i < _source.length; i++) {
                 let _template = _template_postcards;
-                _template = _template.replace(/\[POSTCARD_IMG\]/g,  _source[i]);
+                _template = _template.replace(/\[POSTCARD_IMG\]/g, _source[i]);
                 _template = _template.replace(/data-src/g,  'src');
                 _templates += _template;
             }
