@@ -1,0 +1,32 @@
+/* Welcome to Compass.
+* In this file you should write your main styles. (or centralize your imports)
+* Import this file using the following HTML or equivalent:
+* <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+// @import "breakpoint";
+// @import "compass/css3/";
+// @import "compass/typography/text/replacement";
+// @import "compass/utilities/sprites";
+
+@import "utilities/_config.scss";
+// @import "utilities/_helpers.scss";
+// @import "utilities/_mixins.scss";
+@import "utilities/_media-queries.scss";
+@import "_base";
+//import layout
+@import "layout/_layout.scss";
+// @import "layout/_container.scss";
+@import "layout/_footer.scss";
+@import "layout/_header.scss";
+@import "layout/_sidebar.scss";
+//import modules
+// @import "modules/_btns.scss";
+// @import "modules/_nav.scss";
+// @import "modules/_colorbox.scss";
+// @import "modules/_mCustomScrollbar.scss";
+// @import "modules/_pagination.scss";
+// @import "modules/_waterfall-loading.scss";
+
+//import pages
+@import "pages/_0.animation.scss";
+@import "pages/_0.common.scss";
+@import "pages/_home.scss";
