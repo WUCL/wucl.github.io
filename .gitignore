@@ -119,3 +119,6 @@ typings/
 # project/*/public/js/_config.js
 # project/*/src/js/_config.js
 # project/*/*/src/js/_config.js
+
+# mac things
+.DS_Store
