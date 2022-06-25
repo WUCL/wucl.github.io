@@ -163,7 +163,7 @@ function preloadImg(imgs) {
         }
     });
 }
-preloadImg(window.imgs1);
+// preloadImg(window.imgs1);
 window.imgs1 = [
     // 'dist/video/sample.mp4',
     // 'dist/img/bg-agenda.png',

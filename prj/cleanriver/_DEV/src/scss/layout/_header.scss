@@ -3,7 +3,7 @@ layout/_header
 ======================= */
 .header {
 		// position: fixed;
-		// z-index: 99;
+		z-index: 99;
 
 	// margin-top: 50px;
 	top: 0;
@@ -14,7 +14,7 @@ layout/_header
 	box-sizing: border-box;
 	// height: $haeder_h;
 
-   	padding: 5px 0;
+   	padding: 20px 0 5px;
 	@include mq($min-width: $bp-mobile) {
 		transition: .2s .2s;
 	}
@@ -43,6 +43,7 @@ layout/_header
 			display: block;
 		}
 		.logo {
+			z-index: 1;
 			// position: relative;
 			// width: 100%;
 			// height: 100%;
@@ -508,7 +509,42 @@ layout/_header
 		}
 	}
 }
-
+body[data-page^="river"],
+body[data-page^="ocean"] {
+	.header__inner {
+		.logo {
+			position: absolute;
+			top: 0;
+			a {
+	            display: block;
+	            margin: 0 auto;
+	            width: calc(830px / 4.5);
+	            height: calc(830px / 4.5);
+	            // @include mq($max-width: $bp_2s) {
+	            //    width: calc(830px / 12);
+	            //    height: calc(830px / 12);
+	            // }
+	            // @include mq($max-width: $bp_xs) {
+	            //    width: calc(830px / 13.5);
+	            //    height: calc(830px / 13.5);
+	            //    margin-bottom: 20px;
+	            // }
+         	}
+	   	}
+	}
+}
+body[data-page^="river"] {
+	.header__inner .logo a {
+		background: url('../img/logo-circle-river@2x.png') 100% 100%/100% no-repeat;
+		background-size: contain;
+	}
+}
+body[data-page^="ocean"] {
+	.header__inner .logo a {
+		background: url('../img/logo-circle-ocean@2x.png') 100% 100%/100% no-repeat;
+		background-size: contain;
+	}
+}
 // body[data-scroll="downscroll"] {
 // 	.header {
 // 		@include mq($min-width: $bp-mobile) {

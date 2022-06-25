@@ -15,13 +15,17 @@
         <meta property="og:image" content="" />
         <link rel="icon" type="image/png" href="@@webRoot/favicon.ico" />
         @@include('../src/tpl/_style.html')
+        <link rel="stylesheet" type="text/css" href="@@webRoot/public/lib/swiper/swiper.min.css" />
         <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/ocean.min.css" />
-	</head>
-	<body>
+    </head>
+	<body data-page="ocean">
         @@include('../src/tpl/header.html')
 		@@include('../src/tpl/_ocean.html')
         @@include('../src/tpl/footer.html')
 		@@include('../src/tpl/_script.html')
-		<script src="@@webRoot/public/js/main.js"></script>
+
+        <script src="@@webRoot/public/lib/swiper/swiper.min.js"></script>
+        <script src="@@webRoot/public/js/common.js"></script>
+        <script src="@@webRoot/public/js/ocean.js"></script>
 	</body>
 </html>

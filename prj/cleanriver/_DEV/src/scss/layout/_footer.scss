@@ -104,8 +104,11 @@ footer.footer {
 								justify-content: center;
 								cursor: pointer;
 							}
-							&:hover {
-								color: $color-main;
+							&:hover,
+							&.active {
+								// color: $color-main;
+								font-weight: bold;
+								text-decoration: underline;
 							}
 						}
 					}

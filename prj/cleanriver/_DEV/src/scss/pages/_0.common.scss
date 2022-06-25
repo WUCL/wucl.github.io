@@ -2,23 +2,41 @@
    pages/common
    ======================= */
 #thetitle {
-	position: absolute;
-	// top: $haeder_h + 50px;
-	top: -5vw;
-	left: 5vw;
-	z-index: 100;
 	h1 {
-		font-size: $fontsize-title;
 		display: block;
-		writing-mode: vertical-rl;
 		white-space: nowrap;
 		color: $color-main;
-		letter-spacing: 1.2rem;
-		font-weight: bold;
-		-webkit-text-stroke: 3px $color-white;
+		font-weight: bolder;
 		-webkit-text-fill-color: $color-main;
 		pointer-events: none;
 		user-select: none;
+		letter-spacing: 1.5rem;
+		&:before {
+			content: attr(data-storke);
+			position: absolute;
+			z-index: -1;
+			-webkit-text-stroke: 10px $color-white;;
+			text-stroke: 3px $color-white;;
+		}
+	}
+	&.position-side {
+		position: absolute;
+		top: -5vw;
+		left: 5vw;
+		z-index: 100;
+		h1 {
+			font-size: $fontsize-title-side;
+			writing-mode: vertical-rl;
+			// -webkit-text-stroke: 3px $color-white;
+		}
+	}
+	&.position-center {
+		text-align: center;
+		h1 {
+			margin-left: 1.5rem;
+			font-size: $fontsize-title-center;
+			// -webkit-text-stroke: 2px $color-white;
+		}
 	}
 }
 body {
@@ -44,7 +62,7 @@ body {
 		border-radius: 6px;
 		transition: .2s;
 		transform: scale(1);
-		box-shadow: 4px 4px 4px rgba(0, 0, 0, .25);
+		box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
 		flex-shrink: 0;
 		text-decoration: none;
 		cursor: pointer;
@@ -56,6 +74,14 @@ body {
 		&:hover {
 			transform: scale(.93);
 		}
+	}
+	.btn-style-0 {
+		background: nth($color-btn, 3);
+      font-size: $fontsize-1;
+      color: $color-main;
+      border-radius: 5px;
+      font-weight: 500;
+		padding: 5px 17px;
 	}
 	.btn-style {
 		background: nth($color-btn, 1);
@@ -120,8 +146,11 @@ body {
 	margin: 0 auto;
 	// overflow: hidden;
 	min-height: 100vw;
+	padding: 0 3%;
+	z-index: 1;
 	@include mq($max-width: $bp-mobile) {
 		margin: 30px 20px;
+		padding: 0;
 	}
 	section {
 		width: 100%;
@@ -429,7 +458,7 @@ body {
 										text-align: center;
 										width: 100%;
 										margin-bottom: 5px;
-										transform: translateY(100%);
+										transform: translateY(110%);
 										transition: .35s;
 										@include mq($max-width: $bp-mobile) {
 											font-size: $fontsize-2;
@@ -497,14 +526,6 @@ body {
 										}
 									}
 								}
-							}
-						}
-						&-btn {
-							margin-top: 20px;
-							display: flex;
-							justify-content: flex-end;
-							a {
-								margin-right: 10px;
 							}
 						}
 					}
@@ -759,11 +780,12 @@ body {
 
 .with_afterline {
  	display: inline-flex;
-	font-size: $fontsize-4;
+	font-size: $fontsize-2;
 	width: 100%;
 	font-weight: 500;
+
 	@include mq($max-width: $bp-mobile) {
-		font-size: $fontsize-5;
+		font-size: $fontsize-2;
 	}
 	span {
 		padding: 0 10px 0 5px;
@@ -779,4 +801,33 @@ body {
 		margin-bottom: -9px;
     	z-index: 1;
 	}
+}
+
+ul.the_btn_belowtitle {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 30px;
+   li {
+      margin: 0 13px;
+   }
+   // .btn-item {
+   //    padding: 7px 18px;
+   //    background: $color-white;
+   //    border-radius: 3px;
+   //    transition: .2s;
+   //    box-shadow: 2px 2px 2px rgba($color-black, .1);
+   //    margin: 0 13px;
+   //    font-size: $fontsize-1;
+   //    font-weight: 500;
+   //    a {
+   //       color: $color-main;
+   //       display: block;
+   //       width: 100%;
+   //       height: 100%;
+   //    }
+   //    &:hover {
+   //       transform: translateY(-3px);
+   //    }
+   // }
 }
