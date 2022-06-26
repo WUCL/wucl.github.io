@@ -1,0 +1,97 @@
+/* =======================
+   pages/form-style
+   ======================= */
+#thetitle.position-side {
+   top: 7vw;
+}
+
+section.theform {
+   padding-top: 135px;
+   .inner {
+      form.form-style {
+         background: #f2e1c6;
+         width: 80%;
+         height: auto;
+         margin-left: 20%;
+         color: $color-main;
+         padding: 20px 30px;
+         line-height: normal;
+         .group {
+            &2in1 {
+               ul {
+                  grid-gap: 10px 30px;
+                  grid-template-columns: 50% 50%;
+               }
+            }
+            ul {
+               // grid-template-columns: 1fr;
+               li {
+                  display: flex;
+               }
+            }
+         }
+         ul {
+            display: grid;
+            li {
+               display: flex;
+               flex-direction: column;
+               align-items: flex-start;
+               justify-content: center;
+               margin-bottom: 5px;
+               &.no-column {
+                  flex-direction: row;
+                  align-items: center;
+                  justify-content: flex-start;
+               }
+               input {
+                  width: 100%;
+                  border: 0;
+                  border-radius: 9px;
+                  background: $color-white;
+                  line-height: normal;
+                  padding: 5px 9px;
+                  &[type="radio"] {
+                     width: inherit;
+                     & + span {
+                        display: inline-block;
+                     }
+                  }
+               }
+               label {
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: center;
+               }
+               &.filed-inword {
+                  input {
+                     width: 40px;
+                     margin: 0 5px;
+                  }
+               }
+            }
+         }
+         .form-title {
+            font-size: $fontsize-2;
+            margin-bottom: 9px;
+         }
+         [class^="form-"] {
+            margin-top: 30px;
+            &:first-child {
+               margin-top: 0;
+            }
+         }
+         .form-basic {
+
+         }
+         .form-data {
+
+         }
+         .form-photo {
+
+         }
+         .form-btns {
+
+         }
+      }
+   }
+}

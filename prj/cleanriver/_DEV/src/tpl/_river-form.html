@@ -1,10 +1,63 @@
 <main id="main" class="main">
-    <section class="" data-scroll-index="1">
+    <section id="thetitle" class="thetitle position-side">
+        <h1 data-storke="川廢快篩-新增">川廢快篩-新增</h1>
+    </section>
+    <section class="theform" data-scroll-index="1">
     	<div class="inner">
-            <p></p>
+            <form class="form_ocean form-style" name="form_ocean" onsubmit="return false;">
+                <div class="form-basic">
+                    <div class="form-title">樣區基本資料</div>
+                    <div class="group group2in1">
+                        <ul>
+                            <li class="filed-date"><label>調查日期</label><input type="date" name="date"></li>
+                            <li class="filed-time"><label>調查時間</label><input type="time" name="time"></li>
+                            <li class="filed-city"><label>縣市</label><input type="text" name="city"></li>
+                            <li class="filed-river_name"><label>地圖鏈結</label><input type="text" name="river_name"></li>
+                            <li class="filed-river_part"><label>樣區所在地段</label><input type="text" name="river_part"></li>
+                        </ul>
+                    </div>
+                    <div class="group">
+                        <ul>
+                            <li class="filed-river_start filed-river_end filed-inword">
+                                <label>從編號<input type="text" name="river_start">站開始，到編號<input type="text" name="river_end">結束</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="group">
+                        <ul>
+                            <li class="filed-is_public no-column">
+                                <label>是否公開這筆資料</label>
+                                <input type="radio" name="is_public" value="1"><span>是</span>
+                                <input type="radio" name="is_public" value="0"><span>否</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-data">
+                    <div class="form-title">500公尺樣區內的垃圾相關數據【垃圾數據收集】</div>
+                    <ul>
+                        <li>
+                            <label></label>
+                            <input type="text" name="">
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-photo">
+                    <div class="form-title">照片紀錄【每樣區，至少拍攝各一張照片】</div>
+                    <ul>
+                        <li>
+                            <label></label>
+                            <input type="text" name="">
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-btns display-none">
+                    <ul>
+                        <li><button id="btn-draft" class="btn-draft btn-style-2" type="button">儲存為草稿</button></li>
+                        <li><button id="btn-submit" class="btn-submit btn-style-2" type="submit">資料送出</button></li>
+                    </ul>
+                </div>
+            </form>
         </div>
     </section>
-    <div id="thetitle" class="thetitle">
-        <h1>川廢快篩-form</h1>
-    </div>
 </main>
