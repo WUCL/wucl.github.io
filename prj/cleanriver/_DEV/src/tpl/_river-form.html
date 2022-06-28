@@ -20,10 +20,10 @@
                     <div class="group">
                         <ul>
                             <li class="filed-river_start filed-river_end">
-                                <label class="filed-inword">從編號<input type="text" name="river_start">站開始，到編號<input type="text" name="river_end">結束</label>
+                                <label class="filed-inword" for="filed-river_start">從編號<input type="text" name="river_start"></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end">結束</label>
                             </li>
                             <li class="filed-is_public no-column">
-                                <label>是否公開這筆資料</label>
+                                <label for="filed-is_public">是否公開這筆資料</label>
                                 <input type="radio" name="is_public" value="1" id="is_public_1"><label for="is_public_1">是</label>
                                 <input type="radio" name="is_public" value="0" id="is_public_0"><label for="is_public_0">否</label>
                             </li>
@@ -150,9 +150,12 @@
                 </div>
                 <div id="form-btns" class="form-btns">
                     <ul>
-                        <li>
+                        <li id="theform_is_new" class="theform_is_new">
                             <button id="btn-draft" class="btn-draft btn-style" type="button">儲存草稿</button>
-                            <button id="btn-submit" class="btn-submit btn-style" type="submit">資料送出</button>
+                            <button id="btn-confirm" class="btn-confirm btn-style form-confirm_open" type="button">資料送出</button>
+                        </li>
+                        <li id="theform_is_edit" class="theform_is_edit">
+                            <button id="btn-save" class="btn-save btn-style" type="button">資料儲存</button>
                         </li>
                     </ul>
                 </div>
@@ -160,3 +163,4 @@
         </div>
     </section>
 </main>
+@@include('../tpl/popup-form-confirm.html')

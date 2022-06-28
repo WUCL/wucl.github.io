@@ -7,15 +7,15 @@
             <div id="loading" class="waterfall-loading active"><img src="data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7" alt=""></div>
             <form id="theform" class="form_ocean form-style display-none" name="form_ocean" onsubmit="return false;">
                 <div class="form-basic">
-                    <div class="form-title">活動名稱</div>
+                    <div class="form-title"><label for="filed-title">活動名稱</label><input id="filed-title" type="text" name="title" value="helloooooooo"></div>
                     <div class="group with-2in1">
                         <ul>
-                            <li class="filed-location"><label for="filed-location">位置</label><input id="filed-location" type="text" name="location"></li>
-                            <li class="filed-time"><label for="filed-time">時間</label><input id="filed-time" type="time" name="time"></li>
-                            <li class="filed-city"><label for="filed-city">縣市</label><input id="filed-city" type="text" name="city"></li>
-                            <li class="filed-place"><label for="filed-place">地點</label><input id="filed-place" type="text" name="place"></li>
-                            <li class="filed-lng"><label for="filed-lng">經度</label><input id="filed-lng" type="text" name="lng"></li>
-                            <li class="filed-lat"><label for="filed-lat">緯度</label><input id="filed-lat" type="text" name="lat"></li>
+                            <li class="filed-location"><label for="filed-location">位置</label><input id="filed-location" type="text" name="location" value="allen"></li>
+                            <li class="filed-time"><label for="filed-time">時間</label><input id="filed-time" type="time" name="time" value="boy"></li>
+                            <li class="filed-city"><label for="filed-city">縣市</label><input id="filed-city" type="text" name="city" value="carry"></li>
+                            <li class="filed-place"><label for="filed-place">地點</label><input id="filed-place" type="text" name="place" value="done"></li>
+                            <li class="filed-lng"><label for="filed-lng">經度</label><input id="filed-lng" type="text" name="lng" value="ever"></li>
+                            <li class="filed-lat"><label for="filed-lat">緯度</label><input id="filed-lat" type="text" name="lat" value="free"></li>
                             <li class="filed-user_name"><label for="filed-user_name">登記者名稱</label><input id="filed-user_name" type="text" name="user_name"></li>
                             <li class="filed-user_company"><label for="filed-user_company">單位名稱或登記者</label><input id="filed-user_company" type="text" name="user_company"></li>
                             <li class="filed-user_email"><label for="filed-user_email">登記者信箱</label><input id="filed-user_email" type="text" name="user_email"></li>
@@ -27,7 +27,7 @@
                     <div class="group">
                         <ul>
                             <li class="filed-is_public no-column">
-                                <label>是否公開這筆資料</label>
+                                <label for="filed-is_public">是否公開這筆資料</label>
                                 <input type="radio" name="is_public" value="1" id="is_public_1"><label for="is_public_1">是</label>
                                 <input type="radio" name="is_public" value="0" id="is_public_0"><label for="is_public_0">否</label>
                             </li>
@@ -70,8 +70,9 @@
                             <li class="filed-album_pics">
                                 <div>
                                     <div class="photo-box">
-                                        <input type="file" id="album_pics" name="album_pics" class="display-none" accept="image/*">
-                                        <label class="btn-style" for="album_pics">上傳照片</label>
+                                        <img id="preview_album_pics" class="preview_album_pics" src>
+                                        <input type="file" id="album_pics" name="album_pics" class="pic-upload display-none" accept="image/*">
+                                        <label class="btn-pic-upload btn-style" for="album_pics">上傳照片</label>
                                     </div>
                                 </div>
                             </li>
@@ -80,9 +81,12 @@
                 </div>
                 <div class="form-btns">
                     <ul>
-                        <li>
+                        <li id="theform_is_new" class="theform_is_new">
                             <button id="btn-draft" class="btn-draft btn-style" type="button">儲存草稿</button>
-                            <button id="btn-submit" class="btn-submit btn-style" type="submit">資料送出</button>
+                            <button id="btn-confirm" class="btn-confirm btn-style form-confirm_open" type="button">資料送出</button>
+                        </li>
+                        <li id="theform_is_edit" class="theform_is_edit">
+                            <button id="btn-save" class="btn-save btn-style" type="button">資料儲存</button>
                         </li>
                     </ul>
                 </div>
@@ -90,3 +94,4 @@
         </div>
     </section>
 </main>
+@@include('../tpl/popup-form-confirm.html')

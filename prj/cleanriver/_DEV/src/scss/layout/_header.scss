@@ -14,14 +14,14 @@ layout/_header
 	box-sizing: border-box;
 	// height: $haeder_h;
 
-   	padding: 20px 0 5px;
+   	// padding: 20px 0 5px;
 	@include mq($min-width: $bp-mobile) {
 		transition: .2s .2s;
 	}
 	@include mq($max-width: $bp-mobile) {
 		// height: $haeder_h-m;
 		// margin-top: 25px;
-		overflow: hidden;
+		// overflow: hidden;
 	}
 	&__inner {
 		padding: 0 1%;
@@ -91,35 +91,51 @@ layout/_header
 				// margin-left: 25px;
 				font-size: $fontsize * 1.1;
 				@include mq($max-width: $bp-mobile) {
-					overflow-y: scroll;
-					position: absolute;
-					top: 0;
-					background: $color-white;
-					font-size: 20px;
-					margin: 0;
-					right: 0;
-					opacity: 0;
-					height: 100vh;
-					display: block;
-					transition: opacity .1s, transform .25s;
-					transform: translateX(100%);
-					&:before {
-						content: "";
-						position: relative;
-						margin: 30px auto;
-						display: block;
-						width: calc(1380px / 9);
-						height: calc(546px / 9);
-						background: url('../img/logo@2x.png') 100% 100%/100% no-repeat;
-						background-size: contain;
-						@include mq($max-width: $bp_2s) {
-							width: calc(1380px / 12);
-							height: calc(546px / 12);
+					&:nth-child(1) {
+						// background: red;
+						position: absolute;
+						top: -1.2em;
+    					right: 0;
+						white-space: nowrap;
+						display: inline-block;
+						height: auto;
+						width: auto;
+						li {
+							width: 6em;
 						}
-						@include mq($max-width: $bp_xs) {
-							width: calc(1380px / 13.5);
-							height: calc(546px / 13.5);
-							margin-bottom: 20px;
+					}
+					&:nth-child(2) {
+						overflow-y: scroll;
+						position: absolute;
+						top: 0;
+						background: $color-white;
+						font-size: 20px;
+						margin: 0;
+						right: 0;
+						opacity: 0;
+						height: 100vh;
+						width: 0;
+						display: block;
+						transition: opacity .1s, transform .25s;
+						transform: translateX(100%);
+						&:before {
+							content: "";
+							position: relative;
+							margin: 30px auto;
+							display: block;
+						// 	width: calc(1380px / 9);
+						// 	height: calc(546px / 9);
+						// 	background: url('../img/logo@2x.png') 100% 100%/100% no-repeat;
+						// 	background-size: contain;
+						// 	@include mq($max-width: $bp_2s) {
+						// 		width: calc(1380px / 12);
+						// 		height: calc(546px / 12);
+						// 	}
+						// 	@include mq($max-width: $bp_xs) {
+						// 		width: calc(1380px / 13.5);
+						// 		height: calc(546px / 13.5);
+						// 		margin-bottom: 20px;
+						// 	}
 						}
 					}
 				}
@@ -325,7 +341,7 @@ layout/_header
 		}
 		.hamburger {
 			position: relative;
-			top: 2.5px;
+		    top: 1em;
 			right: 0;
 			width: 70px;
 			height: -webkit-fill-available;
@@ -454,9 +470,11 @@ layout/_header
 					display: none;
 				}
 				.nav {
+					position: relative;
 					margin-top: 0;
-					ul {
+					ul:nth-child(2) {
 						opacity: 1;
+						width: auto;
 						transform: translateX(0%);
 						width: 300px;
 						max-width: 69%;
@@ -515,20 +533,27 @@ body[data-page^="ocean"] {
 		.logo {
 			position: absolute;
 			top: 0;
+			@include mq($max-width: $bp-mobile) {
+				left: 50%;
+				transform: translateX(-50%);
+			}
 			a {
 	            display: block;
 	            margin: 0 auto;
 	            width: calc(830px / 4.5);
 	            height: calc(830px / 4.5);
-	            // @include mq($max-width: $bp_2s) {
-	            //    width: calc(830px / 12);
-	            //    height: calc(830px / 12);
-	            // }
-	            // @include mq($max-width: $bp_xs) {
-	            //    width: calc(830px / 13.5);
-	            //    height: calc(830px / 13.5);
-	            //    margin-bottom: 20px;
-	            // }
+				@include mq($max-width: $bp-mobile) {
+		            width: calc(830px / 9.5);
+		            height: calc(830px / 9.5);
+				}
+	            @include mq($max-width: $bp_m) {
+		            width: calc(830px / 11);
+		            height: calc(830px / 11);
+	            }
+	            @include mq($max-width: $bp_xs) {
+		            width: calc(830px / 13);
+		            height: calc(830px / 13);
+	            }
          	}
 	   	}
 	}

@@ -1,7 +1,11 @@
 /* =======================
    pages/common
    ======================= */
+html {
+	// overflow: hidden;
+}
 #thetitle {
+	z-index: 1;
 	h1 {
 		display: block;
 		white-space: nowrap;
@@ -10,7 +14,13 @@
 		-webkit-text-fill-color: $color-main;
 		pointer-events: none;
 		user-select: none;
-		letter-spacing: 1.5rem;
+		letter-spacing: 1.35rem;
+		@include mq($max-width: $bp-mobile) {
+			letter-spacing: .9rem;
+		}
+		@include mq($max-width: $bp-2s) {
+			letter-spacing: .66rem;
+		}
 		&:before {
 			content: attr(data-storke);
 			position: absolute;
@@ -23,19 +33,47 @@
 		position: absolute;
 		top: -5vw;
 		left: 5vw;
+		width: auto;
 		// z-index: 100;
 		h1 {
 			font-size: $fontsize-title-side;
 			writing-mode: vertical-rl;
 			// -webkit-text-stroke: 3px $color-white;
+			@include mq($max-width: $bp-mobile) {
+				font-size: $fontsize-11;
+			}
+			@include mq($max-width: $bp-m) {
+				font-size: $fontsize-10;
+			}
 		}
 	}
 	&.position-center {
 		text-align: center;
+		@include mq($max-width: $bp-mobile) {
+			margin-top: 12%;
+		}
+		@include mq($max-width: $bp_m) {
+			margin-top: 15%;
+		}
+		@include mq($max-width: $bp_2s) {
+			margin-top: 20%;
+		}
 		h1 {
 			margin-left: 1.5rem;
 			font-size: $fontsize-title-center;
 			// -webkit-text-stroke: 2px $color-white;
+			@include mq($max-width: $bp-mobile) {
+				font-size: $fontsize-10;
+				letter-spacing: .78rem;
+				margin-left: 0;
+			}
+         @include mq($max-width: $bp_m) {
+				font-size: $fontsize-9;
+         }
+			@include mq($max-width: $bp-2s) {
+				font-size: $fontsize-8;
+				letter-spacing: .56rem;
+			}
 		}
 	}
 }
@@ -43,6 +81,10 @@ body {
 	background: $color-white;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
+	padding-top: 20px;
+
+	// display: grid; /*使用grid排版*/
+	// grid-template-rows: 1fr 1fr auto;
 	&.disableScroll {
 		// position: fixed;
 		overflow: hidden;
@@ -146,7 +188,7 @@ body {
 	max-width: $bp-contain-w;
 	margin: 0 auto;
 	// overflow: hidden;
-	min-height: 100vw;
+	// min-height: 100vw;
 	padding: 0 3%;
 	z-index: 1;
 	@include mq($max-width: $bp-mobile) {
@@ -229,6 +271,10 @@ body {
 							@include mq($max-width: $bp-mobile) {
 								font-size: $fontsize-2;
 								line-height: normal;
+							}
+							@include mq($max-width: $bp-2s) {
+								max-width: 2.1em;
+								font-size: $fontsize-1;
 							}
 						}
 					}

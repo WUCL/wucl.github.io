@@ -27,7 +27,7 @@
         			<a href="/"></a>
         		</div>
         		<nav class="nav">
-        			<ul>
+        			<ul class="notmenu">
         				<li id="btn-login" class="nav-unlogin nav-effect"><a href="javascript:;"><label>登入/註冊</label></a></li>
         				<!-- <li class="nav-login nav-effect"><a href="javascript:;"><img class="avatar" src="https://fakeimg.pl/40x40/"><label>登出</label></a></li> -->
         			</ul>
@@ -70,10 +70,10 @@
 		                    <div class="group">
 		                        <ul>
 		                            <li class="filed-river_start filed-river_end">
-		                                <label class="filed-inword">從編號<input type="text" name="river_start">站開始，到編號<input type="text" name="river_end">結束</label>
+		                                <label class="filed-inword" for="filed-river_start">從編號<input type="text" name="river_start"></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end">結束</label>
 		                            </li>
 		                            <li class="filed-is_public no-column">
-		                                <label>是否公開這筆資料</label>
+		                                <label for="filed-is_public">是否公開這筆資料</label>
 		                                <input type="radio" name="is_public" value="1" id="is_public_1"><label for="is_public_1">是</label>
 		                                <input type="radio" name="is_public" value="0" id="is_public_0"><label for="is_public_0">否</label>
 		                            </li>
@@ -200,9 +200,12 @@
 		                </div>
 		                <div id="form-btns" class="form-btns">
 		                    <ul>
-		                        <li>
+		                        <li id="theform_is_new" class="theform_is_new">
 		                            <button id="btn-draft" class="btn-draft btn-style" type="button">儲存草稿</button>
-		                            <button id="btn-submit" class="btn-submit btn-style" type="submit">資料送出</button>
+		                            <button id="btn-confirm" class="btn-confirm btn-style form-confirm_open" type="button">資料送出</button>
+		                        </li>
+		                        <li id="theform_is_edit" class="theform_is_edit">
+		                            <button id="btn-save" class="btn-save btn-style" type="button">資料儲存</button>
 		                        </li>
 		                    </ul>
 		                </div>
@@ -210,6 +213,30 @@
 		        </div>
 		    </section>
 		</main>
+		<section id="form-confirm" data-confirmed="0">
+		    <div class="popup_inner" data-status="confirm">
+		        <div class="popup_header">
+		            <h2 id="popup_title" class="popup_title">請確認填表資訊</h2>
+		        </div>
+		        <div class="popup_main">
+		            <div class="popup_list"></div>
+		            <div class="popup_btns">
+		                <button id="btn-back" class="btn-back btn-style popup_close form-confirm_close" type="button">返回修改</button>
+		                <button id="btn-submit" class="btn-submit btn-style form-confirm_open" type="button">資料送出</button>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="popup_inner" data-status="confirmed">
+		        <div class="popup_header">
+		            <h2 id="popup_title" class="popup_title">表單已成功送出</h2>
+		        </div>
+		        <div class="popup_main">
+		            <div class="popup_btns">
+		                <button id="btn-newone" class="btn-newone btn-style" type="button">新增表單</button>
+		            </div>
+		        </div>
+		    </div>
+		</section>
         <footer id="footer" class="footer">
         	<section class="menus">
         		<div class="menus__inner">
@@ -257,7 +284,10 @@
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
-		<script src="./public/js/main.js"></script>
+		<!-- <script src="./public/js/common.js"></script> -->
+
+		<!-- <script src="./public/js/main.js"></script> -->
+        <script src="./public/js/common.js"></script>
         <script src="./public/js/form.js"></script>
 	</body>
 </html>

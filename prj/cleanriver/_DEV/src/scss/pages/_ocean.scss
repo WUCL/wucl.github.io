@@ -124,13 +124,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
             margin-top: 30px;
             img {
                width: calc(1380px / 8);
                height: calc(546px / 8);
             }
             a {
-               margin-left: 20px;
+               margin: 10px 0 10px 20px;
                background: #0f779c;
                color: $color-white;
             }

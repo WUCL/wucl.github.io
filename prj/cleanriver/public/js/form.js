@@ -20,7 +20,17 @@ $(function() {
                 $d_pic: $('#d_pic'),
                 $album_pics_1: $('#album_pics_1'),
                 $album_pics_2: $('#album_pics_2'),
-            }
+            },
+
+            $btn_draft: $('#btn-draft'),
+            $btn_submit: $('#btn-submit'),
+            $btn_newone: $('#btn-newone'),
+            $btn_save: $('#btn-save'),
+
+            $popup_form_confirm: $('#form-confirm'),
+
+            $theform_is_new: $('#theform_is_new'),
+            $theform_is_edit: $('#theform_is_edit'),
         },
         var: {
             page_status: '',
@@ -35,6 +45,7 @@ $(function() {
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
             this.checkStatus();
+            this.setPopup();
         },
         bindEvent: function() {
             let $this = this;
@@ -58,6 +69,29 @@ $(function() {
                 // do pic sync api
                 // console.log($base64);
             });
+
+            $this.el.$btn_draft.on('click', function() {
+                console.log('save to draft');
+                // send the data to api // API
+                alert('已儲存草稿');
+            });
+
+            $this.el.$btn_submit.on('click', function() {
+                console.log('open confirm popup');
+                $this.el.$popup_form_confirm.attr('data-confirmed', 1);
+                // send the data to api // API
+            });
+
+            $this.el.$btn_newone.on('click', function() {
+                console.log('set clean before the new one');
+                location.href = location.protocol + '//' + location.host + location.pathname;
+            });
+
+            $this.el.$btn_save.on('click', function() {
+                console.log('the data be save');
+                // send the data to api // API
+                alert('資料已儲存');
+            })
         },
         checkStatus: function() {
             let $this = this;
@@ -75,6 +109,7 @@ $(function() {
                 } else if ($this.var.page_status == 'form') {
                     $this.var.form_status = 'edit';
                     $page_title = $this.el.$page_title.html() + ' - 修改';
+                    $this.el.$theform_is_new.remove();
                 }
             } else {
                 if ($this.var.page_status == 'view') {
@@ -83,6 +118,7 @@ $(function() {
                 }
                 $this.var.form_status = 'add';
                 $page_title = $this.el.$page_title.html() + ' - 新增';
+                $this.el.$theform_is_edit.remove();
             }
             $this.el.$body.attr('data-form', $this.var.form_status);
 
@@ -117,7 +153,66 @@ $(function() {
                 });
             }
             return;
-        }
+        },
+        formConfirm: function() {
+            let $this = this;
+            let $temp = '';
+            $data = $this.el.$theform.serializeArray();
+
+            $temp += '<ul>';
+            if (this.var.page_position == 'cleanocean') {
+                $.each($data, function(i, field){
+                    console.log(i);
+                    console.log(field.name + ":" + field.value + " ");
+                    let $label = $('label[for="filed-' + field.name + '"]').text().trim();
+                    let $value = field.value;
+                    if (field.name == 'bottle') {
+                        $temp += '</ul><hr><ul>';
+                    }
+                    $temp += '<li data-label="' + field.name + '"><label>' + $label + '</label><label>' + $value + '</label></li>';
+                });
+                $temp += '</ul>';
+
+                // pics
+                // $temp += '<hr><ul class="pics">';
+                // $temp += '<li><img src="' + $('#preview_album_pics').attr('src') + '"></li>'
+
+            } else if (this.var.page_position == 'cleanriver') {
+                $.each($data, function(i, field){
+                    console.log(i);
+                    console.log(field.name + ":" + field.value + " ");
+                    let $label = $('label[for="filed-' + field.name + '"]').text().trim();
+                    let $value = field.value;
+                    if (field.name == 'occlusion_scope') {
+                        $temp += '</ul><hr><ul>';
+                    }
+                    $temp += '<li data-label="' + field.name + '"><label>' + $label + '</label><label>' + $value + '</label></li>';
+                });
+                $temp += '</ul>';
+
+                // pics
+                // $temp += '<hr><ul class="pics">';
+                // $temp += '<li><img src="' + $('#preview_album_pics').attr('src') + '"></li>'
+            }
+            $temp += '</ul>';
+
+            $this.el.$popup_form_confirm.find('.popup_list').html($temp);
+        },
+        setPopup: function() {
+            let $this = this;
+            $this.el.$popup_form_confirm.popup({
+                escape: false,
+                closebutton: true,
+                scrolllock: true,
+                onopen: function() {
+                    $this.formConfirm();
+                }
+            });
+            // function onOpenAlbum() {
+            //     console.log("onOpenAlbum");
+            //     console.log($this.el.$selectAll);
+            // }
+        },
     };
     FORM.init();
 });

@@ -71,6 +71,7 @@ $(function() {
             })
         },
         detectScroll: function() {
+            // console.log('detectScroll');
             let $this = this
             , lastScrollTop = 0;
             $(window).scroll(function(event) {

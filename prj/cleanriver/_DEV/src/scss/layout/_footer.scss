@@ -19,9 +19,11 @@ footer.footer {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			line-height: normal;
 			@include mq($max-width: $bp-mobile) {
 			    flex-direction: column;
 			    max-width: 90%;
+				justify-content: center;
 			}
 		}
 	}
@@ -41,7 +43,7 @@ footer.footer {
 			}
 		}
 		.logo {
-			width: 50%;
+			width: fit-content;
 			ul {
 				display: flex;
 				align-items: center;
@@ -87,7 +89,11 @@ footer.footer {
 					display: flex;
 					align-items: center;
 					justify-content: flex-end;
+					flex-wrap: wrap;
 					margin-bottom: 12px;
+					@include mq($max-width: $bp-mobile) {
+						justify-content: center;
+					}
 					&:last-child {
 						margin-bottom: 0;
 					}
@@ -144,8 +150,13 @@ footer.footer {
 			@include mq($max-width: $bp-2s) {
 				flex-direction: column;
 				padding: 10px 0;
-				span:nth-child(2) {
-					margin: 7px 0;
+				span {
+					@include mq($max-width: $bp-2s) {
+						font-size: 12px !important;
+					}
+					&:nth-child(2) {
+						margin: 3px 0;
+					}
 				}
 			}
 		}
