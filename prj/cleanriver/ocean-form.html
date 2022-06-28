@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>愛海小旅行-</title>
+        <title>愛海小旅行</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
         <link rel="stylesheet" type="text/css" href="./public/css/ocean-form.min.css" />
 	</head>
-	<body data-page="ocean-form style-form">
+	<body data-page="ocean-form style-form" data-position="cleanocean" data-status="form">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
@@ -50,11 +50,93 @@
         </header>
 		<main id="main" class="main">
 		    <section id="thetitle" class="thetitle position-side">
-		        <h1 data-storke="愛海小旅行-新增">愛海小旅行-新增</h1>
+		        <h1 data-storke="愛海小旅行">愛海小旅行</h1>
 		    </section>
-		    <section class="" data-scroll-index="1">
+		    <section class="theform">
 		    	<div class="inner">
-		            <p></p>
+		            <div id="loading" class="waterfall-loading active"><img src="data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7" alt=""></div>
+		            <form id="theform" class="form_ocean form-style display-none" name="form_ocean" onsubmit="return false;">
+		                <div class="form-basic">
+		                    <div class="form-title">活動名稱</div>
+		                    <div class="group with-2in1">
+		                        <ul>
+		                            <li class="filed-location"><label for="filed-location">位置</label><input id="filed-location" type="text" name="location"></li>
+		                            <li class="filed-time"><label for="filed-time">時間</label><input id="filed-time" type="time" name="time"></li>
+		                            <li class="filed-city"><label for="filed-city">縣市</label><input id="filed-city" type="text" name="city"></li>
+		                            <li class="filed-place"><label for="filed-place">地點</label><input id="filed-place" type="text" name="place"></li>
+		                            <li class="filed-lng"><label for="filed-lng">經度</label><input id="filed-lng" type="text" name="lng"></li>
+		                            <li class="filed-lat"><label for="filed-lat">緯度</label><input id="filed-lat" type="text" name="lat"></li>
+		                            <li class="filed-user_name"><label for="filed-user_name">登記者名稱</label><input id="filed-user_name" type="text" name="user_name"></li>
+		                            <li class="filed-user_company"><label for="filed-user_company">單位名稱或登記者</label><input id="filed-user_company" type="text" name="user_company"></li>
+		                            <li class="filed-user_email"><label for="filed-user_email">登記者信箱</label><input id="filed-user_email" type="text" name="user_email"></li>
+		                            <li class="filed-cleaner_count"><label for="filed-cleaner_count">淨灘人數</label><input id="filed-cleaner_count" type="text" name="cleaner_count"></li>
+		                            <li class="filed-weight"><label for="filed-weight">總重量</label><input id="filed-weight" type="text" name="weight"></li>
+		                            <li class="filed-length"><label for="filed-length">淨灘長度</label><input id="filed-length" type="text" name="length"></li>
+		                        </ul>
+		                    </div>
+		                    <div class="group">
+		                        <ul>
+		                            <li class="filed-is_public no-column">
+		                                <label>是否公開這筆資料</label>
+		                                <input type="radio" name="is_public" value="1" id="is_public_1"><label for="is_public_1">是</label>
+		                                <input type="radio" name="is_public" value="0" id="is_public_0"><label for="is_public_0">否</label>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+		                <div class="form-data">
+		                    <div class="form-title">淨灘廢棄物種類/數量</div>
+		                    <div class="group with-3in1">
+		                        <ul>
+		                            <li class="filed-bottle"><label for="filed-bottle">寶特瓶</label><input id="filed-bottle" type="text" name="bottle"></li>
+		                            <li class="filed-bottle_cap"><label for="filed-bottle_cap">塑膠瓶蓋</label><input id="filed-bottle_cap" type="text" name="bottle_cap"></li>
+		                            <li class="filed-beverage"><label for="filed-beverage">其他飲料與食物容器</label><input id="filed-beverage" type="text" name="beverage"></li>
+		                            <li class="filed-non_food_bottles"><label for="filed-non_food_bottles">非食物的瓶罐與容器</label><input id="filed-non_food_bottles" type="text" name="non_food_bottles"></li>
+		                            <li class="filed-plastic_bag"><label for="filed-plastic_bag">塑膠提袋</label><input id="filed-plastic_bag" type="text" name="plastic_bag"></li>
+		                            <li class="filed-food_bag"><label for="filed-food_bag">食品包裝袋</label><input id="filed-food_bag" type="text" name="food_bag"></li>
+		                            <li class="filed-straw"><label for="filed-straw">吸管</label><input id="filed-straw" type="text" name="straw"></li>
+		                            <li class="filed-drink_cup"><label for="filed-drink_cup">外帶飲料杯</label><input id="filed-drink_cup" type="text" name="drink_cup"></li>
+		                            <li class="filed-tableware"><label for="filed-tableware">免洗餐具</label><input id="filed-tableware" type="text" name="tableware"></li>
+		                            <li class="filed-iron_can"><label for="filed-iron_can">鐵鋁罐</label><input id="filed-iron_can" type="text" name="iron_can"></li>
+		                            <li class="filed-tetra"><label for="filed-tetra">鋁箔包、利樂包</label><input id="filed-tetra" type="text" name="tetra"></li>
+		                            <li class="filed-glass"><label for="filed-glass">玻璃瓶</label><input id="filed-glass" type="text" name="glass"></li>
+		                            <li class="filed-cigarette"><label for="filed-cigarette">煙蒂</label><input id="filed-cigarette" type="text" name="cigarette"></li>
+		                            <li class="filed-lighter"><label for="filed-lighter">打火機</label><input id="filed-lighter" type="text" name="lighter"></li>
+		                            <li class="filed-fishing_gear"><label for="filed-fishing_gear">釣魚用具</label><input id="filed-fishing_gear" type="text" name="fishing_gear"></li>
+		                            <li class="filed-fish_hook"><label for="filed-fish_hook">魚鉤</label><input id="filed-fish_hook" type="text" name="fish_hook"></li>
+		                            <li class="filed-nets_ropes"><label for="filed-nets_ropes">漁網與繩子</label><input id="filed-nets_ropes" type="text" name="nets_ropes"></li>
+		                            <li class="filed-fishing_ball"><label for="filed-fishing_ball">漁業浮球/浮筒/漁船防碰墊</label id="filed-fishing_ball"><input type="text" name="fishing_ball"></li>
+		                            <li class="filed-toothbrush"><label for="filed-toothbrush">牙刷</label><input id="filed-toothbrush" type="text" name="toothbrush"></li>
+		                            <li class="filed-syringe"><label for="filed-syringe">針筒、針頭</label><input id="filed-syringe" type="text" name="syringe"></li>
+		                            <li class="filed-metal"><label for="filed-metal">金屬製品</label><input id="filed-metal" type="text" name="metal"></li>
+		                            <li class="filed-extra_data"><label for="filed-extra_data">自定義欄位</label><input id="filed-extra_data" type="text" name="extra_data"></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		                <div class="form-photo">
+		                    <div class="form-title">照片紀錄</div>
+		                    <div class="group with-photo with-3in1">
+		                        <ul>
+		                            <li class="filed-album_pics">
+		                                <div>
+		                                    <div class="photo-box">
+		                                        <input type="file" id="album_pics" name="album_pics" class="display-none" accept="image/*">
+		                                        <label class="btn-style" for="album_pics">上傳照片</label>
+		                                    </div>
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+		                <div class="form-btns">
+		                    <ul>
+		                        <li>
+		                            <button id="btn-draft" class="btn-draft btn-style" type="button">儲存草稿</button>
+		                            <button id="btn-submit" class="btn-submit btn-style" type="submit">資料送出</button>
+		                        </li>
+		                    </ul>
+		                </div>
+		            </form>
 		        </div>
 		    </section>
 		</main>
@@ -106,5 +188,6 @@
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
 		<script src="./public/js/main.js"></script>
+        <script src="./public/js/form.js"></script>
 	</body>
 </html>

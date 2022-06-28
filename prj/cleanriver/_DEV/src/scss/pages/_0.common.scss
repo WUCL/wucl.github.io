@@ -71,6 +71,7 @@ body {
 		display: inline-block;
 		border: none;
 		line-height: normal;
+		user-select: none;
 		&:hover {
 			transform: scale(.93);
 		}
