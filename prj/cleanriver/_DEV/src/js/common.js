@@ -77,10 +77,10 @@ $(function() {
             $(window).scroll(function(event) {
                 let st = $(this).scrollTop();
                 if (st > lastScrollTop) {
-                    // console.log('downscroll');
+                    // console.log('downscrolwindow.assetsPathl');
                     $this.el.$body.attr('data-scroll', 'downscroll');
                 } else {
-                    // console.log('upscroll');
+                    // console.log('upscrollwindow.assetsPath');
                     $this.el.$body.attr('data-scroll', 'upscroll');
                 }
                 lastScrollTop = st; // initial
@@ -138,7 +138,7 @@ $(function() {
     COMMON.init();
 });
 
-window.assetsPath = '/public/';
+window.assetsPath = '/public';
 window.tw_xy = {
     // 'test': [470, 190],
     '台北': [620, 180],
