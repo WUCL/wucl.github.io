@@ -138,7 +138,7 @@ $(function() {
     COMMON.init();
 });
 
-window.assetsPath = '/public';
+window.assetsPath = './public';
 window.tw_xy = {
     // 'test': [470, 190],
     '台北': [620, 180],
