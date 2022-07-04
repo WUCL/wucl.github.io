@@ -1,4 +1,4 @@
-<section id="form-confirm" data-confirmed="0">
+<section id="form-confirm" class="popup_box" data-confirmed="0">
     <div class="popup_inner" data-status="confirm">
         <div class="popup_header">
             <h2 id="popup_title" class="popup_title">請確認填表資訊</h2>
@@ -6,18 +6,29 @@
         <div class="popup_main">
             <div class="popup_list"></div>
             <div class="popup_btns">
-                <button id="btn-back" class="btn-back btn-style popup_close form-confirm_close" type="button">返回修改</button>
-                <button id="btn-submit" class="btn-submit btn-style form-confirm_open" type="button">資料送出</button>
+                <button id="btn-confirm-back" class="btn-confirm-back btn-style popup_close form-confirm_close" type="button">返回修改</button>
+                <button id="btn-confirm-submit" class="btn-confirm-submit btn-style form-confirm_open" type="button">資料送出</button>
             </div>
         </div>
     </div>
-    <div class="popup_inner" data-status="confirmed">
+    <div class="popup_inner" data-status="confirmed" data-position="ocean">
         <div class="popup_header">
             <h2 id="popup_title" class="popup_title">表單已成功送出</h2>
         </div>
         <div class="popup_main">
             <div class="popup_btns">
-                <button id="btn-newone" class="btn-newone btn-style" type="button">新增表單</button>
+                <button id="btn-confirm-newone" class="btn-confirm-newone btn-style" type="button">新增表單</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup_inner" data-status="confirmed" data-position="river">
+        <div class="popup_header">
+            <h2 id="popup_title" class="popup_title">表單已成功送出</h2>
+        </div>
+        <div class="popup_main">
+            <div class="popup_btns">
+                <button id="btn-confirm-sameone" class="btn-confirm-sameone btn-style" type="button">新增同河川表單</button>
+                <button id="btn-confirm-newone" class="btn-confirm-newone btn-style" type="button">新增其他河川表單</button>
             </div>
         </div>
     </div>

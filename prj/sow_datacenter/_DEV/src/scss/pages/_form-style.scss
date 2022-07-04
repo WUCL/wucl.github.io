@@ -68,10 +68,10 @@ section.theform {
                ul {
                   max-width: 100%;
                   grid-gap: 0 30px;
-                  grid-template-columns: calc((100% - 30px) /2) auto;
+                  grid-template-columns: calc((100% - 30px)/2) calc((100% - 30px)/2);
                   @include mq($max-width: $bp_m) {
                      grid-gap: 0 12px;
-                     grid-template-columns: calc((100% - 12px) /2) auto;
+                     grid-template-columns: calc((100% - 12px)/2) calc((100% - 12px)/2);
                   }
                }
             }
@@ -82,7 +82,7 @@ section.theform {
                   grid-template-columns: calc((100% - 30px) /3) calc((100% - 30px) /3) auto;
                   @include mq($max-width: $bp_m) {
                      grid-gap: 0 12px;
-                     grid-template-columns: calc((100% - 12px) /2) auto;
+                     grid-template-columns: calc((100% - 12px)/2) calc((100% - 12px)/2);
                   }
                }
             }

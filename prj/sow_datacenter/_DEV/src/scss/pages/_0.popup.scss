@@ -1,6 +1,11 @@
 /* =======================
 layout/_popup
 ======================= */
+.popup_box {
+	display: none;
+	visibility: hidden;
+	opacity: 0;
+}
 .popup_content {
 	min-height: 20px;
 	padding: 15px;
@@ -27,9 +32,9 @@ layout/_popup
 		overflow: scroll;
 		padding: 5px;
 		@include mq($max-width: $bp-mobile) {
-		    height: 100%;
-			max-height: 87vh;
-			max-width: 78vw;
+		    height: 100% !important;
+			max-height: 87vh !important;
+			max-width: 78vw !important;
 		}
 		&[data-status="confirm"] {
 			display: block;
@@ -38,6 +43,20 @@ layout/_popup
 		&[data-status="confirmed"] {
 			display: none;
 			visibility: hidden;
+		}
+	}
+	&.size-s {
+		.popup_inner {
+			max-height: 28vh;
+			min-width: 28vw;
+			max-width: 28vw;
+		}
+	}
+	&.size-m {
+		.popup_inner {
+			max-height: 45vh;
+			min-width: 45vw;
+			max-width: 45vw;
 		}
 	}
 	.popup_header {
@@ -89,7 +108,7 @@ layout/_popup
 					background: $color-main;
 					color: $color-white;
 					font-size: $fontsize-1;
-					&.btn-back {
+					&.btn-confirm-back {
 						position: relative;
 						border-radius: 6px;
 						padding: 3px 33px;
@@ -105,7 +124,45 @@ layout/_popup
 			.popup_inner[data-status="confirmed"] {
 				display: block;
 				visibility: visible;
+				&[data-position="river"] {
+					display: none;
+					visibility: hidden;
+				}
 			}
 		}
+	}
+	&#form-select {
+		.popup_main {
+			display: flex;
+			align-items: center;
+			justify-content: flex-center;
+			.formriver_select {
+				line-height: normal;
+				width: 300px;
+				height: 33px;
+				max-width: 50%;
+				border-radius: 5px;
+			}
+			.popup_btns {
+				display: inline-block;
+				margin-left: 9px;
+				button {
+					background: $color-main;
+					color: $color-white;
+					font-size: $fontsize-1;
+				}
+			}
+		}
+	}
+}
+
+body[data-position="cleanriver"] .popup_content#form-confirm .popup_inner {
+	&[data-status="confirmed"][data-position="ocean"] {
+		display: none;
+		visibility: hidden;
+	}
+	&[data-status="confirmed"][data-position="river"] {
+		display: block;
+		visibility: visible;
 	}
 }

@@ -132,11 +132,11 @@
 		                <div class="form-btns">
 		                    <ul>
 		                        <li id="theform_is_new" class="theform_is_new">
-		                            <button id="btn-draft" class="btn-draft btn-style" type="button">儲存草稿</button>
-		                            <button id="btn-confirm" class="btn-confirm btn-style form-confirm_open" type="button">資料送出</button>
+		                            <button id="btn-form-draft" class="btn-form-draft btn-style" type="button">儲存草稿</button>
+		                            <button id="btn-form-confirm" class="btn-form-confirm btn-style form-confirm_open" type="button">資料送出</button>
 		                        </li>
 		                        <li id="theform_is_edit" class="theform_is_edit">
-		                            <button id="btn-save" class="btn-save btn-style" type="button">資料儲存</button>
+		                            <button id="btn-form-save" class="btn-form-save btn-style" type="button">資料儲存</button>
 		                        </li>
 		                    </ul>
 		                </div>
@@ -144,7 +144,7 @@
 		        </div>
 		    </section>
 		</main>
-		<section id="form-confirm" data-confirmed="0">
+		<section id="form-confirm" class="popup_box" data-confirmed="0">
 		    <div class="popup_inner" data-status="confirm">
 		        <div class="popup_header">
 		            <h2 id="popup_title" class="popup_title">請確認填表資訊</h2>
@@ -152,18 +152,29 @@
 		        <div class="popup_main">
 		            <div class="popup_list"></div>
 		            <div class="popup_btns">
-		                <button id="btn-back" class="btn-back btn-style popup_close form-confirm_close" type="button">返回修改</button>
-		                <button id="btn-submit" class="btn-submit btn-style form-confirm_open" type="button">資料送出</button>
+		                <button id="btn-confirm-back" class="btn-confirm-back btn-style popup_close form-confirm_close" type="button">返回修改</button>
+		                <button id="btn-confirm-submit" class="btn-confirm-submit btn-style form-confirm_open" type="button">資料送出</button>
 		            </div>
 		        </div>
 		    </div>
-		    <div class="popup_inner" data-status="confirmed">
+		    <div class="popup_inner" data-status="confirmed" data-position="ocean">
 		        <div class="popup_header">
 		            <h2 id="popup_title" class="popup_title">表單已成功送出</h2>
 		        </div>
 		        <div class="popup_main">
 		            <div class="popup_btns">
-		                <button id="btn-newone" class="btn-newone btn-style" type="button">新增表單</button>
+		                <button id="btn-confirm-newone" class="btn-confirm-newone btn-style" type="button">新增表單</button>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="popup_inner" data-status="confirmed" data-position="river">
+		        <div class="popup_header">
+		            <h2 id="popup_title" class="popup_title">表單已成功送出</h2>
+		        </div>
+		        <div class="popup_main">
+		            <div class="popup_btns">
+		                <button id="btn-confirm-sameone" class="btn-confirm-sameone btn-style" type="button">新增同河川表單</button>
+		                <button id="btn-confirm-newone" class="btn-confirm-newone btn-style" type="button">新增其他河川表單</button>
 		            </div>
 		        </div>
 		    </div>
@@ -206,7 +217,92 @@
         	</section>
         </footer>
         
-        
+        <div id="templates" class="display-none-i">
+            <div id="template_form_river__select">
+                <option value="[ID]">[VALUE]</option>
+            </div>
+
+
+
+            <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+            <!--
+            <div id="template_index__postcards">
+                <li><img data-src="[POSTCARD_IMG]"></li>
+            </div>
+
+            <div id="template_data__result">
+                <li class="filter-result-item datas-item">
+                    <input type="checkbox" name="resultItem[]" id="select-[ID]" value="[ID]">
+                    <label class="f-r-i-name" for="select-[ID]">
+                        <span class="name-county">[COUNTY]</span>
+                        <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                        <span class="name-campaign">[CAMPAIGN]</span>
+                    </label>
+                </li>
+            </div>
+
+            <div id="template_member__postcards">
+                <li><img data-src="[POSTCARD_IMG]"></li>
+            </div>
+
+            <div id="template_member__campaigns">
+                <li class="campaign" data-id="[ID]"><button class="btn-del-campaign btn-style-2" value="[ID]"></button><span>[COUNTY] [DATA_Y]/[DATA_M]/[DATA_D] [CAMPAIGN]</span></li>
+            </div>
+
+            <div id="template_album__result">
+                <li class="filter-result-item albums-item view-album_open" data-id="[ID]">
+                    <div class="f-r-i-name">
+                        <span class="name-county">[COUNTY]</span>
+                        <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                        <span class="name-campaign">[CAMPAIGN]</span>
+                    </div>
+                    <div class="f-r-i-album">
+                        <div class="album-featured"><img data-src="[FEATURED]" /></div>
+                        <div class="album-source">[OWNER]</div>
+                    </div>
+                </li>
+            </div>
+
+            <div id="template_album__pics">
+                <li class="va-pic-item" data-va-pic="[ID]">
+                    <input type="checkbox" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+                    <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+                </li>
+            </div>
+
+            <div id="template_album__pics-radio">
+                <li class="va-pic-item" data-va-pic="[ID]">
+                    <input type="radio" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+                    <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+                </li>
+            </div>
+
+            <div id="template_info__article">
+                <article class="article" data-pid="[PID]">
+                    <a href="[LINK]">
+                        <div class="article-featured"><img data-src="[FEATURED]"></div>
+                        <div class="article-text">
+                            <div class="article-title"><h1>[TITLE]</h1></div>
+                            <div class="article-content">
+                                <div class="article-cat">[CAT]</div>
+                                <div class="article-autohr">[AUTHOR]</div>
+                                <div class="article-date">[DATE]</div>
+                            </div>
+                            <div class="article-description">[DESCRIPTION]</div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+
+            <div id="template_info__article-hot">
+                <li class="post-hot-item" data-pid="[PID]"><a href="[HREF]">[TITLE]</a></li>
+            </div>
+
+            <div id="template_info__article-cat">
+                <li class="post-cat-item" data-catid="[CID]"><a href="[HREF]">[CAT]<label>[CAT_TOTAL]</label></a></li>
+            </div>
+            -->
+        </div>
 		<script src="./public/js/_DATA.js"></script>
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/lib/jquery.inView/jQuery-inView.min.js"></script>

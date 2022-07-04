@@ -22,20 +22,27 @@ $(function() {
                 $album_pics_2: $('#album_pics_2'),
             },
 
-            $btn_draft: $('#btn-draft'),
-            $btn_submit: $('#btn-submit'),
-            $btn_newone: $('#btn-newone'),
-            $btn_save: $('#btn-save'),
+            $btn_draft: $('#btn-form-draft'),
+            $btn_save: $('#btn-form-save'),
+            $btn_confirm_submit: $('#btn-confirm-submit'),
+            $btn_confirm_newone: $('#btn-confirm-newone'),
+            $btn_select_submit: $('#btn-select-submit'),
 
+            $popup_form_select: $('#form-select'),
             $popup_form_confirm: $('#form-confirm'),
 
             $theform_is_new: $('#theform_is_new'),
             $theform_is_edit: $('#theform_is_edit'),
+
+            // popup
+            $formriver_select: $('#formriver_select'),
         },
         var: {
-            page_status: '',
-            page_position: '',
-            form_status: '',
+            page_status: '', // form/view
+            page_position: '', // cleanocean/cleanriver
+            form_status: '', // add/edit
+
+            form_select_value: '',
         },
         init: function() {
             console.log('FORM');
@@ -51,6 +58,17 @@ $(function() {
             let $this = this;
             console.log($this.var.page_status);
             console.log($this.var.page_position);
+
+            $this.el.$btn_select_submit.on('click', function() {
+                $this.var.form_select_value = $this.el.$formriver_select.val();
+
+                // show up the form
+                if ($this.var.form_select_value !== 0 || $this.var.form_select_value !== "") {
+                    $('#form-select').popup('hide');
+                    console.log($this.var.form_select_value);
+                    $this.formShowup();
+                }
+            });
 
             $this.el.$pics.$pic_upload.on('change', function() {
                 let $current = event.currentTarget;
@@ -76,13 +94,13 @@ $(function() {
                 alert('已儲存草稿');
             });
 
-            $this.el.$btn_submit.on('click', function() {
+            $this.el.$btn_confirm_submit.on('click', function() {
                 console.log('open confirm popup');
                 $this.el.$popup_form_confirm.attr('data-confirmed', 1);
                 // send the data to api // API
             });
 
-            $this.el.$btn_newone.on('click', function() {
+            $this.el.$btn_confirm_newone.on('click', function() {
                 console.log('set clean before the new one');
                 location.href = location.protocol + '//' + location.host + location.pathname;
             });
@@ -91,7 +109,7 @@ $(function() {
                 console.log('the data be save');
                 // send the data to api // API
                 alert('資料已儲存');
-            })
+            });
         },
         checkStatus: function() {
             let $this = this;
@@ -105,11 +123,12 @@ $(function() {
                 if ($this.var.page_status == 'view') {
                     $this.var.form_status = 'view';
                     $page_title = $this.el.$page_title.html();
-                    ifisview();
+                    $this.ifIsView();
                 } else if ($this.var.page_status == 'form') {
                     $this.var.form_status = 'edit';
                     $page_title = $this.el.$page_title.html() + ' - 修改';
                     $this.el.$theform_is_new.remove();
+                    $this.formShowup();
                 }
             } else {
                 if ($this.var.page_status == 'view') {
@@ -119,41 +138,53 @@ $(function() {
                 $this.var.form_status = 'add';
                 $page_title = $this.el.$page_title.html() + ' - 新增';
                 $this.el.$theform_is_edit.remove();
+
+                if ($this.var.page_position == 'river') {
+                    $this.openFirstPopup();
+                } else {
+                    $this.formShowup();
+                }
             }
             $this.el.$body.attr('data-form', $this.var.form_status);
 
             $this.el.$page_title.html($page_title);
             $this.el.$thetitle.html($page_title);
             $this.el.$thetitle.attr('data-storke', $page_title);
-            showup();
 
-            //
-            function showup() {
-                console.log('showup');
-                window.setTimeout(( () => {
-                    console.log('data checked');
-                    $this.el.$theform.removeClass('display-none');
-                    $this.el.$loading.removeClass('active');
-                }), 500);
-            }
-            function ifisview() {
-                console.log('ifisview');
-                $this.el.$form_btns.remove();
-
-                // build swiper
-                var swiper = new Swiper("#filed-album_pics", {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                    loop: true,
-                    pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                        dynamicBullets: true,
-                    },
-                });
-            }
             return;
         },
+        //
+        formShowup: function() {
+            let $this = this;
+            console.log('showup');
+
+            // call api
+
+            window.setTimeout(( () => {
+                console.log('data checked');
+                $this.el.$theform.removeClass('display-none');
+                $this.el.$loading.removeClass('active');
+            }), 500);
+        },
+        ifIsView: function() {
+            let $this = this;
+            console.log('ifIsView');
+            $this.el.$form_btns.remove();
+
+            // build swiper
+            var swiper = new Swiper("#filed-album_pics", {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+            });
+            $this.formShowup();
+        },
+
         formConfirm: function() {
             let $this = this;
             let $temp = '';
@@ -162,8 +193,8 @@ $(function() {
             $temp += '<ul>';
             if (this.var.page_position == 'cleanocean') {
                 $.each($data, function(i, field){
-                    console.log(i);
-                    console.log(field.name + ":" + field.value + " ");
+                    // console.log(i);
+                    // console.log(field.name + ":" + field.value + " ");
                     let $label = $('label[for="filed-' + field.name + '"]').text().trim();
                     let $value = field.value;
                     if (field.name == 'bottle') {
@@ -208,11 +239,33 @@ $(function() {
                     $this.formConfirm();
                 }
             });
-            // function onOpenAlbum() {
-            //     console.log("onOpenAlbum");
-            //     console.log($this.el.$selectAll);
-            // }
         },
+
+        openFirstPopup: function() {
+            let $this = this;
+            console.log("setPopup, openfirst");
+            $this.el.$popup_form_select.popup({
+                autoopen: true,
+                escape: false,
+                closebutton: false,
+                scrolllock: true,
+                blur: false,
+                onopen: function() { // call api to show form select
+                    let _source = window.formriver_select
+                    , _target = $this.el.$formriver_select
+                    , _template_select = window.helper.getTemplate('form_river__select')
+                    , _templates = '';
+                    for ($prop in _source) {
+                        let _template = _template_select;
+                        _template = _template.replace(/\[ID\]/g,  _source[$prop]['id']);
+                        _template = _template.replace(/\[VALUE\]/g,  _source[$prop]['value']);
+                        _templates += _template;
+                    }
+                    _target.html(_templates);
+                }
+            });
+        }
+
     };
     FORM.init();
 });

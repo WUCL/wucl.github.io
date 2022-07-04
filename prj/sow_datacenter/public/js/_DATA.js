@@ -1,7 +1,29 @@
-// annual Banner /* [PAGE]index */
+// call api to show form select
+window.formriver_select = [
+    {
+        id: 1,
+        value: '表單1',
+    },
+    {
+        id: 2,
+        value: '表單2',
+    },
+];
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+
+/*
+
+// annual Banner // [PAGE]index
 window.annualTopic = ['https://fakeimg.pl/1100x400/?text=年度倡議主題A&font=noto', 'https://fakeimg.pl/1100x400/?text=年度倡議主題B&font=noto']
 
-// annual Datas /* [PAGE]index/data/member */
+// annual Datas // [PAGE]index/data/member
 window.annualDatas = {
     freq: 17,
     people: 389,
@@ -12,7 +34,7 @@ window.annualDatas = {
 };
 
 
-// annual Area /* [PAGE]index/data */
+// annual Area // [PAGE]index/data
 window.annualArea = {
     '台南': { // tnn
         freq: 10,
@@ -33,11 +55,11 @@ window.annualArea = {
 };
 
 
-// postcards /* [PAGE]index */
+// postcards // [PAGE]index
 window.postcards = ['/wp-content/assets/img/postcard-demo.png?1', '/wp-content/assets/img/postcard-demo.png?2', '/wp-content/assets/img/postcard-demo.png?3', '/wp-content/assets/img/postcard-demo.png?4', '/wp-content/assets/img/postcard-demo.png?8'];
 
 
-// member data /* [PAGE]member */
+// member data // [PAGE]member
 window.member = {
     avatar: 'https://fakeimg.pl/100x100/?text=會員頭照&font=noto',
     name: '阿倫',
@@ -47,7 +69,7 @@ window.member = {
 };
 
 
-// totla campaign /* [PAGE]member */
+// totla campaign // [PAGE]member
 window.campaigns = {
     '1': {
         id: 1,
@@ -213,7 +235,7 @@ window.albumPics = {
 };
 
 
-// info post /* [PAGE]info */
+// info post // [PAGE]info
 window.info = {
     'articles': [
         {
@@ -295,3 +317,5 @@ window.info = {
         },
     ]
 };
+
+*/

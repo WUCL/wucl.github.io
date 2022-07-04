@@ -55,6 +55,11 @@ window.helper = {
         else return $newUrl;
         return;
     },
+
+    // 取得template
+    getTemplate: (template_type) => {
+        return $('#template_' + template_type).html();
+    }
 };
 
 
@@ -122,7 +127,7 @@ window.openAlert = (msg) => {
                 else return window.location.assign($confirmBtnLink[1]);
             }
         }
-    });;
+    });
 }
 /** END openAlert **/
 

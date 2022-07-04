@@ -33,7 +33,6 @@ $(function() {
 
             this.bindEvent();
             this.goUpdateTWDatas();
-            this.bindEvent();
         },
         bindEvent: function() {
             let $this = this;
