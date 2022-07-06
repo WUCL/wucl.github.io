@@ -43,6 +43,12 @@ $(function() {
             form_status: '', // add/edit
 
             form_select_value: '',
+            imgFile: {
+                currentTarget: '',
+                previewTarget: '',
+                b64: '',
+                exif: '',
+            },
         },
         init: function() {
             console.log('FORM');
@@ -70,22 +76,79 @@ $(function() {
                 }
             });
 
-            $this.el.$pics.$pic_upload.on('change', function() {
+            $this.el.$pics.$pic_upload.on('change', function(e) {
+
                 let $current = event.currentTarget;
                 let $whichone = $current.getAttribute('id');
                 let $preview_el = 'preview_' + $whichone;
-                let $base64 = '';
+                // let $b64 = '';
 
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var output = document.getElementById($preview_el);
-                    output.src = reader.result;
-                    $base64 = output.src;
+                // step1, get EXIF
+                let file = e.target.files[0];
+                if (file && file.name) {
+                    EXIF.getData(file, function() {
+                        let exifData = EXIF.pretty(this);
+                        $this.var.imgFile.exif = exifData;
+                        // var exifData = this;
+                        if (exifData) {
+                            // console.log(exifData);
+                        } else {
+                            console.log("No EXIF data found in image '" + file.name + "'.");
+                        }
+                    });
                 }
-                reader.readAsDataURL(event.target.files[0]);
 
-                // do pic sync api
-                // console.log($base64);
+                // do compress
+                handleImageUpload(file);
+                async function handleImageUpload(file) {
+                    // const imageFile = event.target.files[0];
+                    const imageFile = file;
+                    // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+                    // console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+                    const options = {
+                        maxSizeMB: 1.9,
+                        maxWidthOrHeight: 400,
+                        useWebWorker: true
+                    }
+                    try {
+                        const compressedFile = await imageCompression(imageFile, options);
+                        // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                        // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                        // console.log(compressedFile);
+                        //
+                        var reader = new FileReader();
+                        reader.readAsDataURL(compressedFile);
+                        reader.onloadend = function() {
+                            var base64data = reader.result;
+                            $this.var.imgFile.b64 = base64data;
+                            // console.log($this.var.imgFile);
+                            // previewThis(base64data);
+                            let output = document.getElementById($preview_el);
+                            output.src = $this.var.imgFile.b64;
+                            doImgSync();
+                        }
+                    // await uploadToServer(compressedFile); // write your own logic
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+
+                // step2, do preview
+                // var reader = new FileReader();
+                // reader.onload = function() {
+                //     let output = document.getElementById($preview_el);
+                //     output.src = reader.result;
+                //     $b64 = output.src;
+                //     $this.var.imgFile.b64 = $b64;
+                //     doImgSync();
+                // }
+                // reader.readAsDataURL(event.target.files[0]);
+
+                // step3, do api call
+                function doImgSync() {
+                    return console.log($this.var.imgFile);
+                }
             });
 
             $this.el.$btn_draft.on('click', function() {
