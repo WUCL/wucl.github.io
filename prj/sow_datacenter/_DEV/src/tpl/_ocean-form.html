@@ -67,12 +67,15 @@
                     <div class="form-title">照片紀錄</div>
                     <div class="group with-photo with-3in1">
                         <ul>
-                            <li class="filed-album_pics">
+                            <li class="filed-album_pics" data-pid="album_pics">
                                 <div>
                                     <div class="photo-box">
-                                        <img id="preview_album_pics" class="preview_album_pics" src>
                                         <input type="file" id="album_pics" name="album_pics" class="pic-upload display-none" accept="image/*">
-                                        <label class="btn-pic-upload btn-style" for="album_pics">上傳照片</label>
+                                        <img id="preview_album_pics" class="preview_album_pics" src>
+                                        <div class="pics_btns">
+                                            <label class="btn-pic-upload btn-style" for="album_pics"></label>
+                                            <label class="btn-pic-delete btn-style"></label>
+                                        </div>
                                     </div>
                                 </div>
                             </li>

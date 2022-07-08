@@ -14,7 +14,8 @@ $(function() {
             $form_btns: $('#form-btns'),
 
             $pics: {
-                $pic_upload: $('input.pic-upload[type="file"]'),
+                $btn_pic_upload: $('input.pic-upload[type="file"]'),
+                $btn_pic_delete: $('.btn-pic-delete'),
                 $r_pic: $('#r_pic'),
                 $h_pic: $('#h_pic'),
                 $d_pic: $('#d_pic'),
@@ -34,8 +35,9 @@ $(function() {
             $theform_is_new: $('#theform_is_new'),
             $theform_is_edit: $('#theform_is_edit'),
 
-            // popup
-            $formriver_select: $('#formriver_select'),
+            // river
+            $formriver_ul: $('#form-data-ul'), // template for api call dynamic field
+            $formriver_select: $('#formriver_select'), // popup
         },
         var: {
             page_status: '', // form/view
@@ -66,17 +68,49 @@ $(function() {
             console.log($this.var.page_position);
 
             $this.el.$btn_select_submit.on('click', function() {
-                $this.var.form_select_value = $this.el.$formriver_select.val();
+                if ($this.var.page_position !== 'cleanriver') return;
 
+                $this.var.form_select_value = $this.el.$formriver_select.val();
                 // show up the form
                 if ($this.var.form_select_value !== 0 || $this.var.form_select_value !== "") {
+                    // api call 動態欄位
+                    if ($this.var.form_select_value == "1") { dynamic_field = window.formriver_dynamic_field_1;
+                    } else { dynamic_field = window.formriver_dynamic_field_2; }
+
+                        let _source = dynamic_field
+                        , _target = $this.el.$formriver_ul
+                        , _template_extra = window.helper.getTemplate('form_river__extra')
+                        , _templates = '';
+                        for ($prop in _source) {
+                            let _template = _template_extra;
+                            _template = _template.replace(/\[ID\]/g, $prop);
+                            _template = _template.replace(/\[QUESTION\]/g, _source[$prop]);
+                            _templates += _template;
+                        }
+                        _target.append(_templates);
+
                     $('#form-select').popup('hide');
                     console.log($this.var.form_select_value);
                     $this.formShowup();
                 }
             });
 
-            $this.el.$pics.$pic_upload.on('change', function(e) {
+            $this.el.$pics.$btn_pic_delete.on('click', function(e) {
+                console.log("do pic 'delete'");
+
+                let $current = event.currentTarget
+                , $whichone = $current.closest('li')
+                , $id = $($whichone).attr('data-pid')
+                , $preview_el = 'preview_' + $id;
+
+                // call api to delete
+                console.log($id);
+
+                //
+                $("#" + $preview_el).attr('src', '');
+            });
+            $this.el.$pics.$btn_pic_upload.on('change', function(e) {
+                console.log("do pic 'update'");
 
                 let $current = event.currentTarget;
                 let $whichone = $current.getAttribute('id');
@@ -88,9 +122,8 @@ $(function() {
                 if (file && file.name) {
                     EXIF.getData(file, function() {
                         let exifData = EXIF.pretty(this);
-                        $this.var.imgFile.exif = exifData;
-                        // var exifData = this;
                         if (exifData) {
+                            $this.var.imgFile.exif = exifData;
                             // console.log(exifData);
                         } else {
                             console.log("No EXIF data found in image '" + file.name + "'.");
@@ -202,7 +235,7 @@ $(function() {
                 $page_title = $this.el.$page_title.html() + ' - 新增';
                 $this.el.$theform_is_edit.remove();
 
-                if ($this.var.page_position == 'river') {
+                if ($this.var.page_position == 'cleanriver') {
                     $this.openFirstPopup();
                 } else {
                     $this.formShowup();
@@ -320,8 +353,8 @@ $(function() {
                     , _templates = '';
                     for ($prop in _source) {
                         let _template = _template_select;
-                        _template = _template.replace(/\[ID\]/g,  _source[$prop]['id']);
-                        _template = _template.replace(/\[VALUE\]/g,  _source[$prop]['value']);
+                        _template = _template.replace(/\[ID\]/g, _source[$prop]['id']);
+                        _template = _template.replace(/\[VALUE\]/g, _source[$prop]['value']);
                         _templates += _template;
                     }
                     _target.html(_templates);

@@ -104,28 +104,58 @@ section.theform {
                            background: $color-white;
                            border-radius: 5px;
                            overflow: hidden;
-                           img {
-                              height: 100%;
-                              width: auto;
-                           }
-                           &[data-photo="1"] {
-                              background: transparent;
-                           }
-                           label {
+                           > .pics_btns {
                               display: inline-block;
                               position: absolute;
                               top: 50%;
                               left: 50%;
-                              font-size: $fontsize;
                               transform: translate(-50%, -50%);
-                              white-space: nowrap;
-                              @include mq($max-width: $bp_2s) {
-                                 font-size: $fontsize-a;
-                                 padding: 3px 20px;
+                              label {
+                                 position: relative;
+                                 display: inline-block;
+                                 font-size: $fontsize;
+                                 white-space: nowrap;
+                                 margin: 5px 0;
+                                 @include mq($max-width: $bp_2s) {
+                                    font-size: $fontsize-a;
+                                    padding: 3px 20px;
+                                 }
+                                 &:hover {
+                                    transform: scale(.93);
+                                 }
+                                 &[class~="btn-pic-upload"] {
+                                    &:before {
+                                       content: "上傳照片";
+                                       display: block;
+                                       font-size: inherit;
+                                       color: inherit;
+                                    }
+                                 }
+                                 &[class~="btn-pic-delete"] {
+                                    display: none;
+                                    &:before {
+                                       content: "刪除照片";
+                                       display: block;
+                                       font-size: inherit;
+                                       color: inherit;
+                                    }
+                                 }
                               }
-                              &:hover {
-                                 transform: translate(-50%, -50%) scale(.93);
+                           }
+                           img {
+                              height: 100%;
+                              width: auto;
+                              &:not([src=""]) + .pics_btns  {
+                                 label[class~="btn-pic-upload"]:before {
+                                    content: "更新照片";
+                                 }
+                                 label[class~="btn-pic-delete"] {
+                                    display: inline-block;
+                                 }
                               }
+                           }
+                           &[data-photo="1"] {
+                              background: transparent;
                            }
                         }
                         &:nth-child(1) {

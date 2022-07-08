@@ -10,6 +10,9 @@ window.formriver_select = [
     },
 ];
 
+window.formriver_dynamic_field_1 = ['你今天過得好嗎？','你今年去了幾場田調？'];
+window.formriver_dynamic_field_2 = ['今天天氣幾度？','大約會在台北？'];
+
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
@@ -18,7 +21,6 @@ window.formriver_select = [
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
-/*
 
 // annual Banner // [PAGE]index
 window.annualTopic = ['https://fakeimg.pl/1100x400/?text=年度倡議主題A&font=noto', 'https://fakeimg.pl/1100x400/?text=年度倡議主題B&font=noto']
@@ -55,6 +57,7 @@ window.annualArea = {
 };
 
 
+/*
 // postcards // [PAGE]index
 window.postcards = ['/wp-content/assets/img/postcard-demo.png?1', '/wp-content/assets/img/postcard-demo.png?2', '/wp-content/assets/img/postcard-demo.png?3', '/wp-content/assets/img/postcard-demo.png?4', '/wp-content/assets/img/postcard-demo.png?8'];
 
