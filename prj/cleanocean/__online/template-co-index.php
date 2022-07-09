@@ -91,7 +91,7 @@
                 </div>
             </section>
             <section id="annual_datas" class="annual_datas">
-                <div class="title with_afterline"><span>年度數據資料</span></div>
+                <div class="title with_afterline"><span>2022年度數據資料</span></div>
                 <div class="inner">
                     <div class="datas-total">
                         <ul class="datas-total-ul">
