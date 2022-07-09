@@ -179,6 +179,10 @@ body {
 								font-size: $fontsize-2;
 								line-height: normal;
 							}
+							@include mq($max-width: $bp-2s) {
+								font-size: $fontsize-1;
+								max-width: 2.1em;
+							}
 						}
 					}
 					.total-value {
@@ -236,7 +240,7 @@ body {
 				}
 				span {
 					display: block;
-					margin: 20px auto 0;
+					margin-top: 20px;
 					font-size: $fontsize-10;
 					width: max-content;
 					@include mq($max-width: $bp-mobile) {
@@ -391,6 +395,9 @@ body {
 									@include mq($max-width: $bp-mobile) {
 										font-size: $fontsize-2;
 									}
+									@include mq($max-width: $bp-2s) {
+										font-size: $fontsize-1;
+									}
 									&:before {
 										content: "";
 										height: 0;
@@ -408,7 +415,7 @@ body {
 										text-align: center;
 										width: 100%;
 										margin-bottom: 5px;
-										transform: translateY(100%);
+										transform: translateY(110%);
 										transition: .35s;
 										@include mq($max-width: $bp-mobile) {
 											font-size: $fontsize-2;

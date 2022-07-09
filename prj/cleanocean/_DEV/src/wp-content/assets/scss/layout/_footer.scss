@@ -124,6 +124,10 @@ footer.footer {
 				letter-spacing: 1.2px;
 				margin-top: 12px;
 				color: $color-footer;
+				@include mq($max-width: $bp-2s) {
+					font-size: $fontsize;
+					letter-spacing: 1px;
+				}
 			}
 		}
 		.logo,
@@ -159,5 +163,8 @@ footer.footer {
 	.copyright {
 		width: 100%;
 		padding: 0 1.5%;
+		@include mq($max-width: $bp-2s) {
+			padding: 0;
+		}
 	}
 }

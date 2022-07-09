@@ -1,7 +1,7 @@
 "use strict";
 const gulp = require('gulp')
     , bs = require('browser-sync').create()
-    , sass = require('gulp-sass')
+    , sass = require('gulp-sass')(require('sass'))
     , rename = require("gulp-rename")
     , autoprefixer = require('gulp-autoprefixer')
     // , uglify = require('gulp-uglify')
