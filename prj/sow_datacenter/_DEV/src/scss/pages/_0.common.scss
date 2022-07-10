@@ -437,8 +437,8 @@ body {
 						flex-direction: column;
 					}
 					.locals-taiwan {
-						min-width: 400px;
-						padding-right: 10px;
+						min-width: 380px;
+						padding-right: 20px;
 				    	margin: 0 auto;
 						@include mq($max-width: $bp-mobile) {
 							padding-right: 0;
