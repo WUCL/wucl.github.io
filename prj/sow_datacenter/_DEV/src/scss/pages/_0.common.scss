@@ -170,7 +170,7 @@ body {
 		width: 100%;
 		object-fit: cover;
 		height: auto;
-		g.all {
+		g#all {
 			fill: $color-white;
 			@include mq($min-width: $bp-mobile) {
 				path:hover {
@@ -437,8 +437,8 @@ body {
 						flex-direction: column;
 					}
 					.locals-taiwan {
-						min-width: 350px;
-						padding-right: 35px;
+						min-width: 400px;
+						padding-right: 10px;
 				    	margin: 0 auto;
 						@include mq($max-width: $bp-mobile) {
 							padding-right: 0;

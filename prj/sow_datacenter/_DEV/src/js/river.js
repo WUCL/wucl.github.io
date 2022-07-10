@@ -15,6 +15,23 @@ $(function() {
                 top1: $('#goUpdateTWDatas-top1'),
                 top2: $('#goUpdateTWDatas-top2'),
                 top3: $('#goUpdateTWDatas-top3'),
+
+                surveys: $('#goUpdateTWDatas-surveys'),
+                trashs: $('#goUpdateTWDatas-trashs'),
+                oceanside: {
+                    survey: $('#oceanside-survey'),
+                    trash: $('#oceanside-trash'),
+                    top1: $('#oceanside-top1'),
+                    top2: $('#oceanside-top2'),
+                    top3: $('#oceanside-top3'),
+                },
+                riverside: {
+                    survey: $('#riverside-survey'),
+                    trash: $('#riverside-trash'),
+                    top1: $('#riverside-top1'),
+                    top2: $('#riverside-top2'),
+                    top3: $('#riverside-top3'),
+                }
             },
 
             $trashHotP: {
@@ -70,7 +87,7 @@ $(function() {
                 $this.var.$area = _target.attr('data-area');
 
                 let _name = window.mappingTWName[$this.var.$area]
-                , _mappingData = window.annualArea[_name];
+                , _mappingData = window.annualAreaRiver[_name];
                 console.log(_mappingData);
                 if (_mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
@@ -135,7 +152,7 @@ $(function() {
             loadTWSvg: function() {
                 let $this = this;
                 return $this.el.$twimg.load(window.assetsPath + '/img/tw.svg', function() {
-                    $this.el.$twimg.find('#svg-tw path.' + $this.var.$area).addClass('active');
+                    $this.el.$twimg.find('#svg-tw path#' + $this.var.$area).addClass('active');
                 });
             },
             goUpdateTWDatas: function() {
@@ -143,7 +160,7 @@ $(function() {
                 if (window.page == 'member') return;
                 let $this = this
                 , _area = window.mappingTWName[$this.var.$area]
-                , _mappingData = window.annualArea[_area];
+                , _mappingData = window.annualAreaRiver[_area];
                 // console.log($this.var.$area);
                 // console.log(_mappingData);
                 $this.el.$area.name.html(_area);
@@ -154,6 +171,21 @@ $(function() {
                 $this.el.$area.top1.html(_mappingData['top'][0]);
                 $this.el.$area.top2.html(_mappingData['top'][1]);
                 $this.el.$area.top3.html(_mappingData['top'][2]);
+
+                $this.el.$area.oceanside.survey.html(_mappingData['oceanside']['survey']);
+                $this.el.$area.oceanside.trash.html(_mappingData['oceanside']['trash']);
+                $this.el.$area.oceanside.top1.html(_mappingData['oceanside']['top'][0]);
+                $this.el.$area.oceanside.top2.html(_mappingData['oceanside']['top'][1]);
+                $this.el.$area.oceanside.top3.html(_mappingData['oceanside']['top'][2]);
+
+                $this.el.$area.riverside.survey.html(_mappingData['riverside']['survey']);
+                $this.el.$area.riverside.trash.html(_mappingData['riverside']['trash']);
+                $this.el.$area.riverside.top1.html(_mappingData['riverside']['top'][0]);
+                $this.el.$area.riverside.top2.html(_mappingData['riverside']['top'][1]);
+                $this.el.$area.riverside.top3.html(_mappingData['riverside']['top'][2]);
+
+                $this.el.$area.surveys.html(_mappingData['oceanside']['survey'] + _mappingData['riverside']['survey']);
+                $this.el.$area.trashs.html(_mappingData['oceanside']['trash'] + _mappingData['riverside']['trash']);
                 return;
             },
         /* END data */

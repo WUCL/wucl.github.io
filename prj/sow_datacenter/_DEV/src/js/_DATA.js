@@ -53,8 +53,8 @@ window.annualDatas = {
 };
 
 
-// annual Area // [PAGE]index/data
-window.annualArea = {
+// annual Area Ocean // [PAGE]ocean
+window.annualAreaOcean = {
     '台南': { // tnn
         freq: 10,
         top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
@@ -66,6 +66,36 @@ window.annualArea = {
     '台北': { // tpe
         freq: 12,
         top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
+    },
+    '新竹': { // hsz
+        freq: 13,
+        top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
+    },
+};
+
+// annual Area River // [PAGE]river
+window.annualAreaRiver = {
+    '台南': { // tnn
+        freq: 10,
+        top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
+    },
+    '高雄': { // khh
+        freq: 11,
+        top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
+    },
+    '台北': { // tpe
+        freq: 12,
+        top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
+        oceanside: {
+            survey: 40.5,
+            trash: 44049,
+            top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
+        },
+        riverside: {
+            survey: 175,
+            trash: 34000,
+            top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
+        },
     },
     '新竹': { // hsz
         freq: 13,

@@ -30,7 +30,7 @@ $(function() {
             $chartRank: $('#chart-rank'),
         },
         var: {
-            $area: 'tpe', // defaul setting
+            $area: 'khh', // defaul setting
             $api: {
             },
         },
@@ -57,13 +57,13 @@ $(function() {
             $this.el.$twimg.on('click', '#svg-tw', function(e) {
                 let _target = $(e.target)
                 , _currentTarget = $(e.currentTarget)
-                , _targetArea = _target.attr('data-area');
+                , _targetArea = _target.attr('id');
                 if (_targetArea == $this.var.$area) return;
 
-                $this.var.$area = _target.attr('data-area');
+                $this.var.$area = _target.attr('id');
 
                 let _name = window.mappingTWName[$this.var.$area]
-                , _mappingData = window.annualArea[_name];
+                , _mappingData = window.annualAreaOcean[_name];
                 console.log(_mappingData);
                 if (_mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
@@ -128,7 +128,7 @@ $(function() {
             loadTWSvg: function() {
                 let $this = this;
                 return $this.el.$twimg.load(window.assetsPath + '/img/tw.svg', function() {
-                    $this.el.$twimg.find('#svg-tw path.' + $this.var.$area).addClass('active');
+                    $this.el.$twimg.find('#svg-tw path#' + $this.var.$area).addClass('active');
                 });
             },
             showFlot: function() {
@@ -237,7 +237,7 @@ $(function() {
                 if (window.page == 'member') return;
                 let $this = this
                 , _area = window.mappingTWName[$this.var.$area]
-                , _mappingData = window.annualArea[_area];
+                , _mappingData = window.annualAreaOcean[_area];
                 // console.log($this.var.$area);
                 // console.log(_mappingData);
                 $this.el.$area.name.html(_area);
