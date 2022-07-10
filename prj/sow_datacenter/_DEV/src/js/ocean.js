@@ -147,12 +147,11 @@ $(function() {
                     labels: labels,
                     datasets: [
                     {
-                        label: '#l1',
+                        label: '#l1', // 標籤名稱
                         data: [65, 59, 80, 81, 56, 55, 40, 95],
-                        // data: [{x: 10, y: 20}, {x: 15, y: null}, {x: 20, y: 10}]
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: .1
+                        fill: false, // 折現涵蓋的背景是否填滿
+                        borderColor: 'rgb(75, 192, 192)', // 線條顏色
+                        tension: .1, // 點到點的折線角度
                     },
                     {
                         label: '#l2',
@@ -166,7 +165,7 @@ $(function() {
                         data: [33, 59, 71, 100, 56, 99, 30, 20],
                         fill: true,
                         borderColor: 'rgb(255, 0, 192)',
-                        tension: .1
+                        tension: .1,
                     },
                     ]
                 };

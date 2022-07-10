@@ -16,6 +16,15 @@ $(function() {
                 top2: $('#goUpdateTWDatas-top2'),
                 top3: $('#goUpdateTWDatas-top3'),
             },
+
+            $trashHotP: {
+                img_1: $('#hotp-img-1'),
+                btn_w_1: $('#hotp-btn-w-1'),
+                btn_v_1: $('#hotp-btn-v-1'),
+                img_2: $('#hotp-img-2'),
+                btn_w_2: $('#hotp-btn-w-2'),
+                btn_v_2: $('#hotp-btn-v-2'),
+            }
         },
         var: {
             $area: 'tpe', // defaul setting
@@ -26,6 +35,7 @@ $(function() {
             console.log('RIVER');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
+            this.settingDataJS();
             this.loadTopics();
 
             this.goInitial(); // 先 ajax 拿到資料先builder
@@ -33,6 +43,19 @@ $(function() {
 
             this.bindEvent();
             this.goUpdateTWDatas();
+        },
+        settingDataJS: function() {
+            console.log('settingDataJS');
+            let $this = this
+            , _source = window.riverTrashHotP;
+            $this.el.$trashHotP.img_1.attr('src', _source[0][0]);
+            $this.el.$trashHotP.btn_w_1.attr('href', _source[0][1]);
+            $this.el.$trashHotP.btn_v_1.attr('href', _source[0][2]);
+
+            $this.el.$trashHotP.img_2.attr('src', _source[1][0]);
+            $this.el.$trashHotP.btn_w_2.attr('href', _source[1][1]);
+            $this.el.$trashHotP.btn_v_2.attr('href', _source[1][2]);
+            return;
         },
         bindEvent: function() {
             let $this = this;

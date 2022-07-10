@@ -22,8 +22,25 @@ window.formriver_dynamic_field_2 = ['今天天氣幾度？','大約會在台北�
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
 
-// annual Banner // [PAGE]index
-window.annualTopic = ['https://fakeimg.pl/1100x400/?text=年度倡議主題A&font=noto', 'https://fakeimg.pl/1100x400/?text=年度倡議主題B&font=noto']
+// annual Banner // [PAGE]river/ocean
+window.annualTopic = [
+'https://fakeimg.pl/1100x400/?text=年度倡議主題A&font=noto',
+'https://fakeimg.pl/1100x400/?text=年度倡議主題B&font=noto'
+];
+
+// river Trash Hot Point // [PAGE]river
+window.riverTrashHotP = [
+    [ // 左
+        'public/img/hotpoint-1.png', // 圖連結
+        '#官網連結1', // 官網連結
+        '#影片連結1'  // 影片連結
+    ],
+    [ // 右
+        'public/img/hotpoint-2.png', // 圖連結
+        '#官網連結2', // 官網連結
+        '#影片連結2'  // 影片連結
+    ]
+];
 
 // annual Datas // [PAGE]index/data/member
 window.annualDatas = {

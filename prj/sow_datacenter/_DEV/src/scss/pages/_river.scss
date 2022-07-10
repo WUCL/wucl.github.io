@@ -25,7 +25,7 @@
          }
       }
    }
-   section.river_hotpoint {
+   section.river_hotp {
       .inner {
          &:before,
          &:after {
@@ -177,7 +177,7 @@
          }
       }
    }
-   section.river_trash_hotpoint {
+   section.river_trash_hotp {
       .inner {
          .boxs {
             display: flex;
@@ -194,13 +194,13 @@
                &:last-child {
                   margin-left: 10px;
                }
-               .hotpoint-img {
+               .hotp-img {
                   width: 100%;
                   img {
                      width: 100%;
                   }
                }
-               .hotpoint-btns {
+               .hotp-btns {
                   margin-top: 20px;
                   a {
                      margin: 0 9px;
