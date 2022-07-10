@@ -26,6 +26,8 @@ $(function() {
                 top2: $('#goUpdateTWDatas-top2'),
                 top3: $('#goUpdateTWDatas-top3'),
             },
+
+            $chartRank: $('#chart-rank'),
         },
         var: {
             $area: 'tpe', // defaul setting
@@ -40,6 +42,8 @@ $(function() {
 
             this.goInitial(); // 先 ajax 拿到資料先builder
             this.loadTWSvg();
+
+            this.showFlot();
 
             this.bindEvent();
             this.getAnnualDatas();
@@ -126,6 +130,67 @@ $(function() {
                 return $this.el.$twimg.load(window.assetsPath + '/img/tw.svg', function() {
                     $this.el.$twimg.find('#svg-tw path.' + $this.var.$area).addClass('active');
                 });
+            },
+            showFlot: function() {
+                console.log('showFlot');
+                const labels = [
+                    'x1',
+                    'x2',
+                    'x3',
+                    'x4',
+                    'x5',
+                    'x6',
+                    'x7',
+                    'x8',
+                ];
+                const data = {
+                    labels: labels,
+                    datasets: [
+                    {
+                        label: '#l1',
+                        data: [65, 59, 80, 81, 56, 55, 40, 95],
+                        // data: [{x: 10, y: 20}, {x: 15, y: null}, {x: 20, y: 10}]
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: .1
+                    },
+                    {
+                        label: '#l2',
+                        data: [78, 23, 32, 67, 66, 41, 56, 78],
+                        fill: false,
+                        borderColor: 'rgb(0, 255, 192)',
+                        tension: .1,
+                    },
+                    {
+                        label: '#l3',
+                        data: [33, 59, 71, 100, 56, 99, 30, 20],
+                        fill: true,
+                        borderColor: 'rgb(255, 0, 192)',
+                        tension: .1
+                    },
+                    ]
+                };
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        // indexAxis: 'y',
+                        scales: {
+                            x: {
+                                // beginAtZero: true
+                            },
+                            y: {
+                                // min: '-10',
+                                max: 200,
+                                beginAtZero: true,
+                            },
+                        }
+                    }
+                };
+                const myChart = new Chart(
+                    document.getElementById('chart-rank'),
+                    config
+                );
             },
             getAnnualDatas: function() {
                 console.log('getAnnualDatas');
