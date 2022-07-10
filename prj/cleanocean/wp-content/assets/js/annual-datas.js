@@ -41,10 +41,10 @@ $(function() {
             $this.el.$twimg.on('click', '#svg-tw', function(e) {
                 let _target = $(e.target)
                 , _currentTarget = $(e.currentTarget)
-                , _targetArea = _target.attr('data-area');
+                , _targetArea = _target.attr('id');
                 if (_targetArea == $this.var.$area) return;
 
-                $this.var.$area = _target.attr('data-area');
+                $this.var.$area = _target.attr('id');
 
                 let _name = window.mappingTWName[$this.var.$area]
                 , _mappingData = window.annualArea[_name];
@@ -100,7 +100,7 @@ $(function() {
         loadTWSvg: function() {
             let $this = this;
             return $this.el.$twimg.load(window.assetsPath + '/img/tw.svg', function() {
-                $this.el.$twimg.find('#svg-tw path.' + $this.var.$area).addClass('active');
+                $this.el.$twimg.find('#svg-tw path#' + $this.var.$area).addClass('active');
             });
         },
         goUpdateAnnual: function() {
@@ -154,19 +154,26 @@ $(function() {
 });
 
 window.mappingTWName = {
-    'ttt': '台東',
+    'ntpc': '新北',
+    'tpe': '台北',
+    'kel': '基隆',
+    'ila': '宜蘭',
+    'tyn': '桃園',
+    'hszc': '新竹',
+    'hsz': '竹市',
+    'zmi': '苗栗',
+    'txg': '台中',
+    'chw': '彰化',
+    'ntc': '南投',
+    'yun': '雲林',
+    'cyic': '嘉市',
+    'cyi': '嘉義',
+    'tnn': '台南',
     'khh': '高雄',
     'pif': '屏東',
-    'cyi': '嘉義',
-    'yun': '雲林',
-    'chw': '彰化',
-    'txg': '台中',
-    'ntc': '南投',
-    'tyn': '桃園',
-    'zmi': '苗栗',
-    'hsz': '新竹',
-    'tpe': '台北',
-    'tnn': '台南',
-    'ila': '宜蘭',
-    'hun': '花蓮'
+    'hun': '花蓮',
+    'ttt': '台東',
+    'peh': '澎湖',
+    'knh': '金門',
+    'mzw': '馬祖',
 };
