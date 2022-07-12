@@ -124,10 +124,10 @@ layout/_popup
 			.popup_inner[data-status="confirmed"] {
 				display: block;
 				visibility: visible;
-				&[data-position="river"] {
-					display: none;
-					visibility: hidden;
-				}
+				// &[data-position="river"] {
+				// 	display: none;
+				// 	visibility: hidden;
+				// }
 			}
 		}
 	}
@@ -156,13 +156,8 @@ layout/_popup
 	}
 }
 
-body[data-position="cleanriver"] .popup_content#form-confirm .popup_inner {
-	&[data-status="confirmed"][data-position="ocean"] {
-		display: none;
-		visibility: hidden;
-	}
-	&[data-status="confirmed"][data-position="river"] {
-		display: block;
-		visibility: visible;
-	}
+body[data-position="cleanriver"] .popup_content#form-confirm .popup_inner[data-status="confirmed"][data-position="ocean"],
+body[data-position="cleanocean"] .popup_content#form-confirm .popup_inner[data-status="confirmed"][data-position="river"] {
+	display: none;
+	visibility: hidden;
 }

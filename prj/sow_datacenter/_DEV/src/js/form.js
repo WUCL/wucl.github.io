@@ -13,20 +13,12 @@ $(function() {
 
             $form_btns: $('#form-btns'),
 
-            $pics: {
-                $btn_pic_upload: $('input.pic-upload[type="file"]'),
-                $btn_pic_delete: $('.btn-pic-delete'),
-                $r_pic: $('#r_pic'),
-                $h_pic: $('#h_pic'),
-                $d_pic: $('#d_pic'),
-                $album_pics_1: $('#album_pics_1'),
-                $album_pics_2: $('#album_pics_2'),
-            },
-
-            $btn_draft: $('#btn-form-draft'),
+            // $btn_draft: $('#btn-form-draft'),
             $btn_save: $('#btn-form-save'),
             $btn_confirm_submit: $('#btn-confirm-submit'),
-            $btn_confirm_newone: $('#btn-confirm-newone'),
+            $btn_confirm_newone_ocean: $('#btn-confirm-newone_ocean'),
+            $btn_confirm_newone_river: $('#btn-confirm-newone_river'),
+            $btn_confirm_sameone: $('#btn-confirm-sameone'), // river // popup screate ame one
             $btn_select_submit: $('#btn-select-submit'),
 
             $popup_form_select: $('#form-select'),
@@ -35,9 +27,22 @@ $(function() {
             $theform_is_new: $('#theform_is_new'),
             $theform_is_edit: $('#theform_is_edit'),
 
+            $pics: {
+                // $btn_pic_upload: $('input.pic-upload[type="file"]'),
+                // $btn_pic_delete: $('.btn-pic-delete'),
+                $r_pic: $('#r_pic'),
+                $h_pic: $('#h_pic'),
+                $d_pic: $('#d_pic'),
+                $album_pics_1: $('#album_pic_1'),
+                $album_pics_2: $('#album_pic_2'),
+            },
+
             // river
             $formriver_ul: $('#form-data-ul'), // template for api call dynamic field
             $formriver_select: $('#formriver_select'), // popup
+
+            // ocean
+            $formocean_ul: $('#filed-album_pics'),
         },
         var: {
             page_status: '', // form/view
@@ -45,12 +50,17 @@ $(function() {
             form_status: '', // add/edit
 
             form_select_value: '',
-            imgFile: {
-                currentTarget: '',
-                previewTarget: '',
-                b64: '',
-                exif: '',
+            img_file: {
+                status: '',
+                counter: 0,
+                datas: { // lat: '', // lng: '', // file_create_time: ''
+
+                },
             },
+            form_data: {},
+
+            //ocean
+            $temp_formocean_li: window.helper.getTemplate('form_ocean__album_pic'),
         },
         init: function() {
             console.log('FORM');
@@ -58,6 +68,7 @@ $(function() {
             this.var.page_position = this.el.$body.attr('data-position');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
+
             this.bindEvent();
             this.checkStatus();
             this.setPopup();
@@ -95,45 +106,103 @@ $(function() {
                 }
             });
 
-            $this.el.$pics.$btn_pic_delete.on('click', function(e) {
+            $this.el.$theform.on('click', '.btn-pic-delete', function(e) {
                 console.log("do pic 'delete'");
 
-                let $current = event.currentTarget
+                let $current = e.currentTarget
                 , $whichone = $current.closest('li')
+                , $pid = $($whichone).attr('data-pid')
                 , $id = $($whichone).attr('data-pid')
-                , $preview_el = 'preview_' + $id;
+                , $preview_el = $('#preview_' + $pid);
+
+                //
+                $preview_el.attr('src', '');
+
+                // if ocean remove li
+                if ($this.var.page_position === 'cleanocean') {
+                    let $tempid = $preview_el.attr('data-tempid');
+                    $preview_el.attr('data-tempid', '');
+                    $whichone.remove();
+                    delete $this.var.img_file.datas[$tempid];
+                    console.log($this.var.img_file);
+                }
 
                 // call api to delete
                 console.log($id);
-
-                //
-                $("#" + $preview_el).attr('src', '');
             });
-            $this.el.$pics.$btn_pic_upload.on('change', function(e) {
+            $this.el.$theform.on('change', 'input.pic-upload[type="file"]', function(e) {
                 console.log("do pic 'update'");
+                if ($this.var.img_file.status != '') return alert('圖片處理中');
 
-                let $current = event.currentTarget;
+                let $current = e.currentTarget;
                 let $whichone = $current.getAttribute('id');
                 let $preview_el = 'preview_' + $whichone;
+                let $tempid = $this.var.img_file.counter;
+                let $newone = true;
+                if ($('#' + $preview_el).attr('data-tempid') !== undefined) {
+                    $tempid = $('#' + $preview_el).attr('data-tempid');
+                    $newone = false;
+                }
+                // console.log($tempid);
                 // let $b64 = '';
 
                 // step1, get EXIF
                 let file = e.target.files[0];
+                $this.var.img_file.datas[$tempid] = '';
+                $this.var.img_file.datas[$tempid] = {'b64':'', 'file_create_time':'','lat':'','lng':''};
+
                 if (file && file.name) {
                     EXIF.getData(file, function() {
+                        console.log(this);
+
                         let exifData = EXIF.pretty(this);
                         if (exifData) {
-                            $this.var.imgFile.exif = exifData;
-                            // console.log(exifData);
+                            let file_create_time = lat = lng = '';
+                            if (this.exifdata.DateTime !== undefined) {
+                                file_create_time = this.exifdata.DateTime
+                                , lat = calGPS(this.exifdata)['latitude'] // 經度
+                                , lng = calGPS(this.exifdata)['longitude'] // 緯度
+                            }
+                            $this.var.img_file.datas[$tempid]['file_create_time'] = file_create_time;
+                            $this.var.img_file.datas[$tempid]['lat'] = lat;
+                            $this.var.img_file.datas[$tempid]['lng'] = lng;
                         } else {
                             console.log("No EXIF data found in image '" + file.name + "'.");
                         }
+
+                        // =-=-=-=-=-=-=-=-=-=-=
+                        function calGPS(exif) {
+                            let latitude, longitude;
+                            let exifLong = exif.GPSLongitude
+                            , exifLongRef = exif.GPSLongitudeRef
+                            , exifLat = exif.GPSLatitude
+                            , exifLatRef = exif.GPSLatitudeRef;
+                            // console.log('exifLong : ' + exifLong);
+                            // console.log('exifLongRef : ' + exifLongRef);
+                            // console.log('exifLat : ' + exifLat);
+                            // console.log('exifLatRef : ' + exifLatRef);
+
+                            if (exifLatRef == "S") {
+                                latitude = (exifLat[0]*-1) + (( (exifLat[1]*-60) + (exifLat[2]*-1) ) / 3600);
+                            } else {
+                                latitude = exifLat[0] + (( (exifLat[1]*60) + exifLat[2] ) / 3600);
+                            }
+
+                            if (exifLongRef == "W") {
+                                longitude = (exifLong[0]*-1) + (( (exifLong[1]*-60) + (exifLong[2]*-1) ) / 3600);
+                            } else {
+                                longitude = exifLong[0] + (( (exifLong[1]*60) + exifLong[2] ) / 3600);
+                            }
+                            return {'latitude': latitude, 'longitude': longitude};
+                        }
+                        // =-=-=-=-=-=-=-=-=-=-=
                     });
                 }
 
                 // do compress
                 handleImageUpload(file);
                 async function handleImageUpload(file) {
+                    $this.var.img_file.status = 'uploading';
                     // const imageFile = event.target.files[0];
                     const imageFile = file;
                     // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
@@ -153,16 +222,32 @@ $(function() {
                         var reader = new FileReader();
                         reader.readAsDataURL(compressedFile);
                         reader.onloadend = function() {
-                            var base64data = reader.result;
-                            $this.var.imgFile.b64 = base64data;
-                            // console.log($this.var.imgFile);
-                            // previewThis(base64data);
-                            let output = document.getElementById($preview_el);
-                            output.src = $this.var.imgFile.b64;
+                            let base64data = reader.result,
+                            $b64 = $this.var.img_file.datas[$tempid].b64 = base64data;
+
+                            // console.log($newone);
+
+                            if ($this.var.page_position === 'cleanriver' || !$newone) {
+                                let output = document.getElementById($preview_el);
+                                output.src = $b64;
+                                output.setAttribute("data-tempid", $tempid);
+                            } else { // clean ocean
+                                let _target = $this.el.$formocean_ul
+                                , _template = $this.var.$temp_formocean_li;
+
+                                _template = _template.replace(/\[ID\]/g, $tempid);
+                                _target.append(_template);
+
+                                $preview_el = 'preview_album_pic_' + $tempid;
+                                let output = document.getElementById($preview_el);
+                                output.src = $b64;
+                                output.setAttribute("data-tempid", $tempid);
+                            }
                             doImgSync();
                         }
                     // await uploadToServer(compressedFile); // write your own logic
                     } catch (error) {
+                        $this.var.img_file.status = '';
                         console.log(error);
                     }
                 }
@@ -173,38 +258,54 @@ $(function() {
                 //     let output = document.getElementById($preview_el);
                 //     output.src = reader.result;
                 //     $b64 = output.src;
-                //     $this.var.imgFile.b64 = $b64;
+                //     $this.var.img_file.b64 = $b64;
                 //     doImgSync();
                 // }
                 // reader.readAsDataURL(event.target.files[0]);
 
                 // step3, do api call
                 function doImgSync() {
-                    return console.log($this.var.imgFile);
+                    $this.var.img_file.status = '';
+                    $this.var.img_file.counter += 1;
+                    console.log($this.var.img_file);
+                    return;
                 }
             });
 
-            $this.el.$btn_draft.on('click', function() {
-                console.log('save to draft');
-                // send the data to api // API
-                alert('已儲存草稿');
-            });
+            // $this.el.$btn_draft.on('click', function() {
+            //     console.log('save to draft');
+            //     // send the data to api // API
+            //     alert('已儲存草稿');
+            // });
 
             $this.el.$btn_confirm_submit.on('click', function() {
                 console.log('open confirm popup');
+                if ($this.var.img_file.status != '') return alert('圖片處理中');
                 $this.el.$popup_form_confirm.attr('data-confirmed', 1);
                 // send the data to api // API
-            });
-
-            $this.el.$btn_confirm_newone.on('click', function() {
-                console.log('set clean before the new one');
-                location.href = location.protocol + '//' + location.host + location.pathname;
+                console.log($this.var.form_data)
             });
 
             $this.el.$btn_save.on('click', function() {
                 console.log('the data be save');
                 // send the data to api // API
                 alert('資料已儲存');
+            });
+
+            // ocean
+            $this.el.$btn_confirm_newone_ocean.on('click', function() {
+                console.log('ocean, set clean before the "new" one');
+                location.href = location.protocol + '//' + location.host + location.pathname;
+            });
+
+            // river
+            $this.el.$btn_confirm_newone_river.on('click', function() {
+                console.log('river, set clean before the "new" one');
+                location.href = location.protocol + '//' + location.host + location.pathname;
+            });
+            $this.el.$btn_confirm_sameone.on('click', function() {
+                console.log('river, set clean before the "same" one');
+                // location.href = location.protocol + '//' + location.host + location.pathname;
             });
         },
         checkStatus: function() {
@@ -282,17 +383,28 @@ $(function() {
         },
 
         formConfirm: function() {
+            console.log('formConfirm');
             let $this = this;
             let $temp = '';
             $data = $this.el.$theform.serializeArray();
+            // console.log($data);
+
+            // check imgs
+            // console.log($this.var.img_file.datas);
+            $.each($this.var.img_file.datas, function(i){
+                let $temp = $("[data-tempid=" + i + "]");
+                console.log( $temp.attr('id') );
+            });
 
             $temp += '<ul>';
             if (this.var.page_position == 'cleanocean') {
                 $.each($data, function(i, field){
                     // console.log(i);
                     // console.log(field.name + ":" + field.value + " ");
-                    let $label = $('label[for="filed-' + field.name + '"]').text().trim();
-                    let $value = field.value;
+                    let $key = field.name
+                    , $label = $('label[for="filed-' + $key + '"]').text().trim()
+                    , $value = field.value;
+                    $this.var.form_data[$key] = $value;
                     if (field.name == 'bottle') {
                         $temp += '</ul><hr><ul>';
                     }
@@ -306,10 +418,12 @@ $(function() {
 
             } else if (this.var.page_position == 'cleanriver') {
                 $.each($data, function(i, field){
-                    console.log(i);
-                    console.log(field.name + ":" + field.value + " ");
-                    let $label = $('label[for="filed-' + field.name + '"]').text().trim();
-                    let $value = field.value;
+                    // console.log(i);
+                    // console.log(field.name + ":" + field.value + " ");
+                    let $key = field.name
+                    , $label = $('label[for="filed-' + $key + '"]').text().trim()
+                    , $value = field.value;
+                    $this.var.form_data[$key] = $value;
                     if (field.name == 'occlusion_scope') {
                         $temp += '</ul><hr><ul>';
                     }
@@ -323,14 +437,16 @@ $(function() {
             }
             $temp += '</ul>';
 
+            console.log($this.var.form_data);
             $this.el.$popup_form_confirm.find('.popup_list').html($temp);
         },
         setPopup: function() {
             let $this = this;
             $this.el.$popup_form_confirm.popup({
                 escape: false,
-                closebutton: true,
+                closebutton: false,
                 scrolllock: true,
+                blur: false,
                 onopen: function() {
                     $this.formConfirm();
                 }

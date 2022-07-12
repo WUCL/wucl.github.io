@@ -145,7 +145,22 @@ section.theform {
                            img {
                               height: 100%;
                               width: auto;
+                              margin: 0 auto;
                               &:not([src=""]) + .pics_btns  {
+                                 top: auto;
+                                 left: auto;
+                                 bottom: 0;
+                                 right: 0;
+                                 transform: none;
+                                 width: 100%;
+                                 display: flex;
+                                 align-items: center;
+                                 justify-content: space-between;
+                                 label.btn-style {
+                                    padding: 2px 7px;
+                                    margin: 5px;
+                                    font-size: $fontsize-d;
+                                 }
                                  label[class~="btn-pic-upload"]:before {
                                     content: "更新照片";
                                  }
@@ -245,6 +260,13 @@ section.theform {
          }
          .form-photo {
 
+         }
+         .form-status {
+            select {
+               font-size: $fontsize;
+               padding: 3px;
+               border-radius: 5px;
+            }
          }
          .form-btns {
             button {

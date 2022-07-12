@@ -74,15 +74,6 @@
 		                            <li class="filed-length"><label for="filed-length">淨灘長度</label><input id="filed-length" type="text" name="length"></li>
 		                        </ul>
 		                    </div>
-		                    <div class="group">
-		                        <ul>
-		                            <li class="filed-is_public no-column">
-		                                <label for="filed-is_public">是否公開這筆資料</label>
-		                                <input type="radio" name="is_public" value="1" id="is_public_1"><label for="is_public_1">是</label>
-		                                <input type="radio" name="is_public" value="0" id="is_public_0"><label for="is_public_0">否</label>
-		                            </li>
-		                        </ul>
-		                    </div>
 		                </div>
 		                <div class="form-data">
 		                    <div class="form-title">淨灘廢棄物種類/數量</div>
@@ -116,14 +107,14 @@
 		                <div class="form-photo">
 		                    <div class="form-title">照片紀錄</div>
 		                    <div class="group with-photo with-3in1">
-		                        <ul>
-		                            <li class="filed-album_pics" data-pid="album_pics">
+		                        <ul id="filed-album_pics" class="filed-album_pics">
+		                            <li class="filed-album_pic" data-pid="album_pic">
 		                                <div>
 		                                    <div class="photo-box">
-		                                        <input type="file" id="album_pics" name="album_pics" class="pic-upload display-none" accept="image/*">
-		                                        <img id="preview_album_pics" class="preview_album_pics" src>
+		                                        <input type="file" id="album_pic" name="album_pic" class="pic-upload display-none" accept="image/*">
+		                                        <img id="preview_album_pic" class="preview_album_pic" src>
 		                                        <div class="pics_btns">
-		                                            <label class="btn-pic-upload btn-style" for="album_pics"></label>
+		                                            <label class="btn-pic-upload btn-style" for="album_pic"></label>
 		                                            <label class="btn-pic-delete btn-style"></label>
 		                                        </div>
 		                                    </div>
@@ -132,10 +123,30 @@
 		                        </ul>
 		                    </div>
 		                </div>
+		                <div class="form-status">
+		                    <div class="group">
+		                        <ul>
+		                            <li class="filed-is_finish no-column">
+		                                <label for="filed-status">表單目前狀態：</label>
+		                                <select id="status" class="status" name="status">
+		                                    <option value="0">草稿</option>
+		                                    <option value="1">正式發佈</option>
+		                                </select>
+		                            </li>
+		                            <li class="filed-is_public no-column">
+		                                <label for="filed-is_public">表單是否公開：</label>
+		                                <select id="is_public" class="is_public" name="is_public">
+		                                    <option value="0">公開</option>
+		                                    <option value="1">不公開</option>
+		                                </select>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
 		                <div class="form-btns">
 		                    <ul>
 		                        <li id="theform_is_new" class="theform_is_new">
-		                            <button id="btn-form-draft" class="btn-form-draft btn-style" type="button">儲存草稿</button>
+		                            <!-- <button id="btn-form-draft" class="btn-form-draft btn-style" type="button">儲存草稿</button> -->
 		                            <button id="btn-form-confirm" class="btn-form-confirm btn-style form-confirm_open" type="button">資料送出</button>
 		                        </li>
 		                        <li id="theform_is_edit" class="theform_is_edit">
@@ -156,7 +167,7 @@
 		            <div class="popup_list"></div>
 		            <div class="popup_btns">
 		                <button id="btn-confirm-back" class="btn-confirm-back btn-style popup_close form-confirm_close" type="button">返回修改</button>
-		                <button id="btn-confirm-submit" class="btn-confirm-submit btn-style form-confirm_open" type="button">資料送出</button>
+		                <button id="btn-confirm-submit" class="btn-confirm-submit btn-style form-confirm_open" type="button">確認送出</button>
 		            </div>
 		        </div>
 		    </div>
@@ -166,7 +177,7 @@
 		        </div>
 		        <div class="popup_main">
 		            <div class="popup_btns">
-		                <button id="btn-confirm-newone" class="btn-confirm-newone btn-style" type="button">新增表單</button>
+		                <button id="btn-confirm-newone_ocean" class="btn-confirm-newone btn-style" type="button">新增表單</button>
 		            </div>
 		        </div>
 		    </div>
@@ -177,7 +188,7 @@
 		        <div class="popup_main">
 		            <div class="popup_btns">
 		                <button id="btn-confirm-sameone" class="btn-confirm-sameone btn-style" type="button">新增同河川表單</button>
-		                <button id="btn-confirm-newone" class="btn-confirm-newone btn-style" type="button">新增其他河川表單</button>
+		                <button id="btn-confirm-newone_river" class="btn-confirm-newone btn-style" type="button">新增其他河川表單</button>
 		            </div>
 		        </div>
 		    </div>
@@ -227,9 +238,21 @@
             <div id="template_form_river__extra">
                 <li class="filed-extra_data"><label for="filed-extra_data[ID]">[QUESTION]</label><input id="filed-extra_data[ID]" type="text" name="extra_data[ID]"></li>
             </div>
-
-                            
-
+            <div id="template_form_ocean__album_pic">
+                <li class="filed-album_pic_[ID]" data-pid="album_pic_[ID]">
+                    <div>
+                        <div class="photo-box">
+                            <input type="file" id="album_pic_[ID]" name="album_pics_[ID]" class="pic-upload display-none" accept="image/*">
+                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" src>
+                            <div class="pics_btns">
+                                <label class="btn-pic-upload btn-style" for="album_pic_[ID]"></label>
+                                <label class="btn-pic-delete btn-style"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+    
 
 
 

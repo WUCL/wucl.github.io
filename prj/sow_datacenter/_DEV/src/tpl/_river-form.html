@@ -22,11 +22,6 @@
                             <li class="filed-river_start filed-river_end">
                                 <label class="filed-inword" for="filed-river_start">從編號<input type="text" name="river_start"></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end">結束</label>
                             </li>
-                            <li class="filed-is_public no-column">
-                                <label for="filed-is_public">是否公開這筆資料</label>
-                                <input type="radio" name="is_public" value="1" id="is_public_1"><label for="is_public_1">是</label>
-                                <input type="radio" name="is_public" value="0" id="is_public_0"><label for="is_public_0">否</label>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -125,14 +120,14 @@
                     </div>
                     <div class="group with-photo with-3in1">
                         <ul>
-                            <li class="filed-album_pics" data-pid="album_pics_1">
+                            <li class="filed-album_pics" data-pid="album_pic_1">
                                 <div>
                                     <label>其他照片</label>
                                     <div class="photo-box">
-                                        <input type="file" id="album_pics_1" name="album_pics_1" class="pic-upload display-none" accept="image/*">
-                                        <img id="preview_album_pics_1" class="preview_album_pics_1" src>
+                                        <input type="file" id="album_pic_1" name="album_pic_1" class="pic-upload display-none" accept="image/*">
+                                        <img id="preview_album_pic_1" class="preview_album_pic_1" src>
                                         <div class="pics_btns">
-                                            <label class="btn-pic-upload btn-style" for="album_pics_1"></label>
+                                            <label class="btn-pic-upload btn-style" for="album_pic_1"></label>
                                             <label class="btn-pic-delete btn-style"></label>
                                         </div>
                                     </div>
@@ -142,14 +137,14 @@
                                     <label class="filed-inword"><input type="number" id="album_pics[1]_time_min" name="album_pics[1]_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
                                 </div>
                             </li>
-                            <li class="filed-album_pics" data-pid="album_pics_2">
+                            <li class="filed-album_pics" data-pid="album_pic_2">
                                 <div>
                                     <label>其他照片</label>
                                     <div class="photo-box">
-                                        <input type="file" id="album_pics_2" name="album_pics_2" class="pic-upload display-none" accept="image/*">
-                                        <img id="preview_album_pics_2" class="preview_album_pics_2" src>
+                                        <input type="file" id="album_pic_2" name="album_pic_2" class="pic-upload display-none" accept="image/*">
+                                        <img id="preview_album_pic_2" class="preview_album_pic_2" src>
                                         <div class="pics_btns">
-                                            <label class="btn-pic-upload btn-style" for="album_pics_2"></label>
+                                            <label class="btn-pic-upload btn-style" for="album_pic_2"></label>
                                             <label class="btn-pic-delete btn-style"></label>
                                         </div>
                                     </div>
@@ -162,10 +157,30 @@
                         </ul>
                     </div>
                 </div>
+                <div class="form-status">
+                    <div class="group">
+                        <ul>
+                            <li class="filed-is_finish no-column">
+                                <label for="filed-status">表單目前狀態：</label>
+                                <select id="status" class="status" name="status">
+                                    <option value="0">草稿</option>
+                                    <option value="1">正式發佈</option>
+                                </select>
+                            </li>
+                            <li class="filed-is_public no-column">
+                                <label for="filed-is_public">表單是否公開：</label>
+                                <select id="is_public" class="is_public" name="is_public">
+                                    <option value="0">不公開</option>
+                                    <option value="1">公開</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div id="form-btns" class="form-btns">
                     <ul>
                         <li id="theform_is_new" class="theform_is_new">
-                            <button id="btn-form-draft" class="btn-form-draft btn-style" type="button">儲存草稿</button>
+                            <!-- <button id="btn-form-draft" class="btn-form-draft btn-style" type="button">儲存草稿</button> -->
                             <button id="btn-form-confirm" class="btn-form-confirm btn-style form-confirm_open" type="button">資料送出</button>
                         </li>
                         <li id="theform_is_edit" class="theform_is_edit">
