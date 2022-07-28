@@ -111,6 +111,7 @@ $(function() {
         },
         init: function() {
             console.log('FORM');
+            console.log(this.api); // for test
             this.var.page_status = this.el.$body.attr('data-status');
             this.var.page_position = this.el.$body.attr('data-position');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
