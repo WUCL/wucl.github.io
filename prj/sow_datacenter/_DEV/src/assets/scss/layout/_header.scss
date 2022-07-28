@@ -137,24 +137,19 @@ layout/_header
 								margin-bottom: -1px;
 							}
 						}
-						&:after {
-							content: "/";
-							display: inline-block;
-							padding: 0 5px;
-							@include mq($max-width: $bp-mobile) {
-								padding: 0 9px;
-							}
-						}
-						&:last-child {
-							&:after {
-								display: none;
-							}
-						}
 						&.nav-register {
 						}
 						&.nav-logout {
 						}
 						&.nav-login {
+							&:after {
+								content: "/";
+								display: inline-block;
+								padding: 0 5px;
+								@include mq($max-width: $bp-mobile) {
+									padding: 0 9px;
+								}
+							}
 						}
 						&.nav-login {
 							img {
@@ -487,16 +482,29 @@ body[data-page^="ocean"] {
 	   	}
 	}
 }
-body[data-page^="river"] {
-	.header__inner .logo a {
-		background: url('../img/logo-circle-river@2x.png') 100% 100%/100% no-repeat;
-		background-size: contain;
+body {
+	&.islogin {
+		#btn-login,
+		#btn-register {
+			display: none !important;
+		}
 	}
-}
-body[data-page^="ocean"] {
-	.header__inner .logo a {
-		background: url('../img/logo-circle-ocean@2x.png') 100% 100%/100% no-repeat;
-		background-size: contain;
+	&:not(.islogin) {
+		#btn-logout {
+			display: none !important;
+		}
+	}
+	&[data-page^="river"] {
+		.header__inner .logo a {
+			background: url('../img/logo-circle-river@2x.png') 100% 100%/100% no-repeat;
+			background-size: contain;
+		}
+	}
+	&[data-page^="ocean"] {
+		.header__inner .logo a {
+			background: url('../img/logo-circle-ocean@2x.png') 100% 100%/100% no-repeat;
+			background-size: contain;
+		}
 	}
 }
 // body[data-scroll="downscroll"] {

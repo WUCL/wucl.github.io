@@ -21,6 +21,7 @@ $(function() {
             $shareFacebook: $('.share-facebook'),
 
             $btnLogin: $('#btn-login'),
+            $btnLogout: $('#btn-logout'),
         },
         var: {
             // $share: {
@@ -176,10 +177,12 @@ $(function() {
             });
             function doSuccess(_r) { // to get the profile data
                 if (_r.is_login === 1){
+                    $this.el.$body.addClass('islogin');
                     console.log('is login');
                     window._comm.$user.id = _r.data.user_id;
                     window._comm.$user.name = _r.data.name;
                     window._comm.$user.email = _r.data.email;
+                    $this.el.$btnLogout.find('label').prepend(window._comm.$user.name + " ");
                 } else {
                     console.log('is not login');
                     window._comm.$user.id = 1;
