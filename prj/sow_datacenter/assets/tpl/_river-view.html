@@ -1,0 +1,157 @@
+<main id="main" class="main">
+    <section id="thetitle" class="thetitle position-side">
+        <h1 data-storke="川廢快篩">川廢快篩</h1>
+    </section>
+    <section class="theform">
+        <div class="inner">
+            <div class="waterfall-loading theform-loading active"><img src="data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7" alt=""></div>
+            <form id="theform" class="form_river form-style display-none" name="form_river" onsubmit="return false;">
+                <div class="form-basic">
+                    <div class="form-title">樣區基本資料</div>
+                    <div class="group with-2in1">
+                        <ul>
+                            <li class="filed-date"><label for="filed-date">調查日期</label><input id="filed-date" type="date" name="date"></li>
+                            <li class="filed-time"><label for="filed-time">調查時間</label><input id="filed-time" type="time" name="time"></li>
+                            <li class="filed-city"><label for="filed-city">縣市</label><input id="filed-city" type="text" name="city"></li>
+                            <li class="filed-river_name"><label for="filed-river_name">地圖鏈結</label><input id="filed-river_name" type="text" name="river_name"></li>
+                            <li class="filed-river_part"><label for="filed-river_part">樣區所在地段</label><select id="filed-river_part" name="river_part"></select></li>
+                        </ul>
+                    </div>
+                    <div class="group">
+                        <ul>
+                            <li class="filed-river_start filed-river_end">
+                                <label class="filed-inword" for="filed-river_start">從編號<input type="text" name="river_start"></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end">結束</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-data">
+                    <div class="form-title">500公尺樣區內的垃圾相關數據【垃圾數據收集】</div>
+                    <div class="form-description">
+                        <p>【說明文字】<br>*只計算材質為塑膠、指、玻璃、金屬的廢棄物（含布料）<br>*不計算水泥、磚、瓷、竹、木（如家俱）與使用中物體</p>
+                    </div>
+                    <div class="group">
+                        <ul id="form-data-ul" class="form-data-ul">
+                            <li class="filed-occlusion_scope"><label for="filed-occlusion_scope">視線遮蔽程度（約50%以上範圍都是這樣）</label><select id="filed-occlusion_scope" name="occlusion_scope"></select></li>
+                            <li class="filed-garbage_bags"><label for="filed-garbage_bags">垃圾袋數</label><select id="filed-garbage_bags" name="garbage_bags"></select></li>
+                            <li class="filed-survey_scope"><label for="filed-survey_scope">調查範圍寬度（約50%以上範圍都是這麽寬）</label><select id="filed-survey_scope" name="survey_scope"></select></li>
+                            <li class="filed-l_garbages">
+                                <label for="filed-l_garbages">"數量最多"的垃圾類型（最多3項，不用排序）</label>
+                                <select id="filed-l_garbages" name="l_garbages"></select>
+                            </li>
+                            <li class="filed-l_garbage"><label for="filed-l_garbage">其他數量最多的垃圾是（如有才需填）</label><input id="filed-l_garbage" type="text" name="l_garbage"></li>
+                            <li class="filed-v_garbages">
+                                <label for="filed-v_garbages">"最佔體積"的垃圾類型（最多3項，不用排序）</label>
+                                <select id="filed-v_garbages" name="v_garbages"></select>
+                            </li>
+                            <li class="filed-v_garbage"><label for="filed-v_garbage">其他最佔體積的垃圾是（如有才需填）</label><input id="filed-v_garbage" type="text" name="v_garbage"></li>
+                            <li class="filed-m500_garbages"><label for="filed-m500_garbages">500公尺內垃圾型態多為？</label><select id="filed-m500_garbages" name="m500_garbages"></select></li>
+                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages">其他想要補充的資訊（如有才需填）</label><select id="filed-m500_h_garbages" name="m500_h_garbages"></select></li>
+                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">500公尺內垃圾熱點集中於？</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage"></li>
+                            <li class="filed-order_info"><label for="filed-order_info">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
+                        </ul>
+                    </div>
+                    <div class="group">
+                        <ul id="filed-customs"></ul>
+                    </div>
+                </div>
+                <div class="form-photo">
+                    <div class="form-title">照片紀錄【每樣區，至少拍攝各一張照片】</div>
+                    <div class="group with-photo with-3in1">
+                        <ul>
+                            <li class="filed-r_pic_id" data-pid="r_pic_id">
+                                <div>
+                                    <label>代表照</label>
+                                    <div class="photo-box" data-photo="1">
+                                        <img id="preview_r_pic_id" class="preview_r_pic_id" src>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>拍攝時間</label>
+                                    <label class="filed-inword"><input type="number" id="r_pic_time_min" name="r_pic_time_min" min="0" max="23">時 <input type="number" id="r_pic_time_sec" name="r_pic_time_sec" min="0" max="59">分</label>
+                                </div>
+                            </li>
+                            <li class="filed-h_pic_id" data-pid="h_pic_id">
+                                <div>
+                                    <label>熱點照</label>
+                                    <div class="photo-box" data-photo="1">
+                                        <img id="preview_h_pic_id" class="preview_h_pic_id" src>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>拍攝時間</label>
+                                    <label class="filed-inword"><input type="number" id="h_pic_time_min" name="h_pic_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
+                                </div>
+                            </li>
+                            <li class="filed-d_pic_id" data-pid="d_pic_id">
+                                <div>
+                                    <label>值得照</label>
+                                    <div class="photo-box" data-photo="1">
+                                        <img id="preview_d_pic_id" class="preview_d_pic_id" src>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>拍攝時間</label>
+                                    <label class="filed-inword"><input type="number" id="d_pic_time_min" name="d_pic_time_min" min="0" max="23">時 <input type="number" id="d_pic_time_sec" name="d_pic_time_sec" min="0" max="59">分</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="group">
+                        <ul>
+                            <li class="filed-shooter_name"><label for="filed-shooter_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-shooter_name" name="shooter_name"></li>
+                        </ul>
+                    </div>
+                    <div class="group with-photo with-3in1">
+                        <ul>
+                            <li class="filed-album_pics">
+                                <div>
+                                    <label>其他照片</label>
+                                    <div class="photo-box" data-photo="1">
+                                        <img src>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>拍攝時間</label>
+                                    <label class="filed-inword"><input type="number" id="album_pics[1]_time_min" name="album_pics[1]_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
+                                </div>
+                            </li>
+                            <li class="filed-album_pics">
+                                <div>
+                                    <label>其他照片</label>
+                                    <div class="photo-box" data-photo="1">
+                                        <img src>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>拍攝時間</label>
+                                    <label class="filed-inword"><input type="number" id="album_pics[2]_time_min" name="album_pics[2]_time_min" min="0" max="23">時 <input type="number" id="d_pic_time_sec" name="d_pic_time_sec" min="0" max="59">分</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-status">
+                    <div class="group">
+                        <ul>
+                            <li class="filed-is_finish no-column">
+                                <label for="filed-status">表單目前狀態：</label>
+                                <select id="status" class="status" name="status">
+                                    <option value="0">草稿</option>
+                                    <option value="1">正式發佈</option>
+                                </select>
+                            </li>
+                            <li class="filed-is_public no-column">
+                                <label for="filed-is_public">表單是否公開：</label>
+                                <select id="is_public" class="is_public" name="is_public">
+                                    <option value="0">不公開</option>
+                                    <option value="1">公開</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>

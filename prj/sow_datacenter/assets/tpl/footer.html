@@ -1,0 +1,156 @@
+<footer id="footer" class="footer">
+	<section class="menus">
+		<div class="menus__inner">
+			<div class="logo">
+                <ul>
+                    <li>
+                        <a href="https://www.sow.org.tw/" target="_blank"><img src="public/img/logo-sow.png"></a>
+                    </li>
+                </ul>
+			</div>
+			<div class="menu">
+				<nav class="nav">
+					<ul>
+						<li class="nav-method nav-effect"><a href="https://www.sow.org.tw/" target="_blank"><label>荒野保護協會</label></a></li>
+						<li class="nav-data nav-effect view-terms_open"><a href="javascript:;"><label>使用條款</label></a></li>
+						<li class="nav-member nav-effect"><a href="mailto:oceanday@wilderness.tw"><label>聯絡我們</label></a></li>
+					</ul>
+					<ul>
+						<li class="nav-ecopark nav-effect"><a href="https://ecopark.sow.org.tw/" target="_blank"><label>公園生態化</label></a></li>
+						<li class="nav-ecopark_home nav-effect"><a href="https://ecopark.sow.org.tw/home/" target="_blank"><label>幫小松鼠找個家</label></a></li>
+						<li class="nav-grass nav-effect"><a href="#"><label>除草劑</label></a></li>
+						<li class="nav-creek nav-effect"><a href="#"><label>野溪調查</label></a></li>
+						<li class="nav-cleanocean nav-effect"><a href="#"><label>愛海小旅行</label></a></li>
+						<li class="nav-cleanriver nav-effect"><a href="#"><label>川廢快篩</label></a></li>
+						<li class="nav-land52 nav-effect"><a href="#"><label>五十二甲</label></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</section>
+	<section class="copyright">
+		<div class="copyright__inner">
+			<span>Copyright 荒野保護協會版權所有 Design by 築筠文創</span>
+			<span>Email-<a href="mailto:sow@sow.org.tw">sow@sow.org.tw</a></span>
+		</div>
+	</section>
+</footer>
+
+<div id="templates" class="display-none-i">
+    <div id="template_form_river__select">
+        <option value="[ID]" [DISABLED]>[VALUE]</option>
+    </div>
+    <div id="template_form_river__extra">
+        <li class="filed-extra_data"><label for="filed-extra_data[ID]">[QUESTION]</label><input id="filed-extra_data[ID]" type="text" name="extra_data[ID]"></li>
+    </div>
+    <div id="template_form_ocean__album_pic">
+        <li class="filed-album_pic_[ID]" data-pid="album_pic_[ID]">
+            <div>
+                <div class="photo-box">
+                    <input type="file" id="album_pic_[ID]" name="album_pics_[ID]" class="pic-upload display-none" accept="image/*">
+                    <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" src>
+                    <div class="pics_btns">
+                        <label class="btn-pic-upload btn-style" for="album_pic_[ID]"></label>
+                        <label class="btn-pic-delete btn-style"></label>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </div>
+    <div id="template_form_field__custom">
+        <li class="filed-extra_data_[ID]">[CONTENT]</li>
+    </div>
+    <div id="template_input_text">
+        <label for="[ID]">[TITLE]</label><input type="text" id="[ID]" name="[NAME]" value="[VALUE]" maxlength="[MAXLENGTH]" data-hint="[HINT]" [REQUIRED]>
+    </div>
+    <div id="template_input_number">
+        <label for="[ID]">[TITLE]</label><input type="number" id="[ID]" name="[NAME]" value="[VALUE]" min="[MIN]" max="[MAX]" data-hint="[HINT]" [REQUIRED]>
+    </div>
+    <div id="template_select">
+        <label for="[ID]">[TITLE]</label><select id="[ID]" class="status" name="[NAME]" data-hint="[HINT]" [REQUIRED]>[OPTIONS]</select>
+    </div>
+    <div id="template_select_option">
+        <option value="[VALUE]">[OPTION]</option>
+    </div>
+
+
+
+    <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!--
+    <div id="template_index__postcards">
+        <li><img data-src="[POSTCARD_IMG]"></li>
+    </div>
+
+    <div id="template_data__result">
+        <li class="filter-result-item datas-item">
+            <input type="checkbox" name="resultItem[]" id="select-[ID]" value="[ID]">
+            <label class="f-r-i-name" for="select-[ID]">
+                <span class="name-county">[COUNTY]</span>
+                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                <span class="name-campaign">[CAMPAIGN]</span>
+            </label>
+        </li>
+    </div>
+
+    <div id="template_member__postcards">
+        <li><img data-src="[POSTCARD_IMG]"></li>
+    </div>
+
+    <div id="template_member__campaigns">
+        <li class="campaign" data-id="[ID]"><button class="btn-del-campaign btn-style-2" value="[ID]"></button><span>[COUNTY] [DATA_Y]/[DATA_M]/[DATA_D] [CAMPAIGN]</span></li>
+    </div>
+
+    <div id="template_album__result">
+        <li class="filter-result-item albums-item view-album_open" data-id="[ID]">
+            <div class="f-r-i-name">
+                <span class="name-county">[COUNTY]</span>
+                <span class="name-date">[DATA_Y]/[DATA_M]/[DATA_D]</span>
+                <span class="name-campaign">[CAMPAIGN]</span>
+            </div>
+            <div class="f-r-i-album">
+                <div class="album-featured"><img data-src="[FEATURED]" /></div>
+                <div class="album-source">[OWNER]</div>
+            </div>
+        </li>
+    </div>
+
+    <div id="template_album__pics">
+        <li class="va-pic-item" data-va-pic="[ID]">
+            <input type="checkbox" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+        </li>
+    </div>
+
+    <div id="template_album__pics-radio">
+        <li class="va-pic-item" data-va-pic="[ID]">
+            <input type="radio" name="albumPic[]" id="va-pic-[ID]" value="[ID]">
+            <label for="va-pic-[ID]"><img data-src="[PIC]"></label>
+        </li>
+    </div>
+
+    <div id="template_info__article">
+        <article class="article" data-pid="[PID]">
+            <a href="[LINK]">
+                <div class="article-featured"><img data-src="[FEATURED]"></div>
+                <div class="article-text">
+                    <div class="article-title"><h1>[TITLE]</h1></div>
+                    <div class="article-content">
+                        <div class="article-cat">[CAT]</div>
+                        <div class="article-autohr">[AUTHOR]</div>
+                        <div class="article-date">[DATE]</div>
+                    </div>
+                    <div class="article-description">[DESCRIPTION]</div>
+                </div>
+            </a>
+        </article>
+    </div>
+
+    <div id="template_info__article-hot">
+        <li class="post-hot-item" data-pid="[PID]"><a href="[HREF]">[TITLE]</a></li>
+    </div>
+
+    <div id="template_info__article-cat">
+        <li class="post-cat-item" data-catid="[CID]"><a href="[HREF]">[CAT]<label>[CAT_TOTAL]</label></a></li>
+    </div>
+    -->
+</div>

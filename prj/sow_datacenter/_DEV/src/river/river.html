@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>棲地資料庫平台</title>
+        <title>川廢快篩</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -14,16 +14,18 @@
         <meta property="og:description" content="" />
         <meta property="og:image" content="" />
         <link rel="icon" type="image/png" href="@@webRoot/favicon.ico" />
-        @@include('../src/assets/tpl/_style.html')
-        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/home.min.css" />
+        @@include('../../src/assets/tpl/_style.html')
+        <link rel="stylesheet" type="text/css" href="@@webRoot/public/lib/swiper/swiper.min.css" />
+        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/river.min.css" />
 	</head>
-	<body data-page="index">
-        @@include('../src/assets/tpl/header.html')
-		@@include('../src/assets/tpl/_home.html')
-        @@include('../src/assets/tpl/footer.html')
-		@@include('../src/assets/tpl/_script.html')
+	<body data-page="river">
+        @@include('../../src/assets/tpl/header.html')
+		@@include('../../src/assets/tpl/_river.html')
+        @@include('../../src/assets/tpl/footer.html')
+		@@include('../../src/assets/tpl/_script.html')
 
+        <script src="@@webRoot/public/lib/swiper/swiper.min.js"></script>
         <script src="@@webRoot/public/js/common.js"></script>
-		<!-- <script src="@@webRoot/public/js/main.js"></script> -->
+        <script src="@@webRoot/public/js/river.js"></script>
 	</body>
 </html>

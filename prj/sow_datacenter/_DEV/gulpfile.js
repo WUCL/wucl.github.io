@@ -22,11 +22,11 @@ const SRC = './src'
     , DEST = '../'
     , PATH = {
         SRC: {
-            HTML: SRC + '/*.html'
-            , TPL: SRC + '/tpl/*.html'
-            , CSS: SRC + '/scss/**/*.scss'
-            , JS: SRC + '/js/**/*.js'
-            , IMG: SRC + '/img/**/*.{jpg,jpeg,png,gif,svg,ico}'
+            HTML: SRC + '/**/*.html'
+            , TPL: SRC + '/assets/tpl/*.html'
+            , CSS: SRC + '/assets/scss/**/*.scss'
+            , JS: SRC + '/assets/js/**/*.js'
+            , IMG: SRC + '/assets/img/**/*.{jpg,jpeg,png,gif,svg,ico}'
         }
         , DEST: {
             HTML: DEST
