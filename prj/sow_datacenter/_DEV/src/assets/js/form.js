@@ -111,7 +111,6 @@ $(function() {
         },
         init: function() {
             console.log('FORM');
-            console.log(this.api); // for test
             this.var.page_status = this.el.$body.attr('data-status');
             this.var.page_position = this.el.$body.attr('data-position');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
@@ -124,9 +123,22 @@ $(function() {
             this.api.path.delete_pic = this.api.path[this.var.page_position + '_delete_pic'];
             // END detect ocean & river process
 
-            this.bindEvent();
-            this.checkStatus();
-            this.setPopup();
+            $this = this;
+
+            checkUserId();
+            function checkUserId() {
+                console.log('window._comm.$user.id :: ' + window._comm.$user.id);
+                if (window._comm.$user.id === '') {
+                    return window.setTimeout(( () => { checkUserId(); }), 500);
+                } else {
+                    $this.api.data.user_id = window._comm.$user.id;
+                    console.log($this.api); // for test
+
+                    $this.bindEvent();
+                    $this.checkStatus();
+                    $this.setPopup();
+                }
+            }
         },
         bindEvent: function() {
             let $this = this;

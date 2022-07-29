@@ -188,7 +188,7 @@ body {
 	max-width: $bp-contain-w;
 	margin: 0 auto;
 	// overflow: hidden;
-	// min-height: 100vw;
+	min-height: 100vh;
 	padding: 0 3%;
 	z-index: 1;
 	@include mq($max-width: $bp-mobile) {

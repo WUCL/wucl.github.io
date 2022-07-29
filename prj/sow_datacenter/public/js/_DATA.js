@@ -8,6 +8,53 @@ window._comm = {
     $user: {id: '', name: '', email: ''}
 }
 
+window.assetsPath = './public';
+window.tw_xy = {
+    // 'test': [470, 190],
+    '台北': [620, 180],
+    '宜蘭': [675, 335],
+    '花蓮': [605, 655],
+    '台東': [485, 1020],
+    '屏東': [305, 1160],
+    '高雄': [195, 1090],
+    '台南': [130, 945],
+    '嘉義': [125, 815],
+    '雲林': [140, 715],
+    '彰化': [195, 610],
+    '台中': [315, 510],
+    '苗栗': [365, 385],
+    '新竹': [435, 295],
+    '桃園': [470, 190]
+};
+
+window.mappingTWName = {
+    'ntpc': '新北市',
+    'tpe': '臺北市',
+    'kel': '基隆市',
+    'ila': '宜蘭縣',
+    'tyn': '桃園市',
+    'hszc': '新竹縣',
+    'hsz': '新竹市',
+    'zmi': '苗栗縣',
+    'txg': '臺中市',
+    'chw': '彰化縣',
+    'ntc': '南投市',
+    'yun': '雲林縣',
+    'cyic': '嘉義市',
+    'cyi': '嘉義縣',
+    'tnn': '臺南市',
+    'khh': '高雄市',
+    'pif': '屏東縣',
+    'hun': '花蓮縣',
+    'ttt': '臺東縣',
+    'peh': '澎湖縣',
+    'knh': '金門縣',
+    'mzw': '連江縣',
+};
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+
 // call api to show form select
 window.formriver_select = [
     {
@@ -19,10 +66,6 @@ window.formriver_select = [
         value: '表單2',
     },
 ];
-
-// window.formriver_dynamic_field_1 = ['你今天過得好嗎？','你今年去了幾場田調？'];
-// window.formriver_dynamic_field_2 = ['今天天氣幾度？','大約會在台北？'];
-
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
@@ -52,66 +95,66 @@ window.riverTrashHotP = [
     ]
 ];
 
-// annual Datas // [PAGE]index/data/member
-window.annualDatas = {
-    freq: 17,
-    people: 389,
-    meter: 500,
-    kg: 419,
-    top: ['寶特瓶', '煙蒂', '塑膠瓶蓋'],
-    scale: ['30', '17', '15', '12', '9', '6', '4', '4', '3']
-};
+// // annual Datas // [PAGE]index/data/member
+// window.annualDatas = {
+//     freq: 17,
+//     people: 389,
+//     meter: 500,
+//     kg: 419,
+//     top: ['寶特瓶', '煙蒂', '塑膠瓶蓋'],
+//     scale: ['30', '17', '15', '12', '9', '6', '4', '4', '3']
+// };
 
 
-// annual Area Ocean // [PAGE]ocean
-window.annualAreaOcean = {
-    '台南': { // tnn
-        freq: 10,
-        top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
-    },
-    '高雄': { // khh
-        freq: 11,
-        top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
-    },
-    '台北': { // tpe
-        freq: 12,
-        top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
-    },
-    '新竹': { // hsz
-        freq: 13,
-        top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
-    },
-};
+// // annual Area Ocean // [PAGE]ocean
+// window.annualAreaOcean = {
+//     '台南': { // tnn
+//         freq: 10,
+//         top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
+//     },
+//     '高雄': { // khh
+//         freq: 11,
+//         top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
+//     },
+//     '台北': { // tpe
+//         freq: 12,
+//         top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
+//     },
+//     '新竹': { // hsz
+//         freq: 13,
+//         top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
+//     },
+// };
 
-// annual Area River // [PAGE]river
-window.annualAreaRiver = {
-    '台南': { // tnn
-        freq: 10,
-        top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
-    },
-    '高雄': { // khh
-        freq: 11,
-        top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
-    },
-    '台北': { // tpe
-        freq: 12,
-        top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
-        oceanside: {
-            survey: 40.5,
-            trash: 44049,
-            top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
-        },
-        riverside: {
-            survey: 175,
-            trash: 34000,
-            top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
-        },
-    },
-    '新竹': { // hsz
-        freq: 13,
-        top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
-    },
-};
+// // annual Area River // [PAGE]river
+// window.annualAreaRiver = {
+//     '台南': { // tnn
+//         freq: 10,
+//         top: ['塑膠瓶蓋', '寶特瓶', '煙蒂'],
+//     },
+//     '高雄': { // khh
+//         freq: 11,
+//         top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
+//     },
+//     '台北': { // tpe
+//         freq: 12,
+//         top: ['煙蒂', '寶特瓶', '塑膠瓶蓋'],
+//         oceanside: {
+//             survey: 40.5,
+//             trash: 44049,
+//             top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
+//         },
+//         riverside: {
+//             survey: 175,
+//             trash: 34000,
+//             top: ['寶特瓶', '塑膠瓶蓋', '煙蒂'],
+//         },
+//     },
+//     '新竹': { // hsz
+//         freq: 13,
+//         top: ['塑膠瓶蓋', '煙蒂', '寶特瓶'],
+//     },
+// };
 
 
 /*
