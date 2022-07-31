@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>棲地資料庫平台</title>
+        <title>川廢快篩</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -13,14 +13,15 @@
         <meta property="og:title" content="" />
         <meta property="og:description" content="" />
         <meta property="og:image" content="" />
-        <link rel="icon" type="image/png" href="./favicon.ico" />
-        <!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
-        <!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
-        <!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
-        <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
-        <link rel="stylesheet" type="text/css" href="./public/css/home.min.css" />
+        <link rel="icon" type="image/png" href="../favicon.ico" />
+        <!-- <link rel="stylesheet" type="text/css" href="../public/lib/colorbox/colorbox.min.css" /> -->
+        <!-- <link rel="stylesheet" type="text/css" href="../public/lib/slick/slick.css" /> -->
+        <!-- <link rel="stylesheet" type="text/css" href="../public/lib/swiper/swiper.min.css" /> -->
+        <link rel="stylesheet" type="text/css" href="../public/lib/aos/aos.css" />
+        <link rel="stylesheet" type="text/css" href="../public/lib/swiper/swiper.min.css" />
+        <link rel="stylesheet" type="text/css" href="../public/css/river.min.css" />
 	</head>
-	<body data-page="index">
+	<body data-page="river">
         <header id="header" class="header">
         	<div class="header__inner">
         		<div class="logo">
@@ -51,15 +52,127 @@
         	</div>
         </header>
 		<main id="main" class="main">
-		    <section id="thetitle" class="thetitle position-side">
-		        <h1 data-storke="棲地資料庫平台">棲地資料庫平台</h1>
+		    <section id="thetitle" class="thetitle position-center">
+		        <h1 data-storke="川廢快篩">川廢快篩</h1>
+		        <div class="inner">
+		            <ul class="the_btn_belowtitle">
+		                <li><a class="btn-style-0" href="#數據成果">數據成果</a></li>
+		                <li><a class="btn-style-0" href="#trash_hotp">垃圾熱點分佈圖</a></li>
+		                <li><a class="btn-style-0" href="./form.html">成果登記</a></li>
+		            </ul>
+		        </div>
 		    </section>
-		    <section class="kv" data-scroll-index="1">
-		    	<div class="inner">
-		            <img src="./public/img/home-mb.png" usemap="#ImageMap">
-		            <map name="ImageMap">
-		                <area shape="circle" coords="100,100,50" href="#">
-		            </map>
+		    <section class="river_intro">
+		        <div class="inner">
+		            <div class="describe">
+		                <p>熱愛大海的你/妳，對『海』有什像呢？<br/>火烤的烈日下，到海邊戲水、衝浪、風帆、浮淺來消暑？<br/>星空下與親密伴赤腳走在沙灘上，享受兩人時光？<br/>除此之外，到海邊小旅行之餘，還可以有另外一個愛海的選項：</p>
+		                <p><span>『淨灘』多撿一公斤</span><br/>淨灘是目前全球最熱門的愛地球行動。</p>
+		                <p>到海邊遊憩之後，不帶走自己製造的垃圾，也順手撿起沙灘上的垃圾，<br/>在指責任何人之前，我們先動手吧！<br/>因為我們都希望『乾淨的大海』。<br/>只有一個人做得到嗎？別擔心，你/並不孤單一人。<br/>我們就你/妳的旅伴！</p>
+		            </div>
+		        </div>
+		    </section>
+		    <section class="river_hotp">
+		        <div class="title with_afterline"><span>2022年度倡議主題</span></div>
+		        <div class="inner">
+		            <div id="topics-swiper" class="topics topics-swiper">
+		                <div class="swiper-wrapper"></div>
+		                <div class="swiper-pagination"></div>
+		            </div>
+		        </div>
+		    </section>
+		    <section class="river_result annual_datas">
+		        <div class="title with_afterline"><span>數據成果</span></div>
+		        <div class="inner">
+		            <div class="datas-locals">
+		                <div id="twimg" class="locals-taiwan"></div>
+		                <div class="locals-data">
+		                    <div id="goUpdateTWDatas-name" class="locals-data-name" data-unit="場次"></div>
+		                    <div class="locals-data-box">
+		                        <div class="local-data-1">
+		                            <div class="local-freq">
+		                                <ul class="datas-total-ul">
+		                                    <li>
+		                                        <div>總調查長度：</div>
+		                                        <div id="goUpdateTWDatas-surveys" class="value_with_unit" data-unit="公里"></div>
+		                                    </li>
+		                                    <li>
+		                                        <div>總垃圾袋數：</div>
+		                                        <div id="goUpdateTWDatas-trashs" class="value_with_unit" data-unit="袋垃圾"></div>
+		                                    </li>
+		                                </ul>
+		                            </div>
+		                            <div class="local-rank">
+		                                <div id="goUpdateTWDatas-top1" class="rank-style-1 goUpdateTWDatas"></div>
+		                                <div id="goUpdateTWDatas-top2" class="rank-style-2 goUpdateTWDatas"></div>
+		                                <div id="goUpdateTWDatas-top3" class="rank-style-3 goUpdateTWDatas"></div>
+		                            </div>
+		                        </div>
+		                        <div class="local-data-2">
+		                            <div class="oceanside sidedata">
+		                                <div class="side-title">海岸</div>
+		                                <div class="side-freq">
+		                                    <ul class="sidedata-total-ul">
+		                                        <li>
+		                                            <div>調查範圍：</div>
+		                                            <div id="oceanside-survey" class="value_with_unit" data-unit="公里"></div>
+		                                        </li>
+		                                        <li>
+		                                            <div>垃圾總袋數：</div>
+		                                            <div id="oceanside-trash" class="value_with_unit" data-unit="袋垃圾"></div>
+		                                        </li>
+		                                    </ul>
+		                                </div>
+		                                <div class="side-rank">
+		                                    <div id="oceanside-top1" class="rank-style-1 goUpdateTWDatas"></div>
+		                                    <div id="oceanside-top2" class="rank-style-2 goUpdateTWDatas"></div>
+		                                    <div id="oceanside-top3" class="rank-style-3 goUpdateTWDatas"></div>
+		                                </div>
+		                            </div>
+		                            <div class="riverside sidedata">
+		                                <div class="side-title">河岸</div>
+		                                <div class="side-freq">
+		                                    <ul class="sidedata-total-ul">
+		                                        <li>
+		                                            <div>調查範圍：</div>
+		                                            <div id="riverside-survey" class="value_with_unit" data-unit="公里"></div>
+		                                        </li>
+		                                        <li>
+		                                            <div>垃圾總袋數：</div>
+		                                            <div id="riverside-trash" class="value_with_unit" data-unit="袋垃圾"></div>
+		                                        </li>
+		                                    </ul>
+		                                </div>
+		                                <div class="side-rank">
+		                                    <div id="riverside-top1" class="rank-style-1 goUpdateTWDatas"></div>
+		                                    <div id="riverside-top2" class="rank-style-2 goUpdateTWDatas"></div>
+		                                    <div id="riverside-top3" class="rank-style-3 goUpdateTWDatas"></div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </section>
+		    <section id="trash_hotp" class="river_trash_hotp">
+		        <div class="title with_afterline"><span>垃圾熱點分佈圖</span></div>
+		        <div class="inner">
+		            <div class="boxs">
+		                <div class="box">
+		                    <div class="hotp-img"><img id="hotp-img-1" src></div>
+		                    <div class="hotp-btns">
+		                        <a id="hotp-btn-w-1" class="btn-style" href="#官網">官網</a>
+		                        <a id="hotp-btn-v-1" class="btn-style" href="#影片">影片</a>
+		                    </div>
+		                </div>
+		                <div class="box">
+		                    <div class="hotp-img"><img id="hotp-img-2" src></div>
+		                    <div class="hotp-btns">
+		                        <a id="hotp-btn-w-2" class="btn-style" href="#官網">官網</a>
+		                        <a id="hotp-btn-v-2" class="btn-style" href="#影片">影片</a>
+		                    </div>
+		                </div>
+		            </div>
 		        </div>
 		    </section>
 		</main>
@@ -219,18 +332,19 @@
             </div>
             -->
         </div>
-		<script src="./public/js/_DATA.js"></script>
-		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="../public/js/_DATA.js"></script>
+		<script src="../public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
-		<script src="./public/lib/jquery.inView/jQuery-inView.min.js"></script>
-		<script src="./public/js/custom/eventdevice.js"></script>
-		<script src="./public/js/helper.js"></script>
+		<script src="../public/lib/jquery.inView/jQuery-inView.min.js"></script>
+		<script src="../public/js/custom/eventdevice.js"></script>
+		<script src="../public/js/helper.js"></script>
 
 		<!-- Include jQuery Popup Overlay -->
 		<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
-		<!-- <script src="./public/js/common.js"></script> -->
+		<!-- <script src="../public/js/common.js"></script> -->
 
-        <script src="./public/js/common.js"></script>
-		<!-- <script src="./public/js/main.js"></script> -->
+        <script src="../public/lib/swiper/swiper.min.js"></script>
+        <script src="../public/js/common.js"></script>
+        <script src="../public/js/river.js"></script>
 	</body>
 </html>

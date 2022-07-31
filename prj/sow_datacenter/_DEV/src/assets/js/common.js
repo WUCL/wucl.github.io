@@ -21,6 +21,7 @@ $(function() {
             $shareFacebook: $('.share-facebook'),
 
             $btnLogin: $('#btn-login'),
+            $btnAdmin: $('#btn-admin'),
             $btnLogout: $('#btn-logout'),
         },
         var: {
@@ -182,7 +183,7 @@ $(function() {
                     window._comm.$user.id = _r.data.user_id;
                     window._comm.$user.name = _r.data.name;
                     window._comm.$user.email = _r.data.email;
-                    $this.el.$btnLogout.find('label').prepend(window._comm.$user.name + " ");
+                    $this.el.$btnAdmin.find('label').prepend(window._comm.$user.name + " ");
                 } else {
                     console.log('is not login');
                     window._comm.$user.id = 1;

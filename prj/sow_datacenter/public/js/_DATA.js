@@ -2,13 +2,19 @@ window._comm = {
     $api: {
         url: 'https://datasow.69939.uk/api/',
         param: {
-            key: '' // ?key=e8701ad48ba05a91604e480dd60899a3
+            // key: '' // ?key=e8701ad48ba05a91604e480dd60899a3
+            key: 'e8701ad48ba05a91604e480dd60899a3'
         }
     },
-    $user: {id: '', name: '', email: ''}
+    // $user: {id: '', name: '', email: ''}
+    $user: {
+        id: '11',
+        name: 'Allen Wu',
+        email: 'allenwu8098@gmail.com'
+    }
 }
 
-window.assetsPath = './public';
+window.assetsPath = '/public';
 window.tw_xy = {
     // 'test': [470, 190],
     '台北': [620, 180],
@@ -84,12 +90,12 @@ window.annualTopic = [
 // river Trash Hot Point // [PAGE]river
 window.riverTrashHotP = [
     [ // 左
-        'public/img/hotpoint-1.png', // 圖連結
+        '/public/img/hotpoint-1.png', // 圖連結
         '#官網連結1', // 官網連結
         '#影片連結1'  // 影片連結
     ],
     [ // 右
-        'public/img/hotpoint-2.png', // 圖連結
+        '/public/img/hotpoint-2.png', // 圖連結
         '#官網連結2', // 官網連結
         '#影片連結2'  // 影片連結
     ]

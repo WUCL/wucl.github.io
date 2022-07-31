@@ -137,11 +137,8 @@ layout/_header
 								margin-bottom: -1px;
 							}
 						}
-						&.nav-register {
-						}
-						&.nav-logout {
-						}
-						&.nav-login {
+						&.nav-login,
+						&.nav-admin {
 							&:after {
 								content: "/";
 								display: inline-block;
@@ -151,6 +148,7 @@ layout/_header
 								}
 							}
 						}
+
 						&.nav-login {
 							img {
 								width: 26px;
@@ -168,6 +166,9 @@ layout/_header
 								}
 							}
 						}
+						&.nav-register {}
+						&.nav-admin {}
+						&.nav-logout {}
 					}
 				}
 				@include mq($max-width: $bp_xs) {
@@ -490,6 +491,7 @@ body {
 		}
 	}
 	&:not(.islogin) {
+		#btn-admin,
 		#btn-logout {
 			display: none !important;
 		}

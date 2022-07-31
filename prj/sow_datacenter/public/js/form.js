@@ -354,6 +354,7 @@ $(function() {
                     });
 
                     function doSuccess(_r) { // to get upload img id
+                        console.log(_r);
                         $this.var.img_file['datas'][$this.var.img_file.counter]['response'] = _r;
                         return $this.var.img_file.counter += 1;
                     }
@@ -368,12 +369,15 @@ $(function() {
                 , $preview_el = $('#preview_' + $pid)
                 , $tempid = $preview_el.attr('data-tempid')
                 , $delete_id = $this.var.img_file.datas[$tempid]['response']['id']
+                console.log($this.var.img_file.datas);
 
                 // clean data
                 $preview_el.attr('src', '').attr('data-tempid', '');
                 delete $this.var.img_file.datas[$tempid];
                 // if ocean remove li
-                if ($this.var.page_position === 'cleanocean') $whichone.remove();
+                if (($this.var.page_position === 'cleanocean') && ($pid !== 'featured_id')) {
+                    $whichone.remove();
+                }
 
                 // call api // ajax url
                 var _url = $this.api.url + $this.api.path.delete_pic
@@ -410,7 +414,7 @@ $(function() {
             });
 
             // common select limit 3 selected
-             $this.el.$theform.on('change', 'select', function (e) {
+            $this.el.$theform.on('change', 'select', function (e) {
                 let $limit = 3
                 , $target = $(e.target)
                 , $options = $target.find('option:selected')
@@ -420,6 +424,11 @@ $(function() {
                     $options[$limit].selected = false ;
                     return false;
                 }
+            });
+
+            // common input number only input interge
+            $this.el.$theform.on('input', 'input[type="number"]', function () {
+                return this.value = Math.round(this.value);
             });
 
             // $this.el.$btn_draft.on('click', function() {
@@ -805,8 +814,8 @@ $(function() {
 
                 if (/_pic_id|album_pics|shooter_name/.test($key)) continue; // _pic_id / album_pics / shooter_name 跳過先不處理
 
-                if (/status/.test($key)) $value = (($value == 0)?"草稿":"正式發佈");
-                if (/is_public/.test($key)) $value = (($value == 0)?"不公開":"公開");
+                if (/status/.test($key)) $value = (($value === '0')?"草稿":"正式發佈");
+                if (/is_public/.test($key)) $value = (($value === '0')?"不公開":"公開");
 
                 if ($key == 'bottle' || $key == 'occlusion_scope') { $temp += '</ul><hr><ul>'; }
 
