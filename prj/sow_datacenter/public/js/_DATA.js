@@ -3,15 +3,15 @@ window._comm = {
         url: 'https://datasow.69939.uk/api/',
         param: {
             // key: '' // ?key=e8701ad48ba05a91604e480dd60899a3
-            key: 'e8701ad48ba05a91604e480dd60899a3'
+            // key: 'e8701ad48ba05a91604e480dd60899a3'
         }
     },
-    // $user: {id: '', name: '', email: ''}
-    $user: {
-        id: '11',
-        name: 'Allen Wu',
-        email: 'allenwu8098@gmail.com'
-    }
+    $user: {id: '', name: '', email: ''}
+    // $user: {
+    //     id: '11',
+    //     name: 'Allen Wu',
+    //     email: 'allenwu8098@gmail.com'
+    // }
 }
 
 window.assetsPath = '/public';
