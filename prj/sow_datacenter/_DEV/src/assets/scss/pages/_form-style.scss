@@ -289,6 +289,13 @@ section.theform {
          }
       }
    }
+   label[required] {
+      &:before {
+         content: "*";
+         color: red;
+         display: inline-flex;
+      }
+   }
 }
 
 body[data-status="form"][data-form="edit"] {

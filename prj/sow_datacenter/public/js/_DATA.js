@@ -2,7 +2,7 @@ window._comm = {
     $api: {
         url: 'https://datasow.69939.uk/api/',
         param: {
-            // key: '' // ?key=e8701ad48ba05a91604e480dd60899a3
+            key: '' // ?key=e8701ad48ba05a91604e480dd60899a3
             // key: 'e8701ad48ba05a91604e480dd60899a3'
         }
     },

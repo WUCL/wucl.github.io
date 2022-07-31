@@ -62,17 +62,17 @@
 		                    <div class="form-title">樣區基本資料</div>
 		                    <div class="group with-2in1">
 		                        <ul>
-		                            <li class="filed-date"><label for="filed-date">調查日期</label><input id="filed-date" type="date" name="date" required></li>
-		                            <li class="filed-time"><label for="filed-time">調查時間</label><input id="filed-time" type="time" name="time" required></li>
-		                            <li class="filed-city"><label for="filed-city">縣市</label><input id="filed-city" type="text" name="city" required></li>
-		                            <li class="filed-river_name"><label for="filed-river_name">地圖鏈結</label><input id="filed-river_name" type="text" name="river_name" required></li>
-		                            <li class="filed-river_part"><label for="filed-river_part">樣區所在地段</label><select id="filed-river_part" name="river_part" required></select></li>
+		                            <li class="filed-date"><label for="filed-date" required>調查日期</label><input id="filed-date" type="date" name="date" required></li>
+		                            <li class="filed-time"><label for="filed-time" required>調查時間</label><input id="filed-time" type="time" name="time" required></li>
+		                            <li class="filed-city"><label for="filed-city" required>縣市</label><input id="filed-city" type="text" name="city" required></li>
+		                            <li class="filed-river_name"><label for="filed-river_name" required>地圖鏈結</label><input id="filed-river_name" type="text" name="river_name" required></li>
+		                            <li class="filed-river_part"><label for="filed-river_part" required>樣區所在地段</label><select id="filed-river_part" name="river_part" required></select></li>
 		                        </ul>
 		                    </div>
 		                    <div class="group">
 		                        <ul>
 		                            <li class="filed-river_start filed-river_end">
-		                                <label class="filed-inword" for="filed-river_start">從編號<input type="text" name="river_start" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end" required>結束</label>
+		                                <label class="filed-inword" for="filed-river_start" required>從編號<input type="text" name="river_start" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end" required>結束</label>
 		                            </li>
 		                        </ul>
 		                    </div>
@@ -84,22 +84,22 @@
 		                    </div>
 		                    <div class="group">
 		                        <ul id="form-data-ul" class="form-data-ul">
-		                            <li class="filed-occlusion_scope"><label for="filed-occlusion_scope">視線遮蔽程度（約50%以上範圍都是這樣）</label><select id="filed-occlusion_scope" name="occlusion_scope" required></select></li>
-		                            <li class="filed-garbage_bags"><label for="filed-garbage_bags">垃圾袋數</label><select id="filed-garbage_bags" name="garbage_bags" required></select></li>
-		                            <li class="filed-survey_scope"><label for="filed-survey_scope">調查範圍寬度（約50%以上範圍都是這麽寬）</label><select id="filed-survey_scope" name="survey_scope" required></select></li>
+		                            <li class="filed-occlusion_scope"><label for="filed-occlusion_scope" required>視線遮蔽程度（約50%以上範圍都是這樣）</label><select id="filed-occlusion_scope" name="occlusion_scope" required></select></li>
+		                            <li class="filed-garbage_bags"><label for="filed-garbage_bags" required>垃圾袋數</label><select id="filed-garbage_bags" name="garbage_bags" required></select></li>
+		                            <li class="filed-survey_scope"><label for="filed-survey_scope" required>調查範圍寬度（約50%以上範圍都是這麽寬）</label><select id="filed-survey_scope" name="survey_scope" required></select></li>
 		                            <li class="filed-l_garbages">
-		                                <label for="filed-l_garbages">"數量最多"的垃圾類型（最多3項，不用排序）</label>
+		                                <label for="filed-l_garbages" required>"數量最多"的垃圾類型（最多3項，不用排序）</label>
 		                                <select id="filed-l_garbages" name="l_garbages" required></select>
 		                            </li>
-		                            <li class="filed-l_garbage"><label for="filed-l_garbage">其他數量最多的垃圾是（如有才需填）</label><input id="filed-l_garbage" type="text" name="l_garbage" required></li>
+		                            <li class="filed-l_garbage"><label for="filed-l_garbage" required>其他數量最多的垃圾是（如有才需填）</label><input id="filed-l_garbage" type="text" name="l_garbage" required></li>
 		                            <li class="filed-v_garbages">
-		                                <label for="filed-v_garbages">"最佔體積"的垃圾類型（最多3項，不用排序）</label>
+		                                <label for="filed-v_garbages" required>"最佔體積"的垃圾類型（最多3項，不用排序）</label>
 		                                <select id="filed-v_garbages" name="v_garbages" required></select>
 		                            </li>
 		                            <li class="filed-v_garbage"><label for="filed-v_garbage">其他最佔體積的垃圾是（如有才需填）</label><input id="filed-v_garbage" type="text" name="v_garbage"></li>
-		                            <li class="filed-m500_garbages"><label for="filed-m500_garbages">500公尺內垃圾型態多為？</label><select id="filed-m500_garbages" name="m500_garbages" required></select></li>
+		                            <li class="filed-m500_garbages"><label for="filed-m500_garbages" required>500公尺內垃圾型態多為？</label><select id="filed-m500_garbages" name="m500_garbages" required></select></li>
 		                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages">其他想要補充的資訊（如有才需填）</label><select id="filed-m500_h_garbages" name="m500_h_garbages"></select></li>
-		                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">500公尺內垃圾熱點集中於？</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage" required></li>
+		                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage" required>500公尺內垃圾熱點集中於？</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage" required></li>
 		                            <li class="filed-order_info"><label for="filed-order_info">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
 		                        </ul>
 		                    </div>
