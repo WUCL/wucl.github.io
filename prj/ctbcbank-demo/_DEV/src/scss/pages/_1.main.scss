@@ -1,0 +1,54 @@
+/* =======================
+   pages/main
+   ======================= */
+$bg-h-step: [1920px, 2205px, 8609px, 2290px, 3720px, 6195px, 2205px];
+.main {
+	section {
+		display: none;
+		&[class^="step-"] {
+			width: $bp;
+			max-width: 100%;
+			@include mq($max-width: $bp) {
+				width: 100vw;
+			}
+			&:before,
+			&:after {
+				content: "";
+				position: absolute;
+			}
+		}
+		@for $i from 1 through 7 {
+			&.step-#{$i} {
+				height: calc(nth($bg-h-step, $i) * ($bp / 1080px));
+				@include mq($max-width: $bp) {
+					height: calc(nth($bg-h-step, $i) * (100vw / 1080px));
+				}
+				&:before {
+					width: 100%;
+					height: 100%;
+					background: url(../img/step-#{$i}.jpg) top center no-repeat;
+					background-size: contain;
+				}
+			}
+		}
+		// &.step-1 {
+		// 	height: calc(1920px * ($bp / 1080px));
+		// 	@include mq($max-width: $bp) {
+		// 		height: calc(1920px * (100vw / 1080px));
+		// 	}
+		// }
+		// &.step-2 {
+		// 	height: calc(2205px * ($bp / 1080px));
+		// 	@include mq($max-width: $bp) {
+		// 		height: calc(2205px * (100vw / 1080px));
+		// 	}
+		// }
+	}
+	@for $i from 1 through 7 {
+		&[data-index="#{$i}"] {
+			section[data-screen="#{$i}"] {
+				display: block;
+			}
+		}
+	}
+}

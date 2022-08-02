@@ -1,0 +1,36 @@
+/* =======================
+   pages/common
+   ======================= */
+body {
+	max-width: $bp;
+	background: $color-white;
+	background: #efefef;
+	// background: #dbdcdd;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	margin: 0 auto;
+	&.disableScroll {
+		// position: fixed;
+		overflow: hidden;
+	}
+	.main {
+		overflow: hidden;
+		width: 100%;
+		section {
+			width: 100%;
+			height: 100vh;
+			.inner {
+				margin: 0 auto;
+				> .title {
+					display: block;
+				}
+			}
+			&.fullwidth {
+				.inner {
+					width: 100% !important;
+					max-width: 100% !important;
+				}
+			}
+		}
+	}
+}
