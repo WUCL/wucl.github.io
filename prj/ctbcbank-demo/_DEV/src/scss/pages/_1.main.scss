@@ -1,10 +1,77 @@
 /* =======================
    pages/main
    ======================= */
-$bg-h-step: [1920px, 2205px, 8609px, 2290px, 3720px, 6195px, 2205px];
+$bg-h-step: [
+1920px, 2205px, 8609px,
+2290px, 975px, 6195px,
+1920px
+];
 .main {
 	section {
+		height: auto;
 		display: none;
+
+		.inner {
+			.data-time {
+				&-box {
+					color: #253840;
+					font-size: 15px;
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+				}
+				&-datetime {
+					letter-spacing: .7px;
+					font-size: inherit;
+				}
+			}
+			.btn-back {
+				position: absolute;
+				top: 0;
+				left: 0;
+				// background: rgba(255, 0, 0, .5);
+				&-with-arrow {
+					width: 55px;
+					height: 35px;
+					left: 0;
+				}
+			}
+			select.ntd-lives-account-id {
+				height: 54px;
+				position: absolute;
+				border: 0;
+				letter-spacing: 0;
+				background: transparent;
+				// background: rgba(255, 0 ,0, .7);
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				text-indent: 1px;
+				text-overflow: '';
+				&::-ms-expand {
+					display: none;
+				}
+			}
+		}
+
+		[class*="style-title"] {
+			letter-spacing: .35px;
+			font-weight: bold;
+		}
+		.style-title {
+			font-size: 28px;
+		}
+		.style-title-l {
+			font-size: 23px;
+		}
+		.style-title-m {
+			font-size: 20px;
+		}
+		.style-title-s {
+			font-size: 15px;
+			color: #555;
+			font-weight: normal;
+		}
+
 		&[class^="step-"] {
 			width: $bp;
 			max-width: 100%;
@@ -14,35 +81,325 @@ $bg-h-step: [1920px, 2205px, 8609px, 2290px, 3720px, 6195px, 2205px];
 			&:before,
 			&:after {
 				content: "";
-				position: absolute;
+				position: relative;
+				display: block;
 			}
 		}
 		@for $i from 1 through 7 {
 			&.step-#{$i} {
-				height: calc(nth($bg-h-step, $i) * ($bp / 1080px));
-				@include mq($max-width: $bp) {
-					height: calc(nth($bg-h-step, $i) * (100vw / 1080px));
-				}
 				&:before {
+					height: calc(nth($bg-h-step, $i) * ($bp / 1080px));
+					@include mq($max-width: $bp) {
+						height: calc(nth($bg-h-step, $i) * (100vw / 1080px));
+					}
 					width: 100%;
-					height: 100%;
+					// height: 100%;
 					background: url(../img/step-#{$i}.jpg) top center no-repeat;
 					background-size: contain;
 				}
 			}
 		}
-		// &.step-1 {
-		// 	height: calc(1920px * ($bp / 1080px));
-		// 	@include mq($max-width: $bp) {
-		// 		height: calc(1920px * (100vw / 1080px));
-		// 	}
-		// }
-		// &.step-2 {
-		// 	height: calc(2205px * ($bp / 1080px));
-		// 	@include mq($max-width: $bp) {
-		// 		height: calc(2205px * (100vw / 1080px));
-		// 	}
-		// }
+		&.step-1 {}
+		&.step-2 {
+			.inner {
+				.login-form {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					display: block;
+
+					$inpit-top: 36.1%;
+					$input-h: 47px;
+					$input-spacing: 17px;
+					$input-rember-h: 36px;
+
+					input {
+						position: absolute;
+						height: $input-h;
+						width: 50%;
+						left: 33%;
+						border: 0;
+						background: transparent;
+						// background: rgba(255, 255, 0, .7);
+						font-size: $fontsize;
+						&.login-id {
+							top: $inpit-top;
+						}
+						&.login-account {
+							top: calc($inpit-top + ($input-h + $input-spacing) + $input-rember-h);
+						}
+						&.login-password {
+							top: calc($inpit-top + ($input-h + $input-spacing)*2 + $input-rember-h);
+						}
+					}
+					button {
+						&.login-eye {
+							position: absolute;
+							width: 30px;
+							height: 30px;
+							top: 50%;
+							right: 29px;
+						}
+						&.login-submit {
+							position: absolute;
+							// background: red;
+							background: transparent;
+							height: $input-h;
+							width: 88%;
+							top: 70.7%;
+							left: 6%;
+							border-radius: 6px;
+						}
+					}
+				}
+			}
+		}
+		&.step-3 {
+			.inner {
+				.assets-total {
+					position: absolute;
+					top: 3.76%;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+				.ntd-savings {
+					position: absolute;
+					top: 8.56%;
+					width: 94%;
+					height: 116px;
+					left: 3%;
+					border-radius: 12px 0;
+
+					// background: rgba(255, 255, 255, .5);
+					> span {
+						display: block;
+						position: absolute;
+						right: 35px;
+					}
+					&-total {
+						top: 18px;
+					}
+					&-live {
+						top: 60px;
+					}
+				}
+			}
+		}
+		&.step-4 {
+			.inner {
+				.assets-total {
+					position: absolute;
+					top: 21.2%;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+				.ntd-lives {
+					position: absolute;
+					top: 34%;
+					width: 310px;
+					height: 110px;
+					// background: rgba(255, 255, 255, .5);
+					left: 8.7%;
+					&-total {
+						position: absolute;
+						right: 15px;
+						top: 18px;
+						font-weight: bold;
+						color: #444;
+					}
+					&-account {
+						position: absolute;
+						width: 100%;
+						top: 50px;
+						height: 60px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						> span {
+							position: absolute;
+							margin-top: -9px;
+						}
+						&-id {
+							left: 15px;
+							letter-spacing: .2px;
+						}
+						&-total {
+							right: 29px;
+						}
+					}
+				}
+				.data-time {
+					position: absolute;
+					top: 71%;
+					left: 8.4%;
+					&-box {}
+					&-datetime {}
+				}
+			}
+		}
+		&.step-5 {
+			&:before,
+			&:after {
+				position: relative;
+				display: block;
+			}
+			&:after {
+				height: calc(1479px * ($bp / 1080px)); // 2743px
+				@include mq($max-width: $bp) {
+					height: calc(1479px * (100vw / 1080px));
+				}
+				width: 100%;
+				background: url(../img/step-5-bottom.jpg) bottom center no-repeat;
+				background-size: contain;
+			}
+			.inner {
+				select.ntd-lives-account-id {
+					top: 55px;
+					left: 6%;
+					width: 88%;
+					padding-left: 12px;
+					font-weight: 500;
+				}
+				.ntd-lives-account-total {
+					position: absolute;
+					top: 10%;
+					right: 23px;
+					color: $color-white;
+					font-weight: 700;
+					font-size: 24px;
+					letter-spacing: 0;
+				}
+				.trade-list {
+					background: $color-white;
+					// background: red;
+					// width: 98.5%;
+					margin: 0 auto;
+					padding: 0 1.25%;
+					&-item {
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						width: 100%;
+						padding: 15px 0;
+						border-bottom: 1px solid #ddd;
+						font-size: 15px;
+						span {
+							display: block;
+							font-size: inherit;
+						}
+						.date {
+							width: 14%;
+							text-align: right;
+							margin-right: 2.5%;
+							color: #253740;
+						}
+						.title {
+							font-size: inherit;
+							width: 53%;
+							letter-spacing: .35px;
+							> span {
+								height: 1em;
+								white-space: nowrap;
+								text-overflow: ellipsis;
+								-o-text-overflow: ellipsis;
+								overflow: hidden;
+							}
+							&-summary {
+								margin-bottom: 7px;
+								color: #253742;
+							}
+							&-subtitle {
+								color: #637075;
+							}
+						}
+						.amount {
+							width: 22%;
+							text-align: right;
+							font-size: 17px;
+							letter-spacing: .15px;
+							color: #2d3e45;
+						}
+					}
+				}
+				.data-time {
+					padding-top: 15px;
+					background: $color-white;
+					&-box {
+						left: 4.2%;
+					}
+					&-datetime {}
+				}
+				.btn-transfer {
+					position: absolute;
+					bottom: 0;
+					right: 5px;
+					// background: rgba(255, 0, 0, .5);
+					width: 178px;
+					height: 44px;
+					z-index: 1;
+				}
+			}
+		}
+		&.step-6 {
+			.inner {
+				select.ntd-lives-account-id {
+					top: 105px;
+					left: 8%;
+					width: 83.7%;
+					padding-left: 26%;
+					letter-spacing: .25px;
+					font-weight: bold;
+				}
+				.transfer-input {
+					position: absolute;
+					top: 12.7%;
+					// background: rgba(255, 0, 0, .5);
+					width: 100%;
+					height: 195px;
+					> input {
+						position: absolute;
+						height: 51px;
+						width: 47%;
+						left: 33%;
+						border: 0;
+						// background: transparent;
+						background: $color-white;
+						font-size: $fontsize;
+					}
+					&-account {
+
+					}
+					&-amount {
+						top: 36%;
+					}
+					&-note {
+						top: 72%;
+					}
+				}
+				.btn-next {
+					position: absolute;
+					top: 25%;
+					left: 8%;
+					// background: rgba(255, 0, 0, .5);
+					width: 84%;
+					height: 49px;
+					border-radius: 5px;
+					z-index: 1;
+				}
+			}
+		}
+		&.step-7 {
+			.btn-back {
+				&-with-button {
+					width: 113px;
+					height: 32px;
+					top: 37.3%;
+					left: 49%;
+					transform: translateX(-50%);
+				}
+			}
+		}
 	}
 	@for $i from 1 through 7 {
 		&[data-index="#{$i}"] {
@@ -50,5 +407,10 @@ $bg-h-step: [1920px, 2205px, 8609px, 2290px, 3720px, 6195px, 2205px];
 				display: block;
 			}
 		}
+	}
+}
+body[data-mode="test"] {
+	.main section[class^="step-"]:before {
+		content: attr(data-desc);
 	}
 }

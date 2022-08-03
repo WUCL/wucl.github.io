@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- <meta name="viewport" content="width=480, initial-scale=1, user-scalable=0, shrink-to-fit=no"> -->
-        <title>This is TITLE</title>
+        <title>The Bank</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta property="og:url" content="" />
@@ -23,70 +23,106 @@
         <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
 	</head>
 	<body>
-        <select id="select-index" style="position: fixed; top: 5px; right: 5px; z-index: 999;">
-        	<option value="1">1</option>
-        	<option value="2">2</option>
-        	<option value="3">3</option>
-        	<option value="4">4</option>
-        	<option value="5">5</option>
-        	<option value="6">6</option>
-        	<option value="7">7</option>
-        </select>
-		<main id="main" class="main" data-index="1">
-		    <section class="step-1" data-desc="loading" data-screen="1">
-		        <div class="inner">
-		            <h1>loading</h1>
-		        </div>
-		    </section>
-		    <section class="step-2" data-desc="login" data-screen="2">
-		        <div class="inner">
-		            <h1>login</h1>
-		        </div>
-		    </section>
-		    <section class="step-3" data-desc="dashboard" data-screen="3">
-		        <div class="inner">
-		            <h1>dashboard</h1>
-		        </div>
-		    </section>
-		    <section class="step-4" data-desc="ntd-dashboard" data-screen="4">
-		        <div class="inner">
-		            <h1>ntd-dashboard</h1>
-		        </div>
-		    </section>
-		    <section class="step-5" data-desc="ntd-detail" data-screen="5">
-		        <div class="inner">
-		            <h1>ntd-detail</h1>
-		        </div>
-		    </section>
-		    <section class="step-6" data-desc="ntd-transfer" data-screen="6">
-		        <div class="inner">
-		            <h1>ntd-transfer</h1>
-		        </div>
-		    </section>
-		    <section class="step-7" data-desc="ntd-transfer-error" data-screen="7">
-		        <div class="inner">
-		            <h1>ntd-transfer-error</h1>
-		        </div>
-		    </section>
-		</main>
+        <main id="main" class="main" data-index="1">
+            <section id="step-1" class="step-1" data-desc="loading" data-screen="1">
+                <div class="inner"></div>
+            </section>
+            <section id="step-2" class="step-2" data-desc="login" data-screen="2">
+                <div class="inner fixed">
+                    <form id="login-form" class="login-form" onsubmit="return false;">
+                        <input type="text" name="id" class="login-id" id="login-id" required>
+                        <input type="password" maxlength="12" name="account" class="login-account" id="login-account" required>
+                        <button type="button" class="login-eye" id="login-eye"></button>
+                        <input type="password" maxlength="12" name="password" class="login-password" id="login-password" required>
+                        <button type="submit" class="login-submit" id="login-submit"></button>
+                    </form>
+                </div>
+            </section>
+            <section id="step-3" class="step-3" data-desc="dashboard" data-screen="3">
+                <div class="inner fixed">
+                    <span class="assets-total total-amount style-title"></span>
+                    <div id="ntd-savings" class="ntd-savings">
+                        <span id="ntd-savings-total" class="ntd-savings-total total-amount style-title-m"></span>
+                        <span id="ntd-savings-live" class="ntd-savings-live total-amount style-title-s"></span>
+                    </div>
+                </div>
+            </section>
+            <section id="step-4" class="step-4" data-desc="ntd-dashboard" data-screen="4">
+                <div class="inner fixed">
+                    <button type="button" class="btn-back btn-back-with-arrow"></button>
+                    <span class="assets-total total-amount style-title-l"></span>
+                    <div class="ntd-lives">
+                        <span id="ntd-lives-total" class="ntd-lives-total total-amount style-title-s"></span>
+                        <div id="ntd-lives-account" class="ntd-lives-account">
+                            <span class="ntd-lives-account-id style-title-s"></span>
+                            <span class="ntd-lives-account-total total-amount style-title-s"></span>
+                        </div>
+                    </div>
+                    <div class="data-time">
+                        <div class="data-time-box">資料時間：<span id="data-time-datetime" class="data-time-datetime date-time"></span></div>
+                    </div>
+                </div>
+            </section>
+            <section id="step-5" class="step-5" data-desc="ntd-detail" data-screen="5">
+                <div class="inner fixed">
+                    <button type="button" class="btn-back btn-back-with-arrow"></button>
+                    <select class="ntd-lives-account-id style-title-s"></select>
+                    <span class="ntd-lives-account-total total-amount style-title-s"></span>
+                    <button type="button" id="btn-transfer" class="btn-transfer"></button>
+                </div>
+                <div class="inner">
+                    <ul id="trade-list" class="trade-list">
+                        <li class="trade-list-item">
+                            <span class="date">04/06</span>
+                            <div class="title">
+                                <span class="title-summary">簽帳卡</span>
+                                <span class="title-subtitle">簽帳卡回饋金</span>
+                            </div>
+                            <span class="amount">8</span>
+                        </li>
+                    </ul>
+                    <div class="data-time">
+                        <div class="data-time-box">資料時間：<span id="data-time-datetime" class="data-time-datetime date-time"></span></div>
+                    </div>
+                </div>
+            </section>
+            <section id="step-6" class="step-6" data-desc="ntd-transfer" data-screen="6">
+                <div class="inner fixed">
+                    <button type="button" class="btn-back btn-back-with-arrow"></button>
+                    <select class="ntd-lives-account-id style-title-s"></select>
+                    <div class="transfer-input">
+                        <input type="number" name="transfer-input-account" class="transfer-input-account" id="transfer-input-account" max="16" placeholder="銀行代碼/帳號" required>
+                        <input type="number" name="transfer-input-amount" class="transfer-input-amount" id="transfer-input-amount" required>
+                        <input type="text" name="transfer-input-note" class="transfer-input-note" id="transfer-input-note" max="7" placeholder="顯示於交易明細限7個字">
+                    </div>
+                    <button type="button" id="btn-next" class="btn-next"></button>
+                </div>
+            </section>
+            <section id="step-7" class="step-7" data-desc="ntd-transfer-error" data-screen="7">
+                <div class="inner fixed">
+                    <button type="button" class="btn-back btn-back-with-arrow"></button>
+                    <button type="button" class="btn-back btn-back-with-button"></button>
+                </div>
+            </section>
+        </main>
+        <div id="templates" class="display-none-i">
+            <div id="template_trade-item">
+                <li class="trade-list-item">
+                    <span class="date">[DATE]</span>
+                    <div class="title">
+                        <span class="title-summary">[TITLE]</span>
+                        <span class="title-subtitle">[SUBTITLE]</span>
+                    </div>
+                    <span class="amount">[MONEY]</span>
+                </li>
+            </div>
+        </div>
 
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/js/custom/eventdevice.js"></script>
-
-		<!-- development version, includes helpful console warnings -->
-		<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-		<!-- production version, optimized for size and speed -->
-		<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
-
-		<!-- <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script> -->
-		<!-- <script src="https://cdn.jsdelivr.net/npm/vue-modaltor"></script> -->
-
-		<!-- <script src="./public/lib/scrollIt/scrollIt.js"></script> -->
-		<!-- <script src="./public/lib/aos/aos.js"></script> -->
-		<!-- <script src="./public/lib/colorbox/jquery.colorbox.js"></script> -->
-		<!-- <script src="./public/lib/slick/slick.min.js"></script> -->
-		<!-- <script src="./public/lib/swiper/swiper.min.js"></script> -->
-
+		<script src="./public/lib/jquery.preload/preload.js"></script>
+		<script src="./public/lib/moment/moment.min.js"></script>
+		<script src="./public/js/helper.js"></script>
 		<script src="./public/js/main.js"></script>
 	</body>
 </html>

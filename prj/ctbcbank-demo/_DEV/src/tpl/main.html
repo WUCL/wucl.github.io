@@ -1,37 +1,83 @@
 <main id="main" class="main" data-index="1">
-    <section class="step-1" data-desc="loading" data-screen="1">
-        <div class="inner">
-            <h1>loading</h1>
+    <section id="step-1" class="step-1" data-desc="loading" data-screen="1">
+        <div class="inner"></div>
+    </section>
+    <section id="step-2" class="step-2" data-desc="login" data-screen="2">
+        <div class="inner fixed">
+            <form id="login-form" class="login-form" onsubmit="return false;">
+                <input type="text" name="id" class="login-id" id="login-id" required>
+                <input type="password" maxlength="12" name="account" class="login-account" id="login-account" required>
+                <button type="button" class="login-eye" id="login-eye"></button>
+                <input type="password" maxlength="12" name="password" class="login-password" id="login-password" required>
+                <button type="submit" class="login-submit" id="login-submit"></button>
+            </form>
         </div>
     </section>
-    <section class="step-2" data-desc="login" data-screen="2">
-        <div class="inner">
-            <h1>login</h1>
+    <section id="step-3" class="step-3" data-desc="dashboard" data-screen="3">
+        <div class="inner fixed">
+            <span class="assets-total total-amount style-title"></span>
+            <div id="ntd-savings" class="ntd-savings">
+                <span id="ntd-savings-total" class="ntd-savings-total total-amount style-title-m"></span>
+                <span id="ntd-savings-live" class="ntd-savings-live total-amount style-title-s"></span>
+            </div>
         </div>
     </section>
-    <section class="step-3" data-desc="dashboard" data-screen="3">
-        <div class="inner">
-            <h1>dashboard</h1>
+    <section id="step-4" class="step-4" data-desc="ntd-dashboard" data-screen="4">
+        <div class="inner fixed">
+            <button type="button" class="btn-back btn-back-with-arrow"></button>
+            <span class="assets-total total-amount style-title-l"></span>
+            <div class="ntd-lives">
+                <span id="ntd-lives-total" class="ntd-lives-total total-amount style-title-s"></span>
+                <div id="ntd-lives-account" class="ntd-lives-account">
+                    <span class="ntd-lives-account-id style-title-s"></span>
+                    <span class="ntd-lives-account-total total-amount style-title-s"></span>
+                </div>
+            </div>
+            <div class="data-time">
+                <div class="data-time-box">資料時間：<span id="data-time-datetime" class="data-time-datetime date-time"></span></div>
+            </div>
         </div>
     </section>
-    <section class="step-4" data-desc="ntd-dashboard" data-screen="4">
+    <section id="step-5" class="step-5" data-desc="ntd-detail" data-screen="5">
+        <div class="inner fixed">
+            <button type="button" class="btn-back btn-back-with-arrow"></button>
+            <select class="ntd-lives-account-id style-title-s"></select>
+            <span class="ntd-lives-account-total total-amount style-title-s"></span>
+            <button type="button" id="btn-transfer" class="btn-transfer"></button>
+        </div>
         <div class="inner">
-            <h1>ntd-dashboard</h1>
+            <ul id="trade-list" class="trade-list">
+                <li class="trade-list-item">
+                    <span class="date">04/06</span>
+                    <div class="title">
+                        <span class="title-summary">簽帳卡</span>
+                        <span class="title-subtitle">簽帳卡回饋金</span>
+                    </div>
+                    <span class="amount">8</span>
+                </li>
+            </ul>
+            <div class="data-time">
+                <div class="data-time-box">資料時間：<span id="data-time-datetime" class="data-time-datetime date-time"></span></div>
+            </div>
         </div>
     </section>
-    <section class="step-5" data-desc="ntd-detail" data-screen="5">
-        <div class="inner">
-            <h1>ntd-detail</h1>
+    <section id="step-6" class="step-6" data-desc="ntd-transfer" data-screen="6">
+        <div class="inner fixed">
+            <button type="button" class="btn-back btn-back-with-arrow"></button>
+            <select class="ntd-lives-account-id style-title-s"></select>
+            <div class="transfer-input">
+                <input type="number" name="transfer-input-account" class="transfer-input-account" id="transfer-input-account" max="16" placeholder="銀行代碼/帳號" required>
+                <input type="number" name="transfer-input-amount" class="transfer-input-amount" id="transfer-input-amount" required>
+                <input type="text" name="transfer-input-note" class="transfer-input-note" id="transfer-input-note" max="7" placeholder="顯示於交易明細限7個字">
+            </div>
+            <button type="button" id="btn-next" class="btn-next"></button>
         </div>
     </section>
-    <section class="step-6" data-desc="ntd-transfer" data-screen="6">
-        <div class="inner">
-            <h1>ntd-transfer</h1>
-        </div>
-    </section>
-    <section class="step-7" data-desc="ntd-transfer-error" data-screen="7">
-        <div class="inner">
-            <h1>ntd-transfer-error</h1>
+    <section id="step-7" class="step-7" data-desc="ntd-transfer-error" data-screen="7">
+        <div class="inner fixed">
+            <button type="button" class="btn-back btn-back-with-arrow"></button>
+            <button type="button" class="btn-back btn-back-with-button"></button>
         </div>
     </section>
 </main>
+@@include('_template.html')
