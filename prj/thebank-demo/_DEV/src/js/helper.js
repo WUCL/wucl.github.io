@@ -87,9 +87,12 @@ function preloadImg(imgs) {
     });
 }
 window.imgs = [
+    'public/img/step-1-bottom.jpg',
     'public/img/step-1.jpg',
     'public/img/step-2.jpg',
+    'public/img/step-3-bottom.jpg',
     'public/img/step-3.jpg',
+    'public/img/step-4-bottom.jpg',
     'public/img/step-4.jpg',
     'public/img/step-5-bottom.jpg',
     'public/img/step-5.jpg',

@@ -138,6 +138,7 @@ $(function() {
                 $.each($this.el.$loginForm.serializeArray(), function() {
                     $this.api.data[this.name] = this.value;
                 });
+                $this.el.$body.attr('data-loading', '1');
 
                 // "id":"N123456788",
                 // "account":"user003",
@@ -158,6 +159,9 @@ $(function() {
                             console.log(response);
                             if (response.is_success === 1) {
                                 doSuccess(response);
+                            } else {
+                                $this.el.$body.attr('data-loading', '');
+                                alert('登入錯誤');
                             }
                             return;
                         },
@@ -193,7 +197,10 @@ $(function() {
                         }
                         _target.html(_templates);
 
-                        return $this.tranIndex('next');
+                        return setTimeout(( () => {
+                            $this.el.$body.attr('data-loading', '');
+                            $this.tranIndex('next');
+                        } ), 900);
                     }
                 // call api // ajax url
             });

@@ -2,10 +2,26 @@
    pages/main
    ======================= */
 $bg-h-step: [
-1920px, 2205px, 8609px,
+1078px, 2205px, 8396px,
 2290px, 975px, 6195px,
 1920px
 ];
+.waterfall-loading {
+	position: fixed;
+	z-index: 9999;
+	background: rgba(0, 0, 0, .56);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+	img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) scale(1.8);
+	}
+}
 .main {
 	section {
 		height: auto;
@@ -94,12 +110,25 @@ $bg-h-step: [
 					}
 					width: 100%;
 					// height: 100%;
-					background: url(../img/step-#{$i}.jpg) top center no-repeat;
+					background: url(../img/step-#{$i}.jpg?v=0805) top center no-repeat;
 					background-size: contain;
 				}
 			}
 		}
-		&.step-1 {}
+		&.step-1 {
+			min-height: 100vh;
+			&:after {
+				position: absolute;
+				bottom: 0;
+				height: calc(844px * ($bp / 1080px)); // 2743px
+				@include mq($max-width: $bp) {
+					height: calc(844px * (100vw / 1080px));
+				}
+				width: 100%;
+				background: url(../img/step-1-bottom.jpg?0805) bottom center no-repeat;
+				background-size: contain;
+			}
+		}
 		&.step-2 {
 			.inner {
 				.login-form {
@@ -109,10 +138,15 @@ $bg-h-step: [
 					top: 0;
 					display: block;
 
-					$inpit-top: 36.1%;
-					$input-h: 47px;
-					$input-spacing: 17px;
-					$input-rember-h: 36px;
+					// $inpit-top: 36.1%;
+					// $input-h: 47px;
+					// $input-spacing: 17px;
+					// $input-rember-h: 36px;
+
+					$inpit-top: 36.2%;
+					$input-h: 6.1%;
+					$input-spacing: 2%;
+					$input-rember-h: 5%;
 
 					input {
 						position: absolute;
@@ -147,7 +181,7 @@ $bg-h-step: [
 							background: transparent;
 							height: $input-h;
 							width: 88%;
-							top: 70.7%;
+							top: 70.8%;
 							left: 6%;
 							border-radius: 6px;
 						}
@@ -156,6 +190,17 @@ $bg-h-step: [
 			}
 		}
 		&.step-3 {
+			&:after {
+				position: fixed;
+				bottom: -1px;
+				height: calc(210px * ($bp / 1080px)); // 2743px
+				@include mq($max-width: $bp) {
+					height: calc(210px * (100vw / 1080px));
+				}
+				width: 100%;
+				background: url(../img/step-3-bottom.jpg) bottom center no-repeat;
+				background-size: contain;
+			}
 			.inner {
 				.assets-total {
 					position: absolute;
@@ -167,7 +212,7 @@ $bg-h-step: [
 					position: absolute;
 					top: 8.56%;
 					width: 94%;
-					height: 116px;
+					height: 3.87%;
 					left: 3%;
 					border-radius: 12px 0;
 
@@ -187,6 +232,18 @@ $bg-h-step: [
 			}
 		}
 		&.step-4 {
+			min-height: 100vh;
+			&:after {
+				position: fixed;
+				bottom: -1px;
+				height: calc(199px * ($bp / 1080px)); // 2743px
+				@include mq($max-width: $bp) {
+					height: calc(199px * (100vw / 1080px));
+				}
+				width: 100%;
+				background: url(../img/step-4-bottom.jpg) bottom center no-repeat;
+				background-size: contain;
+			}
 			.inner {
 				.assets-total {
 					position: absolute;
@@ -197,8 +254,8 @@ $bg-h-step: [
 				.ntd-lives {
 					position: absolute;
 					top: 34%;
-					width: 310px;
-					height: 110px;
+					width: 82.7%;
+					height: 13.76%;
 					// background: rgba(255, 255, 255, .5);
 					left: 8.7%;
 					&-total {
@@ -211,21 +268,21 @@ $bg-h-step: [
 					&-account {
 						position: absolute;
 						width: 100%;
-						top: 50px;
-						height: 60px;
+						top: 46.1%;
+						height: 54%;
 						display: flex;
 						align-items: center;
 						justify-content: center;
 						> span {
 							position: absolute;
-							margin-top: -9px;
+							margin-top: -2.5%
 						}
 						&-id {
-							left: 15px;
+							left: 5%;
 							letter-spacing: .2px;
 						}
 						&-total {
-							right: 29px;
+							right: 8.7%;
 						}
 					}
 				}
@@ -239,11 +296,6 @@ $bg-h-step: [
 			}
 		}
 		&.step-5 {
-			&:before,
-			&:after {
-				position: relative;
-				display: block;
-			}
 			&:after {
 				height: calc(1479px * ($bp / 1080px)); // 2743px
 				@include mq($max-width: $bp) {
@@ -255,7 +307,7 @@ $bg-h-step: [
 			}
 			.inner {
 				select.ntd-lives-account-id {
-					top: 55px;
+					top: 4.6%;
 					left: 6%;
 					width: 88%;
 					padding-left: 12px;
@@ -333,18 +385,18 @@ $bg-h-step: [
 				.btn-transfer {
 					position: absolute;
 					bottom: 0;
-					right: 5px;
-					// background: rgba(255, 0, 0, .5);
-					width: 178px;
-					height: 44px;
+					right: 1%;
+					width: 48%;
+					height: 3.7%;
 					z-index: 1;
+					// background: rgba(255, 0, 0, .5);
 				}
 			}
 		}
 		&.step-6 {
 			.inner {
 				select.ntd-lives-account-id {
-					top: 105px;
+					top: 4.95%;
 					left: 8%;
 					width: 83.7%;
 					padding-left: 26%;
@@ -356,10 +408,10 @@ $bg-h-step: [
 					top: 12.7%;
 					// background: rgba(255, 0, 0, .5);
 					width: 100%;
-					height: 195px;
+					height: 9%;
 					> input {
 						position: absolute;
-						height: 51px;
+						height: 27%;
 						width: 47%;
 						left: 33%;
 						border: 0;
@@ -383,7 +435,7 @@ $bg-h-step: [
 					left: 8%;
 					// background: rgba(255, 0, 0, .5);
 					width: 84%;
-					height: 49px;
+					height: 2.3%;
 					border-radius: 5px;
 					z-index: 1;
 				}
@@ -392,9 +444,9 @@ $bg-h-step: [
 		&.step-7 {
 			.btn-back {
 				&-with-button {
-					width: 113px;
-					height: 32px;
-					top: 37.3%;
+					width: 30%;
+					height: 4.5%;
+					top: 43%;
 					left: 49%;
 					transform: translateX(-50%);
 				}
@@ -410,7 +462,15 @@ $bg-h-step: [
 	}
 }
 body[data-mode="test"] {
+	[t-highlight] {
+		background: rgba(255, 0, 0, .5) !important;
+	}
 	.main section[class^="step-"]:before {
 		content: attr(data-desc);
+	}
+}
+body[data-loading="1"] {
+	.waterfall-loading {
+		display: block;
 	}
 }
