@@ -79,6 +79,14 @@ layout/_popup
 	}
 
 	&#form-confirm {
+		.error_box {
+			color: red;
+			line-height: normal;
+			font-size: $fontsize;
+			&:empty {
+				display: none;
+			}
+		}
 		.popup_main {
 			.popup_list {
 				> ul {

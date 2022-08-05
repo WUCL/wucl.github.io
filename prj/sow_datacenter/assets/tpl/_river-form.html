@@ -12,15 +12,15 @@
                         <ul>
                             <li class="filed-date"><label for="filed-date" required>調查日期</label><input id="filed-date" type="date" name="date" required></li>
                             <li class="filed-time"><label for="filed-time" required>調查時間</label><input id="filed-time" type="time" name="time" required></li>
-                            <li class="filed-city"><label for="filed-city" required>縣市</label><input id="filed-city" type="text" name="city" required></li>
-                            <li class="filed-river_name"><label for="filed-river_name" required>地圖鏈結</label><input id="filed-river_name" type="text" name="river_name" required></li>
+                            <li class="filed-city"><label for="filed-city" required>縣市</label><input id="filed-city" type="text" name="city" required readonly></li>
+                            <li class="filed-river_name"><label for="filed-river_name" required>河川名稱</label><input id="filed-river_name" type="text" name="river_name" required readonly></li>
                             <li class="filed-river_part"><label for="filed-river_part" required>樣區所在地段</label><select id="filed-river_part" name="river_part" required></select></li>
                         </ul>
                     </div>
                     <div class="group">
                         <ul>
-                            <li class="filed-river_start filed-river_end">
-                                <label class="filed-inword" for="filed-river_start" required>從編號<input type="text" name="river_start" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end" required>結束</label>
+                            <li class="filed-river_start filed-river_end display-flex-i">
+                                <label class="filed-inword" for="filed-river_start" required>從編號<input type="number" name="river_start" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="number" name="river_end" required>結束</label>
                             </li>
                         </ul>
                     </div>
@@ -37,18 +37,18 @@
                             <li class="filed-survey_scope"><label for="filed-survey_scope" required>調查範圍寬度（約50%以上範圍都是這麽寬）</label><select id="filed-survey_scope" name="survey_scope" required></select></li>
                             <li class="filed-l_garbages">
                                 <label for="filed-l_garbages" required>"數量最多"的垃圾類型（最多3項，不用排序）</label>
-                                <select id="filed-l_garbages" name="l_garbages" required></select>
+                                <select id="filed-l_garbages" name="l_garbages" max="3" required></select>
                             </li>
-                            <li class="filed-l_garbage"><label for="filed-l_garbage" required>其他數量最多的垃圾是（如有才需填）</label><input id="filed-l_garbage" type="text" name="l_garbage" required></li>
+                            <li class="filed-l_garbage"><label for="filed-l_garbage">其他數量最多的垃圾是（如有才需填）</label><input id="filed-l_garbage" type="text" name="l_garbage"></li>
                             <li class="filed-v_garbages">
                                 <label for="filed-v_garbages" required>"最佔體積"的垃圾類型（最多3項，不用排序）</label>
-                                <select id="filed-v_garbages" name="v_garbages" required></select>
+                                <select id="filed-v_garbages" name="v_garbages" max="3" required></select>
                             </li>
                             <li class="filed-v_garbage"><label for="filed-v_garbage">其他最佔體積的垃圾是（如有才需填）</label><input id="filed-v_garbage" type="text" name="v_garbage"></li>
                             <li class="filed-m500_garbages"><label for="filed-m500_garbages" required>500公尺內垃圾型態多為？</label><select id="filed-m500_garbages" name="m500_garbages" required></select></li>
-                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages">其他想要補充的資訊（如有才需填）</label><select id="filed-m500_h_garbages" name="m500_h_garbages"></select></li>
-                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage" required>500公尺內垃圾熱點集中於？</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage" required></li>
-                            <li class="filed-order_info"><label for="filed-order_info">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
+                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages" required>500公尺內垃圾熱點集中於？</label><select id="filed-m500_h_garbages" name="m500_h_garbages" required></select></li>
+                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage"></li>
+                            <li class="filed-order_info"><label for="filed-order_info">其他想要補充的資訊（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
                         </ul>
                     </div>
                     <div class="group">
@@ -114,7 +114,7 @@
                     </div>
                     <div class="group">
                         <ul>
-                            <li class="filed-shooter_name"><label for="filed-shooter_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-shooter_name" name="shooter_name"></li>
+                            <li class="filed-user_name"><label for="filed-user_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-user_name" name="user_name"></li>
                         </ul>
                     </div>
                     <div class="group with-photo with-3in1">
@@ -169,8 +169,8 @@
                             <li class="filed-is_public no-column">
                                 <label for="filed-is_public">表單是否公開：</label>
                                 <select id="is_public" class="is_public" name="is_public">
+                                    <option value="1" selected>公開</option>
                                     <option value="0">不公開</option>
-                                    <option value="1">公開</option>
                                 </select>
                             </li>
                         </ul>
@@ -183,7 +183,7 @@
                             <button id="btn-form-confirm" class="btn-form-confirm btn-style form-confirm_open" type="button">資料送出</button>
                         </li>
                         <li id="theform_is_edit" class="theform_is_edit">
-                            <button id="btn-form-save" class="btn-form-save btn-style" type="button">資料儲存</button>
+                            <button id="btn-form-save" class="btn-form-save btn-style form-confirm_open" type="button">資料儲存</button>
                         </li>
                     </ul>
                 </div>
@@ -211,6 +211,7 @@
     <div class="popup_inner" data-status="confirm">
         <div class="popup_header">
             <h2 id="popup_title" class="popup_title">請確認填表資訊</h2>
+            <ul id="error_box" class="error_box"></ul>
         </div>
         <div class="popup_main">
             <div class="popup_list"></div>
@@ -226,7 +227,8 @@
         </div>
         <div class="popup_main">
             <div class="popup_btns">
-                <button id="btn-confirm-newone_ocean" class="btn-confirm-newone btn-style" type="button">新增表單</button>
+                <!-- <button id="btn-confirm-newone_ocean" class="btn-confirm-newone btn-style" type="button">新增表單</button> -->
+                <button id="btn-confirm-finish" class="btn-confirm-finish btn-style" type="button">完成</button>
             </div>
         </div>
     </div>

@@ -31,6 +31,8 @@ $(function() {
             data: {
                 "user_id": window._comm.$user.id,
                 "code": "",
+                // "code": "df8144031980fe488b00d24f0125aebf",
+                "setting_id": "",
             },
             data_others: { // others data
             }
@@ -51,11 +53,13 @@ $(function() {
             $btn_save: $('#btn-form-save'), // 非新增才有
             $btn_confirm_submit: $('#btn-confirm-submit'), // 最後確認送出
             $btn_confirm_newone: $('.btn-confirm-newone'),
+            $btn_confirm_finish: $('#btn-confirm-finish'),
             // $btn_confirm_sameone: $('#btn-confirm-sameone'), // river // popup screate same one
             $btn_select_submit: $('#btn-select-submit'),
 
             $popup_form_select: $('#form-select'),
             $popup_form_confirm: $('#form-confirm'),
+            $popup_form_error_box: $('#error_box'),
 
             $theform_is_new: $('#theform_is_new'),
             $theform_is_edit: $('#theform_is_edit'),
@@ -68,6 +72,10 @@ $(function() {
                 $d_pic: $('#d_pic'),
                 $album_pics_1: $('#album_pic_1'),
                 $album_pics_2: $('#album_pic_2'),
+
+                // ocean
+                $filed_album_pic: $('#filed-album_pic'),
+                $album_pic: $('[data-pid="album_pic"]')
             },
 
             // river
@@ -97,12 +105,19 @@ $(function() {
                 },
             },
             form_data: {
-                featured_id: 0, // ocean
+                pics: {
+                    current: 0,
+                    max: 0, // upload_num
+                    temp_id: '',
+                },
+                featured_id: '', // ocean
 
-                r_pic_id: 0, // river
-                h_pic_id: 0, // river
-                d_pic_id: 0, // river
+                r_pic_id: '', // river
+                h_pic_id: '', // river
+                d_pic_id: '', // river
 
+                // ocean/river
+                album_used: [], // temp the image is used
                 extra_data: {}
             },
 
@@ -187,6 +202,8 @@ $(function() {
                 , $newone = true
                 , $multiple_way = ($($current).hasClass('multiple_way'))?true:false;
 
+                $this.var.form_data.pics.temp_id = $whichone;
+
                 if ($('#' + $preview_el).attr('data-tempid') !== undefined) {
                     $tempid = $('#' + $preview_el).attr('data-tempid');
                     $newone = false;
@@ -218,8 +235,9 @@ $(function() {
                             let file_create_time = lat = lng = '';
                             if (this.exifdata.DateTime !== undefined) {
                                 file_create_time = this.exifdata.DateTime
-                                , lat = calGPS(this.exifdata)['latitude'] // 經度
-                                , lng = calGPS(this.exifdata)['longitude'] // 緯度
+                                , latlng = calGPS(this.exifdata)
+                                , lat = latlng['latitude'] // 經度
+                                , lng = latlng['longitude'] // 緯度
                             }
                             $this.var.img_file.datas[$tempid]['file_create_time'] = file_create_time;
                             $this.var.img_file.datas[$tempid]['lat'] = lat;
@@ -235,21 +253,26 @@ $(function() {
                             , exifLongRef = exif.GPSLongitudeRef
                             , exifLat = exif.GPSLatitude
                             , exifLatRef = exif.GPSLatitudeRef;
+                            // console.log(exif);
                             // console.log('exifLong : ' + exifLong);
                             // console.log('exifLongRef : ' + exifLongRef);
                             // console.log('exifLat : ' + exifLat);
                             // console.log('exifLatRef : ' + exifLatRef);
 
-                            if (exifLatRef == "S") {
-                                latitude = (exifLat[0]*-1) + (( (exifLat[1]*-60) + (exifLat[2]*-1) ) / 3600);
-                            } else {
-                                latitude = exifLat[0] + (( (exifLat[1]*60) + exifLat[2] ) / 3600);
-                            }
+                            if (exifLong !== undefined) {
+                                if (exifLatRef == "S") {
+                                    latitude = (exifLat[0]*-1) + (( (exifLat[1]*-60) + (exifLat[2]*-1) ) / 3600);
+                                } else {
+                                    latitude = exifLat[0] + (( (exifLat[1]*60) + exifLat[2] ) / 3600);
+                                }
 
-                            if (exifLongRef == "W") {
-                                longitude = (exifLong[0]*-1) + (( (exifLong[1]*-60) + (exifLong[2]*-1) ) / 3600);
+                                if (exifLongRef == "W") {
+                                    longitude = (exifLong[0]*-1) + (( (exifLong[1]*-60) + (exifLong[2]*-1) ) / 3600);
+                                } else {
+                                    longitude = exifLong[0] + (( (exifLong[1]*60) + exifLong[2] ) / 3600);
+                                }
                             } else {
-                                longitude = exifLong[0] + (( (exifLong[1]*60) + exifLong[2] ) / 3600);
+                                latitude = longitude = "";
                             }
                             return {'latitude': latitude, 'longitude': longitude};
                         }
@@ -285,16 +308,20 @@ $(function() {
 
                             // console.log($newone);
                             // if ($this.var.page_position === 'cleanriver' || !$newone) {
-                            if (!$multiple_way || !$newone) {
+                            if (!$multiple_way || !$newone) { // do CleanRiver
                                 let output = document.getElementById($preview_el);
                                 output.src = $b64;
                                 output.setAttribute("data-tempid", $tempid);
-                            } else { // clean ocean
-                                let _target = $this.el.$form_filed.album_ul
+                            } else { // do cleanOcean
+                                // let _target = $this.el.$form_filed.album_ul
+                                let _target = $this.el.$pics.$filed_album_pic
                                 , _template = $this.var.$temp_formocean_li;
 
-                                _template = _template.replace(/\[ID\]/g, $tempid);
-                                _target.append(_template);
+                                _template = _template
+                                .replace(/\[ID\]/g, $tempid)
+                                .replace(/\[SRC\]/g, '')
+                                .replace(/data-src/g, 'src');
+                                _target.after(_template);
 
                                 $preview_el = 'preview_album_pic_' + $tempid;
                                 let output = document.getElementById($preview_el);
@@ -324,10 +351,12 @@ $(function() {
                 // step3, 前置完成，處理上傳 do api call
                 function doImgSync() {
                     $this.var.img_file.status = '';
+                    $this.checkPicsIsFull('+1');
 
                     // call api // ajax url
                     var _url = $this.api.url + $this.api.path.upload_pic
-                    + "/?key=" + $this.api.param.key; // 測試用，上線刪掉
+                    // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
+                    ;
                     console.log(_url);
 
                     let _data = Object.assign({}, $this.api.data,
@@ -355,6 +384,8 @@ $(function() {
 
                     function doSuccess(_r) { // to get upload img id
                         console.log(_r);
+                        // console.log($preview_el);
+                        $('#' + $preview_el).attr('data-pics-id', _r.id);
                         $this.var.img_file['datas'][$this.var.img_file.counter]['response'] = _r;
                         return $this.var.img_file.counter += 1;
                     }
@@ -368,8 +399,15 @@ $(function() {
                 , $pid = $($whichone).attr('data-pid')
                 , $preview_el = $('#preview_' + $pid)
                 , $tempid = $preview_el.attr('data-tempid')
-                , $delete_id = $this.var.img_file.datas[$tempid]['response']['id']
+                // , $delete_id = $this.var.img_file.datas[$tempid]['response']['id']
+                , $delete_id = $preview_el.attr('data-pics-id');
+
+                $this.var.form_data.pics.temp_id = $pid;
+
+                console.log($delete_id);
                 console.log($this.var.img_file.datas);
+                console.log($tempid);
+                $this.checkPicsIsFull('-1');
 
                 // clean data
                 $preview_el.attr('src', '').attr('data-tempid', '');
@@ -381,7 +419,8 @@ $(function() {
 
                 // call api // ajax url
                 var _url = $this.api.url + $this.api.path.delete_pic
-                + "/?key=" + $this.api.param.key; // 測試用，上線刪掉
+                // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
+                ;
                 console.log(_url);
 
                 let _data = Object.assign({}, $this.api.data, {
@@ -414,13 +453,13 @@ $(function() {
             });
 
             // common select limit 3 selected
-            $this.el.$theform.on('change', 'select', function (e) {
-                let $limit = 3
-                , $target = $(e.target)
+            $this.el.$theform.on('change', 'select[max]', function (e) {
+                let $target = $(e.target)
+                , $limit = $target.attr('max')
                 , $options = $target.find('option:selected')
                 , $selectLength = $options.length;
                 if ($selectLength > $limit) {
-                    alert('最多選3個');
+                    alert('最多選' + $limit + '個');
                     $options[$limit].selected = false ;
                     return false;
                 }
@@ -445,12 +484,13 @@ $(function() {
                 // send the data to api // API
                 // call api // ajax url
                 var _url = $this.api.url + $this.api.path.save_form
-                + "/?key=" + $this.api.param.key; // 測試用，上線刪掉
+                // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
+                ;
                 console.log(_url);
 
-                let _data = Object.assign({}, $this.api.data, $this.var.form_data, {
-                    // 'featured_id': "0", // 測試待刪除
-                });
+                console.log($this.api.data);
+                console.log($this.var.form_data);
+                let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
                 console.log(_data);
                 // console.log(JSON.stringify(_data));
 
@@ -467,6 +507,16 @@ $(function() {
                             return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
                         } else {
                             $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                            let $err = response.messages;
+                            console.log($err);
+                            for ($prop in $err) {
+                                console.log($err[$prop]);
+                                if ($err[$prop][0] === undefined) break;
+                                let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
+                                , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
+                                $this.el.$popup_form_error_box.append($err_msg);
+                            }
+                            $('.popup_inner[data-status="confirm"]').scrollTop(0);
                         }
                         return;
                     },
@@ -484,13 +534,19 @@ $(function() {
                 console.log('the data be save');
 
                 // call api to save the data
-
-                alert('資料已儲存');
+                $this.formConfirm();
+                // alert('資料已儲存');
             });
 
             // river // ocean
             $this.el.$btn_confirm_newone.on('click', function() {
-                console.log('ocean, set clean before the "new" one');
+                console.log('ocean, refresh the page. (set clean before the "new" one)');
+                location.href = location.protocol + '//' + location.host + location.pathname;
+            });
+
+            // ocean
+            $this.el.$btn_confirm_finish.on('click', function() {
+                console.log('ocean, refresh the page.');
                 location.href = location.protocol + '//' + location.host + location.pathname;
             });
         },
@@ -499,13 +555,16 @@ $(function() {
         checkStatus: function() {
             let $this = this;
             // checking
-            let url_code = window.helper.getUrlParams(window.location.href, 'code');
+            let url_code = window.helper.getUrlParams(window.location.href, 'code')
+            , url_settingId = window.helper.getUrlParams(window.location.href, 'setting_id');
             console.log(url_code);
 
             // checking status, than set up status
             let $page_title = '';
-            if (url_code) {
+            if (url_code && url_settingId) {
                 $this.api.data.code = url_code;
+                $this.api.data.setting_id = url_settingId;
+                console.log($this.api.data)
                 // 確認表單是否為view的狀態
                 if ($this.var.page_status == 'view') {
                     $this.var.form_status = 'view';
@@ -547,8 +606,8 @@ $(function() {
 
             // call api // ajax url
             var _url = $this.api.url + $this.api.path.init_form
-            + "/?key=" + $this.api.param.key; // 測試用，上線刪掉
-
+            // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
+            ;
             // _url += '&__r=' + (new Date()).getTime();
             // console.log(_url);
 
@@ -576,10 +635,13 @@ $(function() {
             function doSuccess(_r_set, _r_data) { // to get the setting file and data file
                 $this.var.form_data['id'] = _r_data.id;
                 $this.var.form_data['code'] = $this.api.data['code'] = _r_data.code;
-                $this.var.form_data['upload_num'] = _r_set.upload_num || 0;
+                $this.var.form_data['pics']['max'] = _r_set.upload_num || 0;
                 // if ($this.var.page_position == 'cleanocean') {
                 //     $this.var.form_data['upload_num'] = _r_set.upload_num;
                 // }
+
+                console.log('upload_num :: ' + $this.var.form_data['pics']['max']);
+                // $this.var.form_data['pics']['max'] = 2; // for test
                 processSetting();
 
                 async function processSetting() {
@@ -613,15 +675,17 @@ $(function() {
                         }
                         let _source = _d
                         , _target = $('#filed-' + _field)
+                        , _size = _source.length // option 數量
                         , _template_option = window.helper.getTemplate('select_option')
                         , _templates = '';
 
-                        if (_is_multiple == 1) _target.attr('multiple', 'multiple');
+                        if (_is_multiple == 1) _target.attr({ 'multiple': 'multiple', 'size': _size });
 
                         for ($prop in _source) {
                             let _template = _template_option;
-                            _template = _template.replace(/\[VALUE\]/g, _source[$prop]);
-                            _template = _template.replace(/\[OPTION\]/g, _source[$prop]);
+                            _template = _template
+                            .replace(/\[VALUE\]/g, _source[$prop])
+                            .replace(/\[OPTION\]/g, _source[$prop]);
                             _templates += _template;
                         }
                         _target.html(_templates);
@@ -651,14 +715,15 @@ $(function() {
                                     var _template_text = window.helper.getTemplate('input_text')
                                     , _temp = _template_text;
 
-                                    _temp = _temp.replace(/\[ID\]/g, 'filed-' + $li['field_data']['field_id']);
-                                    _temp = _temp.replace(/\[NAME\]/g, $li['field_data']['field_id']);
-                                    _temp = _temp.replace(/\[TITLE\]/g, $li['field_title']);
-                                    _temp = _temp.replace(/\[VALUE\]/g, '');
-                                    _temp = _temp.replace(/\[HINT\]/g, $li['field_hint']);
-                                    _temp = _temp.replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'');
+                                    _temp = _temp
+                                    .replace(/\[ID\]/g, 'filed-' + $li['field_data']['field_id'])
+                                    .replace(/\[NAME\]/g, $li['field_data']['field_id'])
+                                    .replace(/\[TITLE\]/g, $li['field_title'])
+                                    .replace(/\[VALUE\]/g, '')
+                                    .replace(/\[HINT\]/g, $li['field_hint'])
+                                    .replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'')
 
-                                    _temp = _temp.replace(/\[MAXLENGTH\]/g, $li['field_data']['text_maxlength']);
+                                    .replace(/\[MAXLENGTH\]/g, $li['field_data']['text_maxlength']);
 
                                     $content += _temp;
                                     break;
@@ -666,15 +731,15 @@ $(function() {
                                     var _template_number = window.helper.getTemplate('input_number')
                                     , _temp = _template_number;
 
-                                    _temp = _temp.replace(/\[ID\]/g, 'filed-' + $li['field_data']['field_id']);
-                                    _temp = _temp.replace(/\[NAME\]/g, $li['field_data']['field_id']);
-                                    _temp = _temp.replace(/\[TITLE\]/g, $li['field_title']);
-                                    _temp = _temp.replace(/\[VALUE\]/g, '');
-                                    _temp = _temp.replace(/\[HINT\]/g, $li['field_hint']);
-                                    _temp = _temp.replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'');
+                                    _temp = _temp.replace(/\[ID\]/g, 'filed-' + $li['field_data']['field_id'])
+                                    .replace(/\[NAME\]/g, $li['field_data']['field_id'])
+                                    .replace(/\[TITLE\]/g, $li['field_title'])
+                                    .replace(/\[VALUE\]/g, '')
+                                    .replace(/\[HINT\]/g, $li['field_hint'])
+                                    .replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'')
 
-                                    _temp = _temp.replace(/\[MAX\]/g, $li['field_data']['number_max']);
-                                    _temp = _temp.replace(/\[MIN\]/g, $li['field_data']['number_min']);
+                                    .replace(/\[MAX\]/g, $li['field_data']['number_max'])
+                                    .replace(/\[MIN\]/g, $li['field_data']['number_min']);
 
                                     $content += _temp;
                                     break;
@@ -688,17 +753,19 @@ $(function() {
                                     , _temp_opts = ''
                                     , $options = $li['field_data']['select_options'];
 
-                                    _temp = _temp.replace(/\[ID\]/g, 'filed-' + $li['field_data']['field_id']);
-                                    _temp = _temp.replace(/\[NAME\]/g, $li['field_data']['field_id']);
-                                    _temp = _temp.replace(/\[TITLE\]/g, $li['field_title']);
-                                    _temp = _temp.replace(/\[VALUE\]/g, '');
-                                    _temp = _temp.replace(/\[HINT\]/g, $li['field_hint']);
-                                    _temp = _temp.replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'');
+                                    _temp = _temp
+                                    .replace(/\[ID\]/g, 'filed-' + $li['field_data']['field_id'])
+                                    .replace(/\[NAME\]/g, $li['field_data']['field_id'])
+                                    .replace(/\[TITLE\]/g, $li['field_title'])
+                                    .replace(/\[VALUE\]/g, '')
+                                    .replace(/\[HINT\]/g, $li['field_hint'])
+                                    .replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'');
 
                                     for ($opt in $options) {
                                         let _temp_opt = _template_select_opt;
-                                        _temp_opt = _temp_opt.replace(/\[VALUE\]/g, $options[$opt]);
-                                        _temp_opt = _temp_opt.replace(/\[OPTION\]/g, $options[$opt]);
+                                        _temp_opt = _temp_opt
+                                        .replace(/\[VALUE\]/g, $options[$opt])
+                                        .replace(/\[OPTION\]/g, $options[$opt]);
                                         _temp_opts += _temp_opt;
                                     }
                                     _temp = _temp.replace(/\[OPTIONS\]/g, _temp_opts);
@@ -720,26 +787,79 @@ $(function() {
                 function processData() {
                     console.log('processData\r\n=-=-=-=-=-=');
                     console.log(_r_data);
+                    $album = _r_data['album_pics'];
+
+                    if (_r_data['featured_id'] !== undefined) $this.var.form_data.album_used.push(_r_data['featured_id']);
+                    if (_r_data['r_pic_id'] !== undefined) $this.var.form_data.album_used.push(_r_data['r_pic_id']);
+                    if (_r_data['h_pic_id'] !== undefined) $this.var.form_data.album_used.push(_r_data['h_pic_id']);
+                    if (_r_data['d_pic_id'] !== undefined) $this.var.form_data.album_used.push(_r_data['d_pic_id']);
 
                     // album_pics // extra_data // status // is_public
                     for ($prop in _r_data) {
                         var $name = $prop
-                        , $val = _r_data[$name];
-                        if ($name == "album_pics" || $name == "featured_id") {
-                            continue;
+                        , $value = _r_data[$name];
+
+                        // console.log("@@@@@@@@@@");
+                        // console.log($name);
+                        // console.log($value);
+                        // console.log("@@@@@@@@@@");
+
+                        // if ($name === "user_name" && $value === "0") $value = window._comm.$user.name;
+
+                        var $el = $this.el.$theform.find('[name="' + $name + '"]');
+                        if ($name == "album_pics") {
+                            // continue; // for test
+                            if ($album.length == 0) continue;
+                            for ($pic in $album) {
+                                if ($this.var.form_data.album_used.includes($pic)) continue;
+                                $this.checkPicsIsFull('+1');
+                                if ($this.var.form_data['pics']['current'] > $this.var.form_data['pics']['max']) break;
+
+                                // let _target = $this.el.$form_filed.album_ul
+                                let _target = $this.el.$pics.$filed_album_pic
+                                , _template = $this.var.$temp_formocean_li;
+
+                                _template = _template
+                                .replace(/\[ID\]/g, $pic)
+                                .replace(/\[SRC\]/g, $album[$pic].url)
+                                .replace(/data-src/g, 'src');
+
+                                _target.after(_template);
+                            }
+                            console.log($this.var.form_data['pics'])
+                        } else if ($name == "featured_id" || $name == "r_pic_id" || $name == "h_pic_id" || $name == "d_pic_id") {
+                            // continue; // for test
+                            // console.log('pic :: $name :: ' + $name);
+                            // console.log('pic :: $value :: ' + $value);
+                            if ($album.length == 0) continue;
+                            if ($album[$value] === undefined) continue;
+                            let $src = $album[$value].url;
+                            $this.var.form_data[$name] = $album[$value].id;
+                            // if ($this.var.form_status === 'view') $el.attr('value', $src);
+                            // else $el.val($src);
+                            $el.attr('value', $src);
+                            $this.el.$theform.find('#preview_' + $name).attr({'src': $src, 'data-pics-id': $album[$value].id});
                         } else if ($name == "extra_data") {
-                            for ($prop_extra in $val) {
+                            // console.log('extra_data :: $name :: ' + $name);
+                            // console.log('extra_data :: $value :: ' + $value);
+                            for ($prop_extra in $value) {
                                 $name = $prop_extra;
-                                $val = $val[$name];
-                                var $el = $this.el.$theform.find('[name="' + $name + '"]');
-                                $el.val($val);
+                                $val = $value[$name];
+                                $el = $this.el.$theform.find('[name="' + $name + '"]');
+                                if ($this.var.form_status === 'view') $el.attr('value', $val);
+                                else $el.val($val);
                             }
                             continue;
                         } else {
-                            var $el = $this.el.$theform.find('[name="' + $name + '"]');
-                            $el.val($val);
+                            // console.log('common :: $name :: ' + $name);
+                            // console.log('common :: $value :: ' + $value);
+                            $el = $this.el.$theform.find('[name="' + $name + '"]');
+                            if ($this.var.form_status === 'view') $el.attr('value', $value);
+                            else $el.val($value);
                         }
                     }
+                    if (($this.el.$theform.find('[name="user_name"]').html() === "") || ($this.el.$theform.find('[name="user_name"]').html() === "0")) $this.el.$theform.find('[name="user_name"]').val(window._comm.$user.name);
+                    if (($this.el.$theform.find('[name="user_email"]').html() === "") || ($this.el.$theform.find('[name="user_email"]').html() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
                 }
 
                 yesShowUp();
@@ -758,7 +878,8 @@ $(function() {
                                 },
                             });
                         }
-                        $this.el.$theform.find('input, select').attr("disabled", true).attr("readonly", "readonly");
+                        // $this.el.$theform.find('input, select').attr("disabled", true)
+                        $this.el.$theform.find('input, select').attr("readonly", "readonly");
                     }
 
                     return window.setTimeout(( () => {
@@ -769,6 +890,31 @@ $(function() {
                 }
             }
         },
+        checkPicsIsFull: function(_count) {
+            // console.log('checkPicsIsFull');
+            let $this = this;
+
+            if (/featured_id|r_pic_id|h_pic_id|d_pic_id/.test($this.var.form_data.pics.temp_id)) return;
+
+            switch (_count) {
+                case '+1':
+                    $this.var.form_data['pics']['current'] += 1;
+                break;
+                case '-1':
+                    $this.var.form_data['pics']['current'] -= 1;
+                break;
+            }
+
+            let $current = $this.var.form_data['pics']['current']
+            , $max = $this.var.form_data['pics']['max'];
+
+            // console.log('current :: ' + $this.var.form_data['pics']['current']);
+            // console.log('max :: ' + $this.var.form_data['pics']['max']);
+            // console.log('current / max :: ' + $current + '/' + $max);
+            if ($current >= $max) $this.el.$pics.$album_pic.addClass('display-none-i');
+            else $this.el.$pics.$album_pic.removeClass('display-none-i');
+            return;
+        },
 
         // first to confirm in the popup, 處理 form 表第一次按送出，整理成清單列表的處理
         formConfirm: function() {
@@ -776,16 +922,24 @@ $(function() {
             let $this = this;
             let $temp = '';
             let $data_serialize = {};
+            console.log($this.el.$theform.serializeArray());
             $.each($this.el.$theform.serializeArray(), function() {
+                console.log(this.name);
+                console.log(this.value);
                 let $el = $('[name="' + this.name + '"]');
                 if ($el.is('select') && $el[0].hasAttribute('multiple')) {
                     if (!Array.isArray($data_serialize[this.name])) $data_serialize[this.name] = []
                     $data_serialize[this.name].push(this.value);
+
+                    $max = $el.attr('max');
+                    if ($max !== undefined && $data_serialize[this.name].length === $max) return false; // same as 'break'
                 } else {
+                    console.log(this.name);
+                    console.log(this.value);
                     $data_serialize[this.name] = this.value;
                 }
             });
-            // console.log($data_serialize);
+            console.log($data_serialize);
             $this.var.form_data = Object.assign({}, $this.var.form_data, $data_serialize);
 
             $.each($this.var.form_data, function(k, v) {
@@ -798,7 +952,7 @@ $(function() {
             // check imgs
             // console.log($this.var.img_file.datas);
             $.each($this.var.img_file.datas, function(i) {
-                console.log($this.var.img_file.datas[i]);
+                // console.log($this.var.img_file.datas[i]);
                 let $id = $this.var.img_file.datas[i]['response'].id
                 , $pid = $this.var.img_file.datas[i].pid;
                 $this.var.form_data[$pid] = $id;
@@ -812,7 +966,7 @@ $(function() {
                 , $label = $('label[for="filed-' + $key + '"]').text().trim()
                 , $value = $data_serialize[$key];
 
-                if (/_pic_id|album_pics|shooter_name/.test($key)) continue; // _pic_id / album_pics / shooter_name 跳過先不處理
+                if (/_pic_id|album_pics/.test($key)) continue; // (/_pic_id|album_pics/.test($key)) 跳過先不處理
 
                 if (/status/.test($key)) $value = (($value === '0')?"草稿":"正式發佈");
                 if (/is_public/.test($key)) $value = (($value === '0')?"不公開":"公開");
@@ -893,9 +1047,10 @@ $(function() {
                         , _templates = '';
                         for ($prop in _source) {
                             let _template = _template_select;
-                            _template = _template.replace(/\[ID\]/g, _source[$prop]['id']);
-                            _template = _template.replace(/\[VALUE\]/g, _source[$prop]['city'] + '-' + _source[$prop]['river_name']);
-                            _template = _template.replace(/\[disabled\]/g, (_source[$prop]['status'] == 0)?'disabled':'');
+                            _template = _template
+                            .replace(/\[ID\]/g, _source[$prop]['id'])
+                            .replace(/\[VALUE\]/g, _source[$prop]['city'] + '-' + _source[$prop]['river_name'])
+                            .replace(/\[disabled\]/g, (_source[$prop]['status'] == 0)?'disabled':'');
                             _templates += _template;
                         }
                         _target.html(_templates);

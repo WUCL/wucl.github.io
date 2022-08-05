@@ -113,3 +113,15 @@ a {
 .display-none-i {
     display: none !important;
 }
+.display-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.display-flex-i {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}

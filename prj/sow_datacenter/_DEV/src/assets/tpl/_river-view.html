@@ -13,14 +13,14 @@
                             <li class="filed-date"><label for="filed-date">調查日期</label><input id="filed-date" type="date" name="date"></li>
                             <li class="filed-time"><label for="filed-time">調查時間</label><input id="filed-time" type="time" name="time"></li>
                             <li class="filed-city"><label for="filed-city">縣市</label><input id="filed-city" type="text" name="city"></li>
-                            <li class="filed-river_name"><label for="filed-river_name">地圖鏈結</label><input id="filed-river_name" type="text" name="river_name"></li>
+                            <li class="filed-river_name"><label for="filed-river_name">河川名稱</label><input id="filed-river_name" type="text" name="river_name"></li>
                             <li class="filed-river_part"><label for="filed-river_part">樣區所在地段</label><select id="filed-river_part" name="river_part"></select></li>
                         </ul>
                     </div>
                     <div class="group">
                         <ul>
-                            <li class="filed-river_start filed-river_end">
-                                <label class="filed-inword" for="filed-river_start">從編號<input type="text" name="river_start"></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="text" name="river_end">結束</label>
+                            <li class="filed-river_start filed-river_end display-flex-i">
+                                <label class="filed-inword" for="filed-river_start">從編號<input type="number" name="river_start"></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="number" name="river_end">結束</label>
                             </li>
                         </ul>
                     </div>
@@ -37,18 +37,18 @@
                             <li class="filed-survey_scope"><label for="filed-survey_scope">調查範圍寬度（約50%以上範圍都是這麽寬）</label><select id="filed-survey_scope" name="survey_scope"></select></li>
                             <li class="filed-l_garbages">
                                 <label for="filed-l_garbages">"數量最多"的垃圾類型（最多3項，不用排序）</label>
-                                <select id="filed-l_garbages" name="l_garbages"></select>
+                                <select id="filed-l_garbages" name="l_garbages" max="3"></select>
                             </li>
                             <li class="filed-l_garbage"><label for="filed-l_garbage">其他數量最多的垃圾是（如有才需填）</label><input id="filed-l_garbage" type="text" name="l_garbage"></li>
                             <li class="filed-v_garbages">
                                 <label for="filed-v_garbages">"最佔體積"的垃圾類型（最多3項，不用排序）</label>
-                                <select id="filed-v_garbages" name="v_garbages"></select>
+                                <select id="filed-v_garbages" name="v_garbages" max="3"></select>
                             </li>
                             <li class="filed-v_garbage"><label for="filed-v_garbage">其他最佔體積的垃圾是（如有才需填）</label><input id="filed-v_garbage" type="text" name="v_garbage"></li>
                             <li class="filed-m500_garbages"><label for="filed-m500_garbages">500公尺內垃圾型態多為？</label><select id="filed-m500_garbages" name="m500_garbages"></select></li>
-                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages">其他想要補充的資訊（如有才需填）</label><select id="filed-m500_h_garbages" name="m500_h_garbages"></select></li>
-                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">500公尺內垃圾熱點集中於？</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage"></li>
-                            <li class="filed-order_info"><label for="filed-order_info">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
+                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages">500公尺內垃圾熱點集中於？</label><select id="filed-m500_h_garbages" name="m500_h_garbages"></select></li>
+                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage"></li>
+                            <li class="filed-order_info"><label for="filed-order_info">其他想要補充的資訊（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
                         </ul>
                     </div>
                     <div class="group">
@@ -61,7 +61,7 @@
                         <ul>
                             <li class="filed-r_pic_id" data-pid="r_pic_id">
                                 <div>
-                                    <label>代表照</label>
+                                    <label for="filed-r_pic_id">代表照</label>
                                     <div class="photo-box" data-photo="1">
                                         <img id="preview_r_pic_id" class="preview_r_pic_id" src>
                                     </div>
@@ -73,7 +73,7 @@
                             </li>
                             <li class="filed-h_pic_id" data-pid="h_pic_id">
                                 <div>
-                                    <label>熱點照</label>
+                                    <label for="filed-h_pic_id">熱點照</label>
                                     <div class="photo-box" data-photo="1">
                                         <img id="preview_h_pic_id" class="preview_h_pic_id" src>
                                     </div>
@@ -85,7 +85,7 @@
                             </li>
                             <li class="filed-d_pic_id" data-pid="d_pic_id">
                                 <div>
-                                    <label>值得照</label>
+                                    <label for="filed-d_pic_id">值得照</label>
                                     <div class="photo-box" data-photo="1">
                                         <img id="preview_d_pic_id" class="preview_d_pic_id" src>
                                     </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="group">
                         <ul>
-                            <li class="filed-shooter_name"><label for="filed-shooter_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-shooter_name" name="shooter_name"></li>
+                            <li class="filed-researcher_name"><label for="filed-researcher_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-researcher_name" name="researcher_name"></li>
                         </ul>
                     </div>
                     <div class="group with-photo with-3in1">
