@@ -116,7 +116,7 @@
 		                            <li class="filed-r_pic_id" data-pid="r_pic_id">
 		                                <div>
 		                                    <label for="filed-r_pic_id">代表照</label>
-		                                    <div class="photo-box" data-photo="1">
+		                                    <div class="photo-box">
 		                                        <img id="preview_r_pic_id" class="preview_r_pic_id" src>
 		                                    </div>
 		                                </div>
@@ -128,7 +128,7 @@
 		                            <li class="filed-h_pic_id" data-pid="h_pic_id">
 		                                <div>
 		                                    <label for="filed-h_pic_id">熱點照</label>
-		                                    <div class="photo-box" data-photo="1">
+		                                    <div class="photo-box">
 		                                        <img id="preview_h_pic_id" class="preview_h_pic_id" src>
 		                                    </div>
 		                                </div>
@@ -140,7 +140,7 @@
 		                            <li class="filed-d_pic_id" data-pid="d_pic_id">
 		                                <div>
 		                                    <label for="filed-d_pic_id">值得照</label>
-		                                    <div class="photo-box" data-photo="1">
+		                                    <div class="photo-box">
 		                                        <img id="preview_d_pic_id" class="preview_d_pic_id" src>
 		                                    </div>
 		                                </div>
@@ -153,7 +153,7 @@
 		                    </div>
 		                    <div class="group">
 		                        <ul>
-		                            <li class="filed-researcher_name"><label for="filed-researcher_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-researcher_name" name="researcher_name"></li>
+		                            <li class="filed-user_name"><label for="filed-user_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-user_name" name="user_name"></li>
 		                        </ul>
 		                    </div>
 		                    <div class="group with-photo with-3in1">
@@ -161,7 +161,7 @@
 		                            <li class="filed-album_pics">
 		                                <div>
 		                                    <label>其他照片</label>
-		                                    <div class="photo-box" data-photo="1">
+		                                    <div class="photo-box">
 		                                        <img src>
 		                                    </div>
 		                                </div>
@@ -173,7 +173,7 @@
 		                            <li class="filed-album_pics">
 		                                <div>
 		                                    <label>其他照片</label>
-		                                    <div class="photo-box" data-photo="1">
+		                                    <div class="photo-box">
 		                                        <img src>
 		                                    </div>
 		                                </div>
@@ -267,6 +267,9 @@
                         </div>
                     </div>
                 </li>
+            </div>
+            <div id="template_form_ocean__album_pic_view">
+                <div class="photo-box swiper-slide" data-pics-id="[ID]"><img data-src="[SRC]"></div>
             </div>
             <div id="template_form_field__custom">
                 <li class="filed-extra_data_[ID]">[CONTENT]</li>

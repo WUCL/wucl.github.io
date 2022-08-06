@@ -354,9 +354,8 @@ $(function() {
                     $this.checkPicsIsFull('+1');
 
                     // call api // ajax url
-                    var _url = $this.api.url + $this.api.path.upload_pic
-                    // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
-                    ;
+                    var _url = $this.api.url + $this.api.path.upload_pic;
+                    if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
                     console.log(_url);
 
                     let _data = Object.assign({}, $this.api.data,
@@ -418,9 +417,8 @@ $(function() {
                 }
 
                 // call api // ajax url
-                var _url = $this.api.url + $this.api.path.delete_pic
-                // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
-                ;
+                var _url = $this.api.url + $this.api.path.delete_pic;
+                if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
                 console.log(_url);
 
                 let _data = Object.assign({}, $this.api.data, {
@@ -483,9 +481,8 @@ $(function() {
 
                 // send the data to api // API
                 // call api // ajax url
-                var _url = $this.api.url + $this.api.path.save_form
-                // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
-                ;
+                var _url = $this.api.url + $this.api.path.save_form;
+                if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
                 console.log(_url);
 
                 console.log($this.api.data);
@@ -558,12 +555,15 @@ $(function() {
             let url_code = window.helper.getUrlParams(window.location.href, 'code')
             , url_settingId = window.helper.getUrlParams(window.location.href, 'setting_id');
             console.log(url_code);
+            console.log(url_settingId);
 
             // checking status, than set up status
             let $page_title = '';
-            if (url_code && url_settingId) {
+            if ((this.var.page_position === "cleanocean" && url_code)
+                ||
+                (this.var.page_position === "cleanriver" && url_code && url_settingId)) {
                 $this.api.data.code = url_code;
-                $this.api.data.setting_id = url_settingId;
+                $this.api.data.setting_id = url_settingId || "";
                 console.log($this.api.data)
                 // 確認表單是否為view的狀態
                 if ($this.var.page_status == 'view') {
@@ -605,9 +605,8 @@ $(function() {
             console.log("showup");
 
             // call api // ajax url
-            var _url = $this.api.url + $this.api.path.init_form
-            // + "/?key=" + $this.api.param.key // 測試用，上線刪掉 for test
-            ;
+            var _url = $this.api.url + $this.api.path.init_form;
+            if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
             // _url += '&__r=' + (new Date()).getTime();
             // console.log(_url);
 
@@ -810,20 +809,22 @@ $(function() {
                         if ($name == "album_pics") {
                             // continue; // for test
                             if ($album.length == 0) continue;
+                            let _target = $this.el.$pics.$filed_album_pic;
+
                             for ($pic in $album) {
                                 if ($this.var.form_data.album_used.includes($pic)) continue;
                                 $this.checkPicsIsFull('+1');
                                 if ($this.var.form_data['pics']['current'] > $this.var.form_data['pics']['max']) break;
 
-                                // let _target = $this.el.$form_filed.album_ul
-                                let _target = $this.el.$pics.$filed_album_pic
-                                , _template = $this.var.$temp_formocean_li;
-
+                                let _template = $this.var.$temp_formocean_li;
+                                if ($this.var.page_position === 'cleanocean' && $this.var.form_status === 'view') {
+                                    _target = $this.el.$form_filed.album_ul.find('.filed-album_pics-wrapper');
+                                    _template = window.helper.getTemplate('form_ocean__album_pic_view');
+                                }
                                 _template = _template
                                 .replace(/\[ID\]/g, $pic)
                                 .replace(/\[SRC\]/g, $album[$pic].url)
                                 .replace(/data-src/g, 'src');
-
                                 _target.after(_template);
                             }
                             console.log($this.var.form_data['pics'])
@@ -854,7 +855,8 @@ $(function() {
                             // console.log('common :: $name :: ' + $name);
                             // console.log('common :: $value :: ' + $value);
                             $el = $this.el.$theform.find('[name="' + $name + '"]');
-                            if ($this.var.form_status === 'view') $el.attr('value', $value);
+                            // console.log($value);
+                            if ($this.var.form_status === 'view') $el.val($value);
                             else $el.val($value);
                         }
                     }
@@ -866,6 +868,7 @@ $(function() {
                 async function yesShowUp() {
                     if ($this.var.form_status === 'view') {
                         if ($this.var.page_position === 'cleanocean') {
+                            console.log('yesShowUp');
                             // build swiper
                             var swiper = new Swiper("#filed-album_pics", {
                                 slidesPerView: 3,
@@ -878,8 +881,8 @@ $(function() {
                                 },
                             });
                         }
-                        // $this.el.$theform.find('input, select').attr("disabled", true)
-                        $this.el.$theform.find('input, select').attr("readonly", "readonly");
+                        $this.el.$theform.find('input').attr("readonly", "readonly");
+                        $this.el.$theform.find('select').attr("disabled", true)
                     }
 
                     return window.setTimeout(( () => {

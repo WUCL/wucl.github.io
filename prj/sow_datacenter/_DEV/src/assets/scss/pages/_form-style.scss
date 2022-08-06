@@ -325,16 +325,17 @@ body[data-status="view"] {
             .photo-box {
                position: relative;
                width: 100%;
-               height: 150px;
+               height: 180px;
                background: $color-white;
                border-radius: 5px;
                img {
                   height: 100%;
                   width: auto;
+                  margin: 0 auto;
                }
-               &[data-photo="1"] {
-                  background: transparent;
-               }
+               // &[data-photo="1"] {
+               //    background: transparent;
+               // }
             }
             .swiper-pagination {
                bottom: -20px;
