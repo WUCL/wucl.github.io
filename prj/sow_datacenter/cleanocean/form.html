@@ -18,6 +18,8 @@
         <!-- <link rel="stylesheet" type="text/css" href="../public/lib/slick/slick.css" /> -->
         <!-- <link rel="stylesheet" type="text/css" href="../public/lib/swiper/swiper.min.css" /> -->
         <link rel="stylesheet" type="text/css" href="../public/lib/aos/aos.css" />
+        <!-- include leafletjs -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
         <link rel="stylesheet" type="text/css" href="../public/css/ocean-form.min.css" />
 	</head>
 	<body data-page="ocean-form style-form" data-position="cleanocean" data-status="form">
@@ -68,6 +70,19 @@
 		                            <li class="filed-place"><label for="filed-place" required>地點（加路蘭、海水浴場...）</label><input id="filed-place" type="text" name="place" required></li>
 		                            <li class="filed-lng"><label for="filed-lng">經度</label><input id="filed-lng" type="number" name="lng"></li>
 		                            <li class="filed-lat"><label for="filed-lat">緯度</label><input id="filed-lat" type="number" name="lat"></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		                <div class="form-basic magin-0">
+		                    <div class="group with-1in1">
+		                        <ul>
+		                            <li class="filed-map"><label>經緯度地圖選擇</label><div id="themap" style="width: 100%; height: 250px;"></div></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		                <div class="form-basic magin-0">
+		                    <div class="group with-2in1">
+		                        <ul>
 		                            <li class="filed-user_name"><label for="filed-user_name" required>登記者名稱</label><input id="filed-user_name" type="text" name="user_name" required></li>
 		                            <li class="filed-user_company"><label for="filed-user_company">單位名稱或登記者</label><input id="filed-user_company" type="text" name="user_company"></li>
 		                            <li class="filed-user_email"><label for="filed-user_email" required>登記者信箱</label><input id="filed-user_email" type="text" name="user_email" required></li>
@@ -391,6 +406,8 @@
 		<!-- <script src="../public/js/common.js"></script> -->
 
         <script src="../public/js/common.js"></script>
+        <!-- include leafletjs -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <!-- <link rel="stylesheet" type="text/css" href="../public/lib/resizeImg/swiper.min.css" /> -->
         <!-- <script src="../public/lib/resizeImg/jquery.resizeImg.js"></script> -->
         <!-- <script src="../public/lib/resizeImg/mobileBUGFix.mini.js"></script> -->

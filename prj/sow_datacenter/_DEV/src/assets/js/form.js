@@ -150,7 +150,7 @@ $(function() {
                     console.log($this.api); // for test
 
                     $this.bindEvent();
-                    $this.checkStatus();
+                    $this.checkStatus(); // start
                     $this.setPopup();
                 }
             }
@@ -884,6 +884,7 @@ $(function() {
                         $this.el.$theform.find('input').attr("readonly", "readonly");
                         $this.el.$theform.find('select').attr("disabled", true)
                     }
+                    $this.setTheMap();
 
                     return window.setTimeout(( () => {
                         console.log('data checked');
@@ -1060,8 +1061,74 @@ $(function() {
                     }
                 });
             }
-        }
+        },
 
+        // the map，經緯度地圖
+        setTheMap: function() {
+            if ($('#themap').length == 0) return;
+            /* map */
+            var default_latlng = [25.042385, 121.533012];
+            var _map = L.map('themap').setView(default_latlng, 18);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(_map);
+
+            var _layer = L.marker(default_latlng).addTo(_map).bindPopup('預設位置 <br> <b>內政部資訊中心</b>').openPopup();
+
+            var _ajaxLock = false;
+
+            _map.on('click', function(ev) {
+                if(!_ajaxLock){
+                    _ajaxLock = true;
+                    console.log(ev.latlng);
+                    setLatLng(ev.latlng.lat,ev.latlng.lng);
+                }
+            });
+
+            function setLatLng(latitude,longitude) {
+
+                document.getElementById("filed-lat").value = latitude;
+                document.getElementById("filed-lng").value = longitude;
+
+                var latlng = {lat: latitude, lng: longitude};
+                // map pan to
+
+                _layer.remove();
+                var url = "https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat="+latitude+"&lon="+longitude+"";
+
+                $.ajax({
+                    url: url,//地址
+                    dataType: 'json',//返回数据类型
+                    contentType: 'application/json',//提交数据类型
+                    type: 'GET',//请求方式
+                    timeout: 30000,//超时
+                    //请求成功
+                    success: function (res) {
+                        console.log(res);
+                        var geocoding = res.features[0].properties.geocoding;
+                        console.log(geocoding);
+
+                        // map add marker
+                        // _showJSON = JSON.stringify(geocoding);
+                        _showAry = geocoding.label.split(',').reverse();
+                        _showName = _showAry.pop();
+                        _showAddr = _showAry.toString().replace(/\,/g, "").replace(/\s/g, '');
+
+                        _layer = L.marker(latlng).addTo(_map).bindPopup("<span style='font-weight:bold;'>" + _showName + "</span><br/>" + _showAddr).openPopup();
+                        _map.panTo(latlng);
+                        _ajaxLock = false;
+                    },
+                    error: function (res) {
+                        console.log(res);
+                        console.log(res.msessage);
+                        console.log(res.error_code);
+                        alert('取地址 API 錯誤，請稍後再試');
+                        _ajaxLock = false;
+                    }
+                });
+            }
+        },
     };
     FORM.init();
 });

@@ -64,6 +64,11 @@ section.theform {
                   margin-bottom: 10px;
                }
             }
+            &.with-1in1 {
+               ul {
+                  max-width: 100%;
+               }
+            }
             &.with-2in1 {
                ul {
                   max-width: 100%;

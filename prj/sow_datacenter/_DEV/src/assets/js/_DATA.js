@@ -1,3 +1,6 @@
+// /cleanriver/view.html?setting_id=1&code=789e06b29313be69ba9516c0e8106dfd
+// /cleanocean/view.html?code=bf340fb0e477c64080be88f994cd174f
+
 window._comm = {
     $testMode: false,
     $api: {
