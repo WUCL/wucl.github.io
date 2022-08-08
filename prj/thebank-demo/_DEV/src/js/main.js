@@ -1,6 +1,6 @@
 $(function() {
     var MAIN = {
-        test_mode: false,
+        test_mode: true,
         api: {
             url: 'https://fakebank.69939.uk/api/v1',
             data: {}
@@ -66,7 +66,7 @@ $(function() {
             if (this.test_mode) this.testMode();
             this.getDateTime();
             this.bindEvent();
-            this.step1();
+            // this.step1();
             this.step2();
             this.step3();
             this.step4();
@@ -238,7 +238,7 @@ $(function() {
                                 // console.log(_source4);
 
                                 // order by
-                                _source4 = Object.keys(_source4).sort().reduce(
+                                _source4 = Object.keys(_source4).sort().reduceRight( // reduce(
                                     (obj, key) => {
                                         obj[key] = _source4[key];
                                         return obj;
