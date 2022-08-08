@@ -1,12 +1,38 @@
 <div id="templates" class="display-none-i">
+    <div id="template_trade-option">
+        <li class="trade-option-item" data-y="[Y]" data-m="[M]">[YM]</li>
+    </div>
+    <div id="template_trade-list">
+        <ul class="trade-list" data-y="[Y]" data-m="[M]" t-highlight>[ITEMS]</ul>
+    </div>
     <div id="template_trade-item">
         <li class="trade-list-item">
-            <span class="date">[DATE]</span>
-            <div class="title">
-                <span class="title-summary">[TITLE]</span>
-                <span class="title-subtitle">[SUBTITLE]</span>
+            <div class="item-top">
+                <span class="date">[DATE]</span>
+                <div class="headline">
+                    <span class="trade-title">[TITLE]</span>
+                    <span class="trade-subtitle">[SUBTITLE]</span>
+                </div>
+                <span class="amount">[MONEY]</span>
             </div>
-            <span class="amount">[MONEY]</span>
+            <div class="item-bottom">
+                <div class="trade-remain">
+                    <label>結餘</label>
+                    <span>[REMAIN]</span>
+                </div>
+                <div class="trade-summary">
+                    <label>註記</label>
+                    <span>[SUMMARY]</span>
+                </div>
+                <div class="trade-subtitle">
+                    <label>備註</label>
+                    <span>[SUBTITLE]</span>
+                </div>
+                <div class="trade-account">
+                    <label>轉出帳號</label>
+                    <span>[ACCOUNT]</span>
+                </div>
+            </div>
         </li>
     </div>
 </div>

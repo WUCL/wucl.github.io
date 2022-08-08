@@ -42,7 +42,9 @@ $(function() {
             // step4
 
             // step5
-            $tradeList: $('#trade-list'),
+            $tradeListsOption: $('#trade-lists-option'),
+            $tradeLists: $('#trade-lists'),
+            // $tradeList: $('.trade-list'),
             $btnTransfer: $('#btn-transfer'),
             // step5
 
@@ -56,6 +58,7 @@ $(function() {
             _step1: {
                 timeout: 1500,
             },
+            _trads: [],
         },
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
@@ -70,6 +73,8 @@ $(function() {
             this.step5();
             this.step6();
             this.step7();
+
+            if (this.test_mode) this.el.$loginSubmit.click();
         },
         testMode: function() {
             console.log('testMode');
@@ -80,6 +85,7 @@ $(function() {
             $('#login-account').attr('value', 'user003');
             $('#login-password').attr('value', '1qaz@WSX');
             $this.el.$select.val($this.el.$main.attr('data-index'));
+
             $this.el.$select.on('change', (e) => {
                 let $index = e.target.value;
                 $this.tranIndex($index);
@@ -111,7 +117,7 @@ $(function() {
             this.el.$main.attr('data-index', index);
             window.scrollTo(0, 0);
 
-            if (this.test_mode) this.testMode();
+            // if (this.test_mode) this.testMode();
             return;
         },
         step1: function() {
@@ -176,31 +182,116 @@ $(function() {
 
                         let $amount = _r.total
                         , $id = _r.id
-                        , $detail = _r.detail;
+                        , $detail = _r.detail
+                        , $account = $id.replaceAt($id.length-1, "*");
+                        $account = $account.replaceAt($account.length-6, "*").replaceAt($account.length-7, "*");
 
                         $this.el.$totalAmount.html(window.helper.numberWithCommas($amount));
                         $this.el.$idSpan.html($id);
                         $this.el.$idSelect.html('<option value="' + $id + '">' + $id + '</option>')
 
-                        let _source = $detail
-                        , _target = $this.el.$tradeList
-                        , _template_item = window.helper.getTemplate('trade-item')
-                        , _templates = '';
+                        // process trade item
 
-                        for ($prop in _source) {
-                            let _template = _template_item;
-                            _template = _template.replace(/\[DATE\]/g, moment(parseInt(_source[$prop].date)).format('MM/DD'));
-                            _template = _template.replace(/\[TITLE\]/g, _source[$prop].title);
-                            _template = _template.replace(/\[SUBTITLE\]/g, _source[$prop].subtitle);
-                            _template = _template.replace(/\[MONEY\]/g, window.helper.numberWithCommas(_source[$prop].money));
-                            _templates += _template;
+                        let _source1 = $detail; // reOrder trade
+
+                        for ($prop1 in _source1) {
+                            let $date = parseInt(_source1[$prop1].date)
+                            , $y = moment.unix($date).format('YYYY')
+                            , $m = moment.unix($date).format('MM')
+                            , $d =  moment.unix($date).format('DD');
+
+                            // console.log(_source1[$prop1]);
+                            // console.log("Year :: " + $y);
+                            // console.log("Month :: " + $m);
+                            // console.log("MonthDate :: " + $md);
+                            if ($this.var._trads[$y] === undefined) $this.var._trads[$y] = {};
+                            if ($this.var._trads[$y][$m] === undefined) $this.var._trads[$y][$m] = {};
+                            $this.var._trads[$y][$m][$d] = _source1[$prop1];
                         }
-                        _target.html(_templates);
+                        console.log($this.var._trads);
+
+                        let _source2 = $this.var._trads
+                        , _target_option = $this.el.$tradeListsOption
+                        , _template_option = window.helper.getTemplate('trade-option')
+                        , _templates_option = ''
+
+                        , _target_list = $this.el.$tradeLists
+                        , _template_list = window.helper.getTemplate('trade-list')
+                        , _template_item = window.helper.getTemplate('trade-item')
+                        , _templates_list = '';
+
+                        for ($prop2 in _source2) {
+                            console.log(_source2);
+
+                            let _source3 = _source2[$prop2]
+                            , $y = $prop2
+                            , $m = 0
+                            , $d = '';
+
+                            for ($prop3 in _source3) {
+                                $m = $prop3;
+                                console.log($m);
+                                let _source4 = _source3[$prop3]
+                                , $templateOption = _template_option
+                                , $templateList = _template_list
+                                , $items = '';
+                                console.log(_source4);
+
+                                // order by
+                                _source4 = Object.keys(_source4).sort().reduce(
+                                    (obj, key) => {
+                                        obj[key] = _source4[key];
+                                        return obj;
+                                    },{}
+                                );
+
+                                for ($prop4 in _source4) {
+                                    $d = $prop4;
+                                    // console.log($d);
+                                    // console.log(_source4[$prop4])
+                                    let $templateItem = _template_item
+                                    , $data = _source4[$prop4]
+                                    , $date = $m + '/' + $d
+                                    , $title = $data.title
+                                    , $subtitle = $data.subtitle
+                                    , $summary = $data.summary
+                                    , $ramain = window.helper.numberWithCommas($data.remain)
+                                    , $money = window.helper.numberWithCommas($data.money);
+
+                                    $templateItem = $templateItem
+                                    .replace(/\[DATE\]/g, $date)
+                                    .replace(/\[TITLE\]/g, $title)
+                                    .replace(/\[SUBTITLE\]/g, $subtitle)
+                                    .replace(/\[SUMMARY\]/g, $summary)
+                                    .replace(/\[ACCOUNT\]/g, $account)
+                                    .replace(/\[REMAIN\]/g, $ramain)
+                                    .replace(/\[MONEY\]/g, $money);
+
+                                    $items += $templateItem;
+                                }
+
+                                // ## build the option
+                                $templateOption = $templateOption
+                                .replace(/\[Y\]/g, $y)
+                                .replace(/\[M\]/g, $m)
+                                .replace(/\[YM\]/g, $y + "/" + $m)
+                                _templates_option += $templateOption;
+
+                                // ## build the items
+                                $templateList = $templateList
+                                .replace(/\[Y\]/g, $y)
+                                .replace(/\[M\]/g, $m)
+                                .replace(/\[ITEMS\]/g, $items);
+                                _templates_list += $templateList;
+                            }
+                        }
+                        _target_option.append(_templates_option);
+                        _target_list.html(_templates_list);
 
                         return setTimeout(( () => {
                             $this.el.$body.attr('data-loading', '');
-                            $this.tranIndex('next');
-                        } ), 900);
+                            $this.tranIndex(5);
+                        } ), 200); // 900
                     }
                 // call api // ajax url
             });
@@ -228,6 +319,31 @@ $(function() {
             let $this = this;
             $this.el.$btnTransfer.on('click', () => {
                 return $this.tranIndex('next');
+            });
+            $this.el.$tradeLists.on('click', '.trade-list-item', (e) => {
+                return $(e.currentTarget).toggleClass('open');
+            });
+            $this.el.$tradeListsOption.on('click', '.trade-option-item', (e) => {
+                let $el = $(e.currentTarget);
+                // if ($el.hasClass('active')) return;
+
+                $this.el.$tradeListsOption.find('.trade-option-item').removeClass('active');
+
+                let $y = $el.attr('data-y')
+                , $m = $el.attr('data-m');
+
+                $.each($this.el.$tradeLists.find('.trade-list'), function() {
+                    let $el_list = $(this)
+                    , $el_list_y = $el_list.attr('data-y')
+                    , $el_list_m = $el_list.attr('data-m');
+                    if (($y =='0' && $m == '0') || ($el_list_y == $y && $el_list_m == $m)) {
+                        $el_list.removeClass('display-none');
+                        return; // same as 'continue'
+                    }
+                    $el_list.addClass('display-none');
+                });
+
+                return $el.addClass('active');
             });
         },
         step6: function() {

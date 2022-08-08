@@ -38,16 +38,17 @@ $fontsize-11: 4rem; // 64
 //Colors
 $color-white: #fff;
 $color-black: #000;
-$color-main: #116934;
-$color-second: #ffcc00;
-$color-font: #484848;
-$color-font2: #646464;
-$color-colorful: [#fcca00, #ffb443, #ff8400, #f34031, #BF0000]; // nth($color-colorful, 1);
+$color-main: #0a7979;
+// $color-second: #ffcc00;
+$color-font: #129c92;
+$color-border: [#e9f1f0, #f5c41a]; // nth($color-border, 1);
+// $color-font2: #646464;
+// $color-colorful: [#fcca00, #ffb443, #ff8400, #f34031, #BF0000]; // nth($color-colorful, 1);
 
 // breakpoint
 $bp-xs: 320px;
 $bp-s: 375px;
-$bp-2s: 414px;
+$bp-2s: 480px;
 $bp-3s: 560px;
 $bp-m: 640px;
 $bp-2m: 768px;

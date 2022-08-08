@@ -42,12 +42,19 @@
     <section id="step-5" class="step-5" data-desc="ntd-detail" data-screen="5">
         <div class="inner fixed">
             <button type="button" class="btn-back btn-back-with-arrow" t-highlight></button>
-            <select class="ntd-lives-account-id style-title-s" t-highlight></select>
-            <span class="ntd-lives-account-total total-amount style-title-s" t-highlight></span>
-            <button type="button" id="btn-transfer" class="btn-transfer" t-highlight></button>
+            <div class="acount-box">
+                <select class="ntd-lives-account-id style-title-s" t-highlight></select>
+                <span class="ntd-lives-account-total total-amount style-title-s" t-highlight></span>
+            </div>
+            <div class="btn-transfer-box">
+                <button type="button" id="btn-transfer" class="btn-transfer" t-highlight></button>
+            </div>
         </div>
         <div class="inner">
-            <ul id="trade-list" class="trade-list" t-highlight></ul>
+            <ul id="trade-lists-option" class="trade-lists-option" t-highlight>
+                <li class="trade-option-item active" data-y="0" data-m="0">最近</li>
+            </ul>
+            <div id="trade-lists" class="trade-lists"></div>
             <div class="data-time" t-highlight>
                 <div class="data-time-box">資料時間：<span id="data-time-datetime" class="data-time-datetime date-time"></span></div>
             </div>

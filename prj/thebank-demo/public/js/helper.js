@@ -61,10 +61,18 @@ window.helper = {
         return $('#template_' + template_type).html();
     },
 
-    numberWithCommas: (x) => {
+    numberWithCommas: (x) => { // 將數字帶上千字符號
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
+
+    // term: (str, index, char) => { // 取代 字串, 第幾個位置, 成什麼字
+    //     var xStr = str.substring(0, str.length + (parseInt(index)));
+    //     return xStr + char;
+    // }
 };
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
 
 function preloadImg(imgs) {
     var index = 0,
@@ -87,15 +95,18 @@ function preloadImg(imgs) {
     });
 }
 window.imgs = [
-    'public/img/step-1-bottom.jpg',
+    'public/img/icon-arrow.png',
     'public/img/step-1.jpg',
+    'public/img/step-1-bottom.jpg',
     'public/img/step-2.jpg',
-    'public/img/step-3-bottom.jpg',
     'public/img/step-3.jpg',
-    'public/img/step-4-bottom.jpg',
+    'public/img/step-3-bottom.jpg',
     'public/img/step-4.jpg',
-    'public/img/step-5-bottom.jpg',
+    'public/img/step-4-bottom.jpg',
     'public/img/step-5.jpg',
+    'public/img/step-5-middle.jpg',
+    'public/img/step-5-bottom.jpg',
+    'public/img/step-5-bottom-btn.jpg',
     'public/img/step-6.jpg',
     'public/img/step-7.jpg',
 ];
