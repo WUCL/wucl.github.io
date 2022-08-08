@@ -291,7 +291,7 @@ $(function() {
                         return setTimeout(( () => {
                             $this.el.$body.attr('data-loading', '');
                             $this.tranIndex(5);
-                        } ), 200); // 900
+                        } ), 700);
                     }
                 // call api // ajax url
             });
