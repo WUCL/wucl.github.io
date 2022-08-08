@@ -1,6 +1,6 @@
 $(function() {
     var MAIN = {
-        test_mode: true,
+        test_mode: false,
         api: {
             url: 'https://fakebank.69939.uk/api/v1',
             data: {}
@@ -66,7 +66,7 @@ $(function() {
             if (this.test_mode) this.testMode();
             this.getDateTime();
             this.bindEvent();
-            // this.step1();
+            this.step1();
             this.step2();
             this.step3();
             this.step4();
