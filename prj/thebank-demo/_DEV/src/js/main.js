@@ -131,15 +131,15 @@ $(function() {
             // console.log('step2');
             let $this = this;
             $this.el.$loginEye.on('click', () => {
-                console.log('eye');
+                // console.log('eye');
                 let $switch = ($('#login-account').attr('type') === "password")?"text":"password";
                 $('#login-account').attr('type', $switch);
                 $this.el.$step2.attr('data-eye', $switch);
                 return;
             });
             $this.el.$loginSubmit.on('click', () => {
-                console.log('submit');
-                console.log($this.el.$loginForm.serializeArray());
+                // console.log('submit');
+                // console.log($this.el.$loginForm.serializeArray());
 
                 $.each($this.el.$loginForm.serializeArray(), function() {
                     $this.api.data[this.name] = this.value;
@@ -153,7 +153,7 @@ $(function() {
                 // call api // ajax url
                     var _url = $this.api.url;
                     let _data = Object.assign({}, $this.api.data);
-                    console.log(_data);
+                    // console.log(_data);
 
                     // ajax handle
                     $.ajax({
@@ -162,7 +162,7 @@ $(function() {
                         data: JSON.stringify(_data),
                         dataType: "json",
                         success: (response) => {
-                            console.log(response);
+                            // console.log(response);
                             if (response.is_success === 1) {
                                 doSuccess(response);
                             } else {
@@ -178,7 +178,7 @@ $(function() {
                     });
 
                     function doSuccess(_r) { // to get the account data
-                        console.log(_r);
+                        // console.log(_r);
 
                         let $amount = _r.total
                         , $id = _r.id
@@ -208,7 +208,7 @@ $(function() {
                             if ($this.var._trads[$y][$m] === undefined) $this.var._trads[$y][$m] = {};
                             $this.var._trads[$y][$m][$d] = _source1[$prop1];
                         }
-                        console.log($this.var._trads);
+                        // console.log($this.var._trads);
 
                         let _source2 = $this.var._trads
                         , _target_option = $this.el.$tradeListsOption
@@ -221,7 +221,7 @@ $(function() {
                         , _templates_list = '';
 
                         for ($prop2 in _source2) {
-                            console.log(_source2);
+                            // console.log(_source2);
 
                             let _source3 = _source2[$prop2]
                             , $y = $prop2
@@ -230,12 +230,12 @@ $(function() {
 
                             for ($prop3 in _source3) {
                                 $m = $prop3;
-                                console.log($m);
+                                // console.log($m);
                                 let _source4 = _source3[$prop3]
                                 , $templateOption = _template_option
                                 , $templateList = _template_list
                                 , $items = '';
-                                console.log(_source4);
+                                // console.log(_source4);
 
                                 // order by
                                 _source4 = Object.keys(_source4).sort().reduce(
