@@ -69,7 +69,7 @@
 		                            <li class="filed-river_part"><label for="filed-river_part" required>樣區所在地段</label><select id="filed-river_part" name="river_part" required></select></li>
 		                        </ul>
 		                    </div>
-		                    <div class="group">
+		                    <div class="group with-1in1">
 		                        <ul>
 		                            <li class="filed-river_start filed-river_end display-flex-i">
 		                                <label class="filed-inword" for="filed-river_start" required>從編號<input type="number" name="river_start" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="number" name="river_end" required>結束</label>
@@ -111,55 +111,61 @@
 		                    <div class="form-title">照片紀錄【每樣區，至少拍攝各一張照片】</div>
 		                    <div class="group with-photo with-3in1">
 		                        <ul>
-		                            <li class="filed-r_pic_id" data-pid="r_pic_id">
+		                            <li class="pic filed-r_pic_id" data-pid="r_pic_id">
 		                                <div>
 		                                    <label>代表照</label>
 		                                    <div class="photo-box">
 		                                        <input type="file" id="r_pic_id" name="r_pic_id" class="pic-upload display-none" accept="image/*">
 		                                        <img id="preview_r_pic_id" class="preview_r_pic_id" src>
 		                                        <div class="pics_btns">
+		                                            <label class="btn-pic-update btn-style"></label>
+		                                            <label class="btn-pic-choice btn-style" for="r_pic_id"></label>
 		                                            <label class="btn-pic-upload btn-style" for="r_pic_id"></label>
 		                                            <label class="btn-pic-delete btn-style"></label>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div>
-		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="r_pic_id-time_min" name="r_pic_id-time_min" min="0" max="23">時 <input type="number" id="r_pic_id-time_sec" name="r_pic_id-time_sec" min="0" max="59">分</label>
+		                                    <label for="r_pic_id-datetime">拍攝時間</label>
+		                                    <input type="datetime-local" id="r_pic_id-datetime" name="r_pic_id-datetime">
 		                                </div>
 		                            </li>
-		                            <li class="filed-h_pic_id" data-pid="h_pic_id">
+		                            <li class="pic filed-h_pic_id" data-pid="h_pic_id">
 		                                <div>
 		                                    <label>熱點照</label>
 		                                    <div class="photo-box">
 		                                        <input type="file" id="h_pic_id" name="h_pic_id" class="pic-upload display-none" accept="image/*">
 		                                        <img id="preview_h_pic_id" class="preview_h_pic_id" src>
 		                                        <div class="pics_btns">
+		                                            <label class="btn-pic-update btn-style"></label>
+		                                            <label class="btn-pic-choice btn-style" for="h_pic_id"></label>
 		                                            <label class="btn-pic-upload btn-style" for="h_pic_id"></label>
 		                                            <label class="btn-pic-delete btn-style"></label>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div>
-		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="h_pic_id-time_min" name="h_pic_id-time_min" min="0" max="23">時 <input type="number" id="h_pic_id-time_sec" name="h_pic_id-time_sec" min="0" max="59">分</label>
+		                                    <label for="h_pic_id-datetime">拍攝時間</label>
+		                                    <input type="datetime-local" id="h_pic_id-datetime" name="h_pic_id-datetime">
 		                                </div>
 		                            </li>
-		                            <li class="filed-d_pic_id" data-pid="d_pic_id">
+		                            <li class="pic filed-d_pic_id" data-pid="d_pic_id">
 		                                <div>
 		                                    <label>值得照</label>
 		                                    <div class="photo-box">
 		                                        <input type="file" id="d_pic_id" name="d_pic_id" class="pic-upload display-none" accept="image/*">
 		                                        <img id="preview_d_pic_id" class="preview_d_pic_id" src>
 		                                        <div class="pics_btns">
+		                                            <label class="btn-pic-update btn-style"></label>
+		                                            <label class="btn-pic-choice btn-style" for="d_pic_id"></label>
 		                                            <label class="btn-pic-upload btn-style" for="d_pic_id"></label>
 		                                            <label class="btn-pic-delete btn-style"></label>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div>
-		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="d_pic_id-time_min" name="d_pic_id-time_min" min="0" max="23">時 <input type="number" id="d_pic_id-time_sec" name="d_pic_id-time_sec" min="0" max="59">分</label>
+		                                    <label for="d_pic_id-datetime">拍攝時間</label>
+		                                    <input type="datetime-local" id="d_pic_id-datetime" name="d_pic_id-datetime">
 		                                </div>
 		                            </li>
 		                        </ul>
@@ -171,38 +177,42 @@
 		                    </div>
 		                    <div class="group with-photo with-3in1">
 		                        <ul>
-		                            <li class="filed-album_pics" data-pid="album_pic_1">
+		                            <li class="pic filed-album_pics filed-album_pic_1" data-pid="album_pic_1">
 		                                <div>
 		                                    <label>其他照片</label>
 		                                    <div class="photo-box">
 		                                        <input type="file" id="album_pic_1" name="album_pic_1" class="pic-upload display-none" accept="image/*">
 		                                        <img id="preview_album_pic_1" class="preview_album_pic_1" src>
 		                                        <div class="pics_btns">
+		                                            <label class="btn-pic-update btn-style"></label>
+		                                            <label class="btn-pic-choice btn-style" for="album_pic_1"></label>
 		                                            <label class="btn-pic-upload btn-style" for="album_pic_1"></label>
 		                                            <label class="btn-pic-delete btn-style"></label>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div>
-		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="album_pics[1]_time_min" name="album_pics[1]_time_min" min="0" max="23">時 <input type="number" id="h_pic_id-time_sec" name="h_pic_id-time_sec" min="0" max="59">分</label>
+		                                    <label for="album_pics_1-datetime">拍攝時間</label>
+		                                    <input type="datetime-local" id="album_pics_1-datetime" name="album_pics_1-datetime">
 		                                </div>
 		                            </li>
-		                            <li class="filed-album_pics" data-pid="album_pic_2">
+		                            <li class="pic filed-album_pics filed-album_pic_2" data-pid="album_pic_2">
 		                                <div>
 		                                    <label>其他照片</label>
 		                                    <div class="photo-box">
 		                                        <input type="file" id="album_pic_2" name="album_pic_2" class="pic-upload display-none" accept="image/*">
 		                                        <img id="preview_album_pic_2" class="preview_album_pic_2" src>
 		                                        <div class="pics_btns">
+		                                            <label class="btn-pic-update btn-style"></label>
+		                                            <label class="btn-pic-choice btn-style" for="album_pic_2"></label>
 		                                            <label class="btn-pic-upload btn-style" for="album_pic_2"></label>
 		                                            <label class="btn-pic-delete btn-style"></label>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div>
-		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="album_pics[2]_time_min" name="album_pics[2]_time_min" min="0" max="23">時 <input type="number" id="d_pic_id-time_sec" name="d_pic_id-time_sec" min="0" max="59">分</label>
+		                                    <label for="album_pics_2-datetime">拍攝時間</label>
+		                                    <input type="datetime-local" id="album_pics_2-datetime" name="album_pics_2-datetime">
 		                                </div>
 		                            </li>
 		                        </ul>
@@ -342,12 +352,13 @@
                 <li class="filed-extra_data"><label for="filed-extra_data[ID]">[QUESTION]</label><input id="filed-extra_data[ID]" type="text" name="extra_data[ID]"></li>
             </div>
             <div id="template_form_ocean__album_pic">
-                <li class="filed-album_pic_[ID]" data-pid="album_pic_[ID]">
+                <li class="pic filed-album_pic_[ID]" data-pid="album_pic_[ID]" data-img-status="[STATUS]">
                     <div>
                         <div class="photo-box">
                             <input type="file" id="album_pic_[ID]" name="album_pics_[ID]" class="pic-upload display-none" accept="image/*">
-                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" data-src="[SRC]" data-pics-id="[ID]">
+                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" data-src="[SRC]" [data-pics-id]>
                             <div class="pics_btns">
+                                <label class="btn-pic-choice btn-style" for="album_pic_[ID]"></label>
                                 <label class="btn-pic-upload btn-style" for="album_pic_[ID]"></label>
                                 <label class="btn-pic-delete btn-style"></label>
                             </div>
@@ -474,6 +485,7 @@
         <script src="../public/lib/img-exif/exif.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
         <!-- <script src="../public/lib/img-exif/binaryajax.js"></script> -->
+        <script src="../public/lib/moment/moment.min.js"></script>
         <script src="../public/js/form.js"></script>
 	</body>
 </html>

@@ -25,6 +25,7 @@ $(function() {
                 init_cleanriver_form: 'init_cleanriver_form',
                 save_cleanriver_data: 'save_cleanriver_data',
                 cleanriver_upload_pic: 'cleanriver_upload_pic',
+                cleanriver_update_pic: 'cleanriver_update_pic',
                 cleanriver_delete_pic: 'cleanriver_delete_pic',
 
             },
@@ -146,6 +147,10 @@ $(function() {
                 if (window._comm.$user.id === '') {
                     return window.setTimeout(( () => { checkUserId(); }), 500);
                 } else {
+                    if (window._comm.$user.id === '-1') {
+                        alert('尚未登入');
+                        location.href = location.protocol + '//' + location.host + '/' + $this.var.page_position + '/' + $this.var.page_position.substring(5) + '.html';
+                    }
                     $this.api.data.user_id = window._comm.$user.id;
                     console.log($this.api); // for test
 
@@ -189,14 +194,124 @@ $(function() {
                     $this.formShowup();
                 }
             });
+            $this.el.$theform.on('click', '.btn-form-confirm', function(e) {
+                let $pic_preview = $('li.pic[data-img-status="preview"]').length;
+                console.log($pic_preview)
+                if ($pic_preview > 0) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return alert('上有照片，尚未上傳');
+                }
+            });
+
+
+            $this.el.$theform.on('click', '.btn-pic-update', function(e) {
+                console.log(".pic-update ON click'");
+                let $current = e.currentTarget
+                , $li_pic_el = $current.closest('li.pic')
+                , $whichone = $li_pic_el.getAttribute('data-pid')
+                , $picsid = $('#preview_' + $whichone).attr('data-pics-id')
+                , $dt_val = $('#' + $whichone + '-datetime').val();
+
+                if ($dt_val == "") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return alert('請選擇拍攝時間');
+                }
+
+                // call api // ajax url
+                var _url = $this.api.url + $this.api.path.cleanriver_update_pic;
+                if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
+                console.log(_url);
+
+                let _data = Object.assign({}, $this.api.data, {
+                    file_title: ''
+                    , is_public: ''
+                    , lat: ''
+                    , lng: ''
+                    , id: $picsid
+                    , file_create_time: moment($dt_val).format('YYYY-MM-DD HH:mm:ss')
+                });
+                console.log(_data);
+
+                // ajax handle
+                $.ajax({
+                    url: _url,
+                    type: "post",
+                    data: JSON.stringify(_data),
+                    dataType: "json",
+                    success: (response) => {
+                        console.log(response);
+                        if (response.is_success === 1) {
+                            doSuccess(response);
+                        } else {
+                            return alert(response.messages[0]);
+                        }
+                        return;
+                    },
+                    error: function(response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
+                function doSuccess(_r) { // to get the delete img
+                    console.log(_r);
+                    return alert('照片時間已更新');
+                }
+            });
+            $this.el.$theform.on('click', '.btn-pic-upload', function(e) {
+                console.log(".pic-upload ON click'");
+                // if ($this.var.page_position !== 'cleanriver') return;
+                let $current = e.currentTarget
+                , $li_pic_el = $current.closest('li.pic')
+                , $whichone = $li_pic_el.getAttribute('data-pid')
+                , $preview_el = 'preview_' + $whichone
+                , $preview_element = $('#' + $preview_el)
+                , $preview_src = $preview_element.attr('src')
+                , $tempid = $preview_element.attr('data-tempid')
+                , $picsid = $preview_element.attr('data-pics-id');
+
+                console.log('$picsid :: ' + $picsid);
+                if ($picsid !== undefined) return;
+
+                console.log('$preview_src :: ' + $preview_src);
+                if ($preview_src == "") {
+                    console.log('AAA')
+                    return;
+                } else {
+                    console.log('BBB')
+                    if ($this.var.page_position === 'cleanriver') {
+
+                        let $dt_el = $('#' + $whichone + '-datetime')
+                        , $dt_val = $dt_el[0].value
+                        , $dt_format = '';
+                        if ($dt_val == "") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return alert('請選擇拍攝時間');
+                        }
+
+                        $dt_format = moment($dt_val).format('YYYY-MM-DD HH:mm:ss');
+                        console.log($dt_format);
+                        $preview_element.attr('data-dt', $dt_format);
+                    }
+                    if ($li_pic_el.getAttribute('data-img-status') === "preview") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // $this.var.img_file.datas[$tempid]['file_create_time'] = $dt_format;
+                        return $this.doImgSync($preview_el);
+                    }
+                }
+            });
 
             // common pic
             $this.el.$theform.on('change', 'input.pic-upload[type="file"]', function(e) {
-                console.log("do pic 'update'");
-                if ($this.var.img_file.status != '') return alert('圖片處理中');
+                console.log("input.pic-upload ON change'");
+                if ($this.var.img_file.status != '') return alert('照片處理中');
 
                 let $current = e.currentTarget
                 , $whichone = $current.getAttribute('id')
+                , $li_pic_el = $current.closest('li.pic')
                 , $preview_el = 'preview_' + $whichone
                 , $tempid = $this.var.img_file.counter
                 , $newone = true
@@ -204,10 +319,13 @@ $(function() {
 
                 $this.var.form_data.pics.temp_id = $whichone;
 
+                console.log($('#' + $preview_el).attr('data-tempid'));
                 if ($('#' + $preview_el).attr('data-tempid') !== undefined) {
                     $tempid = $('#' + $preview_el).attr('data-tempid');
+                    console.log($tempid);
                     $newone = false;
                 }
+                console.log($tempid);
                 // let $b64 = '';
 
                 // step1, get EXIF
@@ -283,7 +401,6 @@ $(function() {
                 // do compress
                 handleImageUpload(file);
                 async function handleImageUpload(file) {
-                    $this.var.img_file.status = 'uploading';
                     // const imageFile = event.target.files[0];
                     const imageFile = file;
                     // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
@@ -303,15 +420,20 @@ $(function() {
                         var reader = new FileReader();
                         reader.readAsDataURL(compressedFile);
                         reader.onloadend = function() {
+                            // console.log(reader.result);
                             let base64data = reader.result,
                             $b64 = $this.var.img_file.datas[$tempid].image = base64data;
+                            console.log('reader.onloadend reader.onloadend reader.onloadend');
 
-                            // console.log($newone);
+                            console.log('$newone :: ' + $newone)
+                            console.log('$multiple_way :: ' + $multiple_way)
                             // if ($this.var.page_position === 'cleanriver' || !$newone) {
                             if (!$multiple_way || !$newone) { // do CleanRiver
+                                console.log('inhere inhere inhere inhere inhere inhere');
                                 let output = document.getElementById($preview_el);
                                 output.src = $b64;
                                 output.setAttribute("data-tempid", $tempid);
+                                $li_pic_el.setAttribute('data-img-status', 'preview'); // set the li is have a preview
                             } else { // do cleanOcean
                                 // let _target = $this.el.$form_filed.album_ul
                                 let _target = $this.el.$pics.$filed_album_pic
@@ -320,6 +442,7 @@ $(function() {
                                 _template = _template
                                 .replace(/\[ID\]/g, $tempid)
                                 .replace(/\[SRC\]/g, '')
+                                .replace(/\[STATUS\]/g, 'preview')
                                 .replace(/data-src/g, 'src');
                                 _target.after(_template);
 
@@ -328,7 +451,18 @@ $(function() {
                                 output.src = $b64;
                                 output.setAttribute("data-tempid", $tempid);
                             }
-                            doImgSync();
+                            // if ($this.var.page_position === 'cleanriver') $li_pic_el.setAttribute('data-img-status', 'preview'); // set the li is have a preview
+
+                            // step3, 前置完成，處理上傳 do api call
+                            // if ($this.var.page_position === 'cleanriver' && ($('#' + $preview_el).attr('data-pics-id') == '' || $('#' + $preview_el).attr('data-pics-id') === undefined)) {
+                            console.log('beforebefore doImgSync');
+                            if ($('#' + $preview_el).attr('data-pics-id') == '' || $('#' + $preview_el).attr('data-pics-id') === undefined) {
+                                console.log($('#' + $preview_el).attr('data-pics-id'));
+                                return;
+                            }
+                            console.log('before doImgSync');
+                            // return; // 斷開這裡的doImgSync，則改為全部要按在上傳步驟
+                            $this.doImgSync($preview_el);
                         }
                     // await uploadToServer(compressedFile); // write your own logic
                     } catch (error) {
@@ -347,55 +481,14 @@ $(function() {
                 //     doImgSync();
                 // }
                 // reader.readAsDataURL(event.target.files[0]);
-
-                // step3, 前置完成，處理上傳 do api call
-                function doImgSync() {
-                    $this.var.img_file.status = '';
-                    $this.checkPicsIsFull('+1');
-
-                    // call api // ajax url
-                    var _url = $this.api.url + $this.api.path.upload_pic;
-                    if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
-                    console.log(_url);
-
-                    let _data = Object.assign({}, $this.api.data,
-                        $this.var.img_file['datas'][$this.var.img_file.counter]);
-                    console.log(_data);
-
-                    // ajax handle
-                    $.ajax({
-                        url: _url,
-                        type: "post",
-                        data: JSON.stringify(_data),
-                        dataType: "json",
-                        success: (response) => {
-                            console.log(response);
-                            if (response.is_success === 1) {
-                                doSuccess(response.data);
-                            }
-                            return;
-                        },
-                        error: function(response) {
-                            console.log("error");
-                            console.log(response);
-                        }
-                    });
-
-                    function doSuccess(_r) { // to get upload img id
-                        console.log(_r);
-                        // console.log($preview_el);
-                        $('#' + $preview_el).attr('data-pics-id', _r.id);
-                        $this.var.img_file['datas'][$this.var.img_file.counter]['response'] = _r;
-                        return $this.var.img_file.counter += 1;
-                    }
-                }
             });
             $this.el.$theform.on('click', '.btn-pic-delete', function(e) {
                 console.log("do pic 'delete'");
 
                 let $current = e.currentTarget
                 , $whichone = $current.closest('li')
-                , $pid = $($whichone).attr('data-pid')
+                , $li_pic_el = $whichone
+                , $pid = $whichone.getAttribute('data-pid')
                 , $preview_el = $('#preview_' + $pid)
                 , $tempid = $preview_el.attr('data-tempid')
                 // , $delete_id = $this.var.img_file.datas[$tempid]['response']['id']
@@ -409,12 +502,18 @@ $(function() {
                 $this.checkPicsIsFull('-1');
 
                 // clean data
-                $preview_el.attr('src', '').attr('data-tempid', '');
+                $preview_el.attr(
+                    {
+                        'src': '',
+                        'data-tempid': '',
+                        'data-dt': ''
+                    }
+                );
                 delete $this.var.img_file.datas[$tempid];
+                $li_pic_el.removeAttribute("data-img-status"); // set the li is have a preview or not than remove
+
                 // if ocean remove li
-                if (($this.var.page_position === 'cleanocean') && ($pid !== 'featured_id')) {
-                    $whichone.remove();
-                }
+                if (($this.var.page_position === 'cleanocean') && ($pid !== 'featured_id')) $whichone.remove();
 
                 // call api // ajax url
                 var _url = $this.api.url + $this.api.path.delete_pic;
@@ -445,7 +544,7 @@ $(function() {
                     }
                 });
                 function doSuccess(_r) { // to get the delete img
-                    console.log(_r);
+                    // console.log(_r);
                 }
                 // console.log($id);
             });
@@ -476,7 +575,7 @@ $(function() {
 
             $this.el.$btn_confirm_submit.on('click', function() {
                 console.log('open confirm popup');
-                if ($this.var.img_file.status != '') return alert('圖片處理中');
+                if ($this.var.img_file.status != '') return alert('照片處理中');
                 $this.el.$popup_form_confirm.attr('data-confirmed', 'loading');
 
                 // send the data to api // API
@@ -546,6 +645,72 @@ $(function() {
                 console.log('ocean, refresh the page.');
                 location.href = location.protocol + '//' + location.host + location.pathname;
             });
+        },
+        doImgSync: function(preview_el) {
+            console.log('doImgSync');
+            let $this = this
+            , $preview_el = preview_el
+            , $preview_element = $('#' + $preview_el)
+            , $tempid = $preview_element.attr('data-tempid')
+            , $li_pic_el = $preview_element.closest('li.pic');
+            console.log($tempid);
+            console.log($this.var.img_file['datas']);
+
+            if ($this.var.page_position == 'cleanriver') {
+                let $dt = $preview_element.attr('data-dt');
+                console.log($dt);
+                if ($dt != "" || $dt !== undefined) {
+                    console.log($dt);
+                    $this.var.img_file.datas[$tempid]['file_create_time'] = $dt;
+                }
+            }
+
+            $this.var.img_file.status = 'uploading';
+            $this.checkPicsIsFull('+1');
+
+            // call api // ajax url
+            var _url = $this.api.url + $this.api.path.upload_pic;
+            if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
+            console.log(_url);
+
+            let _data = {
+                ...($this.api.data),
+                ...($this.var.img_file.datas[$tempid])
+            };
+            console.log(_data);
+
+            // ajax handle
+            $.ajax({
+                url: _url,
+                type: "post",
+                data: JSON.stringify(_data),
+                dataType: "json",
+                success: (response) => {
+                    console.log(response);
+                    if (response.is_success === 1) {
+                        doSuccess(response.data);
+                    }
+                    return;
+                },
+                error: function(response) {
+                    console.log("error");
+                    console.log(response);
+                }
+            });
+
+            function doSuccess(_r) { // to get upload img id
+                console.log(_r);
+                $this.var.img_file.status = '';
+
+                console.log($preview_el);
+                $preview_element.attr('data-pics-id', _r.id);
+                $li_pic_el.attr('data-img-status', 'uploaded');
+
+                $this.var.img_file['datas'][$tempid]['response'] = _r;
+                $this.var.img_file.counter += 1;
+
+                return alert('照片上傳更新完成');
+            }
         },
 
         // 確認 form 表狀態
@@ -639,7 +804,7 @@ $(function() {
                 //     $this.var.form_data['upload_num'] = _r_set.upload_num;
                 // }
 
-                console.log('upload_num :: ' + $this.var.form_data['pics']['max']);
+                // console.log('upload_num :: ' + $this.var.form_data['pics']['max']);
                 // $this.var.form_data['pics']['max'] = 2; // for test
                 processSetting();
 
@@ -824,6 +989,8 @@ $(function() {
                                 _template = _template
                                 .replace(/\[ID\]/g, $pic)
                                 .replace(/\[SRC\]/g, $album[$pic].url)
+                                .replace(/\[data-pics-id\]/g, 'data-pics-id="' + $pic + '"')
+                                .replace(/\[STATUS\]/g, 'uploaded')
                                 .replace(/data-src/g, 'src');
                                 _target.after(_template);
                             }
@@ -928,8 +1095,8 @@ $(function() {
             let $data_serialize = {};
             console.log($this.el.$theform.serializeArray());
             $.each($this.el.$theform.serializeArray(), function() {
-                console.log(this.name);
-                console.log(this.value);
+                // console.log(this.name);
+                // console.log(this.value);
                 let $el = $('[name="' + this.name + '"]');
                 if ($el.is('select') && $el[0].hasAttribute('multiple')) {
                     if (!Array.isArray($data_serialize[this.name])) $data_serialize[this.name] = []
@@ -938,12 +1105,12 @@ $(function() {
                     $max = $el.attr('max');
                     if ($max !== undefined && $data_serialize[this.name].length === $max) return false; // same as 'break'
                 } else {
-                    console.log(this.name);
-                    console.log(this.value);
+                    // console.log(this.name);
+                    // console.log(this.value);
                     $data_serialize[this.name] = this.value;
                 }
             });
-            console.log($data_serialize);
+            // console.log($data_serialize);
             $this.var.form_data = Object.assign({}, $this.var.form_data, $data_serialize);
 
             $.each($this.var.form_data, function(k, v) {
@@ -987,7 +1154,7 @@ $(function() {
 
             $temp += '</ul>';
 
-            console.log($this.var.form_data);
+            // console.log($this.var.form_data);
             $this.el.$popup_form_confirm.find('.popup_list').html($temp);
         },
 

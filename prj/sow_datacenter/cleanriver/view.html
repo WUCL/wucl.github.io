@@ -113,7 +113,7 @@
 		                    <div class="form-title">照片紀錄【每樣區，至少拍攝各一張照片】</div>
 		                    <div class="group with-photo with-3in1">
 		                        <ul>
-		                            <li class="filed-r_pic_id" data-pid="r_pic_id">
+		                            <li class="pic filed-r_pic_id" data-pid="r_pic_id">
 		                                <div>
 		                                    <label for="filed-r_pic_id">代表照</label>
 		                                    <div class="photo-box">
@@ -122,10 +122,10 @@
 		                                </div>
 		                                <div>
 		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="r_pic_time_min" name="r_pic_time_min" min="0" max="23">時 <input type="number" id="r_pic_time_sec" name="r_pic_time_sec" min="0" max="59">分</label>
+		                                    <input type="datetime-local" id="r_pic_id-datetime" name="r_pic_id-datetime">
 		                                </div>
 		                            </li>
-		                            <li class="filed-h_pic_id" data-pid="h_pic_id">
+		                            <li class="pic filed-h_pic_id" data-pid="h_pic_id">
 		                                <div>
 		                                    <label for="filed-h_pic_id">熱點照</label>
 		                                    <div class="photo-box">
@@ -134,10 +134,10 @@
 		                                </div>
 		                                <div>
 		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="h_pic_time_min" name="h_pic_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
+		                                    <input type="datetime-local" id="h_pic_id-datetime" name="h_pic_id-datetime">
 		                                </div>
 		                            </li>
-		                            <li class="filed-d_pic_id" data-pid="d_pic_id">
+		                            <li class="pic filed-d_pic_id" data-pid="d_pic_id">
 		                                <div>
 		                                    <label for="filed-d_pic_id">值得照</label>
 		                                    <div class="photo-box">
@@ -146,7 +146,7 @@
 		                                </div>
 		                                <div>
 		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="d_pic_time_min" name="d_pic_time_min" min="0" max="23">時 <input type="number" id="d_pic_time_sec" name="d_pic_time_sec" min="0" max="59">分</label>
+		                                    <input type="datetime-local" id="d_pic_id-datetime" name="d_pic_id-datetime">
 		                                </div>
 		                            </li>
 		                        </ul>
@@ -158,7 +158,7 @@
 		                    </div>
 		                    <div class="group with-photo with-3in1">
 		                        <ul>
-		                            <li class="filed-album_pics">
+		                            <li class="pic filed-album_pics filed-album_pic_1" data-pid="album_pic_1">
 		                                <div>
 		                                    <label>其他照片</label>
 		                                    <div class="photo-box">
@@ -167,10 +167,10 @@
 		                                </div>
 		                                <div>
 		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="album_pics[1]_time_min" name="album_pics[1]_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
+		                                    <input type="datetime-local" id="album_pics_1-datetime" name="album_pics_1-datetime">
 		                                </div>
 		                            </li>
-		                            <li class="filed-album_pics">
+		                            <li class="pic filed-album_pics filed-album_pic_2" data-pid="album_pic_2">
 		                                <div>
 		                                    <label>其他照片</label>
 		                                    <div class="photo-box">
@@ -179,7 +179,7 @@
 		                                </div>
 		                                <div>
 		                                    <label>拍攝時間</label>
-		                                    <label class="filed-inword"><input type="number" id="album_pics[2]_time_min" name="album_pics[2]_time_min" min="0" max="23">時 <input type="number" id="d_pic_time_sec" name="d_pic_time_sec" min="0" max="59">分</label>
+		                                    <input type="datetime-local" id="album_pics_2-datetime" name="album_pics_2-datetime">
 		                                </div>
 		                            </li>
 		                        </ul>
@@ -255,12 +255,13 @@
                 <li class="filed-extra_data"><label for="filed-extra_data[ID]">[QUESTION]</label><input id="filed-extra_data[ID]" type="text" name="extra_data[ID]"></li>
             </div>
             <div id="template_form_ocean__album_pic">
-                <li class="filed-album_pic_[ID]" data-pid="album_pic_[ID]">
+                <li class="pic filed-album_pic_[ID]" data-pid="album_pic_[ID]" data-img-status="[STATUS]">
                     <div>
                         <div class="photo-box">
                             <input type="file" id="album_pic_[ID]" name="album_pics_[ID]" class="pic-upload display-none" accept="image/*">
-                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" data-src="[SRC]" data-pics-id="[ID]">
+                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" data-src="[SRC]" [data-pics-id]>
                             <div class="pics_btns">
+                                <label class="btn-pic-choice btn-style" for="album_pic_[ID]"></label>
                                 <label class="btn-pic-upload btn-style" for="album_pic_[ID]"></label>
                                 <label class="btn-pic-delete btn-style"></label>
                             </div>

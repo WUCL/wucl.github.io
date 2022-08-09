@@ -67,6 +67,13 @@ section.theform {
             &.with-1in1 {
                ul {
                   max-width: 100%;
+                  label {
+                     white-space: nowrap;
+                     input {
+                        margin: 0 5px;
+                        width: 3em;
+                     }
+                  }
                }
             }
             &.with-2in1 {
@@ -125,24 +132,35 @@ section.theform {
                                     font-size: $fontsize-a;
                                     padding: 3px 20px;
                                  }
+                                 &:before {
+                                    display: block;
+                                    font-size: inherit;
+                                    color: inherit;
+                                 }
                                  &:hover {
                                     transform: scale(.93);
                                  }
+                                 &[class~="btn-pic-update"] {
+                                    display: none;
+                                    &:before {
+                                       content: "更新時間";
+                                    }
+                                 }
+                                 &[class~="btn-pic-choice"] {
+                                    &:before {
+                                       content: "選取照片";
+                                    }
+                                 }
                                  &[class~="btn-pic-upload"] {
+                                    display: none;
                                     &:before {
                                        content: "上傳照片";
-                                       display: block;
-                                       font-size: inherit;
-                                       color: inherit;
                                     }
                                  }
                                  &[class~="btn-pic-delete"] {
                                     display: none;
                                     &:before {
                                        content: "刪除照片";
-                                       display: block;
-                                       font-size: inherit;
-                                       color: inherit;
                                     }
                                  }
                               }
@@ -151,7 +169,7 @@ section.theform {
                               height: 100%;
                               width: auto;
                               margin: 0 auto;
-                              &:not([src=""]) + .pics_btns  {
+                              &[data-pics-id]:not([src=""]) + .pics_btns  {
                                  top: auto;
                                  left: auto;
                                  bottom: 0;
@@ -165,12 +183,6 @@ section.theform {
                                     padding: 2px 7px;
                                     margin: 5px;
                                     font-size: $fontsize-d;
-                                 }
-                                 label[class~="btn-pic-upload"]:before {
-                                    content: "更新照片";
-                                 }
-                                 label[class~="btn-pic-delete"] {
-                                    display: inline-block;
                                  }
                               }
                            }
@@ -235,14 +247,14 @@ section.theform {
                }
                label {
                   display: flex;
-                  align-items: flex-start;
+                  align-items: center;
                   justify-content: center;
-                  &.filed-inword {
-                     input {
-                        width: 50px;
-                        margin: 0 5px;
-                     }
-                  }
+                  // &.filed-inword {
+                  //    input {
+                  //       width: 50px;
+                  //       margin: 0 5px;
+                  //    }
+                  // }
                }
             }
          }
@@ -348,6 +360,74 @@ body[data-status="view"] {
          }
          .form-btns {
             display: none;
+         }
+      }
+   }
+}
+
+
+// body[data-position="cleanriver"] {
+body {
+   section.theform {
+      .inner {
+         form.form-style {
+            .group.with-photo {
+               ul li {
+                  // .photo-box {
+                  //    > .pics_btns label[class~="btn-pic-upload"] {
+                  //       &:before {
+                  //          content: "選取照片";
+                  //       }
+                  //    }
+                  // }
+                  &[data-img-status="preview"] {
+                     .photo-box {
+                        > .pics_btns {
+                           top: auto;
+                           left: auto;
+                           bottom: 0;
+                           right: 0;
+                           transform: none;
+                           width: 100%;
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           label[class~="btn-pic-choice"],
+                           label[class~="btn-pic-upload"] {
+                              padding: 2px 7px;
+                              margin: 5px;
+                              font-size: $fontsize-d;
+                           }
+                           label[class~="btn-pic-choice"]:before {
+                              content: "重新選取照片";
+                           }
+                           label[class~="btn-pic-upload"] {
+                              display: block;
+                              background: #ed3939;
+                              color: $color-white;
+                           }
+                        }
+                     }
+                  }
+                  &[data-img-status="uploaded"] {
+                     .photo-box {
+                        > .pics_btns {
+                           label[class~="btn-pic-choice"] {
+                              display: none;
+                           }
+                           label[class~="btn-pic-upload"]:before {
+                              content: "更新照片";
+                           }
+                           label[class~="btn-pic-update"],
+                           label[class~="btn-pic-upload"],
+                           label[class~="btn-pic-delete"] {
+                              display: block;
+                           }
+                        }
+                     }
+                  }
+               }
+            }
          }
       }
    }

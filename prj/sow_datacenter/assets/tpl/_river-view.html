@@ -59,7 +59,7 @@
                     <div class="form-title">照片紀錄【每樣區，至少拍攝各一張照片】</div>
                     <div class="group with-photo with-3in1">
                         <ul>
-                            <li class="filed-r_pic_id" data-pid="r_pic_id">
+                            <li class="pic filed-r_pic_id" data-pid="r_pic_id">
                                 <div>
                                     <label for="filed-r_pic_id">代表照</label>
                                     <div class="photo-box">
@@ -68,10 +68,10 @@
                                 </div>
                                 <div>
                                     <label>拍攝時間</label>
-                                    <label class="filed-inword"><input type="number" id="r_pic_time_min" name="r_pic_time_min" min="0" max="23">時 <input type="number" id="r_pic_time_sec" name="r_pic_time_sec" min="0" max="59">分</label>
+                                    <input type="datetime-local" id="r_pic_id-datetime" name="r_pic_id-datetime">
                                 </div>
                             </li>
-                            <li class="filed-h_pic_id" data-pid="h_pic_id">
+                            <li class="pic filed-h_pic_id" data-pid="h_pic_id">
                                 <div>
                                     <label for="filed-h_pic_id">熱點照</label>
                                     <div class="photo-box">
@@ -80,10 +80,10 @@
                                 </div>
                                 <div>
                                     <label>拍攝時間</label>
-                                    <label class="filed-inword"><input type="number" id="h_pic_time_min" name="h_pic_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
+                                    <input type="datetime-local" id="h_pic_id-datetime" name="h_pic_id-datetime">
                                 </div>
                             </li>
-                            <li class="filed-d_pic_id" data-pid="d_pic_id">
+                            <li class="pic filed-d_pic_id" data-pid="d_pic_id">
                                 <div>
                                     <label for="filed-d_pic_id">值得照</label>
                                     <div class="photo-box">
@@ -92,7 +92,7 @@
                                 </div>
                                 <div>
                                     <label>拍攝時間</label>
-                                    <label class="filed-inword"><input type="number" id="d_pic_time_min" name="d_pic_time_min" min="0" max="23">時 <input type="number" id="d_pic_time_sec" name="d_pic_time_sec" min="0" max="59">分</label>
+                                    <input type="datetime-local" id="d_pic_id-datetime" name="d_pic_id-datetime">
                                 </div>
                             </li>
                         </ul>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="group with-photo with-3in1">
                         <ul>
-                            <li class="filed-album_pics">
+                            <li class="pic filed-album_pics filed-album_pic_1" data-pid="album_pic_1">
                                 <div>
                                     <label>其他照片</label>
                                     <div class="photo-box">
@@ -113,10 +113,10 @@
                                 </div>
                                 <div>
                                     <label>拍攝時間</label>
-                                    <label class="filed-inword"><input type="number" id="album_pics[1]_time_min" name="album_pics[1]_time_min" min="0" max="23">時 <input type="number" id="h_pic_time_sec" name="h_pic_time_sec" min="0" max="59">分</label>
+                                    <input type="datetime-local" id="album_pics_1-datetime" name="album_pics_1-datetime">
                                 </div>
                             </li>
-                            <li class="filed-album_pics">
+                            <li class="pic filed-album_pics filed-album_pic_2" data-pid="album_pic_2">
                                 <div>
                                     <label>其他照片</label>
                                     <div class="photo-box">
@@ -125,7 +125,7 @@
                                 </div>
                                 <div>
                                     <label>拍攝時間</label>
-                                    <label class="filed-inword"><input type="number" id="album_pics[2]_time_min" name="album_pics[2]_time_min" min="0" max="23">時 <input type="number" id="d_pic_time_sec" name="d_pic_time_sec" min="0" max="59">分</label>
+                                    <input type="datetime-local" id="album_pics_2-datetime" name="album_pics_2-datetime">
                                 </div>
                             </li>
                         </ul>

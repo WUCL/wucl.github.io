@@ -186,7 +186,7 @@ $(function() {
                     $this.el.$btnAdmin.find('label').prepend(window._comm.$user.name + " ");
                 } else {
                     console.log('is not login');
-                    window._comm.$user.id = 1;
+                    window._comm.$user.id = '-1';
                 }
             }
         }

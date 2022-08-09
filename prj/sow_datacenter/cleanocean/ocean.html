@@ -193,12 +193,13 @@
                 <li class="filed-extra_data"><label for="filed-extra_data[ID]">[QUESTION]</label><input id="filed-extra_data[ID]" type="text" name="extra_data[ID]"></li>
             </div>
             <div id="template_form_ocean__album_pic">
-                <li class="filed-album_pic_[ID]" data-pid="album_pic_[ID]">
+                <li class="pic filed-album_pic_[ID]" data-pid="album_pic_[ID]" data-img-status="[STATUS]">
                     <div>
                         <div class="photo-box">
                             <input type="file" id="album_pic_[ID]" name="album_pics_[ID]" class="pic-upload display-none" accept="image/*">
-                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" data-src="[SRC]" data-pics-id="[ID]">
+                            <img id="preview_album_pic_[ID]" class="preview_album_pic_[ID]" data-src="[SRC]" [data-pics-id]>
                             <div class="pics_btns">
+                                <label class="btn-pic-choice btn-style" for="album_pic_[ID]"></label>
                                 <label class="btn-pic-upload btn-style" for="album_pic_[ID]"></label>
                                 <label class="btn-pic-delete btn-style"></label>
                             </div>

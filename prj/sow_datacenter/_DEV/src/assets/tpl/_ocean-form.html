@@ -33,8 +33,8 @@
                             <li class="filed-user_company"><label for="filed-user_company">單位名稱或登記者</label><input id="filed-user_company" type="text" name="user_company"></li>
                             <li class="filed-user_email"><label for="filed-user_email" required>登記者信箱</label><input id="filed-user_email" type="text" name="user_email" required></li>
                             <li class="filed-cleaner_count"><label for="filed-cleaner_count" required>淨灘人數</label><input id="filed-cleaner_count" type="text" name="cleaner_count" required></li>
-                            <li class="filed-weight"><label for="filed-weight">總重量（KG）</label><input id="filed-weight" type="text" name="weight"></li>
-                            <li class="filed-length"><label for="filed-length">淨灘長度（M）</label><input id="filed-length" type="text" name="length"></li>
+                            <li class="filed-weight"><label for="filed-weight">總重量（公斤）</label><input id="filed-weight" type="text" name="weight"></li>
+                            <li class="filed-length"><label for="filed-length">淨灘長度（公尺）</label><input id="filed-length" type="text" name="length"></li>
                         </ul>
                     </div>
                 </div>
@@ -74,12 +74,13 @@
                     <div class="form-title"><label for="filed-featured_id">封面照</label></div>
                     <div class="group with-photo with-3in1">
                         <ul id="filed-featured_id" class="filed-featured_id">
-                            <li class="filed-featured_id" data-pid="featured_id">
+                            <li class="pic filed-featured_id" data-pid="featured_id">
                                 <div>
                                     <div class="photo-box">
                                         <input type="file" id="featured_id" name="featured_id" class="pic-upload display-none" accept="image/*">
                                         <img id="preview_featured_id" class="preview_featured_id" src>
                                         <div class="pics_btns">
+                                            <label class="btn-pic-choice btn-style" for="featured_id"></label>
                                             <label class="btn-pic-upload btn-style" for="featured_id"></label>
                                             <label class="btn-pic-delete btn-style"></label>
                                         </div>
@@ -93,12 +94,13 @@
                     <div class="form-title">照片紀錄</div>
                     <div class="group with-photo with-3in1">
                         <ul id="filed-album_pics" class="filed-album_pics">
-                            <li id="filed-album_pic" class="filed-album_pic" data-pid="album_pic">
+                            <li id="filed-album_pic" class="pic filed-album_pic" data-pid="album_pic">
                                 <div>
                                     <div class="photo-box">
                                         <input type="file" id="album_pic" name="album_pic" class="pic-upload display-none multiple_way" accept="image/*">
                                         <img id="preview_album_pic" class="preview_album_pic" src>
                                         <div class="pics_btns">
+                                            <label class="btn-pic-choice btn-style" for="album_pic"></label>
                                             <label class="btn-pic-upload btn-style" for="album_pic"></label>
                                             <label class="btn-pic-delete btn-style"></label>
                                         </div>
