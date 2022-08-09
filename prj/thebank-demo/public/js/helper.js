@@ -98,6 +98,7 @@ window.imgs = [
     'public/img/icon-arrow.png',
     'public/img/step-1.jpg',
     'public/img/step-1-bottom.jpg',
+    'public/img/step-1-loading.gif',
     'public/img/step-2.jpg',
     'public/img/step-3.jpg',
     'public/img/step-3-bottom.jpg',

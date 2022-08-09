@@ -56,7 +56,8 @@ $(function() {
         },
         var: {
             _step1: {
-                timeout: 1500,
+                timeout1: 1000,
+                timeout2: 2000,
             },
             _trads: [],
         },
@@ -93,7 +94,7 @@ $(function() {
         },
         getDateTime: function() {
             let $this = this;
-            let $dt = moment().format('YYYY/MM/DD hh:mm:ss'); // 2022/07/26 17:09:13
+            let $dt = moment().format('YYYY/MM/DD HH:mm:ss'); // 2022/07/26 17:09:13
             // console.log($dt);
             return $this.el.$dateTime.html($dt);
         },
@@ -124,7 +125,13 @@ $(function() {
             if (this.el.$main.attr('data-index') !== "1") return;
             // console.log('step1');
             let $this = this;
-            setTimeout(( () => $this.tranIndex('next') ), $this.var._step1.timeout);
+            // setTimeout(( () => $this.tranIndex('next') ), $this.var._step1.timeout);
+            setTimeout(function() {
+                $this.el.$step1.addClass('doLoading');
+                setTimeout(function() {
+                    $this.tranIndex('next')
+                }, $this.var._step1.timeout2);
+            }, $this.var._step1.timeout1);
         },
         step2: function() {
             // if (this.el.$main.attr('data-index') !== "2") return;
@@ -192,23 +199,41 @@ $(function() {
 
                         // process trade item
 
-                        let _source1 = $detail; // reOrder trade
+                        let _source1 = $detail // reOrder trade
+                        , _currentY = parseInt(moment().format('YYYY'))
+                        , _currentM = parseInt(moment().format('MM'));
 
                         for ($prop1 in _source1) {
                             let $date = parseInt(_source1[$prop1].date)
                             , $y = moment.unix($date).format('YYYY')
                             , $m = moment.unix($date).format('MM')
                             , $d =  moment.unix($date).format('DD');
+                            // _highestY = parseInt(($y > _highestY)?$y:_highestY);
+                            // _highestM = parseInt(($m > _highestM)?$m:_highestM);
 
-                            // console.log(_source1[$prop1]);
-                            // console.log("Year :: " + $y);
-                            // console.log("Month :: " + $m);
-                            // console.log("MonthDate :: " + $md);
                             if ($this.var._trads[$y] === undefined) $this.var._trads[$y] = {};
                             if ($this.var._trads[$y][$m] === undefined) $this.var._trads[$y][$m] = {};
                             $this.var._trads[$y][$m][$d] = _source1[$prop1];
                         }
+
+                        // _currentM = 1;
+
+                        // 顯示近6個月的月份
+                        let _m = _currentM
+                        , _y = _currentY;
+                        for (let i = 0; i < 6; i++) {
+                            if (_m == 0) {
+                                _y = _y - 1;
+                                _m = 12;
+                            }
+                            if (_m <= 9) _m = '0' + _m;
+
+                            if ($this.var._trads[_y] === undefined) $this.var._trads[_y] = {};
+                            if ($this.var._trads[_y][_m] === undefined) $this.var._trads[_y][_m] = {};
+                            _m -= 1;
+                        }
                         // console.log($this.var._trads);
+
 
                         let _source2 = $this.var._trads
                         , _target_option = $this.el.$tradeListsOption
@@ -221,7 +246,7 @@ $(function() {
                         , _templates_list = '';
 
                         for ($prop2 in _source2) {
-                            // console.log(_source2);
+                            console.log(_source2);
 
                             let _source3 = _source2[$prop2]
                             , $y = $prop2
@@ -230,12 +255,11 @@ $(function() {
 
                             for ($prop3 in _source3) {
                                 $m = $prop3;
-                                // console.log($m);
                                 let _source4 = _source3[$prop3]
+                                , $length = Object.keys(_source4).length
                                 , $templateOption = _template_option
                                 , $templateList = _template_list
                                 , $items = '';
-                                // console.log(_source4);
 
                                 // order by
                                 _source4 = Object.keys(_source4).sort().reduceRight( // reduce(
@@ -247,8 +271,6 @@ $(function() {
 
                                 for ($prop4 in _source4) {
                                     $d = $prop4;
-                                    // console.log($d);
-                                    // console.log(_source4[$prop4])
                                     let $templateItem = _template_item
                                     , $data = _source4[$prop4]
                                     , $date = $m + '/' + $d
@@ -281,6 +303,7 @@ $(function() {
                                 $templateList = $templateList
                                 .replace(/\[Y\]/g, $y)
                                 .replace(/\[M\]/g, $m)
+                                .replace(/\[LENGTH\]/g, $length)
                                 .replace(/\[ITEMS\]/g, $items);
                                 _templates_list += $templateList;
                             }
@@ -331,6 +354,10 @@ $(function() {
 
                 let $y = $el.attr('data-y')
                 , $m = $el.attr('data-m');
+                $this.el.$tradeLists.attr({
+                    'data-y': $y,
+                    'data-m': $m,
+                })
 
                 $.each($this.el.$tradeLists.find('.trade-list'), function() {
                     let $el_list = $(this)

@@ -132,6 +132,12 @@ $bg-h-step: [
 				background: url(../img/step-1-bottom.jpg?0808) bottom center no-repeat;
 				background-size: contain;
 			}
+			&.doLoading {
+				&:after {
+					background: url(../img/step-1-loading.gif?0809) bottom center no-repeat;
+					background-size: contain;
+				}
+			}
 		}
 		&.step-2 {
 			.inner {
@@ -357,6 +363,7 @@ $bg-h-step: [
 					justify-content: flex-start;
 					overflow: auto;
 					-webkit-overflow-scrolling: touch;
+					margin-bottom: -.5px;
 					&:after {
 						content: "";
 						display: block;
@@ -372,7 +379,7 @@ $bg-h-step: [
 						white-space: nowrap;
 						font-size: 15px;
 						letter-spacing: -.1px;
-						border-bottom: 4px solid transparent;
+						border-bottom: 4px solid nth($color-border, 1);
 						&:first-child {
 							padding: 15px 23px;
 							font-size: $fontsize;
@@ -396,111 +403,136 @@ $bg-h-step: [
 							height: calc(91px * ($bp / 1080px));
 						}
 					}
-
-				}
-				.trade-list {
-					background: $color-white;
-					// background: red;
-					// width: 98.5%;
-					margin: 0 auto;
-					padding: 0 1.25%;
-					&-item {
-						border-bottom: 1px solid #ddd;
-						.item-top,
-						.item-bottom {
-							padding: 15px 0;
-							font-size: 15px;
-							user-select: none;
+					.trade-list {
+						background: $color-white;
+						// background: red;
+						// width: 98.5%;
+						margin: 0 auto;
+						padding: 0 1.25%;
+						&:empty:before,
+						&:empty:after {
+							position: relative;
 							width: 100%;
-						}
-						.item-top {
-							display: flex;
+							display: inline-flex;
 							align-items: center;
-							justify-content: flex-start;
-							&:after {
-								content: "";
-								position: absolute;
-								right: 3%;
-								top: 50%;
-								transform: translateY(-50%);
-
-								width: calc(59px / 5);
-								height: calc(35px / 5);
-								background: url(../img/icon-arrow.png?0808) bottom center no-repeat;
-								background-size: contain;
-							}
-							span {
-								display: block;
-								font-size: inherit;
-							}
-							.date {
-								width: 14%;
-								text-align: right;
-								margin-right: 2.5%;
-								color: #253740;
-							}
-							.headline {
-								font-size: inherit;
-								width: 53%;
-								letter-spacing: .35px;
-								> span {
-									height: 1em;
-									white-space: nowrap;
-									text-overflow: ellipsis;
-									-o-text-overflow: ellipsis;
-									overflow: hidden;
-								}
-								.trade-title {
-									color: #253742;
-								}
-								.trade-subtitle {
-									margin-top: 7px;
-									color: #637075;
-								}
-							}
-							.amount {
-								width: 22%;
-								text-align: right;
-								font-size: 17px;
-								letter-spacing: .15px;
-								color: #2d3e45;
-							}
+							justify-content: center;
+							font-size: 15px;
+							line-height: normal;
+							padding: 5px 0;
 						}
-						.item-bottom {
-							display: none;
-							padding-top: 0;
-							padding-left: 16.5%;
-							padding-right: 8.7%;
-							[class^="trade-"] {
+						// &[data-length="0"] {
+						// 	display: none;
+						// }
+						&:empty:before {
+							margin-top: 5px;
+							content: "系統代碼錯誤回應：ESB9201";
+						}
+						&:empty:after {
+							content: "您查詢的日期區間無明細資料";
+							justify-content: flex-start;
+							left: 3.1%;
+						}
+						&-item {
+							border-bottom: 1px solid #ddd;
+							.item-top,
+							.item-bottom {
+								padding: 15px 0;
+								font-size: 15px;
+								user-select: none;
+								width: 100%;
+							}
+							.item-top {
 								display: flex;
-								justify-content: space-between;
-								padding: 5px 0;
-								font-size: inherit;
-								&:first-child {
-									padding-top: 0;
+								align-items: center;
+								justify-content: flex-start;
+								&:after {
+									content: "";
+									position: absolute;
+									right: 3%;
+									top: 50%;
+									transform: translateY(-50%);
+
+									width: calc(59px / 5);
+									height: calc(35px / 5);
+									background: url(../img/icon-arrow.png?0808) bottom center no-repeat;
+									background-size: contain;
 								}
-								label {
+								span {
+									display: block;
 									font-size: inherit;
 								}
-							}
-						}
-						&.open {
-							.item-top {
-								&:after {
-									transform: translateY(-50%) rotate(180deg);
+								.date {
+									width: 14%;
+									text-align: right;
+									margin-right: 2.5%;
+									color: #253740;
 								}
-								.headline .trade-subtitle {
-									display: none;
+								.headline {
+									font-size: inherit;
+									width: 53%;
+									letter-spacing: .35px;
+									> span {
+										height: 1em;
+										white-space: nowrap;
+										text-overflow: ellipsis;
+										-o-text-overflow: ellipsis;
+										overflow: hidden;
+									}
+									.trade-title {
+										color: #253742;
+									}
+									.trade-subtitle {
+										margin-top: 7px;
+										color: #637075;
+									}
+								}
+								.amount {
+									width: 22%;
+									text-align: right;
+									font-size: 17px;
+									letter-spacing: .15px;
+									color: #2d3e45;
 								}
 							}
 							.item-bottom {
-								display: block;
+								display: none;
+								padding-top: 0;
+								padding-left: 16.5%;
+								padding-right: 8.7%;
+								[class^="trade-"] {
+									display: flex;
+									justify-content: space-between;
+									padding: 5px 0;
+									font-size: inherit;
+									&:first-child {
+										padding-top: 0;
+									}
+									label {
+										font-size: inherit;
+									}
+								}
+							}
+							&.open {
+								.item-top {
+									&:after {
+										transform: translateY(-50%) rotate(180deg);
+									}
+									// .headline .trade-subtitle {
+									// 	display: none;
+									// }
+								}
+								.item-bottom {
+									display: block;
+								}
 							}
 						}
 					}
+					&[data-y="0"][data-m="0"] .trade-list[data-length="0"] {
+						display: none;
+					}
 				}
 				.data-time {
-					padding-top: 15px;
+					padding-top: 30px;
 					background: $color-white;
 					&-box {
 						left: 4.2%;
