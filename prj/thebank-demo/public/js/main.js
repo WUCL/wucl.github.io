@@ -65,17 +65,20 @@ $(function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             if (this.test_mode) this.testMode();
-            this.getDateTime();
-            this.bindEvent();
-            this.step1();
-            this.step2();
-            this.step3();
-            this.step4();
-            this.step5();
-            this.step6();
-            this.step7();
 
-            if (this.test_mode) this.el.$loginSubmit.click();
+            window.onload = () => {
+                this.getDateTime();
+                this.bindEvent();
+                this.step1();
+                this.step2();
+                this.step3();
+                this.step4();
+                this.step5();
+                this.step6();
+                this.step7();
+
+                if (this.test_mode) this.el.$loginSubmit.click();
+            };
         },
         testMode: function() {
             console.log('testMode');
