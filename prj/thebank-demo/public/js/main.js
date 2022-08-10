@@ -56,7 +56,7 @@ $(function() {
         },
         var: {
             _step1: {
-                timeout1: 1000,
+                timeout1: 1200,
                 timeout2: 2000,
             },
             _trads: [],

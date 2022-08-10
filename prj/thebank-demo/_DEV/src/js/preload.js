@@ -22,7 +22,7 @@ function preloadImg(imgs) {
     });
 }
 window.imgs = [
-    'public/img/step-1-loading.gif',
+    'public/img/step-1-bottom.gif',
     'public/img/step-1-bottom.jpg',
     'public/img/step-1.jpg',
     'public/img/step-2.jpg',

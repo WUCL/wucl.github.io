@@ -129,15 +129,16 @@ $bg-h-step: [
 					height: calc(844px * (100vw / 1080px));
 				}
 				width: 100%;
-				background: url(../img/step-1-bottom.jpg?0809) bottom center no-repeat;
+				// background: url(../img/step-1-bottom.jpg?0809) bottom center no-repeat;
+				background: url(../img/step-1-bottom.gif?0810) bottom center no-repeat;
 				background-size: contain;
 			}
-			&.doLoading {
-				&:after {
-					background: url(../img/step-1-loading.gif?0809) bottom center no-repeat;
-					background-size: contain;
-				}
-			}
+			// &.doLoading {
+			// 	&:after {
+			// 		background: url(../img/step-1-loading.gif?0809) bottom center no-repeat;
+			// 		background-size: contain;
+			// 	}
+			// }
 		}
 		&.step-2 {
 			.inner {
