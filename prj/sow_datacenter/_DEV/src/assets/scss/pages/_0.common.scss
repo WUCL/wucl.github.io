@@ -25,8 +25,11 @@ html {
 			content: attr(data-storke);
 			position: absolute;
 			z-index: -1;
-			-webkit-text-stroke: 10px $color-white;;
+			-webkit-text-stroke: 10px $color-white;
 			text-stroke: 3px $color-white;;
+			@include mq($max-width: $bp-mobile) {
+				-webkit-text-stroke: 6px $color-white;;
+			}
 		}
 	}
 	&.position-side {
@@ -35,15 +38,26 @@ html {
 		left: 5vw;
 		width: auto;
 		// z-index: 100;
+		@include mq($max-width: $bp-mobile) {
+			position: relative;
+			padding: 0;
+			top: 0;
+			left: 0;
+			height: auto;
+			width: 100%;
+			text-align: center;
+		}
 		h1 {
 			font-size: $fontsize-title-side;
 			writing-mode: vertical-rl;
 			// -webkit-text-stroke: 3px $color-white;
 			@include mq($max-width: $bp-mobile) {
-				font-size: $fontsize-11;
+				font-size: $fontsize-7;
+				writing-mode: initial;
+				letter-spacing: 0;
 			}
 			@include mq($max-width: $bp-m) {
-				font-size: $fontsize-10;
+				// font-size: $fontsize-10;
 			}
 		}
 	}
@@ -63,17 +77,17 @@ html {
 			font-size: $fontsize-title-center;
 			// -webkit-text-stroke: 2px $color-white;
 			@include mq($max-width: $bp-mobile) {
-				font-size: $fontsize-10;
-				letter-spacing: .78rem;
+				font-size: $fontsize-9;
+				letter-spacing: .1rem;
 				margin-left: 0;
 			}
-         @include mq($max-width: $bp_m) {
-				font-size: $fontsize-9;
-         }
-			@include mq($max-width: $bp-2s) {
-				font-size: $fontsize-8;
-				letter-spacing: .56rem;
-			}
+			// @include mq($max-width: $bp_m) {
+			// 	font-size: $fontsize-9;
+			// }
+			// @include mq($max-width: $bp-2s) {
+			// 	font-size: $fontsize-8;
+			// 	letter-spacing: .56rem;
+			// }
 		}
 	}
 }
@@ -192,7 +206,7 @@ body {
 	padding: 0 3%;
 	z-index: 1;
 	@include mq($max-width: $bp-mobile) {
-		margin: 30px 20px;
+		margin: ($hamburger_h-m + 20px) 20px;
 		padding: 0;
 	}
 	section {
@@ -442,6 +456,7 @@ body {
 				    	margin: 0 auto;
 						@include mq($max-width: $bp-mobile) {
 							padding-right: 0;
+							min-width: 100%;
 						}
 					}
 					.locals-data {
@@ -464,7 +479,7 @@ body {
 							background: $color-white;
 							padding: 50px 20px 10px;
 							@include mq($max-width: $bp-mobile) {
-								padding: 10px 20px;
+								padding: 10px;
 							}
 							.local-freq {
 								border-bottom: 2px solid nth($color-rank-scale, 2);

@@ -22,6 +22,10 @@ section.theform {
       background: #f2e1c6;
       margin-left: 20%;
       padding: 20px 30px;
+      @include mq($max-width: $bp-mobile) {
+         width: 100%;
+         margin-left: 0;
+      }
       @include mq($max-width: $bp_m) {
          padding: 15px;
       }
@@ -36,6 +40,9 @@ section.theform {
          .form-title:nth-child(1) {
             display: flex;
             align-items: center;
+            @include mq($max-width: $bp-mobile) {
+               display: block;
+            }
             > label {
                white-space: nowrap;
             }
@@ -53,7 +60,14 @@ section.theform {
          }
          .group {
             margin-bottom: 10px;
-            ul {
+            // > ul {
+            //    li {
+            //       display: flex;
+            //       margin-bottom: 10px;
+            //    }
+            // }
+            > ul {
+               display: grid;
                // grid-template-columns: 1fr;
                max-width: calc((100% - 30px) / 1.5);
                @include mq($max-width: $bp_2s) {
@@ -61,11 +75,58 @@ section.theform {
                }
                li {
                   display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  justify-content: center;
                   margin-bottom: 10px;
+                  &.no-column {
+                     flex-direction: row;
+                     align-items: center;
+                     justify-content: flex-start;
+                  }
+                  input, select {
+                     width: 100%;
+                     border: 0;
+                     border-radius: 5px;
+                     background: $color-white;
+                     line-height: normal;
+                     padding: 5px 9px 3px;
+                     font-size: $fontsize;
+                     line-height: normal;
+                     &[type="radio"] {
+                        width: inherit;
+                        & + span {
+                           display: inline-block;
+                        }
+                     }
+                     & + input {
+                        margin-top: 5px;
+                     }
+                     &[name="status"],
+                     &[name="is_public"] {
+                        width: auto;
+                     }
+                  }
+                  button {
+                     & + button{
+                        margin-top: 10px;
+                     }
+                  }
+                  label {
+                     display: flex;
+                     align-items: center;
+                     justify-content: center;
+                     // &.filed-inword {
+                     //    input {
+                     //       width: 50px;
+                     //       margin: 0 5px;
+                     //    }
+                     // }
+                  }
                }
             }
             &.with-1in1 {
-               ul {
+               > ul {
                   max-width: 100%;
                   label {
                      white-space: nowrap;
@@ -77,7 +138,7 @@ section.theform {
                }
             }
             &.with-2in1 {
-               ul {
+               > ul {
                   max-width: 100%;
                   grid-gap: 0 30px;
                   grid-template-columns: calc((100% - 30px)/2) calc((100% - 30px)/2);
@@ -85,10 +146,14 @@ section.theform {
                      grid-gap: 0 12px;
                      grid-template-columns: calc((100% - 12px)/2) calc((100% - 12px)/2);
                   }
+                  @include mq($max-width: $bp-mobile) {
+                     grid-gap: 0;
+                     grid-template-columns: 100%;
+                  }
                }
             }
             &.with-3in1 {
-               ul {
+               > ul {
                   max-width: 100%;
                   grid-gap: 0 15px;
                   grid-template-columns: calc((100% - 30px) /3) calc((100% - 30px) /3) auto;
@@ -96,10 +161,14 @@ section.theform {
                      grid-gap: 0 12px;
                      grid-template-columns: calc((100% - 12px)/2) calc((100% - 12px)/2);
                   }
+                  @include mq($max-width: $bp-mobile) {
+                     grid-gap: 0;
+                     grid-template-columns: 100%;
+                  }
                }
             }
             &.with-photo {
-               ul {
+               > ul {
                   li {
                      > div {
                         width: 100%;
@@ -158,6 +227,7 @@ section.theform {
                                     }
                                  }
                                  &[class~="btn-pic-delete"] {
+                                    background: #ccc;
                                     display: none;
                                     &:before {
                                        content: "刪除照片";
@@ -183,6 +253,9 @@ section.theform {
                                     padding: 2px 7px;
                                     margin: 5px;
                                     font-size: $fontsize-d;
+                                    @include mq($max-width: $bp-mobile) {
+                                       font-size: $fontsize-a;
+                                    }
                                  }
                               }
                            }
@@ -201,60 +274,6 @@ section.theform {
                         }
                      }
                   }
-               }
-            }
-         }
-         ul {
-            display: grid;
-            li {
-               display: flex;
-               flex-direction: column;
-               align-items: flex-start;
-               justify-content: center;
-               margin-bottom: 5px;
-               &.no-column {
-                  flex-direction: row;
-                  align-items: center;
-                  justify-content: flex-start;
-               }
-               input, select {
-                  width: 100%;
-                  border: 0;
-                  border-radius: 5px;
-                  background: $color-white;
-                  line-height: normal;
-                  padding: 5px 9px 3px;
-                  font-size: $fontsize;
-                  line-height: normal;
-                  &[type="radio"] {
-                     width: inherit;
-                     & + span {
-                        display: inline-block;
-                     }
-                  }
-                  & + input {
-                     margin-top: 5px;
-                  }
-                  &[name="status"],
-                  &[name="is_public"] {
-                     width: auto;
-                  }
-               }
-               button {
-                  & + button{
-                     margin-top: 10px;
-                  }
-               }
-               label {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  // &.filed-inword {
-                  //    input {
-                  //       width: 50px;
-                  //       margin: 0 5px;
-                  //    }
-                  // }
                }
             }
          }
@@ -287,6 +306,7 @@ section.theform {
                font-size: $fontsize;
                padding: 3px;
                border-radius: 5px;
+               min-width: 6em;
             }
          }
          .form-btns {

@@ -14,18 +14,18 @@
                             <li class="filed-time"><label for="filed-time" required>時間</label><input id="filed-time" type="time" name="time" required></li>
                             <li class="filed-city"><label for="filed-city" required>縣市</label><select id="filed-city" name="city" required></select></li>
                             <li class="filed-place"><label for="filed-place" required>地點（加路蘭、海水浴場...）</label><input id="filed-place" type="text" name="place" required></li>
-                            <li class="filed-lng"><label for="filed-lng">經度</label><input id="filed-lng" type="number" name="lng"></li>
-                            <li class="filed-lat"><label for="filed-lat">緯度</label><input id="filed-lat" type="number" name="lat"></li>
+                            <li class="filed-lng form-themap_open"><label for="filed-lng">經度</label><input id="filed-lng" class="filed-lng" type="number" name="lng"></li>
+                            <li class="filed-lat form-themap_open"><label for="filed-lat">緯度</label><input id="filed-lat" class="filed-lat" type="number" name="lat"></li>
                         </ul>
                     </div>
                 </div>
-                <div class="form-basic magin-0">
+                <!-- <div class="form-basic magin-0">
                     <div class="group with-1in1">
                         <ul>
                             <li class="filed-map"><label>經緯度地圖選擇</label><div id="themap" style="width: 100%; height: 250px;"></div></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-basic magin-0">
                     <div class="group with-2in1">
                         <ul>
@@ -146,3 +146,4 @@
     </section>
 </main>
 @@include('../tpl/popup-form-confirm.html')
+@@include('../tpl/popup-form-themap.html')

@@ -5,11 +5,17 @@
 	section.kv {
 		padding: 0;
 		.inner {
+			@include mq($max-width: $bp-mobile) {
+				padding-top: 5vw;
+			}
 			img {
 				width: 90%;
 				height: auto;
 				margin: 0 auto;
 				user-select: none;
+				@include mq($max-width: $bp-mobile) {
+					width: 100%;
+				}
 			}
 		}
 		// width: calc(2880px / 2);

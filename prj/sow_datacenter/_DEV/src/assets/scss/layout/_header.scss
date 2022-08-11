@@ -123,8 +123,10 @@ layout/_header
 					@include mq($max-width: $bp-mobile) {
 						// background: red;
 						position: absolute;
-						top: -.5em;
-						right: 16px;
+						// top: -.5em;
+						// right: 16px;
+						top: 0;
+						left: 20px;
 						white-space: nowrap;
 						height: auto;
 						width: auto;
@@ -236,6 +238,7 @@ layout/_header
 								margin: 0 auto;
 								padding: 15px 0;
 								height: 100%;
+								font-size: $fontsize;
 							}
 							label {
 								transform: rotateY(0);
@@ -275,10 +278,11 @@ layout/_header
 			cursor: pointer;
 			display: none;
 			@include mq($max-width: $bp-mobile) {
+				top: 0;
 				position: absolute;
 				right: 20px;
 				width: 50px;
-				height: 50px;
+				height: $hamburger_h-m;
 				display: flex;
 				background: $color-white;
 				padding: 10px;
@@ -384,8 +388,6 @@ layout/_header
     	position: fixed;
 		@include mq($max-width: $bp-mobile) {
 			height: auto;
-		}
-		@include mq($max-width: $bp-mobile) {
 			.header__inner {
 				display: block;
 				height: 100vh;
@@ -404,6 +406,9 @@ layout/_header
 						width: 300px;
 						max-width: 69%;
 						box-shadow: -1px 0 4px 1px rgba(0, 0, 0, .3);
+					}
+					.notmenu {
+						opacity: 0;
 					}
 				}
 				.hamburger {
@@ -468,17 +473,17 @@ body[data-page^="ocean"] {
 	            width: calc(830px / 4.5);
 	            height: calc(830px / 4.5);
 				@include mq($max-width: $bp-mobile) {
-		            width: calc(830px / 9.5);
-		            height: calc(830px / 9.5);
-				}
-	            @include mq($max-width: $bp_m) {
 		            width: calc(830px / 11);
 		            height: calc(830px / 11);
-	            }
-	            @include mq($max-width: $bp_xs) {
-		            width: calc(830px / 13);
-		            height: calc(830px / 13);
-	            }
+				}
+	            // @include mq($max-width: $bp_m) {
+		           //  width: calc(830px / 11);
+		           //  height: calc(830px / 11);
+	            // }
+	            // @include mq($max-width: $bp_xs) {
+		           //  width: calc(830px / 13);
+		           //  height: calc(830px / 13);
+	            // }
          	}
 	   	}
 	}

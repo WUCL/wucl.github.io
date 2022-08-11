@@ -55,7 +55,6 @@ $(function() {
             this.goUpdateTWDatas();
         },
         bindEvent: function() {
-            let $this = this;
 
             // svg tw click
             $this.el.$twimg.on('click', '#svg-tw', function(e) {

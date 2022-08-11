@@ -96,6 +96,9 @@
          .locals-data {
             .locals-data-box {
                padding-top: 20px;
+               @include mq($max-width: $bp-mobile) {
+                  padding: 10px;
+               }
                .local-data-1 {
                   border-bottom: 2px solid nth($color-rank-scale, 2);
                   padding-bottom: 20px;
@@ -122,20 +125,43 @@
                   font-size: $fontsize-1;
                   line-height: normal;
                   justify-content: space-between;
+                  @include mq($max-width: $bp-mobile) {
+                     flex-direction: column;
+                  }
                   .sidedata {
                      width: 50%;
+                     @include mq($max-width: $bp-mobile) {
+                        width: 100%;
+                     }
                      &:first-child {
                         border-right: 2px solid nth($color-rank-scale, 2);
+                        @include mq($max-width: $bp-mobile) {
+                           padding-bottom: 20px;
+                           border-right: 0;
+                           border-bottom: 2px solid nth($color-rank-scale, 2);
+                        }
                      }
                      &:last-child {
-                        padding: 0 15px;
+                        padding: 0 20px;
+                        @include mq($max-width: $bp-mobile) {
+                           padding: 20px 0 0;
+                        }
                      }
                      .side-title {
                         font-size: $fontsize-4;
+                        @include mq($max-width: $bp-mobile) {
+                           font-weight: bold;
+                        }
                      }
                      &-total-ul {
                         li {
-                           display: inline-flex;
+                           display: flex;
+                           > div {
+                              font-size: inherit;
+                           }
+                           @include mq($max-width: $bp-mobile) {
+                              font-size: $fontsize;
+                           }
                         }
                      }
                   }
@@ -145,6 +171,10 @@
                      }
                      [class*="rank-style-"] {
                         margin-top: 5px;
+                        @include mq($max-width: $bp-mobile) {
+                           margin-top: 9px;
+                           font-size: $fontsize;
+                        }
                         &:before {
                            content: "";
                            display: block;
@@ -183,6 +213,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            @include mq($max-width: $bp-mobile) {
+               flex-direction: column;
+            }
             .box {
                display: flex;
                align-items: center;
@@ -190,9 +223,16 @@
                flex-direction: column;
                &:first-child {
                   margin-right: 10px;
+                  @include mq($max-width: $bp-mobile) {
+                     margin-right: 0;
+                  }
                }
                &:last-child {
                   margin-left: 10px;
+                  @include mq($max-width: $bp-mobile) {
+                     margin-left: 0;
+                     margin-top: 50px;
+                  }
                }
                .hotp-img {
                   width: 100%;
@@ -202,6 +242,9 @@
                }
                .hotp-btns {
                   margin-top: 20px;
+                  @include mq($max-width: $bp-mobile) {
+                     margin-top: 10px;
+                  }
                   a {
                      margin: 0 9px;
                   }

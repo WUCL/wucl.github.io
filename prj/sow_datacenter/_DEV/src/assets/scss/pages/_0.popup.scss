@@ -62,6 +62,19 @@ layout/_popup
 			max-width: 45vw;
 		}
 	}
+	&.size-l {
+		.popup_inner {
+			max-height: 66vh;
+			min-width: 66vw;
+			max-width: 66vw;
+			@include mq($max-width: $bp-mobile) {
+				max-height: 100%;
+				min-width: 100%;
+				max-width: 100%;
+				min-height: inherit;
+			}
+		}
+	}
 	.popup_header {
 		&:after {
 			content: "";
@@ -177,6 +190,65 @@ layout/_popup
 					color: $color-white;
 					font-size: $fontsize-1;
 				}
+			}
+		}
+	}
+	&#form-themap {
+		@include mq($max-width: $bp-mobile) {
+			min-height: 78vh;
+			max-height: 78vh;
+			min-width: 87vw;
+			max-width: 87vw;
+		}
+		.themap {
+			position: relative;
+			width: 100%;
+			height: calc(66vh - 50px - 50px);
+			@include mq($max-width: $bp-mobile) {
+			  height: calc(78vh - 50px - 150px);
+			}
+			.leaflet-popup-content {
+				@include mq($max-width: $bp-mobile) {
+					max-width: 56vw;
+				}
+			}
+			&-lnglat {
+			  margin-top: 9px;
+			  height: 30px;
+			  label {
+			     width: 180px;
+			     height: 20px;
+			     display: inline-block;
+			     font-size: $fontsize-c;
+			     border-bottom: 1px solid #ccc;
+			     padding-bottom: 3px;
+			     margin-right: 9px;
+			     white-space: nowrap;
+			     letter-spacing: -.2px;
+			     @include mq($max-width: $bp-mobile) {
+			        display: block;
+			     	width: 100%;
+			     	margin-right: 0;
+			     	margin-bottom: 5px;
+			     	border-bottom: none;
+			     }
+			     &:before {
+			        content: attr(data-before) "：";
+			     }
+			  }
+			}
+			&-lng {
+			}
+			&-lat {
+			}
+			&-close {
+			  font-size: $fontsize-b;
+			  border: 1px solid #ccc;
+			  border-radius: 5px;
+			  padding: 3px 15px;
+			  &:hover {
+			     background: #ccc;
+			  }
 			}
 		}
 	}

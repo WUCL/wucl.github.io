@@ -19,7 +19,10 @@
         <!-- <link rel="stylesheet" type="text/css" href="../public/lib/swiper/swiper.min.css" /> -->
         <link rel="stylesheet" type="text/css" href="../public/lib/aos/aos.css" />
         <!-- include leafletjs -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+        <!-- <link rel="stylesheet" type="text/css" href="../public/lib/leaflet/leaflet.css" /> -->
+        <!-- <script src="../public/lib/leaflet/leaflet.js"></script> -->
         <link rel="stylesheet" type="text/css" href="../public/css/ocean-form.min.css" />
 	</head>
 	<body data-page="ocean-form style-form" data-position="cleanocean" data-status="form">
@@ -68,18 +71,18 @@
 		                            <li class="filed-time"><label for="filed-time" required>時間</label><input id="filed-time" type="time" name="time" required></li>
 		                            <li class="filed-city"><label for="filed-city" required>縣市</label><select id="filed-city" name="city" required></select></li>
 		                            <li class="filed-place"><label for="filed-place" required>地點（加路蘭、海水浴場...）</label><input id="filed-place" type="text" name="place" required></li>
-		                            <li class="filed-lng"><label for="filed-lng">經度</label><input id="filed-lng" type="number" name="lng"></li>
-		                            <li class="filed-lat"><label for="filed-lat">緯度</label><input id="filed-lat" type="number" name="lat"></li>
+		                            <li class="filed-lng form-themap_open"><label for="filed-lng">經度</label><input id="filed-lng" class="filed-lng" type="number" name="lng"></li>
+		                            <li class="filed-lat form-themap_open"><label for="filed-lat">緯度</label><input id="filed-lat" class="filed-lat" type="number" name="lat"></li>
 		                        </ul>
 		                    </div>
 		                </div>
-		                <div class="form-basic magin-0">
+		                <!-- <div class="form-basic magin-0">
 		                    <div class="group with-1in1">
 		                        <ul>
 		                            <li class="filed-map"><label>經緯度地圖選擇</label><div id="themap" style="width: 100%; height: 250px;"></div></li>
 		                        </ul>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <div class="form-basic magin-0">
 		                    <div class="group with-2in1">
 		                        <ul>
@@ -233,6 +236,21 @@
 		            <div class="popup_btns">
 		                <button id="btn-confirm-sameone" class="btn-confirm-sameone btn-style" type="button">新增同河川表單</button>
 		                <button id="btn-confirm-newone_river" class="btn-confirm-newone btn-style" type="button">新增其他河川表單</button>
+		            </div>
+		        </div>
+		    </div>
+		</section>
+		<section id="form-themap" class="size-l popup_box">
+		    <div class="popup_inner" data-status="select">
+		        <div class="popup_header">
+		            <h2 id="popup_title" class="popup_title">經緯度地圖選擇</h2>
+		        </div>
+		        <div class="popup_main">
+		            <div id="themap" class="themap"></div>
+		            <div class="themap-lnglat">
+		                <label id="themap-lng" class="themap-lng filed-lng" data-before="經度"></label>
+		                <label id="themap-lat" class="themap-lat filed-lat" data-before="緯度"></label>
+		                <button id="btn-themap-close" class="btn-themap-close themap-close">確定並返回表單</button>
 		            </div>
 		        </div>
 		    </div>
@@ -409,8 +427,6 @@
 		<!-- <script src="../public/js/common.js"></script> -->
 
         <script src="../public/js/common.js"></script>
-        <!-- include leafletjs -->
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <!-- <link rel="stylesheet" type="text/css" href="../public/lib/resizeImg/swiper.min.css" /> -->
         <!-- <script src="../public/lib/resizeImg/jquery.resizeImg.js"></script> -->
         <!-- <script src="../public/lib/resizeImg/mobileBUGFix.mini.js"></script> -->
