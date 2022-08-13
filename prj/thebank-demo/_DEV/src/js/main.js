@@ -2,7 +2,7 @@ $(function() {
     var MAIN = {
         test_mode: false,
         api: {
-            url: 'https://fakebank.69939.uk/api/v1',
+            url: '/api/v1',
             data: {}
         },
         env: 'html',
@@ -27,30 +27,39 @@ $(function() {
             $step6: $('#step-6'),
             $step7: $('#step-7'),
 
-            // step2
+            // step-2
             $loginForm: $('#login-form'),
             $loginEye: $('#login-eye'),
             $loginSubmit: $('#login-submit'),
-            // step2
+            // step-2
 
-            // step3
+            // step-3
+            $userName: $('#user-name'),
             $ntdSavings: $('#ntd-savings'),
-            // step3
+            // step-3
 
-            // step4
+            // step-4
             $ntdLivesAccount: $('#ntd-lives-account'),
-            // step4
+            // step-4
 
-            // step5
+            // step-5
             $tradeListsOption: $('#trade-lists-option'),
             $tradeLists: $('#trade-lists'),
             // $tradeList: $('.trade-list'),
             $btnTransfer: $('#btn-transfer'),
-            // step5
+            // step-5
 
-            // step6
+            // step-6
             $btnNext: $('#btn-next'),
+            $btnCommonAgreed: $('#btn-commonagreed'),
+            $transferInputAccount: $('#transfer-input-account'),
             // step6
+
+            // step-commonagreed
+            $commonagreedLists: $('#commonagreed-lists'),
+            $commonagreedListsOption: $('#commonagreed-lists-option'),
+            $btnBackStep6: $('#btn-back-step6'),
+            // step-commonagreed
 
             $select: $('#select-index'), // test
         },
@@ -64,6 +73,10 @@ $(function() {
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
+            { // check is correct host // https://fakebank.69939.uk/
+                if (location.port === '1234') this.api.url = 'https://fakebank.69939.uk/' + this.api.url;
+                else this.api.url = location.host + this.api.url;
+            }
             if (this.test_mode) this.testMode();
 
             window.onload = () => {
@@ -76,11 +89,12 @@ $(function() {
                 this.step5();
                 this.step6();
                 this.step7();
+                this.stepCommonAgreed();
 
                 if (this.test_mode) this.el.$loginSubmit.click();
             };
         },
-        testMode: function() {
+        testMode: function(_index) {
             console.log('testMode');
             let $this = this;
             $this.el.$body.attr('data-mode', 'test');
@@ -90,15 +104,15 @@ $(function() {
             $('#login-password').attr('value', '1qaz@WSX');
             $this.el.$select.val($this.el.$main.attr('data-index'));
 
-            $this.el.$select.on('change', (e) => {
-                let $index = e.target.value;
-                $this.tranIndex($index);
-            });
+            if (_index !== '') $this.tranIndex(_index);
+            // $this.el.$select.on('change', (e) => {
+            //     let $index = e.target.value;
+            //     $this.tranIndex($index);
+            // });
         },
         getDateTime: function() {
             let $this = this;
             let $dt = moment().format('YYYY/MM/DD HH:mm:ss'); // 2022/07/26 17:09:13
-            // console.log($dt);
             return $this.el.$dateTime.html($dt);
         },
         bindEvent: function() {
@@ -107,102 +121,193 @@ $(function() {
                 return $this.tranIndex('back');
             })
         },
-        tranIndex: function(index) {
-            let $currentIndex = parseInt(this.el.$main.attr('data-index'));
-            // console.log($currentIndex);
-            switch (index) {
+        tranIndex: function(_index) {
+            let $currentIndex = parseInt(this.el.$main.attr('data-index'))
+            , $index = _index;
+            switch ($index) {
                 case 'next':
-                    index = $currentIndex + 1;
+                    $index = $currentIndex + 1;
                 break;
                 case 'back':
-                    index = $currentIndex - 1;
+                    $index = $currentIndex - 1;
                 break;
             }
-            this.el.$main.attr('data-index', index);
-            window.scrollTo(0, 0);
-
-            // if (this.test_mode) this.testMode();
-            return;
+            this.el.$main.attr('data-index', $index);
+            return window.scrollTo(0, 0);
         },
         step1: function() {
-            if (this.el.$main.attr('data-index') !== "1") return;
+            // if (this.el.$main.attr('data-index') !== "1") return;
             // console.log('step1');
             let $this = this;
-            // setTimeout(( () => $this.tranIndex('next') ), $this.var._step1.timeout);
-            setTimeout(function() {
-                $this.el.$step1.addClass('doLoading');
-                setTimeout(function() {
-                    $this.tranIndex('next')
-                }, $this.var._step1.timeout2);
-            }, $this.var._step1.timeout1);
+            if ($this.test_mode) return;
+            setTimeout(( () => $this.tranIndex('next') ), ($this.var._step1.timeout1 + $this.var._step1.timeout2));
+            // setTimeout(function() {$this.el.$step1.addClass('doLoading');setTimeout(function() {$this.tranIndex('next')}, $this.var._step1.timeout2);}, $this.var._step1.timeout1);
         },
         step2: function() {
-            // if (this.el.$main.attr('data-index') !== "2") return;
-            // console.log('step2');
             let $this = this;
             $this.el.$loginEye.on('click', () => {
-                // console.log('eye');
                 let $switch = ($('#login-account').attr('type') === "password")?"text":"password";
                 $('#login-account').attr('type', $switch);
                 $this.el.$step2.attr('data-eye', $switch);
                 return;
             });
             $this.el.$loginSubmit.on('click', () => {
-                // console.log('submit');
-                // console.log($this.el.$loginForm.serializeArray());
+                return $this.proccessAPI();
+            });
+        },
+        step3: function() {
+            let $this = this;
 
-                $.each($this.el.$loginForm.serializeArray(), function() {
-                    $this.api.data[this.name] = this.value;
+            $this.el.$ntdSavings.on('click', () => {
+                return $this.tranIndex('next');
+            });
+        },
+        step4: function() {
+            let $this = this;
+            $this.el.$ntdLivesAccount.on('click', () => {
+                return $this.tranIndex('next');
+            });
+        },
+        step5: function() {
+            let $this = this;
+            $this.el.$btnTransfer.on('click', () => {
+                return $this.tranIndex('next');
+            });
+            $this.el.$tradeLists.on('click', '.trade-list-item', (e) => {
+                return $(e.currentTarget).toggleClass('open');
+            });
+            $this.el.$tradeListsOption.on('click', '.trade-option-item', (e) => {
+                let $el = $(e.currentTarget);
+
+                if ($el.hasClass('active')) return;
+                $this.el.$tradeListsOption.find('.trade-option-item').removeClass('active');
+
+                let $y = $el.attr('data-y')
+                , $m = $el.attr('data-m');
+                $this.el.$tradeLists.attr({
+                    'data-y': $y,
+                    'data-m': $m,
+                })
+
+                $.each($this.el.$tradeLists.find('.trade-list'), function() {
+                    let $el_list = $(this)
+                    , $el_list_y = $el_list.attr('data-y')
+                    , $el_list_m = $el_list.attr('data-m');
+                    if (($y =='0' && $m == '0') || ($el_list_y == $y && $el_list_m == $m)) {
+                        $el_list.removeClass('display-none');
+                        return; // same as 'continue'
+                    }
+                    $el_list.addClass('display-none');
                 });
-                $this.el.$body.attr('data-loading', '1');
 
-                // "id":"N123456788",
-                // "account":"user003",
-                // "password":"1qaz@WSX",
+                return $el.addClass('active');
+            });
+        },
+        step6: function() {
+            let $this = this;
+            $this.el.$btnNext.on('click', () => {
+                return $this.tranIndex('next');
+            });
 
-                // call api // ajax url
-                    var _url = $this.api.url;
-                    let _data = Object.assign({}, $this.api.data);
-                    // console.log(_data);
+            $this.el.$btnCommonAgreed.on('click', () => {
+                return $this.tranIndex('commonagreed');
+            });
+        },
+        step7: function() {
+            let $this = this;
+        },
+        stepCommonAgreed: function() {
+            let $this = this;
+            $this.el.$btnBackStep6.on('click', () => {
+                return $this.tranIndex('6');
+            });
+            $this.el.$commonagreedListsOption.on('click', '.commonagreed-lists-option-item', (e) => {
+                let $el = $(e.currentTarget)
+                , $option = $el.attr('data-option');
 
-                    // ajax handle
-                    $.ajax({
-                        url: _url,
-                        type: "post",
-                        data: JSON.stringify(_data),
-                        dataType: "json",
-                        success: (response) => {
-                            // console.log(response);
-                            if (response.is_success === 1) {
-                                doSuccess(response);
-                            } else {
-                                $this.el.$body.attr('data-loading', '');
-                                alert('登入錯誤');
-                            }
-                            return;
-                        },
-                        error: function(response) {
-                            console.log("error");
-                            console.log(response);
+                if ($el.hasClass('active')) return;
+                $this.el.$commonagreedListsOption.find('.commonagreed-lists-option-item').removeClass('active');
+                $el.toggleClass('active');
+                $this.el.$commonagreedLists.attr('data-lists', $option);
+                return;
+            });
+            $this.el.$commonagreedLists.on('click', '.commonagreed-item', (e) => {
+                let $el = $(e.currentTarget)
+                , $num = $el.attr('data-num')
+                , $id = $el.attr('data-id')
+                , $account = $num + "-" + $id;
+
+                console.log($account);
+                console.log($this.el.$transferInputAccount);
+                $this.el.$transferInputAccount.val($account);
+                return $this.tranIndex(6);
+            });
+        },
+
+
+        proccessAPI: function() {
+            let $this = this;
+            $.each($this.el.$loginForm.serializeArray(), function() {
+                $this.api.data[this.name] = this.value;
+            });
+            $this.el.$body.attr('data-loading', '1');
+
+            // "id":"N123456788",
+            // "account":"user003",
+            // "password":"1qaz@WSX",
+
+            // call api // ajax url
+            {
+                var _url = $this.api.url;
+                let _data = Object.assign({}, $this.api.data);
+                // console.log(_data);
+
+                // ajax handle
+                $.ajax({
+                    url: _url,
+                    type: "post",
+                    data: JSON.stringify(_data),
+                    dataType: "json",
+                    success: (response) => {
+                        // console.log(response);
+                        if (response.is_success === 1) {
+                            doSuccess(response);
+                        } else {
+                            $this.el.$body.attr('data-loading', '');
+                            alert('登入錯誤');
                         }
-                    });
+                        return;
+                    },
+                    error: function(response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
 
-                    function doSuccess(_r) { // to get the account data
-                        // console.log(_r);
+                function doSuccess(_r) { // to get the account data
+                    // console.log(_r);
+                    let $amount = _r.total
+                    , $id = _r.id
+                    , $name = _r.name
+                    , $account = $id.replaceAt($id.length-1, "*");
+                    $account = $account.replaceAt($account.length-6, "*").replaceAt($account.length-7, "*");
 
-                        let $amount = _r.total
-                        , $id = _r.id
-                        , $detail = _r.detail
-                        , $account = $id.replaceAt($id.length-1, "*");
-                        $account = $account.replaceAt($account.length-6, "*").replaceAt($account.length-7, "*");
+                    // set the user name
+                    $this.el.$userName.attr('data-name', $name);
 
-                        $this.el.$totalAmount.html(window.helper.numberWithCommas($amount));
-                        $this.el.$idSpan.html($id);
-                        $this.el.$idSelect.html('<option value="' + $id + '">' + $id + '</option>')
+                    // process number with commas,
+                    $this.el.$totalAmount.html(window.helper.numberWithCommas($amount));
 
-                        // process trade item
+                    // set the id
+                    $this.el.$idSpan.html($id);
 
-                        let _source1 = $detail // reOrder trade
+                    // set the id of select
+                    $this.el.$idSelect.html('<option value="' + $id + '">' + $id + '</option>')
+
+                    /* BEGIN process trade item */
+                    {
+                        let $detail = _r.detail
+                        , _source1 = $detail // reOrder trade
                         , _currentY = parseInt(moment().format('YYYY'))
                         , _currentM = parseInt(moment().format('MM'));
 
@@ -219,8 +324,6 @@ $(function() {
                             $this.var._trads[$y][$m][$d] = _source1[$prop1];
                         }
 
-                        // _currentM = 1;
-
                         // 顯示近6個月的月份
                         let _m = _currentM
                         , _y = _currentY;
@@ -235,8 +338,6 @@ $(function() {
                             if ($this.var._trads[_y][_m] === undefined) $this.var._trads[_y][_m] = {};
                             _m -= 1;
                         }
-                        // console.log($this.var._trads);
-
 
                         let _source2 = $this.var._trads
                         , _target_option = $this.el.$tradeListsOption
@@ -249,8 +350,6 @@ $(function() {
                         , _templates_list = '';
 
                         for ($prop2 in _source2) {
-                            console.log(_source2);
-
                             let _source3 = _source2[$prop2]
                             , $y = $prop2
                             , $m = 0
@@ -276,6 +375,7 @@ $(function() {
                                     $d = $prop4;
                                     let $templateItem = _template_item
                                     , $data = _source4[$prop4]
+                                    , $showid = $data.is_show_account
                                     , $date = $m + '/' + $d
                                     , $title = $data.title
                                     , $subtitle = $data.subtitle
@@ -284,6 +384,7 @@ $(function() {
                                     , $money = window.helper.numberWithCommas($data.money);
 
                                     $templateItem = $templateItem
+                                    .replace(/\[SHOWID\]/g, $showid)
                                     .replace(/\[DATE\]/g, $date)
                                     .replace(/\[TITLE\]/g, $title)
                                     .replace(/\[SUBTITLE\]/g, $subtitle)
@@ -313,81 +414,61 @@ $(function() {
                         }
                         _target_option.append(_templates_option);
                         _target_list.html(_templates_list);
-
-                        return setTimeout(( () => {
-                            $this.el.$body.attr('data-loading', '');
-                            $this.tranIndex(5);
-                        } ), 700);
                     }
-                // call api // ajax url
-            });
-        },
-        step3: function() {
-            // if (this.el.$main.attr('data-index') !== "3") return;
-            // console.log('step3');
-            let $this = this;
+                    /* END process trade item */
 
-            $this.el.$ntdSavings.on('click', () => {
-                return $this.tranIndex('next');
-            });
-        },
-        step4: function() {
-            // if (this.el.$main.attr('data-index') !== "4") return;
-            // console.log('step4');
-            let $this = this;
-            $this.el.$ntdLivesAccount.on('click', () => {
-                return $this.tranIndex('next');
-            });
-        },
-        step5: function() {
-            // if (this.el.$main.attr('data-index') !== "5") return;
-            // console.log('step5');
-            let $this = this;
-            $this.el.$btnTransfer.on('click', () => {
-                return $this.tranIndex('next');
-            });
-            $this.el.$tradeLists.on('click', '.trade-list-item', (e) => {
-                return $(e.currentTarget).toggleClass('open');
-            });
-            $this.el.$tradeListsOption.on('click', '.trade-option-item', (e) => {
-                let $el = $(e.currentTarget);
-                // if ($el.hasClass('active')) return;
+                    /* BEGIN process commonagreed item */
+                    {
+                        let $b_num = _r.num
+                        , $b_name = _r.name
+                        , $ca_lists = [_r.designated_users, _r.common_users]
 
-                $this.el.$tradeListsOption.find('.trade-option-item').removeClass('active');
+                        , _target_ca_lists = $this.el.$commonagreedLists
+                        , _template_ca_list = window.helper.getTemplate('commonagreed-list')
+                        , _template_ca_item = window.helper.getTemplate('commonagreed-item')
+                        , _templates_ca_list = '';
 
-                let $y = $el.attr('data-y')
-                , $m = $el.attr('data-m');
-                $this.el.$tradeLists.attr({
-                    'data-y': $y,
-                    'data-m': $m,
-                })
+                        for (let $i = 0; $i < 2; $i++) {
+                            let $ca_list = $ca_lists[$i]
+                            , $templateCAList = _template_ca_list
+                            , $templateCAItem = _template_ca_item
+                            , $ca_items = '';
 
-                $.each($this.el.$tradeLists.find('.trade-list'), function() {
-                    let $el_list = $(this)
-                    , $el_list_y = $el_list.attr('data-y')
-                    , $el_list_m = $el_list.attr('data-m');
-                    if (($y =='0' && $m == '0') || ($el_list_y == $y && $el_list_m == $m)) {
-                        $el_list.removeClass('display-none');
-                        return; // same as 'continue'
+                            for ($prop in $ca_list) {
+                                let $templateItem = $templateCAItem
+                                , $data = $ca_list[$prop]
+                                , $B_NUM = $data.bank_num
+                                , $B_NAME = $data.bank_name
+                                , $B_LIST = ($i == 0)?'約定':'常用'
+                                , $ID = $data.id
+                                , $NICKNAME = $data.name || '';
+
+                                $templateItem = $templateItem
+                                .replace(/\[B_NUM\]/g, $B_NUM)
+                                .replace(/\[B_NAME\]/g, $B_NAME)
+                                .replace(/\[B_LIST\]/g, $B_LIST)
+                                .replace(/\[ID\]/g, $ID)
+                                .replace(/\[NICKNAME\]/g, $NICKNAME);
+
+                                $ca_items += $templateItem;
+                            }
+                            $templateCAList = $templateCAList
+                            .replace(/\[LIST\]/g, ($i == 0)?'agreed':'common')
+                            .replace(/\[ITEMS\]/g, $ca_items);
+
+                            _templates_ca_list += $templateCAList;
+                        }
+                        _target_ca_lists.html(_templates_ca_list);
                     }
-                    $el_list.addClass('display-none');
-                });
+                    /* END process commonagreed item */
 
-                return $el.addClass('active');
-            });
-        },
-        step6: function() {
-            // if (this.el.$main.attr('data-index') !== "6") return;
-            // console.log('step6');
-            let $this = this;
-            $this.el.$btnNext.on('click', () => {
-                return $this.tranIndex('next');
-            });
-        },
-        step7: function() {
-            // if (this.el.$main.attr('data-index') !== "7") return;
-            // console.log('step7');
-            let $this = this;
+                    return setTimeout(( () => {
+                        $this.el.$body.attr('data-loading', '');
+                        $this.tranIndex(5);
+                    } ), 700);
+                }
+            }
+            // call api // ajax url
         },
     };
     MAIN.init();

@@ -36,6 +36,7 @@ window.imgs = [
     'public/img/step-5-bottom-btn.jpg',
     'public/img/step-6.jpg',
     'public/img/step-7.jpg',
+    'public/img/step-commonagreed.jpg',
     'public/img/icon-arrow.png',
 ];
 preloadImg(window.imgs);

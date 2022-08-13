@@ -1,6 +1,8 @@
 /* =======================
    pages/main
    ======================= */
+$img-path: "../img/";
+$img-v: "?0813";
 $bg-h-step: [
 1078px, 2205px, 8396px,
 2290px, 744px, 6195px,
@@ -111,7 +113,7 @@ $bg-h-step: [
 					}
 					width: 100%;
 					// height: 100%;
-					background: url(../img/step-#{$i}.jpg?0808) top center no-repeat;
+					background: url($img-path + 'step-#{$i}.jpg' + $img-v) top center no-repeat;
 					background-size: contain;
 				}
 			}
@@ -129,13 +131,13 @@ $bg-h-step: [
 					height: calc(844px * (100vw / 1080px));
 				}
 				width: 100%;
-				// background: url(../img/step-1-bottom.jpg?0809) bottom center no-repeat;
-				background: url(../img/step-1-bottom.gif?0810) bottom center no-repeat;
+				// background: url($img-path + 'step-1-bottom.jpg' + $img-v) bottom center no-repeat;
+				background: url($img-path + 'step-1-bottom.gif' + $img-v) bottom center no-repeat;
 				background-size: contain;
 			}
 			// &.doLoading {
 			// 	&:after {
-			// 		background: url(../img/step-1-loading.gif?0809) bottom center no-repeat;
+			// 		background: url($img-path + 'step-1-loading.gif' + $img-v) bottom center no-repeat;
 			// 		background-size: contain;
 			// 	}
 			// }
@@ -208,10 +210,24 @@ $bg-h-step: [
 					height: calc(210px * (100vw / 1080px));
 				}
 				width: 100%;
-				background: url(../img/step-3-bottom.jpg?0808) bottom center no-repeat;
+				background: url('../img/step-3-bottom.jpg' + $img-v) bottom center no-repeat;
 				background-size: contain;
 			}
 			.inner {
+				.user-name {
+					position: absolute;
+					top: 2.45%;
+					left: 50%;
+					transform: translateX(-50%);
+					line-height: normal;
+					font-size: $fontsize-2;
+					color: #333;
+					font-weight: 500;
+					&:after {
+						content: attr(data-name);
+						font-size: inherit;
+					}
+				}
 				.assets-total {
 					position: absolute;
 					top: 3.76%;
@@ -250,7 +266,7 @@ $bg-h-step: [
 					height: calc(199px * (100vw / 1080px));
 				}
 				width: 100%;
-				background: url(../img/step-4-bottom.jpg?0808) bottom center no-repeat;
+				background: url('../img/step-4-bottom.jpg' + $img-v) bottom center no-repeat;
 				background-size: contain;
 			}
 			.inner {
@@ -267,7 +283,7 @@ $bg-h-step: [
 					height: 13.76%;
 					left: 8.7%;
 					@include mq($max-width: $bp) {
-						top: 33%;
+						top: 72vw;
 					}
 					&-total {
 						position: absolute;
@@ -313,7 +329,7 @@ $bg-h-step: [
 					height: calc(1351px * (100vw / 1080px));
 				}
 				width: 100%;
-				background: url(../img/step-5-bottom.jpg?0808) bottom center no-repeat;
+				background: url('../img/step-5-bottom.jpg' + $img-v) bottom center no-repeat;
 				background-size: contain;
 			}
 			.inner {
@@ -398,7 +414,7 @@ $bg-h-step: [
 						display: block;
 						width: 100%;
 						height: calc(91px * (100vw / 1080px));
-						background: url(../img/step-5-middle.jpg?0808) top center no-repeat;
+						background: url($img-path + '../img/step-5-middle.jpg' + $img-v) top center no-repeat;
 						background-size: contain;
 						@include mq($min-width: $bp) {
 							height: calc(91px * ($bp / 1080px));
@@ -455,7 +471,7 @@ $bg-h-step: [
 
 									width: calc(59px / 5);
 									height: calc(35px / 5);
-									background: url(../img/icon-arrow.png?0808) bottom center no-repeat;
+									background: url($img-path + 'icon-arrow.png' + $img-v) bottom center no-repeat;
 									background-size: contain;
 								}
 								span {
@@ -526,6 +542,11 @@ $bg-h-step: [
 									display: block;
 								}
 							}
+							&[data-showid="0"] {
+								.trade-account {
+									display: none;
+								}
+							}
 						}
 					}
 					&[data-y="0"][data-m="0"] .trade-list[data-length="0"] {
@@ -542,7 +563,7 @@ $bg-h-step: [
 				}
 				.btn-transfer-box {
 					position: fixed;
-					bottom: 0;
+					bottom: -1px;
 					left: 0;
 					width: 100%;
 					z-index: 1;
@@ -558,7 +579,7 @@ $bg-h-step: [
 					&:before {
 						height: 100%;
 						width: 100%;
-						background: url(../img/step-5-bottom-btn.jpg?0808) bottom center no-repeat;
+						background: url($img-path + 'step-5-bottom-btn.jpg' + $img-v) bottom center no-repeat;
 						background-size: contain;
 					}
 				}
@@ -583,6 +604,13 @@ $bg-h-step: [
 					letter-spacing: .25px;
 					font-weight: bold;
 				}
+				.btn-commonagreed {
+					position: absolute;
+					top: 11.3%;
+					width: 110px;
+					height: 25px;
+					left: 42%;
+				}
 				.transfer-input {
 					position: absolute;
 					top: 12.7%;
@@ -591,8 +619,8 @@ $bg-h-step: [
 					> input {
 						position: absolute;
 						height: 26%;
-						width: 47%;
-						left: 33%;
+						width: 48%;
+						left: 32%;
 						border: 0;
 						background: $color-white;
 						font-size: $fontsize;
@@ -629,12 +657,104 @@ $bg-h-step: [
 				}
 			}
 		}
+		&.step-commonagreed {
+			&:before {
+				height: calc(755px * ($bp / 1080px));
+				@include mq($max-width: $bp) {
+					height: calc(755px * (100vw / 1080px));
+				}
+				width: 100%;
+				// height: 100%;
+				background: url(../img/step-commonagreed.jpg) top center no-repeat;
+				background-size: contain;
+			}
+			.inner {
+				.commonagreed-lists {
+					&-option {
+						position: absolute;
+						top: 43.3vw;
+						left: 25.5%;
+						&-item {
+							display: inline-block;
+							padding: 5px;
+							border: 1px solid $color-font;
+							border-radius: 5px;
+							color: $color-font;
+							font-size: $fontsize;
+							margin: 0 3px;
+							&.active {
+								background: $color-font;
+								color: $color-white;
+							}
+						}
+					}
+					&[data-list="common"],
+					&[data-list="agreed"] {
+						display: block;
+					}
+					> ul.commonagreed-list {
+						margin: 0 15px 0 20px;
+						> li.commonagreed-item {
+							display: block;
+							border-bottom: 1px solid #ddd;
+							padding-top: 9px;
+							padding-bottom: 9px;
+							margin-bottom: 5px;
+							font-size: $fontsize-1;
+							display: flex;
+							flex-direction: column;
+							&:last-child {
+								margin-bottom: 0;
+							}
+							> div {
+								font-size: inherit;
+								min-height: 25px;
+								display: inline-flex;
+								align-items: center;
+								justify-content: flex-start;
+								span {
+									font-size: inherit;
+									line-height: normal;
+									letter-spacing: .3px;
+								}
+							}
+							.headline-1 {
+								span {
+									margin-right: 5px;
+									&:nth-child(3) {
+										color: #999;
+										border: 1px solid #999;
+										border-radius: 7px;
+										padding: 1px 3px;
+									}
+								}
+							}
+							.headline-2 {
+
+							}
+							.headline-3 {
+
+							}
+						}
+					}
+					&[data-lists="agreed"] ul[data-list="common"],
+					&[data-lists="common"] ul[data-list="agreed"] {
+						display: none;
+					}
+				}
+			}
+		}
 	}
 	@for $i from 1 through 7 {
 		&[data-index="#{$i}"] {
 			section[data-screen="#{$i}"] {
 				display: block;
 			}
+		}
+	}
+	&[data-index="commonagreed"] {
+		section[data-screen="commonagreed"] {
+			display: block;
 		}
 	}
 }
