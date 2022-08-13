@@ -236,8 +236,6 @@ $(function() {
                 , $id = $el.attr('data-id')
                 , $account = $num + "-" + $id;
 
-                console.log($account);
-                console.log($this.el.$transferInputAccount);
                 $this.el.$transferInputAccount.val($account);
                 return $this.tranIndex(6);
             });
