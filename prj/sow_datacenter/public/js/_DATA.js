@@ -4,12 +4,15 @@
 window._comm = {
     $testMode: false,
     $api: {
-        url: 'https://datasow.69939.uk/api/',
+        url: '/api/',
         param: {
             key: '' // ?key=e8701ad48ba05a91604e480dd60899a3
         }
     },
     $user: {id: '', name: '', email: ''}
+}
+{ // check is correct host >> https://datasow.69939.uk
+    if (location.port === '1234') window._comm.$api.url = 'https://datasow.69939.uk' + window._comm.$api.url;
 }
 console.log(window._comm);
 if (window._comm.$testMode) {
