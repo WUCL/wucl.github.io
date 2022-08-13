@@ -73,9 +73,8 @@ $(function() {
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
-            { // check is correct host // https://fakebank.69939.uk/
-                if (location.port === '1234') this.api.url = 'https://fakebank.69939.uk/' + this.api.url;
-                else this.api.url = location.host + this.api.url;
+            { // check is correct host >> https://fakebank.69939.uk/
+                if (location.port === '1234') this.api.url = 'https://fakebank.69939.uk' + this.api.url;
             }
             if (this.test_mode) this.testMode();
 
