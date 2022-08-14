@@ -245,13 +245,22 @@ $bg-h-step: [
 					> span {
 						display: block;
 						position: absolute;
-						right: 35px;
+						right: 10%;
+						// @include mq($max-width: $bp) {
+						// 	right: 35px;
+						// }
 					}
 					&-total {
-						top: 18px;
+						top: 4.5vw;
+						@include mq($max-width: $bp) {
+							top: 5vw;
+						}
 					}
 					&-live {
-						top: 60px;
+						top: 13.5vw;
+						@include mq($max-width: $bp) {
+							top: 16vw;
+						}
 					}
 				}
 			}
@@ -302,7 +311,7 @@ $bg-h-step: [
 						justify-content: center;
 						> span {
 							position: absolute;
-							margin-top: -2.5%
+							margin-top: -3.2%;
 						}
 						&-id {
 							left: 5%;

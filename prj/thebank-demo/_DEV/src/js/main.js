@@ -90,7 +90,7 @@ $(function() {
                 this.step7();
                 this.stepCommonAgreed();
 
-                if (this.test_mode) this.el.$loginSubmit.click();
+                // if (this.test_mode) this.el.$loginSubmit.click();
             };
         },
         testMode: function(_index) {
@@ -461,7 +461,7 @@ $(function() {
 
                     return setTimeout(( () => {
                         $this.el.$body.attr('data-loading', '');
-                        $this.tranIndex(5);
+                        $this.tranIndex(3);
                     } ), 700);
                 }
             }
