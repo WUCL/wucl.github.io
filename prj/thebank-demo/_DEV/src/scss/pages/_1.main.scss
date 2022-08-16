@@ -6,7 +6,7 @@ $img-v: "?0813";
 $bg-h-step: [
 1078px, 2205px, 8396px,
 2290px, 744px, 6195px,
-1920px
+2210px, 1920px
 ];
 .waterfall-loading {
 	position: fixed;
@@ -44,11 +44,11 @@ $bg-h-step: [
 					font-size: inherit;
 				}
 			}
-			.btn-back {
+			[class^="btn-back"] {
 				position: absolute;
 				top: 0;
 				left: 0;
-				&-with-arrow {
+				&.btn-back-with-arrow {
 					width: 55px;
 					height: 35px;
 					left: 0;
@@ -104,7 +104,7 @@ $bg-h-step: [
 				left: 0;
 			}
 		}
-		@for $i from 1 through 7 {
+		@for $i from 1 through 8 {
 			&.step-#{$i} {
 				&:before {
 					height: calc(nth($bg-h-step, $i) * ($bp / 1080px));
@@ -644,7 +644,7 @@ $bg-h-step: [
 						top: 72.5%;
 					}
 				}
-				.btn-next {
+				.btn-to-transfer {
 					position: absolute;
 					top: 25%;
 					left: 8%;
@@ -656,6 +656,75 @@ $bg-h-step: [
 			}
 		}
 		&.step-7 {
+			.btn-back {
+				&-with-button {
+					width: 30%;
+					height: 4.5%;
+					top: 43%;
+					left: 49%;
+					transform: translateX(-50%);
+				}
+			}
+			.transfer-immed {
+				&-to,
+				&-from {
+					position: absolute;
+					width: 100%;
+					> span {
+						width: 100%;
+						text-align: right;
+						display: block;
+						line-height: normal;
+						padding-right: 8%;
+					}
+				}
+				&-to {
+					top: 8.3%;
+					&-amount {
+						font-size: $fontsize-5;
+					}
+					&-account {
+						margin-top: 2.2%;
+						font-size: $fontsize;
+						&:after {
+							content: attr(data-name);
+							display: block;
+							margin-top: 5px;
+						}
+					}
+				}
+				&-from {
+					top: 24%;
+					&-date {
+
+					}
+					&-account {
+						margin-top: 4.1%;
+						letter-spacing: 0;
+					}
+				}
+				&-password {
+					position: absolute;
+					top: 53.2%;
+					height: 51px;
+					border: 0;
+					left: 7.7%;
+					width: 85.7%;
+					padding-left: 3%;
+					letter-spacing: .5px;
+					line-height: normal;
+					background: transparent;
+				}
+			}
+			.btn-to-end {
+				position: absolute;
+				top: 64.4%;
+				width: 86.1%;
+				height: 45px;
+				left: 7.5%;
+			}
+		}
+		&.step-8 {
 			.btn-back {
 				&-with-button {
 					width: 30%;
@@ -753,8 +822,34 @@ $bg-h-step: [
 				}
 			}
 		}
+		&.step-loading {
+			min-height: 100vh;
+			&:before {
+				z-index: 1;
+				height: calc(1078px * ($bp / 1080px));
+				@include mq($max-width: $bp) {
+					height: calc(1078px * (100vw / 1080px));
+				}
+				width: 100%;
+				// height: 100%;
+				background: url($img-path + 'step-1.jpg' + $img-v) top center no-repeat;
+				background-size: contain;
+			}
+			&:after {
+				position: absolute;
+				bottom: 0;
+				height: calc(844px * ($bp / 1080px)); // 2743px
+				@include mq($max-width: $bp) {
+					height: calc(844px * (100vw / 1080px));
+				}
+				width: 100%;
+				// background: url($img-path + 'step-1-bottom.jpg' + $img-v) bottom center no-repeat;
+				background: url($img-path + 'step-loading.gif' + $img-v) bottom center no-repeat;
+				background-size: contain;
+			}
+		}
 	}
-	@for $i from 1 through 7 {
+	@for $i from 1 through 8 {
 		&[data-index="#{$i}"] {
 			section[data-screen="#{$i}"] {
 				display: block;
@@ -763,6 +858,11 @@ $bg-h-step: [
 	}
 	&[data-index="commonagreed"] {
 		section[data-screen="commonagreed"] {
+			display: block;
+		}
+	}
+	&[data-index="loading"] {
+		section[data-screen="loading"] {
 			display: block;
 		}
 	}

@@ -5,8 +5,13 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- <meta name="viewport" content="width=480, initial-scale=1, user-scalable=0, shrink-to-fit=no"> -->
         <title>The Bank</title>
+        <link rel="manifest" href="/manifest.json" />
+        <script type="module">
+           import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+           const el = document.createElement('pwa-update');
+           document.body.appendChild(el);
+        </script>
         <meta name="keywords" content="" />
         <meta name="description" content="TheBank" />
         <meta property="og:url" content="" />
@@ -29,7 +34,7 @@
 	<body>
         <div class="waterfall-loading"><img src="data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7" alt=""></div>
         <main id="main" class="main" data-index="1">
-            <section id="step-1" class="step-1" data-desc="loading" data-screen="1">
+            <section id="step-1" class="step-1" data-desc="opening" data-screen="1">
                 <div class="inner"></div>
             </section>
             <section id="step-2" class="step-2" data-desc="login" data-screen="2">
@@ -100,13 +105,28 @@
                         <input type="number" name="transfer-input-amount" class="transfer-input-amount" id="transfer-input-amount" required t-highlight>
                         <input type="text" name="transfer-input-note" class="transfer-input-note" id="transfer-input-note" max="7" placeholder="顯示於交易明細限7個字" t-highlight>
                     </div>
-                    <button type="button" id="btn-next" class="btn-next" t-highlight></button>
+                    <button type="button" id="btn-to-transfer" class="btn-to-transfer" t-highlight></button>
                 </div>
             </section>
-            <section id="step-7" class="step-7" data-desc="ntd-transfer-error" data-screen="7">
+            <section id="step-7" class="step-7" data-desc="ntd-transfer-immed" data-screen="7">
                 <div class="inner fixed">
                     <button type="button" class="btn-back btn-back-with-arrow" t-highlight></button>
-                    <button type="button" class="btn-back btn-back-with-button" t-highlight></button>
+                    <div class="transfer-immed-to" t-highlight>
+                        <span class="transfer-immed-to-amount" id="transfer-immed-to-amount" t-highlight></span>
+                        <span class="transfer-immed-to-account" id="transfer-immed-to-account" t-highlight data-name></span>
+                    </div>
+                    <div class="transfer-immed-from" t-highlight>
+                        <span class="transfer-immed-from-date style-title-s date-only" t-highlight></span>
+                        <span class="transfer-immed-from-account ntd-lives-account-id style-title-s" t-highlight></span>
+                    </div>
+                    <input type="password" maxlength="12" name="password" class="transfer-immed-password" id="transfer-immed-password" placeholder="網銀密碼" t-highlight>
+                    <button type="button" id="btn-to-end" class="btn-to-end" t-highlight></button>
+                </div>
+            </section>
+            <section id="step-8" class="step-8" data-desc="ntd-transfer-error" data-screen="8">
+                <div class="inner fixed">
+                    <button type="button" class="btn-back-to-transfer btn-back-with-arrow" t-highlight></button>
+                    <button type="button" class="btn-back-to-transfer btn-back-with-button" t-highlight></button>
                 </div>
             </section>
             <section id="step-commonagreed" class="step-commonagreed" data-desc="ntd-transfer-commonagreed" data-screen="commonagreed">
@@ -129,6 +149,7 @@
                     </div>
                 </div>
             </section>
+            <section id="step-loading" class="step-loading" data-desc="loading" data-screen="loading"></section>
         </main>
         <div id="templates" class="display-none-i">
             <div id="template_trade-option">
@@ -171,7 +192,7 @@
                 <ul class="commonagreed-list" data-list="[LIST]" t-highlight>[ITEMS]</ul>
             </div>
             <div id="template_commonagreed-item">
-                <li class="commonagreed-item" data-num="[B_NUM]" data-id="[ID]">
+                <li class="commonagreed-item" data-num="[B_NUM]" data-id="[ID]" data-name="[NICKNAME]">
                     <div class="headline-1"><span>[B_NUM]</span><span>[B_NAME]</span><span>[B_LIST]</span></div>
                     <div class="headline-2"><span>[ID]</span></div>
                     <div class="headline-3"><span>[NICKNAME]</span></div>

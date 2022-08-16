@@ -5,8 +5,13 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- <meta name="viewport" content="width=480, initial-scale=1, user-scalable=0, shrink-to-fit=no"> -->
         <title>The Bank</title>
+        <link rel="manifest" href="/manifest.json" />
+        <script type="module">
+           import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+           const el = document.createElement('pwa-update');
+           document.body.appendChild(el);
+        </script>
         <meta name="keywords" content="" />
         <meta name="description" content="TheBank" />
         <meta property="og:url" content="" />
