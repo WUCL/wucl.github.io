@@ -9,7 +9,7 @@ function preloadImg(imgs) {
     $.preload(imgs, {
         // 是否有序加载
         order: false,
-        minTimer: 1300,
+        minTimer: 1500,
         //每加载完一张执行的方法
         each: function (count) {
             let percent = Math.round((count+1) / len * 100) + ' %';
@@ -38,7 +38,6 @@ window.imgs = [
     'public/img/step-7.jpg',
     'public/img/step-8.jpg',
     'public/img/step-commonagreed.jpg',
-    'public/img/step-loading.gif',
     'public/img/icon-arrow.png',
 ];
 preloadImg(window.imgs);

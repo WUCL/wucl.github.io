@@ -1,6 +1,6 @@
 $(function() {
     var MAIN = {
-        test_mode: false,
+        test_mode: (window.test_account === undefined)?false:true,
         api: {
             url: '/api/v1',
             data: {}
@@ -55,13 +55,15 @@ $(function() {
             $btnCommonAgreed: $('#btn-commonagreed'),
             $transferInputAccount: $('#transfer-input-account'),
             $transferInputAmount: $('#transfer-input-amount'),
+            $transferInputNote: $('#transfer-input-note'),
             // step06
 
             // step-7
             $btnToEnd: $('#btn-to-end'),
-            $transferImmedAmount: $('#transfer-immed-to-amount'),
-            $transferImmedAccount: $('#transfer-immed-to-account'),
+            $transferImmedToAmount: $('#transfer-immed-to-amount'),
+            $transferImmedToAccount: $('#transfer-immed-to-account'),
             $transferImmedPassword: $('#transfer-immed-password'),
+            $transferImmedFromNote: $('#transfer-immed-from-note'),
             // step-7
 
             // step-8
@@ -112,9 +114,9 @@ $(function() {
             let $this = this;
             $this.el.$body.attr('data-mode', 'test');
             $this.el.$body.prepend('<select id="select-index" style="position: fixed; right: 0; z-index: 999;"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>');
-            $('#login-id').attr('value', 'L125123832');
-            $('#login-account').attr('value', '000000');
-            $('#login-password').attr('value', '1qaz@WSX');
+            $('#login-id').attr('value', window.test_account.id);
+            $('#login-account').attr('value', window.test_account.account);
+            $('#login-password').attr('value', window.test_account.password);
             $this.el.$select.val($this.el.$main.attr('data-index'));
 
             // if (_index !== '') $this.tranIndex(_index);
@@ -154,12 +156,9 @@ $(function() {
             return window.scrollTo(0, 0);
         },
         step1: function() {
-            // if (this.el.$main.attr('data-index') !== "1") return;
-            // console.log('step1');
             let $this = this;
             if ($this.test_mode) return;
             setTimeout(( () => $this.tranIndex('next') ), ($this.var._step1.timeout1 + $this.var._step1.timeout2));
-            // setTimeout(function() {$this.el.$step1.addClass('doLoading');setTimeout(function() {$this.tranIndex('next')}, $this.var._step1.timeout2);}, $this.var._step1.timeout1);
         },
         step2: function() {
             let $this = this;
@@ -226,14 +225,16 @@ $(function() {
             $this.el.$btnToTransfer.on('click', () => {
                 let $account = $this.el.$transferInputAccount.val()
                 , $name = $this.el.$transferInputAccount.attr('data-name')
-                , $amount = $this.el.$transferInputAmount.val();
+                , $amount = $this.el.$transferInputAmount.val()
+                , $note = $this.el.$transferInputNote.val();
 
                 if ($account === '') return alert('尚未輸入轉入帳號');
                 if ($amount === '') return alert('尚未輸入轉入金額');
 
-                $this.el.$transferImmedAccount.html($account);
-                $this.el.$transferImmedAccount.attr('data-name', $name);
-                $this.el.$transferImmedAmount.html(window.helper.numberWithCommas($amount));
+                $this.el.$transferImmedToAccount.html($account);
+                $this.el.$transferImmedToAccount.attr('data-name', $name);
+                $this.el.$transferImmedToAmount.html(window.helper.numberWithCommas($amount));
+                $this.el.$transferImmedFromNote.html($note);
 
                 return $this.tranIndex('next');
             });
@@ -242,29 +243,30 @@ $(function() {
             });
         },
         step7: function() {
-            // console.log('step7');
             let $this = this;
             $this.el.$btnToEnd.on('click', () => {
                 if ($this.el.$transferImmedPassword.val() === '') return alert('尚未輸入網銀密碼');
 
-                $this.tranIndex('loading');
+                $this.el.$body.attr('data-loading', '1');
                 return setTimeout(( () => {
                     $this.tranIndex('8');
+                    $this.el.$body.attr('data-loading', '');
 
                     // clean data
                     $this.el.$transferImmedPassword.val('');
-                    $this.el.$transferImmedAmount.html('');
-                    $this.el.$transferImmedAmount.attr('data-name', '');
-                    $this.el.$transferImmedAccount.html('');
-                } ), 1500);
+                    $this.el.$transferImmedToAmount.html('');
+                    $this.el.$transferImmedToAmount.attr('data-name', '');
+                    $this.el.$transferImmedToAccount.html('');
+                    $this.el.$transferImmedFromNote.html('');
+                } ), 1000);
             });
         },
         step8: function() {
-            // console.log('step8');
             let $this = this;
             $this.el.$btnBackToTransfer.on('click', () => {
                 $this.el.$transferInputAccount.val("").attr({'value': '', 'data-name': ''});
                 $this.el.$transferInputAmount.val("").attr('value', '');
+                $this.el.$transferInputNote.val("");
                 return $this.tranIndex('6');
             });
         },
@@ -303,15 +305,10 @@ $(function() {
             });
             $this.el.$body.attr('data-loading', '1');
 
-            // "id":"L125123832",
-            // "account":"000000",
-            // "password":"1qaz@WSX",
-
             // call api // ajax url
             {
                 var _url = $this.api.url;
                 let _data = Object.assign({}, $this.api.data);
-                // console.log(_data);
 
                 // ajax handle
                 $.ajax({
@@ -364,19 +361,18 @@ $(function() {
 
                         for ($prop1 in _source1) {
                             let $date = parseInt(_source1[$prop1].date)
-                            , $y = moment.unix($date).format('YYYY')
-                            , $m = moment.unix($date).format('MM')
+                            , $y = '_' + moment.unix($date).format('YYYY')
+                            , $m = moment.unix($date).format('MM');
                             // , $d =  moment.unix($date).format('DD');
-                            , $d =  $date;
+                            // , $d =  $date;
                             // _highestY = parseInt(($y > _highestY)?$y:_highestY);
                             // _highestM = parseInt(($m > _highestM)?$m:_highestM);
 
                             if ($this.var._trads[$y] === undefined) $this.var._trads[$y] = {};
-                            if ($this.var._trads[$y][$m] === undefined) $this.var._trads[$y][$m] = {};
-                            $this.var._trads[$y][$m][$d] = _source1[$prop1];
-
+                            if ($this.var._trads[$y][$m] === undefined) $this.var._trads[$y][$m] = [];
+                            // $this.var._trads[$y][$m].unshift(_source1[$prop1]); // 遞減
+                            $this.var._trads[$y][$m].push(_source1[$prop1]); // 遞增
                         }
-                        // console.log($this.var._trads);
 
                         // 顯示近6個月的月份
                         let _m = _currentM
@@ -388,10 +384,15 @@ $(function() {
                             }
                             if (_m <= 9) _m = '0' + _m;
 
-                            if ($this.var._trads[_y] === undefined) $this.var._trads[_y] = {};
-                            if ($this.var._trads[_y][_m] === undefined) $this.var._trads[_y][_m] = {};
+                            if ($this.var._trads['_'+_y] === undefined) $this.var._trads['_'+_y] = {};
+                            if ($this.var._trads['_'+_y][_m] === undefined) $this.var._trads['_'+_y][_m] = {};
                             _m -= 1;
+                            if (_m <= 0) {
+                                _m = 12;
+                                _y -= 1;
+                            }
                         }
+                        // console.log($this.var._trads);
 
                         let _source2 = $this.var._trads
                         , _target_option = $this.el.$tradeListsOption
@@ -403,11 +404,27 @@ $(function() {
                         , _template_item = window.helper.getTemplate('trade-item')
                         , _templates_list = '';
 
+                        // order by 年份排序
+                        _source2 = Object.keys(_source2).sort().reduceRight( // reduce(
+                            (obj, key) => {
+                                obj[key] = _source2[key];
+                                return obj;
+                            },{}
+                        );
+
                         for ($prop2 in _source2) {
                             let _source3 = _source2[$prop2]
                             , $y = $prop2
                             , $m = 0
                             , $d = '';
+
+                            // order by 月份排序
+                            _source3 = Object.keys(_source3).sort().reduceRight( // reduce(
+                                (obj, key) => {
+                                    obj[key] = _source3[key];
+                                    return obj;
+                                },{}
+                            );
 
                             for ($prop3 in _source3) {
                                 $m = $prop3;
@@ -426,10 +443,11 @@ $(function() {
                                 // );
 
                                 for ($prop4 in _source4) {
-                                    $d = moment.unix($prop4).format('DD');
                                     let $templateItem = _template_item
-                                    , $data = _source4[$prop4]
-                                    , $showid = $data.is_show_account
+                                    , $data = _source4[$prop4];
+                                    $d = moment.unix($data.date).format('DD');
+
+                                    let $showid = $data.is_show_account
                                     , $date = $m + '/' + $d
                                     , $title = $data.title
                                     , $subtitle = $data.subtitle
@@ -449,6 +467,7 @@ $(function() {
 
                                     $items += $templateItem;
                                 }
+                                $y = $y.replace(/\_/g, '');
 
                                 // ## build the option
                                 $templateOption = $templateOption
@@ -466,6 +485,7 @@ $(function() {
                                 _templates_list += $templateList;
                             }
                         }
+                        // console.log(_templates_option);
                         _target_option.append(_templates_option);
                         _target_list.html(_templates_list);
                     }
@@ -519,7 +539,7 @@ $(function() {
                     return setTimeout(( () => {
                         $this.el.$body.attr('data-loading', '');
                         $this.tranIndex(3);
-                        if ($this.test_mode) $this.tranIndex(6);
+                        if ($this.test_mode) $this.tranIndex(5);
                     } ), 700);
                 }
             }

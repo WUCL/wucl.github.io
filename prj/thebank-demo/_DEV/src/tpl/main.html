@@ -67,9 +67,9 @@
             <select class="ntd-lives-account-id style-title-s" t-highlight></select>
             <button type="button" id="btn-commonagreed" class="btn-commonagreed" t-highlight></button>
             <div class="transfer-input" t-highlight>
-                <input type="text" name="transfer-input-account" class="transfer-input-account" id="transfer-input-account" max="16" placeholder="銀行代碼/帳號" required t-highlight>
-                <input type="number" name="transfer-input-amount" class="transfer-input-amount" id="transfer-input-amount" required t-highlight>
-                <input type="text" name="transfer-input-note" class="transfer-input-note" id="transfer-input-note" max="7" placeholder="顯示於交易明細限7個字" t-highlight>
+                <input type="text" name="transfer-input-account" class="transfer-input-account" id="transfer-input-account" maxlength="16" placeholder="銀行代碼/帳號" required t-highlight>
+                <input type="number" name="transfer-input-amount" class="transfer-input-amount" id="transfer-input-amount" maxlength="9" onKeyDown="return this.value = this.value.replace(/^0+/, '');" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" required t-highlight>
+                <input type="text" name="transfer-input-note" class="transfer-input-note" id="transfer-input-note" maxlength="7" placeholder="顯示於交易明細限7個字" t-highlight>
             </div>
             <button type="button" id="btn-to-transfer" class="btn-to-transfer" t-highlight></button>
         </div>
@@ -84,6 +84,7 @@
             <div class="transfer-immed-from" t-highlight>
                 <span class="transfer-immed-from-date style-title-s date-only" t-highlight></span>
                 <span class="transfer-immed-from-account ntd-lives-account-id style-title-s" t-highlight></span>
+                <span id="transfer-immed-from-note" class="transfer-immed-from-note style-title-s" t-highlight></span>
             </div>
             <input type="password" maxlength="12" name="password" class="transfer-immed-password" id="transfer-immed-password" placeholder="網銀密碼" t-highlight>
             <button type="button" id="btn-to-end" class="btn-to-end" t-highlight></button>
@@ -115,6 +116,5 @@
             </div>
         </div>
     </section>
-    <section id="step-loading" class="step-loading" data-desc="loading" data-screen="loading"></section>
 </main>
 @@include('_template.html')

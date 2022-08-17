@@ -2,7 +2,7 @@
    pages/main
    ======================= */
 $img-path: "../img/";
-$img-v: "?0813";
+$img-v: "?0817";
 $bg-h-step: [
 1078px, 2205px, 8396px,
 2290px, 744px, 6195px,
@@ -21,7 +21,7 @@ $bg-h-step: [
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translateX(-50%) scale(1.8);
+		transform: translateX(-50%) scale(1.56);
 	}
 }
 .main {
@@ -304,14 +304,14 @@ $bg-h-step: [
 					&-account {
 						position: absolute;
 						width: 100%;
-						top: 46.1%;
+						top: 45%;
 						height: 54%;
 						display: flex;
 						align-items: center;
 						justify-content: center;
 						> span {
 							position: absolute;
-							margin-top: -3.2%;
+							margin-top: -1%;
 						}
 						&-id {
 							left: 5%;
@@ -631,7 +631,7 @@ $bg-h-step: [
 						width: 48%;
 						left: 32%;
 						border: 0;
-						background: $color-white;
+						background: transparent;
 						font-size: $fontsize;
 					}
 					&-account {
@@ -672,24 +672,26 @@ $bg-h-step: [
 					width: 100%;
 					> span {
 						width: 100%;
+						min-height: 18px;
 						text-align: right;
 						display: block;
 						line-height: normal;
 						padding-right: 8%;
+						font-size: $fontsize;
 					}
 				}
 				&-to {
-					top: 8.3%;
+					top: 9%;
 					&-amount {
 						font-size: $fontsize-5;
 					}
 					&-account {
-						margin-top: 2.2%;
-						font-size: $fontsize;
+						margin-top: 4%;
 						&:after {
 							content: attr(data-name);
 							display: block;
 							margin-top: 5px;
+							font-size: inherit;
 						}
 					}
 				}
@@ -701,6 +703,9 @@ $bg-h-step: [
 					&-account {
 						margin-top: 4.1%;
 						letter-spacing: 0;
+					}
+					&-note {
+						margin-top: 19%;
 					}
 				}
 				&-password {
@@ -822,32 +827,6 @@ $bg-h-step: [
 				}
 			}
 		}
-		&.step-loading {
-			min-height: 100vh;
-			&:before {
-				z-index: 1;
-				height: calc(1078px * ($bp / 1080px));
-				@include mq($max-width: $bp) {
-					height: calc(1078px * (100vw / 1080px));
-				}
-				width: 100%;
-				// height: 100%;
-				background: url($img-path + 'step-1.jpg' + $img-v) top center no-repeat;
-				background-size: contain;
-			}
-			&:after {
-				position: absolute;
-				bottom: 0;
-				height: calc(844px * ($bp / 1080px)); // 2743px
-				@include mq($max-width: $bp) {
-					height: calc(844px * (100vw / 1080px));
-				}
-				width: 100%;
-				// background: url($img-path + 'step-1-bottom.jpg' + $img-v) bottom center no-repeat;
-				background: url($img-path + 'step-loading.gif' + $img-v) bottom center no-repeat;
-				background-size: contain;
-			}
-		}
 	}
 	@for $i from 1 through 8 {
 		&[data-index="#{$i}"] {
@@ -858,11 +837,6 @@ $bg-h-step: [
 	}
 	&[data-index="commonagreed"] {
 		section[data-screen="commonagreed"] {
-			display: block;
-		}
-	}
-	&[data-index="loading"] {
-		section[data-screen="loading"] {
 			display: block;
 		}
 	}
