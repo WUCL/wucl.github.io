@@ -225,11 +225,12 @@ $(function() {
             $this.el.$btnToTransfer.on('click', () => {
                 let $account = $this.el.$transferInputAccount.val()
                 , $name = $this.el.$transferInputAccount.attr('data-name')
-                , $amount = $this.el.$transferInputAmount.val()
+                , $amount = parseInt($this.el.$transferInputAmount.val())
                 , $note = $this.el.$transferInputNote.val();
 
                 if ($account === '') return alert('尚未輸入轉入帳號');
                 if ($amount === '') return alert('尚未輸入轉入金額');
+                if ($amount < 1) return alert('轉入金額為 0元，無法轉帳');
 
                 $this.el.$transferImmedToAccount.html($account);
                 $this.el.$transferImmedToAccount.attr('data-name', $name);
