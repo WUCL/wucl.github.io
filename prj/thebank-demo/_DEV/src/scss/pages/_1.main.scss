@@ -2,7 +2,7 @@
    pages/main
    ======================= */
 $img-path: "../img/";
-$img-v: "?0817";
+$img-v: "?0818";
 $bg-h-step: [
 1078px, 2205px, 8396px,
 2290px, 744px, 6195px,
@@ -719,6 +719,7 @@ $bg-h-step: [
 					letter-spacing: .5px;
 					line-height: normal;
 					background: transparent;
+					font-size: $fontsize;
 				}
 			}
 			.btn-to-end {
