@@ -497,19 +497,19 @@ body {
 									display: flex;
 									flex-direction: column-reverse;
 									width: 100%;
-									font-size: $fontsize-4;
+									font-size: $fontsize-3;
 									text-align: center;
 									overflow: hidden;
-									@include mq($max-width: $bp-mobile) {
-										font-size: $fontsize-2;
-									}
+									// @include mq($max-width: $bp-mobile) {
+									// 	font-size: $fontsize-2;
+									// }
 									&:before {
 										content: "";
 										height: 0;
 										width: 100%;
 										display: block;
 										margin-top: 5px;
-										transition: .9s;
+										transition: .23s;
 									}
 									&:after {
 										content: "";
@@ -526,40 +526,40 @@ body {
 											font-size: $fontsize-2;
 										}
 									}
-									&:nth-child(1) {
+									&:not(:empty):nth-child(1) {
 										order: 2;
 										&:before {
 											// height: 75%;
 											background: nth($color-rank-scale, 1);
-											transition-delay: .4s;
+											transition-delay: .12s;
 										}
 										&:after {
 											content: "TOP1";
-											transition-delay: 1s;
+											transition-delay: .45s;
 										}
 									}
-									&:nth-child(2) {
+									&:not(:empty):nth-child(2) {
 										order: 1;
 										&:before {
 											// height: 55%;
 											background: nth($color-rank-scale, 2);
-											transition-delay: .7s;
+											transition-delay: .35s;
 										}
 										&:after {
 											content: "TOP2";
-											transition-delay: 1.5s;
+											transition-delay: .6s;
 										}
 									}
-									&:nth-child(3) {
+									&:not(:empty):nth-child(3) {
 										order: 3;
 										&:before {
 											// height: 35%;
 											background: nth($color-rank-scale, 3);
-											transition-delay: .55s;
+											transition-delay: .27s;
 										}
 										&:after {
 											content: "TOP3";
-											transition-delay: 1.3s;
+											transition-delay: .35s;
 										}
 									}
 									&.magicing {

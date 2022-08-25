@@ -4,6 +4,7 @@ $(function() {
         api: {
             url: window._comm.$api.url,
             path: {
+                annual_columns: 'annual_columns',
                 annual_datas: 'annual_datas',
                 annual_area: 'annual_area'
             },
@@ -22,9 +23,9 @@ $(function() {
                 people: $('#annual-people'),
                 meter: $('#annual-meter'),
                 kg: $('#annual-kg'),
-                top1: $('#annual-top1'),
-                top2: $('#annual-top2'),
-                top3: $('#annual-top3'),
+                // top1: $('#annual-top1'),
+                // top2: $('#annual-top2'),
+                // top3: $('#annual-top3'),
                 // topScale: $('#annual-rank-scale')
             },
             $area: {
@@ -39,9 +40,11 @@ $(function() {
         },
         var: {
             $area: 'khh', // defaul setting
+            $annualAreaOcean: {},
+            $mappingl10n: {},
         },
         init: function() {
-            console.log('OCEAN');
+            console.info('<< OCEAN >>');
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.loadTopics();
@@ -52,9 +55,9 @@ $(function() {
             this.showFlot();
 
             this.bindEvent();
-            this.goUpdateTWDatas();
         },
         bindEvent: function() {
+            let $this = this;
 
             // svg tw click
             $this.el.$twimg.on('click', '#svg-tw', function(e) {
@@ -66,21 +69,21 @@ $(function() {
                 $this.var.$area = _target.attr('id');
 
                 let _name = window.mappingTWName[$this.var.$area]
-                , _mappingData = window.annualAreaOcean[_name];
+                , _mappingData = $this.var.$annualAreaOcean[_name];
                 console.log(_mappingData);
                 if (_mappingData !== undefined) { // check if data exist
                     _currentTarget.find('path').removeClass('active');
                     _target.addClass('active');
                     $this.goUpdateTWDatas();
                 } else {
-                    console.log('no area');
+                    console.info('<< no area >>');
                     alert('此地區尚無資料');
                 }
                 return;
             });
         },
         loadTopics: function() { // slider
-            console.log('loadTopics');
+            console.info('<< loadTopics >>');
             let $this = this
             , _source = window.annualTopic
             , _target = $this.el.$topicsSwiper.find('.swiper-wrapper')
@@ -106,13 +109,52 @@ $(function() {
         /* BEGIN data */
             goInitial: function() {
                 let $this = this;
-                console.log('goInitial');
+                console.info('<< goInitial >>');
 
-                getupAnnualDatas();
-                getupTWDatas();
+                getMappingColumn();
+
+                function getMappingColumn() {
+                    console.info('<< get the Mapping of Column. >>');
+
+                    // call api // ajax url
+                    let _url = $this.api.url
+                    + $this.api.path.annual_columns;
+                    _url += '/?nocache_x=1';
+                    console.log(_url);
+
+                    let _data = Object.assign({}, $this.api.data);
+                    console.log(_data);
+
+                    // ajax handle
+                    $.ajax({
+                        url: _url,
+                        type: "post",
+                        data: JSON.stringify(_data),
+                        dataType: "json",
+                        success: (response) => {
+                            console.log(response);
+                            if (response.is_success === 1) {
+                                doSuccess(response.data);
+                            }
+                            return;
+                        },
+                        error: function(response) {
+                            console.error("error");
+                            console.log(response);
+                        }
+                    });
+                    function doSuccess(_r) { // to get the data to mapping of column
+                        console.info('<< to get the data to mapping of column >>');
+                        console.log(_r);
+                        $this.var.$mappingl10n = _r;
+
+                        getupAnnualDatas();
+                        getupTWDatas();
+                    }
+                }
 
                 function getupAnnualDatas() {
-                    console.log('get and update AnnualDatas');
+                    console.info('<< get and update AnnualDatas. >>');
 
                     // call api // ajax url
                     let _url = $this.api.url
@@ -154,9 +196,9 @@ $(function() {
 
                         if (window.page == 'member') return;
 
-                        $this.el.$annual.top1.html(_r['top'][0]);
-                        $this.el.$annual.top2.html(_r['top'][1]);
-                        $this.el.$annual.top3.html(_r['top'][2]);
+                        // $this.el.$annual.top1.html(_r['top'][0]);
+                        // $this.el.$annual.top2.html(_r['top'][1]);
+                        // $this.el.$annual.top3.html(_r['top'][2]);
 
                         // let _topScaleLength = _annualDatas['scale'].length;
                         // for (let i = 0; i < _topScaleLength; i++ ) {
@@ -165,7 +207,7 @@ $(function() {
                     }
                 }
                 function getupTWDatas() {
-                    console.log('get and update TWDatas');
+                    console.info('<< get and update TWDatas >>');
 
                     // call api // ajax url
                     let _url = $this.api.url
@@ -183,7 +225,7 @@ $(function() {
                         data: JSON.stringify(_data),
                         dataType: "json",
                         success: (response) => {
-                            // console.log(response);
+                            console.log(response);
                             if (response.is_success === 1) {
                                 doSuccess(response.data);
                             }
@@ -196,11 +238,11 @@ $(function() {
                     });
                     function doSuccess(_r) { // to get the TW area data
                         console.log(_r);
-                        return;
+
                         if (window.page == 'member') return;
-                        let $this = this
-                        , _area = window.mappingTWName[$this.var.$area]
-                        , _mappingData = window.annualAreaOcean[_area];
+                        $this.var.$annualAreaOcean = _r;
+                        let _area = window.mappingTWName[$this.var.$area]
+                        , _mappingData = $this.var.$annualAreaOcean[_area];
                         // console.log($this.var.$area);
                         // console.log(_mappingData);
                         $this.el.$area.name.html(_area);
@@ -211,6 +253,8 @@ $(function() {
                         $this.el.$area.top1.html(_mappingData['top'][0]);
                         $this.el.$area.top2.html(_mappingData['top'][1]);
                         $this.el.$area.top3.html(_mappingData['top'][2]);
+
+                        $this.goUpdateTWDatas();
                         return;
                     }
                 }
@@ -222,7 +266,7 @@ $(function() {
                 });
             },
             showFlot: function() { // 折線圖
-                console.log('showFlot');
+                console.info('<< showFlot >>');
                 const labels = [
                     'x1',
                     'x2',
@@ -282,22 +326,31 @@ $(function() {
                 );
             },
             goUpdateTWDatas: function() {
-                console.log("goUpdateTWDatas");
-                // if (window.page == 'member') return;
-                // let $this = this
-                // , _area = window.mappingTWName[$this.var.$area]
-                // , _mappingData = window.annualAreaOcean[_area];
-                // // console.log($this.var.$area);
-                // // console.log(_mappingData);
-                // $this.el.$area.name.html(_area);
+                console.info('<< goUpdateTWDatas >>');
+                if (window.page == 'member') return;
+                let $this = this
+                , _area = window.mappingTWName[$this.var.$area]
+                , _mappingData = $this.var.$annualAreaOcean[_area]
+                , _areaTwDatas_el = $('.goUpdateTWDatas');
+                // console.log($this.var.$area);
+                console.log(_mappingData);
+                $this.el.$area.name.html(_area);
 
-                // // $this.el.$area.freq.html(_mappingData['freq']);
-                // $this.el.$area.freq.attr('data-endnum', _mappingData['freq']);
+                $this.el.$area.freq.html(_mappingData['freq']);
+                $this.el.$area.freq.attr('data-endnum', _mappingData['freq']);
 
-                // $this.el.$area.top1.html(_mappingData['top'][0]);
-                // $this.el.$area.top2.html(_mappingData['top'][1]);
-                // $this.el.$area.top3.html(_mappingData['top'][2]);
-                // return;
+                _areaTwDatas_el.removeClass('magicing');
+                _areaTwDatas_el.html('');
+                window.setTimeout(( () => {
+                    try {
+                        for (let i = 0; i < 3; i++) {
+                            $this.el.$area['top' + (i+1)].html($this.var.$mappingl10n.cols[_mappingData['top'][i]]);
+                        }
+                    } finally {
+                        _areaTwDatas_el.addClass('magicing');
+                    }
+                }), 1100);
+                return;
             },
         /* END data */
     };
