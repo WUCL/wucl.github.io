@@ -809,6 +809,7 @@ $(function() {
             // console.log(_url);
 
             let _data = Object.assign({}, $this.api.data, $this.api.data_others);
+            console.log(_data);
 
             // ajax handle
             $.ajax({
@@ -1010,6 +1011,10 @@ $(function() {
 
                         // if ($name === "user_name" && $value === "0") $value = window._comm.$user.name;
 
+                        if ($name === "user_name" || $name === "user_email" || $name === "user_company") {
+                            $value = $value.replace(/./g, '*');
+                        }
+
                         var $el = $this.el.$theform.find('[name="' + $name + '"]');
                         if ($name == "album_pics") {
                             // continue; // for test
@@ -1067,8 +1072,10 @@ $(function() {
                             else $el.val($value);
                         }
                     }
-                    if (($this.el.$theform.find('[name="user_name"]').html() === "") || ($this.el.$theform.find('[name="user_name"]').html() === "0")) $this.el.$theform.find('[name="user_name"]').val(window._comm.$user.name);
-                    if (($this.el.$theform.find('[name="user_email"]').html() === "") || ($this.el.$theform.find('[name="user_email"]').html() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
+
+                    // user_name/user_email 預設帶使用者資料
+                    // if (($this.el.$theform.find('[name="user_name"]').html() === "") || ($this.el.$theform.find('[name="user_name"]').html() === "0")) $this.el.$theform.find('[name="user_name"]').val(window._comm.$user.name);
+                    // if (($this.el.$theform.find('[name="user_email"]').html() === "") || ($this.el.$theform.find('[name="user_email"]').html() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
                 }
 
                 yesShowUp();

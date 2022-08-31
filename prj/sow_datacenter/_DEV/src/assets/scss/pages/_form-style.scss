@@ -336,13 +336,6 @@ section.theform {
          }
       }
    }
-   label[required] {
-      &:before {
-         content: "*";
-         color: red;
-         display: inline-flex;
-      }
-   }
 }
 
 body[data-status="form"][data-form="edit"] {
@@ -354,6 +347,15 @@ body[data-status="form"][data-form="edit"] {
       display: block;
       visibility: visible;
    }
+   section.theform {
+      label[required] {
+         &:before {
+            content: "*";
+            color: red;
+            display: inline-flex;
+         }
+      }
+   }
 }
 body[data-status="view"] {
    section.theform {
@@ -361,31 +363,36 @@ body[data-status="view"] {
          input, label {
             pointer-events: none;
          }
-         .group.with-photo {
-            input[type="file"],
-            label.btn-style {
-               display: none;
-            }
-            // ul li > div {
-            //    flex-direction: row;
-            // }
-            .photo-box {
-               position: relative;
-               width: 100%;
-               height: 180px;
-               background: $color-white;
-               border-radius: 5px;
-               img {
-                  height: 100%;
-                  width: auto;
-                  margin: 0 auto;
+         .form-status {
+            display: none;
+         }
+         .group {
+            &.with-photo {
+               input[type="file"],
+               label.btn-style {
+                  display: none;
                }
-               // &[data-photo="1"] {
-               //    background: transparent;
+               // ul li > div {
+               //    flex-direction: row;
                // }
-            }
-            .swiper-pagination {
-               bottom: -20px;
+               .photo-box {
+                  position: relative;
+                  width: 100%;
+                  height: 180px;
+                  background: $color-white;
+                  border-radius: 5px;
+                  img {
+                     height: 100%;
+                     width: auto;
+                     margin: 0 auto;
+                  }
+                  // &[data-photo="1"] {
+                  //    background: transparent;
+                  // }
+               }
+               .swiper-pagination {
+                  bottom: -20px;
+               }
             }
          }
          .form-btns {
