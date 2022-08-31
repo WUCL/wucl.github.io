@@ -52,7 +52,7 @@ $(function() {
             this.goInitial(); // 先 ajax 拿到資料先builder
             this.loadTWSvg();
 
-            this.showFlot();
+            if (this.el.$chartRank.length !== 0) this.showFlot();
 
             this.bindEvent();
         },
@@ -145,8 +145,8 @@ $(function() {
                     });
                     function doSuccess(_r) { // to get the data to mapping of column
                         console.info('<< to get the data to mapping of column >>');
-                        console.log(_r);
                         $this.var.$mappingl10n = _r;
+                        console.log($this.var.$mappingl10n);
 
                         getupAnnualDatas();
                         getupTWDatas();

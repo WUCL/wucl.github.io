@@ -277,10 +277,10 @@ $(function() {
 
                 console.log('$preview_src :: ' + $preview_src);
                 if ($preview_src == "") {
-                    console.log('AAA')
+                    console.log('AAA');
                     return;
                 } else {
-                    console.log('BBB')
+                    console.log('BBB');
                     if ($this.var.page_position === 'cleanriver') {
 
                         let $dt_el = $('#' + $whichone + '-datetime')
@@ -736,6 +736,7 @@ $(function() {
                 // 確認表單是否為view的狀態
                 if ($this.var.page_status == 'view') {
                     $this.var.form_status = 'view';
+                    window._comm.$user.id = 0;
                     $page_title = $this.el.$page_title.html();
                 } else if ($this.var.page_status == 'form') {
                     $this.var.form_status = 'edit';
