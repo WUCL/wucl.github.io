@@ -95,6 +95,7 @@ $(function() {
             $btn_themap_close: $('#btn-themap-close'),
         },
         var: {
+            page_title: '', // page title
             page_status: '', // form/view
             page_position: '', // cleanocean/cleanriver
             form_status: '', // add/edit
@@ -149,13 +150,6 @@ $(function() {
                 if (window._comm.$user.id === '') {
                     return window.setTimeout(( () => { checkUserId(); }), 500);
                 } else {
-                    if (window._comm.$user.id === '-1') {
-                        alert('尚未登入');
-                        location.href = location.protocol + '//' + location.host + '/' + $this.var.page_position + '/' + $this.var.page_position.substring(5) + '.html';
-                    }
-                    $this.api.data.user_id = window._comm.$user.id;
-                    console.log($this.api); // for test
-
                     $this.bindEvent();
                     $this.checkStatus(); // start
                     $this.setPopup();
@@ -720,50 +714,84 @@ $(function() {
         checkStatus: function() {
             let $this = this;
             // checking
-            let url_code = window.helper.getUrlParams(window.location.href, 'code')
-            , url_settingId = window.helper.getUrlParams(window.location.href, 'setting_id');
+            let url_code = window.helper.getUrlParams(window.location.href, 'code') || ''
+            , url_settingId = window.helper.getUrlParams(window.location.href, 'setting_id') || '';
             console.log(url_code);
             console.log(url_settingId);
 
+            $this.api.data.code = url_code;
+            $this.api.data.setting_id = url_settingId;
+            console.log($this.api.data);
+
             // checking status, than set up status
-            let $page_title = '';
-            if ((this.var.page_position === "cleanocean" && url_code)
-                ||
-                (this.var.page_position === "cleanriver" && url_code && url_settingId)) {
-                $this.api.data.code = url_code;
-                $this.api.data.setting_id = url_settingId || "";
-                console.log($this.api.data)
-                // 確認表單是否為view的狀態
-                if ($this.var.page_status == 'view') {
-                    $this.var.form_status = 'view';
-                    window._comm.$user.id = 0;
-                    $page_title = $this.el.$page_title.html();
-                } else if ($this.var.page_status == 'form') {
+            // 確認表單是否為view的狀態
+            if ($this.var.page_status == 'view') {
+                $this.var.form_status = 'view';
+                window._comm.$user.id = 0;
+                console.log(window._comm.$user.id);
+                $this.var.page_title = $this.el.$page_title.html();
+            } else if ($this.var.page_status == 'form') {
+                if ($this.api.data.code == '') {
+                    $this.var.form_status = 'add';
+                    $this.var.page_title = $this.el.$page_title.html() + ' - 新增';
+                    $this.el.$theform_is_edit.remove();
+                } else {
                     $this.var.form_status = 'edit';
-                    $page_title = $this.el.$page_title.html() + ' - 修改';
+                    $this.var.page_title = $this.el.$page_title.html() + ' - 修改';
                     $this.el.$theform_is_new.remove();
                 }
-                $this.formShowup();
-            } else {
-                if ($this.var.page_status == 'view') {
-                    console.log(this.var.page_position);
-                    return alert('導回首頁');
-                }
-                $this.var.form_status = 'add';
-                $page_title = $this.el.$page_title.html() + ' - 新增';
-                $this.el.$theform_is_edit.remove();
-
-                if ($this.var.page_position == 'cleanriver') {
-                    $this.openFirstPopup();
-                } else {
-                    $this.formShowup();
-                }
             }
+
+            $this.api.data.user_id = window._comm.$user.id;
+            if ($this.var.page_position == 'cleanriver') {
+                $this.openFirstPopup();
+            } else {
+                console.log($this.var.page_position);
+                $this.formShowup();
+            }
+
+
+            /*{
+                if ((this.var.page_position === "cleanocean" && url_code)
+                    ||
+                    (this.var.page_position === "cleanriver" && url_code && url_settingId)) {
+                    $this.api.data.code = url_code;
+                    $this.api.data.setting_id = url_settingId || "";
+                    console.log($this.api.data)
+                    // 確認表單是否為view的狀態
+                    if ($this.var.page_status == 'view') {
+                        $this.var.form_status = 'view';
+                        window._comm.$user.id = 0;
+                        $this.var.page_title = $this.el.$page_title.html();
+                    } else if ($this.var.page_status == 'form') {
+                        $this.var.form_status = 'edit';
+                        $this.var.page_title = $this.el.$page_title.html() + ' - 修改';
+                        $this.el.$theform_is_new.remove();
+                    }
+                    $this.formShowup();
+                } else {
+                    if ($this.var.page_status == 'view') {
+                        console.log(this.var.page_position);
+                        return alert('導回首頁');
+                    }
+                    $this.var.form_status = 'add';
+                    $this.var.page_title = $this.el.$page_title.html() + ' - 新增';
+                    $this.el.$theform_is_edit.remove();
+
+                    if ($this.var.page_position == 'cleanriver') {
+                        $this.openFirstPopup();
+                    } else {
+                        $this.formShowup();
+                    }
+                }
+            }*/
+
+
             $this.el.$body.attr('data-form', $this.var.form_status);
 
-            $this.el.$page_title.html($page_title);
-            $this.el.$thetitle.html($page_title);
-            $this.el.$thetitle.attr('data-storke', $page_title);
+            $this.el.$page_title.html($this.var.page_title);
+            $this.el.$thetitle.html($this.var.page_title);
+            $this.el.$thetitle.attr('data-storke', $this.var.page_title);
 
             return;
         },
@@ -791,6 +819,12 @@ $(function() {
                     console.log(response);
                     if (response.is_success === 1) {
                         doSuccess(response.setting, response.data);
+                    } else {
+                        // alert(response.messages[0]);
+                        console.log(window._comm.$user.id);
+                        // alert((window._comm.$user.id === '-1')?'請先登入':response.messages[0]);
+                        alert(response.messages[0]);
+                        return location.href = location.protocol + '//' + location.host + '/' + $this.var.page_position + '/' + $this.var.page_position.substring(5) + '.html';
                     }
                     return;
                 },
