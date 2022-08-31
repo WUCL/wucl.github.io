@@ -551,8 +551,9 @@ $(function() {
                 , $options = $target.find('option:selected')
                 , $selectLength = $options.length;
                 if ($selectLength > $limit) {
-                    alert('最多選' + $limit + '個');
+                    $target.blur();
                     $options[$limit].selected = false ;
+                    alert('最多選' + $limit + '個');
                     return false;
                 }
             });
@@ -871,6 +872,7 @@ $(function() {
 
                         // console.log(_field);
                         // console.log(_d);
+                        // console.log('____________________');
                         if ($this.var.page_position == 'cleanriver') {
                             var _is_multiple = _d['is_multiple'];
                             _d = _d['value'];
@@ -1096,6 +1098,16 @@ $(function() {
                         $this.el.$loading.removeClass('active');
                     }), 500);
                 }
+
+                // Take all of SELECT to select2
+                if (!deviceObj.isMobile()) {
+                    $("select:not([multiple])").select2();
+                    $("select[multiple]:not([max])").select2();
+                    $("select[multiple][max='3']").select2({
+                        maximumSelectionLength: 3,
+                        closeOnSelect: false
+                    });
+                }
             }
         },
         checkPicsIsFull: function(_count) {
@@ -1269,6 +1281,7 @@ $(function() {
             $this.el.$btn_themap_close.on('click', function() {
                 console.log('$btn_themap_close');
                 $('#form-themap').popup('hide');
+                $("#filed-lat, #filed-lng").blur();
             });
             _map.on('click', function(ev) {
                 if(!_ajaxLock){

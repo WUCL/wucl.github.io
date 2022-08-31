@@ -79,6 +79,12 @@ section.theform {
                   align-items: flex-start;
                   justify-content: center;
                   margin-bottom: 10px;
+                  > span.select2 {
+                     min-width: 100%;
+                     @include mq($max-width: $bp-mobile) {
+                        font-size: $fontsize-5 !important;
+                     }
+                  }
                   &.no-column {
                      flex-direction: row;
                      align-items: center;
@@ -93,6 +99,7 @@ section.theform {
                      padding: 5px 9px 3px;
                      font-size: $fontsize;
                      line-height: normal;
+
                      &[type="radio"] {
                         width: inherit;
                         & + span {
@@ -306,7 +313,10 @@ section.theform {
                font-size: $fontsize;
                padding: 3px;
                border-radius: 5px;
-               min-width: 6em;
+               + span.select2 {
+                  min-width: 7em !important;
+                  max-width: 7em !important;
+               }
             }
          }
          .form-btns {
