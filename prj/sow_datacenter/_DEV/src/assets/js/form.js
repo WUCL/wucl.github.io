@@ -1009,7 +1009,10 @@ $(function() {
                         // console.log("@@@@@@@@@@");
 
                         // if ($name === "user_name" && $value === "0") $value = window._comm.$user.name;
-                        if ($name === "user_name" || $name === "user_email" || $name === "user_company") $value = $value.replace(/./g, '*');
+                        if ($name === "user_name" || $name === "user_email" || $name === "user_company") {
+                            if ($value === "") $value = '**********';
+                            else $value = $value.replace(/./g, '*');
+                        }
 
                         var $el = $this.el.$theform.find('[name="' + $name + '"]');
                         if ($name == "album_pics") {
