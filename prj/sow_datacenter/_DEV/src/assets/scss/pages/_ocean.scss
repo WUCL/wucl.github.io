@@ -112,6 +112,37 @@
       // }
    }
    section.river_result {
+      .datas-rank {
+         background: none !important;
+         .chart-rank-box {
+            padding: 10px;
+            border-radius: 10px;
+            background: $color-white;
+            transition: opacity .2s;
+            opacity: 1;
+            &.processing {
+               opacity: .33;
+            }
+         }
+         .chart-filter {
+            &-select {
+               display: block;
+               &  + .select2 {
+                  display: block;
+                  margin-bottom: 10px;
+               }
+            }
+            &-years + .select2 {
+               min-width: 100%;
+            }
+            &-cols + .select2 {
+               min-width: 100%;
+            }
+            .btn-chart-filter {
+               display: block;
+            }
+         }
+      }
    }
    section.river_trash_hotpoint {
       .inner {

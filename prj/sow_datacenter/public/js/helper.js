@@ -57,8 +57,33 @@ window.helper = {
     },
 
     // 取得template
-    getTemplate: (template_type) => {
-        return $('#template_' + template_type).html();
+    getTemplate: (_template_type) => {
+        return $('#template_' + _template_type).html();
+    },
+
+    // 取得隨機顏色 RGB/RGBA
+    get_random_color: (_color_type) => {
+         switch (_color_type) {
+            case 'rgb':
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+            break;
+
+            case 'rgba':
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            break;
+
+            default:
+                console.log(`Sorry, we are out of ${$type}.`);
+        }
+    },
+    set_rgb_to_rgba: (_rgb, _a) => {
+        return _rgb.replace(')', ', ' + _a + ')').replace('rgb', 'rgba');
+    },
+    arrays_equal: (a1, a2) => {
+        /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+        return JSON.stringify(a1) == JSON.stringify(a2);
     }
 };
 

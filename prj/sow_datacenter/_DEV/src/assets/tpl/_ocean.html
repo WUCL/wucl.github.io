@@ -58,7 +58,14 @@
                 </div>
                 <ul id="annual-rank-scale" class="rank-scale"></ul> -->
 
-                <!-- <canvas id="chart-rank"></canvas> -->
+                <div id="chart-rank-box" class="chart-rank-box">
+                    <div id="chart-filter" class="chart-filter">
+                        <select id="chart-filter-years" class="chart-filter-years chart-filter-select" multiple></select>
+                        <select id="chart-filter-cols" class="chart-filter-cols chart-filter-select" multiple></select>
+                        <button id="btn-chart-filter" class="btn-chart-filter btn-style-2">篩選</button>
+                    </div>
+                    <canvas id="chart-rank" class="chart-rank"></canvas>
+                </div>
             </div>
             <div class="datas-locals">
                 <div id="twimg" class="locals-taiwan"></div>
