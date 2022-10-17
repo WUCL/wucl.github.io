@@ -201,7 +201,7 @@ $(function() {
             });
 
             $this.el.$theform.on('click', '.btn-pic-update', function(e) {
-                console.log(".pic-update ON click'");
+                console.log(".pic-update ON click");
                 let $current = e.currentTarget
                 , $li_pic_el = $current.closest('li.pic')
                 , $whichone = $li_pic_el.getAttribute('data-pid')
@@ -255,7 +255,7 @@ $(function() {
                 }
             });
             $this.el.$theform.on('click', '.btn-pic-upload', function(e) {
-                console.log(".pic-upload ON click'");
+                console.log(".pic-upload ON click");
                 // if ($this.var.page_position !== 'cleanriver') return;
                 let $current = e.currentTarget
                 , $li_pic_el = $current.closest('li.pic')
@@ -477,6 +477,32 @@ $(function() {
                 // }
                 // reader.readAsDataURL(event.target.files[0]);
             });
+
+
+            $this.el.$theform.on('click', '.btn-pic-cancel', function(e) {
+                console.log(".pic-cencel ON click");
+                let $current = e.currentTarget
+                , $whichone = $current.closest('li')
+                , $li_pic_el = $whichone
+                , $pid = $whichone.getAttribute('data-pid')
+                , $preview_el = $('#preview_' + $pid)
+                , $tempid = $preview_el.attr('data-tempid');
+
+                // clean data
+                    $preview_el.attr(
+                        {
+                            'src': '',
+                            'data-tempid': '',
+                            'data-dt': ''
+                        }
+                    );
+                    delete $this.var.img_file.datas[$tempid];
+                    $li_pic_el.removeAttribute("data-img-status"); // set the li is have a preview or not than remove
+                    // if ocean remove li
+                    if (($this.var.page_position === 'cleanocean') && ($pid !== 'featured_id')) $whichone.remove();
+                //
+                return;
+            });
             $this.el.$theform.on('click', '.btn-pic-delete', function(e) {
                 console.log("do pic 'delete'");
 
@@ -494,21 +520,21 @@ $(function() {
                 console.log($delete_id);
                 console.log($this.var.img_file.datas);
                 console.log($tempid);
-                $this.checkPicsIsFull('-1');
+                $this.checkPicsIsFull('-1'); // 處理照片數量，確認是否額滿
 
                 // clean data
-                $preview_el.attr(
-                    {
-                        'src': '',
-                        'data-tempid': '',
-                        'data-dt': ''
-                    }
-                );
-                delete $this.var.img_file.datas[$tempid];
-                $li_pic_el.removeAttribute("data-img-status"); // set the li is have a preview or not than remove
-
-                // if ocean remove li
-                if (($this.var.page_position === 'cleanocean') && ($pid !== 'featured_id')) $whichone.remove();
+                    $preview_el.attr(
+                        {
+                            'src': '',
+                            'data-tempid': '',
+                            'data-dt': ''
+                        }
+                    );
+                    delete $this.var.img_file.datas[$tempid];
+                    $li_pic_el.removeAttribute("data-img-status"); // set the li is have a preview or not than remove
+                    // if ocean remove li
+                    if (($this.var.page_position === 'cleanocean') && ($pid !== 'featured_id')) $whichone.remove();
+                //
 
                 // call api // ajax url
                 var _url = $this.api.url + $this.api.path.delete_pic;
@@ -1008,11 +1034,15 @@ $(function() {
                         // console.log($name); console.log($value);
                         // console.log("@@@@@@@@@@");
 
-                        // if ($name === "user_name" && $value === "0") $value = window._comm.$user.name;
-                        if ($name === "user_name" || $name === "user_email" || $name === "user_company") {
-                            if ($value === "") $value = '**********';
-                            else $value = $value.replace(/./g, '*');
-                        }
+                        // 隱藏重要文字轉星字符號於瀏覽狀態
+                            // if ($name === "user_name" && $value === "0") $value = window._comm.$user.name;
+                            if ($this.var.form_status === 'view') {
+                                if ($name === "user_name" || $name === "user_email" || $name === "user_company") {
+                                    if ($value === "") $value = '**********';
+                                    else $value = $value.replace(/./g, '*');
+                                }
+                            }
+                        //
 
                         var $el = $this.el.$theform.find('[name="' + $name + '"]');
                         if ($name == "album_pics") {

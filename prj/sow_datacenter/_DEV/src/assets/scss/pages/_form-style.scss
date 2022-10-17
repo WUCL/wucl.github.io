@@ -216,29 +216,31 @@ section.theform {
                                  &:hover {
                                     transform: scale(.93);
                                  }
-                                 &[class~="btn-pic-update"] {
-                                    display: none;
-                                    &:before {
-                                       content: "更新時間";
-                                    }
-                                 }
-                                 &[class~="btn-pic-choice"] {
-                                    &:before {
-                                       content: "選取照片";
-                                    }
-                                 }
+                                 &[class~="btn-pic-cancel"],
                                  &[class~="btn-pic-upload"] {
-                                    display: none;
-                                    &:before {
-                                       content: "上傳照片";
-                                    }
-                                 }
-                                 &[class~="btn-pic-delete"] {
                                     background: #ccc;
+                                 }
+                                 &[class~="btn-pic-cancel"],
+                                 &[class~="btn-pic-update"],
+                                 &[class~="btn-pic-upload"],
+                                 &[class~="btn-pic-delete"] {
                                     display: none;
-                                    &:before {
-                                       content: "刪除照片";
-                                    }
+                                 }
+
+                                 &[class~="btn-pic-cancel"]:before {
+                                    content: "取消此圖";
+                                 }
+                                 &[class~="btn-pic-update"]:before {
+                                    content: "更新時間";
+                                 }
+                                 &[class~="btn-pic-choice"]:before {
+                                    content: "選取照片";
+                                 }
+                                 &[class~="btn-pic-upload"]:before {
+                                    content: "上傳照片";
+                                 }
+                                 &[class~="btn-pic-delete"]:before {
+                                    content: "刪除照片";
                                  }
                               }
                            }
@@ -429,6 +431,7 @@ body {
                            display: flex;
                            align-items: center;
                            justify-content: space-between;
+                           label[class~="btn-pic-cancel"],
                            label[class~="btn-pic-choice"],
                            label[class~="btn-pic-upload"] {
                               padding: 2px 7px;
@@ -436,10 +439,13 @@ body {
                               font-size: $fontsize-d;
                            }
                            label[class~="btn-pic-choice"]:before {
-                              content: "重新選取照片";
+                              content: "重選照片";
                            }
+                           label[class~="btn-pic-cancel"],
                            label[class~="btn-pic-upload"] {
                               display: block;
+                           }
+                           label[class~="btn-pic-upload"] {
                               background: #ed3939;
                               color: $color-white;
                            }
@@ -449,6 +455,7 @@ body {
                   &[data-img-status="uploaded"] {
                      .photo-box {
                         > .pics_btns {
+                           label[class~="btn-pic-cancel"],
                            label[class~="btn-pic-choice"] {
                               display: none;
                            }
