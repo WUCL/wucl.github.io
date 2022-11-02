@@ -14,8 +14,8 @@ footer.footer {
 		max-width: $bp-2;
 		margin: 0 auto;
 		// width: 100%;
-		max-width: (1200px/3840px/1.5)*3840px;
-		max-height: (1200px/3840px/1.5)*400px;
+		max-width: (1200px/3840px)*3840px;
+		max-height: (1200px/3840px)*400px;
 		width: 100vw;
 		height: 10.5vw;
 		// max-width: 100%;
