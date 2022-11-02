@@ -1,0 +1,18 @@
+/* =======================
+layout/layout
+======================= */
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    -webkit-text-size-adjust: none;
+    font-size: $fontsize;
+    font-family: $fontfamily-primary;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-display: swap;
+}
