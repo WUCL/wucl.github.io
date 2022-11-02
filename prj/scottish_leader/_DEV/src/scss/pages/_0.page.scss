@@ -289,6 +289,8 @@
 					display: inline-block;
 					width: calc(600px / 3);
 					height: calc(146px / 3);
+					left: 50%;
+					transform: translateX(-50%);
 					&:before {
 						content: "";
 						position: absolute;
