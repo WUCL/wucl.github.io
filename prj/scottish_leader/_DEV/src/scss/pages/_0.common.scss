@@ -34,6 +34,7 @@ body {
 	background: $color-white;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
+	max-height: 270vw;
 	&.disableScroll {
 		// position: fixed;
 		overflow: hidden;
@@ -56,9 +57,11 @@ body {
 	}
 	&:after {
 		top: 127.6vw;
-		max-height: (100vw/1920px)*5050px;
-		background: url(../img/bg.jpg) left top no-repeat;
-		background-size: contain;
+		// max-height: (100vw/1920px)*5050px;
+		// background: url(../img/bg.jpg) left top no-repeat;
+		max-height: (100vw/1920px)*7050px;
+		background: url(../img/bg7050.jpg) left top no-repeat;
+		background-size: cover;
 		z-index: -1;
 	}
 
