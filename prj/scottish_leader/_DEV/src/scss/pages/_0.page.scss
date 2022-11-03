@@ -35,6 +35,17 @@ $anim-speed: .65; // in seconds
 // END button cta animation //
 
 .main {
+	&:before {
+		content: "";
+		position: absolute;
+		left: 50px;
+		top: 50px;
+		
+		width: calc(520px / 2.5);
+		height: calc(168px / 2.5);
+		background: url(../img/logo@2x.png) left center no-repeat;
+		background-size: cover;
+	}
 	// &:after {
 	// 	content: "";
 	// 	position: absolute;
@@ -148,7 +159,7 @@ $anim-speed: .65; // in seconds
 			}
 		}
 		&.contents {
-			padding-bottom: 113px;
+			// padding-bottom: 113px;
 			> .title {
 				margin-bottom: 39px;
 				&:before {
@@ -198,7 +209,7 @@ $anim-speed: .65; // in seconds
 							}
 						}
 
-						$scale_text: 2.2;
+						$scale_text: 2;
 						$scale_img: 3.1;
 						&.event-1 {
 							.text {
@@ -222,8 +233,8 @@ $anim-speed: .65; // in seconds
 								height: calc(420px / $scale_text);
 							}
 							.img {
-								top: -113px;
-								left: -14px;
+								top: -73px;
+								left: -41px;
 								width: calc(890px / $scale_img);
 								height: calc(952px / $scale_img);
 								// @include mq($max-width: $bp-2) {
@@ -250,12 +261,12 @@ $anim-speed: .65; // in seconds
 						}
 						&.event-4 {
 							.text {
-								width: calc(897px / $scale_text);
-								height: calc(343px / $scale_text);
+								width: calc(1129px / $scale_text / 1.25);
+								height: calc(501px / $scale_text / 1.25);
 							}
 							.img {
-								top: -35px;
-								left: 42px;
+								top: -59px;
+								left: -22px;
 								width: calc(704px / $scale_img);
 								height: calc(918px / $scale_img);
 								// @include mq($max-width: $bp-2) {
