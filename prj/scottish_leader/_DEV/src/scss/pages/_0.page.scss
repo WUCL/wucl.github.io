@@ -1,6 +1,39 @@
 /* =======================
    pages/page
    ======================= */
+
+// BEGIN button cta animation //
+$anim-duration: 1.5; // in seconds
+$anim-speed: .65; // in seconds
+@keyframes shine-alt1 {
+  0% {
+    opacity: 0.5;
+    transform: translateX(-100px) skewX(-15deg);
+    transition-property: opacity, transform;
+  }
+  #{($anim-speed / ($anim-duration + $anim-speed) * 100%)},
+  100% {
+    opacity: 0.6;
+    transform: translateX(300px) skewX(-15deg);
+    transition-property: opacity, transform;
+  }
+}
+
+@keyframes shine-alt2 {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) skewX(-15deg);
+    transition-property: opacity, transform;
+  }
+  #{($anim-speed / ($anim-duration + $anim-speed) * 100%)},
+  100% {
+    opacity: 1;
+    transform: translateX(300px) skewX(-15deg);
+    transition-property: opacity, transform;
+  }
+}
+// END button cta animation //
+
 .main {
 	// &:after {
 	// 	content: "";
@@ -26,26 +59,56 @@
 		}
 		a.cta {
 			display: inline-block;
-			width: calc(600px / 3);
-			height: calc(146px / 3);
-			margin-top: 30px;
+			width: calc(600px / 2.5);
+			height: calc(146px / 2.5);
+			margin-top: 40px;
 			margin-left: 0;
 			transition: .15s;
+			overflow: hidden;
+			background: url(../img/title_intro_cta@2x.png) left center no-repeat;
+			background-size: cover;
 			@include mq($max-width: $bp-2) {
 				width: calc(600px / 2);
 				height: calc(146px / 2);
 			}
-			&:before {
+			// &:before {
+			// 	content: "";
+			// 	position: absolute;
+			// 	left: 0;
+			// 	width: 100%;
+			// 	height: 100%;
+			// }
+
+			&::before,
+			&::after {
 				content: "";
+				display: block;
 				position: absolute;
-				left: 0;
-				width: 100%;
 				height: 100%;
-				background: url(../img/title_intro_cta@2x.png) left center no-repeat;
-				background-size: cover;
+				top: 0;
+			}
+			&:before {
+				background: rgba(255, 255, 255, 0.5);
+				width: 60px;
+				left: 0;
+				filter: blur(30px);
+				animation: shine-alt1 #{$anim-duration}s ease-in-out infinite;
+			}
+			&:after {
+				background: rgba(255, 255, 255, 0.2);
+				width: 30px;
+				left: 30px;
+				filter: blur(5px);
+				animation: shine-alt2 #{$anim-duration}s ease-in-out infinite;
 			}
 			&:hover {
 				margin-left: 1%;
+				&:before {
+					animation-duration: #{$anim-duration / 2}s;
+				}
+				&:after {
+					animation-duration: #{$anim-duration / 2}s;
+				}
 			}
 		}
 
@@ -73,10 +136,11 @@
 				> p {
 					color: $color-white;
 					line-height: normal;
-					letter-spacing: -1px;
-					font-size: $fontsize-2;
+					// letter-spacing: -1px;
+					font-size: $fontsize-3;
 					@include mq($max-width: $bp-2) {
-						font-size: $fontsize-3;
+						letter-spacing: -1px;
+						font-size: $fontsize-4;
 					}
 				}
 				> a.cta {
@@ -380,7 +444,7 @@
 					}
 				}
 				> a.cta {
-					margin-top: 40px;
+					// margin-top: 40px;
 					left: 50%;
 					transform: translateX(-50%);
 				}
