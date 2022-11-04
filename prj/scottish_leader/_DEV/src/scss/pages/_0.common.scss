@@ -56,7 +56,7 @@ body {
 		z-index: -2;
 		background: url(../img/bg_kv_1104_s.jpg) left top no-repeat;
 		background-size: contain;
-		@include mq($max-width: 950px) {
+		@include mq($max-width: 981px) {
 			background: url(../img/bg_kv_1104_m.jpg) left top no-repeat;
 			background-size: contain;
 		}
@@ -83,8 +83,9 @@ body {
 		background: url(../img/bg_brick_repeat.jpg) left top repeat-y;
 		background-size: contain;
 		z-index: -1;
-		// @include mq($max-width: $bp-2) {
-		// 	top: 127.6vw;
-		// }
+		@include mq($max-width: 981px) {
+			top: 127.6vw;
+			max-height: calc(100% - 120vw);
+		}
 	}
 }
