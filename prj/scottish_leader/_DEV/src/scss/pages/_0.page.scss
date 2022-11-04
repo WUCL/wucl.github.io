@@ -148,9 +148,6 @@ $anim-speed: .65; // in seconds
 		&.intro {
 			padding-top: 9px;
 			padding-bottom: 120px;
-			@include mq($max-width: 950px) {
-				// padding-top: 70px;
-			}
 			> .title {
 				&:before {
 					width: 100%;
@@ -166,9 +163,12 @@ $anim-speed: .65; // in seconds
 					line-height: normal;
 					// letter-spacing: -1px;
 					font-size: $fontsize-3;
-					@include mq($max-width: $bp-2) {
+					@include mq($max-width: 981px) {
 						letter-spacing: -1px;
 						font-size: $fontsize-4;
+					}
+					&:first-child {
+						margin-bottom: 15px;
 					}
 				}
 				> a.cta {
@@ -314,7 +314,7 @@ $anim-speed: .65; // in seconds
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr;
 					grid-gap: 40px 0;
-					@include mq($max-width: $bp-2) {
+					@include mq($max-width: 981px) {
 						max-width: 87%;
 					}
 					[class^="star-"] {
