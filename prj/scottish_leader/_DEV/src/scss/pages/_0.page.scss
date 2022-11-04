@@ -134,6 +134,9 @@ $anim-speed: .65; // in seconds
 		&.intro {
 			padding-top: 9px;
 			padding-bottom: 120px;
+			@include mq($max-width: 950px) {
+				padding-top: 70px;
+			}
 			> .title {
 				&:before {
 					width: 100%;
@@ -229,8 +232,8 @@ $anim-speed: .65; // in seconds
 						}
 						&.event-2 {
 							.text {
-								width: calc(911px / $scale_text);
-								height: calc(420px / $scale_text);
+								width: calc(1156px / $scale_text / 1.25);
+								height: calc(534px / $scale_text / 1.25);
 							}
 							.img {
 								top: -73px;

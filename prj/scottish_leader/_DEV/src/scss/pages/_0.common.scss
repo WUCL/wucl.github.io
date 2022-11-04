@@ -20,10 +20,18 @@ body {
 	background: $color-white;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	max-height: 280vw;
+	max-height: 290vw;
+	// max-height: fit-content;
+	@include mq($min-width: 1400px) {
+		max-height: 200vw;
+	}
 	@include mq($max-width: $bp-2) {
 		// max-height: 270vw;
 		max-height: fit-content;
+	}
+	@include mq($max-width: 950px) {
+		max-height: 1200vw;
+		// max-height: fit-content;
 	}
 
 	// min-width: calc(1920px / 2);
@@ -36,6 +44,9 @@ body {
 		position: absolute;
 		width: 100%;
 		height: 100%;
+		@include mq($max-width: 950px) {
+			width: calc(100% * 1.05);
+		}
 	}
 	&:before {
 		background: url(../img/bgkv.jpg) left top no-repeat;
@@ -49,5 +60,9 @@ body {
 		background: url(../img/bg7050.jpg) left top no-repeat;
 		background-size: cover;
 		z-index: -1;
+		@include mq($max-width: 950px) {
+			top: calc(127.6vw * 1.05);
+			max-height: (100vw/1920px)*7050px * 1.05;
+		}
 	}
 }
