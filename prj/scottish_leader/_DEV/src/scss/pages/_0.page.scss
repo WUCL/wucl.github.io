@@ -41,8 +41,8 @@ $anim-speed: .65; // in seconds
 		left: 50px;
 		top: 50px;
 
-		width: calc(520px / 2.5);
-		height: calc(168px / 2.5);
+		width: calc(520px / 2.87);
+		height: calc(168px / 2.87);
 		background: url(../img/logo_@2x.png) left center no-repeat;
 		background-size: cover;
 	}
@@ -135,7 +135,7 @@ $anim-speed: .65; // in seconds
 			padding-top: 9px;
 			padding-bottom: 120px;
 			@include mq($max-width: 950px) {
-				padding-top: 70px;
+				// padding-top: 70px;
 			}
 			> .title {
 				&:before {

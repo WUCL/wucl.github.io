@@ -20,19 +20,19 @@ body {
 	background: $color-white;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	max-height: 290vw;
+	// max-height: 290vw;
 	// max-height: fit-content;
-	@include mq($min-width: 1400px) {
-		max-height: 200vw;
-	}
-	@include mq($max-width: $bp-2) {
-		// max-height: 270vw;
-		max-height: fit-content;
-	}
-	@include mq($max-width: 950px) {
-		max-height: 1200vw;
-		// max-height: fit-content;
-	}
+	// @include mq($min-width: 1400px) {
+	// 	max-height: 250vw;
+	// }
+	// @include mq($max-width: $bp-2) {
+	// 	// max-height: 270vw;
+	// 	max-height: 310vw;
+	// }
+	// @include mq($max-width: 950px) {
+	// 	max-height: 1200vw;
+	// 	// max-height: fit-content;
+	// }
 
 	// min-width: calc(1920px / 2);
 	// height: calc(1800px / 2);
@@ -44,25 +44,47 @@ body {
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		@include mq($max-width: 950px) {
-			width: calc(100% * 1.05);
+		// @include mq($max-width: 950px) {
+		// 	width: calc(100% * 1.05);
+		// }
+	}
+	// &:before {
+	// 	background: url(../img/bgkv.jpg) left top no-repeat;
+	// 	background-size: contain;
+	// }
+	&:before {
+		z-index: -2;
+		background: url(../img/bg_kv_1104_s.jpg) left top no-repeat;
+		background-size: contain;
+		@include mq($max-width: $bp-2) {
+			background: url(../img/bg_kv_1104_m.jpg) left top no-repeat;
+			background-size: contain;
 		}
 	}
-	&:before {
-		background: url(../img/bgkv.jpg) left top no-repeat;
-		background-size: contain;
-	}
+	// &:after {
+	// 	top: 127.6vw;
+	// 	// max-height: (100vw/1920px)*5050px;
+	// 	// background: url(../img/bg.jpg) left top no-repeat;
+	// 	max-height: (100vw/1920px)*7050px;
+	// 	background: url(../img/bg7050.jpg) left top no-repeat;
+	// 	background-size: cover;
+	// 	z-index: -1;
+	// 	@include mq($max-width: 950px) {
+	// 		top: calc(127.6vw * 1.05);
+	// 		max-height: (100vw/1920px)*7050px * 1.05;
+	// 	}
+	// }
 	&:after {
-		top: 127.6vw;
+		top: 74vw;
+		max-height: calc(100% - 66vw);
 		// max-height: (100vw/1920px)*5050px;
 		// background: url(../img/bg.jpg) left top no-repeat;
-		max-height: (100vw/1920px)*7050px;
-		background: url(../img/bg7050.jpg) left top no-repeat;
-		background-size: cover;
+		// max-height: (100vw/1920px)*7050px;
+		background: url(../img/bg_brick_repeat.jpg) left top repeat-y;
+		background-size: contain;
 		z-index: -1;
-		@include mq($max-width: 950px) {
-			top: calc(127.6vw * 1.05);
-			max-height: (100vw/1920px)*7050px * 1.05;
-		}
+		// @include mq($max-width: $bp-2) {
+		// 	top: 127.6vw;
+		// }
 	}
 }
