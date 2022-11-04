@@ -56,7 +56,7 @@ body {
 		z-index: -2;
 		background: url(../img/bg_kv_1104_s.jpg) left top no-repeat;
 		background-size: contain;
-		@include mq($max-width: $bp-2) {
+		@include mq($max-width: 950px) {
 			background: url(../img/bg_kv_1104_m.jpg) left top no-repeat;
 			background-size: contain;
 		}
