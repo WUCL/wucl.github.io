@@ -191,21 +191,12 @@ $(function() {
                 }
             });
             $this.el.$theform.on('click', '.btn-form-confirm', function(e) {
-                // 判斷是否有選擇照片，但未上傳的狀況，則告知
                 let $pic_preview = $('li.pic[data-img-status="preview"]').length;
                 console.log($pic_preview)
                 if ($pic_preview > 0) {
                     e.preventDefault();
                     e.stopPropagation();
                     return alert('尚有照片未完成上傳');
-                }
-
-                // 判斷是否如果是草稿，則送出不檢查，直接存草稿。
-                let $status_val = $('#status').val();
-                if ($status_val === '0') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return $this.doSaveForm();
                 }
             });
 
@@ -629,7 +620,54 @@ $(function() {
                 if ($this.var.img_file.status != '') return alert('照片處理中');
                 $this.el.$popup_form_confirm.attr('data-confirmed', 'loading');
 
-                return $this.doSaveForm();
+                // send the data to api // API
+                // call api // ajax url
+                var _url = $this.api.url + $this.api.path.save_form;
+                if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
+                console.log(_url);
+
+                console.log($this.api.data);
+                console.log($this.var.form_data);
+                let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
+                console.log(_data);
+                // console.log(JSON.stringify(_data));
+
+                // ajax handle
+                $.ajax({
+                    url: _url,
+                    type: "post",
+                    data: JSON.stringify(_data),
+                    dataType: "json",
+                    success: (response) => {
+                        console.log(response);
+                        // console.log(JSON.stringify(response));
+                        if (response.is_success === 1) {
+                            return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
+                        } else {
+                            $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                            let $err = response.messages;
+                            console.log($err);
+                            $this.el.$popup_form_error_box.html(''); //empty first
+
+                            for ($prop in $err) {
+                                console.log($err[$prop]);
+                                if ($err[$prop][0] === undefined) break;
+                                let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
+                                , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
+                                $this.el.$popup_form_error_box.append($err_msg);
+                            }
+                            $('.popup_inner[data-status="confirm"]').scrollTop(0);
+                        }
+                        return;
+                    },
+                    error: function(response) {
+                        console.log("error");
+                        console.log(response);
+                        $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                    }
+                });
+
+                // console.log($this.var.form_data)
             });
 
             $this.el.$btn_save.on('click', function() {
@@ -1237,59 +1275,6 @@ $(function() {
 
             // console.log($this.var.form_data);
             $this.el.$popup_form_confirm.find('.popup_list').html($temp);
-        },
-
-        doSaveForm: function() {
-            console.log('doSaveForm');
-            return alert('doSaveForm');
-            // send the data to api // API
-            // call api // ajax url
-            var _url = $this.api.url + $this.api.path.save_form;
-            if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
-            console.log(_url);
-
-            console.log($this.api.data);
-            console.log($this.var.form_data);
-            let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
-            console.log(_data);
-            // console.log(JSON.stringify(_data));
-
-            // ajax handle
-            $.ajax({
-                url: _url,
-                type: "post",
-                data: JSON.stringify(_data),
-                dataType: "json",
-                success: (response) => {
-                    console.log(response);
-                    // console.log(JSON.stringify(response));
-                    if (response.is_success === 1) {
-                        return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
-                    } else {
-                        $this.el.$popup_form_confirm.attr('data-confirmed', 0);
-                        let $err = response.messages;
-                        console.log($err);
-                        $this.el.$popup_form_error_box.html(''); //empty first
-
-                        for ($prop in $err) {
-                            console.log($err[$prop]);
-                            if ($err[$prop][0] === undefined) break;
-                            let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
-                            , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
-                            $this.el.$popup_form_error_box.append($err_msg);
-                        }
-                        $('.popup_inner[data-status="confirm"]').scrollTop(0);
-                    }
-                    return;
-                },
-                error: function(response) {
-                    console.log("error");
-                    console.log(response);
-                    $this.el.$popup_form_confirm.attr('data-confirmed', 0);
-                }
-            });
-
-            // console.log($this.var.form_data)
         },
 
         // 如果是 cleanriver，做first popup選哪一個表單填寫
