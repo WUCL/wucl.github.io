@@ -57,6 +57,15 @@ section.theform {
                font-size: $fontsize;
                line-height: normal;
             }
+            #filed-time {
+               &:-webkit-datetime-edit-second-field {
+                  background: $color-white;
+                  color: transparent;
+                  margin-left: -3px;
+                  position: absolute;
+                  width: 1px;
+               }
+            }
          }
          .group {
             margin-bottom: 10px;
@@ -130,6 +139,16 @@ section.theform {
                      //    }
                      // }
                   }
+                  &.with-triangel {
+                     label {
+                        &:after {
+                           content: "▲";
+                           padding-left: 3px;
+                           line-height: normal;
+                           font-size: $fontsize-c;
+                        }
+                     }
+                  }
                }
             }
             &.with-1in1 {
@@ -139,7 +158,9 @@ section.theform {
                      white-space: nowrap;
                      input {
                         margin: 0 5px;
-                        width: 3em;
+                        width: 3.5em;
+                        padding-left: 5px;
+                        padding-right: 5px;
                      }
                   }
                }
@@ -163,7 +184,7 @@ section.theform {
                > ul {
                   max-width: 100%;
                   grid-gap: 0 15px;
-                  grid-template-columns: calc((100% - 30px) /3) calc((100% - 30px) /3) auto;
+                  grid-template-columns: calc((100% - 30px)/3) calc((100% - 30px)/3) calc((100% - 30px)/3);
                   @include mq($max-width: $bp_m) {
                      grid-gap: 0 12px;
                      grid-template-columns: calc((100% - 12px)/2) calc((100% - 12px)/2);
@@ -311,6 +332,15 @@ section.theform {
 
          }
          .form-status {
+            .group {
+               ul {
+                  li {
+                     label {
+                        margin-right: 9px;
+                     }
+                  }
+               }
+            }
             select {
                font-size: $fontsize;
                padding: 3px;
@@ -340,73 +370,167 @@ section.theform {
    }
 }
 
-body[data-status="form"][data-form="edit"] {
-   #theform_is_new {
-      display: none;
-      visibility: hidden;
-   }
-   #theform_is_edit {
-      display: block;
-      visibility: visible;
-   }
-   section.theform {
-      label[required] {
-         &:before {
-            content: "*";
-            color: red;
-            display: inline-flex;
-         }
-      }
-   }
-}
-body[data-status="view"] {
-   section.theform {
-      .inner form.form-style {
-         input, label {
-            pointer-events: none;
-         }
-         .form-status {
-            display: none;
-         }
-         .group {
-            &.with-photo {
-               input[type="file"],
-               label.btn-style {
-                  display: none;
-               }
-               // ul li > div {
-               //    flex-direction: row;
-               // }
-               .photo-box {
-                  position: relative;
-                  width: 100%;
-                  height: 180px;
-                  background: $color-white;
-                  border-radius: 5px;
-                  img {
-                     height: 100%;
-                     width: auto;
-                     margin: 0 auto;
-                  }
-                  // &[data-photo="1"] {
-                  //    background: transparent;
-                  // }
-               }
-               .swiper-pagination {
-                  bottom: -20px;
-               }
-            }
-         }
-         .form-btns {
-            display: none;
-         }
-      }
-   }
-}
+// body[data-status="form"][data-form="edit"] {
+//    #theform_is_new {
+//       display: none;
+//       visibility: hidden;
+//    }
+//    #theform_is_edit {
+//       display: block;
+//       visibility: visible;
+//    }
+// }
+
+// body[data-status="form"][data-form="edit"],
+// body[data-status="form"][data-form="add"] {
+//    section.theform {
+//       label[required] {
+//          &:before {
+//             content: "*";
+//             color: red;
+//             display: inline-flex;
+//          }
+//       }
+//    }
+// }
+
+// body[data-status="view"] {
+//    section.theform {
+//       .inner form.form-style {
+//          input, label {
+//             pointer-events: none;
+//          }
+//          .form-status {
+//             display: none;
+//          }
+//          .group {
+//             &.with-photo {
+//                input[type="file"],
+//                label.btn-style {
+//                   display: none;
+//                }
+//                // ul li > div {
+//                //    flex-direction: row;
+//                // }
+//                .photo-box {
+//                   position: relative;
+//                   width: 100%;
+//                   height: 180px;
+//                   background: $color-white;
+//                   border-radius: 5px;
+//                   img {
+//                      height: 100%;
+//                      width: auto;
+//                      margin: 0 auto;
+//                   }
+//                   // &[data-photo="1"] {
+//                   //    background: transparent;
+//                   // }
+//                }
+//                .swiper-pagination {
+//                   bottom: -20px;
+//                }
+//             }
+//          }
+//          .form-btns {
+//             display: none;
+//          }
+//       }
+//    }
+// }
 
 
 // body[data-position="cleanriver"] {
 body {
+   &[data-status="form"] {
+      &[data-position="cleanocean"] {
+         .main {
+            @include mq($min-width: $bp-mobile) {
+               min-height: 155vh;
+            }
+         }
+      }
+      &[data-position="cleanriver"] {
+         .main {
+            @include mq($min-width: $bp-mobile) {
+               min-height: 140vh;
+            }
+         }
+      }
+
+      &[data-form="edit"],
+      &[data-form="add"] {
+         section.theform {
+            label[required] {
+               &:before {
+                  content: "*";
+                  color: red;
+                  display: inline-flex;
+               }
+            }
+         }
+      }
+
+      &[data-form="edit"] {
+         #theform_is_new {
+            display: none;
+            visibility: hidden;
+         }
+         #theform_is_edit {
+            display: block;
+            visibility: visible;
+         }
+      }
+
+      &[data-status="view"] {
+         section.theform {
+            .inner form.form-style {
+               input, label {
+                  pointer-events: none;
+               }
+               .form-status {
+                  display: none;
+               }
+               .group {
+                  &.with-photo {
+                     input[type="file"],
+                     label.btn-style {
+                        display: none;
+                     }
+                     // ul li > div {
+                     //    flex-direction: row;
+                     // }
+                     .photo-box {
+                        position: relative;
+                        width: 100%;
+                        height: 180px;
+                        background: $color-white;
+                        border-radius: 5px;
+                        img {
+                           height: 100%;
+                           width: auto;
+                           margin: 0 auto;
+                        }
+                        // &[data-photo="1"] {
+                        //    background: transparent;
+                        // }
+                     }
+                     .swiper-pagination {
+                        bottom: -20px;
+                     }
+                  }
+               }
+               .form-btns {
+                  display: none;
+               }
+            }
+         }
+      }
+   }
+
+
+
+
    section.theform {
       .inner {
          form.form-style {

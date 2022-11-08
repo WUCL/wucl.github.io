@@ -2,7 +2,7 @@
 // /cleanocean/view.html?code=bf340fb0e477c64080be88f994cd174f
 
 window._comm = {
-    $testMode: false,
+    $testMode: true,
     $api: {
         url: '/api/',
         param: {

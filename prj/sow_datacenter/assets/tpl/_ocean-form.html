@@ -12,7 +12,7 @@
                         <ul>
                             <li class="filed-location"><label for="filed-location" required>位置</label><select id="filed-location" name="location" required></select></li>
                             <li class="filed-time"><label for="filed-time" required>日期時間</label><input id="filed-time" type="datetime-local" name="time" required></li>
-                            <li class="filed-city"><label for="filed-city" required>縣市</label><select id="filed-city" name="city" required></select></li>
+                            <li class="filed-city"><label for="filed-city" required>縣市</label><select id="filed-city" name="city"></select></li>
                             <li class="filed-place"><label for="filed-place" required>地點（加路蘭、海水浴場...）</label><input id="filed-place" type="text" name="place" required></li>
                             <li class="filed-lng form-themap_open"><label for="filed-lng">經度</label><input id="filed-lng" class="filed-lng" type="number" name="lng"></li>
                             <li class="filed-lat form-themap_open"><label for="filed-lat">緯度</label><input id="filed-lat" class="filed-lat" type="number" name="lat"></li>
@@ -22,8 +22,8 @@
                 <div class="form-basic magin-0">
                     <div class="group with-2in1">
                         <ul>
-                            <li class="filed-user_name"><label for="filed-user_name" required>登記者名稱</label><input id="filed-user_name" type="text" name="user_name" required></li>
-                            <li class="filed-user_company"><label for="filed-user_company">單位名稱或登記者</label><input id="filed-user_company" type="text" name="user_company"></li>
+                            <li class="filed-user_name"><label for="filed-user_name" required>登記者</label><input id="filed-user_name" type="text" name="user_name" required></li>
+                            <li class="filed-user_company"><label for="filed-user_company">參與單位</label><input id="filed-user_company" type="text" name="user_company"></li>
                             <li class="filed-user_email"><label for="filed-user_email" required>登記者信箱</label><input id="filed-user_email" type="text" name="user_email" required></li>
                             <li class="filed-cleaner_count"><label for="filed-cleaner_count" required>淨灘人數</label><input id="filed-cleaner_count" type="text" name="cleaner_count" required></li>
                             <li class="filed-weight"><label for="filed-weight">總重量（公斤）</label><input id="filed-weight" type="text" name="weight"></li>
@@ -44,18 +44,18 @@
                             <li class="filed-straw"><label for="filed-straw">吸管</label><input id="filed-straw" type="number" min="0" name="straw"></li>
                             <li class="filed-drink_cup"><label for="filed-drink_cup">外帶飲料杯</label><input id="filed-drink_cup" type="number" min="0" name="drink_cup"></li>
                             <li class="filed-tableware"><label for="filed-tableware">免洗餐具</label><input id="filed-tableware" type="number" min="0" name="tableware"></li>
-                            <li class="filed-iron_can"><label for="filed-iron_can">鐵鋁罐</label><input id="filed-iron_can" type="number" min="0" name="iron_can"></li>
+                            <li class="filed-iron_can with-triangel"><label for="filed-iron_can">鐵鋁罐</label><input id="filed-iron_can" type="number" min="0" name="iron_can"></li>
                             <li class="filed-tetra"><label for="filed-tetra">鋁箔包、利樂包</label><input id="filed-tetra" type="number" min="0" name="tetra"></li>
-                            <li class="filed-glass"><label for="filed-glass">玻璃瓶</label><input id="filed-glass" type="number" min="0" name="glass"></li>
+                            <li class="filed-glass with-triangel"><label for="filed-glass">玻璃瓶</label><input id="filed-glass" type="number" min="0" name="glass"></li>
                             <li class="filed-cigarette"><label for="filed-cigarette">煙蒂</label><input id="filed-cigarette" type="number" min="0" name="cigarette"></li>
-                            <li class="filed-lighter"><label for="filed-lighter">打火機</label><input id="filed-lighter" type="number" min="0" name="lighter"></li>
+                            <li class="filed-lighter with-triangel"><label for="filed-lighter">打火機</label><input id="filed-lighter" type="number" min="0" name="lighter"></li>
                             <li class="filed-fishing_gear"><label for="filed-fishing_gear">釣魚用具</label><input id="filed-fishing_gear" type="number" min="0" name="fishing_gear"></li>
-                            <li class="filed-fish_hook"><label for="filed-fish_hook">魚鉤</label><input id="filed-fish_hook" type="number" min="0" name="fish_hook"></li>
-                            <li class="filed-nets_ropes"><label for="filed-nets_ropes">漁網與繩子</label><input id="filed-nets_ropes" type="number" min="0" name="nets_ropes"></li>
+                            <li class="filed-fish_hook with-triangel"><label for="filed-fish_hook">魚鉤</label><input id="filed-fish_hook" type="number" min="0" name="fish_hook"></li>
                             <li class="filed-fishing_ball"><label for="filed-fishing_ball">漁業浮球/浮筒/漁船防碰墊</label id="filed-fishing_ball"><input type="number" min="0" name="fishing_ball"></li>
+                            <li class="filed-nets_ropes with-triangel"><label for="filed-nets_ropes">漁網與繩子</label><input id="filed-nets_ropes" type="number" min="0" name="nets_ropes"></li>
                             <li class="filed-toothbrush"><label for="filed-toothbrush">牙刷</label><input id="filed-toothbrush" type="number" min="0" name="toothbrush"></li>
-                            <li class="filed-syringe"><label for="filed-syringe">針筒、針頭</label><input id="filed-syringe" type="number" min="0" name="syringe"></li>
-                            <li class="filed-metal"><label for="filed-metal">金屬製品</label><input id="filed-metal" type="number" min="0" name="metal"></li>
+                            <li class="filed-syringe with-triangel"><label for="filed-syringe">針筒、針頭</label><input id="filed-syringe" type="number" min="0" name="syringe"></li>
+                            <li class="filed-metal with-triangel"><label for="filed-metal">金屬製品</label><input id="filed-metal" type="number" min="0" name="metal"></li>
                             <!-- <li class="filed-extra_data"><label for="filed-extra_data">自定義欄位</label><input id="filed-extra_data" type="text" name="extra_data"></li> -->
                         </ul>
                     </div>
@@ -109,14 +109,14 @@
                     <div class="group">
                         <ul>
                             <li class="filed-is_finish no-column">
-                                <label for="filed-status">表單目前狀態：</label>
+                                <label for="filed-status">表單目前狀態</label>
                                 <select id="status" class="status" name="status">
+                                    <option value="1" selected>正式發佈</option>
                                     <option value="0">草稿</option>
-                                    <option value="1">正式發佈</option>
                                 </select>
                             </li>
                             <li class="filed-is_public no-column">
-                                <label for="filed-is_public">表單是否公開：</label>
+                                <label for="filed-is_public">表單是否公開</label>
                                 <select id="is_public" class="is_public" name="is_public">
                                     <option value="1" selected>公開</option>
                                     <option value="0">不公開</option>
@@ -144,7 +144,7 @@
     <div class="popup_inner waterfall-loading form-confirm-loading active"><img src="data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7" alt=""></div>
     <div class="popup_inner" data-status="confirm">
         <div class="popup_header">
-            <h2 id="popup_title" class="popup_title">請確認填表資訊</h2>
+            <h2 id="popup_title" class="popup_title">預覽淨灘成果</h2>
             <ul id="error_box" class="error_box"></ul>
         </div>
         <div class="popup_main">

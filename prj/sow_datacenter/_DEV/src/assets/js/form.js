@@ -191,12 +191,21 @@ $(function() {
                 }
             });
             $this.el.$theform.on('click', '.btn-form-confirm', function(e) {
+                // 判斷是否有選擇照片，但未上傳的狀況，則告知
                 let $pic_preview = $('li.pic[data-img-status="preview"]').length;
                 console.log($pic_preview)
                 if ($pic_preview > 0) {
                     e.preventDefault();
                     e.stopPropagation();
-                    return alert('上有照片，尚未上傳');
+                    return alert('尚有照片未完成上傳');
+                }
+
+                // 判斷是否如果是草稿，則送出不檢查，直接存草稿。
+                let $status_val = $('#status').val();
+                if ($status_val === '0') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return $this.doSaveForm();
                 }
             });
 
@@ -302,7 +311,10 @@ $(function() {
             // common pic
             $this.el.$theform.on('change', 'input.pic-upload[type="file"]', function(e) {
                 console.log("input.pic-upload ON change'");
-                if ($this.var.img_file.status != '') return alert('照片處理中');
+                if ($this.var.img_file.status != '') {
+                    console.log($this.var.img_file.status);
+                    return alert('照片處理中');
+                }
 
                 let $current = e.currentTarget
                 , $whichone = $current.getAttribute('id')
@@ -446,6 +458,7 @@ $(function() {
                                 output.src = $b64;
                                 output.setAttribute("data-tempid", $tempid);
                             }
+                            $this.var.img_file.counter += 1; // 完成預覽先+1
                             // if ($this.var.page_position === 'cleanriver') $li_pic_el.setAttribute('data-img-status', 'preview'); // set the li is have a preview
 
                             // step3, 前置完成，處理上傳 do api call
@@ -456,13 +469,23 @@ $(function() {
                                 return;
                             }
                             console.log('before doImgSync');
-                            // return; // 斷開這裡的doImgSync，則改為全部要按在上傳步驟
+
+                            // return; // 斷開這裡的doImgSync，則改為全部要按 "在上傳" 的步驟
                             $this.doImgSync($preview_el);
                         }
                     // await uploadToServer(compressedFile); // write your own logic
                     } catch (error) {
                         $this.var.img_file.status = '';
                         console.log(error);
+                    }
+                }
+
+                // sync datetime to photo localtime
+                {
+                    if ($this.var.page_position == 'cleanriver') {
+                        let $_datetime = $('#filed-date').val() + ' ' +  $('#filed-time').val();
+                        console.log($_datetime);
+                        $('#' + $whichone + '-datetime').val($_datetime);
                     }
                 }
 
@@ -584,9 +607,15 @@ $(function() {
                 }
             });
 
-            // common input number only input interge
+            // whole input number only input interge
             $this.el.$theform.on('input', 'input[type="number"]', function () {
                 return this.value = Math.round(this.value);
+            });
+
+            // whole input if the value is 0, than empty when user click
+            $this.el.$theform.on('focus', 'input', function (e) {
+                if($(e.target).val() === '0') $(e.target).val("");
+                return;
             });
 
             // $this.el.$btn_draft.on('click', function() {
@@ -600,52 +629,7 @@ $(function() {
                 if ($this.var.img_file.status != '') return alert('照片處理中');
                 $this.el.$popup_form_confirm.attr('data-confirmed', 'loading');
 
-                // send the data to api // API
-                // call api // ajax url
-                var _url = $this.api.url + $this.api.path.save_form;
-                if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
-                console.log(_url);
-
-                console.log($this.api.data);
-                console.log($this.var.form_data);
-                let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
-                console.log(_data);
-                // console.log(JSON.stringify(_data));
-
-                // ajax handle
-                $.ajax({
-                    url: _url,
-                    type: "post",
-                    data: JSON.stringify(_data),
-                    dataType: "json",
-                    success: (response) => {
-                        console.log(response);
-                        // console.log(JSON.stringify(response));
-                        if (response.is_success === 1) {
-                            return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
-                        } else {
-                            $this.el.$popup_form_confirm.attr('data-confirmed', 0);
-                            let $err = response.messages;
-                            console.log($err);
-                            for ($prop in $err) {
-                                console.log($err[$prop]);
-                                if ($err[$prop][0] === undefined) break;
-                                let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
-                                , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
-                                $this.el.$popup_form_error_box.append($err_msg);
-                            }
-                            $('.popup_inner[data-status="confirm"]').scrollTop(0);
-                        }
-                        return;
-                    },
-                    error: function(response) {
-                        console.log("error");
-                        console.log(response);
-                        $this.el.$popup_form_confirm.attr('data-confirmed', 0);
-                    }
-                });
-
-                // console.log($this.var.form_data)
+                return $this.doSaveForm();
             });
 
             $this.el.$btn_save.on('click', function() {
@@ -714,11 +698,14 @@ $(function() {
                     } else {
                         alert(response.messages[0]);
                     }
+                    $this.var.img_file.status = '';
                     return;
                 },
                 error: function(response) {
                     console.log("error");
                     console.log(response);
+                    $this.var.img_file.status = '';
+                    return;
                 }
             });
 
@@ -731,7 +718,6 @@ $(function() {
                 $li_pic_el.attr('data-img-status', 'uploaded');
 
                 $this.var.img_file['datas'][$tempid]['response'] = _r;
-                $this.var.img_file.counter += 1;
 
                 return alert('照片上傳更新完成');
             }
@@ -1096,15 +1082,22 @@ $(function() {
                             // console.log('common :: $name :: ' + $name);
                             // console.log('common :: $value :: ' + $value);
                             $el = $this.el.$theform.find('[name="' + $name + '"]');
-                            // console.log($value);
+                            if ($el.length == 0) continue;
+                            if ($name === 'time') $value = $value.slice(0, -3);
                             if ($this.var.form_status === 'view') $el.val($value);
                             else $el.val($value);
                         }
                     }
 
+                    // sync datetime to photo localtime
+                    // if ($this.var.page_position == 'cleanriver') {
+                    //     console.log($('#filed-date').val());
+                    //     console.log($('#filed-time').val());
+                    // }
+
                     // user_name/user_email 預設帶使用者資料
                     // if (($this.el.$theform.find('[name="user_name"]').html() === "") || ($this.el.$theform.find('[name="user_name"]').html() === "0")) $this.el.$theform.find('[name="user_name"]').val(window._comm.$user.name);
-                    // if (($this.el.$theform.find('[name="user_email"]').html() === "") || ($this.el.$theform.find('[name="user_email"]').html() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
+                    if (($this.el.$theform.find('[name="user_email"]').html() === "") || ($this.el.$theform.find('[name="user_email"]').html() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
                 }
 
                 yesShowUp();
@@ -1172,9 +1165,12 @@ $(function() {
             return;
         },
 
-        // first to confirm in the popup, 處理 form 表第一次按送出，整理成清單列表的處理
+        // first to confirm in the popup, 處理 form 表第一次按送出，整理成清單列表的處理 // 預覽淨灘成果
         formConfirm: function() {
             console.log('formConfirm');
+
+            console.log('改為先作為草稿判斷改為先作為草稿判斷改為先作為草稿判斷改為先作為草稿判斷');
+
             let $this = this;
             let $temp = '';
             let $data_serialize = {};
@@ -1222,7 +1218,7 @@ $(function() {
                 , $label = $('label[for="filed-' + $key + '"]').text().trim()
                 , $value = $data_serialize[$key];
 
-                if (/_pic_id|album_pics/.test($key)) continue; // (/_pic_id|album_pics/.test($key)) 跳過先不處理
+                if (/_pic_id|album_pics|album_pic/.test($key)) continue; // (/_pic_id|album_pics|album_pic/.test($key)) name有相關關鍵字都跳過先不處理
 
                 if (/status/.test($key)) $value = (($value === '0')?"草稿":"正式發佈");
                 if (/is_public/.test($key)) $value = (($value === '0')?"不公開":"公開");
@@ -1241,6 +1237,59 @@ $(function() {
 
             // console.log($this.var.form_data);
             $this.el.$popup_form_confirm.find('.popup_list').html($temp);
+        },
+
+        doSaveForm: function() {
+            console.log('doSaveForm');
+            return alert('doSaveForm');
+            // send the data to api // API
+            // call api // ajax url
+            var _url = $this.api.url + $this.api.path.save_form;
+            if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
+            console.log(_url);
+
+            console.log($this.api.data);
+            console.log($this.var.form_data);
+            let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
+            console.log(_data);
+            // console.log(JSON.stringify(_data));
+
+            // ajax handle
+            $.ajax({
+                url: _url,
+                type: "post",
+                data: JSON.stringify(_data),
+                dataType: "json",
+                success: (response) => {
+                    console.log(response);
+                    // console.log(JSON.stringify(response));
+                    if (response.is_success === 1) {
+                        return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
+                    } else {
+                        $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                        let $err = response.messages;
+                        console.log($err);
+                        $this.el.$popup_form_error_box.html(''); //empty first
+
+                        for ($prop in $err) {
+                            console.log($err[$prop]);
+                            if ($err[$prop][0] === undefined) break;
+                            let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
+                            , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
+                            $this.el.$popup_form_error_box.append($err_msg);
+                        }
+                        $('.popup_inner[data-status="confirm"]').scrollTop(0);
+                    }
+                    return;
+                },
+                error: function(response) {
+                    console.log("error");
+                    console.log(response);
+                    $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                }
+            });
+
+            // console.log($this.var.form_data)
         },
 
         // 如果是 cleanriver，做first popup選哪一個表單填寫

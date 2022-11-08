@@ -20,13 +20,13 @@
                     <div class="group with-1in1">
                         <ul>
                             <li class="filed-river_start filed-river_end display-flex-i">
-                                <label class="filed-inword" for="filed-river_start" required>從編號<input type="number" name="river_start" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="number" name="river_end" required>結束</label>
+                                <label class="filed-inword" for="filed-river_start" required>從編號<input type="number" name="river_start" min="0" required></label><label class="filed-inword" for="filed-river_end">站開始，到編號<input type="number" name="river_end" min="0" required>結束</label>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="form-data">
-                    <div class="form-title">500公尺樣區內的垃圾相關數據【垃圾數據收集】</div>
+                    <div class="form-title">500公尺樣區內的垃圾相關數據</div>
                     <div class="form-description">
                         <p>【說明文字】<br>*只計算材質為塑膠、指、玻璃、金屬的廢棄物（含布料）<br>*不計算水泥、磚、瓷、竹、木（如家俱）與使用中物體</p>
                     </div>
@@ -45,9 +45,9 @@
                                 <select id="filed-v_garbages" name="v_garbages" maxlength="3" max="3" required></select>
                             </li>
                             <li class="filed-v_garbage"><label for="filed-v_garbage">其他最佔體積的垃圾是（如有才需填）</label><input id="filed-v_garbage" type="text" name="v_garbage"></li>
-                            <li class="filed-m500_garbages"><label for="filed-m500_garbages" required>500公尺內垃圾型態多為？</label><select id="filed-m500_garbages" name="m500_garbages" required></select></li>
-                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages" required>500公尺內垃圾熱點集中於？</label><select id="filed-m500_h_garbages" name="m500_h_garbages" required></select></li>
-                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">其他垃圾熱點集中於？（如有才需填）</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage"></li>
+                            <li class="filed-m500_garbages"><label for="filed-m500_garbages">500公尺內垃圾型態多為</label><select id="filed-m500_garbages" name="m500_garbages" required></select></li>
+                            <li class="filed-m500_h_garbages"><label for="filed-m500_h_garbages">500公尺內垃圾熱點集中於</label><select id="filed-m500_h_garbages" name="m500_h_garbages" required></select></li>
+                            <li class="filed-m500_h_garbage"><label for="filed-m500_h_garbage">其他垃圾熱點集中於（如有才需填）</label><input id="filed-m500_h_garbage" type="text" name="m500_h_garbage"></li>
                             <li class="filed-order_info"><label for="filed-order_info">其他想要補充的資訊（如有才需填）</label><input id="filed-order_info" type="text" name="order_info"></li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
                         <ul>
                             <li class="pic filed-r_pic_id" data-pid="r_pic_id">
                                 <div>
-                                    <label>代表照</label>
+                                    <label required>代表照</label>
                                     <div class="photo-box">
                                         <input type="file" id="r_pic_id" name="r_pic_id" class="pic-upload display-none" accept="image/*">
                                         <img id="preview_r_pic_id" class="preview_r_pic_id" src>
@@ -81,7 +81,7 @@
                             </li>
                             <li class="pic filed-h_pic_id" data-pid="h_pic_id">
                                 <div>
-                                    <label>熱點照</label>
+                                    <label required>熱點照</label>
                                     <div class="photo-box">
                                         <input type="file" id="h_pic_id" name="h_pic_id" class="pic-upload display-none" accept="image/*">
                                         <img id="preview_h_pic_id" class="preview_h_pic_id" src>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="group">
                         <ul>
-                            <li class="filed-user_name"><label for="filed-user_name">拍照及紀錄調查員姓名</label><input type="text" id="filed-user_name" name="user_name"></li>
+                            <li class="filed-user_name"><label for="filed-user_name" required>拍照及紀錄調查員姓名</label><input type="text" id="filed-user_name" name="user_name"></li>
                         </ul>
                     </div>
                     <div class="group with-photo with-3in1">
@@ -175,14 +175,14 @@
                     <div class="group">
                         <ul>
                             <li class="filed-is_finish no-column">
-                                <label for="filed-status">表單目前狀態：</label>
+                                <label for="filed-status">表單目前狀態</label>
                                 <select id="status" class="status" name="status">
+                                    <option value="1" selected>正式發佈</option>
                                     <option value="0">草稿</option>
-                                    <option value="1">正式發佈</option>
                                 </select>
                             </li>
                             <li class="filed-is_public no-column">
-                                <label for="filed-is_public">表單是否公開：</label>
+                                <label for="filed-is_public">表單是否公開</label>
                                 <select id="is_public" class="is_public" name="is_public">
                                     <option value="1" selected>公開</option>
                                     <option value="0">不公開</option>
