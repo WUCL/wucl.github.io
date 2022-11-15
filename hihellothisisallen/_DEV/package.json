@@ -24,7 +24,7 @@
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^5.1.0",
     "gulp-template-html": "^0.2.2",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
@@ -34,6 +34,7 @@
     "imagemin-jpegtran": "^6.0.0",
     "imagemin-pngquant": "^8.0.0",
     "jshint": "^2.11.0",
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
+    "sass": "^1.32.6"
   }
 }

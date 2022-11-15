@@ -1,10 +1,10 @@
 "use strict";
 const gulp = require('gulp')
     , bs = require('browser-sync').create()
-    , sass = require('gulp-sass')
+    , sass = require('gulp-sass')(require('sass'))
     , rename = require("gulp-rename")
     , autoprefixer = require('gulp-autoprefixer')
-    , uglify = require('gulp-uglify')
+    // , uglify = require('gulp-uglify')
     // , cache = require('gulp-cache')
     , plumber = require('gulp-plumber')
     , notify = require('gulp-notify')
@@ -75,7 +75,8 @@ gulp.task('script', function () {
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish', { verbose: true }))
     .pipe(debug({ title: 'Compile:' }))
-    .pipe(uglify())
+    // .pipe(gulpUglify())                     // 將 JavaScript 做最小化
+    // .pipe(gulp.dest('javascript/minify'));  // 指定最小化後的 JavaScript 檔案目錄
     .pipe(gulp.dest(PATH.DEST.JS))
     .pipe(bs.stream())
     .pipe(notify({
