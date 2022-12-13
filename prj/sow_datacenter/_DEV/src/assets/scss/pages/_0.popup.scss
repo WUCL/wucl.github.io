@@ -103,7 +103,7 @@ layout/_popup
 		}
 		.popup_main {
 			.popup_list {
-				max-height: 33vw;
+				max-height: 50vh;
 				overflow: scroll;
 				hr {
 					margin: 18px 0 30px;
@@ -213,10 +213,21 @@ layout/_popup
 			min-width: 87vw;
 			max-width: 87vw;
 		}
+		.popup_title {
+			> .themap_refresh {
+				margin-left: 9px;
+				padding: 0 5px;
+				font-size: $fontsize-d;
+				border-bottom: 1px dashed #ccc;
+				&:hover {
+					background: $color-white;
+				}
+			}
+		}
 		.themap {
 			position: relative;
 			width: 100%;
-			height: calc(66vh - 50px - 50px);
+			height: calc(61vh - 50px - 50px);
 			@include mq($max-width: $bp-mobile) {
 			  height: calc(78vh - 50px - 150px);
 			}

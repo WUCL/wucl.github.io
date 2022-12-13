@@ -1,8 +1,8 @@
 // /cleanriver/view.html?setting_id=1&code=789e06b29313be69ba9516c0e8106dfd
-// /cleanocean/view.html?code=bf340fb0e477c64080be88f994cd174f
+//自己// /cleanocean/view.html?code=f508ced15e5ed637f992d87f4ca98bf1
 
 window._comm = {
-    $testMode: true,
+    $testMode: false,
     $api: {
         url: '/api/',
         param: {

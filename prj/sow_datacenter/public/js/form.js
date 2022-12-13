@@ -108,6 +108,7 @@ $(function() {
 
                 },
             },
+            data_serialize: {},
             form_data: {
                 pics: {
                     current: 0,
@@ -125,7 +126,10 @@ $(function() {
                 extra_data: {}
             },
 
-            //ocean
+            // themap
+            $themap: '',
+
+            // ocean
             $temp_formocean_li: window.helper.getTemplate('form_ocean__album_pic'),
         },
         init: function() {
@@ -191,12 +195,40 @@ $(function() {
                 }
             });
             $this.el.$theform.on('click', '.btn-form-confirm', function(e) {
+                console.log('btn-form-confirm');
+
+
+                // 判斷是否有選擇照片，但未上傳的狀況，則告知
                 let $pic_preview = $('li.pic[data-img-status="preview"]').length;
                 console.log($pic_preview)
                 if ($pic_preview > 0) {
                     e.preventDefault();
                     e.stopPropagation();
                     return alert('尚有照片未完成上傳');
+                }
+
+                // 判斷是否如果是草稿，則送出不檢查，直接存草稿。
+                let $status_val = $('#status').val();
+                if ($status_val === '0') {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    $this.formCheck(
+                        () => { $this.doSaveForm(); } // 此處是走儲存草稿
+                    );
+                } else { // 判斷如果不是草稿，在執行表單檢查
+                    if (!$this.el.$theform[0].checkValidity()) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // If the form is invalid, submit it. The form won't actually submit;
+                        // this will just cause the browser to display the native HTML5 error messages.
+                        // $('#theform').on('click', '#submit-hidden', function(event) {
+                        //     // e.preventDefault();
+                        //     e.stopPropagation();
+                        // })
+                        $this.el.$theform.find(':submit').click()
+
+                    }
                 }
             });
 
@@ -620,54 +652,7 @@ $(function() {
                 if ($this.var.img_file.status != '') return alert('照片處理中');
                 $this.el.$popup_form_confirm.attr('data-confirmed', 'loading');
 
-                // send the data to api // API
-                // call api // ajax url
-                var _url = $this.api.url + $this.api.path.save_form;
-                if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
-                console.log(_url);
-
-                console.log($this.api.data);
-                console.log($this.var.form_data);
-                let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
-                console.log(_data);
-                // console.log(JSON.stringify(_data));
-
-                // ajax handle
-                $.ajax({
-                    url: _url,
-                    type: "post",
-                    data: JSON.stringify(_data),
-                    dataType: "json",
-                    success: (response) => {
-                        console.log(response);
-                        // console.log(JSON.stringify(response));
-                        if (response.is_success === 1) {
-                            return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
-                        } else {
-                            $this.el.$popup_form_confirm.attr('data-confirmed', 0);
-                            let $err = response.messages;
-                            console.log($err);
-                            $this.el.$popup_form_error_box.html(''); //empty first
-
-                            for ($prop in $err) {
-                                console.log($err[$prop]);
-                                if ($err[$prop][0] === undefined) break;
-                                let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
-                                , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
-                                $this.el.$popup_form_error_box.append($err_msg);
-                            }
-                            $('.popup_inner[data-status="confirm"]').scrollTop(0);
-                        }
-                        return;
-                    },
-                    error: function(response) {
-                        console.log("error");
-                        console.log(response);
-                        $this.el.$popup_form_confirm.attr('data-confirmed', 0);
-                    }
-                });
-
-                // console.log($this.var.form_data)
+                return $this.doSaveForm();
             });
 
             $this.el.$btn_save.on('click', function() {
@@ -940,7 +925,9 @@ $(function() {
                             let _template = _template_option;
                             _template = _template
                             .replace(/\[VALUE\]/g, _source[$prop])
-                            .replace(/\[OPTION\]/g, _source[$prop]);
+                            .replace(/\[OPTION\]/g, _source[$prop])
+                            .replace(/\[selected\]/g, ($prop == 0?'selected':''));
+
                             _templates += _template;
                         }
                         _target.html(_templates);
@@ -976,7 +963,7 @@ $(function() {
                                     .replace(/\[TITLE\]/g, $li['field_title'])
                                     .replace(/\[VALUE\]/g, '')
                                     .replace(/\[HINT\]/g, $li['field_hint'])
-                                    .replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'')
+                                    .replace(/\[required\]/g, ($li['is_required'] === '1')?'required':'')
 
                                     .replace(/\[MAXLENGTH\]/g, $li['field_data']['text_maxlength']);
 
@@ -991,7 +978,7 @@ $(function() {
                                     .replace(/\[TITLE\]/g, $li['field_title'])
                                     .replace(/\[VALUE\]/g, '')
                                     .replace(/\[HINT\]/g, $li['field_hint'])
-                                    .replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'')
+                                    .replace(/\[required\]/g, ($li['is_required'] === '1')?'required':'')
 
                                     .replace(/\[MAX\]/g, $li['field_data']['number_max'])
                                     .replace(/\[MIN\]/g, $li['field_data']['number_min']);
@@ -1014,7 +1001,7 @@ $(function() {
                                     .replace(/\[TITLE\]/g, $li['field_title'])
                                     .replace(/\[VALUE\]/g, '')
                                     .replace(/\[HINT\]/g, $li['field_hint'])
-                                    .replace(/\[required\]/g, ($li['is_required'] === 1)?'required':'');
+                                    .replace(/\[required\]/g, ($li['is_required'] === '1')?'required':'');
 
                                     for ($opt in $options) {
                                         let _temp_opt = _template_select_opt;
@@ -1061,10 +1048,18 @@ $(function() {
                         // 隱藏重要文字轉星字符號於瀏覽狀態
                             // if ($name === "user_name" && $value === "0") $value = window._comm.$user.name;
                             if ($this.var.form_status === 'view') {
-                                if ($name === "user_name" || $name === "user_email" || $name === "user_company") {
+                                if (
+                                    (($this.var.page_position === 'cleanocean') && ($name === "user_name" || $name === "user_email" || $name === "user_company"))
+                                    ||
+                                    (($this.var.page_position === 'cleanriver') && ($name === "user_name"))
+                                ) {
                                     if ($value === "") $value = '**********';
                                     else $value = $value.replace(/./g, '*');
                                 }
+                                // if ($name === "user_name" || $name === "user_email" || $name === "user_company") {
+                                //     if ($value === "") $value = '**********';
+                                //     else $value = $value.replace(/./g, '*');
+                                // }
                             }
                         //
 
@@ -1134,8 +1129,8 @@ $(function() {
                     // }
 
                     // user_name/user_email 預設帶使用者資料
-                    // if (($this.el.$theform.find('[name="user_name"]').html() === "") || ($this.el.$theform.find('[name="user_name"]').html() === "0")) $this.el.$theform.find('[name="user_name"]').val(window._comm.$user.name);
-                    if (($this.el.$theform.find('[name="user_email"]').html() === "") || ($this.el.$theform.find('[name="user_email"]').html() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
+                    // if (($this.el.$theform.find('[name="user_name"]').val() === "") || ($this.el.$theform.find('[name="user_name"]').val() === "0")) $this.el.$theform.find('[name="user_name"]').val(window._comm.$user.name);
+                    if (($this.el.$theform.find('[name="user_email"]').val() === "") || ($this.el.$theform.find('[name="user_email"]').val() === "0")) $this.el.$theform.find('[name="user_email"]').val(window._comm.$user.email);
                 }
 
                 yesShowUp();
@@ -1174,6 +1169,9 @@ $(function() {
                         maximumSelectionLength: 3,
                         closeOnSelect: false
                     });
+
+                    // default select first index option // 排除 status/is_public
+                    $("select:not([multiple]):not([name='status']):not([name='is_public']), select[multiple]:not([max]), select[multiple][max='3']").prop("selectedIndex", 0).trigger('change');
                 }
             }
         },
@@ -1203,16 +1201,15 @@ $(function() {
             return;
         },
 
-        // first to confirm in the popup, 處理 form 表第一次按送出，整理成清單列表的處理 // 預覽淨灘成果
-        formConfirm: function() {
-            console.log('formConfirm');
-
-            console.log('改為先作為草稿判斷改為先作為草稿判斷改為先作為草稿判斷改為先作為草稿判斷');
+        // 先處理成 serialArray 給到 form data，送出草稿也可使用
+        formCheck: function(callback) {
+            console.log('formCheck');
+            // return;
+            // return alert('formCheck');
 
             let $this = this;
-            let $temp = '';
-            let $data_serialize = {};
-            console.log($this.el.$theform.serializeArray());
+            let $data_serialize = $this.var.data_serialize = {};
+            // console.log($this.el.$theform.serializeArray());
             $.each($this.el.$theform.serializeArray(), function() {
                 // console.log(this.name);
                 // console.log(this.value);
@@ -1242,19 +1239,77 @@ $(function() {
             // check imgs
             // console.log($this.var.img_file.datas);
             $.each($this.var.img_file.datas, function(i) {
-                // console.log($this.var.img_file.datas[i]);
                 let $id = $this.var.img_file.datas[i]['response'].id
                 , $pid = $this.var.img_file.datas[i].pid;
                 $this.var.form_data[$pid] = $id;
-                // let $temp = $("[data-tempid=" + i + "]");
-                // console.log($temp.attr('id')); // get preview img
             });
+
+            // return
+            if (callback !== undefined) return callback();
+            else return;
+        },
+
+        // first to confirm in the popup, 處理 form 表第一次按送出，整理成清單列表的處理 // 預覽淨灘成果
+        formConfirm: function() {
+            console.log('formConfirm');
+
+            // console.log('改為先作為草稿判斷改為先作為草稿判斷改為先作為草稿判斷改為先作為草稿判斷');
+
+            let $this = this;
+            let $temp = ''
+            , $data_serialize = $this.var.data_serialize;
+            console.log($data_serialize);
+            /*{
+                let $data_serialize = {};
+                console.log($this.el.$theform.serializeArray());
+                $.each($this.el.$theform.serializeArray(), function() {
+                    // console.log(this.name);
+                    // console.log(this.value);
+                    let $el = $('[name="' + this.name + '"]');
+                    if ($el.is('select') && $el[0].hasAttribute('multiple')) {
+                        if (!Array.isArray($data_serialize[this.name])) $data_serialize[this.name] = []
+                        $data_serialize[this.name].push(this.value);
+
+                        $max = $el.attr('max');
+                        if ($max !== undefined && $data_serialize[this.name].length === $max) return false; // same as 'break'
+                    } else {
+                        // console.log(this.name);
+                        // console.log(this.value);
+                        $data_serialize[this.name] = this.value;
+                    }
+                });
+                // console.log($data_serialize);
+                $this.var.form_data = Object.assign({}, $this.var.form_data, $data_serialize);
+
+                $.each($this.var.form_data, function(k, v) {
+                    if (k.includes("custom-")) {
+                        $this.var.form_data["extra_data"][k] = v;
+                        delete $this.var.form_data[k];
+                    }
+                });
+
+                // check imgs
+                // console.log($this.var.img_file.datas);
+                $.each($this.var.img_file.datas, function(i) {
+                    // console.log($this.var.img_file.datas[i]);
+                    let $id = $this.var.img_file.datas[i]['response'].id
+                    , $pid = $this.var.img_file.datas[i].pid;
+                    $this.var.form_data[$pid] = $id;
+                    // let $temp = $("[data-tempid=" + i + "]");
+                    // console.log($temp.attr('id')); // get preview img
+                });
+            }*/
+
 
             $temp += '<ul>';
             for ($i in $data_serialize) {
                 let $key = $i
                 , $label = $('label[for="filed-' + $key + '"]').text().trim()
                 , $value = $data_serialize[$key];
+
+                // console.log("##########");
+                // console.log($key); console.log($value);
+                // console.log("##########");
 
                 if (/_pic_id|album_pics|album_pic/.test($key)) continue; // (/_pic_id|album_pics|album_pic/.test($key)) name有相關關鍵字都跳過先不處理
 
@@ -1275,6 +1330,72 @@ $(function() {
 
             // console.log($this.var.form_data);
             $this.el.$popup_form_confirm.find('.popup_list').html($temp);
+            $this.el.$popup_form_error_box.html(''); // empty errorbox
+        },
+
+        doSaveForm: function() {
+            console.log('doSaveForm');
+            // return alert('doSaveForm');
+
+            // send the data to api // API
+            // call api // ajax url
+            var _url = $this.api.url + $this.api.path.save_form;
+            if (window._comm.$testMode) _url += "/?key=" + $this.api.param.key; // 測試用，上線刪掉 for test
+            console.log(_url);
+
+            console.log($this.api.data);
+            console.log($this.var.form_data);
+            let _data = Object.assign({}, $this.api.data, $this.var.form_data, {});
+            console.log(_data);
+            // console.log(JSON.stringify(_data));
+
+            // return alert('doSaveForm');
+
+            // ajax handle
+            $.ajax({
+                url: _url,
+                type: "post",
+                data: JSON.stringify(_data),
+                dataType: "json",
+                success: (response) => {
+                    console.log(response);
+                    // console.log(JSON.stringify(response));
+                    console.log('allenallenallenallen');
+
+                    if (response.is_success === 1) {
+                        if ($this.var.form_data.status === '0') {
+                            console.log('[Success, to Save Draft]');
+                            alert('成功儲存草稿');
+                        }
+                        if ($this.var.form_data.status === '1') {
+                            console.log('[Success, to Save Public]');
+                        }
+                        return $this.el.$popup_form_confirm.attr('data-confirmed', 1);
+                    } else {
+                        $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                        let $err = response.messages;
+                        console.log($err);
+                        $this.el.$popup_form_error_box.html(''); // empty errorbox first
+
+                        for ($prop in $err) {
+                            console.log($err[$prop]);
+                            if ($err[$prop][0] === undefined) break;
+                            let $title = $('label[for="filed-' + $err[$prop][1] + '"]').html()
+                            , $err_msg = '<li><label>' + (($title === undefined)?"":$title.trim()) + '</label>：<label>' + $err[$prop][0] + '</label></li>';
+                            $this.el.$popup_form_error_box.append($err_msg);
+                        }
+                        $('.popup_inner[data-status="confirm"]').scrollTop(0);
+                    }
+                    return;
+                },
+                error: function(response) {
+                    console.log("error");
+                    console.log(response);
+                    $this.el.$popup_form_confirm.attr('data-confirmed', 0);
+                }
+            });
+
+            // console.log($this.var.form_data)
         },
 
         // 如果是 cleanriver，做first popup選哪一個表單填寫
@@ -1335,12 +1456,13 @@ $(function() {
             }
         },
 
-        // the map，經緯度地圖
+        // the map，經緯度地圖，openstreetmap，leafletjs map
         setTheMap: function() {
+            let $this = this;
             // if ($('#themap').length == 0) return;
             /* map */
             var default_latlng = [25.042385, 121.533012];
-            var _map = L.map('themap').setView(default_latlng, 18);
+            var _map = $this.var.$themap = L.map('themap').setView(default_latlng, 18);
             // initialize the map on the "map" div with a given center and zoom
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1420,7 +1542,9 @@ $(function() {
                 scrolllock: true,
                 blur: false,
                 onopen: function() {
-                    $this.formConfirm();
+                    $this.formCheck(
+                        () => { $this.formConfirm(); }
+                    );
                 }
             });
             $this.el.$popup_form_themap.popup({
@@ -1430,6 +1554,11 @@ $(function() {
                 blur: true,
                 onopen: function() {
                     $this.setTheMap();
+                    // refresh themap
+                    $('#themap_refresh').on('click', function() {
+                        $this.var.$themap.remove();
+                        $this.setTheMap();
+                    });
                 }
             });
         },

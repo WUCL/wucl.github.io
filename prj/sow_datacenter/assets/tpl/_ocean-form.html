@@ -111,15 +111,15 @@
                             <li class="filed-is_finish no-column">
                                 <label for="filed-status">表單目前狀態</label>
                                 <select id="status" class="status" name="status">
-                                    <option value="1" selected>正式發佈</option>
                                     <option value="0">草稿</option>
+                                    <option value="1" selected>正式發佈</option>
                                 </select>
                             </li>
                             <li class="filed-is_public no-column">
                                 <label for="filed-is_public">表單是否公開</label>
                                 <select id="is_public" class="is_public" name="is_public">
-                                    <option value="1" selected>公開</option>
                                     <option value="0">不公開</option>
+                                    <option value="1" selected>公開</option>
                                 </select>
                             </li>
                         </ul>
@@ -136,6 +136,7 @@
                         </li>
                     </ul>
                 </div>
+                <input id="submit-hidden" class="display-none-i" type="submit" style="display:none" />
             </form>
         </div>
     </section>
@@ -181,7 +182,7 @@
 <section id="form-themap" class="size-l popup_box">
     <div class="popup_inner" data-status="select">
         <div class="popup_header">
-            <h2 id="popup_title" class="popup_title">經緯度地圖選擇</h2>
+            <h2 id="popup_title" class="popup_title">經緯度地圖選擇<button type="button" id="themap_refresh" class="themap_refresh">若地圖顯示不完整，請點此重新載入&nbsp;&#x21bb;</button></h2>
         </div>
         <div class="popup_main">
             <div id="themap" class="themap"></div>
