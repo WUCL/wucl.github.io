@@ -1,0 +1,24 @@
+/* =======================
+layout/_footer
+======================= */
+footer.footer {
+	width: 100%;
+	.copyright {
+		width: 100%;
+		background: $color-main;
+		font-size: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: $color-white;
+		padding: 20px 0;
+		box-sizing: border-box;
+		// @include mq($max-width: $bp-2s) {
+		// 	flex-direction: column;
+		// 	padding: 10px 0;
+		// 	span:nth-child(2) {
+		// 		margin: 7px 0;
+		// 	}
+		// }
+	}
+}
