@@ -12,7 +12,9 @@ $haeder_h-s: 60px;
 
 // Font Stacks
 // font-family: "Oswald"; // for Numeric & English
-$fontfamily-primary: "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+// font-family: 'Roboto', sans-serif;
+// $fontfamily-primary: "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$fontfamily-primary: "Roboto", "微軟正黑體", "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $fontfamily-secondary: "Helvetica Neue", Helvetica, Arial, sans-serif;
 %notoseriftc { // @extend %notoseriftc;
 	font-family: "Noto Serif TC";

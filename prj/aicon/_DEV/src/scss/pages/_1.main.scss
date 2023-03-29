@@ -138,24 +138,27 @@
 						}
 						&-2 {
 							.progress {
+								position: relative;
 								display: block;
-								width: 180px;
-								height: 180px;
+								width: 190px;
+								height: 190px;
 								margin: 50px auto;
-								border-radius: 50%;
-								overflow: hidden;
+								text-align: center;
+								// border-radius: 50%;
+								// overflow: hidden;
+
 								&:before,
 								&:after {
 									content: "";
 									width: 100%;
 									height: 100%;
 									display: block;
-									transition: background-image 0.2s ease-in-out;
+									// transition: background-image 0.2s ease-in-out;
 								}
 								&:after {
 									content: attr(data-progress);
 									font-size: 6.6em;
-									line-height: 165px;
+									line-height: 180px;
 									color: $color-main;
 									letter-spacing: -1px;
 
@@ -169,87 +172,119 @@
 									background: $color-box;
 								}
 								&:before {
+									// display: none;
 									// background-image:
 									// linear-gradient(-90deg, $color-main 50%, transparent 50%), // 90deg
 									// linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
 									// linear-gradient(90deg, $color-main 50%, transparent 50%), // 270deg
 									// linear-gradient(90deg, $color-circle 50%, $color-main 50%);
 								}
-								&[data-progress="10"] {
-									&:before {
-										background-image:
-										linear-gradient(-90deg, $color-main 50%, transparent 50%), // each 36deg, end to 90deg
-										linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								// &[data-progress="10"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(-90deg, $color-main 50%, transparent 50%), // each 36deg, end to 90deg
+								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								// 	}
+								// }
+								// &[data-progress="9"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(-54deg, $color-main 50%, transparent 50%),
+								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								// 	}
+								// }
+								// &[data-progress="8"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(-18deg, $color-main 50%, transparent 50%),
+								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								// 	}
+								// }
+								// &[data-progress="7"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(18deg, $color-main 50%, transparent 50%),
+								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								// 	}
+								// }
+								// &[data-progress="6"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(54deg, $color-main 50%, transparent 50%),
+								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								// 	}
+								// }
+								// &[data-progress="5"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(-90deg, $color-circle 50%, transparent 50%),
+								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+								// 	}
+								// }
+								// &[data-progress="4"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(-54deg, $color-circle 50%, transparent 50%),  // each 36deg, end to -90
+								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+								// 	}
+								// }
+								// &[data-progress="3"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(-18deg, $color-circle 50%, transparent 50%),
+								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+								// 	}
+								// }
+								// &[data-progress="2"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(18deg, $color-circle 50%, transparent 50%),
+								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+								// 	}
+								// }
+								// &[data-progress="1"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(54deg, $color-circle 50%, transparent 50%),
+								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+								// 	}
+								// }
+								// &[data-progress="0"] {
+								// 	&:before {
+								// 		background-image:
+								// 		linear-gradient(90deg, $color-circle 50%, transparent 50%),
+								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+								// 	}
+								// }
+
+								svg {
+									position: absolute;
+									top: 0;
+									right: 0;
+									width: 100%;
+									height: 100%;
+									transform: rotateY(-180deg) rotateZ(-90deg);
+									circle {
+										stroke-dashoffset: 0px;
+										stroke-linecap: round;
+										stroke-width: 10px;
+										stroke-dasharray: calc(185 * 3.14);
+										fill: none;
+										&.c1 {
+											stroke: $color-circle;
+										}
+										&.c2 {
+											stroke: $color-main;
+											// animation: countdown 10s linear forwards;
+										}
 									}
 								}
-								&[data-progress="9"] {
-									&:before {
-										background-image:
-										linear-gradient(-54deg, $color-main 50%, transparent 50%),
-										linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
+								@keyframes countdown {
+									from {
+										stroke-dashoffset: 0px;
 									}
-								}
-								&[data-progress="8"] {
-									&:before {
-										background-image:
-										linear-gradient(-18deg, $color-main 50%, transparent 50%),
-										linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-									}
-								}
-								&[data-progress="7"] {
-									&:before {
-										background-image:
-										linear-gradient(18deg, $color-main 50%, transparent 50%),
-										linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-									}
-								}
-								&[data-progress="6"] {
-									&:before {
-										background-image:
-										linear-gradient(54deg, $color-main 50%, transparent 50%),
-										linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-									}
-								}
-								&[data-progress="5"] {
-									&:before {
-										background-image:
-										linear-gradient(-90deg, $color-circle 50%, transparent 50%),
-										linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-									}
-								}
-								&[data-progress="4"] {
-									&:before {
-										background-image:
-										linear-gradient(-54deg, $color-circle 50%, transparent 50%),  // each 36deg, end to -90
-										linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-									}
-								}
-								&[data-progress="3"] {
-									&:before {
-										background-image:
-										linear-gradient(-18deg, $color-circle 50%, transparent 50%),
-										linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-									}
-								}
-								&[data-progress="2"] {
-									&:before {
-										background-image:
-										linear-gradient(18deg, $color-circle 50%, transparent 50%),
-										linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-									}
-								}
-								&[data-progress="1"] {
-									&:before {
-										background-image:
-										linear-gradient(54deg, $color-circle 50%, transparent 50%),
-										linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-									}
-								}
-								&[data-progress="0"] {
-									&:before {
-										background-image:
-										linear-gradient(90deg, $color-circle 50%, transparent 50%),
-										linear-gradient(90deg, $color-main 50%, $color-circle 50%);
+									to {
+										stroke-dashoffset: calc(185 * 3.14);
 									}
 								}
 							}
@@ -278,6 +313,16 @@
 			&[data-layer="3"] .box .title {
 				margin-bottom: 0;
 			}
+			&[data-layer="2"] .box .content .layer-2 .progress {
+				svg {
+					circle {
+						&.c2 {
+							animation: countdown 11s linear forwards;
+						}
+					}
+				}
+			}
+
 		}
 		&.s-2 {
 			.box {
@@ -387,36 +432,6 @@
 								&:after {
 									content: attr(data-score);
 								}
-								// &[data-result="1"] {
-								// 	&:before {
-								// 		background: url(../img/s2_result_1@2x.png) center center no-repeat;
-								// 		background-size: contain;
-								// 	}
-								// 	.score:after {
-								// 		content: "輕度";
-								// 	}
-								// }
-								// &[data-result="2"] {
-								// 	&:before {
-								// 		background: url(../img/s2_result_2@2x.png) center center no-repeat;
-								// 		background-size: contain;
-								// 	}
-								// 	.score:after {
-								// 		content: "中度";
-								// 	}
-								// }
-								// &[data-result="3"] {
-								// 	&:before {
-								// 		background: url(../img/s2_result_3@2x.png) center center no-repeat;
-								// 		background-size: contain;
-								// 	}
-								// 	.score:after {
-								// 		content: "重度";
-								// 	}
-								// }
-								// &:not([data-result=""]) {
-								// 	display: block;
-								// }
 								.score {
 									position: absolute;
 									top: 50%;

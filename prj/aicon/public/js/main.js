@@ -51,7 +51,7 @@ $(function() {
                         clearInterval($_timer);
                         $this.el.$s_1.attr('data-layer', 3);
                     }
-                }), 1200);
+                }), 1050);
             }
 
             // s2
