@@ -147,16 +147,31 @@
 								// border-radius: 50%;
 								// overflow: hidden;
 
-								&:before,
-								&:after {
+								&:before {
+								// , &:after {
 									content: "";
 									width: 100%;
 									height: 100%;
 									display: block;
 									// transition: background-image 0.2s ease-in-out;
 								}
-								&:after {
-									content: attr(data-progress);
+								// &:after {
+								// 	content: attr(data-progress);
+								// 	font-size: 6.6em;
+								// 	line-height: 180px;
+								// 	color: $color-main;
+								// 	letter-spacing: -1px;
+
+								// 	position: absolute;
+								// 	border-radius: 50%;
+								// 	width: 90%;
+								// 	height: 90%;
+								// 	top: 50%;
+								// 	left: 50%;
+								// 	transform: translate(-50%, -50%);
+								// 	background: $color-box;
+								// }
+								.counting {
 									font-size: 6.6em;
 									line-height: 180px;
 									color: $color-main;
@@ -171,91 +186,6 @@
 									transform: translate(-50%, -50%);
 									background: $color-box;
 								}
-								&:before {
-									// display: none;
-									// background-image:
-									// linear-gradient(-90deg, $color-main 50%, transparent 50%), // 90deg
-									// linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-									// linear-gradient(90deg, $color-main 50%, transparent 50%), // 270deg
-									// linear-gradient(90deg, $color-circle 50%, $color-main 50%);
-								}
-								// &[data-progress="10"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(-90deg, $color-main 50%, transparent 50%), // each 36deg, end to 90deg
-								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-								// 	}
-								// }
-								// &[data-progress="9"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(-54deg, $color-main 50%, transparent 50%),
-								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-								// 	}
-								// }
-								// &[data-progress="8"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(-18deg, $color-main 50%, transparent 50%),
-								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-								// 	}
-								// }
-								// &[data-progress="7"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(18deg, $color-main 50%, transparent 50%),
-								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-								// 	}
-								// }
-								// &[data-progress="6"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(54deg, $color-main 50%, transparent 50%),
-								// 		linear-gradient(-90deg, $color-circle 50%, $color-main 50%);
-								// 	}
-								// }
-								// &[data-progress="5"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(-90deg, $color-circle 50%, transparent 50%),
-								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-								// 	}
-								// }
-								// &[data-progress="4"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(-54deg, $color-circle 50%, transparent 50%),  // each 36deg, end to -90
-								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-								// 	}
-								// }
-								// &[data-progress="3"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(-18deg, $color-circle 50%, transparent 50%),
-								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-								// 	}
-								// }
-								// &[data-progress="2"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(18deg, $color-circle 50%, transparent 50%),
-								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-								// 	}
-								// }
-								// &[data-progress="1"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(54deg, $color-circle 50%, transparent 50%),
-								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-								// 	}
-								// }
-								// &[data-progress="0"] {
-								// 	&:before {
-								// 		background-image:
-								// 		linear-gradient(90deg, $color-circle 50%, transparent 50%),
-								// 		linear-gradient(90deg, $color-main 50%, $color-circle 50%);
-								// 	}
-								// }
 
 								svg {
 									position: absolute;

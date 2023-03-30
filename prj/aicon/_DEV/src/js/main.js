@@ -17,6 +17,7 @@ $(function() {
             $btn_s2: $('#btn-s_2'),
 
             $progress: $('#progress'),
+            $counting: $('#counting'),
             $form: $('#form'),
             $result: $('#result'),
             $score: $('#score'),
@@ -45,7 +46,8 @@ $(function() {
                 , $_timer;
                 $_timer = setInterval(( () => {
                     $_counting -= 1;
-                    $this.el.$progress.attr('data-progress', $_counting);
+                    // $this.el.$progress.attr('data-progress', $_counting);
+                    $this.el.$counting.html($_counting);
                     if ($_counting < 0){
                         console.log($_counting);
                         clearInterval($_timer);
