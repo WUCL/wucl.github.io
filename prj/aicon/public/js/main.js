@@ -77,6 +77,7 @@ $(function() {
                     } else {
                         $_result = 1;
                     }
+                    $this.el.$form.find('input[type="radio"]').attr('disabled','disabled');
                     $this.el.$score.attr('data-score', $_score);
                     $this.el.$s_2.attr('data-result', $_result).attr('data-layer', 2);
                     return;
