@@ -19,8 +19,8 @@ $(function() {
             $progress: $('#progress'),
             $counting: $('#counting'),
             $form: $('#form'),
-            $result: $('#result'),
-            $score: $('#score'),
+            // $result: $('#result-box'),
+            $score: $('#result-score'),
             $slickList: $('#slick-list'),
             $cover: $('#cover'),
             $btn_coverClose: $('#btn-cover_close'),
@@ -30,6 +30,7 @@ $(function() {
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
+            // alert(deviceObj.name);
             this.bindEvent();
             this.buildSlick();
         },
@@ -101,7 +102,7 @@ $(function() {
                 infinite: true,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                arrows: false,
+                arrows: true,
                 dots: true,
                 autoplay: true,
                 autoplaySpeed: 2000,

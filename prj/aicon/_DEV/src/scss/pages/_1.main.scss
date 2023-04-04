@@ -47,15 +47,22 @@
 					letter-spacing: .78px;
 				}
 				.content {
+					padding: 0 35px;
 					.caption {
 						color: $color-main;
 						font-size: $fontsize-2;
 						letter-spacing: 1.35px;
+						// @include mq($min-width: $bp - 1px) {
+						// 	font-size: calc($fontsize-3 + 1px);
+						// }
 						p {
 							font-size: inherit;
 							line-height: 1.7em;
 							color: $color-font;
 							display: block;
+							// @include mq($min-width: $bp - 1px) {
+							// 	line-height: 2em;
+							// }
 							&:nth-child(2) {
 								display: inline-block;
 							}
@@ -64,7 +71,11 @@
 				}
 				.addition {
 					font-size: $fontsize-d;
+					line-height: normal;
 					color: #666;
+					// @include mq($min-width: $bp - 1px) {
+					// 	font-size: $fontsize-a;
+					// }
 				}
 			}
 			[class^="btn-s"] {
@@ -252,207 +263,218 @@
 					}
 				}
 			}
-
 		}
 		&.s-2 {
 			.box {
 				.content {
-					.layer {
-						display: none;
-						&-1 {
-							.test {
-								ul {
-									padding: 0 50px;
-									li {
-										display: grid;
-										grid-template-columns: auto 110px 110px 110px;
+					.test {
+						ul {
+							padding: 0 15px;
+							// @include mq($min-width: $bp - 1px) {
+							// 	padding: 0;
+							// }
+							li {
+								display: grid;
+								grid-template-columns: auto 110px 110px 110px;
+								align-items: center;
+								font-size: calc($fontsize-1 + 1px);
+								line-height: calc($fontsize-5 - 3px);
+								color: $color-font;
+								letter-spacing: .5px;
+								padding: 21px 0;
+								background-image: linear-gradient(to right, #D2DEEE 55%, rgba($color-white, 0) 10%);
+								background-position: bottom;
+								background-size: 20px 2px;
+								background-repeat: repeat-x;
+								// @include mq($min-width: $bp - 1px) {
+								// 	font-size: calc($fontsize-3 + 1px);
+								// 	padding: 23px 0;
+								// 	grid-template-columns: auto 100px 100px 100px;
+								// }
+								&:first-child {
+									background-image: linear-gradient(to right, #D2DEEE 100%, rgba($color-white, 0) 10%);
+								}
+								div {
+									font-size: inherit;
+									display: inline-block;
+									&:nth-child(1) {
+										text-align: justify;
+									}
+									&:nth-child(2),
+									&:nth-child(3),
+									&:nth-child(4) {
+										display: inline-flex;
+										justify-content: center;
 										align-items: center;
-										font-size: calc($fontsize-1 + 1px);
-										line-height: $fontsize-5;
-										color: $color-font;
-										letter-spacing: .5px;
-										padding: 23px 0;
-										background-image: linear-gradient(to right, #D2DEEE 55%, rgba($color-white, 0) 10%);
-										background-position: bottom;
-										background-size: 20px 2px;
-										background-repeat: repeat-x;
-										&:first-child {
-											background-image: linear-gradient(to right, #D2DEEE 100%, rgba($color-white, 0) 10%);
-										}
-										div {
+										label {
 											display: inline-block;
-											&:nth-child(1) {
-												text-align: justify;
+											width: calc(60px / 2);
+											height: calc(60px / 2);
+											&:before {
+												content: "";
+												display: block;
+												position: absolute;
+												left: 0;
+												width: 100%;
+												height: 100%;
+												background: url(../img/s2_check@2x.png) center center no-repeat;
+												background-size: cover;
 											}
-											&:nth-child(2),
-											&:nth-child(3),
-											&:nth-child(4) {
-												display: inline-flex;
-												justify-content: center;
-												align-items: center;
-												label {
-													display: inline-block;
-													width: calc(60px / 2);
-													height: calc(60px / 2);
-													&:before {
-														content: "";
-														display: block;
-														position: absolute;
-														left: 0;
-														width: 100%;
-														height: 100%;
-														background: url(../img/s2_check@2x.png) center center no-repeat;
-														background-size: cover;
-													}
+										}
+										input {
+											font-size: 0;
+											line-height: 0;
+											opacity: 0;
+											visibility: hidden;
+											display: none;
+											&:checked + label {
+												&:before {
+													background: url(../img/s2_checked@2x.png) center center no-repeat;
+													background-size: cover;
 												}
-												input {
-													font-size: 0;
-													line-height: 0;
-													opacity: 0;
-													visibility: hidden;
-													display: none;
-													&:checked + label {
-														&:before {
-															background: url(../img/s2_checked@2x.png) center center no-repeat;
-															background-size: cover;
-														}
-													}
-												}
-											}
-											&:nth-child(2) {
-
-											}
-											&:nth-child(3) {
-
-											}
-											&:nth-child(4) {
-
 											}
 										}
 									}
-								}
-							}
-							.btn-s_2 {
-								&:before {
-									background: url(../img/s2_btn_send@2x.png) left center no-repeat;
-									background-size: cover;
-								}
-							}
-						}
-						&-2 {
-							> .caption {
-								p {
-									color: inherit;
-									font-weight: bold;
-								}
-							}
-							.result {
-								display: none;
-								margin: 30px auto;
-								width: calc(520px / 2);
-								height: calc(520px / 2);
-								&:before {
-									content: "";
-									position: absolute;
-									top: 0;
-									left: 0;
-									width: 100%;
-									height: 100%;
-								}
-								&:after {
-									content: attr(data-score);
-								}
-								.score {
-									position: absolute;
-									top: 50%;
-									left: 50%;
-									transform: translate(-50%, -50%);
-									display: flex;
-									flex-direction: column;
-									justify-content: center;
-									color: $color-white;
-									letter-spacing: 2px;
-									font-weight: bold;
-									&:before {
-										content: attr(data-score);
-										font-size: 4.6em;
-										margin-bottom: 15px;
+									&:nth-child(2) {
+
 									}
-									&:after {
-										font-size: $fontsize-4;
+									&:nth-child(3) {
+
+									}
+									&:nth-child(4) {
+
 									}
 								}
-								&-addition {
-									margin-bottom: 15px;
-									&:before,
-									&:after {
-										font-size: $fontsize-d;
-										color: #666;
-										margin-bottom: 15px;
-									}
-									&:before {
-										font-weight: 500;
-										font-size: $fontsize-2;
-										color: $color-font;
-										margin-bottom: 15px;
-									}
-								}
-							}
-							.addition {
-								font-size: $fontsize-d;
-								color: #666;
-								margin-bottom: 15px;
 							}
 						}
 					}
+					.btn-s_2 {
+						&:before {
+							background: url(../img/s2_btn_send@2x.png) left center no-repeat;
+							background-size: cover;
+						}
+					}
+					.result {
+						display: none;
+						margin-top: 30px;
+						.caption {
+							p {
+								color: inherit;
+								font-weight: bold;
+							}
+						}
+						&-box {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							margin: 30px auto;
+							// padding: 30px;
+							width: calc(1118px / 2);
+							height: calc(300px / 2);
+							&:before {
+								content: "";
+								position: absolute;
+								top: 0;
+								left: 0;
+								width: 100%;
+								height: 100%;
+							}
+							&:after {
+								content: attr(data-score);
+							}
+						}
+						&-score {
+							// position: absolute;
+							// top: 50%;
+							// left: 50%;
+							// transform: translate(-50%, -50%);
+							line-height: 5em;
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+							color: $color-white;
+							letter-spacing: 2px;
+							font-weight: 500;
+							border-right: 2px solid $color-white;
+							padding-right: 35px;
+							margin-right: 35px;
+							&:before {
+								content: attr(data-score);
+								font-size: 4.6em;
+							}
+						}
+						&-addition {
+							display: flex;
+							align-items: flex-start;
+							justify-content: center;
+							flex-direction: column;
+							&:before,
+							&:after {
+								font-weight: bold;
+								font-size: calc($fontsize-6 + 1px);
+								color: $color-white;
+								margin-bottom: 9px;
+							}
+							&:after {
+								font-size: $fontsize-3;
+							}
+						}
+					}
+					.addition {
+						font-size: $fontsize-d;
+						color: #666;
+						margin-bottom: 15px;
+						// @include mq($min-width: $bp - 1px) {
+						// 	font-size: $fontsize-a;
+						// }
+					}
 				}
 			}
-			&[data-layer="1"] .box .content .layer-1,
 			&[data-layer="2"] .box .content .layer-2,
 			&:not([data-result=""]) .box .content .result {
 				display: block;
 			}
-			&[data-layer="2"] .box .content > .caption {
+			&[data-layer="2"] .box .content .btn-s_2 {
 				display: none;
 			}
 			&[data-result="1"] .box .content .result {
-				&:before {
-					background: url(../img/s2_result_1@2x.png) center center no-repeat;
+				&-box:before {
+					background: url(../img/s2_result_1_square@2x.png) center center no-repeat;
 					background-size: contain;
-				}
-				.score:after {
-					content: "輕微";
 				}
 				&-addition {
 					&:before {
+						content: "輕微";
+					}
+					&:after {
 						content: "需注意生活習慣";
 					}
 				}
 			}
 			&[data-result="2"] .box .content .result {
-				&:before {
-					background: url(../img/s2_result_2@2x.png) center center no-repeat;
+				&-box:before {
+					background: url(../img/s2_result_2_square@2x.png) center center no-repeat;
 					background-size: contain;
-				}
-				.score:after {
-					content: "中度";
 				}
 				&-addition {
 					&:before {
+						content: "中度";
+					}
+					&:after {
 						content: "建議使用藥物緩解不適";
 					}
 				}
 			}
 			&[data-result="3"] .box .content .result {
-				&:before {
-					background: url(../img/s2_result_3@2x.png) center center no-repeat;
+				&-box:before {
+					background: url(../img/s2_result_3_square@2x.png) center center no-repeat;
 					background-size: contain;
-				}
-				.score:after {
-					content: "嚴重";
 				}
 				&-addition {
 					&:before {
+						content: "嚴重";
+					}
+					&:after {
 						content: "建議諮詢醫療人員";
 					}
 				}
@@ -644,6 +666,11 @@
 						bottom: 10%;
 						left: 50%;
 						transform: translateX(-50%);
+						// @include mq($min-width: $bp - 1px) {
+						// 	padding: 0 35px;
+						// 	line-height: normal;
+						// 	font-size: $fontsize-a;
+						// }
 					}
 				}
 			}
@@ -652,6 +679,107 @@
 			&[data-cover="2"] .cover .cover-list .cover-item-2,
 			&[data-cover="3"] .cover .cover-list .cover-item-3 {
 				display: block;
+			}
+		}
+	}
+	.slick-prev,
+	.slick-next {
+		font-size: 0;
+		line-height: 0;
+		position: absolute;
+		top: 50%;
+		display: block;
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		-webkit-transform: translate(0, -50%);
+		-ms-transform: translate(0, -50%);
+		transform: translate(0, -50%);
+		cursor: pointer;
+		color: transparent;
+		border: none;
+		outline: none;
+		background: transparent;
+		z-index: 1;
+		margin: 20px auto;
+
+		width: calc(120px / 2);
+		height: calc(120px / 2);
+		transition: .1s;
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url(../img/s3_carousel_arrow@2x.png) center center no-repeat;
+			background-size: cover;
+		}
+		&:hover {
+			width: calc(120px / 2.1);
+			height: calc(120px / 2.1);
+			opacity: .78;
+		}
+	}
+	.slick-prev {
+		left: 25px;
+	}
+	.slick-next {
+		right: 25px;
+		&:before {
+			transform: rotateY(180deg);
+		}
+	}
+}
+
+body.Mobile {
+	.main {
+		section {
+			> .inner {
+				.box {
+					.content {
+						.caption {
+							font-size: calc($fontsize-3 + 1px);
+							p {
+								line-height: 2em;
+							}
+						}
+						.addition {
+							font-size: $fontsize-a;
+						}
+					}
+				}
+			}
+			&.s-2 {
+				.box {
+					.content {
+						.test {
+							ul {
+								padding: 0;
+								li {
+									font-size: calc($fontsize-3 + 1px);
+									padding: 23px 0;
+									grid-template-columns: auto 100px 100px 100px;
+								}
+							}
+						}
+						.addition {
+							font-size: $fontsize-a;
+						}
+					}
+				}
+			}
+			&.s-3 {
+				.box {
+					.cover {
+						&-addition {
+							padding: 0 35px;
+							line-height: normal;
+							font-size: $fontsize-a;
+						}
+					}
+				}
 			}
 		}
 	}
