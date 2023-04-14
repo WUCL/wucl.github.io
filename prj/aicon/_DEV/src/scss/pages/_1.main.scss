@@ -426,6 +426,7 @@
 						}
 					}
 					.addition {
+						display: block;
 						font-size: $fontsize-d;
 						color: #666;
 						margin-bottom: 15px;
@@ -441,6 +442,17 @@
 			}
 			&[data-layer="2"] .box .content .btn-s_2 {
 				display: none;
+			}
+			&[data-result="1"] .box .content .test .result {
+				.addition-b {
+					display: none;
+				}
+			}
+			&[data-result="2"] .box .content .test .result,
+			&[data-result="3"] .box .content .test .result {
+				.addition-a {
+					display: none;
+				}
 			}
 			&[data-result="1"] .box .content .result {
 				&-box:before {
@@ -466,7 +478,8 @@
 						content: "中度";
 					}
 					&:after {
-						content: "建議使用藥物緩解不適\a可諮詢藥師";
+						// content: "建議使用藥物緩解不適\a可諮詢藥師";
+						content: "建議使用藥物緩解不適";
 					}
 				}
 			}
@@ -480,7 +493,8 @@
 						content: "嚴重";
 					}
 					&:after {
-						content: "建議諮詢醫療人員\a可諮詢藥師";
+						// content: "建議諮詢醫療人員\a可諮詢藥師";
+						content: "建議諮詢醫療人員";
 					}
 				}
 			}
