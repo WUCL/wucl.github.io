@@ -47,6 +47,8 @@
 					letter-spacing: .78px;
 				}
 				.content {
+					border-radius: 30px;
+					overflow: hidden;
 					padding: 0 35px;
 					.caption {
 						color: $color-main;
@@ -601,8 +603,10 @@
 					&-close {
 						position: absolute;
 						z-index: 1;
-						top: 30px;
-						right: 30px;
+						// top: 30px;
+						// right: 30px;
+						top: 30%;
+						left: 75%;
 						display: block;
 						width: calc(100px / 2);
 						height: calc(100px / 2);
