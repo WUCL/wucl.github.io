@@ -32,7 +32,7 @@ $(function() {
             this.el.$body.addClass(deviceObj.name);
             // alert(deviceObj.name);
             this.bindEvent();
-            this.buildSlick();
+            // this.buildSlick();
         },
         bindEvent: function() {
             let $this = this;

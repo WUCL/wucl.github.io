@@ -426,7 +426,6 @@
 						}
 					}
 					.addition {
-						display: block;
 						font-size: $fontsize-d;
 						color: #666;
 						margin-bottom: 15px;
@@ -442,17 +441,6 @@
 			}
 			&[data-layer="2"] .box .content .btn-s_2 {
 				display: none;
-			}
-			&[data-result="1"] .box .content .test .result {
-				.addition-b {
-					display: none;
-				}
-			}
-			&[data-result="2"] .box .content .test .result,
-			&[data-result="3"] .box .content .test .result {
-				.addition-a {
-					display: none;
-				}
 			}
 			&[data-result="1"] .box .content .result {
 				&-box:before {
@@ -562,7 +550,7 @@
 						.slick-item {
 							cursor: pointer;
 							display: block;
-							margin: 0 auto 30px;
+							margin: 0 auto 60px;
 							transition: .2s;
 							&:hover {
 								transform: scale(.99);
