@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+  <meta name="format-detection" content="telephone=no">
+  <title>Beam Suntory 威士忌愛好會</title>
+  <meta name="description" content="威士忌愛好會">
+  <meta name="keywords" content="三得利,威士忌愛好會,Beam Suntory,威士忌,whisky">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="bookmark" href="../img/favicon.ico">
+  <link rel="stylesheet" href="../css/reset.min.css">
+  <link rel="stylesheet" href="../css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../css/style.css?20220429">
+</head>
+
+<body>
+  <nav class="header">
+    <h1 class="logo" onclick="goHref('./home.html', event)">
+      <img src="../img/logo_b.png" alt="BEAM SUNTORY INC." width="230" height="38" loading="lazy" />
+    </h1>
+    <ul class="menu">
+      <li onclick="toggle(this)">最新活動
+        <button class="arrow"></button>
+        <ul style="right: 0rem; width: 280px;">
+          <li style="text-align: center;text-indent: 0px;unicode-bidi: plaintext;"
+            onclick="goHref('./news.html', event)">
+            會員限定活動<br />年度加碼</li>
+          <li style="text-align: center;text-indent: 0px;" onclick="goHref('./prize_list_part3.html', event)">
+            職魂之作認購權<br />得獎名單</li>
+        </ul>
+      </li>
+      <li onclick="goProduce(this, event, './commodity_A.html')">產品介紹
+        <button class="arrow"></button>
+        <ul>
+          <li onclick="goHref('./commodity_A.html', event)">歐肯</li>
+          <li onclick="goHref('./commodity_B.html', event)">波摩</li>
+          <li onclick="goHref('./commodity_L.html', event)">拉弗格</li>
+          <li onclick="goHref('./commodity_Y.html', event)">山崎</li>
+          <li onclick="goHref('./commodity_H.html', event)">白州</li>
+        </ul>
+      </li>
+      <li onclick="goHref('https://maac.io/1vzN0', event, '_blank')">加入會員</li>
+      <li
+        onclick="goHref('https://docs.google.com/document/d/1Ky5FVHg4twciV7m36rBhmUem5kQ1ZDMtW5tR29F2S2Q/edit', event, '_blank')">
+        購買通路</li>
+    </ul>
+    <div class="mobileBtn" onclick="menuToggle(this)">
+      <p>close</p>
+      <div><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+  <main class="main brownBG">
+    <div class="newsImg mb_0"><img class="imgDesk" src="../img/news_w.jpg"
+        alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="1441" height="757" loading="lazy"><img class="imgMobile"
+        src="../img/news_m.jpg" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="768" height="410" loading="lazy">
+    </div>
+    <div class="lottery">
+      <form action="">
+        <p>查詢抽獎資格請輸入</p>
+        <input type="text" id="uid" name="uid" placeholder="身分證統一編號">
+        <input type="tel" id="mobile" name="mobile" placeholder="手機號碼">
+        <button id="querySubscription" name="querySubscription">查詢</button>
+      </form>
+      <p>參加抽獎人數<br /> <span id="subscriptionAmount" name="subscriptionAmount">0</span>人</p>
+    </div>
+    <div class="news">
+      <h2>活動辦法｜</h2>
+      <div class="border_0 mb_0 pb_0">
+        <p>
+          即日起，每位Beam Suntory威士忌愛好會LINE @官方帳號之綁定會員，於2022/11/30 23:59前完成下列步驟且成功送出報名表單後，即獲得參加【會員限定活動-年度加碼】抽獎活動的抽獎資格乙次：
+        <ol style="margin-left: 3rem;">
+          <li>於Beam Suntory威士忌愛好會LINE @官方帳號主選單點擊「參加活動」</li>
+          <li>點選【會員限定活動-年度加碼】抽獎活動項目</li>
+          <li>點選「我要兌換」</li>
+          <li>填寫表單中會員之身份證字號，並按「參加抽獎」</li>
+          <li>成功送出表單後，將扣除15點會員點數</li>
+          <li>出現彈出「兌換成功」訊息，即表示報名成功</li>
+        </ol>
+        </p>
+        <p>如欲更正會員個人資訊，請經由主選單「會員中心」--> 「問題與協助」進行反映。</p>
+        <p>每位綁定會員僅能參加乙次，獲得抽獎活動資格24小時後，可於Beam Suntory威士忌愛好會官方網站「最新活動」頁面，查詢抽獎資格及專屬抽獎編號。</p>
+        <p>得獎者將於2022年12月擇期公開抽出，並於官方帳號及官方網站通知，請密切關注官方帳號訊息。</p>
+      </div>
+      <ul class="listIcons mtb_2">
+        <h2>活動獎項｜</h2>
+        <li>【波摩50年認購權】，共1名（非贈品，為認購權，認購價格$1,450,000元/瓶）</li>
+        <li>【山崎限量版－職魂之作認購權】，共10名（非贈品，為認購權，認購價格$120,000元/組）</li>
+        <li>歐肯白蘇維濃桶單一麥芽蘇格蘭威士忌乙瓶，共10名</li>
+        <li>歐肯三桶單一麥芽蘇格蘭威士忌乙瓶，共10名</li>
+      </ul>
+      <ul class="listDecimal mtb_2">
+        <h2>注意事項｜</h2>
+        <li>本活動之參加對象限參加時已年滿20歲之中華民國國民。</li>
+        <li>每位會員僅限參加乙次，且每個身份證字號僅能參加乙次，成功扣取會員點數後將無法返還已扣除之會員點數。</li>
+        <li>
+          抽出各獎項資格後，將與中獎者聯繫相關兌獎相關事宜。若因資料填寫不完整、不正確，或其他不可抗力因素，導致本活動小組無法取得聯繫者，則視同放棄兌換資格，且不另行通知。若參加人有涉及不正當得利及非法行為，台灣三得利股份有限公司有權利取消參與活動之相關資格。
+        </li>
+        <li>中獎者若抽中【波摩50年認購權】或【山崎限量版－職魂之作認購權】之獎項，該中獎者不得再將其認購權轉讓，若中獎者放棄認購權，則視同自願放棄中獎權利，亦不進行候補。</li>
+        <li>【波摩50年認購權】及【山崎限量版－職魂之作認購權】之兌獎方式，將由台灣三得利專人聯繫中獎者。</li>
+        <li>
+          依所得稅法規定，舉凡中獎金額或獎項年度累計價值超過1,000元(含)以上，將列入本年度之個人綜合所得稅申報，本活動之承辦單位將於次年度開立扣繳憑單寄送予中獎者，中獎者於兌獎時需繳交身份證正反面影本。另中獎獎品價值超過新台幣20,000元(含)以上者，應自行負擔機會中獎所得稅，依法須預先扣繳10%稅金(稅額以獎品市價計算)。承辦單位依法代收中獎稅金，故中獎者需將兌獎資料連同預繳稅金一併繳回，方可進行兌獎，未能如期依法繳納應繳稅額者，視同自願放棄中獎權利，亦不進行候補。
+        </li>
+        <li>獎品寄送限於台灣、金門、澎湖、馬祖地區，離島及偏遠地區之到貨時間，因船期交通等問題，以物流配送公司實際配達時間為準。</li>
+        <li>若中獎者因資格不符或願意放棄視同放棄中獎資格者，不另行於網站公告，該獎項不釋出由台灣三得利股份有限公司保留。獎品一經主辦單位郵寄出，如有遺失、損毀等事情發生，主辦單位不負補發之責。</li>
+        <li>本活動主辦單位台灣三得利(股)公司及其員工、相關配合單位、廣告公司皆不得參加本活動，一經主辦單位發現或經第三人檢舉經查證屬實，主辦單位有權利立即取消其得獎資格並追回獎品。</li>
+        <li>台灣三得利股份有限公司本抽獎活動主辦單位保留解釋、變更、增訂、修改、刪除或終止本抽獎活動之相關權利，而無須另行通知。</li>
+      </ul>
+    </div>
+    <div class="banner owl-carousel owl-theme">
+      <div id="val">
+        <div class="mask">
+          <img class="imgDesk" src="../img/new_spring_w.png" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="1920"
+            height="600" loading="lazy"><img class="imgMobile" src="../img/new_spring_m.png"
+            alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="990" height="550" loading="lazy">
+        </div>
+      </div>
+      <div id="val">
+        <div class="mask">
+          <img class="imgDesk" src="../img/new_summer_w.png" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="1920"
+            height="600" loading="lazy"><img class="imgMobile" src="../img/new_summer_m.png"
+            alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="990" height="550" loading="lazy">
+        </div>
+      </div>
+      <div id="val">
+        <div class="mask">
+          <img class="imgDesk" src="../img/new_autumn_w.png" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="1920"
+            height="600" loading="lazy"><img class="imgMobile" src="../img/new_autumn_m.png"
+            alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="990" height="550" loading="lazy">
+        </div>
+      </div>
+      <div id="val">
+        <div class="mask">
+          <img class="imgDesk" src="../img/new_winter_w.png" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="1920"
+            height="600" loading="lazy"><img class="imgMobile" src="../img/new_winter_m.png"
+            alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="990" height="550" loading="lazy">
+        </div>
+      </div>
+      <div id="val">
+        <div class="mask">
+          <img class="imgDesk" src="../img/new_Bowmore01_w.jpg" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法"
+            width="1920" height="600" loading="lazy"><img class="imgMobile" src="../img/new_Bowmore01_m.jpg"
+            alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="990" height="550" loading="lazy">
+        </div>
+      </div>
+      <div id="val">
+        <div class="mask">
+          <img class="imgDesk" src="../img/new_Bowmore02_w.jpg" alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法"
+            width="1920" height="600" loading="lazy"><img class="imgMobile" src="../img/new_Bowmore02_m.jpg"
+            alt="Beam Suntory 威士忌愛好會-山崎限量版<職魂之作>認購權抽獎活動辦法" width="990" height="550" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>©2022 Copyright 2022. 台灣三得利股份有限公司 All Rights Reserved.</p>
+    <button class="goTop"></button>
+    <img src="../img/footer.png" width="510" height="71" loading="lazy">
+  </footer>
+  <div class="modal" id="modal1">
+    <div class="modalDialog">
+      <div class="mobileBtn" onclick="modalClose(this)">
+        <div><span></span><span></span></div>
+      </div>
+      <div>
+        <p>恭喜您具備【山崎限量版－職魂之作認購權】抽獎活動資格！</p>
+        <p>您的抽獎編號為【<span id="subscriptionSequence" name="subscriptionSequence"></span>】</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="modal2">
+    <div class="modalDialog">
+      <div class="mobileBtn" onclick="modalClose(this)">
+        <div><span></span><span></span></div>
+      </div>
+      <div>
+        <p class="textYellow">抱歉，您目前尚未具備【山崎限量版－職魂之作認購權】抽獎活動資格，</p>
+        <p class="textYellow">請參考以下活動辦法來參加，謝謝您。</p>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../js/jquery.min.js" defer></script>
+<script src="../js/owl.carousel.js" defer></script>
+<script src="../js/index.js" defer></script>
+<script src="../js/lottery3_api.js" defer></script>
+
+</html>

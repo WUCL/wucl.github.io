@@ -1,0 +1,372 @@
+/* =======================
+   pages/suntorytime
+   ======================= */
+.main {
+	section.suntorytime {
+		&:before {
+			content: "";
+			left: 0;
+			width: calc(1014px / 1.35);
+			height: calc(96px / 1.35);
+			background: url(../img/suntory_time_bg.png) left center no-repeat;
+			background-size: contain;
+			display: inline-block;
+			@include mq($max-width: $bp-2s) {
+				width: 100vw;
+				height: 10vw;
+			}
+		}
+		.inner {
+			max-width: $bp-4l;
+			.title {
+				@include mq($max-width: $bp-2s) {
+					width: 100%;
+				}
+			}
+			.content {
+				margin-top: -9px;
+				.list {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					grid-gap: 20px;
+					// height: 800px;
+					margin: 0 auto;
+					@include mq($max-width: $bp-4l + 20px) {
+						width: 95%;
+					}
+					@include mq($max-width: $bp-2m) {
+						width: 100%;
+						grid-template-columns: 1fr;
+					}
+					// @include mq($max-width: $bp-m) {
+					// 	grid-template-columns: 1fr;
+					// }
+					.item {
+						padding: 60px 30px;
+						display: block;
+						width: 100%;
+						height: 100%;
+						background: $color-white;
+						box-shadow: 0 0 10px rgba(34, 22, 23, 0.06);
+						display: flex;
+						flex-direction: column;
+						text-align: left;
+						margin: 0 auto;
+						@include mq($max-width: $bp-2m) {
+							padding: 50px 20px;
+						}
+						> .title {
+							text-align: center;
+						}
+						.caption {
+							p {
+								text-align: center;
+								@include mq($max-width: $bp-2m) {
+									text-align: justify;
+								}
+								> span {
+									font-size: $fontsize_b;
+									letter-spacing: .15em;
+									line-height: $fontsize_2;
+									display: block;
+									color: $color-font;
+									@include mq($max-width: $bp-2m) {
+										display: inline;
+									}
+								}
+							}
+						}
+						.box {
+							width: 80%;
+							margin: 0 auto;
+							@include mq($max-width: $bp-4l + 20px) {
+								width: 100%;
+							}
+							.b-title {
+								font-weight: normal;
+								background: $color-main;
+								letter-spacing: .35em;
+								font-size: $fontsize;
+								color: $color-white;
+								display: inline-block;
+								padding: 3px 9px 3px calc(9px + 0.35em);
+								margin: 30px 0;
+								left: 50%;
+								transform: translateX(-50%);
+							}
+							.points {
+								margin: 0 auto;
+								width: calc(180px / 2);
+								height: calc(232px / 2);
+								@include mq($max-width: $bp-2m) {
+									width: calc(180px / 2.2);
+									height: calc(232px / 2.2);
+								}
+								@include mq($max-width: $bp-2s) {
+									width: calc(180px / 2);
+									height: calc(232px / 2);
+								}
+								&:before {
+									content: "";
+									left: 0;
+									width: 100%;
+									height: 100%;
+									display: inline-block;
+									position: relative;
+									// position: absolute;
+								}
+								&.point-3 {
+									&:before {
+										background: url(../img/points_3.png) left center no-repeat;
+										background-size: contain;
+									}
+								}
+								&.point-15 {
+									&:before {
+										background: url(../img/points_15.png) left center no-repeat;
+										background-size: contain;
+									}
+								}
+								&.point-18 {
+									&:before {
+										background: url(../img/points_18.png) left center no-repeat;
+										background-size: contain;
+									}
+								}
+							}
+							&-time {
+								ul {
+									text-align: center;
+									li {
+										display: inline-flex;
+										align-items: center;
+										justify-content: center;
+										margin-bottom: 15px;
+										padding-bottom: 15px;
+										border-bottom: 1px solid #ECEBE9;
+										&:last-child {
+											border-bottom: 0;
+										}
+										// @include mq($max-width: $bp-2m) {
+										// 	font-size: $fontsize_a;
+										// }
+										div {
+											font-weight: normal;
+											&:nth-child(1) {
+												white-space: nowrap;
+												padding: 5px 19px 5px calc(19px + .35em);
+												border-radius: 20px;
+												letter-spacing: .35em;
+												background: lighten($color-main, 30%);
+												margin-right: 15px;
+												color: #221617;
+												@include mq($max-width: $bp-2l) {
+													padding: 5px 17px 5px calc(17px + .2em);
+													letter-spacing: .2em;
+													margin-right: 9px;
+												}
+												@include mq($max-width: $bp-l) {
+													padding: 5px 19px 5px calc(19px + .1em);
+													letter-spacing: .1em;
+												}
+												// @include mq($max-width: $bp-2m) {
+												// 	padding: 3px 17px 3px calc(17px + .1em);
+												// 	margin-right: 9px;
+												// }
+											}
+											&:nth-child(2) {
+												letter-spacing: .3em;
+												@include mq($max-width: $bp-2l) {
+													letter-spacing: .2em;
+												}
+												@include mq($max-width: $bp-l) {
+													letter-spacing: .1em;
+												}
+											}
+										}
+									}
+								}
+							}
+							&-1-price {
+								ul {
+									li {
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										margin-bottom: 25px;
+										@include mq($max-width: $bp-2s) {
+											flex-direction: column;
+											margin-bottom: 50px;
+										}
+										.price-l {
+											width: 100%;
+											&-t {
+												font-weight: normal;
+												font-size: $fontsize;
+												letter-spacing: .3em;
+												border-bottom: 1px solid #ECE8E4;
+												padding-bottom: 5px;
+												margin-bottom: 5px;
+												@include mq($max-width: $bp-2s) {
+													font-size: $fontsize_2;
+													border-bottom: 0;
+													letter-spacing: .2em;
+													text-align: center;
+												}
+												> span {
+													font-weight: 600;
+													letter-spacing: .3em;
+													@include mq($max-width: $bp-2s) {
+														letter-spacing: .2em;
+													}
+												}
+											}
+											&-b {
+												font-weight: normal;
+												font-size: $fontsize_d;
+												color: $color-font;
+												max-width: 66%;
+												text-align: justify;
+												@include mq($max-width: $bp-2s) {
+													font-size: $fontsize_a;
+													max-width: 100%;
+													text-align: center;
+												}
+											}
+										}
+										.price-r {
+											.points {
+												&:before {
+													margin-top: -9px;
+													margin-left: -7px;
+													@include mq($max-width: $bp-2s) {
+														margin-top: 9px;
+														margin-left: 0;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							&-2-time {
+								> p {
+									display: block;
+									text-align: center;
+									font-size: $fontsize;
+									font-weight: normal;
+									letter-spacing: .3em;
+									margin-bottom: 20px;
+								}
+								ul {
+									text-align: left;
+									li {
+										border-bottom: 0;
+										div {
+											&:nth-child(1) {
+												letter-spacing: .3em;
+												padding: 7px 15px 7px calc(15px + .3em);
+												@include mq($max-width: $bp-2s) {
+													letter-spacing: .2em;
+													padding: 7px 11px 7px calc(11px + .2em);
+												}
+											}
+										}
+									}
+								}
+								> span {
+									display: block;
+									text-align: center;
+									font-size: $fontsize_d;
+									color: $color-font;
+									letter-spacing: .05em;
+									@include mq($max-width: $bp-2s) {
+										font-size: $fontsize_e;
+										letter-spacing: 0;
+									}
+								}
+							}
+							&-2-style {
+								ul {
+									li {
+										display: flex;
+										align-items: center;
+										justify-content: flex-start;
+										margin-bottom: 25px;
+										@include mq($max-width: $bp-m) {
+											margin-bottom: 20px;
+										}
+										span {
+											padding-left: 13px;
+											width: 100%;
+											font-weight: normal;
+											line-height: normal;
+											font-size: $fontsize + 1px;
+											letter-spacing: .15em;
+											@include mq($max-width: $bp-m) {
+												font-size: $fontsize;
+												letter-spacing: .1em;
+												padding-left: 9px;
+											}
+										}
+										&:before {
+											content: "";
+											left: 0;
+											width: calc(40px / 1.5);
+											height: calc(40px / 1.5);
+											background: url(../img/whisky_icon.png) left center no-repeat;
+											background-size: contain;
+											display: inline-block;
+											@include mq($max-width: $bp-2s) {
+												width: calc(40px / 1.2);
+												height: calc(40px / 1.2);
+												// display: block;
+												margin: 0 auto;
+											}
+										}
+									}
+								}
+							}
+							&-2-price {
+							}
+
+							.folder-ctrl {
+								display: none;
+								margin-bottom: 20px;
+								// border: 1px solid;
+								padding: 3px 9px;
+								// display: inline-block;
+								text-align: center;
+								@include mq($max-width: $bp-2s) {
+									display: block;
+								}
+								&:before {
+									content: "▸";
+									margin-right: 10px;
+									display: inline-block;
+								}
+							}
+							@include mq($max-width: $bp-2s) {
+								.folder-content {
+									height: 0;
+									visibility: hidden;
+								}
+							}
+						 	&[data-folder="1"] {
+								.folder-ctrl {
+									&:before {
+										transform: rotate(90deg);
+									}
+								}
+								.folder-content {
+									height: auto;
+									visibility: visible;
+								}
+						 	}
+						}
+					}
+				}
+			}
+		}
+	}
+}

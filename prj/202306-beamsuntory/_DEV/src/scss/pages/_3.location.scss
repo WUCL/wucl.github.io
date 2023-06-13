@@ -1,0 +1,44 @@
+/* =======================
+   pages/location
+   ======================= */
+.main {
+	section.location {
+		.inner {
+			> .content {
+				p {
+					letter-spacing: .35em;
+					line-height: $fontsize_6;
+					@include mq($max-width: $bp-2s) {
+						letter-spacing: .22em;
+					}
+				}
+				a {
+					font-size: $fontsize_c;
+					line-height: $fontsize_6;
+					letter-spacing: .25em;
+					color: $color-main;
+					display: inline-block;
+					transition: .2s;
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize_b;
+						margin-top: 9px;
+					}
+					&:before {
+						content: "";
+						left: 0;
+						width: calc(26px / 1.3);
+						height: calc(26px / 1.3);
+						background: url(../img/map_icon.png) left center no-repeat;
+						background-size: contain;
+						display: inline-block;
+						margin-bottom: -3px;
+						padding-right: 3px;
+					}
+					&:hover {
+						transform: translateX(5px);
+					}
+				}
+			}
+		}
+	}
+}
