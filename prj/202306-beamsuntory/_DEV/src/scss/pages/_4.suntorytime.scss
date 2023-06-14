@@ -61,18 +61,18 @@
 						.caption {
 							p {
 								text-align: center;
-								@include mq($max-width: $bp-2m) {
-									text-align: justify;
-								}
+								// @include mq($max-width: $bp-2m) {
+								// 	text-align: justify;
+								// }
 								> span {
 									font-size: $fontsize_b;
 									letter-spacing: .15em;
 									line-height: $fontsize_2;
 									display: block;
 									color: $color-font;
-									@include mq($max-width: $bp-2m) {
-										display: inline;
-									}
+									// @include mq($max-width: $bp-2m) {
+									// 	display: inline;
+									// }
 								}
 							}
 						}
@@ -117,19 +117,19 @@
 								}
 								&.point-3 {
 									&:before {
-										background: url(../img/points_3.png) left center no-repeat;
+										background: url(../img/points_3@2x.png) left center no-repeat;
 										background-size: contain;
 									}
 								}
 								&.point-15 {
 									&:before {
-										background: url(../img/points_15.png) left center no-repeat;
+										background: url(../img/points_15@2x.png) left center no-repeat;
 										background-size: contain;
 									}
 								}
 								&.point-18 {
 									&:before {
-										background: url(../img/points_18.png) left center no-repeat;
+										background: url(../img/points_18@2x.png) left center no-repeat;
 										background-size: contain;
 									}
 								}
@@ -144,8 +144,12 @@
 										margin-bottom: 15px;
 										padding-bottom: 15px;
 										border-bottom: 1px solid #ECEBE9;
+										width: 100%;
 										&:last-child {
 											border-bottom: 0;
+										}
+										@include mq($max-width: $bp-2s) {
+											justify-content: space-around;
 										}
 										// @include mq($max-width: $bp-2m) {
 										// 	font-size: $fontsize_a;
@@ -308,18 +312,21 @@
 												letter-spacing: .1em;
 												padding-left: 9px;
 											}
+											@include mq($max-width: $bp-2s) {
+												letter-spacing: .05em;
+											}
 										}
 										&:before {
 											content: "";
 											left: 0;
-											width: calc(40px / 1.5);
-											height: calc(40px / 1.5);
-											background: url(../img/whisky_icon.png) left center no-repeat;
+											width: calc(80px / 2.5);
+											height: calc(80px / 2.5);
+											background: url(../img/whisky_icon@2x.png) left center no-repeat;
 											background-size: contain;
 											display: inline-block;
 											@include mq($max-width: $bp-2s) {
-												width: calc(40px / 1.2);
-												height: calc(40px / 1.2);
+												// width: calc(80px / 2.2);
+												// height: calc(80px / 2.2);
 												// display: block;
 												margin: 0 auto;
 											}
@@ -334,33 +341,47 @@
 								display: none;
 								margin-bottom: 20px;
 								// border: 1px solid;
-								padding: 3px 9px;
+								padding: 13px 0;
+								letter-spacing: .2em;
+								font-size: calc($fontsize_a + 1px);
 								// display: inline-block;
 								text-align: center;
+								color: $color-main;
+								border-bottom: 1px solid $color-main;
 								@include mq($max-width: $bp-2s) {
-									display: block;
+									display: flex;
+									align-items: center;
+									justify-content: space-between;
 								}
-								&:before {
-									content: "▸";
-									margin-right: 10px;
+								&:after {
+									// content: "▸";
+									// margin-right: 10px;
+									content: "";
 									display: inline-block;
+									width: calc(40px / 2);
+									height: calc(40px / 2);
+									background: url(../img/icon_open@2x.png) left center no-repeat;
+									background-size: contain;
 								}
 							}
 							@include mq($max-width: $bp-2s) {
 								.folder-content {
-									height: 0;
-									visibility: hidden;
+									max-height: 0;
+									overflow: hidden;
+									transition: max-height .2s ease-in-out;
 								}
 							}
 						 	&[data-folder="1"] {
 								.folder-ctrl {
-									&:before {
-										transform: rotate(90deg);
+									&:after {
+										// transform: rotate(90deg);
+										background: url(../img/icon_close@2x.png) left center no-repeat;
+										background-size: contain;
 									}
 								}
 								.folder-content {
-									height: auto;
-									visibility: visible;
+									max-height: 500px;
+									// visibility: visible;
 								}
 						 	}
 						}

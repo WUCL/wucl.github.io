@@ -6,16 +6,16 @@
 		.inner {
 			> .content {
 				p {
-					@include mq($max-width: $bp-2m) {
-						text-align: justify;
-					}
+					// @include mq($max-width: $bp-2m) {
+					// 	text-align: justify;
+					// }
 					> span {
 						letter-spacing: .35em;
 						line-height: $fontsize_6;
 						display: block;
-						@include mq($max-width: $bp-2m) {
-							display: inline;
-						}
+						// @include mq($max-width: $bp-2m) {
+						// 	display: inline;
+						// }
 					}
 				}
 			}
