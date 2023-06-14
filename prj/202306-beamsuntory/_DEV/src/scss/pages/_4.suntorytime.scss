@@ -144,11 +144,11 @@
 										margin-bottom: 15px;
 										padding-bottom: 15px;
 										border-bottom: 1px solid #ECEBE9;
-										width: 100%;
 										&:last-child {
 											border-bottom: 0;
 										}
 										@include mq($max-width: $bp-2s) {
+											width: 100%;
 											justify-content: space-around;
 										}
 										// @include mq($max-width: $bp-2m) {
