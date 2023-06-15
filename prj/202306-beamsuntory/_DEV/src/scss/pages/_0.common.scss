@@ -3,6 +3,17 @@
    ======================= */
 .main {
 	overflow: hidden;
+	span.protect_text {
+		color: $color-font-protect;
+		display: block;
+		text-align: center;
+		font-size: $fontsize_d;
+		letter-spacing: .05em;
+		@include mq($max-width: $bp-2s) {
+			font-size: $fontsize_e;
+			letter-spacing: 0;
+		}
+	}
 	section {
 		font-weight: normal;
 		text-align: center;

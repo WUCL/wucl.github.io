@@ -96,10 +96,13 @@
 								left: 50%;
 								transform: translateX(-50%);
 							}
+							> span.protect_text {
+								margin-bottom: 30px;
+							}
 							.points {
 								margin: 0 auto;
-								width: calc(180px / 2);
-								height: calc(232px / 2);
+								width: calc(180px / 2.1);
+								height: calc(232px / 2.1);
 								@include mq($max-width: $bp-2m) {
 									width: calc(180px / 2.2);
 									height: calc(232px / 2.2);
@@ -236,15 +239,22 @@
 													@include mq($max-width: $bp-2s) {
 														letter-spacing: .2em;
 													}
+													&.protect_text {
+														display: inline;
+														font-weight: normal;
+														letter-spacing: .1em;
+													}
 												}
 											}
 											&-b {
 												font-weight: normal;
-												font-size: $fontsize_d;
+												font-size: $fontsize_e;
 												color: $color-font;
 												// max-width: 66%;
-												max-width: 87%;
+												// max-width: 89%;
+												max-width: 100%;
 												text-align: justify;
+												// letter-spacing: -.87px;
 												@include mq($max-width: $bp-2s) {
 													font-size: $fontsize_a;
 													max-width: 100%;
@@ -296,17 +306,16 @@
 										}
 									}
 								}
-								> span {
-									display: block;
-									text-align: center;
-									font-size: $fontsize_d;
-									color: $color-font;
-									letter-spacing: .05em;
-									@include mq($max-width: $bp-2s) {
-										font-size: $fontsize_e;
-										letter-spacing: 0;
-									}
-								}
+								// > span {
+								// 	display: block;
+								// 	text-align: center;
+								// 	font-size: $fontsize_d;
+								// 	letter-spacing: .05em;
+								// 	@include mq($max-width: $bp-2s) {
+								// 		font-size: $fontsize_e;
+								// 		letter-spacing: 0;
+								// 	}
+								// }
 							}
 							&-2-style {
 								ul {
