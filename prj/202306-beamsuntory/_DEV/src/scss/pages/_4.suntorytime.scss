@@ -243,6 +243,10 @@
 														display: inline;
 														font-weight: normal;
 														letter-spacing: .1em;
+														@include mq($max-width: $bp-2s) {
+															display: block;
+															font-size: $fontsize_a;
+														}
 													}
 												}
 											}
@@ -285,6 +289,13 @@
 									font-weight: normal;
 									letter-spacing: .3em;
 									margin-bottom: 20px;
+								}
+								> span.protect_text {
+									@include mq($max-width: $bp-2s) {
+										display: block;
+										font-size: $fontsize;
+										letter-spacing: .1em;
+									}
 								}
 								ul {
 									text-align: left;
@@ -340,6 +351,7 @@
 												padding-left: 9px;
 											}
 											@include mq($max-width: $bp-2s) {
+												font-size: $fontsize - 1px;
 												letter-spacing: .05em;
 											}
 										}
