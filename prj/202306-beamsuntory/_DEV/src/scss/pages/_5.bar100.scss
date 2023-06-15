@@ -12,8 +12,8 @@
 					@include mq($max-width: $bp-2s) {
 						font-size: $fontsize;
 						letter-spacing: 1px;
-						width: 130%;
-						left: -15%;
+						// width: 130%;
+						// left: -15%;
 					}
 				}
 			}
@@ -188,7 +188,8 @@
 					}
 				}
 				.btns {
-					margin-top: 20px;
+					margin-top: 60px;
+					margin-bottom: 10px;
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -200,11 +201,11 @@
 						align-items: center;
 						justify-content: center;
 						width: 320px;
-						height: 80px;
+						height: 60px;
 						font-size: $fontsize_1;
 						letter-spacing: .2em;
 						line-height: normal;
-						font-weight: normal;
+						font-weight: 400;
 						@include mq($max-width: $bp-2m) {
 							width: 270px;
 						}

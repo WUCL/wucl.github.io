@@ -20,7 +20,9 @@
 			max-width: $bp-4l;
 			.title {
 				@include mq($max-width: $bp-2s) {
-					width: 100%;
+					// width: 100%;
+					margin-right: auto;
+					margin-left: auto;
 				}
 			}
 			.content {
@@ -149,7 +151,8 @@
 										}
 										@include mq($max-width: $bp-2s) {
 											width: 100%;
-											justify-content: space-around;
+											// justify-content: space-around;
+											justify-content: space-between;
 										}
 										// @include mq($max-width: $bp-2m) {
 										// 	font-size: $fontsize_a;
@@ -159,10 +162,10 @@
 											&:nth-child(1) {
 												white-space: nowrap;
 												padding: 5px 19px 5px calc(19px + .35em);
-												border-radius: 20px;
+												border-radius: 30px;
 												letter-spacing: .35em;
 												background: lighten($color-main, 30%);
-												margin-right: 15px;
+												margin-right: 18px;
 												color: #221617;
 												@include mq($max-width: $bp-2l) {
 													padding: 5px 17px 5px calc(17px + .2em);
@@ -172,6 +175,10 @@
 												@include mq($max-width: $bp-l) {
 													padding: 5px 19px 5px calc(19px + .1em);
 													letter-spacing: .1em;
+												}
+												@include mq($max-width: $bp-2s) {
+													padding: 5px 19px 5px calc(19px + .15em);
+													letter-spacing: .15em;
 												}
 												// @include mq($max-width: $bp-2m) {
 												// 	padding: 3px 17px 3px calc(17px + .1em);
@@ -186,6 +193,9 @@
 												@include mq($max-width: $bp-l) {
 													letter-spacing: .1em;
 												}
+												@include mq($max-width: $bp-2s) {
+													letter-spacing: .15em;
+												}
 											}
 										}
 									}
@@ -197,10 +207,13 @@
 										display: flex;
 										align-items: center;
 										justify-content: center;
-										margin-bottom: 25px;
+										margin-bottom: 60px;
 										@include mq($max-width: $bp-2s) {
 											flex-direction: column;
 											margin-bottom: 50px;
+										}
+										&:last-child {
+											margin-bottom: 0;
 										}
 										.price-l {
 											width: 100%;
@@ -229,7 +242,8 @@
 												font-weight: normal;
 												font-size: $fontsize_d;
 												color: $color-font;
-												max-width: 66%;
+												// max-width: 66%;
+												max-width: 87%;
 												text-align: justify;
 												@include mq($max-width: $bp-2s) {
 													font-size: $fontsize_a;
@@ -266,13 +280,17 @@
 									text-align: left;
 									li {
 										border-bottom: 0;
+										@include mq($max-width: $bp-2s) {
+											justify-content: flex-start;
+										}
 										div {
 											&:nth-child(1) {
 												letter-spacing: .3em;
-												padding: 7px 15px 7px calc(15px + .3em);
+												padding: 15px 15px 15px calc(15px + .3em);
 												@include mq($max-width: $bp-2s) {
-													letter-spacing: .2em;
-													padding: 7px 11px 7px calc(11px + .2em);
+													letter-spacing: .1em;
+													padding: 13px 11px 13px calc(11px + .1em);
+													margin-right: 13px;
 												}
 											}
 										}

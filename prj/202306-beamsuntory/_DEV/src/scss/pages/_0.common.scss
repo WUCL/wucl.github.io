@@ -27,7 +27,8 @@
 				display: block;
 			}
 			.title {
-				font-size: $fontsize_2;
+				font-size: $fontsize_5;
+				font-weight: 600;
 				display: inline-block;
 				letter-spacing: $fontsize_d;
 				padding-bottom: 15px;
@@ -41,9 +42,10 @@
 					margin: 5px 0;
 				}
 				@include mq($max-width: $bp-2s) {
-					width: 66%;
+					width: 87%;
 					font-size: $fontsize_3;
-					letter-spacing: $fontsize;
+					// letter-spacing: $fontsize;
+					letter-spacing: 9px;
 				}
 				&:after {
 					content: "";
