@@ -22,7 +22,6 @@
 						padding: 50px 30px 10px;
 					}
 					&_title {
-						font-weight: 500;
 						font-size: calc($fontsize_2 - 1px);
 						letter-spacing: 0;
 						background: $color-main;
@@ -56,6 +55,7 @@
 						// }
 						span {
 							@include transform-skew;
+							font-weight: bolder;
 							display: inline-block;
 							&.__mb {
 								display: none;

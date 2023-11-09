@@ -103,14 +103,14 @@
 					display: inline-flex;
 					align-items: center;
 					justify-content: center;
-					padding: 9px 33px;
+					padding: 15px 30px;
 					border: 1px solid $color-white;
 					font-size: $fontsize-2;
 					font-weight: bold;
 					margin: 20px auto 0;
 					transition: .1s;
 					@include mq($max-width: $bp-2s) {
-						padding: 12px 33px;
+						padding: 12px 30px;
 					}
 					&:before {
 						content: "";

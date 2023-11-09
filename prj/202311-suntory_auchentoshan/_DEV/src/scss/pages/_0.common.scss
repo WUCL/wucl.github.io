@@ -65,6 +65,9 @@
 			display: inline;
 		}
 		.inner {
+			@include mq($max-width: $bp-2l) {
+				width: 95%;
+			}
 			@include mq($max-width: $bp-2m) {
 				width: 91%;
 			}
