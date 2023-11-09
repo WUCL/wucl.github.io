@@ -1,0 +1,33 @@
+<nav class="header">
+    <h1 class="logo" onclick="goHref('./home.html', event)">
+        <img src="@@webRoot/public/img/logo_b.png" alt="BEAM SUNTORY INC." width="230" height="38" loading="lazy" />
+    </h1>
+    <ul class="menu">
+        <li onclick="toggle(this)">最新活動
+            <button class="arrow"></button>
+            <ul style="right: 0rem; width: 280px;">
+                <li style="text-align: center;text-indent: 0px;unicode-bidi: plaintext;" onclick="goHref('./news.html', event)">
+                    會員限定活動<br/>年度加碼</li>
+                <li style="text-align: center;text-indent: 0px;" onclick="goHref('./prize_list_part3.html', event)">職魂之作認購權<br/>得獎名單</li>
+            </ul>
+        </li>
+        <li onclick="goProduce(this, event, './commodity_A.html')">產品介紹
+            <button class="arrow"></button>
+            <ul>
+                <li onclick="goHref('./commodity_A.html', event)">歐肯</li>
+                <li onclick="goHref('./commodity_B.html', event)">波摩</li>
+                <li onclick="goHref('./commodity_L.html', event)">拉弗格</li>
+                <li onclick="goHref('./commodity_Y.html', event)">山崎</li>
+                <li onclick="goHref('./commodity_H.html', event)">白州</li>
+            </ul>
+        </li>
+        <li onclick="goHref('https://maac.io/1vzN0', event, '_blank')">加入會員</li>
+        <li
+            onclick="goHref('https://docs.google.com/document/d/1Ky5FVHg4twciV7m36rBhmUem5kQ1ZDMtW5tR29F2S2Q/edit', event, '_blank')">
+            購買通路</li>
+    </ul>
+    <div class="mobileBtn" onclick="menuToggle(this)">
+        <p>close</p>
+        <div><span></span><span></span><span></span></div>
+    </div>
+</nav>

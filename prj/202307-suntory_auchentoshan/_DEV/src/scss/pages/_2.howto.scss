@@ -1,0 +1,33 @@
+/* =======================
+   pages/howto
+   ======================= */
+.main {
+	section.s-howto {
+		margin-top: 50px;
+		@include mq($max-width: $bp-2s) {
+			margin-top: 15px;
+		}
+		.inner {
+			> .content {
+				@include transform-skew;
+				font-size: calc($fontsize_4 - 1px);
+				font-weight: 450;
+				@include mq($max-width: $bp-2s) {
+					font-size: $fontsize_1;
+				}
+				p {
+					letter-spacing: 1px;
+					font-weight: inherit;
+					> span {
+						font-weight: inherit;
+						@include mq($max-width: $bp-2s) {
+							letter-spacing: 0;
+							padding: 0;
+							margin: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,20 @@
+/* =======================
+   pages/dt
+   ======================= */
+.main {
+	section.s-dt {
+		.inner {
+			> .content {
+				p {
+					@include transform-skew;
+					font-size: calc($fontsize_6 - 1px);
+					font-weight: 450;
+					letter-spacing: 1px;
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize_4;
+					}
+				}
+			}
+		}
+	}
+}

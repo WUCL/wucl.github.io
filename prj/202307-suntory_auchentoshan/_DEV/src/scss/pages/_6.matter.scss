@@ -1,0 +1,28 @@
+/* =======================
+   pages/matter
+   ======================= */
+.main {
+	section.s-matter {
+		background: rgba(gray, .5);
+		.inner {
+			max-width: $bp-2l;
+			> .title {
+
+			}
+			> .content {
+				font-size: $fontsize_d;
+				line-height: $fontsize_3;
+				@include mq($max-width: $bp-2s) {
+					margin: 15px;
+					margin-right: 9px;
+				}
+				ol {
+					list-style: decimal;
+					li {
+						text-align: justify;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,126 @@
+/* =======================
+   pages/common
+   ======================= */
+.main {
+	overflow: hidden;
+	span {
+		&.highlight,
+		&.highlight > span {
+			z-index: 1;
+			margin: 0 3px;
+			letter-spacing: .5px;
+			&:before {
+				content: "";
+				background: $color-highlight;
+				width: 100%;
+				height: 9px;
+				display: block;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				z-index: -1;
+				transform: skew(-10deg);
+			}
+			&.highlight_2 {
+				&:before {
+					background: $color-highlight2;
+				}
+			}
+		}
+		&.remark {
+			display: block;
+			font-size: $fontsize_f;
+			color: gray;
+			padding: 7px 0;
+			+ .remark {
+				margin-top: -13px;
+			}
+		}
+	}
+	section {
+		font-weight: normal;
+		text-align: center;
+		width: 100%;
+		height: 100%;
+		min-width: 100vw;
+		// min-height: 100vh;
+		padding: 25px 0;
+		@include mq($max-width: $bp-2s) {
+			padding: 20px 0;
+		}
+		p, span {
+			line-height: normal;
+			font-weight: normal;
+			font-size: inherit;
+		}
+		p > span {
+			display: inline;
+		}
+		.inner {
+			@include mq($max-width: $bp-2m) {
+				width: 91%;
+			}
+			// max-width: $bp-2;
+			margin: 0 auto;
+			> .title {
+				display: block;
+			}
+			.title {
+				font-size: $fontsize_4;
+				font-weight: 600;
+				display: inline-block;
+				// font-style: italic;
+				@include transform-skew;
+				&:before,
+				&:after {
+					content: "";
+					position: absolute;
+					width: 100%;
+					height: 100%;
+				}
+				&:before {
+					left: -87%;
+					background: url(../img/dot_l@2x.png) center center no-repeat;
+					background-size: 35%;
+				}
+				&:after {
+					right: -87%;
+					background: url(../img/dot_r@2x.png) center center no-repeat;
+					background-size: 35%;
+				}
+			}
+			> .content {
+				margin-top: 15px;
+			}
+		}
+		&.fullwidth {
+			.inner {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+		}
+	}
+}
+body {
+	// background: #f5f5f5;
+	// background: url(../img/bg-block.jpg) center center repeat;
+	// background-size: contain;
+	background: url(../img/bg.jpg) center center repeat;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	&.disableScroll {
+		// position: fixed;
+		overflow: hidden;
+	}
+
+	/* BEGIN DEFAULT TEST */
+	// background: #777;
+	// display: flex;
+	// flex-direction: column;
+	// align-items: center;
+	// justify-content: center;
+	// font-size: 20px;
+	// color: brown;
+	// font-weiht: bold;
+	/* END DEFAULT TEST */
+}
