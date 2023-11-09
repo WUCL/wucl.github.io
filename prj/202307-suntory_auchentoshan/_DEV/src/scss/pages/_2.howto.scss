@@ -3,7 +3,7 @@
    ======================= */
 .main {
 	section.s-howto {
-		margin-top: 50px;
+		margin-top: 40px;
 		@include mq($max-width: $bp-2s) {
 			margin-top: 15px;
 		}
