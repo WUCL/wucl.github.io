@@ -43,12 +43,12 @@ $color-white: #fff;
 $color-black: #000;
 $color-main: #982941;
 $color-second: #ffcc00;
-$color-highlight: #d2a4ae;
+$color-highlight: #f5c6d4;
 $color-highlight2: #efc1cc;
 $color-font: #6c6c6c;
 $color-shadow: #4a131f;
 $color-border: rgba(#972740, .35);
-$color-gradient: [#fff, #972740];
+$color-gradient: [#fff, #f5b9ca];
 // $color-colorful: [#fcca00, #ffb443, #ff8400, #f34031, #BF0000]; // nth($color-colorful, 1);
 
 @mixin transform-skew {
@@ -58,7 +58,7 @@ $color-gradient: [#fff, #972740];
 	background: linear-gradient(180deg, nth($color-gradient, 1) 30%, lighten(nth($color-gradient, 2), 56%) 100%);
 }
 @mixin linegradient-opacity {
-	background: linear-gradient(180deg, rgba(nth($color-gradient, 1), .2) 30%, rgba(nth($color-gradient, 2), .2) 100%);
+	background: linear-gradient(180deg, rgba(nth($color-gradient, 1), .45) 30%, rgba(nth($color-gradient, 2), .45) 100%);
 }
 
 // breakpoint
