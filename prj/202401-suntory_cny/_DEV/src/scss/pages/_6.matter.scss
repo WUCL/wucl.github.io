@@ -1,0 +1,46 @@
+/* =======================
+   pages/matter
+   ======================= */
+.main {
+	section.s-matter {
+		background: $color-matter;
+		.inner {
+			max-width: $bp-2l;
+	    	align-items: flex-start;
+			@include mq($max-width: $bp-2s) {
+				margin-top: 30px;
+				padding: 0 15px 0 7px;
+			}
+			> .title {
+				color: $color-white;
+				margin-left: -20px;
+				margin-bottom: 10px;
+
+				font-size: calc($fontsize_1 - 1px);
+				line-height: normal;
+				letter-spacing: 3px;
+				font-weight: normal;
+				@include mq($max-width: $bp-2s) {
+					font-size: $fontsize_1;
+					margin-left: -9px;
+				}
+			}
+			> .content {
+				color: $color-white;
+				font-size: $fontsize_d;
+				line-height: $fontsize_3;
+				@include mq($max-width: $bp-2s) {
+					margin: 15px;
+					margin-right: 9px;
+				}
+				ol {
+					list-style: decimal;
+					li {
+						text-align: justify;
+						letter-spacing: 2px;
+					}
+				}
+			}
+		}
+	}
+}

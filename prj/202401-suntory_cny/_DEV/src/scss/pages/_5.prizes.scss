@@ -1,0 +1,287 @@
+/* =======================
+   pages/prizes
+   ======================= */
+.main {
+	section.s-prizes {
+		// background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+		// background: $color-white;
+		.inner {
+			// max-width: $bp-2l;
+			> .title {}
+			> .content {
+				.m-box_title {
+					top: -4%;
+					@include mq($max-width: $bp-2s) {
+						top: -1.5%;
+					}
+				}
+				.m-box_content {
+					width: 100%;
+					.p-box {
+						padding-bottom: 30px;
+						@include mq($max-width: $bp-2s) {
+							padding-bottom: 0;
+						}
+						&_item {
+							display: inline-flex;
+							flex-direction: column;
+							align-items: center;
+							justify-content: center;
+							padding: 0 15px;
+							@include mq($max-width: $bp-2s) {
+								padding: 15px 10px;
+							}
+						}
+						&_img {
+							position: relative;
+							display: block;
+							width: calc(400px / 2.7);
+							height: calc(400px / 2.7);
+							// @include mq($max-width: $bp-2s) {
+							// 	width: 250px;
+							// 	height: 250px;
+							// }
+							img {
+								display: block;
+								width: 100%;
+								height: 100%;
+							}
+							span {
+								background: $color-main;
+								width: 50px;
+								height: 50px;
+								color: $color-font;
+								font-size: $fontsize_2;
+								position: absolute;
+								right: -15px;
+								top: -15px;
+								border-radius: 50%;
+								font-weight: bold;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								@include mq($max-width: $bp-2s) {
+									right: -11px;
+									top: -11px;
+									font-size: $fontsize_4;
+								}
+								&:after {
+									content:"名";
+									font-size: $fontsize_e;
+									margin-left: 1px;
+									margin-top: 5px;
+									@include mq($max-width: $bp-2s) {
+										font-size: calc($fontsize - 1px);
+									}
+								}
+							}
+						}
+
+						&_name {
+							color: #666;
+						}
+
+						&_group {
+							@include mq($max-width: $bp-2s) {
+								margin: 0;
+								display: inline;
+							}
+							&.__top {
+								margin-top: 30px;
+								.p-box {
+									&_item {
+										width: 100%;
+										flex-direction: row;
+										@include mq($max-width: $bp-2s) {
+											flex-direction: column;
+										}
+									}
+									&_img {
+										margin-right: 60px;
+										width: calc(600px / 2.3);
+										height: calc(400px / 2.3);
+										@include mq($max-width: $bp-2s) {
+											margin-right: 0;
+										}
+									}
+									&_info {
+										display: flex;
+										flex-direction: column;
+										align-content: center;
+									}
+									&_title {
+										font-size: $fontsize_1;
+										letter-spacing: 9px;
+										@include mq($max-width: $bp-2s) {
+											margin-top: 20px;
+											font-size: $fontsize_3;
+											letter-spacing: 5px;
+										}
+									}
+									&_name {
+										margin: 7px 0;
+										@include mq($max-width: $bp-2s) {
+											font-size: $fontsize_1;
+										}
+									}
+								}
+							}
+							&.__bottom {
+								margin-top: 60px;
+								@include mq($max-width: $bp-2s) {
+									margin-top: 20px;
+									display: grid;
+									grid-template-columns: repeat(2, 1fr);
+								}
+								.p-box {
+									&_title {
+										margin-bottom: 20px;
+										letter-spacing: 3px;
+									}
+									&_name {
+										margin: 11px 0 0;
+									}
+									&_img {
+										span {
+											transform: scale(.78);
+											right: -5px;
+											top: -5px;
+										}
+									}
+								}
+							}
+						}
+
+						&_title {
+							color: $color_font;
+							line-height: normal;
+						}
+						&_name {
+							line-height: $fontsize_1;
+							font-size: $fontsize_b;
+							> span {
+								font-weight: inherit;
+								letter-spacing: 1px;
+							}
+						}
+
+						// @include mq($max-width: $bp-2s) {
+						// 	&_item {
+						// 		margin: 10px 0;
+						// 		&.__1 {
+						// 			.p-box_title,
+						// 			.p-box_name {
+						// 				font-size: $fontsize_1;
+						// 			}
+						// 		}
+						// 		&.__2,
+						// 		&.__3,
+						// 		&.__4,
+						// 		&.__5 {
+						// 			.p-box_title {
+						// 				font-size: $fontsize;
+						// 			}
+						// 			.p-box_img {
+						// 				width: 35vw;
+						// 				height: 35vw;
+						// 			}
+						// 		}
+						// 		&.__2,
+						// 		&.__3 {
+						// 			.p-box_title {
+						// 				margin-top: -5px;
+						// 			}
+						// 		}
+						// 		&.__4,
+						// 		&.__5 {
+						// 			.p-box_title {
+						// 				margin-top: -20px;
+						// 			}
+						// 		}
+						// 	}
+						// }
+					}
+				}
+				.btn-cta {
+			    	cursor: pointer;
+
+					width: 100%;
+					max-width: 320px;
+
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+
+					font-size: $fontsize_3;
+					font-weight: bolder;
+
+					margin: 50px auto 10px;
+
+
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize_4;
+					}
+					&:before {
+						content: "";
+						display: block;
+						z-index: 0;
+						position: absolute;
+						width: 100.5%;
+						height: 100%;
+						background: $color-shadow;
+						right: -3.5px;
+						bottom: -2px;
+						border-radius: 52px;
+					}
+					a {
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+
+						width: 100%;
+
+						height: 100%;
+						color: inherit;
+						letter-spacing: 5px;
+						margin-right: -5px;
+						font-size: inherit;
+
+						display: inline-block;
+						padding: 11px 29px;
+						padding-right: 25px;
+						border-radius: 52px;
+
+						background: nth($color-border, 1);
+						color: $color-font;
+						@include mq($max-width: $bp-2s) {
+							margin-right: -10px;
+						}
+						&:after {
+							content: "";
+							display: inline-block;
+							position: relative;
+							left: 7px;
+							width: calc(56px / 2.5);
+							height: calc(56px / 2.5);
+							background: url(../img/cta_arr@2x.png) left center no-repeat;
+							background-size: cover;
+							transition: .1s;
+							@include mq($max-width: $bp-2s) {
+								top: 4px;
+								width: calc(56px / 2.2);
+								height: calc(56px / 2.2);
+							}
+						}
+					}
+					&:hover {
+						a {
+							&:after {
+								left: 14px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

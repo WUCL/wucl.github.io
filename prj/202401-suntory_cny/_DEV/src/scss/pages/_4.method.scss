@@ -1,0 +1,45 @@
+/* =======================
+   pages/method
+   ======================= */
+.main {
+	section.s-method {
+		.inner {
+			// max-width: $bp-2l;
+			> .title {}
+			> .content {
+				.m-box_title {
+					top: -6%;
+				}
+				.m-box_content {
+					p {
+						font-size: inherit;
+						line-height: $fontsize_4;
+						letter-spacing: 4px;
+						&.__mb {
+							display: none;
+						}
+						@include mq($max-width: $bp-2s) {
+							&.__pc {
+								display: none;
+							}
+							&.__mb {
+								display: block;
+							}
+						}
+					}
+					img {
+						width: auto;
+						max-width: 60%;
+						display: inline-block;
+						margin-top: 30px;
+						margin-bottom: -30px;
+						@include mq($max-width: $bp-2s) {
+							max-width: 100%;
+							margin-bottom: -34px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

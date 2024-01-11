@@ -1,0 +1,48 @@
+/* =======================
+   pages/howto
+   ======================= */
+.main {
+	section.s-howto {
+		margin-top: 40px;
+		@include mq($max-width: $bp-2s) {
+			// margin-top: 15px;
+		}
+		.inner {
+			> .content {
+				.m-box_title {
+					@include mq($max-width: $bp-2s) {
+						top: -11%;
+					}
+				}
+				.m-box_content {
+					p {
+						&.__mb {
+							display: none;
+						}
+						@include mq($max-width: $bp-2s) {
+							&.__pc {
+								display: none;
+							}
+							&.__mb {
+								display: block;
+							}
+						}
+						> span {
+							font-weight: bold;
+							letter-spacing: 2px;
+							@include mq($max-width: $bp-2s) {
+								letter-spacing: 0;
+								padding: 0;
+								margin: 0;
+								&:nth-child(1),
+								&:nth-child(9) {
+									display: block;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
