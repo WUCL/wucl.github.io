@@ -140,7 +140,7 @@
 						}
 						span {
 							z-index: 1;
-							background: nth($color-border, 1);
+							background: $color-main;
 							color: $color-font;
 
 							font-size: calc($fontsize_3 - 1px);

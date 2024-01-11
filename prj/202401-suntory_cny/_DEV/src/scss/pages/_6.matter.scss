@@ -38,6 +38,9 @@
 					li {
 						text-align: justify;
 						letter-spacing: 2px;
+						&:nth-child(3) {
+							font-weight: bold;
+						}
 					}
 				}
 			}

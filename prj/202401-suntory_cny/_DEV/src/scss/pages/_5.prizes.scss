@@ -247,11 +247,11 @@
 						font-size: inherit;
 
 						display: inline-block;
-						padding: 11px 29px;
-						padding-right: 25px;
+						padding: 14px 80px;
+						// padding-right: 25px;
 						border-radius: 52px;
 
-						background: nth($color-border, 1);
+						background: $color-main;
 						color: $color-font;
 						@include mq($max-width: $bp-2s) {
 							margin-right: -10px;
@@ -260,6 +260,7 @@
 							content: "";
 							display: inline-block;
 							position: relative;
+							top: 2px;
 							left: 7px;
 							width: calc(56px / 2.5);
 							height: calc(56px / 2.5);
