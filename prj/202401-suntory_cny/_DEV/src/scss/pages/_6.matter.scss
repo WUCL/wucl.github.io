@@ -39,7 +39,9 @@
 						text-align: justify;
 						letter-spacing: 2px;
 						&:nth-child(3) {
-							font-weight: bold;
+							font-weight: bolder;
+							margin: 3px 0;
+							line-height: $fontsize_2;
 						}
 					}
 				}

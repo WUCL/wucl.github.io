@@ -46,9 +46,18 @@
 			+ .remark {
 				margin-top: -13px;
 			}
+			&.__mb {
+				display: none;
+			}
 			@include mq($max-width: $bp-2s) {
 				font-size: calc($fontsize_a + 1px);
 				letter-spacing: 0;
+				&.__pc {
+					display: none;
+				}
+				&.__mb {
+					display: block;
+				}
 			}
 		}
 	}
