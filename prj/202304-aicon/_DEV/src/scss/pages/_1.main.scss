@@ -113,8 +113,8 @@
 			.header {
 				display: block;
 				margin: 0 auto 60px;
-				width: calc(1032px / 2);
-				height: calc(228px / 2);
+				width: calc(1157px / 2);
+				height: calc(348px / 2);
 				&:before {
 					content: "";
 					position: absolute;
@@ -155,8 +155,9 @@
 								display: block;
 								width: 190px;
 								height: 190px;
-								margin: 50px auto;
+								margin: 90px auto 100px;
 								text-align: center;
+								transform: scale(1.7);
 								// border-radius: 50%;
 								// overflow: hidden;
 
@@ -185,10 +186,10 @@
 								// 	background: $color-box;
 								// }
 								.counting {
-									font-size: 6.6em;
+									font-size: 7.7em;
 									line-height: 180px;
 									color: $color-main;
-									letter-spacing: -1px;
+									letter-spacing: -3px;
 
 									position: absolute;
 									border-radius: 50%;
@@ -283,6 +284,7 @@
 								line-height: calc($fontsize-5 - 3px);
 								color: $color-font;
 								letter-spacing: .5px;
+								// padding: 11px 0;
 								padding: 21px 0;
 								background-image: linear-gradient(to right, #D2DEEE 55%, rgba($color-white, 0) 10%);
 								background-position: bottom;
@@ -312,6 +314,11 @@
 											display: inline-block;
 											width: calc(60px / 2);
 											height: calc(60px / 2);
+											touch-action: manipulation; // label&input on mobile be smooth
+											@include mq($max-width: $bp-l) {
+												width: calc(80px / 2);
+												height: calc(80px / 2);
+											}
 											&:before {
 												content: "";
 												display: block;
@@ -371,8 +378,8 @@
 							justify-content: center;
 							margin: 30px auto;
 							// padding: 30px;
-							width: calc(1118px / 2);
-							height: calc(300px / 2);
+							width: calc(1118px / 1.93);
+							height: calc(300px / 1.93);
 							&:before {
 								content: "";
 								position: absolute;
@@ -395,11 +402,11 @@
 							flex-direction: column;
 							justify-content: center;
 							color: $color-white;
-							letter-spacing: 2px;
+							// letter-spacing: 2px;
 							font-weight: 500;
 							border-right: 2px solid $color-white;
-							padding-right: 35px;
-							margin-right: 35px;
+							padding-right: 30px;
+							margin-right: 30px;
 							&:before {
 								content: attr(data-score);
 								font-size: 4.6em;
@@ -451,10 +458,10 @@
 				}
 				&-addition {
 					&:before {
-						content: "輕微";
+						content: "輕度風險";
 					}
 					&:after {
-						content: "需注意生活習慣";
+						content: "可透過基礎保濕型人工淚液保養";
 					}
 				}
 			}
@@ -465,11 +472,11 @@
 				}
 				&-addition {
 					&:before {
-						content: "中度";
+						content: "中度風險";
 					}
 					&:after {
 						// content: "建議使用藥物緩解不適\a可諮詢藥師";
-						content: "建議使用藥物緩解不適";
+						content: "可透過全效型或滋潤型人工淚液緩解；\a或補充魚油等健康食品改善淚液分泌狀況";
 					}
 				}
 			}
@@ -480,11 +487,11 @@
 				}
 				&-addition {
 					&:before {
-						content: "嚴重";
+						content: "重度風險";
 					}
 					&:after {
 						// content: "建議諮詢醫療人員\a可諮詢藥師";
-						content: "建議諮詢醫療人員";
+						content: "嚴重乾眼恐引起視力受損；\a可透過全效型或加強保濕型人工淚液緩解\a及諮詢醫療人員";
 					}
 				}
 			}
@@ -573,18 +580,34 @@
 								}
 							}
 							&-2 {
-								width: calc(808px / 2);
-								height: calc(508px / 2);
+								width: calc(804px / 2);
+								height: calc(596px / 2);
 								&:before {
 									background: url(../img/s3_doctor_2@2x.png) center center no-repeat;
 									background-size: contain;
 								}
 							}
 							&-3 {
-								width: calc(808px / 2);
-								height: calc(508px / 2);
+								width: calc(806px / 2);
+								height: calc(454px / 2);
 								&:before {
 									background: url(../img/s3_doctor_3@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+							&-4 {
+								width: calc(808px / 2);
+								height: calc(536px / 2);
+								&:before {
+									background: url(../img/s3_doctor_4@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+							&-5 {
+								width: calc(832px / 2);
+								height: calc(470px / 2);
+								&:before {
+									background: url(../img/s3_doctor_5@2x.png) center center no-repeat;
 									background-size: contain;
 								}
 							}
@@ -670,6 +693,22 @@
 								background-size: contain;
 							}
 						}
+						&-4 {
+							// width: calc(962px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_4_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
+						&-5 {
+							// width: calc(962px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_5_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
 					}
 					&-addition {
 						font-size: $fontsize-d;
@@ -691,7 +730,9 @@
 			&:not([data-cover=""]) .cover,
 			&[data-cover="1"] .cover .cover-list .cover-item-1,
 			&[data-cover="2"] .cover .cover-list .cover-item-2,
-			&[data-cover="3"] .cover .cover-list .cover-item-3 {
+			&[data-cover="3"] .cover .cover-list .cover-item-3,
+			&[data-cover="4"] .cover .cover-list .cover-item-4,
+			&[data-cover="5"] .cover .cover-list .cover-item-5 {
 				display: block;
 			}
 		}
