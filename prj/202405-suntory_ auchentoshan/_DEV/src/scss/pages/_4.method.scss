@@ -1,0 +1,116 @@
+/* =======================
+   pages/method
+   ======================= */
+.main {
+	section.s-method {
+		.inner {
+			// max-width: $bp-2l;
+			> .title {
+				width: calc(623px / 2.87);
+				height: calc(113px / 2.87);
+				@include mq($max-width: $bp-2s) {
+					width: calc(623px / 2.35);
+					height: calc(113px / 2.35);
+				}
+				&:before {
+					content: "";
+					position: absolute;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					background: url(../img/title-03@2x.png) left center no-repeat;
+					background-size: cover;
+				}
+			}
+			> .content {
+				.m-box {
+					display: block;
+				}
+				.m-box_title {
+					top: -6%;
+				}
+				.m-box_content {
+					width: calc(1904px / 2.6);
+					height: calc(609px / 2.6);
+					margin: 0 auto;
+					right: -10px;
+					@include mq($max-width: $bp-2m) {
+						width: 100%;
+						height: 136vw;
+					}
+					p {
+						font-size: calc($fontsize + 3px);
+						line-height: $fontsize_4;
+						letter-spacing: 2.5px;
+						> span {
+							&.yellow {
+								padding: 0 2px;
+								color: $color-highlight;
+							}
+						}
+						&._1,
+						&._3, {
+							padding-top: 30px;
+							@include mq($max-width: $bp-2m) {
+								padding-top: 55px;
+							}
+						}
+						&._3, {
+							@include mq($max-width: $bp-2m) {
+								padding-top: 40px;
+							}
+						}
+						&.__mb {
+							display: none;
+						}
+						@include mq($max-width: $bp-2m) {
+							line-height: $fontsize_6;
+							&.__pc {
+								display: none;
+							}
+							&.__mb {
+								display: block;
+							}
+						}
+					}
+					&:before {
+						content: "";
+						position: absolute;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: url(../img/event-box-pc@2x.png) left center no-repeat;
+						background-size: cover;
+						@include mq($max-width: $bp-2m) {
+							background: url(../img/event-box-m@2x.png) left center no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+				.method_img {
+					display: block;
+					margin: 20px auto;
+					width: calc(1504px / 2.87);
+					height: calc(328px / 2.87);
+					@include mq($max-width: $bp-2m) {
+						width: calc(678px / 2);
+						height: calc(174px / 2);
+					}
+					&:before {
+						content: "";
+						display: block;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: url(../img/event-label-pc@2x.png) left center no-repeat;
+						background-size: cover;
+						@include mq($max-width: $bp-2m) {
+							background: url(../img/event-label-m@2x.png) left center no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+			}
+		}
+	}
+}
