@@ -1,0 +1,66 @@
+/* =======================
+   pages/matter
+   ======================= */
+.main {
+	section.s-matter {
+		position: relative;
+		// width: calc(3840px / 2);
+		// height: calc(1200px / 2);
+		width: 100%;
+		// height: 37.5vw;
+		@include mq($max-width: $bp-2m) {
+			// height: 55vw;
+		}
+		&:before {
+			content: "";
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url(../img/bg_rule_pc@2x.jpg) left center no-repeat;
+			background-size: cover;
+			// @include mq($max-width: $bp-2l) {
+			// 	background: url(../img/kv_m.jpg) left center no-repeat;
+			// 	background-size: cover;
+			// }
+			@include mq($max-width: $bp-2m) {
+				background: url(../img/bg_rule_m@2x.jpg) left center no-repeat;
+				background-size: cover;
+			}
+		}
+		.inner {
+			max-width: $bp-2l;
+	    	// align-items: flex-start;
+	    	align-items: center;
+			padding-top: 50px;
+			@include mq($max-width: $bp-2s) {
+				padding-top: 30px;
+			}
+			> .content {
+				color: $color-white;
+				font-size: $fontsize_e;
+				line-height: $fontsize_2;
+				// max-width: 78%;
+				padding: 30px 0 0;
+				@include mq($max-width: $bp-2s) {
+					max-width: 87%;
+					margin: 15px;
+					margin-top: 7px;
+					margin-right: 0;
+				}
+				ol {
+					list-style: decimal;
+					li {
+						text-align: justify;
+						letter-spacing: 2px;
+						// &:nth-child(3) {
+						// 	font-weight: bolder;
+						// 	margin: 3px 0;
+						// 	line-height: $fontsize_2;
+						// }
+					}
+				}
+			}
+		}
+	}
+}

@@ -8,11 +8,13 @@
 	// background: rgb(0,0,0);
 	// background: linear-gradient(180deg, lighten($color-main, 18%) 0%, lighten($color-main, 19%) 78%, $color-white 100%);
 
+	top: 0;
 	left: 0;
 	width: 100vw;
 	// height: calc(2819px / 2);
-	background: url(../img/bg-noise.jpg) left center no-repeat;
-	background-size: cover;
+	// background: url(../img/bg_pc@2x.jpg) left center no-repeat;
+	// background-size: cover;
+   // background-position-y: 37.5vw;
 	span {
 		&.bigger {
 			z-index: 1;
@@ -87,7 +89,7 @@
 		height: 100%;
 		min-width: 100vw;
 		// min-height: 100vh;
-		padding: 40px 0;
+		padding: 35px 0;
 		@include mq($max-width: $bp-2s) {
 			padding: 30px 0;
 		}
@@ -118,12 +120,18 @@
 			}
 			// max-width: $bp-2;
 			margin: 0 auto;
-			// > .title {
-			// 	display: block;
-			// 	font-size: $fontsize_4;
-			// 	font-weight: 600;
-			// 	display: inline-block;
-			// }
+			> .title {
+				display: block;
+				font-size: $fontsize-2;
+				font-weight: 500;
+				display: inline-block;
+				letter-spacing: 7px;
+				color: $color-white;
+
+				padding: 11px 35px 11px 42px;
+				border: 1px solid;
+				border-image: linear-gradient(to right, #FFA6C9 0%, #F3AC63 100%) 1;
+			}
 			> .content {
 				width: 100%;
 				font-size: $fontsize;
@@ -145,9 +153,9 @@
 					line-height: normal;
 					// margin: 50px 0 25px;
 					// padding: 45px 0 25px;
-					padding: 35px 0 0;
+					padding: 30px 0 0;
 					@include mq($max-width: $bp-2s) {
-						padding: 35px 0 30px;
+						padding: 30px 0;
 						// padding: 50px 30px 10px;
 					}
 					// &_title {
@@ -210,6 +218,14 @@
 				max-width: 100% !important;
 			}
 		}
+	}
+	div.sections {
+		position: relative;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		background: url(../img/bg_pc@2x.jpg) left center no-repeat;
+		background-size: cover;
 	}
 
 	.decorate {

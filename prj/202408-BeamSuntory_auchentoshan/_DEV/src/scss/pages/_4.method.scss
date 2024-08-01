@@ -6,107 +6,206 @@
 		.inner {
 			// max-width: $bp-2l;
 			> .title {
-				width: calc(623px / 2.87);
-				height: calc(113px / 2.87);
-				@include mq($max-width: $bp-2s) {
-					width: calc(623px / 2.35);
-					height: calc(113px / 2.35);
-				}
-				&:before {
-					content: "";
-					position: absolute;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					background: url(../img/title-03@2x.png) left center no-repeat;
-					background-size: cover;
-				}
 			}
 			> .content {
 				.m-box {
 					display: block;
-				}
-				.m-box_title {
-					top: -6%;
-				}
-				.m-box_content {
-					width: calc(1904px / 2.6);
-					height: calc(609px / 2.6);
-					margin: 0 auto;
-					right: -10px;
-					@include mq($max-width: $bp-2m) {
-						width: 100%;
-						height: 136vw;
+					&-1,
+					&-2 {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						text-align: justify;
 					}
-					p {
-						font-size: calc($fontsize + 3px);
-						line-height: $fontsize_4;
-						letter-spacing: 2.5px;
-						> span {
-							&.yellow {
-								padding: 0 2px;
-								color: $color-highlight;
+
+					&-1 {
+						&-l {
+							width: 42%;
+							&-title {
+								img {
+									display: block;
+									width: 100%;
+								}
+							}
+							&-subtitle {
+								margin-top: 35px;
+								color: $color-white;
+								padding: 13px 0 15px 15px;
+
+								border-left: 4px solid;
+								border-image: linear-gradient(to bottom, #FFA6C9 0%, transparent 100%) 1;
+								p {
+
+									font-size: $fontsize-a;
+									letter-spacing: 1px;
+									font-weight: 600;
+									line-height: $fontsize-2;
+								}
 							}
 						}
-						&._1,
-						&._3, {
-							padding-top: 30px;
-							@include mq($max-width: $bp-2m) {
-								padding-top: 55px;
+						&-r {
+							width: 58%;
+						}
+					}
+					&-2 {
+						margin-top: 35px;
+					}
+					.p-lists {
+						display: flex;
+						align-items: start;
+						justify-content: space-around;
+						width: 100%;
+						.p-item {
+							display: flex;
+							flex-direction: column;
+							align-items: center;
+							justify-content: center;
+							text-align: center;
+							color: $color-white;
+							&-pic {
+								display: block;
+								width: calc(500px / 2.6);
+								img {
+									display: block;
+									width: 100%;
+								}
+							}
+							&-num {
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								position: absolute;
+								top: 0;
+								right: 0;
+								width: 60px;
+								height: 60px;
+								background: $color-white;
+								border-radius: 50%;
+								color: #828282;
+								font-size: $fontsize-1;
+								letter-spacing: -1px;
+								font-weight: 500;
+								&:after {
+									content: "名";
+									font-size: $fontsize-d;
+									margin-bottom: -3px;
+									margin-left: 1px;
+								}
+							}
+							&-name {
+								margin-top: 15px;
+								font-weight: bold;
+								letter-spacing: 2.5px;
+								padding: 3px 15px;
+								background: linear-gradient(0.25turn, transparent, #96263E, transparent);
+							}
+							&-content {
+								margin-top: 7px;
+								opacity: .66;
+								letter-spacing: -1px;
 							}
 						}
-						&._3, {
-							@include mq($max-width: $bp-2m) {
-								padding-top: 40px;
-							}
-						}
-						&.__mb {
-							display: none;
-						}
-						@include mq($max-width: $bp-2m) {
-							line-height: $fontsize_6;
-							&.__pc {
+					}
+				}
+				.btn-cta {
+			    	cursor: pointer;
+					width: 100%;
+					max-width: 360px;
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+
+					font-size: $fontsize_3;
+					font-weight: bolder;
+
+					margin: 40px auto 10px;
+
+					@include mq($max-width: $bp-2s) {
+						width: 97%;
+						left: -1.5%;
+					}
+					// &:before {
+					// 	content: "";
+					// 	display: block;
+					// 	z-index: 0;
+					// 	position: absolute;
+					// 	width: 100.5%;
+					// 	height: 100%;
+					// 	background: nth($color-cta, 2);
+					// 	right: -9px;
+					// 	bottom: -7px;
+					// 	border-radius: 40px; // 52px
+					// }
+					a {
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						font-weight: inherit;
+
+						width: 100%;
+
+						height: 100%;
+						color: nth($color-cta, 1);
+						margin-right: -5px;
+						font-size: inherit;
+
+						// display: inline-block;
+						// padding: 14px 80px;
+						// padding-right: 25px;
+						padding: 15px;
+						border-radius: 40px; // 52px
+
+						background: $color-white;
+						box-shadow: 2px 1px 3px 2px nth($color-cta, 1);
+						color: $color-white;
+
+						span {
+							color: nth($color-cta, 1);
+							letter-spacing: 5px;
+							font-weight: inherit;
+							background: -webkit-linear-gradient(nth($color-cta, 1), nth($color-cta, 2));
+							-webkit-background-clip: text;
+							-webkit-text-fill-color: transparent;
+							&.__mb {
 								display: none;
 							}
-							&.__mb {
-								display: block;
+						}
+						@include mq($max-width: $bp-2s) {
+							margin-right: -10px;
+							font-size: $fontsize_4;
+							span {
+								letter-spacing: 5px;
+								&.__pc {
+									display: none;
+								}
+								&.__mb {
+									display: block;
+								}
+							}
+						}
+						&:after {
+							content: "";
+							display: inline-block;
+							position: relative;
+							top: 2px;
+							left: 7px;
+							width: calc(71px / 2.5);
+							height: calc(46px / 2.5);
+							background: url(../img/cta_arrow_r@2x.png) left center no-repeat;
+							background-size: cover;
+							transition: .1s;
+							@include mq($max-width: $bp-2s) {
+								top: 4px;
+								width: calc(71px / 2.5);
+								height: calc(46px / 2.5);
 							}
 						}
 					}
-					&:before {
-						content: "";
-						position: absolute;
-						left: 0;
-						width: 100%;
-						height: 100%;
-						background: url(../img/event-box-pc@2x.png) left center no-repeat;
-						background-size: cover;
-						@include mq($max-width: $bp-2m) {
-							background: url(../img/event-box-m@2x.png) left center no-repeat;
-							background-size: cover;
-						}
-					}
-				}
-				.method_img {
-					display: block;
-					margin: 20px auto;
-					width: calc(1504px / 2.87);
-					height: calc(328px / 2.87);
-					@include mq($max-width: $bp-2m) {
-						width: calc(678px / 2);
-						height: calc(174px / 2);
-					}
-					&:before {
-						content: "";
-						display: block;
-						left: 0;
-						width: 100%;
-						height: 100%;
-						background: url(../img/event-label-pc@2x.png) left center no-repeat;
-						background-size: cover;
-						@include mq($max-width: $bp-2m) {
-							background: url(../img/event-label-m@2x.png) left center no-repeat;
-							background-size: cover;
+					&:hover {
+						a {
+							&:after {
+								left: 14px;
+							}
 						}
 					}
 				}
