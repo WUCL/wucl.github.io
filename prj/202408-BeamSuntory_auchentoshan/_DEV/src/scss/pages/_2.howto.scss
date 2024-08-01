@@ -1,0 +1,65 @@
+/* =======================
+   pages/howto
+   ======================= */
+.main {
+	section.s-howto {
+		margin-top: 40px;
+		@include mq($max-width: $bp-2s) {
+			// margin-top: 15px;
+		}
+		.inner {
+			> .title {
+				width: calc(623px / 2.87);
+				height: calc(112px / 2.87);
+				@include mq($max-width: $bp-2s) {
+					width: calc(623px / 2.35);
+					height: calc(112px / 2.35);
+				}
+				&:before {
+					content: "";
+					position: absolute;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					background: url(../img/title-01@2x.png) left center no-repeat;
+					background-size: cover;
+				}
+			}
+			> .content {
+				.m-box_title {
+					@include mq($max-width: $bp-2s) {
+						top: -11%;
+					}
+				}
+				.m-box_content {
+					p {
+						&.__mb {
+							display: none;
+						}
+						@include mq($max-width: $bp-2s) {
+							&.__pc {
+								display: none;
+							}
+							&.__mb {
+								display: block;
+							}
+						}
+						> span {
+							font-weight: bold;
+							letter-spacing: 2px;
+							@include mq($max-width: $bp-2s) {
+								letter-spacing: 0;
+								padding: 0;
+								margin: 0;
+								&:nth-child(1),
+								&:nth-child(9) {
+									display: block;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
