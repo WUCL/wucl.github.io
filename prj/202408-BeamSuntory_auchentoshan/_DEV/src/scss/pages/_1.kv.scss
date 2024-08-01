@@ -38,6 +38,7 @@
 			top: 26vw;
 			left: 16.3vw;
 			width: 36vw;
+			transition: .1s;
 
 			@include mq($max-width: $bp-2m) {
 				top: 50vw;
@@ -48,6 +49,9 @@
 			img {
 				display: block;
 				width: 100%;
+			}
+			&:hover {
+				margin-left: -10px;
 			}
 		}
 	}
