@@ -224,109 +224,11 @@
 		top: 0;
 		left: 0;
 		width: 100vw;
-		background: url(../img/bg_pc@2x.jpg) left center no-repeat;
+		background: url(../img/bg_pc@2x.jpg) left top no-repeat;
 		background-size: cover;
-	}
-
-	.decorate {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		.d-circle {
-			position: absolute;
-			display: block;
-
-			width: calc(1584px / 2);
-			height: calc(1584px / 2);
-			&:before {
-				content: "";
-				display: block;
-				width: 100%;
-				height: 100%;
-				background: url(../img/bg_circle@2x.png) left center no-repeat;
-				background-size: cover;
-			}
-			&_1 {
-				top: 30vw;
-				left: -5vw;
-				width: calc(1584px / 7);
-				height: calc(1584px / 7);
-				@include mq($max-width: $bp-2s) {
-					top: 50vw;
-					left: -9vw;
-					width: calc(1584px / 11);
-					height: calc(1584px / 11);
-				}
-			}
-			&_2 {
-				top: 58vw;
-				right: -14vw;
-				width: calc(1584px / 5);
-				height: calc(1584px / 5);
-				@include mq($max-width: $bp-2s) {
-					top: 285vw;
-					right: -25vw;
-					width: calc(1584px / 7);
-					height: calc(1584px / 7);
-				}
-			}
-			&_3 {
-				bottom: 15%;
-				left: -10vw;
-				width: calc(1584px / 3);
-				height: calc(1584px / 3);
-				@include mq($max-width: $bp-2s) {
-					bottom: 30%;
-					left: -63vw;
-					// width: calc(1584px / 7);
-					// height: calc(1584px / 7);
-				}
-			}
-		}
-		.d-shape {
-			position: absolute;
-			display: block;
-			&_1 {
-				top: 31vw;
-				right: 0;
-				width: calc(1600px / 3);
-				height: calc(700px / 3);
-				@include mq($max-width: $bp-2s) {
-					top: 50vw;
-					width: calc(1600px / 5);
-					height: calc(700px / 5);
-				}
-				&:before {
-					content: "";
-					display: block;
-					width: 100%;
-					height: 100%;
-					background: url(../img/bg_shape_up@2x.png) left center no-repeat;
-					background-size: cover;
-				}
-			}
-			&_2 {
-				bottom: 22%;
-				left: 0;
-				width: calc(2080px / 2.5);
-				height: calc(600px / 2.5);
-				@include mq($max-width: $bp-2s) {
-					bottom: 36%;
-					left: -57vw;
-					width: calc(2080px / 4);
-					height: calc(600px / 4);
-				}
-				&:before {
-					content: "";
-					display: block;
-					width: 100%;
-					height: 100%;
-					background: url(../img/bg_shape_down@2x.png) left center no-repeat;
-					background-size: cover;
-				}
-			}
+		@include mq($max-width: $bp-2m) {
+			background: url(../img/bg_m@2x.jpg) left top no-repeat;
+			background-size: cover;
 		}
 	}
 }
