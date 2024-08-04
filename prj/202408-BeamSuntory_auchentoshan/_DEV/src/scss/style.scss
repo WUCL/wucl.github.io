@@ -12,12 +12,15 @@
 // @import "utilities/_mixins.scss";
 @import "utilities/_media-queries.scss";
 @import "_base";
+@import "utilities/_animation_glitch.scss";
+
 //import layout
 @import "layout/_layout.scss";
 // @import "layout/_container.scss";
 @import "layout/_footer.scss";
 @import "layout/_header.scss";
 // @import "layout/_sidebar.scss";
+
 //import modules
 // @import "modules/_btns.scss";
 // @import "modules/_nav.scss";

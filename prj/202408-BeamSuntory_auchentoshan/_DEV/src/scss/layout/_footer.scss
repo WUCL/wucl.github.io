@@ -3,6 +3,17 @@ layout/_footer
 ======================= */
 footer.footer {
 	width: 100%;
+	> img {
+		@include mq($max-width: $bp-m) {
+			max-height: 9vh;
+		}
+		@include mq($max-width: $bp-3s) {
+			max-height: 7vh;
+		}
+		@include mq($max-width: $bp-2s) {
+			max-height: 4vh;
+		}
+	}
 	.copyright {
 		width: 100%;
 		background: $color-black;

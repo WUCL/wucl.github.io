@@ -6,4 +6,9 @@ header.header {
 	}
 	&.open {
 	}
+	@include mq($max-width: $bp-xl) {
+		> .logo img {
+
+		}
+	}
 }

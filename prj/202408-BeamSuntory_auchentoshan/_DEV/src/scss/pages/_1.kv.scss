@@ -22,14 +22,16 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: url(../img/kv_pc.jpg) left top no-repeat;
+			// background: url(../img/kv_pc@2x.jpg) left top no-repeat;
+			background: url(../img/kv_pc_no_t@2x.webp) left top no-repeat;
 			background-size: cover;
 			// @include mq($max-width: $bp-2l) {
 			// 	background: url(../img/kv_m.jpg) left center no-repeat;
 			// 	background-size: cover;
 			// }
 			@include mq($max-width: $bp-2m) {
-				background: url(../img/kv_m.jpg) left top no-repeat;
+				// background: url(../img/kv_m@2x.jpg) left top no-repeat;
+				background: url(../img/kv_m_no_t@2x.webp) left top no-repeat;
 				background-size: cover;
 			}
 		}
@@ -51,7 +53,49 @@
 				width: 100%;
 			}
 			&:hover {
-				margin-left: -10px;
+				margin-left: -7px;
+				@include mq($max-width: $bp-2m) {
+					margin-left: -40%;
+					margin-top: 7px;
+				}
+			}
+		}
+		.kv-title {
+			position: absolute;
+			top: 11.4vw;
+			left: 16.3vw;
+			width: 38.3vw;
+			transition: .1s;
+			@include mq($max-width: $bp-2m) {
+				top: 18.8vw;
+				left: 49.1%;
+				width: 81.8%;
+				margin-left: -40%;
+			}
+			img {
+				display: block;
+				width: 100%;
+			}
+			&:nth-child(2),
+			&:nth-child(3) {
+				display: none;
+			}
+		}
+		&[data-glitch="1"] {
+			.kv-title {
+				&:nth-child(1) {
+					animation: glitch1 3.5s infinite;
+				}
+				&:nth-child(2) {
+					display: block;
+					filter: sepia(100%) hue-rotate(190deg) saturate(500%);
+					animation: glitch2 3.5s infinite;
+				}
+				&:nth-child(3) {
+					display: block;
+					filter: sepia(80%) brightness(1) invert(0);
+					animation: glitch3 3.5s infinite;
+				}
 			}
 		}
 	}

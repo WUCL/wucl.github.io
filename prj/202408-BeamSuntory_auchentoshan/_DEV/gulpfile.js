@@ -26,7 +26,7 @@ const SRC = './src'
             , TPL: SRC + '/tpl/*.html'
             , CSS: SRC + '/scss/**/*.scss'
             , JS: SRC + '/js/**/*.js'
-            , IMG: SRC + '/img/**/*.{jpg,jpeg,png,gif,svg,ico}'
+            , IMG: SRC + '/img/**/*.{jpg,jpeg,png,gif,svg,ico,webp}'
         }
         , DEST: {
             HTML: DEST
