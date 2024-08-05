@@ -11,7 +11,8 @@
 		height: 37.5vw;
 		// margin-top: -37.5vw;
 		@include mq($max-width: $bp-2m) {
-			height: 160vw;
+			// height: 160vw;
+			height: 55.5vw;
 		}
 		&:before,
 		&:after {
@@ -40,23 +41,24 @@
 			top: 26vw;
 			left: 16.3vw;
 			width: 36vw;
-			transition: .1s;
-
 			@include mq($max-width: $bp-2m) {
-				top: 50vw;
-				left: 50%;
-				width: 80%;
+				top: 39.5vw;
+				left: 43.5%;
+				width: 53%;
 				margin-left: -40%;
 			}
 			img {
 				display: block;
 				width: 100%;
+				transition: .1s;
 			}
 			&:hover {
-				margin-left: -7px;
-				@include mq($max-width: $bp-2m) {
-					margin-left: -40%;
-					margin-top: 7px;
+				img {
+					margin-left: -7px;
+					@include mq($max-width: $bp-2m) {
+						margin-left: -40%;
+						margin-top: 7px;
+					}
 				}
 			}
 		}
@@ -65,36 +67,43 @@
 			top: 11.4vw;
 			left: 16.3vw;
 			width: 38.3vw;
-			transition: .1s;
 			@include mq($max-width: $bp-2m) {
-				top: 18.8vw;
-				left: 49.1%;
-				width: 81.8%;
+				top: 17.3vw;
+				left: 43.3%;
+				width: 58%;
 				margin-left: -40%;
 			}
-			img {
+			&_glitch {
+				position: absolute;
+				top: 0;
+				left: 0;
 				display: block;
 				width: 100%;
-			}
-			&:nth-child(2),
-			&:nth-child(3) {
-				display: none;
-			}
-		}
-		&[data-glitch="1"] {
-			.kv-title {
-				&:nth-child(1) {
-					animation: glitch1 3.5s infinite;
-				}
-				&:nth-child(2) {
+				transition: .1s;
+				img {
 					display: block;
-					filter: sepia(100%) hue-rotate(190deg) saturate(500%);
-					animation: glitch2 3.5s infinite;
+					width: 100%;
 				}
+				&:nth-child(2),
 				&:nth-child(3) {
-					display: block;
-					filter: sepia(80%) brightness(1) invert(0);
-					animation: glitch3 3.5s infinite;
+					display: none;
+				}
+			}
+			&[data-glitch="1"] {
+				.kv-title_glitch {
+					&:nth-child(1) {
+						animation: glitch1 3.5s infinite;
+					}
+					&:nth-child(2) {
+						display: block;
+						filter: sepia(100%) hue-rotate(190deg) saturate(500%);
+						animation: glitch2 3.5s infinite;
+					}
+					&:nth-child(3) {
+						display: block;
+						filter: sepia(80%) brightness(1) invert(0);
+						animation: glitch3 3.5s infinite;
+					}
 				}
 			}
 		}

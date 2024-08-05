@@ -85,7 +85,7 @@
 		// min-height: 100vh;
 		padding: 35px 0;
 		@include mq($max-width: $bp-2s) {
-			padding: 30px 0;
+			padding: 20px 0;
 		}
 		p, span {
 			line-height: normal;
@@ -145,7 +145,7 @@
 					// padding: 45px 0 25px;
 					padding: 30px 0 0;
 					@include mq($max-width: $bp-2s) {
-						padding: 30px 0;
+						padding: 25px 0;
 						// padding: 50px 30px 10px;
 					}
 					&_content {
