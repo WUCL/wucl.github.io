@@ -145,8 +145,9 @@
 									font-size: $fontsize-5;
 								}
 								@include mq($max-width: $bp-2s) {
-									width: 70px;
-									height: 70px;
+									width: 60px;
+									height: 60px;
+									font-size: $fontsize-3;
 								}
 								&:after {
 									content: "名";
@@ -161,6 +162,7 @@
 								}
 							}
 							&-name {
+								display: inline-block;
 								margin-top: 15px;
 								font-weight: bold;
 								letter-spacing: 2.5px;
@@ -179,6 +181,23 @@
 								}
 								@include mq($max-width: $bp-2s) {
 									font-size: $fontsize-2;
+								}
+							}
+						}
+					}
+					@include mq($max-width: $bp-2s) {
+						&-2 {
+							.p-lists {
+								.p-item {
+									flex-direction: row;
+									justify-content: space-around;
+									&-pic {
+										width: 41vw;
+									}
+									&-info {
+										width: 33vw;
+										margin-left: 3vw;
+									}
 								}
 							}
 						}
