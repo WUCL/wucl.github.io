@@ -28,13 +28,20 @@ $(function() {
             });
         },
         doAos: function() {
-            return AOS.init({
-                duration: 650,
-                offset: 300,
-                delay: 0,
-                once: true,
-                easing: 'ease-in-out'
-            });
+            if (this.el.$main.attr('data-aos_open') == "1") {
+                 AOS.init({
+                    duration: 650,
+                    offset: 300,
+                    delay: 0,
+                    once: true,
+                    easing: 'ease-in-out'
+                });
+            } else {
+                AOS.init({
+                    disable: true,
+                });
+            }
+            return ;
         },
     };
     MAIN.init();
