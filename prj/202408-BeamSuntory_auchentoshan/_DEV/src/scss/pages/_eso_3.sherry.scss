@@ -1,0 +1,144 @@
+/* =======================
+   pages/sherry
+   eso
+   ======================= */
+.main {
+	section.s-sherry_eso {
+		width: 100vw;
+		background: url(../img/sherry_eso-bg_pc@2x.jpg) left center no-repeat;
+		background-size: cover;
+		@include mq($max-width: $bp-2m) {
+			background: url(../img/sherry_eso-bg_m@2x.jpg) left bottom no-repeat;
+			background-size: cover;
+			padding-bottom: 40vw;
+		}
+
+		.inner {
+			@include mq($max-width: $bp-2m) {
+				margin-top: 35px;
+			}
+			> .title {
+			}
+			> .content {
+				.m-box {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding-bottom: 15vw;
+					@include mq($max-width: $bp-m) {
+						flex-direction: column;
+					}
+					@include mq($max-width: $bp-2m) {
+						padding-bottom: 30vw;
+					}
+					.product {
+						width: 53%;
+
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+
+						text-align: justify;
+						text-justify: distribute-all-lines;
+						text-align-last: justify;
+						@include mq($max-width: $bp-m) {
+							width: 100%;
+						}
+						.img {
+							width: 400px;
+							max-width: 100%;
+							margin-bottom: -50px;
+							@include mq($max-width: $bp-m) {
+								width: 560px;
+							}
+							img {
+								display: block;
+								width: 100%;
+							}
+						}
+						.title,
+						.subtitle {
+							width: 100%;
+							max-width: 280px;
+							letter-spacing: 1px;
+							@include mq($max-width: $bp-m) {
+								width: 380px;
+								max-width: 100%
+							}
+							@include mq($max-width: $bp-3s) {
+								width: 100%;
+							}
+						}
+						.title {
+							color: #FFEDAE;
+							// width: 700px;
+							font-size: $fontsize_2;
+							font-weight: 500;
+							text-shadow: 2px 2px 7px rgba(0, 0, 0, 70%);
+							@include mq($max-width: $bp-m) {
+								font-size: $fontsize-6;
+								letter-spacing: 1px;
+							}
+						}
+						.subtitle {
+							color: $color_white;
+							margin-top: 9px;
+							@include mq($max-width: $bp-m) {
+								font-size: $fontsize-2;
+							}
+							span {
+								display: inline-block;
+								margin-left: 9px;
+								padding: 2px 13px;
+								border: 1px solid $color_white;
+								letter-spacing: 4px;
+								font-weight: 500;
+								font-size: inherit;
+							}
+						}
+					}
+					.infos {
+						width: 45%;
+						@include mq($max-width: $bp-m) {
+							width: 100%;
+							margin-top: 50px;
+						}
+
+						// display: flex;
+						// flex-direction: column;
+						// align-items: center;
+						// justify-content: center;
+						[class*='info-'] {
+							text-align: left;
+							font-size: $fontsize;
+							@include mq($max-width: $bp-m) {
+								font-size: $fontsize-2;
+							}
+							> div {
+								margin-bottom: 11px;
+								text-align: justify;
+								display: inline-block;
+								color: $color_white;
+								font-size: inherit;
+								&:first-child {
+									padding: 1px 5px;
+									font-weight: bold;
+									background: #C43D76;
+									letter-spacing: 2px;
+									margin-bottom: 9px;
+								}
+								&:last-child {
+									display: block;
+									@include mq($max-width: $bp-m) {
+										letter-spacing: 2px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -14,7 +14,7 @@ $(function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
-            this.doAos();
+            // this.doAos();
         },
         bindEvent: function() {
             let $this = this;

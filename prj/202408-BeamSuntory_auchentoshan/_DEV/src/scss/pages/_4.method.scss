@@ -43,8 +43,8 @@
 							&-subtitle {
 								margin-top: 35px;
 								color: $color-white;
-								padding: 13px 0 15px 15px;
 
+								padding: 13px 0 15px 15px;
 								border-left: 4px solid;
 								border-image: linear-gradient(to bottom, #FFA6C9 0%, transparent 100%) 1;
 								@include mq($max-width: $bp-2m) {
@@ -203,10 +203,170 @@
 						}
 					}
 				}
+
+				.howtodt {
+					display: flex;
+					align-items: flex-start;
+					justify-content: center;
+					@include mq($max-width: $bp-3s) {
+						align-items: center;
+						flex-direction: column;
+					}
+
+					padding: 50px 20px;
+					margin: 40px 0 0;
+
+					border-radius: 16px;
+					background: linear-gradient(180deg, rgba(58,41,48,.3) 0%, rgba(255,255,255, 0) 100%);
+					&_l, &_r {
+						.title {
+							font-size: $fontsize-1;
+							font-weight: 500;
+							display: inline-block;
+							letter-spacing: 5px;
+							color: $color-white;
+
+							padding: 7px 21px 7px 27px;
+							border: 1px solid;
+							border-image: linear-gradient(to right, #FFA6C9 0%, #F3AC63 100%) 1;
+
+							@include mq($max-width: $bp-3s) {
+								font-size: $fontsize-3;
+							}
+						}
+					}
+					&_l {
+						width: 44%;
+						padding-right: 5%;
+						border-right: 2px solid;
+						border-image: linear-gradient(to bottom, transparent 0%, #FFA6C9 50%, transparent 100%) 1;
+
+						@include mq($max-width: $bp-2m) {
+							width: 50%;
+						}
+						@include mq($max-width: $bp-3s) {
+							width: 78%;
+							border-right: 0;
+							border-bottom: 2px solid;
+							border-image: linear-gradient(to right, transparent 0%, #FFA6C9 50%, transparent 100%) 1;
+							padding-right: 0;
+							padding-bottom: 5%;
+						}
+						@include mq($max-width: $bp-s) {
+							width: 100%;
+						}
+
+						// howto
+						.m-box_title {
+							@include mq($max-width: $bp-3s) {
+								top: -11%;
+							}
+						}
+						.m-box_content {
+							p {
+								font-size: $fontsize;
+								@include mq($max-width: $bp-2m) {
+									font-size: $fontsize-a;
+									line-height: 1.5rem;
+									letter-spacing: 1px;
+								}
+								@include mq($max-width: $bp-3s) {
+									font-size: $fontsize-2;
+									line-height: 2rem;
+								}
+								&.__mb {
+									display: none;
+								}
+								@include mq($max-width: $bp-3s) {
+									&.__pc {
+										display: none;
+									}
+									&.__mb {
+										display: block;
+									}
+								}
+								> span {
+									font-weight: bold;
+									letter-spacing: 2px;
+									@include mq($max-width: $bp-3s) {
+										letter-spacing: 0;
+										padding: 0;
+										margin: 0;
+										&:nth-child(1)
+										// ,&:nth-child(9)
+										{
+											display: block;
+										}
+									}
+								}
+							}
+						}
+					}
+					&_r {
+						padding-left: 5%;
+						width: 44%;
+						@include mq($max-width: $bp-3s) {
+							width: 100%;
+							padding-left: 0;
+							padding-top: calc(5% + 25px);
+						}
+
+						// dt
+						.m-box_title {
+							@include mq($max-width: $bp-2s) {
+								top: -15%;
+							}
+						}
+						.m-box_content {
+							display: inline-flex;
+							align-items: center;
+							justify-content: center;
+							@include mq($max-width: $bp-2s) {
+								// flex-direction: column;
+							}
+							p {
+								font-size: calc($fontsize_1 - 1px);
+								display: inline-flex;
+								align-items: center;
+								justify-content: center;
+								letter-spacing: 2px;
+								font-weight: inherit;
+								@include mq($max-width: $bp-3s) {
+									font-size: $fontsize_2;
+								}
+								@include mq($max-width: $bp-2s) {
+									font-size: $fontsize_3;
+									letter-spacing: 2.5px;
+								}
+								&:nth-child(1) {
+									&:after {
+										content: "";
+										position: relative;
+										display: inline-block;
+										left: 0;
+										margin: 0 20px 0 15px;
+										width: calc(50px / 2);
+										height: calc(32px / 2);
+										background: url(../img/cta_arrow_w@2x.png) left center no-repeat;
+										background-size: cover;
+										@include mq($max-width: $bp-2s) {
+											width: calc(50px / 2);
+											height: calc(32px / 2);
+										}
+									}
+								}
+								&:nth-child(2) {
+									letter-spacing: -1px;
+								}
+							}
+						}
+					}
+				}
+
 				.btn-cta {
 			    	cursor: pointer;
 					width: 100%;
-					max-width: 360px;
+					max-width: 390px;
 					display: inline-flex;
 					align-items: center;
 					justify-content: center;
@@ -249,7 +409,7 @@
 						// display: inline-block;
 						// padding: 14px 80px;
 						// padding-right: 25px;
-						padding: 15px;
+						padding: 11px 21px;
 						border-radius: 40px; // 52px
 
 						background: $color-white;

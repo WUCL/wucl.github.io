@@ -1,0 +1,289 @@
+/* =======================
+   pages/howto
+   eso
+   ======================= */
+.main {
+	section.s-howto_eso {
+		width: 100vw;
+		background: url(../img/howto_eso-bg@2x.jpg) left center no-repeat;
+		background-size: cover;
+
+		.inner {
+			@include mq($max-width: $bp-2m) {
+				margin-top: 35px;
+			}
+			@include mq($max-width: $bp-3s) {
+				margin-top: 0;
+			}
+			> .title {
+			}
+			> .content {
+				.m-box {
+					flex-direction: column;
+				}
+				.m-box_title,
+				.m-box_content {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					text-align: justify;
+					@include mq($max-width: $bp-3s) {
+						flex-direction: column;
+					}
+					img {
+						display: block;
+						width: 100%;
+					}
+					&_l,
+					&_r {
+						display: flex;
+						align-items: center;
+						flex-direction: column;
+						justify-content: center;
+					}
+					&_l {
+						width: 41%;
+						@include mq($max-width: $bp-3s) {
+							width: 100%;
+							margin-bottom: 50px;
+						}
+					}
+					&_r {
+						width: 53%;
+						@include mq($max-width: $bp-3s) {
+							width: 100%;
+						}
+					}
+				}
+				.m-box_title {
+					max-width: 89%;
+					@include mq($max-width: $bp-3s) {
+						max-width: 100%;
+					}
+					&_l {
+					}
+					&_r {
+						align-items: flex-start;
+						padding: 13px 17px 19px 17px;
+						border-left: 2px solid;
+						border-right: 2px solid;
+						border-image: linear-gradient(to bottom, #FFA6C9 0%, transparent 100%) 1;
+						> .title {
+							color: $color-main;
+							font-size: $fontsize;
+							font-weight: bold;
+							margin-bottom: 13px;
+							letter-spacing: 1px;
+							p {
+								font-weight: bold;
+								color: inherit;
+								&.__mb {
+									display: none;
+								}
+							}
+							@include mq($max-width: $bp-3s) {
+								font-size: $fontsize-3;
+								p.__pc {
+									display: none;
+								}
+								p.__mb {
+									display: block;
+								}
+							}
+						}
+						> .description {
+							color: $color-main;
+							font-size: $fontsize_d;
+							@include mq($max-width: $bp-3s) {
+								font-size: $fontsize;
+							}
+							p {
+								margin-left: 15px;
+								letter-spacing: -.5px;
+								line-height: $fontsize_1;
+								@include mq($max-width: $bp-3s) {
+									letter-spacing: 1px;
+									line-height: $fontsize-3;
+								}
+								&:before {
+									content: "※";
+									display: inline-block;
+									margin-left: -17px;
+									padding-right: 7px;
+								}
+							}
+						}
+					}
+				}
+				.m-box_content {
+					padding: 35px;
+					margin: 40px 0 0;
+					align-items: flex-start;
+
+					// border: 1px solid transparent;
+					border-radius: 16px;
+					background: linear-gradient(180deg, rgba(58,41,48,.3) 0%, rgba(255,255,255, 0) 100%);
+
+					@include mq($max-width: $bp-m) {
+						padding: 35px 20px;
+						flex-direction: column;
+					}
+					.title {
+						font-size: $fontsize;
+						font-weight: 500;
+						display: inline-block;
+						letter-spacing: 7px;
+						color: $color-white;
+						margin-bottom: 30px;
+
+						padding: 3px 19px 5px 23px;
+						border: 1px solid;
+						border-image: linear-gradient(to right, #FFFFFF 0%, #C8789F 100%) 1;
+						@include mq($max-width: $bp-m) {
+							font-size: $fontsize-4;
+							padding: 5px 31px 5px 35px;
+						}
+					}
+					&_l {
+						width: 50%;
+						@include mq($max-width: $bp-m) {
+							width: 100%;
+							margin-bottom: 50px;
+						}
+					}
+					&_r {
+						width: 42%;
+						@include mq($max-width: $bp-m) {
+							width: 100%;
+						}
+						.title {
+							margin-bottom: 35px;
+						}
+						img {
+							&.__mb {
+								display: none;
+							}
+							@include mq($max-width: $bp-m) {
+								&.__pc {
+									display: none;
+								}
+								&.__mb {
+									display: block;
+								}
+							}
+						}
+					}
+				}
+				.btn-cta_seo {
+			    	cursor: pointer;
+					width: 100%;
+					max-width: 400px;
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+
+					font-size: $fontsize_3;
+					font-weight: bolder;
+
+					margin: 40px auto 10px;
+					padding: 1.5px;
+					@include mq($max-width: $bp-2s) {
+						width: 97%;
+						left: -1.5%;
+						margin-top: 0;
+					}
+					&:before {
+						content: "";
+						display: block;
+						z-index: 0;
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						background: -webkit-linear-gradient(nth($color-boxshadow, 1), nth($color-boxshadow, 2));
+						right: -2.5px;
+						bottom: 0;
+						border-radius: 40px; // 52px
+						filter: blur(1px);
+					}
+					a {
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						font-weight: inherit;
+
+						width: 100%;
+
+						height: 100%;
+						color: nth($color-cta, 1);
+						margin-right: -5px;
+						font-size: inherit;
+
+						// display: inline-block;
+						// padding: 14px 80px;
+						// padding-right: 25px;
+						padding: 11px 21px;
+						border-radius: 40px; // 52px
+
+						background: $color-white;
+						// box-shadow: 2px 1px 3px 2px nth($color-cta, 1);
+						color: $color-white;
+						@include mq($max-width: $bp-2s) {
+							font-size: $fontsize-3;
+						}
+						span {
+							color: nth($color-cta, 1);
+							letter-spacing: 2px;
+							font-weight: inherit;
+							background: -webkit-linear-gradient(nth($color-cta, 1), nth($color-cta, 2));
+							-webkit-background-clip: text;
+							-webkit-text-fill-color: transparent;
+							&.__mb {
+								display: none;
+							}
+							@include mq($max-width: $bp-2s) {
+								letter-spacing: 1px;
+							}
+						}
+						// @include mq($max-width: $bp-2s) {
+						// 	margin-right: -10px;
+						// 	font-size: $fontsize_4;
+						// 	span {
+						// 		letter-spacing: 5px;
+						// 		&.__pc {
+						// 			display: none;
+						// 		}
+						// 		&.__mb {
+						// 			display: block;
+						// 		}
+						// 	}
+						// }
+						&:after {
+							content: "";
+							display: inline-block;
+							position: relative;
+							top: 2px;
+							left: 7px;
+							width: calc(71px / 2.5);
+							height: calc(46px / 2.5);
+							background: url(../img/cta_arrow_r@2x.png) left center no-repeat;
+							background-size: cover;
+							transition: .1s;
+							@include mq($max-width: $bp-2s) {
+								top: -1px;
+								width: calc(71px / 3);
+								height: calc(46px / 3);
+							}
+						}
+					}
+					&:hover {
+						a {
+							&:after {
+								left: 14px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

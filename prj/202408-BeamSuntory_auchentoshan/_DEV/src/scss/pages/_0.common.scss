@@ -24,9 +24,15 @@
 			&:last-child {
 				margin-right: 3px;
 			}
-			font-size: $fontsize_3;
+			font-size: $fontsize-1;
 			color: $color-highlight;
 			font-weight: bold;
+			@include mq($max-width: $bp-3s) {
+				font-size: $fontsize-3;
+			}
+			@include mq($max-width: $bp-2s) {
+				font-size: $fontsize-4;
+			}
 		}
 		&.highlight,
 		&.highlight > span {
@@ -115,7 +121,6 @@
 			// max-width: $bp-2;
 			margin: 0 auto;
 			> .title {
-				display: block;
 				font-size: $fontsize-2;
 				font-weight: 500;
 				display: inline-block;
