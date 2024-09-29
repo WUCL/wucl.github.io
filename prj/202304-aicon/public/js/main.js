@@ -33,6 +33,8 @@ $(function() {
             // alert(deviceObj.name);
             this.bindEvent();
             // this.buildSlick();
+
+            // this.go_html2canvas();
         },
         bindEvent: function() {
             let $this = this;
@@ -80,6 +82,11 @@ $(function() {
                     $this.el.$form.find('input[type="radio"]').attr('disabled','disabled');
                     $this.el.$score.attr('data-score', $_score);
                     $this.el.$s_2.attr('data-result', $_result).attr('data-layer', 2);
+
+                    html2canvas(document.querySelector("#capture")).then(canvas => {
+                        console.log(456);
+                        document.querySelector("#capture").appendChild(canvas);
+                    });
                     return;
                 } else {
                     return alert('尚有未選擇項目');
@@ -107,6 +114,12 @@ $(function() {
                 dots: true,
                 autoplay: false,
                 autoplaySpeed: 2000,
+            });
+        },
+        go_html2canvas: function() {
+            html2canvas(document.querySelector("#go_capture")).then(canvas => {
+                // console.log(123);
+                document.body.appendChild(canvas);
             });
         }
     };
