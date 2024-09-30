@@ -1,0 +1,40 @@
+/* =======================
+   pages/kv
+   ======================= */
+.main {
+	section._kv {
+		padding: 0;
+		margin-bottom: 10px;
+		position: relative;
+		width: 100%;
+		height: 31vw;
+		@include mq($max-width: $bp-2m) {
+			height: 55.5vw;
+		}
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		&:before {
+			background: url(../img/kv.webp) left top no-repeat;
+			background-size: cover;
+			@include mq($max-width: $bp-2l) {
+				background: url(../img/kv_m.webp) left top no-repeat;
+				background-size: cover;
+			}
+		}
+		&:after {
+			bottom: -10px;
+			height: 10px;
+			// @include mq($max-width: $bp-2m) {
+			// 	height: 5vw;
+			// }
+			background: url(../img/linear.png) left top no-repeat;
+			background-size: cover;
+		}
+	}
+}

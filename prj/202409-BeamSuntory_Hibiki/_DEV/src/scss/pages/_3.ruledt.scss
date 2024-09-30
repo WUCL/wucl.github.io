@@ -1,0 +1,81 @@
+/* =======================
+   pages/ruledt
+   ======================= */
+.main {
+	section._ruledt {
+		> .inner {
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: space-between;
+			> .inner {
+				// max-width: auto;
+				&-rule {
+					width: 51%;
+					margin-right: 3.5%;
+					margin-left: 0;
+					> .content {
+						padding-top: 20px;
+						img {
+							width: 100%;
+							display: block;
+							padding-top: 15px;
+						}
+					}
+				}
+				&-dt {
+					width: 41%;
+					margin-right: 0;
+					margin-left: 3.5%;
+					// text-align: left;
+					// align-items: flex-start;
+					> .content {
+						padding-top: 35px;
+						letter-spacing: .5px;
+						.e-title,
+						.e-content {
+							color: $color-white;
+							font-size: $fontsize-1;
+						}
+						.e-title {
+							display: inline-block;
+							padding: 13px 20px;
+							margin-bottom: 35px;
+							border: 1px solid $color-white;
+						}
+						.e-content {
+						}
+
+						.e-time {
+							border-bottom: 1px solid #ccc;
+							padding-bottom: 35px;
+							margin-bottom: 35px;
+						}
+						.e-date {
+							.e-prizes {
+								display: flex;
+								margin-top: 35px;
+								img {
+									width: 100%;
+									display: block;
+								}
+								p {
+									line-height: normal;
+									margin-top: 15px;
+									text-align: center;
+									letter-spacing: .3px;
+								}
+								&-1 {
+									padding-right: 7px;
+								}
+								&-2 {
+									padding-left: 7px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

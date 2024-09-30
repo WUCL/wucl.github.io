@@ -1,0 +1,140 @@
+/* =======================
+   pages/common
+   ======================= */
+.main {
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	background: url(../img/bg.webp) left center no-repeat;
+	background-size: cover;
+	section {
+		font-weight: normal;
+		text-align: center;
+		width: 100%;
+		height: 100%;
+		min-width: 100vw;
+		// min-height: 100vh;
+		padding: 35px 0;
+		@include mq($max-width: $bp-2s) {
+			padding: 20px 0;
+		}
+		p, span {
+			line-height: normal;
+			font-weight: normal;
+			font-size: inherit;
+			padding: 0;
+			margin: 0;
+			color: $color-white;
+		}
+		p > span {
+			display: inline;
+		}
+		.inner {
+			max-width: $bp-2l;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			@include mq($max-width: $bp-2l) {
+				width: 95%;
+			}
+			@include mq($max-width: $bp-2m) {
+				width: 91%;
+			}
+			// max-width: $bp-2;
+			margin: 0 auto;
+			> .title {
+				@include text_lineargradient-1;
+
+				font-size: $fontsize-3;
+				font-weight: 300;
+				display: inline-block;
+				letter-spacing: 3px;
+				color: $color-main;
+
+				padding: 15px 7px 25px;
+				border-bottom: 2.5px solid;
+				border-image: linear-gradient(to right, transparent 0%, $color-main 50%, transparent 100%) 1;
+
+				// background: rgb(255,255,255);
+				// background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,221,75,1) 50%, rgba(255,255,255,1) 100%);
+			}
+			> .content {
+				width: 100%;
+				font-size: $fontsize;
+
+				.m-box {
+					width: 100%;
+					// min-height: 150px;
+					// background: $color-white;
+
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					// border-radius: 25px;
+					line-height: normal;
+					// margin: 50px 0 25px;
+					// padding: 45px 0 25px;
+					padding: 30px 0 0;
+					@include mq($max-width: $bp-2s) {
+						padding: 25px 0;
+						// padding: 50px 30px 10px;
+					}
+					&_content {
+						p {
+							display: block;
+							font-size: $fontsize_1;
+							line-height: $fontsize_6;
+							letter-spacing: 3px;
+
+							font-weight: inherit;
+							// letter-spacing: .5px;
+							@include mq($max-width: $bp-2s) {
+								font-size: $fontsize_2;
+								line-height: $fontsize_7;
+								letter-spacing: 2px;
+							}
+						}
+					}
+				}
+			}
+		}
+		&.fullwidth {
+			.inner {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+		}
+	}
+	// div.sections {
+	// 	position: relative;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: 100vw;
+	// 	// background: url(../img/bg_pc@2x.jpg) left top no-repeat;
+	// 	background: url(../img/bg_pc@2x.webp) left top no-repeat;
+	// 	background-size: cover;
+	// 	@include mq($max-width: $bp-2m) {
+	// 		// background: url(../img/bg_m@2x.jpg) left top no-repeat;
+	// 		background: url(../img/bg_m@2x.webp) left top no-repeat;
+	// 		background-size: cover;
+	// 	}
+	// }
+}
+body {
+	// background: #000;
+	// background: url(../img/bg-block.jpg) center center repeat;
+	// background-size: contain;
+	// background: url(../img/bg.jpg) center center repeat;
+
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	&.disableScroll {
+		// position: fixed;
+		overflow: hidden;
+	}
+}

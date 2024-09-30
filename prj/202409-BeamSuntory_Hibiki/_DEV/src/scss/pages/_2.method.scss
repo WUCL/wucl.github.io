@@ -1,0 +1,63 @@
+/* =======================
+   pages/method
+   ======================= */
+.main {
+	section._method {
+		margin-top: 50px;
+		> .inner {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			> .inner {
+				// max-width: auto;
+				&-pic {
+					width: 41%;
+					margin-right: 3%;
+					margin-left: 0;
+					img {
+						width: 100%;
+						display: block;
+					}
+				}
+				&-method {
+					width: 51%;
+					margin-right: 0;
+					margin-left: 3%;
+					text-align: left;
+					align-items: flex-start;
+				}
+				> .content {
+					.headline {
+						@include text_lineargradient-1;
+
+						text-align: justify;
+						font-weight: 300;
+						font-size: calc($fontsize-1 - 2px);
+						line-height: $fontsize-4;
+						letter-spacing: 1.7px;
+						margin: 25px 0;
+						span {
+							font-weight: 500;
+							letter-spacing: 3px;
+							background-color: $color-white;
+							-webkit-background-clip: text;
+							-moz-background-clip: text;
+							-webkit-text-fill-color: transparent;
+							-moz-text-fill-color: transparent;
+						}
+					}
+					.description {
+						color: $color-white;
+						font-size: $fontsize-c;
+						padding-left: 1em;
+						p {
+							text-indent: -1em;
+							line-height: $fontsize-2;
+							letter-spacing: .5px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

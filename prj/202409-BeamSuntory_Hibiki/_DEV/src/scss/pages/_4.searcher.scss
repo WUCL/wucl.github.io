@@ -1,0 +1,113 @@
+/* =======================
+   pages/searcher
+   ======================= */
+.main {
+	section._searcher {
+		.inner {
+			padding-top: 50px;
+			padding-bottom: 50px;
+			border: 2px solid;
+			border-image: linear-gradient(to top, transparent 0%, $color-main 100%) 1;
+			> .title {}
+			> .content {
+				.s-search,
+				.s-result {
+					display: none;
+				}
+
+				button[class*="btn-"] {
+					display: inline-block;
+					width: 100px;
+					height: 48px;
+					border-radius: 5px;
+					color: $color-white;
+					font-size: $fontsize + 1px;
+					letter-spacing: 1px;
+					font-weight: 500;
+					background: rgb(255,255,255);
+					background: linear-gradient(90deg, $color-search 0% 20%, $color-second 50%, $color-search 80% 100%);
+				}
+
+				.s-search {
+					.description {
+						color: $color-white;
+						margin: 35px 0;
+					}
+					.searchbar {
+						display: block;
+						width: fit-content;
+						margin: 0 auto;
+						input {
+							background: $color-white;
+							text-align: center;
+							border: 2px solid transparent;
+							border-radius: 5px;
+							line-height: normal;
+							width: 300px;
+							height: 48px;
+							font-size: $fontsize + 1px;
+							letter-spacing: 1px;
+							&.s_it {
+								margin-right: 7px;
+								&:focus {
+									border-color: $color-main;
+								}
+							}
+						}
+						.btn-submit {
+
+						}
+						.msg_error {
+							display: none;
+							color: $color-error;
+							text-align: left;
+							margin-top: 7px;
+							letter-spacing: .5px;
+						}
+						&._error {
+							input.s_it {
+								border-color: $color-error;
+							}
+							.msg_error {
+								display: block;
+							}
+						}
+					}
+				}
+				.s-result {
+					@include mq($max-width: $bp-2m) {
+						// height: 55.5vw;
+					}
+					.ticket {
+				    	margin: 35px auto;
+						width: calc(1408px / 2);
+						height: calc(476px / 2);
+						display: block;
+						background: url(../img/event_ticket@2x.webp) left top no-repeat;
+						background-size: cover;
+						&:after {
+							@include text_lineargradient-1;
+
+							content: attr(data-num);
+							position: absolute;
+							top: 8.2vw;
+							left: 32vw;
+							display: inline-block;
+							font-size: $fontsize-10;
+							color: $color-main;
+							line-height: normal;
+							letter-spacing: 7px;
+						}
+					}
+					.btn-research {
+						width: 120px;
+					}
+				}
+			}
+		}
+		&[data-layer="1"] .inner > .content > .s-search,
+		&[data-layer="2"] .inner > .content > .s-result {
+			display: block;
+		}
+	}
+}

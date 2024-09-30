@@ -1,0 +1,79 @@
+/* =======================
+   pages/winner
+   ======================= */
+.main {
+	section._winner {
+		.inner {
+			padding-top: 50px;
+			// padding-bottom: 50px;
+			border: 2px solid;
+			border-image: linear-gradient(to top, transparent 0%, $color-main 100%) 1;
+			> .title {}
+			> .content {
+				margin: 35px 0;
+				.prize-1,
+				.prize-2 {
+					width: 400px;
+					margin: 0 auto;
+					color: $color-white;
+					text-align: center;
+					// display: flex;
+					// align-items: center;
+					// justify-content: center;
+					// flex-direction: column;
+					.p-header {
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						flex-direction: row;
+						font-size: $fontsize-2;
+						margin-bottom: 35px;
+						&_label {
+							// font-size: $fontsize-3;
+							letter-spacing: 3px;
+							font-weight: 500;
+							padding: 7px 30px;
+							background: $color-main;
+							background: linear-gradient(90deg, transparent 0% 3%, $color-second 50%, transparent 97% 100%);
+						}
+						&_t {
+							@include text_lineargradient-2;
+							margin-right: 15px;
+							margin-left: 15px;
+						}
+						&_q {
+							font-size: $fontsize + 2px;
+							background: #977D27;
+							padding: 3px 11px;
+							border-radius: 37px;
+							letter-spacing: -.5px;
+						}
+					}
+					.p-list {
+						li {
+							font-size: $fontsize + 1px;
+							max-width: 50%;
+							margin: 12px auto;
+							display: grid;
+							grid-template-columns: 1fr 1fr;
+							> div {
+								letter-spacing: .5px;
+							}
+						}
+						&_header {
+							margin: 25px auto !important;
+							> div {
+								@include text_lineargradient-2;
+							}
+						}
+					}
+				}
+				.prize-1 {
+					border-bottom: 1px solid #424242;
+					padding-bottom: 35px;
+					margin-bottom: 35px;
+				}
+			}
+		}
+	}
+}

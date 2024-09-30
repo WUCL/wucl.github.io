@@ -1,0 +1,91 @@
+/* =======================
+   pages/product
+   ======================= */
+.main {
+	section._product {
+		padding: 0;
+		margin-bottom: 10px;
+		position: relative;
+		width: 100%;
+		height: 31.2vw;
+		@include mq($max-width: $bp-2m) {
+			height: 55.5vw;
+		}
+		&:before {
+			content: "";
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url(../img/Hikibi40_banner@2x.webp) left top no-repeat;
+			background-size: cover;
+			// @include mq($max-width: $bp-2l) {
+			// 	background: url(../img/kv_m.webp) left top no-repeat;
+			// 	background-size: cover;
+			// }
+		}
+
+		.inner {
+			> .content {
+				width: 56%;
+				max-width: 600px;
+				position: absolute;
+				top: 2vw;
+				right: -8vw;
+				border: 2px solid $color-main;
+				padding: 30px 40px 15px 50px;
+				background: rgba(0, 0, 0, .56);
+				color: $color-main;
+				.p-name {
+					@include text_lineargradient-1;
+					font-size: $fontsize-2;
+					letter-spacing: 5px;
+					font-weight: 400;
+				}
+				.p-label {
+					font-size: $fontsize-b;
+					letter-spacing: 1.5em;
+					margin: 15px 0;
+					color: #EDE1A4;
+				}
+				.p-img {
+					width: 90%;
+					max-width: 350px;
+					margin: 15px auto;
+					img {
+						display: block;
+						width: 100%;
+					}
+				}
+				.p-info {
+
+				}
+				.p-info-item {
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+					> div {
+						margin: 5px 0;
+						letter-spacing: 1px;
+						font-size: $fontsize-a;
+						font-weight: 400;
+						&:nth-child(1) {
+							padding: 5px;
+							width: 100%;
+							max-width: 85px;
+							text-align: center;
+							background: $color-black;
+							color: $color-white;
+						}
+						&:nth-child(2) {
+							@include text_lineargradient-3;
+							margin-left: 15px;
+							text-align: left;
+							letter-spacing: -.5px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
