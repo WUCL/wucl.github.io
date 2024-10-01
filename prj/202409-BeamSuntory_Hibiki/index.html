@@ -17,10 +17,12 @@
         <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
         <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
         <link rel="icon" type="image/png" href="./public/img/favicon.ico" />
+
         <link rel="stylesheet" type="text/css" href="./public/bs/css/beamsuntory-reset.min.css" />
         <link rel="stylesheet" type="text/css" href="./public/bs/css/beamsuntory-style.css" />
         <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" />
         <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+
         <!-- Meta Pixel Code -->
         <script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -285,8 +287,62 @@
 
         <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
         <script src="./public/lib/slick/slick.min.js"></script>
+        <script src="./public/lib/jquery.preload/jquery.preload.min.js"></script>
+        <script src="./public/lib/jquery.preload/preload.js"></script>
         <script src="./public/js/custom/eventdevice.js"></script>
+
         <script src="./public/bs/js/beamsuntory-index.js"></script>
+
+        <script type="text/javascript">
+        function preloadImg(imgs) {
+        	// console.log(imgs);
+
+            let index = 0,
+            len = imgs.length;
+
+            // 图片预加载
+            $.preload(imgs, {
+                // 是否有序加载
+                order: false,
+                minTimer: 1300,
+                // 每加载完一张执行的方法
+                each: function (count) {
+                    let percent = Math.round((count+1) / len * 100) + '%';
+                    // console.log(percent);
+                },
+                // 加载完所有的图片执行的方法
+                end: function () {
+                    // console.log((index + 1) + '/' + len);
+                }
+            });
+        }
+        window.preloadImgs = [
+        	'./public/img/carousel_arrow_right@2x.png',
+        	'./public/img/arrow@2x.png',
+        	'./public/img/carousel_arrow_left@2x.png',
+        	'./public/img/linear.png',
+        	'./public/img/bg_notice.webp',
+        	'./public/img/bg.webp',
+        	'./public/img/event_role_flow_1@2x.webp',
+        	'./public/img/event_role_flow_2@2x.webp',
+        	'./public/img/event_role_flow_3@2x.webp',
+        	'./public/img/event_role_flow_4@2x.webp',
+        	'./public/img/event_role_flow_5@2x.webp',
+        	'./public/img/event_rule_prize_1@2x.webp',
+        	'./public/img/event_rule_prize_2@2x.webp',
+        	'./public/img/event_ticket_m@2x.webp',
+        	'./public/img/event_ticket@2x.webp',
+        	'./public/img/events_info@2x.webp',
+        	'./public/img/kv_m.webp',
+        	'./public/img/kv.webp',
+        	'./public/img/prize_1@2x.webp',
+        	'./public/img/prize_2@2x.webp',
+        	'./public/img/product_details_m@2x.webp',
+        	'./public/img/product_details@2x.webp',
+        ];
+        preloadImg(window.preloadImgs);
+
+        </script>
         <script src="./public/js/main.js"></script>
     </body>
 </html>
