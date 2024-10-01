@@ -124,6 +124,11 @@
 						width: 64vw;
 						height: 21vw;
 						display: block;
+						@include mq($min-width: $bp-xl) {
+							width: calc(1408px / 2);
+							height: calc(476px / 2);
+						}
+
 						@include mq($max-width: $bp-2l) {
 							width: 82vw;
 							height: 27vw;
@@ -167,6 +172,10 @@
 							color: $color-main;
 							line-height: normal;
 							letter-spacing: 7px;
+							@include mq($min-width: $bp-xl) {
+								top: 49%;
+								left: 63%;
+							}
 							@include mq($max-width: $bp-2l) {
 								top: 13.7vw;
 								left: 51.9vw;
