@@ -103,13 +103,13 @@
                 <div class="s-search">
                     <div class="description">請輸入您的手機號碼，&#10;&#13;以查詢您的「認購權抽獎序號」</div>
                     <div id="searchbar" class="searchbar" _error>
-                        <input type="text" id="s_it" class="s_it" name="s_it" placeholder="請輸入您的手機號碼">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="10" size="10" id="s_it" class="s_it" name="s_it" placeholder="請輸入您的手機號碼">
                         <button id="btn-submit" class="btn-submit">查 詢</button>
                         <div class="msg_error">手機號碼格式錯誤</div>
                     </div>
                 </div>
                 <div class="s-result">
-                    <div id="ticket" class="ticket" data-num="20398"></div>
+                    <div id="ticket" class="ticket" data-num></div>
                     <button id="btn-research" class="btn-research">重新查詢</button>
                 </div>
             </div>

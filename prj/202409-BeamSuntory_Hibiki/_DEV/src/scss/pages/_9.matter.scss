@@ -33,7 +33,7 @@
 				font-size: $fontsize-e;
 				line-height: $fontsize-2;
 				// max-width: 78%;
-				padding: 30px 0 0;
+				padding: 30px 0 0 30px;
 				@include mq($max-width: $bp-2s) {
 					max-width: 87%;
 					margin: 15px;
