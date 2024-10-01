@@ -14,6 +14,8 @@ $(function() {
             $s_it: $('#s_it'),
             $btn_submit: $('#btn-submit'),
             $btn_research: $('#btn-research'),
+
+            $carouselit: $('#carouselit'),
         },
         var: {
         },
@@ -21,6 +23,8 @@ $(function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             this.bindEvent();
+
+            this.carouselit();
         },
         bindEvent: function() {
             let $this = this;
@@ -43,6 +47,20 @@ $(function() {
 
                 $this.el.$_searcher.attr('data-layer', 1);
                 return;
+            });
+        },
+
+        carouselit: function() {
+            this.el.$carouselit.slick({
+                infinite: false,
+                dots: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                // centerMode: true,
+                centerPadding: '30px',
+                prevArrow: '<button type="button" class="slick-prev"></button>',
+                nextArrow: '<button type="button" class="slick-next"></button>',
+
             });
         },
     };

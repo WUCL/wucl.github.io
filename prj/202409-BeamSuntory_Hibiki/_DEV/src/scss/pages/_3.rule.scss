@@ -1,0 +1,53 @@
+/* =======================
+   pages/rule
+   ======================= */
+.main {
+	section._rule {
+		> .inner {
+			.content {
+				padding-top: 20px;
+				img {
+					width: 100%;
+					display: block;
+					padding: 10px;
+				}
+				.slick-list {
+					max-width: calc(100% - 120px);
+    				// padding: 0 50px;
+		    		margin: 0 auto;
+				}
+				.slick-prev,
+				.slick-next {
+					position: absolute;
+					top: calc(50% - calc(120px / 5));
+					z-index: 1;
+					width: calc(120px / 3);
+					height: calc(120px / 3);
+					&:before {
+						content: "";
+						display: block;
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.slick-prev {
+					left: 0;
+					&:before {
+						background: url(../img/carousel_arrow_left@2x.png) left top no-repeat;
+						background-size: cover;
+					}
+				}
+				.slick-next {
+					right: 0;
+					&:before {
+						background: url(../img/carousel_arrow_right@2x.png) left top no-repeat;
+						background-size: cover;
+					}
+				}
+			}
+		}
+	}
+}

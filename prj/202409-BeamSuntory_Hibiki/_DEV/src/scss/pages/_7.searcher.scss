@@ -85,6 +85,8 @@
 						display: block;
 						background: url(../img/event_ticket@2x.webp) left top no-repeat;
 						background-size: cover;
+						font-family: Times New Roman;
+						font-weight: 500;
 						&:after {
 							@include text_lineargradient-1;
 

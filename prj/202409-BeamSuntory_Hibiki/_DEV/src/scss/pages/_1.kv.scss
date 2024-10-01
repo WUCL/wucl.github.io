@@ -20,6 +20,7 @@
 			height: 100%;
 		}
 		&:before {
+			top: 0;
 			background: url(../img/kv.webp) left top no-repeat;
 			background-size: cover;
 			@include mq($max-width: $bp-2l) {

@@ -19,6 +19,7 @@
         <link rel="icon" type="image/png" href="./public/img/favicon.ico" />
         <link rel="stylesheet" type="text/css" href="./public/bs/css/beamsuntory-reset.min.css" />
         <link rel="stylesheet" type="text/css" href="./public/bs/css/beamsuntory-style.css" />
+        <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" />
         <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
 	</head>
 	<body>
@@ -66,49 +67,91 @@
                     <div class="inner inner-method">
                         <div class="title">活動說明與辦法</div>
                         <div class="content">
-                            <div class="headline">會員於活動期間，使用會員點數 <span>15 點</span> 兌換抽獎券，即可參加 12/9 <span>Hibiki 40 年認購權抽獎</span> 活動</div>
+                            <div class="headline">活動期間內，凡使用會員點數 <span>15 點</span> 即可兌換，兌換抽獎券，最高上限乙張 <span>Hibiki 40 年認購權抽獎券</span></div>
                             <div class="description">
-                                <p>※ 會員完成兌換流程後，將透過 LINE 派發「抽獎序號」</p>
-                                <p>※ 若忘記抽獎序號，可於成功兌換的 2 小時後，至活動官網「Hibiki 40 年認購權 抽獎序號」區塊查詢。</p>
-                                <p>※ 抽獎將於12/9 (一)進行線上直播，獎項包括:<br>・Hibiki 40 年 認購權 (1名)<br>・Hibiki JH (10名)</p>
-                                <p>※ 每個會員帳號限兌換乙張抽獎券。若單一帳號重覆中獎，需請得獎者擇一領取。 放棄的獎項將由備取者遞補。</p>
+                                <p>・完成「Hibiki 40 年認購權抽獎」兌換流程 2 小時内，系統將於官方 LINE 帳號派發個人「專屬抽獎序號」。</p>
+                                <p>・12/9 (一) 線上直播，抽出「Hibiki 40 年認購權 *1名」，會員可憑「專屬抽獎序號」兌獎。</p>
+                                <p>・12/10 (二) 將正式於官方 LINE 帳號公布「Hibiki 40 年認購權 *1名」、「Hibiki Japanese Harmony * 10名」中獎名單。</p>
+                                <p>・「Hibiki 40 年認購權」得獎者，須於 12/13 (五) 前確認是否兌獎，逾期視同放棄，將順延下一位備取得獎者。</p>
+                                <p>・每位會員帳號僅限兌換乙張抽獎券資格。且若單一帳號重覆中獎，須請得獎者擇一領取。另一獎項空缺名額將由備取者遞補。</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section id="_ruledt" class="_ruledt">
+            <section id="_rule" class="_rule">
                 <div class="inner">
-                    <div class="inner inner-rule">
-                        <div class="title">活動資格與辦法</div>
-                        <div class="content">
-                            <img src="./public/img/event_rule_1@2x.webp">
-                            <img src="./public/img/event_rule_2@2x.webp">
-                            <img src="./public/img/event_rule_3@2x.webp">
+                    <div class="title">活動資格與辦法</div>
+                    <div class="content">
+                        <div id="carouselit" class="carouselit">
+                            <img src="./public/img/event_role_flow_1@2x.webp">
+                            <img src="./public/img/event_role_flow_2@2x.webp">
+                            <img src="./public/img/event_role_flow_3@2x.webp">
+                            <img src="./public/img/event_role_flow_4@2x.webp">
+                            <img src="./public/img/event_role_flow_5@2x.webp">
                         </div>
                     </div>
-                    <div class="inner inner-dt">
-                        <div class="title">活動期間</div>
-                        <div class="content">
-                            <div class="e-time">
-                                <div class="e-title">報名時間</div>
-                                <div class="e-content">即日起至 12/1 (日) 23:59 截止</div>
+                </div>
+            </section>
+            <section id="_dt" class="_dt">
+                <div class="inner">
+                    <div class="title">活動期間</div>
+                    <div class="content">
+                        <div class="dt_info">
+                            <div class="dt_info-title">兌換抽獎券</div>
+                            <div class="dt_info-content">點數兌換抽獎券開放至 12/1(日) 23:59 結束</div>
+                        </div>
+                        <div class="dt_info">
+                            <div class="dt_info-title">Hibiki 40 年 認購權</div>
+                            <div class="dt_info-content">將在 12/9(一)於直播中抽出</div>
+                        </div>
+                        <div class="dt_info">
+                            <div class="dt_info-title">Hibiki Japanese Harmony</div>
+                            <div class="dt_info-content">將另外抽出，並於 12/10公佈得獎名單</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="_product" class="_product">
+                <div class="inner">
+                    <div class="content">
+                        <div class="p-name">響HIBIKI 40年日本威士忌</div>
+                        <div class="p-label">限量雋藏之作</div>
+                        <div class="p-img"><img src="./public/img/Hikibi40_details@2x.webp"></div>
+                        <div class="p-info">
+                            <div class="p-info-item">
+                                <div>色澤</div>
+                                <div>金琥珀色</div>
                             </div>
-                            <div class="e-date">
-                                <div class="e-title">活動日期</div>
-                                <div class="e-content">12/9 （一）線上直播抽出獎項，包括：</div>
-                                <div class="e-prizes">
-                                    <div class="e-prizes-1">
-                                        <img src="./public/img/event_rule_prize_1@2x.webp">
-                                        <p>Hibiki 40年 認購權 (1名)</p>
-                                    </div>
-                                    <div class="e-prizes-2">
-                                        <img src="./public/img/event_rule_prize_2@2x.webp">
-                                        <p>Hibiki JH (10名)</p>
-                                    </div>
-                                </div>
+                            <div class="p-info-item">
+                                <div>香氣</div>
+                                <div>杏桃、日本枇杷、檸檬丁香氣息</div>
+                            </div>
+                            <div class="p-info-item">
+                                <div>口感</div>
+                                <div>以無花果乾、蜂蜜、日本柚子交織出華麗層次</div>
+                            </div>
+                            <div class="p-info-item">
+                                <div>尾韻</div>
+                                <div>柔美細緻的日式檀香、悠饒綿延的水楢木尾韻</div>
+                            </div>
+                            <div class="p-info-item">
+                                <div>酒精濃度</div>
+                                <div>43%</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+            <section id="_prizes" class="_prizes">
+                <div class="inner">
+                    <div class="title">活動贈品獎項</div>
+                    <div class="content">
+                        <div class="prizes">
+                            <div class="prizes-1"><img src="./public/img/prize_1@2x.webp"></div>
+                            <div class="prizes-2"><img src="./public/img/prize_2@2x.webp"></div>
+                        </div>
+                        <div class="btn-cta"><a href="javascript:;" target="_blank">綁定會員，兌換抽獎</a></div>
                     </div>
                 </div>
             </section>
@@ -168,49 +211,6 @@
                     </div>
                 </div>
             </section>
-            <section id="_prizes" class="_prizes">
-                <div class="inner">
-                    <div class="title">活動贈品獎項</div>
-                    <div class="content">
-                        <div class="prizes">
-                            <div class="prizes-1"><img src="./public/img/prize_1@2x.webp"></div>
-                            <div class="prizes-2"><img src="./public/img/prize_2@2x.webp"></div>
-                        </div>
-                        <div class="btn-cta"><a href="javascript:;" target="_blank">綁定會員，兌換抽獎</a></div>
-                    </div>
-                </div>
-            </section>
-            <section id="_product" class="_product">
-                <div class="inner">
-                    <div class="content">
-                        <div class="p-name">響HIBIKI 40年日本威士忌</div>
-                        <div class="p-label">限量雋藏之作</div>
-                        <div class="p-img"><img src="./public/img/Hikibi40_details@2x.webp"></div>
-                        <div class="p-info">
-                            <div class="p-info-item">
-                                <div>色澤</div>
-                                <div>金琥珀色</div>
-                            </div>
-                            <div class="p-info-item">
-                                <div>香氣</div>
-                                <div>杏桃、日本枇杷、檸檬丁香氣息</div>
-                            </div>
-                            <div class="p-info-item">
-                                <div>口感</div>
-                                <div>以無花果乾、蜂蜜、日本柚子交織出華麗層次</div>
-                            </div>
-                            <div class="p-info-item">
-                                <div>尾韻</div>
-                                <div>柔美細緻的日式檀香、悠饒綿延的水楢木尾韻</div>
-                            </div>
-                            <div class="p-info-item">
-                                <div>酒精濃度</div>
-                                <div>43%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <section id="_matter" class="_matter">
                 <div class="inner">
                     <div class="title">注意事項</div>
@@ -218,7 +218,7 @@
                         <ol>
                             <li>本活動採系統機率抽獎，且不接受重複領獎，若有單一帳號重覆中獎之情形，主辦單位將於活動結束後透過Email信箱/LINE官方訊息通知，需請得獎者擇一領取。如無法配合或逾期未回覆者，視同放棄本次領取資格，不得要求補發。</li>
                             <li>得獎者需填寫正確會員資料，若因個人資料填寫不完整、不正確，或其他不可抗力因素，導致本活動小組無法取得聯繫者，視同放棄兌換資格，且不另行通知，亦不進行候補。</li>
-                            <li>所有活動資訊/領獎事宜皆以官方LINE帳號訊息通知，若期間因靜音/封鎖/刪除訊息等個人行為，導致錯失領取機會者，視同放棄資格，不得要求補發。</li>
+                            <li>「響Hibiki 40 年日本威士忌」認購權之兌獎方式，將由賓三得利台灣(股)公司專人聯繫中獎者。若抽中「響Hibiki 40 年日本威士忌」認購權之獎項，該中獎者不得再將其認購權轉讓，若中獎者放棄認購權，視同自願放棄中獎權利，亦不進行候補。</li>
                             <li>本活動贈送之獎項以實物為準，圖片僅供參考，獎項之款式/規格由賓三得利台灣(股)公司指定，得獎者不得要求更換、轉讓及兌現。如遇不可抗力之因素，主辦單位保留更換其他等值獎項之權利，且無需事前通知或公布。因部分酒款品項具高額價值性，配送/領取事宜將依實際通知時間為準。</li>
                             <li>未滿18歲者禁止飲酒，活動參與者需年滿18歲，若為活動中獎者，皆需出示有效身份證明文件(身分證、健保卡)，方得領取獎項，若經發現參與者未滿18歲，主辦單位有權撤銷領獎權利。</li>
                             <li>本活動贈獎資格皆以電腦系統紀錄為準，若參加人有任何涉及不正當得利/不法手段，或以一人多機/一人多號/一人多帳戶等方式重複參與等行為，賓三得利台灣(股)公司有權利取消其活動參與資格與回收獎勵，會員點數視同品牌資產，使用者需自行負擔因違反相關規定所產生之一切法律責任。</li>
@@ -262,6 +262,7 @@
         </aside>
 
         <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
+        <script src="./public/lib/slick/slick.min.js"></script>
         <script src="./public/js/custom/eventdevice.js"></script>
         <script src="./public/bs/js/beamsuntory-index.js"></script>
         <script src="./public/js/main.js"></script>
