@@ -8,7 +8,16 @@
 			// padding-bottom: 50px;
 			border: 2px solid;
 			border-image: linear-gradient(to top, transparent 0%, $color-main 100%) 1;
-			> .title {}
+			@include mq($max-width: $bp-m) {
+				max-width: 90%;
+			}
+			> .title {
+				@include mq($max-width: $bp-2s) {
+					font-size: $fontsize-4;
+					line-height: $fontsize-7;
+					letter-spacing: 3px;
+				}
+			}
 			> .content {
 				margin: 35px 0;
 				.prize-1,
@@ -21,25 +30,45 @@
 					// align-items: center;
 					// justify-content: center;
 					// flex-direction: column;
+					@include mq($max-width: $bp-3s) {
+						width: 100%;
+					}
 					.p-header {
 						display: flex;
 						align-items: center;
-						justify-content: flex-start;
+						justify-content: center;
 						flex-direction: row;
 						font-size: $fontsize-2;
 						margin-bottom: 35px;
-						&_label {
-							// font-size: $fontsize-3;
-							letter-spacing: 3px;
-							font-weight: 500;
-							padding: 7px 30px;
-							background: $color-main;
-							background: linear-gradient(90deg, transparent 0% 3%, $color-second 50%, transparent 97% 100%);
+						// &_label {
+						// 	// font-size: $fontsize-3;
+						// 	letter-spacing: 3px;
+						// 	font-weight: 500;
+						// 	padding: 7px 30px;
+						// 	background: $color-main;
+						// 	background: linear-gradient(90deg, transparent 0% 3%, $color-second 50%, transparent 97% 100%);
+						// }
+						@include mq($max-width: $bp-3s) {
+							font-size: $fontsize-3;
+							letter-spacing: 1px;
+						}
+						@include mq($max-width: $bp-2s) {
+							// font-size: $fontsize-2;
+							letter-spacing: -.5px;
 						}
 						&_t {
 							@include text_lineargradient-2;
 							margin-right: 15px;
 							margin-left: 15px;
+							font-size: inherit;
+							letter-spacing: inherit;
+							// @include mq($max-width: $bp-2m) {
+							// 	font-size: $fontsize-2;
+							// }
+							@include mq($max-width: $bp-2s) {
+								margin-right: 10px;
+								margin-left: 10px;
+							}
 						}
 						&_q {
 							font-size: $fontsize + 2px;
@@ -47,6 +76,7 @@
 							padding: 3px 11px;
 							border-radius: 37px;
 							letter-spacing: -.5px;
+							letter-spacing: inherit;
 						}
 					}
 					.p-list {
@@ -56,8 +86,19 @@
 							margin: 12px auto;
 							display: grid;
 							grid-template-columns: 1fr 1fr;
+							@include mq($max-width: $bp-3s) {
+								max-width: 78%;
+							}
+							@include mq($max-width: $bp-2s) {
+								max-width: 87%;
+							}
 							> div {
 								letter-spacing: .5px;
+								font-size: inherit;
+								@include mq($max-width: $bp-3s) {
+									font-size: $fontsize + 3px;
+									letter-spacing: 1px;
+								}
 							}
 						}
 						&_header {

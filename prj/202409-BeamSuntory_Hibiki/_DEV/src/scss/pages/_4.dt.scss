@@ -9,7 +9,7 @@
 				letter-spacing: .5px;
 				.dt_info {
 					width: 100%;
-					max-width: 640px;
+					max-width: 750px;
 
 					color: $color-white;
 					font-size: $fontsize + 1px;
@@ -21,17 +21,40 @@
 					border-bottom: 1px solid $color-divider;
 					padding-bottom: 25px;
 					margin-bottom: 25px;
+					@include mq($max-width: $bp-m) {
+						flex-direction: column;
+					}
 					&:last-child {
 						border: 0;
 					}
 					&-title {
 						display: inline-block;
 						width: 100%;
-						max-width: 240px;
-						padding: 13px;
+						max-width: 310px;
+						min-width: 310px;
+						padding: 13px 3px;
 						margin-right: 25px;
 						background: linear-gradient(to top, transparent 0%, rgba(255, 255, 255, .1) 92% 100%);
 						letter-spacing: .35px;
+				    	line-height: normal;
+						@include mq($max-width: $bp-2l) {
+							max-width: 280px;
+							min-width: 280px;
+						}
+						@include mq($max-width: $bp-m) {
+							margin-right: 0;
+							margin-bottom: 20px;
+							font-size: $fontsize-1;
+							font-weight: 500;
+							max-width: 75%;
+						}
+						@include mq($max-width: $bp-3s) {
+							font-size: $fontsize-2;
+							font-weight: bold;
+						}
+						@include mq($max-width: $bp-3s) {
+							max-width: 87%;
+						}
 						&:before {
 							content: "";
 							position: absolute;
@@ -54,6 +77,19 @@
 					&-content {
 						@include text_lineargradient-3;
 						letter-spacing: 1.5px;
+						line-height: normal;
+						text-align: left;
+						@include mq($max-width: $bp-m) {
+							text-align: center;
+							letter-spacing: 1px;
+							font-size: $fontsize-1;
+						}
+						@include mq($max-width: $bp-3s) {
+							text-align: center;
+							letter-spacing: 2px;
+							font-size: $fontsize-2;
+							max-width: 90%;
+						}
 					}
 				}
 			}

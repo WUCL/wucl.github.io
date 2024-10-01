@@ -8,7 +8,18 @@
 			padding-bottom: 50px;
 			border: 2px solid;
 			border-image: linear-gradient(to top, transparent 0%, $color-main 100%) 1;
-			> .title {}
+			@include mq($max-width: $bp-m) {
+				max-width: 90%;
+			}
+			@include mq($max-width: $bp-3s) {
+				padding-bottom: 87px;
+			}
+			> .title {
+				@include mq($max-width: $bp-2s) {
+					font-size: $fontsize-4;
+					line-height: $fontsize-7;
+				}
+			}
 			> .content {
 				.s-search,
 				.s-result {
@@ -32,11 +43,25 @@
 					.description {
 						color: $color-white;
 						margin: 35px 0;
+						@include mq($max-width: $bp-2m) {
+							font-size: $fontsize-1;
+							letter-spacing: 1px;
+						}
+						@include mq($max-width: $bp-3s) {
+							white-space: pre-wrap;
+							font-size: $fontsize-2;
+							line-height: $fontsize-5;
+							letter-spacing: 1.5px;
+						}
 					}
 					.searchbar {
 						display: block;
 						width: fit-content;
 						margin: 0 auto;
+						@include mq($max-width: $bp-3s) {
+							width: 100%;
+							max-width: 78%;
+						}
 						input {
 							background: $color-white;
 							text-align: center;
@@ -47,6 +72,13 @@
 							height: 48px;
 							font-size: $fontsize + 1px;
 							letter-spacing: 1px;
+							@include mq($max-width: $bp-3s) {
+								border-radius: 7px;
+								font-size: $fontsize-3;
+								width: 100%;
+								height: 56px;
+								margin-bottom: 20px;
+							}
 							&.s_it {
 								margin-right: 7px;
 								&:focus {
@@ -55,7 +87,12 @@
 							}
 						}
 						.btn-submit {
-
+							@include mq($max-width: $bp-3s) {
+								border-radius: 7px;
+								font-size: $fontsize-3;
+								width: 100%;
+								height: 56px;
+							}
 						}
 						.msg_error {
 							display: none;
@@ -75,34 +112,88 @@
 					}
 				}
 				.s-result {
-					@include mq($max-width: $bp-2m) {
-						// height: 55.5vw;
+					@include mq($max-width: $bp-3s) {
+						width: 100%;
+						max-width: 78%;
+						margin: 0 auto;
 					}
 					.ticket {
 				    	margin: 35px auto;
-						width: calc(1408px / 2);
-						height: calc(476px / 2);
+						// width: calc(1408px / 2);
+						// height: calc(476px / 2);
+						width: 64vw;
+						height: 21vw;
 						display: block;
-						background: url(../img/event_ticket@2x.webp) left top no-repeat;
-						background-size: cover;
-						font-family: Times New Roman;
-						font-weight: 500;
+						@include mq($max-width: $bp-2l) {
+							width: 82vw;
+							height: 27vw;
+						}
+						@include mq($max-width: $bp-3s) {
+				        	width: 101%;
+							height: 101vw;
+						}
+						&:before {
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							background: url(../img/event_ticket@2x.webp) left top no-repeat;
+							background-size: cover;
+							@include mq($max-width: $bp-3s) {
+								background: url(../img/event_ticket_m@2x.webp) left top no-repeat;
+								background-size: cover;
+							}
+						}
+
+						// @include mq($max-width: $bp-2m) {
+						// 	width: calc(546px / 2);
+						// 	height: calc(784px / 2);
+						// 	background: url(../img/event_ticket_m@2x.webp) left top no-repeat;
+						// 	background-size: cover;
+						// }
 						&:after {
 							@include text_lineargradient-1;
 
+							font-family: Times New Roman;
+							font-weight: 500;
 							content: attr(data-num);
 							position: absolute;
-							top: 8.2vw;
-							left: 32vw;
+							top: 10.7vw;
+							left: 40.9vw;
 							display: inline-block;
 							font-size: $fontsize-10;
 							color: $color-main;
 							line-height: normal;
 							letter-spacing: 7px;
+							@include mq($max-width: $bp-2l) {
+								top: 13.7vw;
+								left: 51.9vw;
+								font-size: $fontsize-9;
+							}
+							@include mq($max-width: $bp-2m) {
+								font-size: $fontsize-8;
+							}
+							@include mq($max-width: $bp-3s) {
+								font-size: $fontsize-11;
+								top: 76vw;
+								left: 18vw;
+							}
+							@include mq($max-width: $bp-2s) {
+								font-size: $fontsize-9;
+							}
 						}
 					}
 					.btn-research {
 						width: 120px;
+						@include mq($max-width: $bp-3s) {
+							border-radius: 7px;
+							font-size: $fontsize-3;
+							width: 98%;
+							height: 56px;
+							letter-spacing: 10px;
+						}
 					}
 				}
 			}

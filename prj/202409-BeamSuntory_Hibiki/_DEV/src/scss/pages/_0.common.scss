@@ -50,6 +50,7 @@
 				@include text_lineargradient-1;
 
 				font-size: $fontsize-3;
+				line-height: $fontsize-4;
 				font-weight: 300;
 				display: inline-block;
 				letter-spacing: 3px;
@@ -61,6 +62,17 @@
 
 				// background: rgb(255,255,255);
 				// background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,221,75,1) 50%, rgba(255,255,255,1) 100%);
+				@include mq($max-width: $bp-2m) {
+					padding-bottom: 15px;
+					padding-right: 15px;
+					padding-left: 15px;
+				}
+				@include mq($max-width: $bp-m) {
+					font-size: $fontsize-5;
+					line-height: $fontsize-9;
+					letter-spacing: 5px;
+					white-space: pre-wrap;
+				}
 			}
 			> .content {
 				width: 100%;

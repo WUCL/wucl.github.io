@@ -60,7 +60,20 @@ $(function() {
                 centerPadding: '30px',
                 prevArrow: '<button type="button" class="slick-prev"></button>',
                 nextArrow: '<button type="button" class="slick-next"></button>',
-
+                responsive: [
+                    {
+                      breakpoint: 900,
+                      settings: {
+                        slidesToShow: 2
+                      }
+                    },
+                    {
+                      breakpoint: 560,
+                      settings: {
+                        slidesToShow: 1
+                      }
+                    }
+                  ]
             });
         },
     };

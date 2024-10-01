@@ -9,12 +9,24 @@
 			}
 			> .content {
 				margin: 35px 0;
+				@include mq($max-width: $bp-m) {
+					max-width: 87%;
+				}
+				@include mq($max-width: $bp-3s) {
+					max-width: 100%;
+				}
 				.prizes {
 					display: grid;
 					grid-template-columns: 1fr 1fr;
+					@include mq($max-width: $bp-m) {
+						grid-template-columns: auto;
+					}
 					img {
 						display: block;
 						width: 100%;
+						@include mq($max-width: $bp-m) {
+							margin: 30px 0;
+						}
 					}
 				}
 				.btn-cta {
@@ -25,15 +37,23 @@
 					align-items: center;
 					justify-content: center;
 
-					font-size: calc($fontsize-2 + 2px);
-					font-weight: 500;
 					border-radius: 40px; // 52px
 					border: 1px solid $color-main;
 					overflow: hidden;
 
-
 					margin: 60px auto 0;
+					@include mq($max-width: $bp-m) {
+						max-width: 78%;
+					}
+					@include mq($max-width: $bp-3s) {
+						max-width: 90%;
+					}
+					@include mq($max-width: $bp-2s) {
+						max-width: 100%;
+					}
 					a {
+						font-size: calc($fontsize-2 + 2px);
+						font-weight: 500;
 						display: inline-flex;
 						align-items: center;
 						justify-content: center;
@@ -49,6 +69,14 @@
 						background: linear-gradient(110deg, #93692E 0%, #D6A604 78%, $color-main 100%);
 						color: $color-white;
 						text-shadow: 2px 2px 3px rgba(0, 0, 0, .35);
+						@include mq($max-width: $bp-m) {
+							font-size: $fontsize-4;
+							padding: 18px;
+						}
+						@include mq($max-width: $bp-2s) {
+							font-size: $fontsize-3;
+							letter-spacing: 3px;
+						}
 						&:after {
 							content: "";
 							display: inline-block;

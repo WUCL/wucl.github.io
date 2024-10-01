@@ -8,12 +8,28 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			@include mq($max-width: $bp-2m) {
+				flex-direction: column;
+			}
 			> .inner {
 				// max-width: auto;
+				.title {
+					@include mq($max-width: $bp-2m) {
+						margin: 0 auto;
+					}
+				}
 				&-pic {
 					width: 41%;
 					margin-right: 3%;
 					margin-left: 0;
+					@include mq($max-width: $bp-2l) {
+						// width: 43%;
+						margin-right: 0;
+					}
+					@include mq($max-width: $bp-2m) {
+						width: 100%;
+						margin-left: 0;
+					}
 					img {
 						width: 100%;
 						display: block;
@@ -25,6 +41,14 @@
 					margin-left: 3%;
 					text-align: left;
 					align-items: flex-start;
+					@include mq($max-width: $bp-2l) {
+						width: 53%;
+						margin-left: 0;
+					}
+					@include mq($max-width: $bp-2m) {
+						width: 100%;
+						margin-left: 0;
+					}
 				}
 				> .content {
 					.headline {
@@ -36,6 +60,16 @@
 						line-height: $fontsize-4;
 						letter-spacing: 1.7px;
 						margin: 25px 0;
+						@include mq($max-width: $bp-3s) {
+							font-size: $fontsize-1;
+							line-height: $fontsize-5;
+						}
+						@include mq($max-width: $bp-2s) {
+							font-size: $fontsize-3;
+							line-height: $fontsize-6;
+							letter-spacing: 3px;
+							text-align: center;
+						}
 						span {
 							font-weight: 500;
 							letter-spacing: 3px;
@@ -44,16 +78,35 @@
 							-moz-background-clip: text;
 							-webkit-text-fill-color: transparent;
 							-moz-text-fill-color: transparent;
+							@include mq($max-width: $bp-3s) {
+								letter-spacing: 2px;
+							}
+							@include mq($max-width: $bp-2s) {
+								letter-spacing: 0;
+							}
 						}
 					}
 					.description {
 						font-size: $fontsize-c;
 						padding-left: 1em;
+						text-align: justify;
+						@include mq($max-width: $bp-3s) {
+							font-size: $fontsize-1;
+						}
 						p {
 							color: #EAEAEA;
 							text-indent: -1em;
 							line-height: $fontsize-2;
 							letter-spacing: .5px;
+							@include mq($max-width: $bp-3s) {
+								letter-spacing: 1.5px;
+								line-height: $fontsize-5;
+							}
+							@include mq($max-width: $bp-2s) {
+								letter-spacing: 1.5px;
+								line-height: $fontsize-4;
+								opacity: .9;
+							}
 						}
 					}
 				}
