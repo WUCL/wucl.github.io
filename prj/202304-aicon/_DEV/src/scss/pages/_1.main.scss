@@ -509,13 +509,15 @@
 				}
 				.btn-download {
 					display: block;
-					margin-top: 20px;
+					margin: 20px auto 0;
 					width: calc(608px / 2);
 					height: calc(106px / 2);
 					transition: .1s;
 					&:before {
 						content: "";
 						position: absolute;
+						top: 0;
+						left: 0;
 						width: 100%;
 						height: 100%;
 						background: url(../img/btn_download@2x.png) left center no-repeat;
