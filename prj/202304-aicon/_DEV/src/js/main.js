@@ -24,6 +24,9 @@ $(function() {
             $slickList: $('#slick-list'),
             $cover: $('#cover'),
             $btn_coverClose: $('#btn-cover_close'),
+
+            $new_result: $('#new_result'),
+            $btn_download: $('#btn-download'),
         },
         var: {
         },
@@ -64,12 +67,13 @@ $(function() {
                 let $_result
                 , $_score = 0
                 , $_count1 = 0
-                , $_count2 = 6;
+                , $_count2 = 6
+                , $_download;
                 $.each($this.el.$form.serializeArray(), function() {
                     $_count1++;
-                    console.log(this.value);
+                    // console.log(this.value);
                     $_score += parseInt(this.value);
-                    console.log($_score);
+                    // console.log($_score);
                 });
                 if ($_count1 == $_count2) {
                     if ($_score > 10) {
@@ -83,10 +87,15 @@ $(function() {
                     $this.el.$score.attr('data-score', $_score);
                     $this.el.$s_2.attr('data-result', $_result).attr('data-layer', 2);
 
+                    $_download = $this.el.$new_result.find(' > img[data-rimg="' + $_result + '"]').attr('src');
+                    console.log($_download);
+                    $this.el.$btn_download.attr('href', $_download);
+                    /*
                     html2canvas(document.querySelector("#capture")).then(canvas => {
                         console.log(456);
                         document.querySelector("#capture").appendChild(canvas);
                     });
+                    */
                     return;
                 } else {
                     return alert('尚有未選擇項目');
