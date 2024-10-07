@@ -72,8 +72,8 @@
 					}
 				}
 				.addition {
-					font-size: $fontsize-d;
-					line-height: normal;
+					font-size: $fontsize-b;
+					line-height: $fontsize-1;
 					color: #666;
 					// @include mq($min-width: $bp - 1px) {
 					// 	font-size: $fontsize-a;
@@ -846,7 +846,8 @@ body.Mobile {
 				.box {
 					.content {
 						.caption {
-							font-size: calc($fontsize-3 + 1px);
+							// font-size: calc($fontsize-3 + 1px);
+							font-size: $fontsize-4;
 							p {
 								line-height: 2em;
 							}
@@ -878,6 +879,11 @@ body.Mobile {
 			}
 			&.s-3 {
 				.box {
+					.caption {
+						label {
+							font-size: $fontsize-3;
+						}
+					}
 					.cover {
 						&-addition {
 							padding: 0 35px;
