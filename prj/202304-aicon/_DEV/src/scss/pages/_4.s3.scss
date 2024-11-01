@@ -1,0 +1,247 @@
+/* =======================
+   pages/kv
+   ======================= */
+.main {
+	section {
+		&.s-3 {
+			&:before {
+				content: "";
+				position: absolute;
+				right: calc(49vw - calc(2224px / 2));
+				bottom: -60px;
+				width: calc(2224px / 2);
+				height: calc(1440px / 2);
+				background: url(../img/bg_splash_R@2x.png) left center no-repeat;
+				background-size: cover;
+			}
+			.box {
+				padding: 0;
+				.content {
+					// margin-bottom: 0;
+					padding: 30px 0;
+					.slick-list {
+						margin-top: 20px;
+						.slick-dots {
+							display: inline-flex;
+							> li {
+								font-size: 0;
+								line-height: 0;
+								display: block;
+								width: 20px;
+								height: 20px;
+								padding: 5px;
+								margin: 0 5px;
+								cursor: pointer;
+								color: transparent;
+								border: 0;
+								outline: none;
+								background: transparent;
+								&:before {
+									font-family: 'slick';
+									font-size: 40px;
+									line-height: 20px;
+									position: absolute;
+									top: 0;
+									left: 0;
+									width: 20px;
+									height: 20px;
+									content: '•';
+									text-align: center;
+									color: $color-circle;
+									-webkit-font-smoothing: antialiased;
+									-moz-osx-font-smoothing: grayscale;
+									transition: .1s;
+								}
+								&:hover,
+								&.slick-active {
+									&:before {
+										color: $color-main;
+									}
+								}
+								&.slick-active:hover {
+									opacity: .5;
+								}
+							}
+						}
+						.slick-item {
+							cursor: pointer;
+							display: block;
+							margin: 0 auto 60px;
+							transition: .2s;
+							&:hover {
+								transform: scale(.99);
+							}
+							&:before {
+								content: "";
+								position: absolute;
+								left: 0;
+								width: 100%;
+								height: 100%;
+							}
+							&-1 {
+								width: calc(808px / 2);
+								height: calc(502px / 2);
+								&:before {
+									background: url(../img/s3_doctor_1@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+							&-2 {
+								width: calc(804px / 2);
+								height: calc(596px / 2);
+								&:before {
+									background: url(../img/s3_doctor_2@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+							&-3 {
+								width: calc(806px / 2);
+								height: calc(454px / 2);
+								&:before {
+									background: url(../img/s3_doctor_3@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+							&-4 {
+								width: calc(808px / 2);
+								height: calc(536px / 2);
+								&:before {
+									background: url(../img/s3_doctor_4@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+							&-5 {
+								width: calc(832px / 2);
+								height: calc(470px / 2);
+								&:before {
+									background: url(../img/s3_doctor_5@2x.png) center center no-repeat;
+									background-size: contain;
+								}
+							}
+						}
+					}
+				}
+				.cover {
+					display: none;
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					background: rgba($color-black, .7);
+					z-index: 2;
+					&-close {
+						position: absolute;
+						z-index: 1;
+						// top: 30px;
+						// right: 30px;
+						top: 30%;
+						left: 75%;
+						display: block;
+						width: calc(100px / 2);
+						height: calc(100px / 2);
+						transition: .2s;
+						&:before {
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							background: url(../img/s3_pop_close@2x.png) center center no-repeat;
+							background-size: cover;
+						}
+						&:hover {
+							transform: scale(.9);
+						}
+					}
+					&-list {
+						width: 100%;
+						height: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						margin-top: 30px;
+					}
+					&-item {
+						display: none;
+						margin: 0 auto 30px;
+						width: 100%;
+						height: calc(580px / 2);
+						&:before {
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+						}
+						&-1 {
+							// width: calc(1000px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_1_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
+						&-2 {
+							// width: calc(962px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_2_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
+						&-3 {
+							// width: calc(962px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_3_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
+						&-4 {
+							// width: calc(962px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_4_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
+						&-5 {
+							// width: calc(962px / 2);
+							// height: calc(580px / 2);
+							&:before {
+								background: url(../img/s3_doctor_5_pop@2x.png) center center no-repeat;
+								background-size: contain;
+							}
+						}
+					}
+					&-addition {
+						font-size: $fontsize-d;
+						color: $color-white;
+						width: 100%;
+						// line-height: auto;
+						position: absolute;
+						bottom: 10%;
+						left: 50%;
+						transform: translateX(-50%);
+						// @include mq($min-width: $bp - 1px) {
+						// 	padding: 0 35px;
+						// 	line-height: normal;
+						// 	font-size: $fontsize-a;
+						// }
+					}
+				}
+			}
+			&:not([data-cover=""]) .cover,
+			&[data-cover="1"] .cover .cover-list .cover-item-1,
+			&[data-cover="2"] .cover .cover-list .cover-item-2,
+			&[data-cover="3"] .cover .cover-list .cover-item-3,
+			&[data-cover="4"] .cover .cover-list .cover-item-4,
+			&[data-cover="5"] .cover .cover-list .cover-item-5 {
+				display: block;
+			}
+		}
+	}
+}

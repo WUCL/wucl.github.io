@@ -727,6 +727,93 @@ body.disableScroll {
   -ms-transform: translateX(10px);
   transform: translateX(10px);
 }
+.main .slick-prev,
+.main .slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+  z-index: 1;
+  margin: 20px auto;
+  width: 52.1739130435px;
+  height: 52.1739130435px;
+  -webkit-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+.main .slick-prev:before,
+.main .slick-next:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../img/s3_carousel_arrow@2x.png) center center no-repeat;
+  background-size: cover;
+}
+.main .slick-prev:hover,
+.main .slick-next:hover {
+  width: 50px;
+  height: 50px;
+  opacity: 0.78;
+}
+.main .slick-prev {
+  left: 25px;
+}
+.main .slick-next {
+  right: 25px;
+}
+.main .slick-next:before {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+body.Mobile .main section > .inner .box .content .caption {
+  font-size: 1.8rem;
+}
+body.Mobile .main section > .inner .box .content .caption p {
+  line-height: 2em;
+}
+body.Mobile .main section > .inner .box .content .addition {
+  font-size: 0.95rem;
+}
+body.Mobile .main section.s-2 .box .content .test ul {
+  padding: 0;
+}
+body.Mobile .main section.s-2 .box .content .test ul li {
+  font-size: calc(1.6rem + 1px);
+  padding: 23px 0;
+  -ms-grid-columns: auto 100px 100px 100px;
+  grid-template-columns: auto 100px 100px 100px;
+}
+body.Mobile .main section.s-2 .box .content .addition {
+  font-size: 0.95rem;
+}
+body.Mobile .main section.s-3 .box .caption label {
+  font-size: 1.6rem;
+}
+body.Mobile .main section.s-3 .box .cover-addition {
+  padding: 0 35px;
+  line-height: normal;
+  font-size: 0.95rem;
+}
+
+/* =======================
+   pages/kv
+   ======================= */
 .main section.s-1:before {
   content: "";
   position: absolute;
@@ -860,6 +947,10 @@ body.disableScroll {
   -webkit-animation: countdown 11s linear forwards;
   animation: countdown 11s linear forwards;
 }
+
+/* =======================
+   pages/kv
+   ======================= */
 .main section.s-2 {
   /*
   &[data-layer="2"] .box .content .layer-2,
@@ -1144,6 +1235,10 @@ body.disableScroll {
 .main section.s-2[data-result="1"] .box .content .new_result .n_r-1, .main section.s-2[data-result="2"] .box .content .new_result .n_r-2, .main section.s-2[data-result="3"] .box .content .new_result .n_r-3 {
   display: block;
 }
+
+/* =======================
+   pages/kv
+   ======================= */
 .main section.s-3:before {
   content: "";
   position: absolute;
@@ -1368,87 +1463,4 @@ body.disableScroll {
 }
 .main section.s-3:not([data-cover=""]) .cover, .main section.s-3[data-cover="1"] .cover .cover-list .cover-item-1, .main section.s-3[data-cover="2"] .cover .cover-list .cover-item-2, .main section.s-3[data-cover="3"] .cover .cover-list .cover-item-3, .main section.s-3[data-cover="4"] .cover .cover-list .cover-item-4, .main section.s-3[data-cover="5"] .cover .cover-list .cover-item-5 {
   display: block;
-}
-.main .slick-prev,
-.main .slick-next {
-  font-size: 0;
-  line-height: 0;
-  position: absolute;
-  top: 50%;
-  display: block;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  -webkit-transform: translate(0, -50%);
-  -ms-transform: translate(0, -50%);
-  transform: translate(0, -50%);
-  cursor: pointer;
-  color: transparent;
-  border: none;
-  outline: none;
-  background: transparent;
-  z-index: 1;
-  margin: 20px auto;
-  width: 52.1739130435px;
-  height: 52.1739130435px;
-  -webkit-transition: 0.1s;
-  -o-transition: 0.1s;
-  transition: 0.1s;
-}
-.main .slick-prev:before,
-.main .slick-next:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(../img/s3_carousel_arrow@2x.png) center center no-repeat;
-  background-size: cover;
-}
-.main .slick-prev:hover,
-.main .slick-next:hover {
-  width: 50px;
-  height: 50px;
-  opacity: 0.78;
-}
-.main .slick-prev {
-  left: 25px;
-}
-.main .slick-next {
-  right: 25px;
-}
-.main .slick-next:before {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-}
-
-body.Mobile .main section > .inner .box .content .caption {
-  font-size: 1.8rem;
-}
-body.Mobile .main section > .inner .box .content .caption p {
-  line-height: 2em;
-}
-body.Mobile .main section > .inner .box .content .addition {
-  font-size: 0.95rem;
-}
-body.Mobile .main section.s-2 .box .content .test ul {
-  padding: 0;
-}
-body.Mobile .main section.s-2 .box .content .test ul li {
-  font-size: calc(1.6rem + 1px);
-  padding: 23px 0;
-  -ms-grid-columns: auto 100px 100px 100px;
-  grid-template-columns: auto 100px 100px 100px;
-}
-body.Mobile .main section.s-2 .box .content .addition {
-  font-size: 0.95rem;
-}
-body.Mobile .main section.s-3 .box .caption label {
-  font-size: 1.6rem;
-}
-body.Mobile .main section.s-3 .box .cover-addition {
-  padding: 0 35px;
-  line-height: normal;
-  font-size: 0.95rem;
 }
