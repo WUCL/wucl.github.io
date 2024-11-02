@@ -6,54 +6,71 @@
 		&.s-2 {
 			.box {
 				.content {
+					@include mq($min-width: $bp - 1px) {
+						padding: 0 20px;
+					}
 					.test {
 						ul {
 							padding: 0 15px;
-							// @include mq($min-width: $bp - 1px) {
-							// 	padding: 0;
-							// }
+							@include mq($min-width: $bp - 1px) {
+								padding: 0;
+							}
 							li {
 								display: grid;
-								grid-template-columns: auto 110px 110px 110px;
+								grid-template-columns: auto 75px 75px 75px 75px 75px;
 								align-items: center;
-								font-size: calc($fontsize-1 + 1px);
+								font-size: calc($fontsize-1 + 2px);
 								line-height: calc($fontsize-5 - 3px);
 								color: $color-font;
-								letter-spacing: .5px;
+								letter-spacing: .7px;
 								// padding: 11px 0;
 								padding: 21px 0;
 								background-image: linear-gradient(to right, #D2DEEE 55%, rgba($color-white, 0) 10%);
 								background-position: bottom;
 								background-size: 20px 2px;
 								background-repeat: repeat-x;
-								// @include mq($min-width: $bp - 1px) {
-								// 	font-size: calc($fontsize-3 + 1px);
-								// 	padding: 23px 0;
-								// 	grid-template-columns: auto 100px 100px 100px;
-								// }
+
+								@include mq($min-width: $bp - 1px) {
+									font-size: $fontsize-4;
+									// line-height: calc($fontsize-5 - 3px);
+									padding: 35px 0;
+									grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
+									letter-spacing: -.7px;
+								}
+
+								white-space: pre-wrap;
 								&:first-child {
 									background-image: linear-gradient(to right, #D2DEEE 100%, rgba($color-white, 0) 10%);
+									line-height: $fontsize-3;
+									@include mq($min-width: $bp - 1px) {
+										font-size: $fontsize-4;
+										line-height: $fontsize-6;
+										letter-spacing: -3.5px;
+									}
 								}
 								div {
 									font-size: inherit;
 									display: inline-block;
 									&:nth-child(1) {
-										text-align: justify;
+										// text-align: justify;
+										text-align: left;
 									}
 									&:nth-child(2),
 									&:nth-child(3),
-									&:nth-child(4) {
+									&:nth-child(4),
+									&:nth-child(5),
+									&:nth-child(6) {
 										display: inline-flex;
 										justify-content: center;
 										align-items: center;
 										label {
 											display: inline-block;
-											width: calc(60px / 2);
-											height: calc(60px / 2);
+											width: calc(50px / 2);
+											height: calc(50px / 2);
 											touch-action: manipulation; // label&input on mobile be smooth
 											@include mq($max-width: $bp-l) {
-												width: calc(80px / 2);
-												height: calc(80px / 2);
+												width: calc(78px / 2);
+												height: calc(78px / 2);
 											}
 											&:before {
 												content: "";
@@ -80,17 +97,35 @@
 											}
 										}
 									}
-									&:nth-child(2) {
-
-									}
-									&:nth-child(3) {
-
-									}
-									&:nth-child(4) {
-
-									}
+									&:nth-child(2) {}
+									&:nth-child(3) {}
+									&:nth-child(4) {}
+									&:nth-child(5) {}
+									&:nth-child(6) {}
 								}
 							}
+						}
+						.step-q {
+							.caption {
+								white-space: pre-wrap;
+								line-height: normal;
+							}
+						}
+					}
+					.btn-s_2-next {
+						background: $color-second;
+						width: 180px;
+						height: 60px;
+						color: $color-white;
+						display: inline-flex;
+						flex-direction: column;
+						justify-content: center;
+						font-size: $fontsize-2;
+						letter-spacing: 5px;
+						margin: 50px auto 20px;
+						border-radius: 7px;
+						@include mq($min-width: $bp - 1px) {
+							font-size: $fontsize-4;
 						}
 					}
 					.btn-s_2 {
@@ -264,6 +299,14 @@
 					}
 				}
 			}
+			&[data-step="1"] .box .content .test .step-q-2,
+			&[data-step="1"] .box .content .test .step-q-3,
+			&[data-step="2"] .box .content .test .step-q-1,
+			&[data-step="2"] .box .content .test .step-q-3,
+			&[data-step="3"] .box .content .test .step-q-1,
+			&[data-step="3"] .box .content .test .step-q-2 {
+				display: none;
+			}
 
 			&[data-layer="2"] .box .content .caption,
 			&[data-layer="2"] .box .content .test {
@@ -276,7 +319,8 @@
 			}
 			&[data-result="1"] .box .content .new_result .n_r-1,
 			&[data-result="2"] .box .content .new_result .n_r-2,
-			&[data-result="3"] .box .content .new_result .n_r-3 {
+			&[data-result="3"] .box .content .new_result .n_r-3,
+			&[data-result="4"] .box .content .new_result .n_r-4 {
 				display: block;
 			}
 

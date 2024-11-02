@@ -96,11 +96,17 @@ gulp.task('style', ()=> {
         , grid: true
         , cascade: false
     }))
-    // .pipe(cleanCSS({ compatibility: 'ie8' }))
-    // .pipe(rename(function (path) { // Updates the object in-place// path.dirname += "/ciao";// path.extname = ".css";
-    //     path.basename += ".min";
-    // }))
-    // .pipe(debug({ title: 'Compile:' }))
+
+    // not minfi export .css first
+    .pipe(debug({ title: 'Compile:' }))
+    .pipe(gulp.dest(PATH.DEST.CSS))
+    // not minfi export .css first
+
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(rename(function (path) { // Updates the object in-place// path.dirname += "/ciao";// path.extname = ".css";
+        path.basename += ".min";
+    }))
+    .pipe(debug({ title: 'Compile:' }))
     .pipe(gulp.dest(PATH.DEST.CSS))
     .pipe(bs.stream())
     .pipe(notify({
