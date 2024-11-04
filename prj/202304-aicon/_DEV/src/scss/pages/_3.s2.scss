@@ -6,15 +6,15 @@
 		&.s-2 {
 			.box {
 				.content {
-					@include mq($min-width: $bp - 1px) {
-						padding: 0 20px;
-					}
+					// @include mq($max-width: $bp - 1px) {
+					// 	padding: 0 20px;
+					// }
 					.test {
 						ul {
 							padding: 0 15px;
-							@include mq($min-width: $bp - 1px) {
-								padding: 0;
-							}
+							// @include mq($max-width: $bp - 1px) {
+							// 	padding: 0;
+							// }
 							li {
 								display: grid;
 								grid-template-columns: auto 75px 75px 75px 75px 75px;
@@ -30,19 +30,19 @@
 								background-size: 20px 2px;
 								background-repeat: repeat-x;
 
-								@include mq($min-width: $bp - 1px) {
-									font-size: $fontsize-4;
-									// line-height: calc($fontsize-5 - 3px);
-									padding: 35px 0;
-									grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
-									letter-spacing: -.7px;
-								}
+								// @include mq($max-width: $bp - 1px) {
+								// 	font-size: $fontsize-4;
+								// 	// line-height: calc($fontsize-5 - 3px);
+								// 	padding: 35px 0;
+								// 	grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
+								// 	letter-spacing: -.7px;
+								// }
 
 								white-space: pre-wrap;
 								&:first-child {
 									background-image: linear-gradient(to right, #D2DEEE 100%, rgba($color-white, 0) 10%);
 									line-height: $fontsize-3;
-									@include mq($min-width: $bp - 1px) {
+									@include mq($max-width: $bp - 1px) {
 										font-size: $fontsize-4;
 										line-height: $fontsize-6;
 										letter-spacing: -3.5px;
@@ -68,10 +68,10 @@
 											width: calc(50px / 2);
 											height: calc(50px / 2);
 											touch-action: manipulation; // label&input on mobile be smooth
-											@include mq($max-width: $bp-l) {
-												width: calc(78px / 2);
-												height: calc(78px / 2);
-											}
+											// @include mq($max-width: $bp-l) {
+											// 	width: calc(78px / 2);
+											// 	height: calc(78px / 2);
+											// }
 											&:before {
 												content: "";
 												display: block;
@@ -124,9 +124,9 @@
 						letter-spacing: 5px;
 						margin: 50px auto 20px;
 						border-radius: 7px;
-						@include mq($min-width: $bp - 1px) {
-							font-size: $fontsize-4;
-						}
+						// @include mq($max-width: $bp - 1px) {
+						// 	font-size: $fontsize-4;
+						// }
 					}
 					.btn-s_2 {
 						&:before {
@@ -325,6 +325,57 @@
 			}
 
 			/* new result */
+		}
+	}
+}
+
+body.Mobile {
+	.main {
+		section {
+			&.s-2 {
+				.box {
+					.content {
+						padding: 0 20px;
+						.test {
+							ul {
+								padding: 0;
+								li {
+									font-size: $fontsize-4;
+									line-height: $fontsize-5;
+									padding: 35px 0;
+									grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
+									letter-spacing: -2px;
+									div {
+										&:nth-child(2),
+										&:nth-child(3),
+										&:nth-child(4),
+										&:nth-child(5),
+										&:nth-child(6) {
+											label {
+												width: calc(78px / 2);
+												height: calc(78px / 2);
+											}
+										}
+									}
+								}
+							}
+						}
+						.btn-s_2-next {
+							font-size: $fontsize-4;
+						}
+						.addition {
+							font-size: $fontsize-a;
+						}
+					}
+					.new_result {
+						.btn-download {
+							margin: 35px auto 20px;
+							width: calc(608px / 1.68);
+							height: calc(106px / 1.68);
+						}
+					}
+				}
+			}
 		}
 	}
 }

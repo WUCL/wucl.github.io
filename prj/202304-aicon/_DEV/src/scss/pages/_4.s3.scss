@@ -81,10 +81,10 @@
 							&-1 {
 								width: calc(808px / 2);
 								height: calc(502px / 2);
-								@include mq($min-width: $bp - 1px) {
-									width: calc(808px / 1.6);
-									height: calc(502px / 1.6);
-								}
+								// @include mq($max-width: $bp - 1px) {
+								// 	width: calc(808px / 1.6);
+								// 	height: calc(502px / 1.6);
+								// }
 								&:before {
 									background: url(../img/s3_doctor_1@2x.png) center center no-repeat;
 									background-size: contain;
@@ -93,10 +93,10 @@
 							&-2 {
 								width: calc(804px / 2);
 								height: calc(596px / 2);
-								@include mq($min-width: $bp - 1px) {
-									width: calc(804px / 1.6);
-									height: calc(596px / 1.6);
-								}
+								// @include mq($max-width: $bp - 1px) {
+								// 	width: calc(804px / 1.6);
+								// 	height: calc(596px / 1.6);
+								// }
 								&:before {
 									background: url(../img/s3_doctor_2@2x.png) center center no-repeat;
 									background-size: contain;
@@ -105,10 +105,10 @@
 							&-3 {
 								width: calc(806px / 2);
 								height: calc(454px / 2);
-								@include mq($min-width: $bp - 1px) {
-									width: calc(806px / 1.6);
-									height: calc(454px / 1.6);
-								}
+								// @include mq($max-width: $bp - 1px) {
+								// 	width: calc(806px / 1.6);
+								// 	height: calc(454px / 1.6);
+								// }
 								&:before {
 									background: url(../img/s3_doctor_3@2x.png) center center no-repeat;
 									background-size: contain;
@@ -117,10 +117,10 @@
 							&-4 {
 								width: calc(808px / 2);
 								height: calc(536px / 2);
-								@include mq($min-width: $bp - 1px) {
-									width: calc(808px / 1.6);
-									height: calc(536px / 1.6);
-								}
+								// @include mq($max-width: $bp - 1px) {
+								// 	width: calc(808px / 1.6);
+								// 	height: calc(536px / 1.6);
+								// }
 								&:before {
 									background: url(../img/s3_doctor_4@2x.png) center center no-repeat;
 									background-size: contain;
@@ -129,10 +129,10 @@
 							&-5 {
 								width: calc(832px / 2);
 								height: calc(470px / 2);
-								@include mq($min-width: $bp - 1px) {
-									width: calc(832px / 1.6);
-									height: calc(470px / 1.6);
-								}
+								// @include mq($max-width: $bp - 1px) {
+								// 	width: calc(832px / 1.6);
+								// 	height: calc(470px / 1.6);
+								// }
 								&:before {
 									background: url(../img/s3_doctor_5@2x.png) center center no-repeat;
 									background-size: contain;
@@ -188,9 +188,9 @@
 						margin: 0 auto 30px;
 						width: 100%;
 						height: calc(580px / 2);
-						@include mq($min-width: $bp - 1px) {
-							height: calc(580px / 1.8);
-						}
+						// @include mq($max-width: $bp - 1px) {
+						// 	height: calc(580px / 1.8);
+						// }
 						&:before {
 							content: "";
 							position: absolute;
@@ -249,7 +249,7 @@
 						bottom: 10%;
 						left: 50%;
 						transform: translateX(-50%);
-						// @include mq($min-width: $bp - 1px) {
+						// @include mq($max-width: $bp - 1px) {
 						// 	padding: 0 35px;
 						// 	line-height: normal;
 						// 	font-size: $fontsize-a;
@@ -264,6 +264,61 @@
 			&[data-cover="4"] .cover .cover-list .cover-item-4,
 			&[data-cover="5"] .cover .cover-list .cover-item-5 {
 				display: block;
+			}
+		}
+	}
+}
+
+
+body.Mobile {
+	.main {
+		section {
+			&.s-3 {
+				.box {
+					.content {
+						.slick-list {
+							.slick-item {
+								&-1 {
+									width: calc(808px / 1.6);
+									height: calc(502px / 1.6);
+								}
+								&-2 {
+									width: calc(804px / 1.6);
+									height: calc(596px / 1.6);
+								}
+								&-3 {
+									width: calc(806px / 1.6);
+									height: calc(454px / 1.6);
+								}
+								&-4 {
+									width: calc(808px / 1.6);
+									height: calc(536px / 1.6);
+								}
+								&-5 {
+									width: calc(832px / 1.6);
+									height: calc(470px / 1.6);
+								}
+							}
+						}
+					}
+					.caption {
+						label {
+							font-size: $fontsize-5;
+							margin: 35px 0;
+							display: block;
+						}
+					}
+					.cover {
+						&-item {
+							height: calc(580px / 1.8);
+						}
+						&-addition {
+							padding: 0 35px;
+							line-height: normal;
+							font-size: $fontsize-a;
+						}
+					}
+				}
 			}
 		}
 	}

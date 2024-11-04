@@ -45,10 +45,10 @@
 					font-size: $fontsize-2;
 					font-weight: 600;
 					letter-spacing: .78px;
-					@include mq($min-width: $bp - 1px) {
-						font-size: $fontsize-5;
-						letter-spacing: 3px;
-					}
+					// @include mq($min-width: $bp - 1px) {
+					// 	font-size: $fontsize-5;
+					// 	letter-spacing: 3px;
+					// }
 				}
 				.content {
 					border-radius: 30px;
@@ -58,9 +58,9 @@
 						color: $color-main;
 						font-size: $fontsize-2;
 						letter-spacing: 1.35px;
-						@include mq($min-width: $bp - 1px) {
-							font-size: $fontsize-5;
-						}
+						// @include mq($min-width: $bp - 1px) {
+						// 	font-size: $fontsize-5;
+						// }
 						p {
 							font-size: inherit;
 							line-height: 1.7em;
@@ -76,9 +76,10 @@
 					}
 				}
 				.addition {
-					font-size: $fontsize-b;
-					line-height: $fontsize-1;
+					font-size: $fontsize-1;
+					line-height: $fontsize-4;
 					color: #666;
+					letter-spacing: .7px;
 					// @include mq($min-width: $bp - 1px) {
 					// 	font-size: $fontsize-a;
 					// }
@@ -160,52 +161,18 @@ body.Mobile {
 		section {
 			> .inner {
 				.box {
+					.title {
+						font-size: $fontsize-5;
+						letter-spacing: 3px;
+					}
 					.content {
 						.caption {
-							// font-size: calc($fontsize-3 + 1px);
-							// font-size: $fontsize-5;
+							font-size: $fontsize-5;
 							p {
 								line-height: 2em;
 							}
 						}
 						.addition {
-							font-size: $fontsize-a;
-						}
-					}
-				}
-			}
-			&.s-2 {
-				.box {
-					.content {
-						.test {
-							// ul {
-							// 	padding: 0;
-							// 	li {
-							// 		font-size: calc($fontsize-3 + 1px);
-							// 		padding: 23px 0;
-							// 		grid-template-columns: auto 100px 100px 100px;
-							// 	}
-							// }
-						}
-						.addition {
-							font-size: $fontsize-a;
-						}
-					}
-				}
-			}
-			&.s-3 {
-				.box {
-					.caption {
-						label {
-							font-size: $fontsize-5;
-							margin: 50px 0;
-							display: block;
-						}
-					}
-					.cover {
-						&-addition {
-							padding: 0 35px;
-							line-height: normal;
 							font-size: $fontsize-a;
 						}
 					}

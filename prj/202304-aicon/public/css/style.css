@@ -681,12 +681,6 @@ body.disableScroll {
   font-weight: 600;
   letter-spacing: 0.78px;
 }
-@media only screen and (min-width: 639px) {
-  .main section > .inner .box .title {
-    font-size: 2rem;
-    letter-spacing: 3px;
-  }
-}
 .main section > .inner .box .content {
   border-radius: 30px;
   overflow: hidden;
@@ -696,11 +690,6 @@ body.disableScroll {
   color: #5b108b;
   font-size: 1.4rem;
   letter-spacing: 1.35px;
-}
-@media only screen and (min-width: 639px) {
-  .main section > .inner .box .content .caption {
-    font-size: 2rem;
-  }
 }
 .main section > .inner .box .content .caption p {
   font-size: inherit;
@@ -712,9 +701,10 @@ body.disableScroll {
   display: inline-block;
 }
 .main section > .inner .box .addition {
-  font-size: 0.9rem;
-  line-height: 1.2rem;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
   color: #666;
+  letter-spacing: 0.7px;
 }
 .main section > .inner [class^=btn-s] {
   cursor: pointer;
@@ -792,23 +782,17 @@ body.disableScroll {
   transform: rotateY(180deg);
 }
 
+body.Mobile .main section > .inner .box .title {
+  font-size: 2rem;
+  letter-spacing: 3px;
+}
+body.Mobile .main section > .inner .box .content .caption {
+  font-size: 2rem;
+}
 body.Mobile .main section > .inner .box .content .caption p {
   line-height: 2em;
 }
 body.Mobile .main section > .inner .box .content .addition {
-  font-size: 0.95rem;
-}
-body.Mobile .main section.s-2 .box .content .addition {
-  font-size: 0.95rem;
-}
-body.Mobile .main section.s-3 .box .caption label {
-  font-size: 2rem;
-  margin: 50px 0;
-  display: block;
-}
-body.Mobile .main section.s-3 .box .cover-addition {
-  padding: 0 35px;
-  line-height: normal;
   font-size: 0.95rem;
 }
 
@@ -828,7 +812,7 @@ body.Mobile .main section.s-3 .box .cover-addition {
 .main section.s-1 .header {
   display: block;
   margin: 0 auto 60px;
-  width: 578.5px;
+  width: 664px;
   height: 174px;
 }
 .main section.s-1 .header:before {
@@ -1009,18 +993,8 @@ body.Mobile .main section.s-3 .box .cover-addition {
   /* new result */
   /* new result */
 }
-@media only screen and (min-width: 639px) {
-  .main section.s-2 .box .content {
-    padding: 0 20px;
-  }
-}
 .main section.s-2 .box .content .test ul {
   padding: 0 15px;
-}
-@media only screen and (min-width: 639px) {
-  .main section.s-2 .box .content .test ul {
-    padding: 0;
-  }
 }
 .main section.s-2 .box .content .test ul li {
   display: -ms-grid;
@@ -1044,22 +1018,13 @@ body.Mobile .main section.s-3 .box .cover-addition {
   background-repeat: repeat-x;
   white-space: pre-wrap;
 }
-@media only screen and (min-width: 639px) {
-  .main section.s-2 .box .content .test ul li {
-    font-size: 1.8rem;
-    padding: 35px 0;
-    -ms-grid-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
-    grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
-    letter-spacing: -0.7px;
-  }
-}
 .main section.s-2 .box .content .test ul li:first-child {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(100%, #D2DEEE), color-stop(10%, rgba(255, 255, 255, 0)));
   background-image: -o-linear-gradient(left, #D2DEEE 100%, rgba(255, 255, 255, 0) 10%);
   background-image: linear-gradient(to right, #D2DEEE 100%, rgba(255, 255, 255, 0) 10%);
   line-height: 1.6rem;
 }
-@media only screen and (min-width: 639px) {
+@media only screen and (max-width: 639px) {
   .main section.s-2 .box .content .test ul li:first-child {
     font-size: 1.8rem;
     line-height: 2.2rem;
@@ -1093,12 +1058,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
   height: 25px;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
-}
-@media only screen and (max-width: 800px) {
-  .main section.s-2 .box .content .test ul li div:nth-child(2) label, .main section.s-2 .box .content .test ul li div:nth-child(3) label, .main section.s-2 .box .content .test ul li div:nth-child(4) label, .main section.s-2 .box .content .test ul li div:nth-child(5) label, .main section.s-2 .box .content .test ul li div:nth-child(6) label {
-    width: 39px;
-    height: 39px;
-  }
 }
 .main section.s-2 .box .content .test ul li div:nth-child(2) label:before, .main section.s-2 .box .content .test ul li div:nth-child(3) label:before, .main section.s-2 .box .content .test ul li div:nth-child(4) label:before, .main section.s-2 .box .content .test ul li div:nth-child(5) label:before, .main section.s-2 .box .content .test ul li div:nth-child(6) label:before {
   content: "";
@@ -1147,11 +1106,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
   letter-spacing: 5px;
   margin: 50px auto 20px;
   border-radius: 7px;
-}
-@media only screen and (min-width: 639px) {
-  .main section.s-2 .box .content .btn-s_2-next {
-    font-size: 1.8rem;
-  }
 }
 .main section.s-2 .box .content .btn-s_2:before {
   background: url(../img/s2_btn_send@2x.png) left center no-repeat;
@@ -1300,6 +1254,36 @@ body.Mobile .main section.s-3 .box .cover-addition {
   display: block;
 }
 
+body.Mobile .main section.s-2 .box .content {
+  padding: 0 20px;
+}
+body.Mobile .main section.s-2 .box .content .test ul {
+  padding: 0;
+}
+body.Mobile .main section.s-2 .box .content .test ul li {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  padding: 35px 0;
+  -ms-grid-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
+  grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
+  letter-spacing: -2px;
+}
+body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(2) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(3) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(4) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(5) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(6) label {
+  width: 39px;
+  height: 39px;
+}
+body.Mobile .main section.s-2 .box .content .btn-s_2-next {
+  font-size: 1.8rem;
+}
+body.Mobile .main section.s-2 .box .content .addition {
+  font-size: 0.95rem;
+}
+body.Mobile .main section.s-2 .box .new_result .btn-download {
+  margin: 35px auto 20px;
+  width: 361.9047619048px;
+  height: 63.0952380952px;
+}
+
 /* =======================
    pages/kv
    ======================= */
@@ -1390,12 +1374,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
   width: 404px;
   height: 251px;
 }
-@media only screen and (min-width: 639px) {
-  .main section.s-3 .box .content .slick-list .slick-item-1 {
-    width: 505px;
-    height: 313.75px;
-  }
-}
 .main section.s-3 .box .content .slick-list .slick-item-1:before {
   background: url(../img/s3_doctor_1@2x.png) center center no-repeat;
   background-size: contain;
@@ -1403,12 +1381,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
 .main section.s-3 .box .content .slick-list .slick-item-2 {
   width: 402px;
   height: 298px;
-}
-@media only screen and (min-width: 639px) {
-  .main section.s-3 .box .content .slick-list .slick-item-2 {
-    width: 502.5px;
-    height: 372.5px;
-  }
 }
 .main section.s-3 .box .content .slick-list .slick-item-2:before {
   background: url(../img/s3_doctor_2@2x.png) center center no-repeat;
@@ -1418,12 +1390,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
   width: 403px;
   height: 227px;
 }
-@media only screen and (min-width: 639px) {
-  .main section.s-3 .box .content .slick-list .slick-item-3 {
-    width: 503.75px;
-    height: 283.75px;
-  }
-}
 .main section.s-3 .box .content .slick-list .slick-item-3:before {
   background: url(../img/s3_doctor_3@2x.png) center center no-repeat;
   background-size: contain;
@@ -1432,12 +1398,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
   width: 404px;
   height: 268px;
 }
-@media only screen and (min-width: 639px) {
-  .main section.s-3 .box .content .slick-list .slick-item-4 {
-    width: 505px;
-    height: 335px;
-  }
-}
 .main section.s-3 .box .content .slick-list .slick-item-4:before {
   background: url(../img/s3_doctor_4@2x.png) center center no-repeat;
   background-size: contain;
@@ -1445,12 +1405,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
 .main section.s-3 .box .content .slick-list .slick-item-5 {
   width: 416px;
   height: 235px;
-}
-@media only screen and (min-width: 639px) {
-  .main section.s-3 .box .content .slick-list .slick-item-5 {
-    width: 520px;
-    height: 293.75px;
-  }
 }
 .main section.s-3 .box .content .slick-list .slick-item-5:before {
   background: url(../img/s3_doctor_5@2x.png) center center no-repeat;
@@ -1516,11 +1470,6 @@ body.Mobile .main section.s-3 .box .cover-addition {
   width: 100%;
   height: 290px;
 }
-@media only screen and (min-width: 639px) {
-  .main section.s-3 .box .cover-item {
-    height: 322.2222222222px;
-  }
-}
 .main section.s-3 .box .cover-item:before {
   content: "";
   position: absolute;
@@ -1562,4 +1511,38 @@ body.Mobile .main section.s-3 .box .cover-addition {
 }
 .main section.s-3:not([data-cover=""]) .cover, .main section.s-3[data-cover="1"] .cover .cover-list .cover-item-1, .main section.s-3[data-cover="2"] .cover .cover-list .cover-item-2, .main section.s-3[data-cover="3"] .cover .cover-list .cover-item-3, .main section.s-3[data-cover="4"] .cover .cover-list .cover-item-4, .main section.s-3[data-cover="5"] .cover .cover-list .cover-item-5 {
   display: block;
+}
+
+body.Mobile .main section.s-3 .box .content .slick-list .slick-item-1 {
+  width: 505px;
+  height: 313.75px;
+}
+body.Mobile .main section.s-3 .box .content .slick-list .slick-item-2 {
+  width: 502.5px;
+  height: 372.5px;
+}
+body.Mobile .main section.s-3 .box .content .slick-list .slick-item-3 {
+  width: 503.75px;
+  height: 283.75px;
+}
+body.Mobile .main section.s-3 .box .content .slick-list .slick-item-4 {
+  width: 505px;
+  height: 335px;
+}
+body.Mobile .main section.s-3 .box .content .slick-list .slick-item-5 {
+  width: 520px;
+  height: 293.75px;
+}
+body.Mobile .main section.s-3 .box .caption label {
+  font-size: 2rem;
+  margin: 35px 0;
+  display: block;
+}
+body.Mobile .main section.s-3 .box .cover-item {
+  height: 322.2222222222px;
+}
+body.Mobile .main section.s-3 .box .cover-addition {
+  padding: 0 35px;
+  line-height: normal;
+  font-size: 0.95rem;
 }
