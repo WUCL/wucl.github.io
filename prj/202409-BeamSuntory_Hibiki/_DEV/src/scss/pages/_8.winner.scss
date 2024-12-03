@@ -22,7 +22,7 @@
 				margin: 35px 0;
 				.prize-1,
 				.prize-2 {
-					width: 400px;
+					width: 500px;
 					margin: 0 auto;
 					color: $color-white;
 					text-align: center;
@@ -113,6 +113,11 @@
 					border-bottom: 1px solid $color-divider;
 					padding-bottom: 35px;
 					margin-bottom: 35px;
+					.p-list {
+						li {
+							grid-template-columns: 1fr 1fr 1fr;
+						}
+					}
 				}
 			}
 		}
