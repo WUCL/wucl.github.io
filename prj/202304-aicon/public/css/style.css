@@ -814,6 +814,8 @@ body.Mobile .main section > .inner .box .content .addition {
   margin: 0 auto 60px;
   width: 664px;
   height: 174px;
+  max-width: 90vw;
+  max-height: 23vw;
 }
 .main section.s-1 .header:before {
   content: "";
@@ -1545,4 +1547,23 @@ body.Mobile .main section.s-3 .box .cover-addition {
   padding: 0 35px;
   line-height: normal;
   font-size: 0.95rem;
+}
+
+/* =======================
+   pages/extra
+   ======================= */
+.savetips {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.tscrs {
+  margin-top: 20px;
+}
+
+.q-title {
+  -webkit-align-self: end;
+  -ms-flex-item-align: end;
+  -ms-grid-row-align: end;
+  align-self: end;
 }

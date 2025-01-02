@@ -19,6 +19,8 @@
 				margin: 0 auto 60px;
 				width: calc(1328px / 2);
 				height: calc(348px / 2);
+				max-width: 90vw;
+				max-height: 23vw;
 				&:before {
 					content: "";
 					position: absolute;
