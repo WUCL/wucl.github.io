@@ -1,0 +1,119 @@
+/* =======================
+   pages/common
+   ======================= */
+.main {
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	background: url(../img/bg.jpg) left center no-repeat;
+	background-size: cover;
+	section {
+		font-weight: normal;
+		text-align: center;
+		width: 100%;
+		height: 100%;
+		min-width: 100vw;
+		// min-height: 100vh;
+		padding: 35px 0;
+		@include mq($max-width: $bp-2s) {
+			padding: 20px 0;
+		}
+		.inner {
+			max-width: $bp;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			@include mq($max-width: $bp-2l) {
+				max-width: 95%;
+			}
+			@include mq($max-width: $bp-2m) {
+				max-width: 91%;
+			}
+			@include mq($max-width: $bp-m) {
+				max-width: 85%;
+			}
+			// max-width: $bp-2;
+			margin: 0 auto;
+			.title {
+				font-weight: 300;
+				display: inline-block;
+
+				padding: 9px 0 18px 0;
+				border-bottom: 1px solid;
+				border-image: linear-gradient(to right, transparent 0%, $color-main 50%, transparent 100%) 1;
+				display: flex;
+				.t1 {
+					font-size: $fontsize;
+					padding-right: 9px;
+					letter-spacing: -.5px;
+					white-space: pre-wrap;
+			    	text-align: left;
+			    	line-height: normal;
+					font-weight: 400;
+					color: #A7A7A7;
+				}
+				.t2 {
+					font-weight: bold;
+					display: flex;
+					align-items: end;
+					margin-top: 30px;
+
+					padding-left: 9px;
+					font-size: $fontsize-3;
+					// line-height: $fontsize-4;
+					letter-spacing: 10px;
+					&:before {
+						content: "";
+						width: 1px;
+						height: 55px;
+						top: -30px;
+						margin-left: -15px;
+						display: block;
+						background: #BFBFBF;
+						position: absolute;
+						transform: skew(-25deg);
+					}
+				}
+			}
+			.content {
+				width: 100%;
+				font-size: $fontsize;
+				color: #BFBFBF;
+				text-align: justify;
+				margin-top: 18px;
+				letter-spacing: 1.3px;
+				line-height: $fontsize-2;
+				font-size: $fontsize-a;
+				@include mq($max-width: $bp-2s) {
+					font-size: $fontsize-2;
+					line-height: $fontsize-5;
+					letter-spacing: 1px;
+				}
+			}
+		}
+		&.fullwidth {
+			.inner {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+		}
+	}
+}
+body {
+	// background: #000;
+	// background: url(../img/bg-block.jpg) center center repeat;
+	// background-size: contain;
+	// background: url(../img/bg.jpg) center center repeat;
+
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	color: $color-white;
+	&.disableScroll {
+		// position: fixed;
+		overflow: hidden;
+	}
+}

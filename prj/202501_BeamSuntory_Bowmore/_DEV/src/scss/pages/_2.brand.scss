@@ -1,0 +1,55 @@
+/* =======================
+   pages/brand
+   ======================= */
+.main {
+	section._brand {
+		// margin-top: 50px;
+		> .inner {
+			.box-lr {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				@include mq($max-width: $bp-2s) {
+					flex-direction: column;
+					margin-top: 30px;
+				}
+				.box-l {
+					width: 50%;
+					@include mq($max-width: $bp-2s) {
+						width: 100%;
+						margin-bottom: 20px;
+					}
+					.img {
+						img {
+							display: block;
+							width: 100%;;
+						}
+					}
+				}
+				.box-r {
+					width: 46%;
+					@include mq($max-width: $bp-2s) {
+						width: 100%;
+					}
+					.title {
+						.t1 {
+							padding-right: 15px;
+						}
+						.t2 {
+
+						}
+					}
+					.content {
+						p {
+							letter-spacing: inherit;
+							line-height: inherit;
+							font-size: inherit;
+						}
+					}
+				}
+			}
+		}
+	}
+}

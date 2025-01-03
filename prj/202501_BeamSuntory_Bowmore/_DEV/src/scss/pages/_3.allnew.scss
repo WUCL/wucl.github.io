@@ -1,0 +1,45 @@
+/* =======================
+   pages/allnew
+   ======================= */
+.main {
+	section._allnew {
+		@include mq($max-width: $bp-2s) {
+			margin-top: 50px;
+		}
+		> .inner {
+			&.an-2 {
+				margin-top: 200px;
+				@include mq($max-width: $bp-2l) {
+					margin-top: 50px;
+				}
+			}
+			.title {
+				.t1 {
+					margin-top: -15px;
+				}
+				.t2 {
+
+				}
+			}
+			.content {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					letter-spacing: inherit;
+					line-height: inherit;
+					font-size: inherit;
+					max-width: $bp-2l;
+				}
+				.img {
+					margin-top: 30px;
+					img {
+						display: block;
+						width: 100%;;
+					}
+				}
+			}
+		}
+	}
+}
