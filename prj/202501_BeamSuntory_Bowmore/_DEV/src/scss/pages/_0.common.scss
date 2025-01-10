@@ -6,7 +6,7 @@
 	top: 0;
 	left: 0;
 	width: 100vw;
-	background: url(../img/bg.jpg) left center no-repeat;
+	background: url(../img/bg-pc@2x.webp) left center no-repeat;
 	background-size: cover;
 	section {
 		font-weight: normal;
@@ -47,14 +47,14 @@
 				border-image: linear-gradient(to right, transparent 0%, $color-main 50%, transparent 100%) 1;
 				display: flex;
 				.t1 {
-					font-size: $fontsize;
+					font-size: $fontsize-1;
 					padding-right: 9px;
-					letter-spacing: -.5px;
+					letter-spacing: 5px;
 					white-space: pre-wrap;
 			    	text-align: left;
 			    	line-height: normal;
 					font-weight: 400;
-					color: #A7A7A7;
+					color: $color-white;
 				}
 				.t2 {
 					font-weight: bold;
@@ -63,19 +63,21 @@
 					margin-top: 30px;
 
 					padding-left: 9px;
-					font-size: $fontsize-3;
-					// line-height: $fontsize-4;
-					letter-spacing: 10px;
+					font-size: $fontsize-5;
+					line-height: $fontsize-9;
+					letter-spacing: 14px;
+					font-weight: 900;
+					white-space: pre-wrap;
 					&:before {
 						content: "";
 						width: 1px;
-						height: 55px;
-						top: -30px;
+						height: 45px;
+						top: -25px;
 						margin-left: -15px;
 						display: block;
 						background: #BFBFBF;
 						position: absolute;
-						transform: skew(-25deg);
+						transform: skew(-30deg);
 					}
 				}
 			}
@@ -92,6 +94,51 @@
 					font-size: $fontsize-2;
 					line-height: $fontsize-5;
 					letter-spacing: 1px;
+				}
+			}
+
+			.ytimg {
+				display: block;
+				width: 100%;
+				height: 100%;
+				&:after {
+					content: "";
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					display: block;
+					width: calc(160px / 2);
+					height: calc(160px / 2);
+					background: url(../img/video_play@2x.png) left top no-repeat;
+					background-size: cover;
+					transition: .2s;
+				}
+				&:hover {
+					cursor: pointer;
+					&:after {
+						transform: translate(-25%, -50%);
+					}
+				}
+				> img {
+					display: block;
+					width: 100%;
+					visibility: hidden;
+					z-index: -99;
+				}
+
+				&._with_iframe {
+					background: none !important;
+					&:after {
+						display: none;
+					}
+					.ytimg_video {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+					}
 				}
 			}
 		}

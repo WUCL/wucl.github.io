@@ -8,7 +8,7 @@
 		}
 		> .inner {
 			&.an-2 {
-				margin-top: 200px;
+				margin-top: 150px;
 				@include mq($max-width: $bp-2l) {
 					margin-top: 50px;
 				}
@@ -16,6 +16,8 @@
 			.title {
 				.t1 {
 					margin-top: -15px;
+					letter-spacing: 0;
+					color: #E7E7E7;
 				}
 				.t2 {
 
@@ -26,17 +28,73 @@
 				align-items: center;
 				justify-content: center;
 				flex-direction: column;
+				text-align: center;
 				p {
-					letter-spacing: inherit;
-					line-height: inherit;
-					font-size: inherit;
+					white-space: pre-wrap;
+					letter-spacing: .2px;
+					line-height: $fontsize-3;
+					font-size: $fontsize;
 					max-width: $bp-2l;
 				}
+
 				.img {
 					margin-top: 30px;
 					img {
 						display: block;
 						width: 100%;;
+					}
+				}
+			}
+			&.an-1 {
+				.content {
+					.btn-more {
+						&:before {
+							content: "MORE +";
+							font-size: inherit;
+						}
+						&:hover {
+							cursor: pointer;
+							text-decoration: underline;
+						}
+					}
+					.box-more {
+						// margin-top: -50px;
+						// background: linear-gradient(bottom,rgb(255, 255, 255) 15%,rgba(255, 255, 255, 0) 100%);
+						// // background: linear-gradient(171deg, #B5A178 46.89%, #FFEFCE 55.84%);
+						// background-clip: text;
+						// color: transparent;
+						// p {
+						// 	letter-spacing: .2px;
+						// 	line-height: $fontsize-3;
+						// 	font-size: $fontsize;
+						// 	max-width: $bp-2l;
+						// }
+						&[data-more="0"] {
+							height: 9em;
+							overflow: hidden;
+							p {
+								display: none;
+								&:first-child {
+									display: block;
+									/* Permalink - use to edit and share this gradient. 固定鏈接 - 用於編輯和分享此漸變： https://colorzilla.com/gradient-editor/#ffffff+0,e03b00+100 */
+									background: linear-gradient(to bottom,  #ffffff 0%, rgba(255, 255, 255, .3) 60%, rgba(255, 255, 255, 0) 100%);
+									// background: linear-gradient(171deg, #B5A178 46.89%, #FFEFCE 55.84%);
+									background-clip: text;
+									color: transparent;
+								}
+							}
+						}
+						&[data-more="1"] {
+							p {
+								display: block;
+							}
+							+.btn-more {
+								padding-top: 20px;
+								&:before {
+									content: "LESS -";
+								}
+							}
+						}
 					}
 				}
 			}

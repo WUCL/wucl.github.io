@@ -8,18 +8,13 @@ $(function() {
             $header: $('#header'),
             $main: $('#main'),
             $footer: $('#footer'),
-            $nav: $('#nav'),
-            $navSwitch: $('#switch'),
 
-            $shareLine: $('.share-line'),
-            $shareFacebook: $('.share-facebook'),
+            $btn_more: $('#btn-more'),
+            $box_more: $('#box-more'),
+
+            $ytimg: $('.ytimg'),
         },
         var: {
-            $share: {
-                facebookLink: location.origin,
-                lineText: '我是LINE分享\n哈哈哈哈🥺',
-                lineLink: location.origin,
-            },
         },
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
@@ -29,50 +24,30 @@ $(function() {
         bindEvent: function() {
             let $this = this;
 
-            // switch menu
-            $this.el.$navSwitch.on('click', function() {
-                $this.el.$body.toggleClass('openheader');
-            });
-            $this.el.$nav.on('click', function() {
-                $this.el.$body.removeClass('openheader');
+            // btn-more
+            $this.el.$btn_more.on('click', function() {
+                if ($this.el.$box_more.attr('data-more') == 0) $this.el.$box_more.attr('data-more', 1);
+                else $this.el.$box_more.attr('data-more', 0);
+                return;
             });
 
-            // shares
-            $this.el.$shareLine.on('click', function() {
-                console.log('share-line');
-                let url = encodeURIComponent($this.var.$share.lineLink);
+            // ytimg
+            $this.el.$ytimg.on('click', function() {
+                let ytid = $(this).attr('data-youtube-id');
+                console.log(ytid);
 
-                // 1. link with text
-                let text = encodeURIComponent($this.var.$share.lineText);
-                window.open('http://line.naver.jp/R/msg/text/?' + text + "%0D%0A" + url);
+// <iframe width="560" height="315" src="https://www.youtube.com/embed/1mNctcAyEEc?si=AwgGHlNBsQrDZ7aC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-                // 2. only link
-                // window.open('http://line.naver.jp/R/msg/text/?' + _url);
-            });
-            $this.el.$shareFacebook.on('click', function() {
-                console.log('share-facebook');
-                window.open('http://www.facebook.com/sharer.php?u=' + $this.var.$share.facebookLink);
-            });
-        },
-        doAos: function() {
-            return AOS.init({
-                duration: 300,
-                offset: 150,
-                delay: 0,
-                once: true,
-                easing: 'ease-in'
-            });
-        },
-        doScrollIt: function() {
-            let $this = this;
-            $.scrollIt({
-                upKey: 38,             // key code to navigate to the next section
-                downKey: 40,           // key code to navigate to the previous section
-                easing: 'easeInOutExpo',      // the easing function for animation
-                scrollTime: 600,       // how long (in ms) the animation takes
-                activeClass: 'active', // class given to the active nav element
-                onPageChange: function(e) {},    // function(pageIndex) that is called when page is changed
-                topOffset: -130           // offste (in px) for fixed top navigation
+                let video =
+                  ''
+                  + '<iframe width="100%" class="ytimg_video ' + ytid + '"'
+                  + 'src="'+ $(this).attr('data-video') +'"'
+                  + 'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"'
+                  + ' webkitAllowFullScreen mozallowfullscreen allowFullScreen'
+                  + ' frameBorder="0" data-ytid="' + ytid + '"></iframe>';
+
+                // $(this).replaceWith(video);
+                $(this).addClass('_with_iframe').append(video);
             });
         },
     };

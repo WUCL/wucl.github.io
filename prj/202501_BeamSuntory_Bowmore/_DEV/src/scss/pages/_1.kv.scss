@@ -21,7 +21,7 @@
 		}
 		&:before {
 			top: 0;
-			background: url(../img/kv.jpg) left top no-repeat;
+			background: url(../img/kv_pc.jpg) left top no-repeat;
 			background-size: cover;
 			@include mq($max-width: $bp-2l) {
 				background: url(../img/kv_m.jpg) left top no-repeat;
