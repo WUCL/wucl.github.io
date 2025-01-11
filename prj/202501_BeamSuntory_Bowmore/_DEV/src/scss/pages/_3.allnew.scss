@@ -30,6 +30,12 @@
 				}
 				.t2 {
 					white-space: normal;
+					// &._pc {
+					// 	display: inline-block;
+					// }
+					&._mb {
+						display: none;
+					}
 					@include mq($max-width: $bp-2s) {
 						font-size: $fontsize-7;
 						text-align: justify;
@@ -40,6 +46,12 @@
 						text-align-last: justify;
 						width: 100%;
 						line-height: $fontsize-9;
+						&._pc {
+							display: none;
+						}
+						&._mb {
+							display: inline;
+						}
 					}
 				}
 			}
