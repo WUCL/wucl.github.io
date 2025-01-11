@@ -15,12 +15,32 @@
 			}
 			.title {
 				.t1 {
-					margin-top: -15px;
+					// margin-top: -15px;
+					// letter-spacing: 0;
+					// color: #E7E7E7;
+
+					padding-right: 0;
 					letter-spacing: 0;
-					color: #E7E7E7;
+					font-size: $fontsize-b;
+					color: #A7A7A7;
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize-1;
+						width: 45%;
+					}
 				}
 				.t2 {
+					white-space: normal;
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize-7;
+						text-align: justify;
+						white-space: pre-wrap;
 
+						display: inline-block;
+						text-justify: distribute-all-lines;
+						text-align-last: justify;
+						width: 100%;
+						line-height: $fontsize-9;
+					}
 				}
 			}
 			.content {
@@ -35,6 +55,15 @@
 					line-height: $fontsize-3;
 					font-size: $fontsize;
 					max-width: $bp-2l;
+					@include mq($max-width: $bp-2m) {
+						font-size: $fontsize-1;
+						letter-spacing: -.4px;
+					}
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize-3;
+						line-height: $fontsize-6;
+						letter-spacing: .8px;
+					}
 				}
 
 				.img {
@@ -48,6 +77,7 @@
 			&.an-1 {
 				.content {
 					.btn-more {
+						margin: 10px 0 35px;
 						&:before {
 							content: "MORE +";
 							font-size: inherit;
@@ -72,6 +102,12 @@
 						&[data-more="0"] {
 							height: 9em;
 							overflow: hidden;
+							@include mq($max-width: $bp-2m) {
+								height: 8em;
+							}
+							@include mq($max-width: $bp-2s) {
+								height: 11em;
+							}
 							p {
 								display: none;
 								&:first-child {
@@ -81,6 +117,11 @@
 									// background: linear-gradient(171deg, #B5A178 46.89%, #FFEFCE 55.84%);
 									background-clip: text;
 									color: transparent;
+									@include mq($max-width: $bp-2s) {
+										background: linear-gradient(to bottom,  #ffffff 0%, rgba(255, 255, 255, .3) 25%, rgba(255, 255, 255, 0) 100%);
+										background-clip: text;
+										color: transparent;
+									}
 								}
 							}
 						}

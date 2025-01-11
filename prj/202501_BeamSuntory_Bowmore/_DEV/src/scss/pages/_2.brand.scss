@@ -11,15 +11,19 @@
 				align-items: center;
 				justify-content: space-between;
 				width: 100%;
-				@include mq($max-width: $bp-2s) {
+				@include mq($max-width: $bp-2) {
 					flex-direction: column;
 					margin-top: 30px;
 				}
+				@include mq($max-width: $bp-2s) {
+				}
 				.box-l {
 					width: 50%;
-					@include mq($max-width: $bp-2s) {
+					@include mq($max-width: $bp-2) {
 						width: 100%;
 						margin-bottom: 20px;
+					}
+					@include mq($max-width: $bp-2s) {
 					}
 					// .img {
 					// 	img {
@@ -34,15 +38,16 @@
 				}
 				.box-r {
 					width: 46%;
-					@include mq($max-width: $bp-2s) {
+					@include mq($max-width: $bp-2) {
 						width: 100%;
+					}
+					@include mq($max-width: $bp-2s) {
 					}
 					.title {
 						.t1 {
 							padding-right: 15px;
 						}
 						.t2 {
-
 						}
 					}
 					.content {
@@ -50,6 +55,15 @@
 							letter-spacing: inherit;
 							line-height: inherit;
 							font-size: inherit;
+
+							@include mq($max-width: $bp-2m) {
+								font-size: $fontsize-1;
+							}
+							@include mq($max-width: $bp-2s) {
+								font-size: $fontsize-3;
+								line-height: $fontsize-7;
+								letter-spacing: .5px;
+							}
 						}
 					}
 				}

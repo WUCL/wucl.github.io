@@ -2,12 +2,20 @@
    pages/common
    ======================= */
 .main {
+	font-family: "Noto Serif TC", serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-variation-settings:
+	"wdth" 100;
+
 	overflow: hidden;
 	top: 0;
 	left: 0;
 	width: 100vw;
-	background: url(../img/bg-pc@2x.webp) left center no-repeat;
-	background-size: cover;
+	background: url(../img/bg-pc@2x.webp) left top no-repeat;
+	// background-size: cover;
+	background-size: 100% 100%;
 	section {
 		font-weight: normal;
 		text-align: center;
@@ -27,10 +35,10 @@
 			justify-content: center;
 			flex-direction: column;
 
-			@include mq($max-width: $bp-2l) {
-				max-width: 95%;
+			@include mq($max-width: $bp-2) {
+				max-width: 87%;
 			}
-			@include mq($max-width: $bp-2m) {
+			@include mq($max-width: $bp-2l) {
 				max-width: 91%;
 			}
 			@include mq($max-width: $bp-m) {
@@ -40,12 +48,17 @@
 			margin: 0 auto;
 			.title {
 				font-weight: 300;
-				display: inline-block;
+				// display: inline-block;
 
 				padding: 9px 0 18px 0;
-				border-bottom: 1px solid;
-				border-image: linear-gradient(to right, transparent 0%, $color-main 50%, transparent 100%) 1;
-				display: flex;
+				border-bottom: 1.5px solid;
+				// border-image: linear-gradient(to right, transparent 0%, $color-main 50%, transparent 100%) 1;
+				border-image: linear-gradient(to right, #3F1516 0%, $color-main 35%, $color-white 50%,  $color-main 65%, #3F1516 100%) 1;
+
+				display: inline-flex;
+				@include mq($max-width: $bp-2s) {
+					width: 100%;
+				}
 				.t1 {
 					font-size: $fontsize-1;
 					padding-right: 9px;
@@ -68,6 +81,11 @@
 					letter-spacing: 14px;
 					font-weight: 900;
 					white-space: pre-wrap;
+					@include mq($max-width: $bp-2s) {
+						font-size: $fontsize-4;
+						line-height: $fontsize-7;
+						letter-spacing: 3px;
+					}
 					&:before {
 						content: "";
 						width: 1px;
