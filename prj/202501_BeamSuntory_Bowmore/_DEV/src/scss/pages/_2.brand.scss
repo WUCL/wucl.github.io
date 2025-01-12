@@ -56,6 +56,10 @@
 							line-height: inherit;
 							font-size: inherit;
 
+							font-weight: 600;
+							text-shadow: 0 0 10px $color-black;
+							color: $color-white;
+
 							@include mq($max-width: $bp-2m) {
 								font-size: $fontsize-1;
 							}
