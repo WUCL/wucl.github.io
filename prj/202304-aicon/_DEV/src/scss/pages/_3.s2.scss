@@ -18,9 +18,12 @@
 							li {
 								display: grid;
 								grid-template-columns: auto 75px 75px 75px 75px 75px;
+								// grid-template-columns: 170px 75px 75px 75px 75px 75px;
 								align-items: center;
-								font-size: calc($fontsize-1 + 2px);
-								line-height: calc($fontsize-5 - 3px);
+								// font-size: calc($fontsize-1 + 2px);
+								// line-height: calc($fontsize-5 - 3px);
+								font-size: calc($fontsize-1 - 1px);
+								line-height: $fontsize-5;
 								color: $color-font;
 								letter-spacing: .7px;
 								// padding: 11px 0;
@@ -59,7 +62,8 @@
 									&:nth-child(3),
 									&:nth-child(4),
 									&:nth-child(5),
-									&:nth-child(6) {
+									&:nth-child(6),
+									&:nth-child(7) {
 										display: inline-flex;
 										justify-content: center;
 										align-items: center;
@@ -299,6 +303,11 @@
 					}
 				}
 			}
+			&[data-step="2"] .box .content .test ul li,
+			&[data-step="3"] .box .content .test ul li {
+				grid-template-columns: auto 75px 75px 75px 75px 75px 75px;
+			}
+
 			&[data-step="1"] .box .content .test .step-q-2,
 			&[data-step="1"] .box .content .test .step-q-3,
 			&[data-step="2"] .box .content .test .step-q-1,
@@ -350,7 +359,8 @@ body.Mobile {
 										&:nth-child(3),
 										&:nth-child(4),
 										&:nth-child(5),
-										&:nth-child(6) {
+										&:nth-child(6),
+										&:nth-child(7) {
 											label {
 												width: calc(78px / 2);
 												height: calc(78px / 2);

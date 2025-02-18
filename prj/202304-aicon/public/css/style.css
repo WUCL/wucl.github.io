@@ -235,10 +235,20 @@ footer.footer .copyright {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   color: #fff;
-  padding: 20px 0;
+  padding: 16px 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+footer.footer .copyright > span {
+  padding: 2px 0;
+  display: inline-block;
+  line-height: normal;
 }
 
 /* =======================
@@ -684,7 +694,7 @@ body.disableScroll {
 .main section > .inner .box .content {
   border-radius: 30px;
   overflow: hidden;
-  padding: 0 35px;
+  padding: 0 25px;
 }
 .main section > .inner .box .content .caption {
   color: #5b108b;
@@ -1007,8 +1017,8 @@ body.Mobile .main section > .inner .box .content .addition {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  font-size: calc(1.2rem + 2px);
-  line-height: calc(2rem - 3px);
+  font-size: calc(1.2rem - 1px);
+  line-height: 2rem;
   color: #444;
   letter-spacing: 0.7px;
   padding: 21px 0;
@@ -1040,7 +1050,7 @@ body.Mobile .main section > .inner .box .content .addition {
 .main section.s-2 .box .content .test ul li div:nth-child(1) {
   text-align: left;
 }
-.main section.s-2 .box .content .test ul li div:nth-child(2), .main section.s-2 .box .content .test ul li div:nth-child(3), .main section.s-2 .box .content .test ul li div:nth-child(4), .main section.s-2 .box .content .test ul li div:nth-child(5), .main section.s-2 .box .content .test ul li div:nth-child(6) {
+.main section.s-2 .box .content .test ul li div:nth-child(2), .main section.s-2 .box .content .test ul li div:nth-child(3), .main section.s-2 .box .content .test ul li div:nth-child(4), .main section.s-2 .box .content .test ul li div:nth-child(5), .main section.s-2 .box .content .test ul li div:nth-child(6), .main section.s-2 .box .content .test ul li div:nth-child(7) {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -1054,14 +1064,14 @@ body.Mobile .main section > .inner .box .content .addition {
   -ms-flex-align: center;
   align-items: center;
 }
-.main section.s-2 .box .content .test ul li div:nth-child(2) label, .main section.s-2 .box .content .test ul li div:nth-child(3) label, .main section.s-2 .box .content .test ul li div:nth-child(4) label, .main section.s-2 .box .content .test ul li div:nth-child(5) label, .main section.s-2 .box .content .test ul li div:nth-child(6) label {
+.main section.s-2 .box .content .test ul li div:nth-child(2) label, .main section.s-2 .box .content .test ul li div:nth-child(3) label, .main section.s-2 .box .content .test ul li div:nth-child(4) label, .main section.s-2 .box .content .test ul li div:nth-child(5) label, .main section.s-2 .box .content .test ul li div:nth-child(6) label, .main section.s-2 .box .content .test ul li div:nth-child(7) label {
   display: inline-block;
   width: 25px;
   height: 25px;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
 }
-.main section.s-2 .box .content .test ul li div:nth-child(2) label:before, .main section.s-2 .box .content .test ul li div:nth-child(3) label:before, .main section.s-2 .box .content .test ul li div:nth-child(4) label:before, .main section.s-2 .box .content .test ul li div:nth-child(5) label:before, .main section.s-2 .box .content .test ul li div:nth-child(6) label:before {
+.main section.s-2 .box .content .test ul li div:nth-child(2) label:before, .main section.s-2 .box .content .test ul li div:nth-child(3) label:before, .main section.s-2 .box .content .test ul li div:nth-child(4) label:before, .main section.s-2 .box .content .test ul li div:nth-child(5) label:before, .main section.s-2 .box .content .test ul li div:nth-child(6) label:before, .main section.s-2 .box .content .test ul li div:nth-child(7) label:before {
   content: "";
   display: block;
   position: absolute;
@@ -1071,14 +1081,14 @@ body.Mobile .main section > .inner .box .content .addition {
   background: url(../img/s2_check@2x.png) center center no-repeat;
   background-size: cover;
 }
-.main section.s-2 .box .content .test ul li div:nth-child(2) input, .main section.s-2 .box .content .test ul li div:nth-child(3) input, .main section.s-2 .box .content .test ul li div:nth-child(4) input, .main section.s-2 .box .content .test ul li div:nth-child(5) input, .main section.s-2 .box .content .test ul li div:nth-child(6) input {
+.main section.s-2 .box .content .test ul li div:nth-child(2) input, .main section.s-2 .box .content .test ul li div:nth-child(3) input, .main section.s-2 .box .content .test ul li div:nth-child(4) input, .main section.s-2 .box .content .test ul li div:nth-child(5) input, .main section.s-2 .box .content .test ul li div:nth-child(6) input, .main section.s-2 .box .content .test ul li div:nth-child(7) input {
   font-size: 0;
   line-height: 0;
   opacity: 0;
   visibility: hidden;
   display: none;
 }
-.main section.s-2 .box .content .test ul li div:nth-child(2) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(3) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(4) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(5) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(6) input:checked + label:before {
+.main section.s-2 .box .content .test ul li div:nth-child(2) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(3) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(4) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(5) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(6) input:checked + label:before, .main section.s-2 .box .content .test ul li div:nth-child(7) input:checked + label:before {
   background: url(../img/s2_checked@2x.png) center center no-repeat;
   background-size: cover;
 }
@@ -1243,6 +1253,10 @@ body.Mobile .main section > .inner .box .content .addition {
   -ms-transform: translateX(10px);
   transform: translateX(10px);
 }
+.main section.s-2[data-step="2"] .box .content .test ul li, .main section.s-2[data-step="3"] .box .content .test ul li {
+  -ms-grid-columns: auto 75px 75px 75px 75px 75px 75px;
+  grid-template-columns: auto 75px 75px 75px 75px 75px 75px;
+}
 .main section.s-2[data-step="1"] .box .content .test .step-q-2, .main section.s-2[data-step="1"] .box .content .test .step-q-3, .main section.s-2[data-step="2"] .box .content .test .step-q-1, .main section.s-2[data-step="2"] .box .content .test .step-q-3, .main section.s-2[data-step="3"] .box .content .test .step-q-1, .main section.s-2[data-step="3"] .box .content .test .step-q-2 {
   display: none;
 }
@@ -1270,7 +1284,7 @@ body.Mobile .main section.s-2 .box .content .test ul li {
   grid-template-columns: auto 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
   letter-spacing: -2px;
 }
-body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(2) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(3) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(4) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(5) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(6) label {
+body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(2) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(3) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(4) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(5) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(6) label, body.Mobile .main section.s-2 .box .content .test ul li div:nth-child(7) label {
   width: 39px;
   height: 39px;
 }
@@ -1559,6 +1573,9 @@ body.Mobile .main section.s-3 .box .cover-addition {
 
 .tscrs {
   margin-top: 20px;
+  font-size: 0.8rem;
+  letter-spacing: -0.2px;
+  line-height: normal;
 }
 
 .q-title {

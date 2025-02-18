@@ -76,7 +76,7 @@ $(function() {
                     // console.log(_qid + i);
                     _checks =  $("input[name='" + _qid + i + "']");
                     if (!_checks.is(":checked")) {
-                        // console.log("not check; " + i);
+                        // console.log("a, not check; " + i);
                         return alert('尚有未選擇項目');
                     }
                 }
@@ -94,7 +94,7 @@ $(function() {
                     // console.log(_qid + i);
                     _checks =  $("input[name='" + _qid + i + "']");
                     if (!_checks.is(":checked")) {
-                        // console.log("not check; " + i);
+                        // console.log("b, not check; " + i);
                         return alert('尚有未選擇項目');
                     }
                 }
@@ -109,15 +109,20 @@ $(function() {
                 , $_score = 0
                 , $_count1 = 0
                 , $_count2 = 12 // 題數 5 + 4 + 3;
+                , $_count_na = 0 // na數量
                 , $_osdi // 公式
                 , $_download;
+                console.log('$_count2 :: ' + $_count2);
                 $.each($this.el.$form.serializeArray(), function() {
-                    $_count1++;
                     // console.log('this.value :: ' + this.value);
+                    if (this.value == "na") return $_count_na++;
+                    $_count1++;
                     $_score += parseInt(this.value);
                     // console.log('$_score :: ' + $_score);
                     // console.log('$_count1 :: ' + $_count1);
                 });
+                $_count2 -= $_count_na;
+
                 if ($_count1 == $_count2) {
                     $_osdi = parseInt(($_score*25) / $_count2); // 乾眼症評分方式 OSDI = (總和x25)/答題數
                     console.log('$_osdi :: ' + $_osdi);
@@ -150,6 +155,7 @@ $(function() {
                     */
                     return;
                 } else {
+                    // console.log("c,");
                     return alert('尚有未選擇項目');
                 }
             });

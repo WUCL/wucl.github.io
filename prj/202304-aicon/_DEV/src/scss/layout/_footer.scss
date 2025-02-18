@@ -10,8 +10,9 @@ footer.footer {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 		color: $color-white;
-		padding: 20px 0;
+		padding: 16px 0;
 		box-sizing: border-box;
 		// @include mq($max-width: $bp-2s) {
 		// 	flex-direction: column;
@@ -20,5 +21,10 @@ footer.footer {
 		// 		margin: 7px 0;
 		// 	}
 		// }
+		> span {
+			padding: 2px 0;
+			display: inline-block;
+			line-height: normal;
+		}
 	}
 }
