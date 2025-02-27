@@ -1096,6 +1096,10 @@ body.Mobile .main section > .inner .box .content .addition {
   white-space: pre-wrap;
   line-height: normal;
 }
+.main section.s-2 .box .content .test .step-q .caption > u {
+  font: inherit;
+  font-size: inherit;
+}
 .main section.s-2 .box .content .btn-s_2-next {
   background: #865697;
   width: 180px;
@@ -1254,8 +1258,8 @@ body.Mobile .main section > .inner .box .content .addition {
   transform: translateX(10px);
 }
 .main section.s-2[data-step="2"] .box .content .test ul li, .main section.s-2[data-step="3"] .box .content .test ul li {
-  -ms-grid-columns: auto 75px 75px 75px 75px 75px 75px;
-  grid-template-columns: auto 75px 75px 75px 75px 75px 75px;
+  -ms-grid-columns: auto 75px 75px 75px 75px 75px;
+  grid-template-columns: auto 75px 75px 75px 75px 75px;
 }
 .main section.s-2[data-step="1"] .box .content .test .step-q-2, .main section.s-2[data-step="1"] .box .content .test .step-q-3, .main section.s-2[data-step="2"] .box .content .test .step-q-1, .main section.s-2[data-step="2"] .box .content .test .step-q-3, .main section.s-2[data-step="3"] .box .content .test .step-q-1, .main section.s-2[data-step="3"] .box .content .test .step-q-2 {
   display: none;
@@ -1572,10 +1576,19 @@ body.Mobile .main section.s-3 .box .cover-addition {
 }
 
 .tscrs {
-  margin-top: 20px;
-  font-size: 0.8rem;
+  margin: 10px auto;
+  font-size: 0.75rem;
   letter-spacing: -0.2px;
   line-height: normal;
+  width: 60%;
+  text-align: center;
+}
+.tscrs a {
+  font-size: 0.75rem;
+  color: #fff;
+}
+.tscrs a:hover {
+  text-decoration: underline;
 }
 
 .q-title {

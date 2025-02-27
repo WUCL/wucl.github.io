@@ -113,6 +113,10 @@
 							.caption {
 								white-space: pre-wrap;
 								line-height: normal;
+								> u {
+									font: inherit;
+									font-size: inherit;
+								}
 							}
 						}
 					}
@@ -305,7 +309,8 @@
 			}
 			&[data-step="2"] .box .content .test ul li,
 			&[data-step="3"] .box .content .test ul li {
-				grid-template-columns: auto 75px 75px 75px 75px 75px 75px;
+				grid-template-columns: auto 75px 75px 75px 75px 75px;
+				// grid-template-columns: auto 75px 75px 75px 75px 75px 75px;
 			}
 
 			&[data-step="1"] .box .content .test .step-q-2,

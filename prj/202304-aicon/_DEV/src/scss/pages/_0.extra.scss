@@ -6,10 +6,21 @@
    font-size: 20px;
 }
 .tscrs{
-   margin-top: 20px;
-   font-size: $fontsize-d;
+   margin: 10px auto;
+   font-size: $fontsize-e;
    letter-spacing: -.2px;
    line-height: normal;
+   width: 60%;
+   text-align: center;
+   a {
+      font-size: $fontsize-e;
+      color: $color-white;
+      // text-decoration: underline;
+      &:hover {
+         text-decoration: underline;
+         // text-decoration: none;;
+      }
+   }
 }
 .q-title{
    align-self: end;
