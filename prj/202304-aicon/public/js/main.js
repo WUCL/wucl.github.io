@@ -114,12 +114,12 @@ $(function() {
                 , $_download;
                 console.log('$_count2 :: ' + $_count2);
                 $.each($this.el.$form.serializeArray(), function() {
-                    console.log('this.value :: ' + this.value);
+                    // console.log('this.value :: ' + this.value);
                     if (this.value == "na") return $_count_na++;
                     $_count1++;
                     $_score += parseInt(this.value);
-                    console.log('$_score :: ' + $_score);
-                    console.log('$_count1 :: ' + $_count1);
+                    // console.log('$_score :: ' + $_score);
+                    // console.log('$_count1 :: ' + $_count1);
                 });
                 $_count2 -= $_count_na;
 
