@@ -1,0 +1,55 @@
+/* =======================
+   pages/_pp
+   ======================= */
+#_pp {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 99;
+	&:not([data-show="1"]) {
+		display: none;
+	}
+	._pp_cover {
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: $color-black;
+		opacity: .78;
+	}
+	._pp_box {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 77vh;
+		width: 77vw;
+		background: $color-white;
+		border-radius: 7px;
+		overflow: hidden;
+		._pp_close {
+			position: relative;
+			width: 100%;
+			height: 21px;
+			background: $color-white;
+			cursor: pointer;
+			&:before {
+				content: "CLOSE";
+				display: flex;
+				height: 100%;
+				align-items: center;
+    			justify-content: flex-end;
+				font-size: $fontsize-c;
+				letter-spacing: .7px;
+				color: $color-black;
+				line-height: normal;
+				text-align: right;
+				padding-right: 9px;
+			}
+		}
+	}
+}
