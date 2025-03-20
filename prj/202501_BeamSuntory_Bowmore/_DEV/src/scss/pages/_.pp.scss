@@ -19,36 +19,41 @@
 		width: 100%;
 		height: 100%;
 		background: $color-black;
-		opacity: .78;
+		opacity: .8;
 	}
 	._pp_box {
 		position: absolute;
-		top: 50%;
+		top: 51%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		height: 77vh;
 		width: 77vw;
-		background: $color-white;
-		border-radius: 7px;
-		overflow: hidden;
+		iframe {
+			border-radius: 7px;
+			overflow: hidden;
+		}
 		._pp_close {
 			position: relative;
 			width: 100%;
 			height: 21px;
-			background: $color-white;
+			// background: $color-white;
 			cursor: pointer;
+
+			position: absolute;
+			width: 28px;
+			height: 28px;
+			cursor: pointer;
+			right: 2%;
+			top: -7%;
 			&:before {
-				content: "CLOSE";
+				content: "";
 				display: flex;
+				width: 100%;
 				height: 100%;
 				align-items: center;
     			justify-content: flex-end;
-				font-size: $fontsize-c;
-				letter-spacing: .7px;
-				color: $color-black;
-				line-height: normal;
-				text-align: right;
-				padding-right: 9px;
+			   background: url(../img/close.png) right center no-repeat;
+    			background-size: 21px 21px;
 			}
 		}
 	}
