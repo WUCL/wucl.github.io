@@ -1,0 +1,225 @@
+/* =======================
+   pages/common
+   ======================= */
+.main {
+	// font-family: "Noto Serif TC", serif;
+	@extend %notosanstc;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-variation-settings: "wdth" 100;
+	color: $color-white;
+
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	background: url(../img/bg.webp) left top no-repeat;
+	// background-size: cover;
+	background-size: 100% 100%;
+	section {
+		width: 100%;
+		height: 100%;
+		min-width: 100vw;
+		// min-height: 100vh;
+		padding: 50px 0 25px;
+		span {
+			letter-spacing: 1.8px;
+			&._highlight {
+				position: relative;
+				font-weight: 500;
+				margin: 0 5px;
+				padding: 0 3px;
+				z-index: 0;
+				&:after {
+					content: "";
+					position: absolute;
+					left: 0;
+					top: .87em;
+					background: rgba(120, 61, 212, 1);
+					width: 100%;
+					height: .7em;
+					border-radius: 2px;
+					z-index: -1;
+				}
+			}
+			&._bold {
+				font-weight: bold;
+			}
+			&._y {
+				color: rgba(255, 226, 128, 1);
+			}
+		}
+		.inner {
+			max-width: $bp-2;
+			margin: 0 auto;
+			font-size: $fontsize;
+			text-align: center;
+			> .title {
+				display: block;
+				margin: 25px auto 40px;
+				&:before {
+					content: "";
+					position: absolute;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.description {
+				display: block;;
+				margin: 20px auto;
+				line-height: 1.8em;
+				letter-spacing: 1px;
+				&._t {
+					margin: 20px auto;
+				}
+			}
+			> .content {
+				letter-spacing: 1px;
+				.bbox {
+					margin: 35px auto;
+					padding: 35px 50px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					line-height: normal;
+					border: 0 solid transparent;
+					border-radius: 15px;
+					backface-visibility: hidden;
+					transform: translateZ(0);
+					background-image: linear-gradient(to top, rgba(255, 255, 255, .4), rgba(255, 255, 255, 0));
+					&:before {
+						content: "";
+						display: block;
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 99.9%;
+						height: 100%;
+						border: 1px solid transparent;
+						border-radius: 15px;
+						background-image: linear-gradient(to bottom, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0));
+						background-origin: border-box;
+						mask-image: linear-gradient(white, white), linear-gradient(white, white);
+						mask-composite: exclude, add;
+						mask-clip: padding-box, border-box;
+					}
+
+					&_l,
+					&_r {
+						width: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+					&_r {
+						&:before {
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 1px;
+							height: 100%;
+							background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+							pointer-events: none;
+							z-index: 1;
+						}
+					}
+					&-p {
+						line-height: normal;
+						letter-spacing: 1px;
+					}
+				}
+
+				.step {
+					display: inline-grid;
+					grid-template-columns: 1fr 1fr 1fr 1fr;
+					grid-column-gap: 18px;
+					margin-top: 50px;
+					&-t {
+						width: 100%;
+						&-1,
+						&-2,
+						&-3 {
+							line-height: 1.4em;
+							font-size: $fontsize_a;
+							letter-spacing: 1px;
+						}
+						&-1 {
+							font-size: $fontsize_b;
+							color: rgba(161, 138, 200, 1);
+						}
+						&-2 {
+						}
+						&-3 {
+							color: rgba(255, 226, 128, 1);
+						}
+					}
+					&-b {
+						margin: 20px auto 50px;
+						&:before {
+							content: "";
+							display: block;
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+						}
+					}
+				}
+
+				.gotobtn {
+					border-radius: 35px;
+					background: rgba(209, 7, 88, 1);
+					color: $color-white;
+					display: inline-block;
+					padding: 9px 25px;
+					box-shadow: 0px 18px 20.2px 0px rgba(0, 0, 0, .25);
+					> a {
+						color: inherit;
+						display: block;
+						width: 100%;
+						height: 100%;
+						letter-spacing: 1px;
+						line-height: normal;
+						font-weight: bold;
+						&:after {
+							content: "";
+							position: relative;
+							display: inline-block;
+							margin-left: 7px;
+							right: 0;
+							width: 16px;
+							height: 13px;
+							background: url(../img/cta_arrow.svg) left center no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+			}
+		}
+		&.fullwidth {
+			.inner {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+		}
+	}
+}
+body {
+	// background: #000;
+	// background: url(../img/bg-block.jpg) center center repeat;
+	// background-size: contain;
+	// background: url(../img/bg.jpg) center center repeat;
+
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	color: $color-white;
+	&.disableScroll {
+		// position: fixed;
+		overflow: hidden;
+	}
+}

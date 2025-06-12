@@ -1,0 +1,26 @@
+/* =======================
+   pages/_period
+   ======================= */
+.main {
+	section._period {
+		.inner {
+			> .title {
+				width: calc(800px / 2);
+				height: calc(126px / 2);
+				@include mq($max-width: $bp-2s) {
+					width: calc(670px / 2);
+					height: calc(126px / 2);
+				}
+				&:before {
+					background: url(../img/t-period_pc@2x.webp) left center no-repeat;
+					background-size: cover;
+					@include mq($max-width: $bp-2s) {
+						background: url(../img/t-period_m@2x.webp) left center no-repeat;
+						background-size: cover;
+					}
+				}
+			}
+			> .content {}
+		}
+	}
+}

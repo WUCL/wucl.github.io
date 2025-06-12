@@ -1,0 +1,55 @@
+/* =======================
+   pages/_login_auchen
+   ======================= */
+.main {
+	section._login_auchen {
+		.inner {
+			> .title {
+				width: calc(1428px / 2);
+				height: calc(126px / 2);
+				@include mq($max-width: $bp-2s) {
+					width: calc(670px / 2);
+					height: calc(255px / 2);
+				}
+				&:before {
+					background: url(../img/t-loginauchen_pc@2x.webp) left center no-repeat;
+					background-size: cover;
+					@include mq($max-width: $bp-2s) {
+						background: url(../img/t-loginauchen_m@2x.webp) left center no-repeat;
+						background-size: cover;
+					}
+				}
+			}
+			> .content {
+				.description {
+					&:nth-child(4) {
+						// display: inline-block;
+						display: inline-grid;
+						grid-template-columns: 1fr 1fr;
+						grid-column-gap: 10vw;
+						> ul {
+							li {
+								list-style: disc;
+								text-align: left;
+								line-height: 1.8em;
+							}
+						}
+					}
+				}
+				.step {
+					&-b {
+						width: calc(550px / 2.6);
+						height: calc(469px / 2.6);
+					}
+					$max: 4;
+					@for $i from 1 through $max {
+						&_#{$i} .step-b:before {
+							background: url(../img/line_rule_step#{$i}@2x.webp) left center no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+			}
+		}
+	}
+}
