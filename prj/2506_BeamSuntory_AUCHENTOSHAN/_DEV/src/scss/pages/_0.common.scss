@@ -31,7 +31,9 @@
 				margin: 0 5px;
 				padding: 0 3px;
 				z-index: 0;
-				font-size: $fontsize-1;
+				&._t {
+					font-size: $fontsize-1;
+				}
 				&:after {
 					content: "";
 					position: absolute;
@@ -50,12 +52,18 @@
 			&._y {
 				color: rgba(255, 226, 128, 1);
 			}
+			&._small {
+				font-size: $fontsize-a;
+			}
 		}
 		.inner {
 			max-width: $bp-2;
 			margin: 0 auto;
 			font-size: $fontsize;
 			text-align: center;
+			@include mq($max-width: $bp-2) {
+				max-width: 90vw;
+			}
 			> .title {
 				display: block;
 				margin: 25px auto 40px;
@@ -91,6 +99,10 @@
 					backface-visibility: hidden;
 					transform: translateZ(0);
 					background-image: linear-gradient(to top, rgba(255, 255, 255, .4), rgba(255, 255, 255, 0));
+					@include mq($max-width: $bp-2m) {
+						padding: 0;
+						flex-direction: column;
+					}
 					&:before {
 						content: "";
 						display: block;
@@ -114,6 +126,12 @@
 						display: flex;
 						align-items: center;
 						justify-content: center;
+						@include mq($max-width: $bp-2m) {
+							padding: 35px
+						}
+						@include mq($max-width: $bp-m) {
+							flex-direction: column;
+						}
 					}
 					&_r {
 						&:before {
@@ -126,19 +144,54 @@
 							background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 							pointer-events: none;
 							z-index: 1;
+							@include mq($max-width: $bp-2m) {
+								width: 50% !important;
+								height: 1px !important;
+								background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) !important;
+								left: 50% !important;
+								margin-left: -25% !important;
+							}
+						}
+					}
+					&-n {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+
+						background: rgba(241, 140, 68, 1);
+						border-radius: 50%;
+						width: 35px;
+						height: 35px;
+						margin-right: 15px;
+						line-height: normal;
+						@include mq($max-width: $bp-m) {
+							margin-right: 0;
+							margin-bottom: 15px;
 						}
 					}
 					&-p {
+						text-align: left;
 						line-height: normal;
 						letter-spacing: 1px;
+						@include mq($max-width: $bp-m) {
+							text-align: center;
+						}
 					}
 				}
 
 				.step {
-					display: inline-grid;
-					grid-template-columns: 1fr 1fr 1fr 1fr;
+					display: grid;
+					grid-template-columns: repeat(4, 1fr);
 					grid-column-gap: 18px;
 					margin-top: 50px;
+					@include mq($max-width: $bp-2) {
+						// max-width: 90vw;
+						grid-template-columns: repeat(auto-fit, minmax(calc(100%/5), 1fr));
+						grid-column-gap: 5px;
+					}
+					@include mq($max-width: $bp-2m) {
+						grid-template-columns: repeat(2, 1fr);
+					}
 					&-t {
 						width: 100%;
 						&-1,
@@ -147,6 +200,10 @@
 							line-height: 1.4em;
 							font-size: $fontsize_a;
 							letter-spacing: 1px;
+							@include mq($max-width: $bp-2) {
+								font-size: $fontsize_c;
+								// letter-spacing: 0;
+							}
 						}
 						&-1 {
 							font-size: $fontsize_b;

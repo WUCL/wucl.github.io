@@ -7,15 +7,15 @@
 			> .title {
 				width: calc(1428px / 2);
 				height: calc(128px / 2);
-				@include mq($max-width: $bp-2s) {
+				@include mq($max-width: $bp-2m) {
 					width: calc(670px / 2);
 					height: calc(255px / 2);
 				}
 				&:before {
-					background: url(../img/t-loginauchen_pc@2x.webp) left center no-repeat;
+					background: url(../img/t-loginauchen_pc@2x.webp) center center no-repeat;
 					background-size: cover;
-					@include mq($max-width: $bp-2s) {
-						background: url(../img/t-loginauchen_m@2x.webp) left center no-repeat;
+					@include mq($max-width: $bp-2m) {
+						background: url(../img/t-loginauchen_m@2x.webp) center center no-repeat;
 						background-size: cover;
 					}
 				}
@@ -40,6 +40,14 @@
 					&-b {
 						width: calc(551px / 2.6);
 						height: calc(468px / 2.6);
+						@include mq($max-width: $bp-2) {
+							width: calc(551px / 2.9);
+							height: calc(468px / 2.9);
+						}
+						@include mq($max-width: $bp-2m) {
+							width: calc(551px / 2.2);
+							height: calc(468px / 2.2);
+						}
 					}
 					$max: 4;
 					@for $i from 1 through $max {

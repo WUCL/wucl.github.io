@@ -7,15 +7,15 @@
 			> .title {
 				width: calc(1536px / 2);
 				height: calc(126px / 2);
-				@include mq($max-width: $bp-2s) {
+				@include mq($max-width: $bp-2m) {
 					width: calc(670px / 2);
 					height: calc(256px / 2);
 				}
 				&:before {
-					background: url(../img/t-lottery_pc@2x.webp) left center no-repeat;
+					background: url(../img/t-lottery_pc@2x.webp) center center no-repeat;
 					background-size: cover;
-					@include mq($max-width: $bp-2s) {
-						background: url(../img/t-lottery_m@2x.webp) left center no-repeat;
+					@include mq($max-width: $bp-2m) {
+						background: url(../img/t-lottery_m@2x.webp) center center no-repeat;
 						background-size: cover;
 					}
 				}
@@ -25,6 +25,14 @@
 					&-b {
 						width: calc(551px / 2.5);
 						height: calc(441px / 2.5);
+						@include mq($max-width: $bp-2) {
+							width: calc(551px / 2.9);
+							height: calc(441px / 2.9);
+						}
+						@include mq($max-width: $bp-2m) {
+							width: calc(551px / 2.3);
+							height: calc(441px / 2.3);
+						}
 					}
 					$max: 4;
 					@for $i from 1 through $max {
@@ -81,9 +89,13 @@
 						}
 						&_b {
 							display: inline-grid;
-							grid-template-columns: 1fr 1fr 1fr 1fr;
+							grid-template-columns: repeat(4, 1fr);
 							grid-column-gap: 2.1vw;
 							align-items: start;
+							@include mq($max-width: $bp-2m) {
+								grid-template-columns: repeat(2, 1fr);
+								grid-column-gap: 11vw;
+							}
 						}
 						.prize {
 							display: flex;
@@ -96,6 +108,14 @@
 									margin: 0 auto;
 									width: calc(500px / 2.3);
 									height: calc(500px / 2.3);
+									@include mq($max-width: $bp-2) {
+										width: calc(500px / 2.5);
+										height: calc(500px / 2.5);
+									}
+									@include mq($max-width: $bp-2m) {
+										width: calc(500px / 2);
+										height: calc(500px / 2);
+									}
 									&:before {
 										content: "";
 										position: absolute;
@@ -141,12 +161,30 @@
 							}
 							&-tickets {
 						    	margin: 0 auto;
-						    	max-width: 70vw;
+						    	max-width: 90%;
 								flex-direction: row;
+								@include mq($max-width: $bp-2m) {
+						    		max-width: 100%;
+								}
+								@include mq($max-width: $bp-m) {
+									flex-direction: column;
+								}
 								> div {
 									&:nth-child(1) {
 										width: calc(1140px / 2);
 										height: calc(501px / 2);
+										@include mq($max-width: $bp-2) {
+											width: calc(1140px / 2.3);
+											height: calc(501px / 2.3);
+										}
+										@include mq($max-width: $bp-2m) {
+											width: calc(1140px / 2.8);
+											height: calc(501px / 2.8);
+										}
+										@include mq($max-width: $bp-m) {
+											width: calc(1140px / 2);
+											height: calc(501px / 2);
+										}
 										@include mq($max-width: $bp-2s) {
 											width: calc(712px / 2);
 											height: calc(610px / 2);
