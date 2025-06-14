@@ -31,6 +31,7 @@
 				margin: 0 5px;
 				padding: 0 3px;
 				z-index: 0;
+				font-size: $fontsize-1;
 				&:after {
 					content: "";
 					position: absolute;
@@ -79,7 +80,7 @@
 				letter-spacing: 1px;
 				.bbox {
 					margin: 35px auto;
-					padding: 35px 50px;
+					padding: 30px 40px;
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -176,7 +177,7 @@
 					background: rgba(209, 7, 88, 1);
 					color: $color-white;
 					display: inline-block;
-					padding: 9px 25px;
+					padding: 7px 21px;
 					box-shadow: 0px 18px 20.2px 0px rgba(0, 0, 0, .25);
 					> a {
 						color: inherit;

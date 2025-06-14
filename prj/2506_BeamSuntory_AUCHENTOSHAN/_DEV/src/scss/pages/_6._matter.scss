@@ -4,6 +4,51 @@
 .main {
 	section._matter {
 		.inner {
+			> .title {}
+			> .content {
+				ul {
+					max-height: 550px;
+
+					position: relative;
+					overflow: hidden;
+					transition: max-height .4s ease;
+
+					mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+					mask-size: 100% 100%;
+					mask-repeat: no-repeat;
+					li {
+						margin-left: 2em;
+						line-height: 1.8em;
+						text-align: justify;
+						letter-spacing: 1.5px;
+						font-size: $fontsize-c;
+						text-indent: -1.4em;
+						&:nth-child(n+11) {
+							text-indent: -2em;
+						}
+					}
+				}
+				.matter-checkbox {
+					display: none;
+					&-label {
+						margin: 20px auto;
+						display: inline-block;
+						&:after {
+							content: "MORE +";
+						}
+					}
+					&:checked {
+						& ~ ul {
+							max-height: 10000px;
+							-webkit-mask-image: none;
+							mask-image: none;
+						}
+						& + ul + .matter-checkbox-label:after {
+							content: "LESS -";
+						}
+					}
+				}
+			}
 		}
 	}
 }

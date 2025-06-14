@@ -5,11 +5,11 @@
 	section._lottery {
 		.inner {
 			> .title {
-				width: calc(1953px / 2);
+				width: calc(1536px / 2);
 				height: calc(126px / 2);
 				@include mq($max-width: $bp-2s) {
-					width: calc(736px / 2);
-					height: calc(255px / 2);
+					width: calc(670px / 2);
+					height: calc(256px / 2);
 				}
 				&:before {
 					background: url(../img/t-lottery_pc@2x.webp) left center no-repeat;
@@ -23,8 +23,8 @@
 			> .content {
 				.step {
 					&-b {
-						width: calc(550px / 2.6);
-						height: calc(421px / 2.6);
+						width: calc(551px / 2.5);
+						height: calc(441px / 2.5);
 					}
 					$max: 4;
 					@for $i from 1 through $max {
@@ -32,6 +32,241 @@
 							background: url(../img/lottery_rule_step#{$i}@2x.webp) left center no-repeat;
 							background-size: cover;
 						}
+					}
+				}
+				.waves {
+					> .description {
+						label {
+							&:nth-child(1) {
+								display: block;
+								margin: 25px auto 10px;
+								width: calc(894px / 2);
+								height: calc(68px / 2);
+								@include mq($max-width: $bp-2s) {
+									width: calc(560px / 2);
+									height: calc(144px / 2);
+								}
+								&:before {
+									content: "";
+									position: absolute;
+									left: 0;
+									width: 100%;
+									height: 100%;
+								}
+							}
+							&:nth-child(2) {
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								&:before,
+								&:after {
+									content: "";
+									background: $color-white;
+									width: 21px;
+									height: 2px;
+									display: inline-block;
+									margin: 0 7px;
+								}
+								span {
+									font-style: italic;
+									letter-spacing: 1px;
+									font-size: $fontsize-a;
+								}
+							}
+						}
+					}
+					.prizes {
+						&_t {
+							margin: 30px auto;
+						}
+						&_b {
+							display: inline-grid;
+							grid-template-columns: 1fr 1fr 1fr 1fr;
+							grid-column-gap: 2.1vw;
+							align-items: start;
+						}
+						.prize {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							flex-direction: column;
+							> div {
+								&:nth-child(1) {
+									display: block;
+									margin: 0 auto;
+									width: calc(500px / 2.3);
+									height: calc(500px / 2.3);
+									&:before {
+										content: "";
+										position: absolute;
+										left: 0;
+										width: 100%;
+										height: 100%;
+									}
+								}
+								&:nth-child(2) {
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									flex-direction: column;
+									margin: 20px auto;
+									> span {
+										letter-spacing: 0;
+										line-height: normal;
+										white-space: pre-line;
+										margin-bottom: 5px;
+										&:nth-child(1) {
+											padding: 3px 15px;
+											border-radius: 30px;
+											background: $color-white;
+											color: rgba(120, 61, 212, 1);
+											letter-spacing: 1.5px;
+											font-weight: 700;
+											font-size: $fontsize-d;
+										}
+										&:nth-child(2) {
+											color: rgba(255, 226, 128, 1);
+											font-weight: 600;
+											margin: 7px auto;
+										}
+										&:nth-child(3) {
+											font-weight: 400;
+										}
+										&:nth-child(4) {
+											font-size: $fontsize-f;
+											letter-spacing: -.9px;
+										}
+									}
+								}
+							}
+							&-tickets {
+						    	margin: 0 auto;
+						    	max-width: 70vw;
+								flex-direction: row;
+								> div {
+									&:nth-child(1) {
+										width: calc(1140px / 2);
+										height: calc(501px / 2);
+										@include mq($max-width: $bp-2s) {
+											width: calc(712px / 2);
+											height: calc(610px / 2);
+										}
+										&:before {
+											background: url(../img/lottery_prize_tickets@2x.webp) left center no-repeat;
+											background-size: cover;
+											@include mq($max-width: $bp-2s) {
+												background: url(../img/lottery_prize_tickets-m@2x.webp) left center no-repeat;
+												background-size: cover;
+											}
+										}
+									}
+								}
+							}
+							&-apmax {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_AirPodsMAX@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+							&-table {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_table@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+							&-aw {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_aw@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+							&-shirts {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_shirts@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+							&-speaker {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_speaker@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+							&-gm {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_gm@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+							&-uber {
+								> div {
+									&:nth-child(1) {
+										&:before {
+											background: url(../img/lottery_prize_uber@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+						}
+					}
+					&_1 {
+						> .description {
+							label {
+								&:nth-child(1) {
+									&:before {
+										background: url(../img/lottery_awards_title_w1-pc@2x.webp) left center no-repeat;
+										background-size: cover;
+										@include mq($max-width: $bp-2s) {
+											background: url(../img/lottery_awards_title_w1-m@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+						}
+
+					}
+					&_2 {
+						> .description {
+							label {
+								&:nth-child(1) {
+									&:before {
+										background: url(../img/lottery_awards_title_w2-pc@2x.webp) left center no-repeat;
+										background-size: cover;
+										@include mq($max-width: $bp-2s) {
+											background: url(../img/lottery_awards_title_w2-m@2x.webp) left center no-repeat;
+											background-size: cover;
+										}
+									}
+								}
+							}
+						}
+
 					}
 				}
 			}
