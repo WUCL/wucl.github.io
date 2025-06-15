@@ -20,7 +20,40 @@
 					}
 				}
 			}
-			> .content {}
+			> .content {
+				.bbox {
+					&_r {
+						.bbox-p {
+							display: grid;
+							grid-template-columns: auto 1fr;
+							column-gap: 7px;
+							row-gap: 4px;
+							align-items: center;
+							@include mq($max-width: $bp-2s) {
+								grid-template-columns: 1fr;
+								row-gap: 1px;
+							}
+							> span {
+								@include mq($max-width: $bp-2s) {
+									grid-column: 1 / -1;
+								}
+								&._title {
+									grid-column: 1 / -1;
+									// margin-bottom: 8px;
+									@include mq($max-width: $bp-2s) {
+										margin-bottom: 3px;
+									}
+								}
+							}
+							// @include mq($max-width: $bp-2s) {
+							// 	span._bold + span._small {
+							// 		display: block;;
+							// 	}
+							// }
+						}
+					}
+				}
+			}
 		}
 	}
 }

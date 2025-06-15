@@ -21,6 +21,21 @@
 				}
 			}
 			> .content {
+				> .description {
+					> ul {
+						> li {
+							@include mq($max-width: $bp-2s) {
+								list-style: disc;
+								text-align: justify;
+								line-height: normal;
+								margin-bottom: 5px;
+								margin-left: 1em;
+								letter-spacing: 1px;
+								font-size: $fontsize-1;
+							}
+						}
+					}
+				}
 				.step {
 					&-b {
 						width: calc(551px / 2.5);
@@ -37,11 +52,23 @@
 					$max: 4;
 					@for $i from 1 through $max {
 						&_#{$i} .step-b:before {
-							background: url(../img/lottery_rule_step#{$i}@2x.webp) left center no-repeat;
+							background: url(../img/lottery_rule_step#{$i}@2x.webp) center center no-repeat;
 							background-size: cover;
 						}
 					}
 				}
+				&[data-content="2"],
+				&[data-content="3"] {
+					@include mq($max-width: $bp-2s) {
+						margin-top: 50px;
+					}
+				}
+				.gotobtn {
+					@include mq($max-width: $bp-2s) {
+						padding: 15px 20px;
+					}
+				}
+
 				.waves {
 					> .description {
 						label {
@@ -51,6 +78,7 @@
 								width: calc(894px / 2);
 								height: calc(68px / 2);
 								@include mq($max-width: $bp-2s) {
+									margin: 35px auto 20px;
 									width: calc(560px / 2);
 									height: calc(144px / 2);
 								}
@@ -74,11 +102,26 @@
 									height: 2px;
 									display: inline-block;
 									margin: 0 7px;
+									@include mq($max-width: $bp-2s) {
+										margin: 0 14px;
+									}
 								}
 								span {
 									font-style: italic;
 									letter-spacing: 1px;
 									font-size: $fontsize-a;
+									@include mq($max-width: $bp-2s) {
+										font-size: $fontsize-1;
+										letter-spacing: 2px;
+									}
+								}
+								> span {
+									@include mq($max-width: $bp-2s) {
+										display: flex;
+										align-items: flex-start;
+										justify-content: center;
+										flex-direction: column;
+									}
 								}
 							}
 						}
@@ -96,12 +139,21 @@
 								grid-template-columns: repeat(2, 1fr);
 								grid-column-gap: 11vw;
 							}
+							@include mq($max-width: $bp-2s) {
+								grid-template-columns: repeat(1, 1fr);
+							}
 						}
 						.prize {
 							display: flex;
 							align-items: center;
 							justify-content: center;
 							flex-direction: column;
+							@include mq($max-width: $bp-2s) {
+								// flex-direction: row;
+								display: grid;
+								grid-template-columns: 1fr 1fr;
+								grid-column-gap: 5px;
+							}
 							> div {
 								&:nth-child(1) {
 									display: block;
@@ -115,6 +167,10 @@
 									@include mq($max-width: $bp-2m) {
 										width: calc(500px / 2);
 										height: calc(500px / 2);
+									}
+									@include mq($max-width: $bp-2s) {
+										width: calc(500px / 2.8);
+										height: calc(500px / 2.8);
 									}
 									&:before {
 										content: "";
@@ -130,11 +186,22 @@
 									justify-content: center;
 									flex-direction: column;
 									margin: 20px auto;
+									@include mq($max-width: $bp-2s) {
+										margin: 25px auto;
+									}
 									> span {
 										letter-spacing: 0;
 										line-height: normal;
 										white-space: pre-line;
 										margin-bottom: 5px;
+										&._br {
+											br {
+												display: none;
+												@include mq($max-width: $bp-2s) {
+													display: block;
+												}
+											}
+										}
 										&:nth-child(1) {
 											padding: 3px 15px;
 											border-radius: 30px;
@@ -143,18 +210,31 @@
 											letter-spacing: 1.5px;
 											font-weight: 700;
 											font-size: $fontsize-d;
+											@include mq($max-width: $bp-2s) {
+												font-size: $fontsize;
+											}
 										}
 										&:nth-child(2) {
 											color: rgba(255, 226, 128, 1);
 											font-weight: 600;
 											margin: 7px auto;
+											@include mq($max-width: $bp-2s) {
+												font-size: $fontsize-1;
+											}
 										}
 										&:nth-child(3) {
 											font-weight: 400;
+											@include mq($max-width: $bp-2s) {
+												font-size: $fontsize-1;
+											}
 										}
 										&:nth-child(4) {
 											font-size: $fontsize-f;
 											letter-spacing: -.9px;
+											@include mq($max-width: $bp-2s) {
+												font-size: $fontsize-b;
+												letter-spacing: 0
+											}
 										}
 									}
 								}
@@ -168,6 +248,9 @@
 								}
 								@include mq($max-width: $bp-m) {
 									flex-direction: column;
+								}
+								@include mq($max-width: $bp-2s) {
+									display: flex;
 								}
 								> div {
 									&:nth-child(1) {
@@ -190,10 +273,10 @@
 											height: calc(610px / 2);
 										}
 										&:before {
-											background: url(../img/lottery_prize_tickets@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_tickets@2x.webp) center center no-repeat;
 											background-size: cover;
 											@include mq($max-width: $bp-2s) {
-												background: url(../img/lottery_prize_tickets-m@2x.webp) left center no-repeat;
+												background: url(../img/lottery_prize_tickets-m@2x.webp) center center no-repeat;
 												background-size: cover;
 											}
 										}
@@ -204,7 +287,7 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_AirPodsMAX@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_AirPodsMAX@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -214,7 +297,7 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_table@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_table@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -224,8 +307,17 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_aw@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_aw@2x.webp) center center no-repeat;
 											background-size: cover;
+										}
+									}
+									&:nth-child(2) {
+										> span {
+											&:nth-child(4) {
+												@include mq($max-width: $bp-2s) {
+													font-size: $fontsize-d;
+												}
+											}
 										}
 									}
 								}
@@ -234,7 +326,7 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_shirts@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_shirts@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -244,7 +336,7 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_speaker@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_speaker@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -254,7 +346,7 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_gm@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_gm@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -264,7 +356,7 @@
 								> div {
 									&:nth-child(1) {
 										&:before {
-											background: url(../img/lottery_prize_uber@2x.webp) left center no-repeat;
+											background: url(../img/lottery_prize_uber@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -277,10 +369,10 @@
 							label {
 								&:nth-child(1) {
 									&:before {
-										background: url(../img/lottery_awards_title_w1-pc@2x.webp) left center no-repeat;
+										background: url(../img/lottery_awards_title_w1-pc@2x.webp) center center no-repeat;
 										background-size: cover;
 										@include mq($max-width: $bp-2s) {
-											background: url(../img/lottery_awards_title_w1-m@2x.webp) left center no-repeat;
+											background: url(../img/lottery_awards_title_w1-m@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}
@@ -294,10 +386,10 @@
 							label {
 								&:nth-child(1) {
 									&:before {
-										background: url(../img/lottery_awards_title_w2-pc@2x.webp) left center no-repeat;
+										background: url(../img/lottery_awards_title_w2-pc@2x.webp) center center no-repeat;
 										background-size: cover;
 										@include mq($max-width: $bp-2s) {
-											background: url(../img/lottery_awards_title_w2-m@2x.webp) left center no-repeat;
+											background: url(../img/lottery_awards_title_w2-m@2x.webp) center center no-repeat;
 											background-size: cover;
 										}
 									}

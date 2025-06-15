@@ -3,6 +3,9 @@
    ======================= */
 .main {
 	section._matter {
+		@include mq($max-width: $bp-2s) {
+			padding-top: 0;
+		}
 		.inner {
 			> .title {}
 			> .content {
@@ -25,6 +28,9 @@
 						text-indent: -1.4em;
 						&:nth-child(n+11) {
 							text-indent: -2em;
+						}
+						@include mq($max-width: $bp-2s) {
+							font-size: $fontsize-a;
 						}
 					}
 				}

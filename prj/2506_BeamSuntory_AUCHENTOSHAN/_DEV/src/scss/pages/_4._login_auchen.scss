@@ -22,16 +22,52 @@
 			}
 			> .content {
 				.description {
-					&:nth-child(4) {
+					@include mq($max-width: $bp-2s) {
+						text-align: justify;
+						font-size: $fontsize-1;
+						line-height: normal;
+					}
+					&:nth-child(2) {
+						@include mq($max-width: $bp-2s) {
+							margin-bottom: 10px;
+						}
+						span {
+							display: block;
+							@include mq($max-width: $bp-2s) {
+								margin-bottom: 12px;
+							}
+							&._indent {
+								@include mq($max-width: $bp-2s) {
+									text-indent: -1.3em;
+									margin-left: 1.3em;
+								}
+							}
+						}
+					}
+					&:nth-child(3) {
 						// display: inline-block;
 						display: inline-grid;
 						grid-template-columns: 1fr 1fr;
 						grid-column-gap: 7vw;
+						@include mq($max-width: $bp-2s) {
+							margin: 0 auto;
+							max-width: 70vw;
+							grid-template-columns: 1fr;
+						}
 						> ul {
 							li {
 								list-style: disc;
-								text-align: left;
+								text-align: justify;
 								line-height: 1.8em;
+								@include mq($max-width: $bp-2s) {
+									line-height: normal;
+									margin-bottom: 5px;
+								}
+								> span {
+									@include mq($max-width: $bp-2s) {
+										display: block;
+									}
+								}
 							}
 						}
 					}
@@ -48,6 +84,10 @@
 							width: calc(551px / 2.2);
 							height: calc(468px / 2.2);
 						}
+						@include mq($max-width: $bp-2s) {
+							width: calc(551px / 1.8);
+							height: calc(468px / 1.8);
+						}
 					}
 					$max: 4;
 					@for $i from 1 through $max {
@@ -55,6 +95,11 @@
 							background: url(../img/line_rule_step#{$i}@2x.webp) left center no-repeat;
 							background-size: cover;
 						}
+					}
+				}
+				.gotobtn {
+					@include mq($max-width: $bp-2s) {
+						padding: 15px 20px;
 					}
 				}
 			}
