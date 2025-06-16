@@ -22,9 +22,9 @@
 			}
 			> .content {
 				.description {
+					font-size: $fontsize-1;
 					@include mq($max-width: $bp-2s) {
 						text-align: justify;
-						font-size: $fontsize-1;
 						line-height: normal;
 					}
 					&:nth-child(2) {
@@ -33,6 +33,8 @@
 						}
 						span {
 							display: block;
+							letter-spacing: 0;
+
 							@include mq($max-width: $bp-2s) {
 								margin-bottom: 12px;
 							}
