@@ -7,54 +7,35 @@
             </div>
             <div class="card">
                 <form id="form">
-                    <label>希望如何升級廚房</label>
-                    <select name="upgradeType" required>
+                    <!-- 1 -->
+                    <label>題目1</label>
+                    <select name="t1" required>
                         <option value="">請選擇</option>
-                        <option>單品升級</option>
-                        <option>全廚改造</option>
+                        <option>1</option>
+                        <option>2</option>
                     </select>
-                    <br>
-                    <label>希望多久內完成升級</label>
-                    <select name="timeframe" required>
+
+                    <!-- 2 -->
+                    <label>題目2</label>
+                    <select name="t2" required>
                         <option value="">請選擇</option>
-                        <option>3個月內</option>
-                        <option>6個月內</option>
-                        <option>12個月內</option>
+                        <option>a</option>
+                        <option>b</option>
                     </select>
-                    <br>
-                    <label>最重視的AI功能</label>
-                    <select name="aiFocus" required>
-                        <option value="">請選擇</option>
-                        <option>安全防護</option>
-                        <option>自動控制</option>
-                        <option>美感設計</option>
-                        <option>清潔便利</option>
-                    </select>
-                    <br>
-                    <label>預算範圍</label>
-                    <select name="budget" required>
-                        <option value="">請選擇</option>
-                        <option>5–10萬</option>
-                        <option>10–20萬</option>
-                        <option>20萬以上</option>
-                    </select>
-                    <br>
+
+                    <!-- 8 留下聯絡資訊 -->
                     <label>姓名</label>
                     <input name="name" required />
-                    <br>
-                    <label>手機</label>
-                    <input name="phone" required />
-                    <br>
-                    <label>Email</label>
-                    <input name="email" type="email" />
-                    <br>
-                    <div style="margin-top:12px; display:flex; gap:8px;">
-                        <button type="button" id="loginBtn" style="display:none;">LINE 登入</button>
-                        <button type="submit">送出</button>
-                    </div>
+
+                    <!-- 9 是否同意專人聯繫 -->
+                    <label style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+                    <input type="checkbox" name="consent" value="同意" required />是否同意專人聯繫</label>
+
+                    <!-- 送出 -->
+                    <div style="margin-top:12px; display:flex; gap:8px;"><button type="submit">送出</button></div>
                 </form>
+                <div id="result" style="margin-top:10px;"></div>
             </div>
-            <div id="result" style="margin-top:10px;"></div>
         </div>
     </section>
 </main>

@@ -1,0 +1,100 @@
+<main id="main" class="main">
+    <section class="">
+    	<div class="inner">
+            <div class="card" id="profileCard" >
+                <div>👤 <b id="displayName"></b></div>
+                <div style="font-size:12px;color:#666;" id="userIdHint"></div>
+            </div>
+            <div class="card">
+                <form id="form">
+                    <!-- 1 希望如何升級廚房 -->
+                    <label>希望如何升級廚房</label>
+                    <select name="upgradeType" required>
+                        <option value="">請選擇</option>
+                        <option>單品升級</option>
+                        <option>全廚改造</option>
+                    </select>
+
+                    <!-- 2 希望多久內完成升級 -->
+                    <label>希望多久內完成升級</label>
+                    <select name="timeframe" required>
+                        <option value="">請選擇</option>
+                        <option>3個月內</option>
+                        <option>6個月內</option>
+                        <option>12個月內</option>
+                    </select>
+
+                    <!-- 3 目前廚房設備使用多久 -->
+                    <label>目前廚房設備使用多久</label>
+                    <select name="usageYears" required>
+                        <option value="">請選擇</option>
+                        <option>1年內</option>
+                        <option>1-3年</option>
+                        <option>3-5年</option>
+                        <option>5年以上</option>
+                    </select>
+
+                    <!-- 4 在家裡烹飪的頻率為 -->
+                    <label>在家裡烹飪的頻率為</label>
+                    <select name="cookFreq" required>
+                        <option value="">請選擇</option>
+                        <option>很少</option>
+                        <option>偶而</option>
+                        <option>經常</option>
+                        <option>每天</option>
+                    </select>
+
+                    <!-- 5 最重視AI哪些功能（單選；若要多選再說我幫你改成 checkbox） -->
+                    <label>最重視 AI 哪些功能</label>
+                    <select name="aiFocus" required>
+                        <option value="">請選擇</option>
+                        <option>安全防護</option>
+                        <option>自動控制</option>
+                        <option>美感設計</option>
+                        <option>清潔便利</option>
+                    </select>
+
+                    <!-- 6 您的預算範圍 -->
+                    <label>您的預算範圍</label>
+                    <select name="budget" required>
+                        <option value="">請選擇</option>
+                        <option>5-10萬</option>
+                        <option>10-20萬</option>
+                        <option>20萬以上</option>
+                    </select>
+
+                    <!-- 7 選購時最重視 -->
+                    <label>選購時最重視</label>
+                    <select name="priority" required>
+                        <option value="">請選擇</option>
+                        <option>品質耐用</option>
+                        <option>功能實用</option>
+                        <option>外觀設計</option>
+                        <option>售後服務</option>
+                    </select>
+
+                    <!-- 8 留下聯絡資訊 -->
+                    <label>姓名</label>
+                    <input name="name" required />
+
+                    <label>手機</label>
+                    <input name="phone" required />
+
+                    <label>Email</label>
+                    <input name="email" type="email" />
+
+                    <label>地址</label>
+                    <input name="address" />
+
+                    <!-- 9 是否同意專人聯繫 -->
+                    <label style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+                    <input type="checkbox" name="consent" value="同意" required />是否同意專人聯繫</label>
+
+                    <!-- 送出 -->
+                    <div style="margin-top:12px; display:flex; gap:8px;"><button type="submit">送出</button></div>
+                </form>
+                <div id="result" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </section>
+</main>
