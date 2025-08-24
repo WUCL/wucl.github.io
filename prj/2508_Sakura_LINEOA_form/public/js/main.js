@@ -38,8 +38,8 @@ $(function() {
             //         alert(`LIFF init error: ${err.code} ${err.message}`);
             //     }
             // })();
-            // console.log($this.var);
-            // console.log($this.var.$LIFF_ID);
+            console.log($this.var);
+            console.log($this.var.$LIFF_ID);
 
             (async () => {
               try {
