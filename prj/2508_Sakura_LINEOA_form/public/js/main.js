@@ -11,7 +11,7 @@ $(function() {
             $nav: $('#nav'),
         },
         var: {
-            $testmode: false,
+            $testmode: true,
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbw2AHucouMWAr0e7bH6ujaoVTI1KT4upBTcGmkhYbtj2udQEmkxAOGcqTu34OHBj59o/exec',
         },

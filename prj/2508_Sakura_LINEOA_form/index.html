@@ -36,50 +36,118 @@
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
 		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?1720" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?1820" />
 	</head>
 	<body>
         <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
         
 		<main id="main" class="main">
-		    <section class="">
+		    <section class="card">
 		    	<div class="inner">
-		            <div class="card" id="profileCard" >
+		            <div class="profileCard" id="profileCard" >
 		                <div>👤 <b id="displayName"></b></div>
 		                <div style="font-size:12px;color:#666;" id="userIdHint"></div>
 		            </div>
 		            <br>
-		            <div class="card">
+		            <div class="formCard">
 		                <form id="form">
-		                    <!-- 1 -->
-		                    <label>題目1</label>
-		                    <select name="t1" required>
-		                        <option value="">請選擇</option>
-		                        <option>1</option>
-		                        <option>2</option>
-		                    </select>
-		                    <br>
-		                    <br>
-		                    <!-- 2 -->
-		                    <label>題目2</label>
-		                    <select name="t2" required>
-		                        <option value="">請選擇</option>
-		                        <option>a</option>
-		                        <option>b</option>
-		                    </select>
-		                    <br>
-		                    <br>
+		                    <!-- 1 希望如何升級廚房 -->
+		                    <div class="tItem">
+		                        <label>希望如何升級廚房</label>
+		                        <select name="upgradeType" required>
+		                            <option value="">請選擇</option>
+		                            <option>單品升級</option>
+		                            <option>全廚改造</option>
+		                        </select>
+		                    </div>
+		                    <!-- 2 希望多久內完成升級 -->
+		                    <div class="tItem">
+		                        <label>希望多久內完成升級</label>
+		                        <select name="timeframe" required>
+		                            <option value="">請選擇</option>
+		                            <option>3個月內</option>
+		                            <option>6個月內</option>
+		                            <option>12個月內</option>
+		                        </select>
+		                    </div>
+		                    <!-- 3 目前廚房設備使用多久 -->
+		                    <div class="tItem _h">
+		                        <label>目前廚房設備使用多久</label>
+		                        <select name="usageYears" required>
+		                            <option value="">請選擇</option>
+		                            <option>1年內</option>
+		                            <option>1-3年</option>
+		                            <option>3-5年</option>
+		                            <option>5年以上</option>
+		                        </select>
+		                    </div>
+		                    <!-- 4 在家裡烹飪的頻率為 -->
+		                    <div class="tItem _h">
+		                        <label>在家裡烹飪的頻率為</label>
+		                        <select name="cookFreq" required>
+		                            <option value="">請選擇</option>
+		                            <option>很少</option>
+		                            <option>偶而</option>
+		                            <option>經常</option>
+		                            <option>每天</option>
+		                        </select>
+		                    </div>
+		                    <!-- 5 最重視AI哪些功能（單選；若要多選再說我幫你改成 checkbox） -->
+		                    <div class="tItem _h">
+		                        <label>最重視 AI 哪些功能</label>
+		                        <select name="aiFocus" required>
+		                            <option value="">請選擇</option>
+		                            <option>安全防護</option>
+		                            <option>自動控制</option>
+		                            <option>美感設計</option>
+		                            <option>清潔便利</option>
+		                        </select>
+		                    </div>
+		                    <!-- 6 您的預算範圍 -->
+		                    <div class="tItem _h">
+		                        <label>您的預算範圍</label>
+		                        <select name="budget" required>
+		                            <option value="">請選擇</option>
+		                            <option>5-10萬</option>
+		                            <option>10-20萬</option>
+		                            <option>20萬以上</option>
+		                        </select>
+		                    </div>
+		                    <!-- 7 選購時最重視 -->
+		                    <div class="tItem _h">
+		                        <label>選購時最重視</label>
+		                        <select name="priority" required>
+		                            <option value="">請選擇</option>
+		                            <option>品質耐用</option>
+		                            <option>功能實用</option>
+		                            <option>外觀設計</option>
+		                            <option>售後服務</option>
+		                        </select>
+		                    </div>
 		                    <!-- 8 留下聯絡資訊 -->
-		                    <label>姓名</label>
-		                    <input name="name" required />
-		                    <br>
-		                    <br>
+		                    <div class="tItem">
+		                        <label>姓名</label>
+		                        <input name="name" required />
+		                    </div>
+		                    <div class="tItem _h">
+		                        <label>手機</label>
+		                        <input name="phone" required />
+		                    </div>
+		                    <div class="tItem _h">
+		                        <label>Email</label>
+		                        <input name="email" type="email" />
+		                    </div>
+		                    <div class="tItem _h">
+		                        <label>地址</label>
+		                        <input name="address" />
+		                    </div>
+
 		                    <!-- 9 是否同意專人聯繫 -->
 		                    <label style="display:flex;align-items:center;gap:8px;margin-top:8px;">
 		                    <input type="checkbox" name="consent" value="同意" required />同意專人聯繫</label>
 
 		                    <!-- 送出 -->
-		                    <div style="margin-top:12px; display:flex; gap:8px;"><button type="submit" style="border: 1px solid">送出</button></div>
+		                    <div class="submit" style="margin-top:12px; display:flex; gap:8px;"><button type="submit">送出</button></div>
 		                </form>
 		                <div id="result" style="margin-top:10px;"></div>
 		            </div>
@@ -92,6 +160,6 @@
 		<script src="./public/js/custom/eventdevice.js"></script>
 		<!-- <script src="./public/lib/aos/aos.js"></script> -->
 
-		<script src="./public/js/main.js?1731"></script>
+		<script src="./public/js/main.js?1820"></script>
 	</body>
 </html>

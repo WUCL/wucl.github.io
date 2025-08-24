@@ -1,0 +1,43 @@
+/* =======================
+   pages/card
+   ======================= */
+.main {
+	section.card {
+		.inner {
+			.profileCard {
+				background: rgba($color-main, .1);
+				padding: 9px;
+				border-radius: 7px;
+				line-height: normal;
+			}
+			.formCard {
+				background: rgba($color-main, .3);
+				padding: 9px;
+				border-radius: 7px;
+				form#form {
+					.tItem {
+						margin-bottom: 7px;
+						line-height: normal;
+						&._h {
+							// display: none;
+						}
+					}
+					select,
+					input {
+						border-radius: 7px;
+						padding: 3px;
+					}
+					.submit {
+						button {
+							border: 1px solid $color-main;
+							border-radius: 7px;
+							padding: 3px 7px;
+							background: $color-main;
+							color: $color-white;
+						}
+					}
+				}
+			}
+		}
+	}
+}
