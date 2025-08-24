@@ -83,33 +83,47 @@ $(function() {
 
             // 3) 送資料到 Google Apps Script
             document.getElementById('form').addEventListener('submit', async (e) => {
-              e.preventDefault();
-              const form = e.currentTarget;
-              const data = Object.fromEntries(new FormData(form).entries());
+                e.preventDefault();
+                const form = e.currentTarget;
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const resultDiv = document.getElementById('result');
 
-              // 附上 LINE 取得到的資訊（可依需求調整）
-              const payload = {
-                timestamp: new Date().toISOString(),
-                lineUid,
-                displayName: userProfile?.displayName || '',
-                pictureUrl: userProfile?.pictureUrl || '',
-                idToken, // 可選：若後端要驗簽
-                ...data,
-              };
+                // 附上 LINE 取得到的資訊（可依需求調整）
+                // 取表單資料
+                const data = Object.fromEntries(new FormData(form).entries());
+                const payload = {
+                    timestamp: new Date().toISOString(),
+                    lineUid,
+                    displayName: userProfile?.displayName || '',
+                    pictureUrl: userProfile?.pictureUrl || '',
+                    idToken,
+                    ...data,
+                };
 
-              try {
-                const res = await fetch($this.var.$GS_WEBAPP_URL, {
-                  method: 'POST',
-                  mode: 'no-cors', // Apps Script 開放匿名時可用；如要回應內容可移除 no-cors 並在後端回 JSON
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(payload),
-                });
-                document.getElementById('result').textContent = "✅ 已送出，感謝填寫！";
-                form.reset();
-              } catch (err) {
-                console.error(err);
-                document.getElementById('result').textContent = "❌ 傳送失敗，請稍後再試。";
-              }
+                // UI 狀態更新：按鈕停用 + 顯示傳送中
+                submitBtn.disabled = true;
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = "送出中...";
+                resultDiv.textContent = "資料傳送中，請稍候...";
+
+                try {
+                    const res = await fetch($this.var.$GS_WEBAPP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Apps Script 開放匿名時可用；如要回應內容可移除 no-cors 並在後端回 JSON
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
+
+                    document.getElementById('result').textContent = "✅ 已送出，感謝填寫！";
+                    form.reset();
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById('result').textContent = "❌ 傳送失敗，請稍後再試。";
+                } finally {
+                    // 無論成功失敗，都恢復按鈕狀態
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
             });
         },
         // doAos: function() {
