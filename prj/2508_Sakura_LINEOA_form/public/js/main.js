@@ -113,10 +113,16 @@ $(function() {
                 try {
                     const res = await fetch($this.var.$GS_WEBAPP_URL, {
                         method: 'POST',
-                        mode: 'no-cors', // Apps Script 開放匿名時可用；如要回應內容可移除 no-cors 並在後端回 JSON
+                        // mode: 'no-cors', // Apps Script 開放匿名時可用；如要回應內容可移除 no-cors 並在後端回 JSON
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload),
                     });
+
+                    // 這裡會真的拿到回應（因為後端已加 CORS）
+                    const json = await res.json();
+                    if (!res.ok || !json.ok) {
+                        throw new Error(json.message || `HTTP ${res.status}`);
+                    }
 
                     document.getElementById('result').textContent = "✅ 已送出，感謝填寫！";
                     form.reset();
