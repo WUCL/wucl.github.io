@@ -1,6 +1,6 @@
 <main id="main" class="main">
     <section class="card">
-    	<div class="inner">
+        <div class="inner">
             <div class="profileCard" id="profileCard">
                 <div>ENV Mode: <b id="envMode"></b></div>
                 <div>TEST Mode: <b id="testMode"></b></div>
@@ -14,7 +14,7 @@
                     <!-- 1 希望如何升級廚房 -->
                     <div class="tItem">
                         <label>希望如何升級廚房</label>
-                        <select name="upgradeType">
+                        <select name="t1">
                             <option value="">請選擇</option>
                             <option>單品升級</option>
                             <option>全廚改造</option>
@@ -23,7 +23,7 @@
                     <!-- 2 希望多久內完成升級 -->
                     <div class="tItem">
                         <label>希望多久內完成升級</label>
-                        <select name="timeframe">
+                        <select name="t2">
                             <option value="">請選擇</option>
                             <option>3個月內</option>
                             <option>6個月內</option>
@@ -33,7 +33,7 @@
                     <!-- 3 目前廚房設備使用多久 -->
                     <div class="tItem _h">
                         <label>目前廚房設備使用多久</label>
-                        <select name="usageYears">
+                        <select name="t3">
                             <option value="">請選擇</option>
                             <option>1年內</option>
                             <option>1-3年</option>
@@ -44,7 +44,7 @@
                     <!-- 4 在家裡烹飪的頻率為 -->
                     <div class="tItem _h">
                         <label>在家裡烹飪的頻率為</label>
-                        <select name="cookFreq">
+                        <select name="t4">
                             <option value="">請選擇</option>
                             <option>很少</option>
                             <option>偶而</option>
@@ -55,7 +55,7 @@
                     <!-- 5 最重視AI哪些功能（單選；若要多選再說我幫你改成 checkbox） -->
                     <div class="tItem _h">
                         <label>最重視 AI 哪些功能</label>
-                        <select name="aiFocus">
+                        <select name="t5">
                             <option value="">請選擇</option>
                             <option>安全防護</option>
                             <option>自動控制</option>
@@ -66,7 +66,7 @@
                     <!-- 6 您的預算範圍 -->
                     <div class="tItem _h">
                         <label>您的預算範圍</label>
-                        <select name="budget">
+                        <select name="t6">
                             <option value="">請選擇</option>
                             <option>5-10萬</option>
                             <option>10-20萬</option>
@@ -76,7 +76,7 @@
                     <!-- 7 選購時最重視 -->
                     <div class="tItem _h">
                         <label>選購時最重視</label>
-                        <select name="priority">
+                        <select name="t7">
                             <option value="">請選擇</option>
                             <option>品質耐用</option>
                             <option>功能實用</option>
@@ -104,7 +104,7 @@
 
                     <!-- 9 是否同意專人聯繫 -->
                     <label style="display:flex;align-items:center;gap:8px;margin-top:8px;">
-                    <input type="checkbox" name="consent" value="同意" required />同意專人聯繫</label>
+                    <input type="checkbox" name="consent" value="同意" />同意專人聯繫</label>
 
                     <!-- 送出 -->
                     <div class="submit" style="margin-top:12px; display:flex; gap:8px;"><button type="submit">送出</button></div>
