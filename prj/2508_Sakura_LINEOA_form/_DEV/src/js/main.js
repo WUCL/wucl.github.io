@@ -23,17 +23,36 @@ $(function() {
         bindEvent: function() {
             let $this = this;
 
-            if (!liff.isInClient() && !liff.isLoggedIn()) liff.login();
+            // if (!liff.isInClient() && !liff.isLoggedIn()) liff.login();
 
             let userProfile = null;
             let idToken = null;
             let lineUid = null;
 
+            // (async () => {
+            //     try {
+            //     await liff.init({ liffId: $this.var.$LIFF_ID });
+            //         console.log("LIFF init OK");
+            //     } catch (err) {
+            //         console.error("LIFF init error:", err.code, err.message);
+            //         alert(`LIFF init error: ${err.code} ${err.message}`);
+            //     }
+            // })();
+            // console.log($this.var);
+            // console.log($this.var.$LIFF_ID);
+
             (async () => {
               try {
                 await liff.init({
-                    liffId: LIFF_ID, // Use own liffId
+                    liffId: $this.var.$LIFF_ID, // Use own liffId
                     withLoginOnExternalBrowser: true, // Enable automatic login process
+                })
+                .then(() => {
+                    console.log("LIFF init success");
+                })
+                .catch((err) => {
+                    console.error("LIFF init error:", err.code, err.message);
+                    alert("LIFF init error: " + err.code + " " + err.message);
                 });
 
                 // 若在外部瀏覽器，提示使用者改在 LINE 打開
@@ -78,7 +97,7 @@ $(function() {
               };
 
               try {
-                const res = await fetch(GS_WEBAPP_URL, {
+                const res = await fetch($this.var.$GS_WEBAPP_URL, {
                   method: 'POST',
                   mode: 'no-cors', // Apps Script 開放匿名時可用；如要回應內容可移除 no-cors 並在後端回 JSON
                   headers: { 'Content-Type': 'application/json' },
