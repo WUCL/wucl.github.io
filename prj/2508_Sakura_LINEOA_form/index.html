@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>2508_Sakura_LINEOA_form</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:image" content="" />
+
+        <link rel="icon" type="image/png" href="./favicon.ico" />
+
+        <!-- BEGIN google noto sans tc -->
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+        <!-- END google noto sans tc -->
+
+        <!-- BEGIN google noto serif -->
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+        <!-- END google noto serif -->
+
+
+        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
+		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+	</head>
+	<body>
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+        
+		<main id="main" class="main">
+		    <section class="">
+		    	<div class="inner">
+		            <div class="card" id="profileCard" >
+		                <div>👤 <b id="displayName"></b></div>
+		                <div style="font-size:12px;color:#666;" id="userIdHint"></div>
+		            </div>
+		            <div class="card">
+		                <form id="form">
+		                    <label>希望如何升級廚房</label>
+		                    <select name="upgradeType" required>
+		                        <option value="">請選擇</option>
+		                        <option>單品升級</option>
+		                        <option>全廚改造</option>
+		                    </select>
+		                    <br>
+		                    <label>希望多久內完成升級</label>
+		                    <select name="timeframe" required>
+		                        <option value="">請選擇</option>
+		                        <option>3個月內</option>
+		                        <option>6個月內</option>
+		                        <option>12個月內</option>
+		                    </select>
+		                    <br>
+		                    <label>最重視的AI功能</label>
+		                    <select name="aiFocus" required>
+		                        <option value="">請選擇</option>
+		                        <option>安全防護</option>
+		                        <option>自動控制</option>
+		                        <option>美感設計</option>
+		                        <option>清潔便利</option>
+		                    </select>
+		                    <br>
+		                    <label>預算範圍</label>
+		                    <select name="budget" required>
+		                        <option value="">請選擇</option>
+		                        <option>5–10萬</option>
+		                        <option>10–20萬</option>
+		                        <option>20萬以上</option>
+		                    </select>
+		                    <br>
+		                    <label>姓名</label>
+		                    <input name="name" required />
+		                    <br>
+		                    <label>手機</label>
+		                    <input name="phone" required />
+		                    <br>
+		                    <label>Email</label>
+		                    <input name="email" type="email" />
+		                    <br>
+		                    <div style="margin-top:12px; display:flex; gap:8px;">
+		                        <button type="button" id="loginBtn" style="display:none;">LINE 登入</button>
+		                        <button type="submit">送出</button>
+		                    </div>
+		                </form>
+		            </div>
+		            <div id="result" style="margin-top:10px;"></div>
+		        </div>
+		    </section>
+		</main>
+		
+
+		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="./public/js/custom/eventdevice.js"></script>
+		<!-- <script src="./public/lib/aos/aos.js"></script> -->
+
+		<script src="./public/js/main.js"></script>
+	</body>
+</html>
