@@ -18,7 +18,11 @@ $(function() {
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
+            document.getElementById('envMode').textContent = deviceObj.name;
+            document.getElementById('testMode').textContent = this.var.$testmode;
+
             // this.doAos();
+
             if (!this.var.$testmode) this.bindEvent();
         },
         bindEvent: function() {
