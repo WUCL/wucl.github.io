@@ -11,6 +11,7 @@ $(function() {
             $nav: $('#nav'),
         },
         var: {
+            $testmode: false,
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbw2AHucouMWAr0e7bH6ujaoVTI1KT4upBTcGmkhYbtj2udQEmkxAOGcqTu34OHBj59o/exec',
         },
@@ -18,7 +19,7 @@ $(function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             this.el.$body.addClass(deviceObj.name);
             // this.doAos();
-            this.bindEvent();
+            if (!this.var.$testmode) this.bindEvent();
         },
         bindEvent: function() {
             let $this = this;
