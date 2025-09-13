@@ -12,6 +12,7 @@ $(function() {
         },
         var: {
             $testmode: false,
+            $testuid: 'jimmyisgood',
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
         },
@@ -45,7 +46,7 @@ $(function() {
             console.log($this.var);
             console.log($this.var.$LIFF_ID);
 
-            if (!this.var.$testmode) {
+            if (!$this.var.$testmode) {
                 (async () => {
                   try {
                     await liff.init({
@@ -84,6 +85,8 @@ $(function() {
                     alert("LIFF 初始化失敗，請稍後再試。");
                   }
                 })();
+            } else {
+                lineUid = $this.var.$testuid;
             }
 
             // 3) 送資料到 Google Apps Script
