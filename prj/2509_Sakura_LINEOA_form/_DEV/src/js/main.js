@@ -11,14 +11,17 @@ $(function() {
             $nav: $('#nav'),
         },
         var: {
-            $testmode: false,
-            $testuid: 'jimmyisgood',
+            $testmode: true,
+            $testuid: 'allen250914test',
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
         },
         init: function() {
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+            console.log(deviceObj);
             this.el.$body.addClass(deviceObj.name);
+
+            document.getElementById('envDevice').textContent = deviceObj.envDevice;
             document.getElementById('envMode').textContent = deviceObj.name;
             document.getElementById('testMode').textContent = this.var.$testmode;
 
