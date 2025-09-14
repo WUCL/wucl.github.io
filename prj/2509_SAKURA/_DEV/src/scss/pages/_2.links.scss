@@ -1,0 +1,43 @@
+/* =======================
+   pages/_links
+   ======================= */
+.main {
+	section._links {
+		> .inner {
+			> .box {
+				box-shadow: 0 21px 56px 14px rgba(0, 0, 0, .2);
+				.links {
+					padding: 40px 15px;
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					// grid-column-gap: 14px;
+					// border-top: 6px solid $color-second;
+					border-top: 6px solid;
+					border-image-source: linear-gradient(90deg, #FF787F 0%, #C9151E 100%);
+					border-image-slice: 1; /* Specifies how the border image is sliced */
+
+					line-height: normal;
+					text-align: center;
+					&-1 {
+						border-right: 1px solid #E5E5E5;
+					}
+					&-2 {}
+					&-t,
+					&-d {
+						font-size: $fontsize-1;
+					}
+					&-t {
+						color: $color-main;
+						font-weight: 500;
+					}
+					&-d {
+						font-weight: 400;
+						color: #2E2E2E;
+					}
+					&-btn {
+					}
+				}
+			}
+		}
+	}
+}

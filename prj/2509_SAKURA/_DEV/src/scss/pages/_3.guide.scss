@@ -1,0 +1,126 @@
+/* =======================
+   pages/_guide
+   ======================= */
+.main {
+	section._guide {
+		> .inner {
+			> .box {
+				.clist {
+					padding: 40px 50px;
+					&-item {
+						line-height: normal;
+						margin-top: 25px;
+						&:first-child {
+							margin-top: 0;
+						}
+						&-title {
+							display: inline-block;
+							font-size: calc($fontsize-2 - 1px);
+							@extend %layout-title;
+							&:after {
+								margin: 7px auto;
+							}
+						}
+						&-content {
+							padding: 15px 0;
+							font-size: calc($fontsize-1 - 2px);
+							color: #666666;
+							line-height: 28px;
+							ul {
+								li {
+									list-style-type: disc;
+									margin-left: 1.4em;
+									padding-left: .1em;
+								}
+							}
+							.layout-btn {
+								width: 100%;
+								text-align: center;
+								a {
+									display: inline-flex;
+									padding: 9px 24px;
+									font-size: calc($fontsize-1 - 2.5px);
+									&:after {
+										width: calc(56px / 3.3);
+										height: calc(56px / 3.3);
+									}
+								}
+							}
+							.steps {
+								&-a {
+									display: grid;
+									grid-template-columns: 1fr 1fr 1fr 1fr;
+									grid-column-gap: 30px;
+									img {
+										display: block;
+										width: 100%;
+									}
+								}
+								&-b {
+									margin: 30px auto;
+									&-1,
+									&-2,
+									&-3,
+									&-4 {
+										display: block;
+										margin-bottom: 20px;
+										width: calc(1800px / 2);
+										height: calc(840px / 2);
+										&:before {
+											content: "";
+											position: absolute;
+											top: 0;
+											left: 0;
+											width: 100%;
+											height: 100%;
+										}
+									}
+									&-1 {
+										&:before {
+											background: url(../img/step-b-1@2x.png) left top no-repeat;
+											background-size: cover;
+											@include mq($max-width: $bp-2l) {
+												background: url(../img/step-b-1-m@2x.jpg) left top no-repeat;
+												background-size: cover;
+											}
+										}
+									}
+									&-2 {
+										&:before {
+											background: url(../img/step-b-2@2x.png) left top no-repeat;
+											background-size: cover;
+											@include mq($max-width: $bp-2l) {
+												background: url(../img/step-b-2-m@2x.jpg) left top no-repeat;
+												background-size: cover;
+											}
+										}
+									}
+									&-3 {
+										&:before {
+											background: url(../img/step-b-3@2x.png) left top no-repeat;
+											background-size: cover;
+											@include mq($max-width: $bp-2l) {
+												background: url(../img/step-b-3-m@2x.jpg) left top no-repeat;
+												background-size: cover;
+											}
+										}
+									}
+									&-4 {
+										&:before {
+											background: url(../img/step-b-4@2x.png) left top no-repeat;
+											background-size: cover;
+											@include mq($max-width: $bp-2l) {
+												background: url(../img/step-b-4-m@2x.jpg) left top no-repeat;
+												background-size: cover;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
