@@ -7,14 +7,26 @@
 			.models {
 				&-list {
 					padding: 40px;
+					@include mq($max-width: $bp-3s) {
+						padding: 25px;
+					}
 					&-item {
+						margin-top: 25px;
 						border: 1px solid #EEEEEE;
 						border-radius: 24px;
-						padding: 0 16px;
+						padding: 0 20px;
+						@include mq($max-width: $bp-3s) {
+							margin-top: 20px;
+						}
+						&:first-child {
+							margin-top: 0;
+						}
 						&-title {
 							color: #2E2E2E;
 							padding: 24px 0;
 							font-size: $fontsize-2;
+							font-weight: 400;
+							transition: .2s;
 							&:after {
 								content: "";
 								position: absolute;
@@ -42,11 +54,29 @@
 								li {
 									padding: 20px 24px;
 									display: grid;
-									grid-template-columns: 1fr 1fr 1fr;
+									grid-template-columns: 1.4fr 1.4fr 1fr;
 									font-weight: 500;
 									color: #2E2E2E;
 									text-align: center;
+									@include mq($max-width: $bp-3s) {
+										padding: 18px 15px;
+									}
+									&:hover {
+										background: rgba($color-second, .05);
+									}
 									.col {
+										&-1,
+										&-2,
+										&-3 {
+											// text-align: justify;
+											font-size: $fontsize-1;
+											line-height: 25px;
+											span {
+												@include mq($max-width: $bp-3s) {
+													display: block;
+												}
+											}
+										}
 										&-1 {
 											text-align: left;
 										}
@@ -86,6 +116,10 @@
 												background: url(../img/icon-external_link@2x.png) left top no-repeat;
 												background-size: cover;
 												transition: .2s;
+												@include mq($max-width: $bp-3s) {
+													width: calc(48px / 2.2);
+													height: calc(48px / 2.2);
+												}
 											}
 											&:hover {
 												&:after {
@@ -99,6 +133,7 @@
 						}
 
 						&.unfolder {
+							padding-bottom: 20px;
 							.models-list-item-title {
 								color: $color-main;
 								font-weight: 500;
@@ -107,7 +142,7 @@
 								}
 							}
 							.models-list-item-folder {
-								max-height: 1000px;
+								max-height: 2000px;
 							}
 						}
 					}

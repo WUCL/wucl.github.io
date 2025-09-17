@@ -4,28 +4,22 @@
 .main {
 	section._kv {
 		padding: 0;
-		margin-bottom: 10px;
 		position: relative;
 		width: 100%;
-		height: 41vw;
 		height: 41.6vw;
 		@include mq($max-width: $bp-2l) {
 			height: 128vw;
 		}
-		&:before,
-		&:after {
+		&:before{
 			content: "";
 			position: absolute;
 			left: 0;
 			width: 100%;
 			height: 100%;
-		}
-		&:before {
-			top: 0;
-			background: url(../img/kv@2x.jpg) left top no-repeat;
+			background: url(../img/kv@2x.jpg) center top no-repeat;
 			background-size: cover;
 			@include mq($max-width: $bp-2l) {
-				background: url(../img/kv-m@2x.jpg) left top no-repeat;
+				background: url(../img/kv-m@2x.jpg) center top no-repeat;
 				background-size: cover;
 			}
 		}

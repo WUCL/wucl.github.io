@@ -7,14 +7,28 @@
 			> .box {
 				display: grid;
 				grid-template-columns: 1fr 1fr;
+				@include mq($max-width: $bp-2m) {
+					grid-template-columns: 1fr;
+					border-radius: 50px;
+					margin: 0 auto;
+				}
+				@include mq($max-width: $bp-3s) {
+				}
 				.ai {
 					&_l,
 					&_r {
 					}
 					&_l {
 						display: block;
-						width: calc(1000px / 2);
-						height: calc(1060px / 2);
+						width: 100%;
+						height: 49.3vw;
+						max-width: calc(1000px / 2);
+						max-height: calc(1060px / 2);
+						@include mq($max-width: $bp-2m) {
+							max-width: 100%;
+							max-height: 100%;
+							height: 99vw;
+						}
 						&:before {
 							content: "";
 							position: absolute;
@@ -24,13 +38,14 @@
 							height: 100%;
 							background: url(../img/ai@2x.jpg) left top no-repeat;
 							background-size: cover;
-							// @include mq($max-width: $bp-2l) {
-							// 	background: url(../img/ai-m@2x.jpg) left top no-repeat;
-							// 	background-size: cover;
-							// }
+							@include mq($max-width: $bp-2m) {
+								background: url(../img/ai-m@2x.jpg) left top no-repeat;
+								background-size: cover;
+							}
 						}
 					}
 					&_r {
+						padding: 40px;
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -38,6 +53,12 @@
 						line-height: normal;
 						> .title {
 							@extend %main-title;
+							@include mq($max-width: $bp-3s) {
+								text-align: center;
+								span {
+									display: block;
+								}
+							}
 						}
 						> .description {
 							font-size: $fontsize-1;

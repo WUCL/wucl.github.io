@@ -2,8 +2,177 @@
 layout/_header
 ======================= */
 header.header {
+	height: 70px;
+	position: relative;
+	z-index: 10;
+	&:before {
+		content: "";
+		z-index: 11;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 6px;
+
+		border-top: 6px solid;
+		border-image: linear-gradient(90deg, $color-second 0%, $color-main 100%);
+		border-image-slice: 1;
+
+		// background: linear-gradient(90deg, $color-second 0%, $color-main 100%);
+		transition: .2s;
+	}
 	.header-inner {
+		max-width: calc($bp-3l + 30px);
+		height: 100%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 15px;
+
+		@include mq($max-width: $bp-3l) {
+			max-width: $bp-2l;
+		}
+		@include mq($max-width: $bp-2l) {
+			padding: 0 20px;
+		}
+		.logo {
+			> img {
+				display: block;
+				max-height: 24px;
+			}
+		}
+		.menu {
+			display: flex;
+			gap: 15px;
+			align-items: center;
+  			// transition: transform 0.3s ease;
+			@include mq($max-width: $bp-2l) {
+				gap: 10px;
+			}
+			@include mq($max-width: $bp-l) {
+				gap: 5px;
+			}
+			@include mq($max-width: $bp-2m) {
+				// transform: translateX(100%);
+			}
+			@include mq($max-width: $bp-2m - 1px) {
+				// transition: .2s ease;
+			}
+			&-item {
+				@include mq($max-width: $bp-2m) {
+					display: none;
+				}
+				a {
+					font-size: calc($fontsize + 2px);
+					text-decoration: none;
+					color: $color-black;
+					transition: .2s;
+					padding: 10px;
+					@include mq($max-width: $bp-2l) {
+						padding: 10px;
+					}
+					&:hover {
+						color: $color-main;
+					}
+				}
+			}
+
+			.hamburger {
+				display: none;
+				flex-direction: column;
+				justify-content: space-between;
+				width: 28px;
+				height: 21px;
+				cursor: pointer;
+				position: relative;
+				z-index: 11;
+				// @include mq($max-width: $bp-2l) {
+				// 	display: flex;
+				// }
+				@include mq($max-width: $bp-2m) {
+					// position: fixed;
+					display: flex;
+					position: absolute;
+					right: 10px;
+
+				}
+				> span {
+					height: 3.5px;
+					background: $color-black;
+					border-radius: 2px;
+					transition: .2s ease;
+					transform-origin: center;
+				}
+				&:hover {
+					> span {
+						background: $color-main;
+					}
+				}
+				&:active {
+					> span {
+						background: $color-second;
+					}
+				}
+			}
+		}
 	}
 	&.open {
+		&:before {
+			// background: linear-gradient(-90deg, $color-second 0%, $color-main 100%);
+			border-image: linear-gradient(-90deg, $color-second 0%, $color-main 100%);
+			border-image-slice: 1;
+		}
+		.header-inner {
+			.logo {
+				position: fixed;
+				z-index: 12;
+			}
+			.menu {
+				position: fixed;
+				top: 0;
+				right: 0;
+				background: white;
+				width: 100%;
+				height: 100vh;
+				padding: 80px 20px 20px;
+				&-item {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: flex-start;
+					transform: translateX(0);
+			 		a {
+						padding: 24px 0;
+						font-size: $fontsize-3;
+						border-top: 1px solid #E5E5E5;
+						width: 100%;
+						&:first-child {
+							border-top: 0;
+						}
+					}
+				}
+				.hamburger {
+					@include mq($max-width: $bp-2m) {
+						position: fixed;
+						top: 27.5px;
+						right: 30px;
+					}
+					> span {
+						&:nth-child(1) {
+							transform: rotate(45deg) translate(6px, 6px);
+						}
+						&:nth-child(2) {
+							opacity: 0;
+						}
+						&:nth-child(3) {
+							transform: rotate(-45deg) translate(6px, -6px);
+						}
+					}
+				}
+			}
+		}
 	}
 }

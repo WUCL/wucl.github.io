@@ -6,12 +6,15 @@ $(function() {
             $doc: $(document),
             $body: $('body'),
             $header: $('#header'),
+            $hamburger: $('#hamburger'),
             $main: $('#main'),
             $footer: $('#footer'),
             $nav: $('#nav'),
             $navSwitch: $('#switch'),
 
             $_models: $('#_models'),
+
+            $reply_btn: $('.reply-btn'),
         },
         var: {
         },
@@ -25,16 +28,19 @@ $(function() {
             let $this = this;
 
             // switch menu
-            // $this.el.$navSwitch.on('click', function() {
-            //     $this.el.$body.toggleClass('openheader');
-            // });
-            // $this.el.$nav.on('click', function() {
-            //     $this.el.$body.removeClass('openheader');
-            // });
+            $this.el.$hamburger.on('click', function() {
+                $this.el.$header.toggleClass('open');
+                // document.getElementById('header').classList.toggle('open');
+            });
 
-            $this.el.$_models.on('click', '.models .models-list-item' ,function() {
+            $this.el.$reply_btn.on('click', function() {
+                confirm('您是否已於期間內購買\r\nAI Kitchen 系列商品？');
+            });
+
+            $this.el.$_models.on('click', '.models .models-list-item > .models-list-item-title' ,function() {
                 console.log(this);
-                this.classList.toggle('unfolder');
+                // this.classList.toggle('unfolder');
+                this.closest('.models-list-item')?.classList.toggle('unfolder');
             });
 
         },
@@ -48,9 +54,9 @@ $(function() {
                         <div class="models-list-item-header">
                             <ul>
                                 <li>
-                                    <div class="col-1">產品型號</div>
-                                    <div class="col-2">櫻花加碼金額</div>
-                                    <div class="col-3">商品連結</div>
+                                    <div class="col-1">產品<span>型號</span></div>
+                                    <div class="col-2">櫻花加<span>碼金額</span></div>
+                                    <div class="col-3">商品<span>連結</span></div>
                                 </li>
                             </ul>
                         </div>
@@ -58,11 +64,11 @@ $(function() {
                             <ul>`;
                             group.items.forEach(item => {
                                 html += `
-                                    <li>
+                                    <li class="${item.model}">
                                         <div class="col-1">${item.model}</div>
                                         <div class="col-2">${item.bonus}</div>
                                         <div class="col-3">
-                                            ${item.link.includes("請洽") ? "請洽店面" : `<a href="${item.link}" target="_blank">連結</a>`}
+                                            ${item.link.includes("請洽") ? "請洽店面" : `<a href="${item.link}" target="_blank"></a>`}
                                         </div>
                                     </li>`;
                                 });

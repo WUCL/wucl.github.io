@@ -37,7 +37,22 @@
 	</head>
 	<body>
         <header id="header" class="header">
-        	This is HEADER
+        	<div class="header-inner">
+        		<div class="logo"><img src="./public/img/logo@2x.png"></div>
+        		<nav class="menu">
+        			<div class="menu-item">
+        				<a href="#">活動說明</a>
+        				<a href="#">活動集氣清單</a>
+        				<a href="#">整體廚房加碼活動</a>
+        				<a href="#">購買通路</a>
+        			</div>
+        			<div class="hamburger" id="hamburger">
+        				<span></span>
+        				<span></span>
+        				<span></span>
+        			</div>
+        		</nav>
+        	</div>
         </header>
 		<main id="main" class="main">
 		    <section id="_kv" class="_kv"></section>
@@ -95,17 +110,25 @@
 		                        <div class="clist-item-title">申請流程</div>
 		                        <div class="clist-item-content">
 		                            <div class="steps-a">
-		                                <img src="./public/img/step-a-1@2x.png">
-		                                <img src="./public/img/step-a-2@2x.png">
-		                                <img src="./public/img/step-a-3@2x.png">
-		                                <img src="./public/img/step-a-4@2x.png">
+		                                <img class="img" src="./public/img/step-a-1@2x.png">
+		                                <img class="img" src="./public/img/step-a-2@2x.png">
+		                                <img class="img" src="./public/img/step-a-3@2x.png">
+		                                <img class="img" src="./public/img/step-a-4@2x.png">
+		                                <img class="img-m" src="./public/img/step-a-1-m@2x.png">
+		                                <img class="img-m" src="./public/img/step-a-2-m@2x.png">
+		                                <img class="img-m" src="./public/img/step-a-3-m@2x.png">
+		                                <img class="img-m" src="./public/img/step-a-4-m@2x.png">
 		                            </div>
-		                            <div class="steps-btn layout-btn"><a href="javascript:;" target="_blank">立即回函登錄</a></div>
+		                            <div class="steps-btn reply-btn layout-btn"><a href="javascript:;" target="_blank">立即回函登錄</a></div>
 		                            <div class="steps-b">
-		                                <div class="steps-b-1"></div>
-		                                <div class="steps-b-2"></div>
-		                                <div class="steps-b-3"></div>
-		                                <div class="steps-b-4"></div>
+		                                <img class="img" src="./public/img/step-b-1@2x.png">
+		                                <img class="img" src="./public/img/step-b-2@2x.png">
+		                                <img class="img" src="./public/img/step-b-3@2x.png">
+		                                <img class="img" src="./public/img/step-b-4@2x.png">
+		                                <img class="img-m" src="./public/img/step-b-1-m@2x.png">
+		                                <img class="img-m" src="./public/img/step-b-2-m@2x.png">
+		                                <img class="img-m" src="./public/img/step-b-3-m@2x.png">
+		                                <img class="img-m" src="./public/img/step-b-4-m@2x.png">
 		                            </div>
 		                        </div>
 		                    </div>
@@ -129,7 +152,7 @@
 		                                <li>回函申請人姓名與收款金融帳戶戶名不相符。 使用估價單上傳、無法辨識購買櫻花相關產品。</li>
 		                                <li>收據未蓋店章、未拍攝完整或有斷字、污損等不清晰情況，導致審核難以辨識。 開立收據字體未工整，導致審核難以辨識。</li>
 		                            </ul>
-		                            <div class="steps-btn layout-btn"><a href="javascript:;" target="_blank">立即回函登錄</a></div>
+		                            <div class="steps-btn reply-btn layout-btn"><a href="javascript:;" target="_blank">立即回函登錄</a></div>
 		                        </div>
 		                    </div>
 		                </div>
@@ -187,11 +210,7 @@
 		        </div>
 		    </section>
 		</main>
-		<footer id="footer" class="footer">
-			<section class="copyright">
-				<!-- <span>Copyright © 2025</span> -->
-			</section>
-		</footer>
+		
 
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/js/custom/eventdevice.js"></script>
