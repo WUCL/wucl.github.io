@@ -15,6 +15,7 @@ $(function() {
             $_models: $('#_models'),
 
             $reply_btn: $('.reply-btn'),
+            $off_popup: $('.off_popup'),
         },
         var: {
         },
@@ -33,9 +34,19 @@ $(function() {
                 // document.getElementById('header').classList.toggle('open');
             });
 
-            $this.el.$reply_btn.on('click', function() {
-                confirm('您是否已於期間內購買\r\nAI Kitchen 系列商品？');
+            $this.el.$reply_btn.add($this.el.$off_popup).on('click', function () {
+                $this.el.$body.toggleClass('on-popup no-scroll');
             });
+
+            // $this.el.$reply_btn.on('click', function() {
+            //     $this.el.$body.toggleClass('on-popup');
+            //     $this.el.$body.toggleClass('no-scroll');
+            // });
+
+            // $this.el.$popup_cover.on('click', function() {
+            //     $this.el.$body.toggleClass('on-popup');
+            //     $this.el.$body.toggleClass('no-scroll');
+            // });
 
             $this.el.$_models.on('click', '.models .models-list-item > .models-list-item-title' ,function() {
                 console.log(this);
