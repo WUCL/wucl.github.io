@@ -2,8 +2,39 @@
 layout/_header
 ======================= */
 header.header {
-	.header-inner {
+	max-width: $bp;
+	height: 70px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 10;
+	&:before {
+		content: "";
+		z-index: 11;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 6px;
+
+		border-top: 6px solid;
+		border-image: linear-gradient(90deg, $color-second 0%, $color-main 100%);
+		border-image-slice: 1;
+
+		transition: .2s;
 	}
-	&.open {
+	.header-inner {
+		max-width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 15px;
+		.logo {
+			> img {
+				display: block;
+				max-height: 24px;
+			}
+		}
 	}
 }

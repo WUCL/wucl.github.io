@@ -1,0 +1,95 @@
+/* =======================
+   pages/_survey
+   ======================= */
+.main {
+	section._survey {
+		padding: 20px;
+		.inner {
+			.step_bar {
+				display: none;
+				width: calc(670px / 2);
+				height: calc(184px / 2);
+				padding: 7px;
+				margin: 0 auto 25px;
+				&:before {
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.form_box {
+				background: rgba($color-main, .3);
+				padding: 9px;
+				border-radius: 7px;
+				form#form {
+					.item {
+						margin-bottom: 7px;
+						line-height: normal;
+						&._h {
+							display: none;
+						}
+					}
+					select,
+					input {
+						border-radius: 7px;
+						padding: 3px;
+					}
+					.submit {
+						button {
+						}
+					}
+				}
+			}
+		}
+	}
+	&[data-step="1"],
+	&[data-step="2"],
+	&[data-step="3"] {
+		section._card {
+			.inner {
+				.stepBar {
+					display: block;
+				}
+			}
+		}
+	}
+	&[data-step="1"] {
+		section._card {
+			.inner {
+				.stepBar {
+					&:before {
+						background: url(../img/step_1@2x.png) center center no-repeat;
+						background-size: cover;
+					}
+				}
+			}
+		}
+	}
+	&[data-step="2"] {
+		section._card {
+			.inner {
+				.stepBar {
+					&:before {
+						background: url(../img/step_2@2x.png) center center no-repeat;
+						background-size: cover;
+					}
+				}
+			}
+		}
+	}
+	&[data-step="3"] {
+		section._card {
+			.inner {
+				.stepBar {
+					&:before {
+						background: url(../img/step_3@2x.png) center center no-repeat;
+						background-size: cover;
+					}
+				}
+			}
+		}
+	}
+}

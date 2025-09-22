@@ -2,6 +2,8 @@
    pages/common
    ======================= */
 .main {
+	max-width: $bp;
+	margin: 0 auto;
 	overflow: hidden;
 	section {
 		width: 100%;
@@ -10,7 +12,7 @@
 		// min-height: 100vh;
 		// padding: 50px 0;
 		.inner {
-			max-width: $bp-2;
+			max-width: 100%;
 			margin: 0 auto;
 			> .title {
 				display: block;
@@ -23,36 +25,52 @@
 			}
 		}
 	}
+	.layout-btn {
+		margin: 30px 0 0;
+		display: inline-block;
+		width: 100%;
+		button {
+			display: block;
+			width: 100%;
+			padding: 14px;
+			background: $color-main;
+			color: $color-white;
+			border-radius: 9px;
+			font-size: $fontsize-1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: .2s;
+			&:after {
+				content: "";
+				display: inline-block;
+				position: relative;
+				margin-left: 7px;
+				left: 0;
+				width: calc(56px / 2.8);
+				height: calc(56px / 2.8);
+				background: url(../img/icon-arrow_r@2x.png) left top no-repeat;
+				background-size: cover;
+				transition: .2s;
+			}
+		}
+		&:hover {
+			button {
+				&:after {
+					left: 5px;
+				}
+			}
+		}
+	}
 }
 body {
 	background: $color-white;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	padding: 35px;
-	&.disableScroll {
-		// position: fixed;
-		overflow: hidden;
-	}
 
-}
-.slick-dots {
-	margin-top: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	li {
-		margin: 0 5px;
-		button {
-			text-indent: -999999px;
-			background: rgba($color-black, .25);
-			width: 9px;
-			height: 9px;
-			border-radius: 50%;
-		}
-		&.slick-active {
-			button {
-				background: rgba($color-black, .5);
-			}
-		}
+	.profileCard {
+		background: rgba($color-main, .1);
+		padding: 7px;
+		line-height: normal;
 	}
 }

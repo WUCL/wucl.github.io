@@ -8,7 +8,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=480, initial-scale=1, user-scalable=0, shrink-to-fit=no">
         <title>2509_SAKURA_LINELiffForm</title>
         <meta name="keywords" content="" />
         <meta name="description" content="SAKURA form" />
@@ -22,16 +23,27 @@
 
         @@include('../src/tpl/_fonts.html')
 		@@include('../src/tpl/_style.html')
-        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/style.min.css?0052" />
+        <link rel="stylesheet" type="text/css" href="@@webRoot/public/css/style.min.css?@@DATE" />
 	</head>
 	<body>
         <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-        <span style="color:red;">0052</span>
-        <!-- @@include('../src/tpl/header.html') -->
+
+        <div class="profileCard" id="profileCard">
+            <div>datetime :: <b>@@NOW</b></div>
+            <div>no :: <b>@@DATE</b></div>
+            <div>ENV Device :: <b id="envDevice"></b></div>
+            <div>ENV Mode :: <b id="envMode"></b></div>
+            <div>TEST Mode :: <b id="testMode"></b></div>
+            <div>-</div>
+            <div>👤 <b id="displayName"></b></div>
+            <div style="font-size:12px;color:#666;" id="userIdHint"></div>
+        </div>
+
+        @@include('../src/tpl/header.html')
 		@@include('../src/tpl/main.html')
-		<!-- @@include('../src/tpl/footer.html') -->
 
 		@@include('../src/tpl/_script.html')
-		<script src="@@webRoot/public/js/main.js?0052"></script>
+        <script src="@@webRoot/public/js/Q_LIST.js?@@DATE"></script>
+		<script src="@@webRoot/public/js/main.js?@@DATE"></script>
 	</body>
 </html>

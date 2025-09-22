@@ -16,6 +16,8 @@ const gulp = require('gulp')
     , fileinclude = require('gulp-file-include')
     , debug = require('gulp-debug')
     // , del = require('del')
+    , replace = require('gulp-replace')
+    , moment = require('moment')
     ;
 
 const SRC = './src'
@@ -53,12 +55,17 @@ gulp.task('serve', function(cb) {
 
 /* html */
 gulp.task('html', () => {
+    const now = moment().format('YYYY-MM-DD HH:mm:ss');
+    const date = moment().format('YYMMDD');
+
     return gulp.src(PATH.SRC.HTML)
     .pipe(fileinclude({
         prefix: '@@'
         , basepath: '@file'
         , indent: true
     }))
+    .pipe(replace('@@NOW', now))
+    .pipe(replace('@@DATE', date))
     .pipe(changed(PATH.DEST.HTML, { hasChanged: changed.compareContents }))
     .pipe(debug({ title: 'Compile:' }))
     .pipe(gulp.dest(PATH.DEST.HTML))

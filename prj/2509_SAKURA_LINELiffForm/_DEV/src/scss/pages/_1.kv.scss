@@ -1,0 +1,61 @@
+/* =======================
+   pages/_kv
+   ======================= */
+.main {
+	section._kv {
+		background: rgba(243, 243, 243, 1);
+		padding: 0;
+		position: relative;
+		width: 100%;
+		height: 41vw;
+		overflow: hidden;
+		&:before{
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: -25%;
+			width: 100%;
+			height: 100%;
+			background: url(../img/mask_b@2x.png) center top no-repeat;
+			background-size: cover;
+		}
+		.inner {
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			align-content: center;
+			justify-content: center;
+			line-height: normal;
+			.title {
+				display: block;
+				font-size: $fontsize-5;
+				font-weight: 500;
+				&:after {
+					content: "";
+					display: block;
+					max-width: 80px;
+					width: 100%;
+					height: 2px;
+					background: linear-gradient(90deg, $color-second 0%, $color-main 100%);
+					// background: $color-main;
+					margin: 16px auto;
+				}
+			}
+			.description {
+				font-size: $fontsize-2;
+				p {
+
+				}
+			}
+			span {
+				&.highlight_red {
+					color: $color-main;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+}
