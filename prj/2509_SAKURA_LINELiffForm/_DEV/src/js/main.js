@@ -11,9 +11,9 @@ $(function() {
             $nav: $('#nav'),
         },
         var: {
-            $survey_step: 1,
+            $survey_step: 1, // init
             $testmode: true,
-            $testuid: 'allen250914test',
+            $testuid: 'allen2509232049test',
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
         },
@@ -26,10 +26,7 @@ $(function() {
             document.getElementById('envMode').textContent = deviceObj.name;
             document.getElementById('testMode').textContent = this.var.$testmode;
 
-            // this.doAos();
             this.bindEvent();
-            this.buildSurvey();
-
         },
         bindEvent: function() {
             let $this = this;
@@ -40,15 +37,6 @@ $(function() {
             let idToken = null;
             let lineUid = null;
 
-            // (async () => {
-            //     try {
-            //     await liff.init({ liffId: $this.var.$LIFF_ID });
-            //         console.log("LIFF init OK");
-            //     } catch (err) {
-            //         console.error("LIFF init error:", err.code, err.message);
-            //         alert(`LIFF init error: ${err.code} ${err.message}`);
-            //     }
-            // })();
             console.log($this.var);
             console.log($this.var.$LIFF_ID);
 
@@ -95,21 +83,23 @@ $(function() {
                 lineUid = $this.var.$testuid;
             }
 
-            // 3) 送資料到 Google Apps Script
-            document.getElementById('form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const resultDiv = document.getElementById('result');
+            function collectFormData(lineUid, userProfile, idToken) {
+                console.log('collectFormData');
+                console.log('lineUid :: ' + lineUid);
+                console.log('userProfile :: ' + userProfile);
+                console.log('idToken :: ' + idToken);
+                const form = document.getElementById('form');
+                // const data = Object.fromEntries(new FormData(form).entries());
+                const formData = new FormData(form);
+                const data = {};
+                for (const key of formData.keys()) {
+                    const values = formData.getAll(key); // 取得所有值
+                    data[key] = values.length > 1 ? values : values[0]; // 多個值用陣列，否則直接塞值
+                }
+                console.log(':: data ::');
+                console.log(data);
 
-                // 鎖按鈕 & 提示
-                submitBtn.disabled = true;
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = "送出中...";
-                resultDiv.textContent = "資料傳送中，請稍候...";
-
-                const data = Object.fromEntries(new FormData(form).entries());
-                const payload = {
+                return {
                     timestamp: new Date().toISOString(),
                     lineUid,
                     displayName: userProfile?.displayName || '',
@@ -117,16 +107,26 @@ $(function() {
                     idToken,
                     ...data,
                 };
+            }
+            async function submitToGoogleScript(payload) {
+                const form = document.getElementById('form');
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const resultDiv = document.getElementById('result');
+
+                submitBtn.disabled = true;
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = "送出中...";
+                resultDiv.textContent = "資料傳送中，請稍候...";
 
                 try {
                     await fetch($this.var.$GS_WEBAPP_URL, {
-                      method: 'POST',
-                      mode: 'no-cors',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(payload),
-                    });
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
 
-                    console.log("✅ 表單已送出:", payload);
+                console.log("✅ 表單已送出:", payload);
                     resultDiv.textContent = "✅ 已送出，感謝填寫！";
                     form.reset();
                 } catch (err) {
@@ -136,12 +136,12 @@ $(function() {
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalText;
                 }
-            });
-        },
+            }
 
-        buildSurvey: function() {
+
+
+            // === buildSurvey ===
             console.log('buildSurvey');
-            let $this = this;
             $this.el.$main.attr('data-step', $this.var.$survey_step);
 
             // == Render 所有題目 ==
@@ -158,6 +158,7 @@ $(function() {
                         fieldset.dataset.type = q.t;
                         fieldset.dataset.id = `s${stepIndex + 1}_q${qIndex + 1}`;
                         if (q.maxcheckbox) fieldset.dataset.maxcheckbox = q.maxcheckbox;
+                        console.log(fieldset.dataset.id);
 
                         const legend = document.createElement('legend');
                         legend.textContent = `${qIndex + 1}. ${q.q}`;
@@ -218,9 +219,10 @@ $(function() {
                     item.removeAttribute('data-error');
 
                     const type = item.dataset.type;
+                    const inputs = item.querySelectorAll('input, textarea');
                     const checked = item.querySelectorAll('input:checked');
 
-                    // max checkbox 限制
+                    // ✅ checkbox: max 限制
                     if (type === 'checkbox' && item.dataset.maxcheckbox) {
                         const max = parseInt(item.dataset.maxcheckbox, 10);
                         if (checked.length > max) {
@@ -230,45 +232,58 @@ $(function() {
                         }
                     }
 
-                    // 必填驗證
-                    if (checked.length === 0) {
+                    // ✅ radio / checkbox 必填驗證
+                    if ((type === 'radio' || type === 'checkbox') && checked.length === 0) {
                         item.classList.add('error');
                         item.dataset.error = '欄位必填';
                         valid = false;
+                    }
+
+                    // ✅ 其他 input / textarea 必填驗證（例如 text / textarea）
+                    if (type !== 'radio' && type !== 'checkbox') {
+                        const hasValue = Array.from(inputs).some((input) => input.value.trim() !== '');
+                        if (!hasValue) {
+                            item.classList.add('error');
+                            item.dataset.error = '欄位必填';
+                            valid = false;
+                        }
                     }
                 });
 
                 return valid;
             }
 
+
             // == 偵測清除error ==
             function bindErrorClearOnInput() {
-                document.querySelectorAll('.item input').forEach((input) => {
-                    input.addEventListener('change', () => {
+                document.querySelectorAll('.item input, .item textarea').forEach((input) => {
+                    input.addEventListener('input', () => {
                         const fieldset = input.closest('.item');
-                        const checked = fieldset.querySelectorAll('input:checked');
                         const type = fieldset.dataset.type;
+                        const checked = fieldset.querySelectorAll('input:checked');
                         const max = parseInt(fieldset.dataset.maxcheckbox || Infinity, 10);
 
-                        // ✅ 條件一：無 max 限制 → 只要有勾就清錯
-                        if (type === 'checkbox' && !fieldset.dataset.maxcheckbox) {
+                        // ✅ radio
+                        if (type === 'radio') {
                             if (checked.length > 0) {
                                 fieldset.classList.remove('error');
                                 fieldset.removeAttribute('data-error');
                             }
                         }
 
-                        // ✅ 條件二：有 max 限制 → 勾選數量在範圍內才清錯
-                        if (type === 'checkbox' && fieldset.dataset.maxcheckbox) {
-                            if (checked.length > 0 && checked.length <= max) {
-                            fieldset.classList.remove('error');
-                            fieldset.removeAttribute('data-error');
+                        // ✅ checkbox
+                        if (type === 'checkbox') {
+                            if (!fieldset.dataset.maxcheckbox || checked.length <= max) {
+                                if (checked.length > 0) {
+                                    fieldset.classList.remove('error');
+                                    fieldset.removeAttribute('data-error');
+                                }
                             }
                         }
 
-                        // ✅ radio 題型
-                        if (type === 'radio') {
-                            if (checked.length > 0) {
+                        // ✅ 其他輸入（例如 text / textarea）
+                        if (type !== 'radio' && type !== 'checkbox') {
+                            if (input.value.trim() !== '') {
                                 fieldset.classList.remove('error');
                                 fieldset.removeAttribute('data-error');
                             }
@@ -277,18 +292,20 @@ $(function() {
                 });
             }
 
+
             // == 綁定下一步按鈕 ==
             document.querySelector('.step_submit button').addEventListener('click', () => {
+                console.log('綁定下一步按鈕');
                 const main = document.querySelector('main');
                 let currentStep = parseInt(main.dataset.step, 10); // ex: data-step="1"
                 const isValid = validateCurrentStep(currentStep);
+                console.log('currentStep :: ' + currentStep);
+                console.log('isValid :: ' + isValid);
 
                 if (!isValid) {
                     // 滾動至第一個錯誤欄位
                     const firstError = document.querySelector(`.step_${currentStep} .item.error`);
-                    if (firstError) {
-                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
+                    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     return;
                 }
 
@@ -298,9 +315,10 @@ $(function() {
                     main.setAttribute('data-step', currentStep);
                     document.querySelector(`.step_bar`).scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else if (currentStep === 3) {
+                    console.log('currentStep :: ' + currentStep);
                     // ✅ Step3 為最終步驟，請在此填入送出處理
-                    alert('所有欄位皆已完成，進入送出階段！');
-                    // 可加上資料彙整 / Ajax 上傳 / 頁面跳轉等處理
+                    const payload = collectFormData(lineUid, userProfile, idToken);
+                    submitToGoogleScript(payload);
                 }
             });
 

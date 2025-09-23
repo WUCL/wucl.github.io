@@ -3,14 +3,13 @@
    ======================= */
 .main {
 	section._survey {
-		padding: 20px;
+		padding: 15px 20px;
 		.inner {
 			.step_bar {
 				display: none;
-				width: calc(670px / 2);
-				height: calc(184px / 2);
-				padding: 7px;
-				margin: 0 auto 25px;
+				width: calc(670px / 1.6);
+				height: calc(184px / 1.6);
+				margin: 35px auto;
 				&:before {
 					content: "";
 					position: absolute;
@@ -36,7 +35,12 @@
 							display: grid;
 							grid-template-columns: 1fr 1fr;
 							grid-gap: 7px;
+							&.no-grid {
+								display: inline-flex;
+								width: 100%;
+							}
 							label {
+								width: 100%;
 								position: relative;
 								display: inline-block;
 								font-size: $fontsize;
@@ -44,8 +48,13 @@
 								cursor: pointer;
 								user-select: none;
 								overflow: hidden;
+
+								input[type="text"],
 								span {
+									width: 100%;
 									padding: 7px 12px;
+									font-size: inherit;
+									line-height: normal;
 									display: flex;
 									align-items: center;
 									justify-content: flex-start;
@@ -61,10 +70,13 @@
 										margin-right: 7px;
 									}
 								}
+								input[type="text"] {
+									padding: 9px 12px;
+								}
 								input {
-									display: none;
 									&[type="radio"],
 									&[type="checkbox"] {
+										display: none;
 										&:checked + span {
 											border-color: $color-main;
 											background: rgba($color-main, .15);
@@ -93,7 +105,8 @@
 										}
 									}
 								}
-								&:hover {
+								&:hover,
+								input[type="text"]:hover {
 									border-color: $color-main;
 									color: $color-main;
 								}
@@ -124,7 +137,12 @@
 					}
 					.step_submit {
 						button {
-							display: none;
+							&[type="submit"] {
+								display: none;
+							}
+							&:before {
+								content: "下一步";
+							}
 						}
 					}
 				}
@@ -154,9 +172,13 @@
 			}
 		}
 	}
-	&[data-step="1"] section._survey form#form .step_submit button[type="button"],
-	&[data-step="2"] section._survey form#form .step_submit button[type="button"],
-	&[data-step="3"] section._survey form#form .step_submit button[type="submit"] {
-		display: block;
+	// &[data-step="1"] section._survey form#form .step_submit button[type="button"],
+	// &[data-step="2"] section._survey form#form .step_submit button[type="button"],
+	// &[data-step="3"] section._survey form#form .step_submit button[type="submit"] {
+	// 	display: flex;
+	// }
+	&[data-step="3"] section._survey .inner form#form .step_submit button:before {
+		content: "送出";
 	}
+
 }
