@@ -21,15 +21,100 @@
 				}
 			}
 			.form_box {
-				background: rgba($color-main, .3);
-				padding: 9px;
-				border-radius: 7px;
 				form#form {
+					.step {
+						display: none;
+					}
 					.item {
-						margin-bottom: 7px;
+						margin-bottom: 30px;
 						line-height: normal;
+						legend {
+							font-size: $fontsize-1;
+							margin-bottom: 12px;
+						}
+						.labels {
+							display: grid;
+							grid-template-columns: 1fr 1fr;
+							grid-gap: 7px;
+							label {
+								position: relative;
+								display: inline-block;
+								font-size: $fontsize;
+								color: #666;
+								cursor: pointer;
+								user-select: none;
+								overflow: hidden;
+								span {
+									padding: 7px 12px;
+									display: flex;
+									align-items: center;
+									justify-content: flex-start;
+									border: 1px solid #EEE;
+									border-radius: 8px;
+									transition: .2s ease;
+									&:before {
+										content: "";
+										position: relative;
+										display: inline-block;
+										width: calc(40px / 2);
+										height: calc(40px / 2);
+										margin-right: 7px;
+									}
+								}
+								input {
+									display: none;
+									&[type="radio"],
+									&[type="checkbox"] {
+										&:checked + span {
+											border-color: $color-main;
+											background: rgba($color-main, .15);
+											color: $color-main;
+										}
+									}
+									&[type="radio"] {
+										// radio 未勾選
+										& + span:before {
+											background: url("../img/icon-radio@2x.png") no-repeat center/contain;
+										}
+										// radio 已勾選
+										&:checked + span:before {
+											background-image: url("../img/icon-radio-checked@2x.png");
+										}
+									}
+
+									&[type="checkbox"] {
+										// checkbox 未勾選
+										& + span::before {
+											background: url("../img/icon-check@2x.png") no-repeat center/contain;
+										}
+										// checkbox 已勾選
+										&:checked + span::before {
+											background-image: url("../img/icon-check-checked@2x.png");
+										}
+									}
+								}
+								&:hover {
+									border-color: $color-main;
+									color: $color-main;
+								}
+							}
+						}
 						&._h {
 							display: none;
+						}
+						&.error {
+							legend {
+								color: $color-main;
+							}
+							&:after {
+								content: attr(data-error);
+								color: $color-main;
+								display: block;
+								margin: 7px 0;
+								font-size: $fontsize-c;
+								font-weight: 500;
+								line-height: normal;
+							}
 						}
 					}
 					select,
@@ -37,59 +122,41 @@
 						border-radius: 7px;
 						padding: 3px;
 					}
-					.submit {
+					.step_submit {
 						button {
+							display: none;
 						}
 					}
 				}
 			}
 		}
 	}
-	&[data-step="1"],
-	&[data-step="2"],
-	&[data-step="3"] {
-		section._card {
-			.inner {
-				.stepBar {
-					display: block;
-				}
-			}
-		}
-	}
-	&[data-step="1"] {
-		section._card {
-			.inner {
-				.stepBar {
-					&:before {
-						background: url(../img/step_1@2x.png) center center no-repeat;
-						background-size: cover;
+	@for $i from 1 through 3 {
+		&[data-step="#{$i}"] {
+			section._survey {
+				.inner {
+					.step_bar {
+						display: block;
+
+						&:before {
+							background: url(../img/step_#{$i}@2x.png) center center no-repeat;
+							background-size: cover;
+						}
+					}
+					.form_box {
+						form#form {
+							.step_#{$i} {
+								display: block;
+							}
+						}
 					}
 				}
 			}
 		}
 	}
-	&[data-step="2"] {
-		section._card {
-			.inner {
-				.stepBar {
-					&:before {
-						background: url(../img/step_2@2x.png) center center no-repeat;
-						background-size: cover;
-					}
-				}
-			}
-		}
-	}
-	&[data-step="3"] {
-		section._card {
-			.inner {
-				.stepBar {
-					&:before {
-						background: url(../img/step_3@2x.png) center center no-repeat;
-						background-size: cover;
-					}
-				}
-			}
-		}
+	&[data-step="1"] section._survey form#form .step_submit button[type="button"],
+	&[data-step="2"] section._survey form#form .step_submit button[type="button"],
+	&[data-step="3"] section._survey form#form .step_submit button[type="submit"] {
+		display: block;
 	}
 }
