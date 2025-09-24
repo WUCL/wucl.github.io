@@ -29,6 +29,7 @@
 		margin: 0 auto;
 		display: inline-block;
 		width: 100%;
+		a,
 		button {
 			width: 100%;
 			padding: 14px;
@@ -54,6 +55,7 @@
 			}
 		}
 		&:hover {
+			a,
 			button {
 				&:after {
 					left: 5px;

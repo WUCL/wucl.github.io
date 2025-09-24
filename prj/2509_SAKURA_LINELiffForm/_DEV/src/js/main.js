@@ -13,7 +13,7 @@ $(function() {
         var: {
             $survey_step: 1, // init
             $testmode: true,
-            $testuid: 'allen2509232049test',
+            $testuid: 'test-2509241617',
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
         },
@@ -22,11 +22,24 @@ $(function() {
             console.log(deviceObj);
             this.el.$body.addClass(deviceObj.name);
 
-            document.getElementById('envDevice').textContent = deviceObj.envDevice;
-            document.getElementById('envMode').textContent = deviceObj.name;
-            document.getElementById('testMode').textContent = this.var.$testmode;
+            console.table({
+                envDevice: deviceObj.envDevice,
+                envMode: deviceObj.name,
+                testMode: this.var.$testmode
+            });
 
+            this.renderTwzipcode();
             this.bindEvent();
+        },
+        renderTwzipcode: function() {
+            let twzipcode = new TWzipcode({
+                "district": {
+                    onChange: function (id) {
+                        console.log(this.nth(id).get());
+                    }
+                }
+            });
+            // console.log(twzipcode.get());
         },
         bindEvent: function() {
             let $this = this;
@@ -70,9 +83,13 @@ $(function() {
                     lineUid = decoded?.sub || null;
 
                     // 顯示於畫面
-                    document.getElementById('profileCard').style.display = 'block';
-                    document.getElementById('displayName').textContent = userProfile.displayName || '(無名稱)';
-                    document.getElementById('userIdHint').textContent = lineUid ? `UID: ${lineUid}` : '（未取得 UID）';
+                    // document.getElementById('profileCard').style.display = 'block';
+                    // document.getElementById('displayName').textContent = userProfile.displayName || '(無名稱)';
+                    // document.getElementById('userIdHint').textContent = lineUid ? `UID: ${lineUid}` : '（未取得 UID）';
+                    console.table({
+                        displayName: userProfile.displayName || '(無名稱)',
+                        UID: lineUid ? `UID: ${lineUid}` : '（未取得 UID）'
+                    });
 
                   } catch (err) {
                     console.error(err);
@@ -85,17 +102,30 @@ $(function() {
 
             function collectFormData(lineUid, userProfile, idToken) {
                 console.log('collectFormData');
-                console.log('lineUid :: ' + lineUid);
-                console.log('userProfile :: ' + userProfile);
-                console.log('idToken :: ' + idToken);
+                console.table({
+                    lineUid: lineUid,
+                    userProfile: userProfile,
+                    idToken: idToken
+                });
                 const form = document.getElementById('form');
                 // const data = Object.fromEntries(new FormData(form).entries());
                 const formData = new FormData(form);
                 const data = {};
                 for (const key of formData.keys()) {
                     const values = formData.getAll(key); // 取得所有值
-                    data[key] = values.length > 1 ? values : values[0]; // 多個值用陣列，否則直接塞值
+                    let value = values.length > 1 ? values : values[0]; // 多個值用陣列，否則直接塞值
+
+                    // ✅ 特別處理地址 (s3_q5)
+                    if (key === 's3_q5') {
+                        const county = formData.get('county') || '';
+                        const district = formData.get('district') || '';
+                        const detail = formData.get('s3_q5') || '';
+                        value = county + district + detail;
+                    }
+
+                    data[key] = value;
                 }
+
                 console.log(':: data ::');
                 console.log(data);
 
@@ -110,31 +140,39 @@ $(function() {
             }
             async function submitToGoogleScript(payload) {
                 const form = document.getElementById('form');
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const resultDiv = document.getElementById('result');
+                // const submitBtn = form.querySelector('button[type="submit"]');
+                // const resultDiv = document.getElementById('result');
 
-                submitBtn.disabled = true;
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = "送出中...";
-                resultDiv.textContent = "資料傳送中，請稍候...";
+                // submitBtn.disabled = true;
+                // const originalText = submitBtn.textContent;
+                // submitBtn.textContent = "送出中...";
+                // resultDiv.textContent = "資料傳送中，請稍候...";
 
+                document.querySelector(`.step_bar`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                $this.el.$main.attr('data-step', '99').addClass('loading');
                 try {
                     await fetch($this.var.$GS_WEBAPP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
 
-                console.log("✅ 表單已送出:", payload);
-                    resultDiv.textContent = "✅ 已送出，感謝填寫！";
+                    console.log("✅ 表單已送出:", payload);
+                    // resultDiv.textContent = "✅ 已送出，感謝填寫！";
+                    console.log("✅ 已送出，感謝填寫！");
+                    // $this.el.$main.attr('data-step', '99');
+
                     form.reset();
                 } catch (err) {
                     console.error(err);
-                    resultDiv.textContent = "❌ 傳送失敗，請稍後再試。";
+                    // resultDiv.textContent = "❌ 傳送失敗，請稍後再試。";
+                    console.log("❌ 傳送失敗，請稍後再試。");
                 } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
+                    console.log('submit done');
+                    // submitBtn.disabled = false;
+                    // submitBtn.textContent = originalText;
+                    $this.el.$main.removeClass('loading');
                 }
             }
 
@@ -158,7 +196,7 @@ $(function() {
                         fieldset.dataset.type = q.t;
                         fieldset.dataset.id = `s${stepIndex + 1}_q${qIndex + 1}`;
                         if (q.maxcheckbox) fieldset.dataset.maxcheckbox = q.maxcheckbox;
-                        console.log(fieldset.dataset.id);
+                        // console.log(fieldset.dataset.id);
 
                         const legend = document.createElement('legend');
                         legend.textContent = `${qIndex + 1}. ${q.q}`;
@@ -245,6 +283,26 @@ $(function() {
                         if (!hasValue) {
                             item.classList.add('error');
                             item.dataset.error = '欄位必填';
+                            valid = false;
+                        }
+                    }
+
+                    // 📞 電話驗證
+                    if (type === 'tel') {
+                        const value = item.querySelector('input').value.trim();
+                        if (!/^\d{10}$/.test(value)) {
+                            item.classList.add('error');
+                            item.dataset.error = '請輸入正確的10碼電話號碼';
+                            valid = false;
+                        }
+                    }
+
+                    // 📧 Email 驗證
+                    if (type === 'email') {
+                        const value = item.querySelector('input').value.trim();
+                        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                            item.classList.add('error');
+                            item.dataset.error = '請輸入有效的 Email';
                             valid = false;
                         }
                     }

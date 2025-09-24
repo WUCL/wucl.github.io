@@ -7,9 +7,14 @@
 		.inner {
 			.step_bar {
 				display: none;
-				width: calc(670px / 1.6);
-				height: calc(184px / 1.6);
+				// width: calc(670px / 1.6);
+				// height: calc(184px / 1.6);
 				margin: 35px auto;
+
+				max-width: 418.75px;
+				max-height: 115px;
+				width: 100%;
+				height: 24.5vw;
 				&:before {
 					content: "";
 					position: absolute;
@@ -49,10 +54,14 @@
 								user-select: none;
 								overflow: hidden;
 
+								select,
 								input[type="text"],
+								input[type="date"],
+								input[type="tel"],
+								input[type="email"],
 								span {
 									width: 100%;
-									padding: 7px 12px;
+									padding: 9px 12px;
 									font-size: inherit;
 									line-height: normal;
 									display: flex;
@@ -61,17 +70,18 @@
 									border: 1px solid #EEE;
 									border-radius: 8px;
 									transition: .2s ease;
+								}
+								span {
+									height: 100%;
+									padding: 7px 12px;
 									&:before {
 										content: "";
 										position: relative;
 										display: inline-block;
-										width: calc(40px / 2);
-										height: calc(40px / 2);
+										min-width: calc(40px / 2.2);
+										min-height: calc(40px / 2.2);
 										margin-right: 7px;
 									}
-								}
-								input[type="text"] {
-									padding: 9px 12px;
 								}
 								input {
 									&[type="radio"],
@@ -105,8 +115,11 @@
 										}
 									}
 								}
-								&:hover,
-								input[type="text"]:hover {
+								input[type="text"]:hover,
+								input[type="date"]:hover,
+								input[type="tel"]:hover,
+								input[type="email"]:hover,
+								&:hover {
 									border-color: $color-main;
 									color: $color-main;
 								}
@@ -135,6 +148,11 @@
 						border-radius: 7px;
 						padding: 3px;
 					}
+					.twzipcode {
+						display: grid;
+						grid-template-columns: 1fr 1fr;
+						grid-gap: 7px;
+					}
 					.step_submit {
 						button {
 							&[type="submit"] {
@@ -144,6 +162,58 @@
 								content: "下一步";
 							}
 						}
+					}
+				}
+				.step_done {
+					display: none;
+					text-align: center;
+					line-height: normal;
+					.title {
+						font-size: $fontsize-2;
+						font-weight: 500;
+					}
+					.description {
+						font-size: $fontsize-1;
+						line-height: 32px;
+					}
+					.condition {
+						padding: 21px;
+						background: #FAEBEB;
+						border-radius: 12px;
+						margin: 24px auto;
+						&_1 {
+							&:after {
+								content: "";
+								display: block;
+								max-width: 80px;
+								width: 100%;
+								height: 2px;
+								background: linear-gradient(90deg, $color-second 0%, $color-main 100%);
+								// background: $color-main;
+								margin: 21px auto;
+							}
+						}
+						&_2 {}
+						&_t,
+						&_d {
+							line-height: normal;
+						}
+						&_t {
+							color: $color-main;
+							font-weight: 500;
+							font-size: $fontsize-1;
+							margin-bottom: 12px;
+						}
+						&_d {
+							font-weight: 400;
+							font-size: $fontsize-b;
+						}
+					}
+					.btn-gopage,
+					.btn-login {
+						display: block;
+						max-width: 200px;
+						margin-bottom: 24px;
 					}
 				}
 			}
@@ -177,8 +247,57 @@
 	// &[data-step="3"] section._survey form#form .step_submit button[type="submit"] {
 	// 	display: flex;
 	// }
+	&[data-step="0"] section._survey .inner form#form .step_submit button {
+		display: none;
+	}
 	&[data-step="3"] section._survey .inner form#form .step_submit button:before {
 		content: "送出";
 	}
-
+	&[data-step="99"] section._survey .inner {
+		form#form {
+			display: none;
+		}
+		.step_bar {
+			display: block;
+			width: calc(121px / 2);
+			height: calc(120px / 2);
+			&:before {
+				background: url(../img/step_done@2x.png) center center no-repeat;
+				background-size: cover;
+			}
+		}
+		.step_done {
+			display: block;
+		}
+	}
+	&[data-step="99"].loading {
+		 section._survey .inner .step_bar {
+			&:before {
+				background: url(../img/icon-step@2x.png) center center no-repeat;
+				background-size: cover;
+			}
+			&:after {
+				content: "";
+				position: absolute;  /* 依你的 main 定位，如果 main 沒有定位，記得加 position: relative; */
+				top: 50%;
+				left: 50%;
+				width: 16px;
+				height: 16px;
+				margin: -12px 0 0 -10px;
+				border: 3px solid transparent;
+				border-top-color: #fff; /* 主色，可改 */
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				z-index: 9999; /* 確保在最上層 */
+			}
+		}
+		section._survey .inner .step_done {
+			display: none;
+		}
+	}
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" data-step="0">
     <section class="_kv">
         <div class="inner">
             <div class="title">廚房問卷大調查</div>
@@ -18,31 +18,34 @@
                         <fieldset class="item" data-type="text" data-id="s3_q1">
                             <legend>您的姓名</legend>
                             <div class="labels no-grid">
-                                <label for="s3_q1"><input type="text" id="s3_q1" name="s3_q1" value="name"></label>
+                                <label for="s3_q1"><input type="text" id="s3_q1" name="s3_q1" placeholder="請輸入姓名"></label>
                             </div>
                         </fieldset>
                         <fieldset class="item" data-type="text" data-id="s3_q2">
                             <legend>您的生日</legend>
                             <div class="labels no-grid">
-                                <label for="s3_q2"><input type="text" id="s3_q2" name="s3_q2" placeholder="請輸入姓名" value="bd"></label>
+                                <label for="s3_q2"><input type="date" id="s3_q2" name="s3_q2" placeholder="請輸入生日"></label>
                             </div>
                         </fieldset>
                         <fieldset class="item" data-type="text" data-id="s3_q3">
                             <legend>您的手機號碼</legend>
                             <div class="labels no-grid">
-                                <label for="s3_q3"><input type="text" id="s3_q3" name="s3_q3" placeholder="請輸入手機號碼" value="0987654321"></label>
+                                <label for="s3_q3"><input type="tel" pattern="\d*" inputmode="numeric" maxlength="10" id="s3_q3" name="s3_q3" placeholder="請輸入手機號碼"></label>
                             </div>
                         </fieldset>
                         <fieldset class="item" data-type="text" data-id="s3_q4">
                             <legend>您的 Email</legend>
                             <div class="labels no-grid">
-                                <label for="s3_q4"><input type="text" id="s3_q4" name="s3_q4" placeholder="請輸入 Email" value="aeiou@ggmail.com"></label>
+                                <label for="s3_q4"><input type="email" id="s3_q4" name="s3_q4" placeholder="請輸入 Email"></label>
                             </div>
                         </fieldset>
                         <fieldset class="item" data-type="text" data-id="s3_q5">
                             <legend>您的地址</legend>
                             <div class="labels no-grid">
-                                <label for="s3_q5"><input type="text" id="s3_q5" name="s3_q5" value="address"></label>
+                                <label for="s3_q5">
+                                    <div class="twzipcode"></div>
+                                    <input type="text" id="s3_q5" name="s3_q5" placeholder="請輸入詳細地址">
+                                </label>
                             </div>
                         </fieldset>
                         <fieldset class="item" data-type="radio" data-id="s3_q6">
@@ -60,10 +63,24 @@
                             </div>
                         </fieldset>
                     </div>
-                    <!-- 送出 -->
-                    <!-- <div class="layout-btn submit" style="margin-top:12px; display:flex; gap:8px;"><button type="submit">送出</button></div> -->
                     <div class="layout-btn step_submit"><button type="button"></button><button type="submit"></button></div>
                 </form>
+                <div class="step_done">
+                    <div class="title">問卷完成！</div>
+                    <div class="description">感謝您完成廚房調查問卷填寫</div>
+                    <div class="condition">
+                        <div class="condition_1">
+                            <div class="condition_t">🎁 恭喜獲得抽獎資格！</div>
+                            <div class="condition_d">將於每月抽中獎名單，並透過簡訊/Email通知</div>
+                        </div>
+                        <div class="condition_2">
+                            <div class="condition_t">✨ 登錄指定產品享現金回饋！</div>
+                            <div class="condition_d">凡活動期間登錄指定產品，符合資格者享回饋</div>
+                        </div>
+                    </div>
+                    <div class="layout-btn btn-gopage"><a href="javascript:;" target="_blank">回到活動頁面</a></div>
+                    <div class="layout-btn btn-login"><a href="javascript:;" target="_blank">立即登錄回函</a></div>
+                </div>
                 <div id="result" style="margin-top:10px;"></div>
             </div>
         </div>

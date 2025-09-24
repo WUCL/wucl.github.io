@@ -8,8 +8,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-        <meta name="viewport" content="width=480, initial-scale=1, user-scalable=0, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <meta name="viewport" content="width=480, initial-scale=1, user-scalable=0, shrink-to-fit=no"> -->
         <title>2509_SAKURA_LINELiffForm</title>
         <meta name="keywords" content="" />
         <meta name="description" content="SAKURA form" />
@@ -41,28 +41,28 @@
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
 		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?250923" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css?250924" />
 	</head>
 	<body>
         <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
-        <div class="profileCard" id="profileCard">
-            <div>datetime :: <b>2025-09-23 20:03:29</b></div>
-            <div>no :: <b>250923</b></div>
+        <!-- <div class="profileCard" id="profileCard">
+            <div>datetime :: <b>2025-09-24 17:54:04</b></div>
+            <div>no :: <b>250924</b></div>
             <div>ENV Device :: <b id="envDevice"></b></div>
             <div>ENV Mode :: <b id="envMode"></b></div>
             <div>TEST Mode :: <b id="testMode"></b></div>
             <div>-</div>
             <div>👤 <b id="displayName"></b></div>
             <div style="font-size:12px;color:#666;" id="userIdHint"></div>
-        </div>
+        </div> -->
 
         <header id="header" class="header">
         	<div class="header-inner">
         		<div class="logo"><img src="./public/img/logo@2x.png"></div>
         	</div>
         </header>
-		<main id="main" class="main">
+		<main id="main" class="main" data-step="0">
 		    <section class="_kv">
 		        <div class="inner">
 		            <div class="title">廚房問卷大調查</div>
@@ -82,31 +82,34 @@
 		                        <fieldset class="item" data-type="text" data-id="s3_q1">
 		                            <legend>您的姓名</legend>
 		                            <div class="labels no-grid">
-		                                <label for="s3_q1"><input type="text" id="s3_q1" name="s3_q1" value="name"></label>
+		                                <label for="s3_q1"><input type="text" id="s3_q1" name="s3_q1" placeholder="請輸入姓名"></label>
 		                            </div>
 		                        </fieldset>
 		                        <fieldset class="item" data-type="text" data-id="s3_q2">
 		                            <legend>您的生日</legend>
 		                            <div class="labels no-grid">
-		                                <label for="s3_q2"><input type="text" id="s3_q2" name="s3_q2" placeholder="請輸入姓名" value="bd"></label>
+		                                <label for="s3_q2"><input type="date" id="s3_q2" name="s3_q2" placeholder="請輸入生日"></label>
 		                            </div>
 		                        </fieldset>
 		                        <fieldset class="item" data-type="text" data-id="s3_q3">
 		                            <legend>您的手機號碼</legend>
 		                            <div class="labels no-grid">
-		                                <label for="s3_q3"><input type="text" id="s3_q3" name="s3_q3" placeholder="請輸入手機號碼" value="0987654321"></label>
+		                                <label for="s3_q3"><input type="tel" pattern="\d*" inputmode="numeric" maxlength="10" id="s3_q3" name="s3_q3" placeholder="請輸入手機號碼"></label>
 		                            </div>
 		                        </fieldset>
 		                        <fieldset class="item" data-type="text" data-id="s3_q4">
 		                            <legend>您的 Email</legend>
 		                            <div class="labels no-grid">
-		                                <label for="s3_q4"><input type="text" id="s3_q4" name="s3_q4" placeholder="請輸入 Email" value="aeiou@ggmail.com"></label>
+		                                <label for="s3_q4"><input type="email" id="s3_q4" name="s3_q4" placeholder="請輸入 Email"></label>
 		                            </div>
 		                        </fieldset>
 		                        <fieldset class="item" data-type="text" data-id="s3_q5">
 		                            <legend>您的地址</legend>
 		                            <div class="labels no-grid">
-		                                <label for="s3_q5"><input type="text" id="s3_q5" name="s3_q5" value="address"></label>
+		                                <label for="s3_q5">
+		                                    <div class="twzipcode"></div>
+		                                    <input type="text" id="s3_q5" name="s3_q5" placeholder="請輸入詳細地址">
+		                                </label>
 		                            </div>
 		                        </fieldset>
 		                        <fieldset class="item" data-type="radio" data-id="s3_q6">
@@ -124,10 +127,24 @@
 		                            </div>
 		                        </fieldset>
 		                    </div>
-		                    <!-- 送出 -->
-		                    <!-- <div class="layout-btn submit" style="margin-top:12px; display:flex; gap:8px;"><button type="submit">送出</button></div> -->
 		                    <div class="layout-btn step_submit"><button type="button"></button><button type="submit"></button></div>
 		                </form>
+		                <div class="step_done">
+		                    <div class="title">問卷完成！</div>
+		                    <div class="description">感謝您完成廚房調查問卷填寫</div>
+		                    <div class="condition">
+		                        <div class="condition_1">
+		                            <div class="condition_t">🎁 恭喜獲得抽獎資格！</div>
+		                            <div class="condition_d">將於每月抽中獎名單，並透過簡訊/Email通知</div>
+		                        </div>
+		                        <div class="condition_2">
+		                            <div class="condition_t">✨ 登錄指定產品享現金回饋！</div>
+		                            <div class="condition_d">凡活動期間登錄指定產品，符合資格者享回饋</div>
+		                        </div>
+		                    </div>
+		                    <div class="layout-btn btn-gopage"><a href="javascript:;" target="_blank">回到活動頁面</a></div>
+		                    <div class="layout-btn btn-login"><a href="javascript:;" target="_blank">立即登錄回函</a></div>
+		                </div>
 		                <div id="result" style="margin-top:10px;"></div>
 		            </div>
 		        </div>
@@ -136,9 +153,11 @@
 
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./public/js/custom/eventdevice.js"></script>
+
+		<script src="./public/lib/twzipcode/twzipcode.min.js"></script>
 		<!-- <script src="./public/lib/aos/aos.js"></script> -->
 
-        <script src="./public/js/Q_LIST.js?250923"></script>
-		<script src="./public/js/main.js?250923"></script>
+        <script src="./public/js/Q_LIST.js?250924"></script>
+		<script src="./public/js/main.js?250924"></script>
 	</body>
 </html>
