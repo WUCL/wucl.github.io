@@ -8,6 +8,7 @@
 		position: relative;
 		width: 100%;
 		height: 56vw;
+		max-height: 350px;
 		overflow: hidden;
 		&:before{
 			content: "";
