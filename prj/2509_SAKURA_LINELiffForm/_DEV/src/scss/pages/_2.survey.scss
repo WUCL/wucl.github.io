@@ -60,6 +60,8 @@
 								input[type="tel"],
 								input[type="email"],
 								span {
+									background: $color-white;
+									color: inherit;
 									width: 100%;
 									padding: 9px 12px;
 									font-size: inherit;
@@ -122,6 +124,12 @@
 								&:hover {
 									border-color: $color-main;
 									color: $color-main;
+								}
+
+								input[type="date"] {
+									appearance: none;
+									-webkit-appearance: none;
+									background-color: $color-white;
 								}
 							}
 						}

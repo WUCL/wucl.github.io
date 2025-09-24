@@ -11,9 +11,9 @@ $(function() {
             $nav: $('#nav'),
         },
         var: {
-            $survey_step: 1, // init
+            $survey_step: 1, // init 1, 2, 3, 99
             $testmode: false,
-            $testuid: 'test-2509241617',
+            $testuid: 'test-250924-2247',
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
         },
