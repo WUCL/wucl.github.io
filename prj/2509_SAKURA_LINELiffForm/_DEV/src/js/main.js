@@ -13,7 +13,7 @@ $(function() {
         var: {
             $survey_step: 1, // init 1, 2, 3, 99
             $testmode: false,
-            $testuid: 'test-250924-2247',
+            $testuid: 'test-250924-2346',
             $LIFF_ID: '2007975476-OnJ2DKGJ',
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
         },
@@ -50,8 +50,8 @@ $(function() {
             let idToken = null;
             let lineUid = null;
 
-            console.log($this.var);
-            console.log($this.var.$LIFF_ID);
+            // console.log($this.var);
+            // console.log($this.var.$LIFF_ID);
 
             if (!$this.var.$testmode) {
                 (async () => {
@@ -111,6 +111,7 @@ $(function() {
                 // const data = Object.fromEntries(new FormData(form).entries());
                 const formData = new FormData(form);
                 const data = {};
+
                 for (const key of formData.keys()) {
                     const values = formData.getAll(key); // 取得所有值
                     let value = values.length > 1 ? values : values[0]; // 多個值用陣列，否則直接塞值
@@ -129,8 +130,19 @@ $(function() {
                 console.log(':: data ::');
                 console.log(data);
 
+                const timeStamp = new Intl.DateTimeFormat('zh-TW', {
+                                year: 'numeric',
+                                month: 'numeric',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                second: '2-digit',
+                                hour12: true,
+                                timeZone: 'Asia/Taipei'
+                                }).format(new Date());
+
                 return {
-                    timestamp: new Date().toISOString(),
+                    timestamp: timeStamp,
                     lineUid,
                     displayName: userProfile?.displayName || '',
                     pictureUrl: userProfile?.pictureUrl || '',
@@ -179,7 +191,7 @@ $(function() {
 
 
             // === buildSurvey ===
-            console.log('buildSurvey');
+            // console.log('buildSurvey');
             $this.el.$main.attr('data-step', $this.var.$survey_step);
 
             // == Render 所有題目 ==
@@ -269,6 +281,29 @@ $(function() {
                             valid = false;
                         }
                     }
+                    console.log(type);
+
+                    // // 📞 電話驗證
+                    if (type === 'tel') {
+                        console.log('hello tel');
+                        const value = item.querySelector('input').value.trim();
+                        if (!/^09\d{8}$/.test(value)) {
+                            item.classList.add('error');
+                            item.dataset.error = '請輸入正確的手機號碼（09 開頭，共 10 碼）';
+                            valid = false;
+                        }
+                    }
+
+                    // 📧 Email 驗證
+                    if (type === 'email') {
+                        console.log('hello email');
+                        const value = item.querySelector('input').value.trim();
+                        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                            item.classList.add('error');
+                            item.dataset.error = '請輸入有效的 Email';
+                            valid = false;
+                        }
+                    }
 
                     // ✅ radio / checkbox 必填驗證
                     if ((type === 'radio' || type === 'checkbox') && checked.length === 0) {
@@ -277,32 +312,21 @@ $(function() {
                         valid = false;
                     }
 
+                    if (type === 'address') {
+                        const detailInput = item.querySelector('input[type="text"]');
+                        if (!detailInput || detailInput.value.trim() === '') {
+                            item.classList.add('error');
+                            item.dataset.error = '請輸入詳細地址';
+                            valid = false;
+                        }
+                    }
+
                     // ✅ 其他 input / textarea 必填驗證（例如 text / textarea）
                     if (type !== 'radio' && type !== 'checkbox') {
                         const hasValue = Array.from(inputs).some((input) => input.value.trim() !== '');
                         if (!hasValue) {
                             item.classList.add('error');
                             item.dataset.error = '欄位必填';
-                            valid = false;
-                        }
-                    }
-
-                    // 📞 電話驗證
-                    if (type === 'tel') {
-                        const value = item.querySelector('input').value.trim();
-                        if (!/^\d{10}$/.test(value)) {
-                            item.classList.add('error');
-                            item.dataset.error = '請輸入正確的10碼電話號碼';
-                            valid = false;
-                        }
-                    }
-
-                    // 📧 Email 驗證
-                    if (type === 'email') {
-                        const value = item.querySelector('input').value.trim();
-                        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                            item.classList.add('error');
-                            item.dataset.error = '請輸入有效的 Email';
                             valid = false;
                         }
                     }
