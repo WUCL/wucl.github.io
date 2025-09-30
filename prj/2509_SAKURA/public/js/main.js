@@ -54,6 +54,16 @@ $(function() {
                 this.closest('.models-list-item')?.classList.toggle('unfolder');
             });
 
+            $this.el.$header.on('click', '.scroll_to', function(e) {
+                e.preventDefault(); // 避免 a href="#" 跳動
+                const targetId = this.dataset.scroll; // 拿到 data-scroll 的值
+                document.querySelector(`#${targetId}`).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+
+
         },
         renderModelList: function (data) {
             let html = '';

@@ -3,8 +3,10 @@ layout/_header
 ======================= */
 header.header {
 	height: 70px;
-	position: relative;
+	position: fixed;
 	z-index: 10;
+	width: 100%;
+	background: #fff;
 	&:before {
 		content: "";
 		z-index: 11;

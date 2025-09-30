@@ -146,6 +146,9 @@ body {
 		// position: fixed;
 		width: 100%;
 	}
+	.popup {
+		display: none;
+	}
 	&.on-popup {
 		.popup {
 			position: fixed;
