@@ -172,6 +172,25 @@
 							}
 						}
 					}
+					.notice {
+						display: none;
+						margin: 35px auto;
+						line-height: normal;
+						font-size: $fontsize-c;
+						&_t {
+							font-weight: 500;
+							margin-bottom: 10px;
+						}
+						&_c {
+							padding-left: 1.1em;
+							p {
+								text-indent: -1.1em;
+								text-align: justify;
+								font-size: inherit;
+								color: #666;
+							}
+						}
+					}
 				}
 				.step_done {
 					display: none;
@@ -259,8 +278,13 @@
 	&[data-step="0"] section._survey .inner form#form .step_submit button {
 		display: none;
 	}
-	&[data-step="3"] section._survey .inner form#form .step_submit button:before {
-		content: "送出";
+	&[data-step="3"] section._survey .inner form#form {
+		.notice {
+			display: block;
+		}
+		.step_submit button:before {
+			content: "送出";
+		}
 	}
 	&[data-step="99"] section._survey .inner {
 		form#form {
