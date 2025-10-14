@@ -40,7 +40,7 @@
 									list-style-type: disc;
 									margin-left: 1.4em;
 									padding-left: .1em;
-									text-align: justify;
+									// text-align: justify;
 								}
 							}
 							.layout-btn {
@@ -180,6 +180,61 @@
 									// 		}
 									// 	}
 									// }
+								}
+							}
+						}
+						.video-wrapper {
+							width: 100%;
+							aspect-ratio: 16 / 9;  /* ⬅️ 自動維持 16:9 高度 */
+							overflow: hidden;
+							position: relative;
+							iframe {
+								width: 100%;
+								height: 100%;
+								border: 0;
+								display: block;
+							}
+						}
+						.invoice_rule {
+							margin: 20px auto;
+							img {
+								display: block;
+								width: 100%;
+								max-width: 490px;
+								&.img {
+									@include mq($max-width: $bp-3s) {
+										display: none;
+									}
+								}
+								&.img-m {
+									display: none;
+									@include mq($max-width: $bp-3s) {
+										display: block;
+									}
+								}
+							}
+						}
+						&._notice {
+							.clist-item-content {
+								ul {
+									li {
+										span {
+											font-weight: 500;
+										}
+										&:nth-child(5),
+										&:nth-child(6),
+										&:nth-child(7),
+										&:nth-child(8) {
+											margin-left: 2.8em;
+										}
+									}
+								}
+							}
+						}
+						&._deny {
+							.clist-item-title {
+								&:after {
+									max-width: 100%;
 								}
 							}
 						}

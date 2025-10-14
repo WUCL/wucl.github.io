@@ -148,6 +148,11 @@
 					}
 				}
 			}
+			.box {
+				@include mq($max-width: $bp-2s) {
+					margin-bottom: 120px;
+				}
+			}
 		}
 	}
 }
