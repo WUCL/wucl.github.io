@@ -6,16 +6,26 @@ aside#aside {
 	display: block;
 	right: 10px;
 	top: 40%;
-	@include mq($max-width: $bp-2s) {
+	z-index: 1000; // 確保在最上面
+  @include mq($max-width: $bp-2s) {
+		// 讓它「確實」貼齊底部與左右
+		inset: auto 0 0 0; // 等同 bottom:0; left:0; right:0;（top 自動）
+		right: auto; // 避免桌機設定殘留
 		top: auto;
-		bottom: -1px;
-		right: auto;
-		left: 0;
-		width: 100%;
+		width: 100vw; // 100% 有時受容器影響，改用視窗寬度更保險
+		margin: 0;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, .1);
-	}
+		box-shadow: 0 -4px 8px 0 rgba(0,0,0,.1);
+		background: #fff; // 若需要
+		// iOS 安全區（瀏海/底部 home bar）
+		padding-bottom: env(safe-area-inset-bottom);
+
+		// 有些舊裝置不支援 env()，加個保底
+		@supports not (padding: max(0px)) {
+		padding-bottom: 0;
+		}
+  	}
 	a.aside_btn {
 		display: flex;
 		flex-direction: column;
@@ -43,6 +53,7 @@ aside#aside {
 		}
 		p {
 			span {
+				display: block;
 				font-weight: 600;
 			}
 			&._pc {
