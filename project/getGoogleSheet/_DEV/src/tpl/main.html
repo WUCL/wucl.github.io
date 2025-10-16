@@ -1,0 +1,22 @@
+<main id="main" class="main">
+    <section class="kv" data-scroll-index="1">
+    	<div class="inner"></div>
+    </section>
+
+
+    https://docs.google.com/spreadsheets/d/1El1xW2FDjDsYuQufsD4Xa0MeEdAh53ATM4zyKjVFbcg/edit?gid=95435494#gid=95435494
+    
+    <div id="list"></div>
+    <script>
+    async function loadCSV(url){
+      const text = await fetch(url, {cache:'no-store'}).then(r=>r.text());
+      // 簡單 CSV 轉陣列（遇到逗號/引號較複雜可改用 PapaParse）
+      const rows = text.trim().split(/\r?\n/).map(r => r.split(","));
+      const [header, ...data] = rows;
+      const html = data.map(r => `<li>${r.join(" / ")}</li>`).join("");
+      document.getElementById("list").innerHTML = `<ul>${html}</ul>`;
+    }
+    loadCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_3y3mNQ1KnCpRJ1L3zaZbxNhffKs7oIs4bS39B7VoeIQ93U8yiuVILv0r3EuiMgXwSzOB4OeNIoMi/pub?gid=95435494&single=true&output=csv");
+    </script>
+
+</main>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>This is TITLE</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="" />
+        <meta property="og:description" content="" />
+        <meta property="og:image" content="" />
+
+        <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /> -->
+        <!-- <link rel="icon" type="image/png" href="./favicon.png" /> -->
+        <link rel="icon" type="image/png" href="./favicon.ico" />
+
+        <!-- BEGIN google noto sans tc -->
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+        <!-- END google noto sans tc -->
+
+        <!-- BEGIN google noto serif -->
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+        <!-- END google noto serif -->
+
+
+        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
+		<link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" />
+        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+	</head>
+	<body>
+        <header id="header" class="header">
+        	This is HEADER
+        </header>
+		<main id="main" class="main">
+		    <section class="kv" data-scroll-index="1">
+		    	<div class="inner"></div>
+		    </section>
+
+		    <div id="list"></div>
+		    <script>
+		    async function loadCSV(url){
+		      const text = await fetch(url, {cache:'no-store'}).then(r=>r.text());
+		      // 簡單 CSV 轉陣列（遇到逗號/引號較複雜可改用 PapaParse）
+		      const rows = text.trim().split(/\r?\n/).map(r => r.split(","));
+		      const [header, ...data] = rows;
+		      const html = data.map(r => `<li>${r.join(" / ")}</li>`).join("");
+		      document.getElementById("list").innerHTML = `<ul>${html}</ul>`;
+		    }
+		    loadCSV("https://docs.google.com/spreadsheets/d/e/2PACX-1vR_3y3mNQ1KnCpRJ1L3zaZbxNhffKs7oIs4bS39B7VoeIQ93U8yiuVILv0r3EuiMgXwSzOB4OeNIoMi/pub?gid=95435494&single=true&output=csv");
+		    </script>
+
+		</main>
+		<footer id="footer" class="footer">
+			<section class="copyright">
+				<span>Copyright © 2025</span>
+			</section>
+		</footer>
+
+		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
+		<script src="./public/js/custom/eventdevice.js"></script>
+
+		<!-- development version, includes helpful console warnings -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+		<!-- production version, optimized for size and speed -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script> -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue-modaltor"></script> -->
+
+		<!-- <script src="./public/lib/scrollIt/scrollIt.js"></script> -->
+		<!-- <script src="./public/lib/aos/aos.js"></script> -->
+		<!-- <script src="./public/lib/colorbox/jquery.colorbox.js"></script> -->
+		<!-- <script src="./public/lib/slick/slick.min.js"></script> -->
+		<!-- <script src="./public/lib/swiper/swiper.min.js"></script> -->
+
+		<script src="./public/js/main.js"></script>
+	</body>
+</html>
