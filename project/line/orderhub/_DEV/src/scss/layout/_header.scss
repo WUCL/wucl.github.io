@@ -1,0 +1,40 @@
+/* =======================
+layout/_header
+======================= */
+header.header {
+	.header-inner {
+	}
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--bd);
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 10;
+	h1 {
+		font-size: 18px;
+		margin: 0;
+	}
+	#meta {
+		font-size: 12px;
+		color: var(--m);
+		margin-top: 4px;
+	}
+	.tabs {
+		display: flex;
+		gap: 8px;
+		margin: 8px 0 16px;
+	}
+	.tab {
+		padding: 8px 12px;
+		border: 1px solid var(--bd);
+		border-radius: 999px;
+		background: #fff;
+		cursor: pointer;
+		font-size: 14px;
+		&.active {
+			background: #111;
+			color: #fff;
+			border-color: #111;
+		}
+	}
+}
