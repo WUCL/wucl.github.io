@@ -82,10 +82,6 @@ $(function() {
                     const decoded = liff.getDecodedIDToken(); // { sub: 'Uxxxxxxxx', name, email? ... }
                     lineUid = decoded?.sub || null;
 
-                    // 顯示於畫面
-                    // document.getElementById('profileCard').style.display = 'block';
-                    // document.getElementById('displayName').textContent = userProfile.displayName || '(無名稱)';
-                    // document.getElementById('userIdHint').textContent = lineUid ? `UID: ${lineUid}` : '（未取得 UID）';
                     console.table({
                         displayName: userProfile.displayName || '(無名稱)',
                         UID: lineUid ? `UID: ${lineUid}` : '（未取得 UID）'
@@ -152,13 +148,6 @@ $(function() {
             }
             async function submitToGoogleScript(payload) {
                 const form = document.getElementById('form');
-                // const submitBtn = form.querySelector('button[type="submit"]');
-                // const resultDiv = document.getElementById('result');
-
-                // submitBtn.disabled = true;
-                // const originalText = submitBtn.textContent;
-                // submitBtn.textContent = "送出中...";
-                // resultDiv.textContent = "資料傳送中，請稍候...";
 
                 document.querySelector(`.step_bar`).scrollIntoView({ behavior: 'smooth', block: 'center' });
                 $this.el.$main.attr('data-step', '99').addClass('loading');
