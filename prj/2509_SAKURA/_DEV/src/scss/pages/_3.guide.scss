@@ -9,7 +9,7 @@
 					margin-bottom: 0;
 				}
 				.clist {
-					padding: 40px 50px;
+					padding: 40px 40px;
 					@include mq($max-width: $bp-2m) {
 						padding: 40px 30px;
 					}
