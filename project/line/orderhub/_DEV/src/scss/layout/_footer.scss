@@ -5,27 +5,13 @@ footer.footer {
 	width: 100%;
 	.copyright {
 		width: 100%;
-		background: $color-black;
-		font-size: 14px;
+		border-top: .1px solid $color-main;
+		font-size: $fontsize-f;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: $color-white;
-		padding: 15px 0;
+		color: $color-main;
+		padding: 7px 0;
 		box-sizing: border-box;
-		img {
-			height: 33px;
-			margin: 0 0 0 4px;
-			@include mq($max-width: $bp-2s) {
-				margin: -9px auto;
-			}
-		}
-		@include mq($max-width: $bp-2s) {
-			flex-direction: column;
-			padding: 10px 0;
-			span:nth-child(2) {
-				margin: 7px 0;
-			}
-		}
 	}
 }

@@ -74,7 +74,7 @@ table {
 
 * {
     position: relative;
-    -webkit-tap-highlight-color: rgba($color-black, 0);
+    -webkit-tap-highlight-color: rgba($color-000, 0);
     box-sizing: border-box;
 }
 ::-webkit-scrollbar {
@@ -126,9 +126,10 @@ textarea,
 button {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--bd);
+    border: 1px solid $color-bd;
     border-radius: 10px;
     font-size: 15px;
+    background: #fff;
 }
 textarea {
     resize: vertical;

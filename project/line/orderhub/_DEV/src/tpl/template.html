@@ -1,0 +1,108 @@
+<!-- 環境徽章 -->
+<template id="tpl-badge">
+    <div id="env-badge" class="env-badge">{{label}}</div>
+</template>
+<!-- 訊息（統一樣式） -->
+<template id="tpl-msg">
+    <div class="msg {{cls}}">{{text}}</div>
+</template>
+<!-- 新增表單 -->
+<template id="tpl-add">
+    <form id="formAdd" class="card">
+        <div class="row">
+            <div class="field">
+                <label>客戶</label>
+                <select name="客戶類型" data-opt="cType"></select>
+            </div>
+            <div class="field">
+                <label>接單平台</label>
+                <select name="接單平台" data-opt="platforms">
+                    <option value="" selected disabled>請選擇</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>訂單日期<span class="hint">（預設今天）</span></label>
+                <input name="訂單日期" type="date">
+            </div>
+            <!-- <div class="field">
+                <label>交貨日期</label>
+                <input name="交貨日期" type="date">
+            </div> -->
+            <!-- <div class="field">
+                <label>是否已交貨</label>
+                <select name="是否已交貨" data-opt="isDelivery">
+                    <option value="" selected disabled>請選擇</option>
+                </select>
+            </div> -->
+            <!-- <div class="field">
+                <label>是否已付款</label>
+                <select name="是否已付款" data-opt="isPay">
+                    <option value="" selected disabled>請選擇</option>
+                </select>
+            </div> -->
+            <!-- <div class="field">
+                <label>商品項目</label>
+                <textarea name="商品項目" rows="1"></textarea>
+            </div> -->
+            <!-- <div class="field">
+                <label>訂單金額</label>
+                <input name="訂單金額" type="number" min="0" step="1">
+            </div> -->
+            <!-- <div class="field">
+                <label>訂購人姓名</label>
+                <input name="訂購人姓名" required>
+            </div>
+            <div class="field">
+                <label>訂購人電話</label>
+                <input name="訂購人電話" inputmode="tel" required>
+            </div>
+            <div class="field">
+                <label>訂單備註</label>
+                <textarea name="訂單備註" rows="3"></textarea>
+            </div> -->
+        </div>
+        <button type="submit" class="btn primary">送出</button>
+        <div data-slot="msg"></div>
+    </form>
+</template>
+<!-- 編輯表單 -->
+<template id="tpl-edit">
+    <section class="card">
+        <div class="row">
+            <div class="field">
+                <label>訂單編號</label>
+                <input id="oid" placeholder="O-YYYYMM-00001" value="{{orderId}}">
+            </div>
+            <div class="field" style="display:flex;align-items:end">
+                <button type="button" id="btnLoad" class="btn">載入</button>
+            </div>
+        </div>
+        <form id="formEdit" style="display:none">
+            <div class="field">
+                <label>是否已付款</label>
+                <select name="是否已付款">
+                    <option>未付款</option>
+                    <option>已付款</option>
+                    <option>貨到付款</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>是否已交貨</label>
+                <select name="是否已交貨">
+                    <option>未交貨</option>
+                    <option>已交貨</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>貨運單號</label>
+                <input name="貨運單號">
+            </div>
+            <div class="field">
+                <label>訂單備註</label>
+                <textarea name="訂單備註" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn primary">儲存更新</button>
+            <div data-slot="msg"></div>
+        </form>
+    </section>
+</template>

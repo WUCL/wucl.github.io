@@ -1,4 +1,22 @@
 /* ======================
    modules/btns
    ======================= */
-.btn {}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.btn.primary,
+button.primary {
+    background: $color-ink;
+    color: $color-fff;
+    border-color: $color-ink;
+
+    &:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+}
