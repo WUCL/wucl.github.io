@@ -463,7 +463,7 @@ $(function() {
                 await liff.init({ liffId: this.var.LIFF_ID });
                 if (!liff.isLoggedIn()) { liff.login(); return; }
                 const p = await liff.getProfile();
-                this.var.actor = p.userId || 'LIFF';
+                this.var.actor = 'LIFF';// p.userId || 'LIFF';
                 this.setMeta('使用者：' + (p.displayName || ''));
             } catch (e) {
                 this.setMeta('(LIFF 初始化失敗)');
