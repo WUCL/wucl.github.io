@@ -16,21 +16,21 @@ header.header {
 		margin: 0;
 	}
 
-	.tabs {
+	.nav {
 		display: flex;
 		gap: 8px;
 		margin-top: 8px;
-	}
-	.tab {
-		padding: 7px;
-		border: 1px solid $color-bd;
-		border-radius: 999px;
-		background: #fff;
-		font-size: $fontsize-a;
-		&.active {
-			background: #111;
-			color: #fff;
-			border-color: #111;
+		&-link {
+			padding: 7px;
+			border: 1px solid $color-bd;
+			border-radius: 999px;
+			background: #fff;
+			font-size: $fontsize-a;
+			&.active {
+				background: #111;
+				color: #fff;
+				border-color: #111;
+			}
 		}
 	}
 }

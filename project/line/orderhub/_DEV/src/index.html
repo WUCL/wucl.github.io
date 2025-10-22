@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" data-api-endpoint="https://script.google.com/macros/s/AKfycbys--UCUGCa5VAIXf_Gc6uBnT2Ix8_UzeABt-YQ4Fy5Yz4v2JAiVuV-b8-QRLT1LSxL/exec?api=1">
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -31,27 +31,31 @@
 		@@include('../src/tpl/_script.html')
 		<!-- <script src="@@webRoot/public/js/main.js"></script> -->
 
-		<!-- 仍保留你現有 -->
-		<script src="@@webRoot/public/js/ui/templates.js"></script>
-		<script src="@@webRoot/public/js/ui/options.js"></script>
+		<!-- 0) 全域命名空間（第一支） -->
+		<script src="public/js/core/app.core.js"></script>
+		<script src="@@webRoot/public/js/ui/eventdevice.js"></script>
 
-		<!-- 拆分後的新檔 -->
-		<!-- app.base.js 最先，提供 APP 與 el/var。 -->
-		<script src="@@webRoot/public/js/core/app.base.js"></script>
+		<!-- 1) Core Init（快取節點、輕量環境檢查；不依賴 TPL / API） -->
+		<script src="public/js/core/app.init.js"></script>
 
-		<!-- utils.js、api.js 先於 features，使 feature 內可直接用它們。 -->
-		<script src="@@webRoot/public/js/ui/utils.js"></script>
-		<script src="@@webRoot/public/js/services/api.js"></script>
+		<!-- 2) UI/工具 -->
+		<script src="public/js/ui/templates.js"></script>
+		<script src="public/js/ui/utils.js"></script>
 
-		<script src="@@webRoot/public/js/features/add.js"></script>
-		<!-- <script src="@@webRoot/public/js/features/edit.js"></script> -->
+		<!-- 3) 資料與環境 -->
+		<script src="public/js/ui/options.js"></script>
+		<script src="public/js/core/env.liff.js"></script>
 
-		<!-- env.liff.js、router.js、app.init.js 放在 boot 前，確保啟動時有這些方法。 -->
-		<script src="@@webRoot/public/js/core/env.liff.js"></script>
-		<script src="@@webRoot/public/js/core/app.router.js"></script>
-		<script src="@@webRoot/public/js/core/app.init.js"></script>
+		<!-- 4) Services -->
+		<script src="public/js/services/api.js"></script>
 
-		<!-- boot.js 最後，等 DOM ready 再呼叫 APP.init()。 -->
-		<script src="@@webRoot/public/js/core/boot.js"></script>
+		<!-- 5) Features -->
+		<script src="public/js/features/list.js"></script>
+		<script src="public/js/features/add.js"></script>
+		<script src="public/js/features/edit.js"></script>
+
+		<!-- 6) Router（最後；會觸發 APP.route() ） -->
+		<script src="public/js/core/app.router.js"></script>
+
 	</body>
 </html>

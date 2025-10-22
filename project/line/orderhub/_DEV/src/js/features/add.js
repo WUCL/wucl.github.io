@@ -3,100 +3,78 @@
 	內容： 新增頁面。
 	來源方法：renderAdd
 	======================= */
-Object.assign(APP, {
-	renderAdd: function() {
-		const frag = TPL.tpl('tpl-add');
-		const node = TPL.mount('#main', frag);
+(function(w) {
+    'use strict';
+    var APP = w.APP || (w.APP = {});
 
-		const $form = $('#formAdd');
-		const $slot = $form.find('[data-slot="msg"]');
+    Object.assign(APP, {
+        renderAdd: function() {
+            TPL.render('#main', 'tpl-add');
 
-		this.populateAllSelects($form); // ← 一次自動灌入所有 select
+            var $form = $('#formAdd');
+            var $slot = $form.find('[data-slot="msg"]');
+            if (w.ORDER_OPTIONS && ORDER_OPTIONS.populateAll) ORDER_OPTIONS.populateAll($form[0]);
 
-		$form.find('[name="訂單日期"]').each(function() {
-			if (!this.value) {
-				const today = new Date().toISOString().split('T')[0];
-				this.value = today;
-			}
-		});
+            // 預設今天（若欄位存在）
+            var $od = $form.find('[name="訂單日期"]');
+            if ($od.length && !$od.val()) {
+                var d = new Date();
+                var mm = ('0' + (d.getMonth() + 1)).slice(-2);
+                var dd = ('0' + d.getDate()).slice(-2);
+                $od.val(d.getFullYear() + '-' + mm + '-' + dd);
+            }
 
-		$form.off('submit').on('submit', async (e) => {
-			e.preventDefault();
+            $form.off('submit.addNS').on('submit.addNS', function(e) {
+                e.preventDefault();
+                var data = APP.formToObject($form);
+                var errs = APP.validateAddData(data);
+                APP.showFieldErrors($form, errs);
+                APP.logValidationDebug('新增訂單', data, errs);
+                if (Object.keys(errs).length) {
+                    APP.renderErrorSummary($slot, errs);
+                    APP.scrollToFirstError($form);
+                    return;
+                }
 
-			const data = this.formToObject($form);
-			const $btn  = $form.find('button[type="submit"]');
-			const $slot = $form.find('[data-slot="msg"]');
+                // 取得 LIFF 使用者（可空）
+                var lineName = '',
+                    lineId = '';
+                (function getProfileMaybe() {
+                    try {
+                        if (w.liff && liff.isLoggedIn && liff.isLoggedIn()) {
+                            liff.getProfile().then(function(p) {
+                                lineName = p.displayName || '';
+                                lineId = p.userId || '';
+                                submitNow();
+                            }).catch(submitNow);
+                            return;
+                        }
+                    } catch (e) {}
+                    submitNow();
+                })();
 
-			// 驗證
-			const errs = this.validateAddData(data);
-			this.showFieldErrors($form, errs);
-			this.logValidationDebug('新增訂單', data, errs);
+                function submitNow() {
+                    var $btn = $form.find('button[type="submit"]');
+                    $btn.prop('disabled', true).text('送出中…');
 
-			if (Object.keys(errs).length) {
-				this.renderErrorSummary($slot, errs);
-				this.scrollToFirstError($form);
-				return; // 停止送出
-			}
+                    APP.api('create', { data: data, actor: APP.var.actor, lineName: lineName, lineId: lineId })
+                        .then(function(res) {
+                            $btn.prop('disabled', false).text('送出');
+                            $slot.removeClass('ok err').addClass(res && res.ok ? 'msg ok' : 'msg err')
+                                .text(res && res.ok ? ('✅ 已建立：' + res.orderId) : ('❌ 失敗：' + ((res && res.msg) || '未知錯誤')));
 
-			// 取得 LINE 使用者資訊（若已登入）
-			let lineName = '';
-			let lineId   = '';
-
-			try {
-				const isDev = location.hostname === 'localhost' || location.hostname.startsWith('192.168.');
-				if (!isDev && window.liff && liff.isLoggedIn && liff.isLoggedIn()) {
-					const profile = await liff.getProfile();
-					lineName = profile.displayName || '';
-					lineId   = profile.userId || '';
-				} else if (isDev) {
-					// 本機測試時給模擬資料
-					lineName = 'DEV-LOCAL';
-					lineId = 'LOCAL-TEST-ID';
-				}
-			} catch (e) {
-				  console.warn('getProfile error', e);
-				  // 補救：如果 LINE 初始化還沒完成，也用模擬資料
-				  lineName = 'DEV-FALLBACK';
-				  lineId = 'FALLBACK-ID';
-			}
-
-			// 送出
-			$btn.prop('disabled', true).text('送出中…');
-			let res;
-			try {
-				res = await this.api('create', {
-					data,
-					actor: this.var.actor,
-					lineName,
-					lineId
-				});
-			} catch (err) {
-				console.error('[API] create error:', err);
-				res = { ok: false, msg: 'network-error' };
-			}
-			$btn.prop('disabled', false).text('送出');
-
-			if (res && res.ok) {
-				$slot.removeClass('err').addClass('msg ok').text('✅ 已建立：' + res.orderId);
-				try {
-					if (window.liff) {
-						await liff.sendMessages([{ type: 'text', text: '✅ 新增訂單：' + res.orderId }]);
-					}
-				} catch (_) {}
-				// 清空表單與錯誤
-				$form[0].reset();
-				this.showFieldErrors($form, {}); // 清錯
-				this.populateAllSelects?.($form); // 重灌 placeholder
-			} else {
-				// 額外診斷（若 api() 回傳 invalid-json 會有補充欄位）
-				if (res && res.msg === 'invalid-json') {
-					console.warn('[API] invalid-json detail:', {
-						status: res.status, contentType: res.contentType, snippet: res.snippet
-					});
-				}
-				$slot.removeClass('ok').addClass('msg err')
-				  .text('❌ 失敗：' + ((res && res.msg) || '未知錯誤'));
-			}
-		});
-	}
-});
+                            if (res && res.ok) {
+                                $form[0].reset();
+                                APP.showFieldErrors($form, {});
+                                if (ORDER_OPTIONS && ORDER_OPTIONS.populateAll) ORDER_OPTIONS.populateAll($form[0]);
+                            }
+                        })
+                        .catch(function() {
+                            $btn.prop('disabled', false).text('送出');
+                            $slot.removeClass('ok').addClass('msg err').text('❌ 失敗：network-error');
+                        });
+                }
+            });
+        }
+    });
+})(window);

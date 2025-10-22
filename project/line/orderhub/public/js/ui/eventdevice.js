@@ -1,27 +1,26 @@
-var deviceObj = {
+// src/js/ui/eventdevice.js
+// === Device Info Utility ===
+window.deviceObj = {
     name: 'PC',
     pvtag: '',
     isMobile: function() {
         return !!navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i);
     },
     getDeviceName: function() {
-        if (this.isMobile()) {
-            return 'Mobile';
-        }
-        return 'PC';
+        return this.isMobile() ? 'Mobile' : 'PC';
     },
     getPVtag: function() {
-        if (this.isMobile()) {
-            return '/mobile';
-        }
-        return '';
+        return this.isMobile() ? '/mobile' : '';
     },
     init: function() {
         this.name = this.getDeviceName();
         this.pvtag = this.getPVtag();
     }
 };
-deviceObj.init();
-function isMobile() {
-    return deviceObj.isMobile();
-}
+
+window.deviceObj.init();
+
+// 方便使用的快捷函式
+window.isMobile = function() {
+    return window.deviceObj.isMobile();
+};

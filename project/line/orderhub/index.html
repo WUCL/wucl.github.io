@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" data-api-endpoint="https://script.google.com/macros/s/AKfycbys--UCUGCa5VAIXf_Gc6uBnT2Ix8_UzeABt-YQ4Fy5Yz4v2JAiVuV-b8-QRLT1LSxL/exec?api=1">
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -44,10 +44,10 @@
 		<header id="header" class="header">
 			<h1>訂單系統</h1>
 			<div id="meta" class="meta">初始化中…</div>
-			<div class="tabs">
-				<button class="tab" id="tab-add" onclick="go('#/add')">新增</button>
-				<button class="tab" id="tab-edit" onclick="go('#/edit')">編輯</button>
-			</div>
+			<nav class="nav">
+				<a href="#/list" class="nav-link" data-nav="list">清單</a>
+				<a href="#/add"  class="nav-link" data-nav="add">新增</a>
+			</nav>
 		</header>
 		<main id="main" class="main"></main>
 
@@ -78,41 +78,41 @@
 		                <input name="訂單日期" type="date">
 		            </div>
 		            <!-- <div class="field">
-		                <label>交貨日期</label>
-		                <input name="交貨日期" type="date">
-		            </div> -->
+						<label>交貨日期</label>
+						<input name="交貨日期" type="date">
+					</div> -->
 		            <!-- <div class="field">
-		                <label>是否已交貨</label>
-		                <select name="是否已交貨" data-opt="isDelivery">
-		                    <option value="" selected disabled>請選擇</option>
-		                </select>
-		            </div> -->
+						<label>是否已交貨</label>
+						<select name="是否已交貨" data-opt="isDelivery">
+							<option value="" selected disabled>請選擇</option>
+						</select>
+					</div> -->
 		            <!-- <div class="field">
-		                <label>是否已付款</label>
-		                <select name="是否已付款" data-opt="isPay">
-		                    <option value="" selected disabled>請選擇</option>
-		                </select>
-		            </div> -->
+						<label>是否已付款</label>
+						<select name="是否已付款" data-opt="isPay">
+							<option value="" selected disabled>請選擇</option>
+						</select>
+					</div> -->
 		            <!-- <div class="field">
-		                <label>商品項目</label>
-		                <textarea name="商品項目" rows="1"></textarea>
-		            </div> -->
+						<label>商品項目</label>
+						<textarea name="商品項目" rows="1"></textarea>
+					</div> -->
 		            <!-- <div class="field">
-		                <label>訂單金額</label>
-		                <input name="訂單金額" type="number" min="0" step="1">
-		            </div> -->
+						<label>訂單金額</label>
+						<input name="訂單金額" type="number" min="0" step="1">
+					</div> -->
 		            <!-- <div class="field">
-		                <label>訂購人姓名</label>
-		                <input name="訂購人姓名" required>
-		            </div>
-		            <div class="field">
-		                <label>訂購人電話</label>
-		                <input name="訂購人電話" inputmode="tel" required>
-		            </div>
-		            <div class="field">
-		                <label>訂單備註</label>
-		                <textarea name="訂單備註" rows="3"></textarea>
-		            </div> -->
+						<label>訂購人姓名</label>
+						<input name="訂購人姓名" required>
+					</div>
+					<div class="field">
+						<label>訂購人電話</label>
+						<input name="訂購人電話" inputmode="tel" required>
+					</div>
+					<div class="field">
+						<label>訂單備註</label>
+						<textarea name="訂單備註" rows="3"></textarea>
+					</div> -->
 		        </div>
 		        <button type="submit" class="btn primary">送出</button>
 		        <div data-slot="msg"></div>
@@ -159,6 +159,57 @@
 		        </form>
 		    </section>
 		</template>
+		<!-- ========== List: 首頁清單 ========== -->
+		<template id="tpl-list">
+		    <section class="page list">
+		        <header class="hd">
+		            <h1>訂單清單</h1>
+		            <small class="sub">最新 <span data-bind="count">0</span> 筆</small>
+		        </header>
+		        <div class="toolbar">
+		            <button class="btn" data-action="refresh">重新整理</button>
+		            <div class="spacer"></div>
+		            <a class="btn primary" href="#/add">＋ 新增訂單</a>
+		        </div>
+		        <div class="cards" id="listContainer" data-empty="#tpl-list-empty"></div>
+		        <footer class="ft">
+		            <button class="btn" data-action="prev" disabled>上一頁</button>
+		            <span class="page-info" data-bind="pageInfo">第 1/1 頁</span>
+		            <button class="btn" data-action="next" disabled>下一頁</button>
+		        </footer>
+		    </section>
+		</template>
+		<template id="tpl-list-empty">
+		    <div class="empty">
+		        <p>目前沒有資料。</p>
+		    </div>
+		</template>
+		<!-- 單張卡片（由 JS 動態組，不一定要 template；給你參考） -->
+		<template id="tpl-list-card">
+		    <div class="card order" data-id="">
+		        <div class="row a">
+		            <div class="id" data-bind="訂單編號">#O-YYYYMM-00001</div>
+		            <div class="platform" data-bind="接單平台">LINE</div>
+		        </div>
+		        <div class="row b">
+		            <div class="buyer">
+		                <span data-bind="訂購人姓名">王小明</span>
+		                <small data-bind="訂購人電話">0900-000-000</small>
+		            </div>
+		            <div class="amount">
+		                <span>$</span><b data-bind="訂單金額">0</b>
+		            </div>
+		        </div>
+		        <div class="row c">
+		            <small>交貨日：<span data-bind="交貨日期">2025/10/22</span></small>
+		            <small>交貨：<span data-bind="是否已交貨">未交貨</span></small>
+		            <small>付款：<span data-bind="是否已付款">未付款</span></small>
+		        </div>
+		        <div class="row d actions">
+		            <a class="btn" data-action="edit" href="#">編輯</a>
+		        </div>
+		    </div>
+		</template>
 
 		<footer id="footer" class="footer">
 			<section class="copyright">
@@ -168,30 +219,34 @@
 		
 
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="./public/js/ui/eventdevice.js"></script>
+
 		<!-- <script src="./public/js/main.js"></script> -->
 
-		<!-- 仍保留你現有 -->
-		<script src="./public/js/ui/templates.js"></script>
-		<script src="./public/js/ui/options.js"></script>
+		<!-- 0) 全域命名空間（第一支） -->
+		<script src="public/js/core/app.core.js"></script>
+		<script src="./public/js/ui/eventdevice.js"></script>
 
-		<!-- 拆分後的新檔 -->
-		<!-- app.base.js 最先，提供 APP 與 el/var。 -->
-		<script src="./public/js/core/app.base.js"></script>
+		<!-- 1) Core Init（快取節點、輕量環境檢查；不依賴 TPL / API） -->
+		<script src="public/js/core/app.init.js"></script>
 
-		<!-- utils.js、api.js 先於 features，使 feature 內可直接用它們。 -->
-		<script src="./public/js/ui/utils.js"></script>
-		<script src="./public/js/services/api.js"></script>
+		<!-- 2) UI/工具 -->
+		<script src="public/js/ui/templates.js"></script>
+		<script src="public/js/ui/utils.js"></script>
 
-		<script src="./public/js/features/add.js"></script>
-		<!-- <script src="./public/js/features/edit.js"></script> -->
+		<!-- 3) 資料與環境 -->
+		<script src="public/js/ui/options.js"></script>
+		<script src="public/js/core/env.liff.js"></script>
 
-		<!-- env.liff.js、router.js、app.init.js 放在 boot 前，確保啟動時有這些方法。 -->
-		<script src="./public/js/core/env.liff.js"></script>
-		<script src="./public/js/core/app.router.js"></script>
-		<script src="./public/js/core/app.init.js"></script>
+		<!-- 4) Services -->
+		<script src="public/js/services/api.js"></script>
 
-		<!-- boot.js 最後，等 DOM ready 再呼叫 APP.init()。 -->
-		<script src="./public/js/core/boot.js"></script>
+		<!-- 5) Features -->
+		<script src="public/js/features/list.js"></script>
+		<script src="public/js/features/add.js"></script>
+		<script src="public/js/features/edit.js"></script>
+
+		<!-- 6) Router（最後；會觸發 APP.route() ） -->
+		<script src="public/js/core/app.router.js"></script>
+
 	</body>
 </html>
