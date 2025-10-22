@@ -359,7 +359,7 @@ $(function() {
                 }
             }
 
-            // 訂單金額（數字）
+             // 訂單金額（數字）
             if (hasField('訂單金額')) {
                 const amt = Number(data['訂單金額']);
                 if (!(amt >= 0)) errs['訂單金額'] = '請輸入數字';
