@@ -1,227 +1,227 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Order Hub</title>
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="" />
-        <meta property="og:description" content="" />
-        <meta property="og:image" content="" />
-        <link rel="icon" type="image/png" href="./favicon.ico" />
 
-        <!-- BEGIN google noto sans tc -->
-        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
-        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
-        <!-- END google noto sans tc -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Order Hub</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <link rel="icon" type="image/png" href="./favicon.ico" />
+    <!-- BEGIN google noto sans tc -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+    <!-- END google noto sans tc -->
 
-        <!-- BEGIN google noto serif -->
-        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
-        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
-        <!-- END google noto serif -->
-
-
-        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
-		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
-		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
-		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
-		<!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
-        <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
-        <link rel="preconnect" href="https://static.line-scdn.net">
-        <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-	</head>
-	<body>
-        <header id="header" class="header">
-        	<h1>訂單系統</h1>
-        	<div id="meta" class="meta">初始化中…</div>
-        	<nav class="nav">
-        		<a href="#/list" class="nav-link" data-nav="list">清單</a>
-        		<a href="#/add"  class="nav-link" data-nav="add">新增</a>
-        	</nav>
-        </header>
-		<main id="main" class="main"></main>
-
-		<!-- 環境徽章 -->
-		<template id="tpl-badge">
-		    <div id="env-badge" class="env-badge">{{label}}</div>
-		</template>
-		<!-- 訊息（統一樣式） -->
-		<template id="tpl-msg">
-		    <div class="msg {{cls}}">{{text}}</div>
-		</template>
-		<!-- 新增表單 -->
-		<template id="tpl-add">
-		    <form id="formAdd" class="card">
-		        <div class="row">
-		            <div class="field">
-		                <label>客戶</label>
-		                <select name="客戶類型" data-opt="cType"></select>
-		            </div>
-		            <div class="field">
-		                <label>接單平台</label>
-		                <select name="接單平台" data-opt="platforms">
-		                    <option value="" selected disabled>請選擇</option>
-		                </select>
-		            </div>
-		            <div class="field">
-		                <label>訂單日期<span class="hint">（預設今天）</span></label>
-		                <input name="訂單日期" type="date">
-		            </div>
-		            <!-- <div class="field">
-						<label>交貨日期</label>
-						<input name="交貨日期" type="date">
-					</div> -->
-		            <!-- <div class="field">
-						<label>是否已交貨</label>
-						<select name="是否已交貨" data-opt="isDelivery">
-							<option value="" selected disabled>請選擇</option>
-						</select>
-					</div> -->
-		            <!-- <div class="field">
-						<label>是否已付款</label>
-						<select name="是否已付款" data-opt="isPay">
-							<option value="" selected disabled>請選擇</option>
-						</select>
-					</div> -->
-		            <!-- <div class="field">
-						<label>商品項目</label>
-						<textarea name="商品項目" rows="1"></textarea>
-					</div> -->
-		            <!-- <div class="field">
-						<label>訂單金額</label>
-						<input name="訂單金額" type="number" min="0" step="1">
-					</div> -->
-		            <!-- <div class="field">
-						<label>訂購人姓名</label>
-						<input name="訂購人姓名" required>
-					</div>
-					<div class="field">
-						<label>訂購人電話</label>
-						<input name="訂購人電話" inputmode="tel" required>
-					</div>
-					<div class="field">
-						<label>訂單備註</label>
-						<textarea name="訂單備註" rows="3"></textarea>
-					</div> -->
-		        </div>
-		        <button type="submit" class="btn primary">送出</button>
-		        <div data-slot="msg"></div>
-		    </form>
-		</template>
-		<!-- 編輯表單 -->
-		<template id="tpl-edit">
-		    <section class="card">
-		        <div class="row">
-		            <div class="field">
-		                <label>訂單編號</label>
-		                <input id="oid" placeholder="O-YYYYMM-00001" value="{{orderId}}">
-		            </div>
-		            <div class="field" style="display:flex;align-items:end">
-		                <button type="button" id="btnLoad" class="btn">載入</button>
-		            </div>
-		        </div>
-		        <form id="formEdit" style="display:none">
-		            <div class="field">
-		                <label>是否已付款</label>
-		                <select name="是否已付款">
-		                    <option>未付款</option>
-		                    <option>已付款</option>
-		                    <option>貨到付款</option>
-		                </select>
-		            </div>
-		            <div class="field">
-		                <label>是否已交貨</label>
-		                <select name="是否已交貨">
-		                    <option>未交貨</option>
-		                    <option>已交貨</option>
-		                </select>
-		            </div>
-		            <div class="field">
-		                <label>貨運單號</label>
-		                <input name="貨運單號">
-		            </div>
-		            <div class="field">
-		                <label>訂單備註</label>
-		                <textarea name="訂單備註" rows="3"></textarea>
-		            </div>
-		            <button type="submit" class="btn primary">儲存更新</button>
-		            <div data-slot="msg"></div>
-		        </form>
-		    </section>
-		</template>
-		<!-- ========== List: 首頁清單 ========== -->
-		<template id="tpl-list">
-		    <section class="page list">
-		        <header class="hd">
-		            <h1>訂單清單</h1>
-		            <small class="sub">最新 <span data-bind="count">0</span> 筆</small>
-		        </header>
-		        <div class="toolbar">
-		            <button class="btn" data-action="refresh">重新整理</button>
-		            <div class="spacer"></div>
-		            <a class="btn primary" href="#/add">＋ 新增訂單</a>
-		        </div>
-		        <div class="cards" id="listContainer" data-empty="#tpl-list-empty"></div>
-		        <footer class="ft">
-		            <button class="btn" data-action="prev" disabled>上一頁</button>
-		            <span class="page-info" data-bind="pageInfo">第 1/1 頁</span>
-		            <button class="btn" data-action="next" disabled>下一頁</button>
-		        </footer>
-		    </section>
-		</template>
-		<template id="tpl-list-empty">
-		    <div class="empty">
-		        <p>目前沒有資料。</p>
-		    </div>
-		</template>
-		<!-- 單張卡片（由 JS 動態組，不一定要 template；給你參考） -->
-		<template id="tpl-list-card">
-		    <div class="card order" data-id="">
-		        <div class="row a">
-		            <div class="id" data-bind="訂單編號">#O-YYYYMM-00001</div>
-		            <div class="platform" data-bind="接單平台">LINE</div>
-		        </div>
-		        <div class="row b">
-		            <div class="buyer">
-		                <span data-bind="訂購人姓名">王小明</span>
-		                <small data-bind="訂購人電話">0900-000-000</small>
-		            </div>
-		            <div class="amount">
-		                <span>$</span><b data-bind="訂單金額">0</b>
-		            </div>
-		        </div>
-		        <div class="row c">
-		            <small>交貨日：<span data-bind="交貨日期">2025/10/22</span></small>
-		            <small>交貨：<span data-bind="是否已交貨">未交貨</span></small>
-		            <small>付款：<span data-bind="是否已付款">未付款</span></small>
-		        </div>
-		        <div class="row d actions">
-		            <a class="btn" data-action="edit" href="#">編輯</a>
-		        </div>
-		    </div>
-		</template>
+    <!-- BEGIN google noto serif -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+    <!-- END google noto serif -->
 
 
-		<footer id="footer" class="footer">
-			<section class="copyright">
-				<span>Copyright © 2025 WUCL.</span>
-			</section>
-		</footer>
-        
+    <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
+    <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
+    <link rel="preconnect" href="https://static.line-scdn.net">
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+    <header id="header" class="header">
+    	<h1>訂單系統</h1>
+    	<div id="meta" class="meta">初始化中…</div>
+    	<nav class="nav">
+    		<a href="#/list" class="nav-link" data-nav="list">清單</a>
+    		<a href="#/add"  class="nav-link" data-nav="add">新增</a>
+    	</nav>
+    </header>
+    <main id="main" class="main"></main>
 
-		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
-		<script src="./public/js/custom/eventdevice.js"></script>
-        <script src="./public/js/templates.js"></script>
-        <script src="./public/js/options.js"></script>
-		<script src="./public/js/main.js"></script>
-	</body>
+    <!-- 環境徽章 -->
+    <template id="tpl-badge">
+        <div id="env-badge" class="env-badge">{{label}}</div>
+    </template>
+    <!-- 訊息（統一樣式） -->
+    <template id="tpl-msg">
+        <div class="msg {{cls}}">{{text}}</div>
+    </template>
+    <!-- 新增表單 -->
+    <template id="tpl-add">
+        <form id="formAdd" class="card">
+            <div class="row">
+                <div class="field">
+                    <label>客戶</label>
+                    <select name="客戶類型" data-opt="cType"></select>
+                </div>
+                <div class="field">
+                    <label>接單平台</label>
+                    <select name="接單平台" data-opt="platforms">
+                        <option value="" selected disabled>請選擇</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>訂單日期<span class="hint">（預設今天）</span></label>
+                    <input name="訂單日期" type="date">
+                </div>
+                <!-- <div class="field">
+    				<label>交貨日期</label>
+    				<input name="交貨日期" type="date">
+    			</div> -->
+                <!-- <div class="field">
+    				<label>是否已交貨</label>
+    				<select name="是否已交貨" data-opt="isDelivery">
+    					<option value="" selected disabled>請選擇</option>
+    				</select>
+    			</div> -->
+                <!-- <div class="field">
+    				<label>是否已付款</label>
+    				<select name="是否已付款" data-opt="isPay">
+    					<option value="" selected disabled>請選擇</option>
+    				</select>
+    			</div> -->
+                <!-- <div class="field">
+    				<label>商品項目</label>
+    				<textarea name="商品項目" rows="1"></textarea>
+    			</div> -->
+                <!-- <div class="field">
+    				<label>訂單金額</label>
+    				<input name="訂單金額" type="number" min="0" step="1">
+    			</div> -->
+                <!-- <div class="field">
+    				<label>訂購人姓名</label>
+    				<input name="訂購人姓名" required>
+    			</div>
+    			<div class="field">
+    				<label>訂購人電話</label>
+    				<input name="訂購人電話" inputmode="tel" required>
+    			</div>
+    			<div class="field">
+    				<label>訂單備註</label>
+    				<textarea name="訂單備註" rows="3"></textarea>
+    			</div> -->
+            </div>
+            <button type="submit" class="btn primary">送出</button>
+            <div data-slot="msg"></div>
+        </form>
+    </template>
+    <!-- 編輯表單 -->
+    <template id="tpl-edit">
+        <section class="card">
+            <div class="row">
+                <div class="field">
+                    <label>訂單編號</label>
+                    <input id="oid" placeholder="O-YYYYMM-00001" value="{{orderId}}">
+                </div>
+                <div class="field" style="display:flex;align-items:end">
+                    <button type="button" id="btnLoad" class="btn">載入</button>
+                </div>
+            </div>
+            <form id="formEdit" style="display:none">
+                <div class="field">
+                    <label>是否已付款</label>
+                    <select name="是否已付款">
+                        <option>未付款</option>
+                        <option>已付款</option>
+                        <option>貨到付款</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>是否已交貨</label>
+                    <select name="是否已交貨">
+                        <option>未交貨</option>
+                        <option>已交貨</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>貨運單號</label>
+                    <input name="貨運單號">
+                </div>
+                <div class="field">
+                    <label>訂單備註</label>
+                    <textarea name="訂單備註" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn primary">儲存更新</button>
+                <div data-slot="msg"></div>
+            </form>
+        </section>
+    </template>
+    <!-- ========== List: 首頁清單 ========== -->
+    <template id="tpl-list">
+        <section class="page list">
+            <header class="hd">
+                <h1>訂單清單</h1>
+                <small class="sub">最新 <span data-bind="count">0</span> 筆</small>
+            </header>
+            <div class="toolbar">
+                <button class="btn" data-action="refresh">重新整理</button>
+                <div class="spacer"></div>
+                <a class="btn primary" href="#/add">＋ 新增訂單</a>
+            </div>
+            <div class="cards" id="listContainer" data-empty="#tpl-list-empty"></div>
+            <footer class="ft">
+                <button class="btn" data-action="prev" disabled>上一頁</button>
+                <span class="page-info" data-bind="pageInfo">第 1/1 頁</span>
+                <button class="btn" data-action="next" disabled>下一頁</button>
+            </footer>
+        </section>
+    </template>
+    <template id="tpl-list-empty">
+        <div class="empty">
+            <p>目前沒有資料。</p>
+        </div>
+    </template>
+    <!-- 單張卡片（由 JS 動態組，不一定要 template；給你參考） -->
+    <template id="tpl-list-card">
+        <div class="card order" data-id="">
+            <div class="row a">
+                <div class="id" data-bind="訂單編號">#O-YYYYMM-00001</div>
+                <div class="platform" data-bind="接單平台">LINE</div>
+            </div>
+            <div class="row b">
+                <div class="buyer">
+                    <span data-bind="訂購人姓名">王小明</span>
+                    <small data-bind="訂購人電話">0900-000-000</small>
+                </div>
+                <div class="amount">
+                    <span>$</span><b data-bind="訂單金額">0</b>
+                </div>
+            </div>
+            <div class="row c">
+                <small>交貨日：<span data-bind="交貨日期">2025/10/22</span></small>
+                <small>交貨：<span data-bind="是否已交貨">未交貨</span></small>
+                <small>付款：<span data-bind="是否已付款">未付款</span></small>
+            </div>
+            <div class="row d actions">
+                <a class="btn" data-action="edit" href="#">編輯</a>
+            </div>
+        </div>
+    </template>
+
+
+    <footer id="footer" class="footer">
+    	<section class="copyright">
+    		<span>Copyright © 2025 WUCL.</span>
+    	</section>
+    </footer>
+    
+    <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./public/js/custom/eventdevice.js"></script>
+    <script src="./public/js/templates.js"></script>
+    <script src="./public/js/options.js"></script>
+    <script src="./public/js/main.js"></script>
+</body>
+
 </html>
