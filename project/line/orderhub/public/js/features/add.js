@@ -31,11 +31,15 @@
         $form.off('submit').on('submit', async (e) => {
             e.preventDefault();
 
+            // === 狀態列：開始 ===
+            if (APP.status && APP.status.start) APP.status.start('新增訂單');
+
             const data = this.formToObject($form);
             const $btn = $form.find('button[type="submit"]');
             const $slot = $form.find('[data-slot="msg"]');
 
             // 驗證
+            if (APP.status && APP.status.tick) APP.status.tick('驗證資料', 25);
             const errs = this.validateAddData(data);
             this.showFieldErrors($form, errs);
             if (typeof this.logValidationDebug === 'function') {
@@ -45,6 +49,7 @@
             if (Object.keys(errs).length) {
                 this.renderErrorSummary($slot, errs);
                 this.scrollToFirstError($form);
+                if (APP.status && APP.status.done) APP.status.done(false, '驗證失敗');
                 return; // 停止送出
             }
 
@@ -74,6 +79,7 @@
             }
 
             // 送出
+            if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 35);
             $btn.prop('disabled', true).text('送出中…');
 
             let res;
@@ -92,6 +98,7 @@
             $btn.prop('disabled', false).text('送出');
 
             if (res && res.ok) {
+                if (APP.status && APP.status.tick) APP.status.tick('處理回應', 30);
                 $slot.removeClass('err').addClass('msg ok').text('✅ 已建立：' + res.orderId);
                 try {
                     if (window.liff) {
@@ -109,6 +116,8 @@
                 if (typeof this.populateAllSelects === 'function') {
                     this.populateAllSelects($form);
                 }
+
+                if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
             } else {
                 // 額外診斷（若 api() 回傳 invalid-json 會有補充欄位）
                 if (res && res.msg === 'invalid-json') {
@@ -122,6 +131,8 @@
                     .removeClass('ok')
                     .addClass('msg err')
                     .text('❌ 失敗：' + ((res && res.msg) || '未知錯誤'));
+
+                if (APP.status && APP.status.done) APP.status.done(false, (res && res.msg) || '未知錯誤');
             }
         });
     };

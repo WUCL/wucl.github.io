@@ -114,18 +114,24 @@
         }
 
         function fetchAndRender() {
+            // === 狀態列：開始 ===
+            if (APP.status && APP.status.start) APP.status.start('載入清單');
+
             $btnRefresh.prop('disabled', true).text('重新整理中…');
             $container.html('<div class="loading">讀取中…</div>');
 
             // 後端預期：APP.api('list', { limit }) 回 { ok:true, items:[...] }
+            if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 40);
             APP.api('list', { limit: LIMIT }).then(function(res) {
                 $btnRefresh.prop('disabled', false).text('重新整理');
                 $container.find('.loading').remove();
 
                 if (res && res.ok && Array.isArray(res.items)) {
+                    if (APP.status && APP.status.tick) APP.status.tick('渲染列表', 40);
+
                     var items = res.items;
                     setCount(items.length);
-                    if (!items.length) { renderEmpty($container); return; }
+                    if (!items.length) { renderEmpty($container); if (APP.status && APP.status.done) APP.status.done(true, '完成（0 筆）'); return; }
 
                     // 清空容器並逐筆加入
                     $container.html('');
@@ -133,18 +139,22 @@
                         var $card = createCard(items[i]);
                         $container.append($card);
                     }
+
+                    if (APP.status && APP.status.done) APP.status.done(true, '完成（' + items.length + ' 筆）');
                     return;
                 }
 
                 // 後端尚未實作 → 顯示提示
                 setCount(0);
                 renderEmpty($container);
+                if (APP.status && APP.status.done) APP.status.done(false, 'API not ready');
                 console.warn('[List] API not ready or bad response:', res);
             }).catch(function(err) {
                 $btnRefresh.prop('disabled', false).text('重新整理');
                 $container.find('.loading').remove();
                 setCount(0);
                 renderEmpty($container);
+                if (APP.status && APP.status.done) APP.status.done(false, '讀取錯誤');
                 console.error('[List] fetch error:', err);
             });
         }
