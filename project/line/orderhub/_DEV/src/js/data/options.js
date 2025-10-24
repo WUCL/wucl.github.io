@@ -1,3 +1,5 @@
+/* eslint-env browser, es2020 */
+/*! OrderHub — Data/Options (ORDER_OPTIONS) */
 ;(function(w) {
     'use strict';
     // 靜態下拉選單資料（之後可改由 GAS 讀）

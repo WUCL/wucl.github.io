@@ -1,5 +1,6 @@
-/* global NodeFilter */
-(function(w) {
+/* eslint-env browser, es2020 */
+/*! OrderHub — UI/Templates (TPL) */
+;(function(w) {
     'use strict';
 
     function renderTextNodes(node, data) {
