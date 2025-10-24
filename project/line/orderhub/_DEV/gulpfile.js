@@ -8,7 +8,7 @@
 "use strict";
 const gulp = require('gulp'),
     bs = require('browser-sync').create(),
-    sass = require('gulp-sass')(require('sass')),
+    sass = require('gulp-sass')(require('sass-embedded')),
     rename = require("gulp-rename"),
     autoprefixer = require('gulp-autoprefixer'),
     plumber = require('gulp-plumber'),

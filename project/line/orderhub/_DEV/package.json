@@ -38,6 +38,7 @@
     "imagemin-pngquant": "^8.0.0",
     "plugin-error": "^2.0.1",
     "sass": "^1.77.8",
+    "sass-embedded": "^1.93.2",
     "yargs": "^17.7.2"
   }
 }

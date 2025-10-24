@@ -1,17 +1,20 @@
-/* =======================
-layout/_footer
-======================= */
-footer.footer {
-	width: 100%;
-	.copyright {
-		width: 100%;
-		border-top: .1px solid $color-main;
-		font-size: $fontsize-f;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: $color-main;
-		padding: 7px 0;
-		box-sizing: border-box;
-	}
+// ===============================
+// layout/_footer.scss
+// ===============================
+@use "../utilities/config"as *;
+
+.footer {
+    margin-top: 16px;
+
+    .footer__inner {
+        border-top: 1px solid $bd;
+        padding: 8px 12px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        small {
+            color: $muted;
+        }
+    }
 }

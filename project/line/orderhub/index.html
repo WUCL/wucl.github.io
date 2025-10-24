@@ -31,36 +31,47 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/colorbox/colorbox.min.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/slick/slick.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/swiper/swiper.min.css" /> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./public/lib/aos/aos.css" /> -->
+    
     <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
     <link rel="preconnect" href="https://static.line-scdn.net">
-    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js" defer></script>
 </head>
 <body>
     <header id="header" class="header">
-    	<h1>訂單系統</h1>
-    	<div id="meta" class="meta">初始化中…</div>
-    	<nav class="nav">
-    		<a href="#/list" class="nav-link" data-nav="list">清單</a>
-    		<a href="#/add"  class="nav-link" data-nav="add">新增</a>
-    	</nav>
+        <div class="header__inner">
+            <!-- 第 1 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
+            <div class="header-row row-1">
+                <h1>訂單系統</h1>
+                <div id="meta" class="meta meta--tiny">（DEV 模式，未登入）</div>
+            </div>
+            <!-- 第 2 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
+            <div class="header-row row-2">
+                <nav id="breadcrumb" class="breadcrumb" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="#/list">首頁</a></li>
+                        <li class="current" aria-current="page">訂單列表</li>
+                    </ol>
+                </nav>
+                <nav class="nav">
+                    <a href="#/add" class="btn btn--icon" data-nav="add" aria-label="新增訂單">
+                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor" />
+                        </svg>
+                        <span>新增訂單</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
     </header>
+    <div id="clock" class="clock">—</div>
     <main id="main" class="main"></main>
-
-    <!-- 環境徽章 -->
-    <template id="tpl-badge">
-        <div id="env-badge" class="env-badge">{{label}}</div>
-    </template>
     <!-- 訊息（統一樣式） -->
     <template id="tpl-msg">
         <div class="msg {{cls}}">{{text}}</div>
     </template>
     <!-- 新增表單 -->
     <template id="tpl-add">
-        <form id="formAdd" class="card">
+        <form id="formAdd" class="form card vertical">
             <div class="row">
                 <div class="field">
                     <label>客戶</label>
@@ -77,41 +88,41 @@
                     <input name="訂單日期" type="date">
                 </div>
                 <!-- <div class="field">
-    				<label>交貨日期</label>
-    				<input name="交貨日期" type="date">
-    			</div> -->
+                    <label>交貨日期</label>
+                    <input name="交貨日期" type="date">
+                </div> -->
                 <!-- <div class="field">
-    				<label>是否已交貨</label>
-    				<select name="是否已交貨" data-opt="isDelivery">
-    					<option value="" selected disabled>請選擇</option>
-    				</select>
-    			</div> -->
+                    <label>是否已交貨</label>
+                    <select name="是否已交貨" data-opt="isDelivery">
+                        <option value="" selected disabled>請選擇</option>
+                    </select>
+                </div> -->
                 <!-- <div class="field">
-    				<label>是否已付款</label>
-    				<select name="是否已付款" data-opt="isPay">
-    					<option value="" selected disabled>請選擇</option>
-    				</select>
-    			</div> -->
+                    <label>是否已付款</label>
+                    <select name="是否已付款" data-opt="isPay">
+                        <option value="" selected disabled>請選擇</option>
+                    </select>
+                </div> -->
                 <!-- <div class="field">
-    				<label>商品項目</label>
-    				<textarea name="商品項目" rows="1"></textarea>
-    			</div> -->
+                    <label>商品項目</label>
+                    <textarea name="商品項目" rows="1"></textarea>
+                </div> -->
                 <!-- <div class="field">
-    				<label>訂單金額</label>
-    				<input name="訂單金額" type="number" min="0" step="1">
-    			</div> -->
+                    <label>訂單金額</label>
+                    <input name="訂單金額" type="number" min="0" step="1">
+                </div> -->
                 <!-- <div class="field">
-    				<label>訂購人姓名</label>
-    				<input name="訂購人姓名" required>
-    			</div>
-    			<div class="field">
-    				<label>訂購人電話</label>
-    				<input name="訂購人電話" inputmode="tel" required>
-    			</div>
-    			<div class="field">
-    				<label>訂單備註</label>
-    				<textarea name="訂單備註" rows="3"></textarea>
-    			</div> -->
+                    <label>訂購人姓名</label>
+                    <input name="訂購人姓名" required>
+                </div>
+                <div class="field">
+                    <label>訂購人電話</label>
+                    <input name="訂購人電話" inputmode="tel" required>
+                </div>
+                <div class="field">
+                    <label>訂單備註</label>
+                    <textarea name="訂單備註" rows="3"></textarea>
+                </div> -->
             </div>
             <button type="submit" class="btn primary">送出</button>
             <div data-slot="msg"></div>
@@ -160,22 +171,42 @@
     </template>
     <!-- ========== List: 首頁清單 ========== -->
     <template id="tpl-list">
-        <section class="page list">
-            <header class="hd">
-                <h1>訂單清單</h1>
-                <small class="sub">最新 <span data-bind="count">0</span> 筆</small>
-            </header>
-            <div class="toolbar">
-                <button class="btn" data-action="refresh">重新整理</button>
-                <div class="spacer"></div>
-                <a class="btn primary" href="#/add">＋ 新增訂單</a>
+        <section class="panel">
+            <div class="panel-h">
+                <h2>訂單清單</h2>
+                <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div>
             </div>
-            <div class="cards" id="listContainer" data-empty="#tpl-list-empty"></div>
-            <footer class="ft">
-                <button class="btn" data-action="prev" disabled>上一頁</button>
-                <span class="page-info" data-bind="pageInfo">第 1/1 頁</span>
-                <button class="btn" data-action="next" disabled>下一頁</button>
-            </footer>
+            <div class="panel-b">
+                <!-- 排序 / 篩選 -->
+                <div class="list-toolbar">
+                    <div class="filters">
+                        <span class="year-tag" data-year="2025">2025 年</span>
+                        <label>
+                            狀態
+                            <select id="filterStatus">
+                                <option value="">全部</option>
+                                <option value="未出貨">未出貨</option>
+                                <option value="未付款">未付款</option>
+                            </select>
+                        </label>
+                        <label>
+                            區間
+                            <select id="filterRange">
+                                <option value="">全部時間</option>
+                                <option value="this-week">這週</option>
+                                <option value="this-month">這個月</option>
+                                <option value="month">指定月份</option>
+                            </select>
+                        </label>
+                        <label id="filterMonthWrap" style="display:none;">
+                            月份
+                            <input id="filterMonth" type="month" min="2025-01" max="2025-12" value="2025-10">
+                        </label>
+                    </div>
+                    <div class="tools"></div>
+                </div>
+                <div class="list-wrap" id="listContainer"></div>
+            </div>
         </section>
     </template>
     <template id="tpl-list-empty">
@@ -184,37 +215,42 @@
         </div>
     </template>
     <!-- 單張卡片（由 JS 動態組，不一定要 template；給你參考） -->
+    <!-- 單筆卡片（兩行極簡） -->
     <template id="tpl-list-card">
         <div class="card order" data-id="">
+            <!-- 行 A：ID、交貨日、結果 Tag（未出貨/未付款） -->
             <div class="row a">
-                <div class="id" data-bind="訂單編號">#O-YYYYMM-00001</div>
-                <div class="platform" data-bind="接單平台">LINE</div>
+                <div class="cell id">#<span data-bind="訂單編號">—</span></div>
+                <div class="cell meta"><span data-bind="交貨日期">—</span></div>
+                <div class="row d actions">
+                    <span class="tags-inline"></span>
+                    <a class="icon-btn" data-action="edit" title="編輯" href="#" aria-label="編輯">
+                        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor" />
+                        </svg>
+                    </a>
+                </div>
             </div>
+            <!-- 行 B：平台、客戶、分類、金額（右邊詳細） -->
             <div class="row b">
-                <div class="buyer">
-                    <span data-bind="訂購人姓名">王小明</span>
-                    <small data-bind="訂購人電話">0900-000-000</small>
+                <div class="cell meta"><span data-bind="接單平台">—</span></div>
+                <div class="cell meta"><span data-bind="訂購人姓名">—</span></div>
+                <div class="cell meta"><span data-bind="品項分類">—</span></div>
+                <div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
+                <div class="row d actions">
+                    <a class="icon-btn" data-action="toggle" title="詳情" href="#" aria-label="詳情">
+                        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </a>
                 </div>
-                <div class="amount">
-                    <span>$</span><b data-bind="訂單金額">0</b>
-                </div>
-            </div>
-            <div class="row c">
-                <small>交貨日：<span data-bind="交貨日期">2025/10/22</span></small>
-                <small>交貨：<span data-bind="是否已交貨">未交貨</span></small>
-                <small>付款：<span data-bind="是否已付款">未付款</span></small>
-            </div>
-            <div class="row d actions">
-                <a class="btn" data-action="edit" href="#">編輯</a>
             </div>
         </div>
     </template>
-
-
-    <footer id="footer" class="footer">
-    	<section class="copyright">
-    		<span>Copyright © 2025 WUCL.</span>
-    	</section>
+    <footer class="footer">
+        <div class="footer__inner">
+            <small>Copyright © 2025 WUCL.</small>
+        </div>
     </footer>
     
     <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
@@ -222,6 +258,7 @@
     <!-- UI 與靜態資料 -->
     <script src="./public/js/ui/eventdevice.js"></script>
     <script src="./public/js/ui/templates.js"></script>
+    <script src="./public/js/core/app.clock.js"></script>
     <script src="./public/js/data/options.js"></script>
 
     <!-- Core / Services / UI Helpers -->

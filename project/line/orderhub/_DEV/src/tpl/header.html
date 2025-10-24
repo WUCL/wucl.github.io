@@ -1,8 +1,26 @@
 <header id="header" class="header">
-	<h1>訂單系統</h1>
-	<div id="meta" class="meta">初始化中…</div>
-	<nav class="nav">
-		<a href="#/list" class="nav-link" data-nav="list">清單</a>
-		<a href="#/add"  class="nav-link" data-nav="add">新增</a>
-	</nav>
+    <div class="header__inner">
+        <!-- 第 1 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
+        <div class="header-row row-1">
+            <h1>訂單系統</h1>
+            <div id="meta" class="meta meta--tiny">（DEV 模式，未登入）</div>
+        </div>
+        <!-- 第 2 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
+        <div class="header-row row-2">
+            <nav id="breadcrumb" class="breadcrumb" aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="#/list">首頁</a></li>
+                    <li class="current" aria-current="page">訂單列表</li>
+                </ol>
+            </nav>
+            <nav class="nav">
+                <a href="#/add" class="btn btn--icon" data-nav="add" aria-label="新增訂單">
+                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor" />
+                    </svg>
+                    <span>新增訂單</span>
+                </a>
+            </nav>
+        </div>
+    </div>
 </header>

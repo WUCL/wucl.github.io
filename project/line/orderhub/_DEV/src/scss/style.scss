@@ -1,30 +1,11 @@
-/* Welcome to Compass.
-* In this file you should write your main styles. (or centralize your imports)
-* Import this file using the following HTML or equivalent:
-* <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-// @import "breakpoint";
-// @import "compass/css3/";
-// @import "compass/typography/text/replacement";
-// @import "compass/utilities/sprites";
+/* style.scss — 入口：請統一使用 @use */
+@use "utilities/config";
+@use "utilities/mixins";
+@use "utilities/components"; // 按鈕、表單、狀態列、清單卡片等（你目前集中到一檔的話）
 
-@import "utilities/_config.scss";
-// @import "utilities/_helpers.scss";
-// @import "utilities/_mixins.scss";
-@import "utilities/_media-queries.scss";
-@import "_base";
-//import layout
-@import "layout/_layout.scss";
-@import "layout/_footer.scss";
-@import "layout/_header.scss";
-// @import "layout/_sidebar.scss";
-//import modules
-@import "modules/_btns.scss";
-// @import "modules/_nav.scss";
-// @import "modules/_colorbox.scss";
-// @import "modules/_mCustomScrollbar.scss";
-// @import "modules/_pagination.scss";
-// @import "modules/_waterfall-loading.scss";
+@use "base";
 
-//import pages
-@import "pages/_common.scss";
-@import "pages/_main.scss";
+@use "layout/header";
+@use "layout/footer";
+// 如果你有 main/panel 放在 pages/_main.scss、pages/_common.scss，建議合併成 _layout.scss 再 @use
+@use "layout/layout"; // ← 這檔若暫時沒有，可先註解掉

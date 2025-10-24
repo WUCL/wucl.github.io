@@ -4,7 +4,8 @@
  * 職責：建立 APP 命名空間、環境偵測、LIFF 初始化、Router、啟動器
  * 依賴：jQuery、TPL、(可選) liff、eventdevice.js
  */
-;(function(w, $) {
+;
+(function(w, $) {
     'use strict';
 
     // 全域命名空間
@@ -59,15 +60,6 @@
         return { isDev: false, isStaging: false, label: 'PROD' };
     };
 
-    // DEV/STAGING 顯示徽章（可點擊移除）
-    APP.showEnvBadge_ = function(env) {
-        if (!(env.isDev || env.isStaging)) return;
-        if (document.getElementById('env-badge')) return;
-        var frag = TPL.tpl('tpl-badge', { label: env.label });
-        TPL.mount(document.body, frag, false);
-        $('#env-badge').on('click', function() { $(this).remove(); });
-    };
-
     // LIFF 初始化（本機與未設定 LIFF_ID 時，一律略過登入）
     APP.initLiff = function() {
         var self = this;
@@ -91,8 +83,9 @@
             try {
                 liff.init({ liffId: self.var.LIFF_ID }).then(function() {
                     if (!liff.isLoggedIn()) {
-                    	liff.login();
-                        resolve(); return;
+                        liff.login();
+                        resolve();
+                        return;
                     }
                     liff.getProfile().then(function(p) {
                         self.var.actor = 'LIFF';
@@ -126,12 +119,21 @@
         }
     };
 
+    // 麵包屑
+    APP.updateBreadcrumb = function(name) {
+        var map = { list: '訂單列表', add: '新增訂單', edit: '編輯訂單' };
+        var label = map[name] || '訂單列表';
+        var el = document.querySelector('#breadcrumb .current');
+        if (el) el.textContent = label;
+    };
+
     // 簡易路由（預設 list，若未實作則 fallback add）
     APP.route = function() {
         if (!location.hash) location.hash = '#/list';
         this.navHighlight();
         var h = (location.hash || '').replace(/^#\//, '');
         var name = h.split('?')[0];
+        this.updateBreadcrumb(name);
         if (name === 'add') { this.renderAdd(); return; }
         if (this.renderList) this.renderList();
         else this.renderAdd();
@@ -153,13 +155,14 @@
         this.var.isDev = env.isDev;
         this.var.isStaging = env.isStaging;
         this.var.envLabel = env.label;
-        this.showEnvBadge_({ isDev: env.isDev, isStaging: env.isStaging, label: env.label });
 
         var self = this;
         this.initLiff().then(function() {
             self.route();
             self.el.$win.on('hashchange', function() { self.route(); });
         });
-    };
 
+        // APP.clock
+        if (APP.clock && typeof APP.clock.init === 'function') APP.clock.init();
+    };
 })(window, jQuery);

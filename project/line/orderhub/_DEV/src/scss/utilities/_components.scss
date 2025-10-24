@@ -1,0 +1,286 @@
+@use "sass:color";
+@use "../utilities/config"as *;
+
+/* ========== Meta / DEV 提示（極小） ========== */
+.meta--tiny {
+    font-size: 11px;
+    color: $muted;
+    opacity: .85;
+}
+
+/* ========== 麵包屑 ========== */
+.breadcrumb {
+    font-size: 12px;
+    color: $muted;
+
+    ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    li::after {
+        content: '/';
+        margin-left: 6px;
+        color: $bd;
+    }
+
+    li:last-child::after {
+        content: '';
+        margin: 0;
+    }
+
+    li.current {
+        color: $ink;
+        font-weight: 600;
+    }
+}
+
+/* ========== 工具列 / 年份標籤 ========== */
+.year-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid $bd;
+    border-radius: $radius-sm;
+    background: #fff;
+    color: $muted;
+    font-size: 12px;
+}
+
+/* 圖示按鈕（小一點） */
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid $bd;
+    border-radius: $radius-sm;
+    color: $muted;
+    background: #fff;
+    cursor: pointer;
+
+    &:hover {
+        background: $bg-soft;
+        color: $ink;
+    }
+
+    svg {
+        display: block;
+    }
+}
+
+/* Tag：未出貨 / 未付款 */
+.tag {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 11px;
+    border: 1px solid $bd;
+    border-radius: 999px;
+    color: $muted;
+
+    &+.tag {
+        margin-left: 6px;
+    }
+}
+
+/* ========== 清單卡片（兩行極簡 + 間距更小） ========== */
+.card.order {
+    background: $card-bg;
+    border: 1px solid $bd;
+    border-radius: $radius;
+    box-shadow: $shadow-sm;
+    padding: 6px 8px;
+
+    &+.card.order {
+        margin-top: 8px;
+    }
+
+    .row {
+        padding: 2px 0;
+        gap: 6px;
+    }
+
+    /* 行 A：ID | 交貨日 | 右側：tag + 編輯 */
+    .row.a {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+        /* ID, 交貨日, 空白, actions */
+        gap: 6px 8px;
+        align-items: center;
+
+        .cell.id {
+            font-weight: 700;
+            color: $ink;
+        }
+    }
+
+    /* 行 B：平台 | 客戶 | 分類 | 金額 | 右側 詳細 */
+    .row.b {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto auto;
+        /* 平台, 人, 分類, 金額, 詳細 */
+        gap: 6px 8px;
+        align-items: center;
+
+        .amount {
+            font-weight: 700;
+            color: $ink;
+        }
+    }
+
+    .icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border: 1px solid $bd;
+        border-radius: $radius-sm;
+        color: $muted;
+        background: #fff;
+        cursor: pointer;
+
+        &:hover {
+            background: $bg-soft;
+            color: $ink;
+        }
+    }
+
+    .tags-inline {
+        display: inline-flex;
+        gap: 6px;
+        margin-right: 6px;
+
+        .tag {
+            font-size: 11px;
+            border: 1px solid $bd;
+            border-radius: 999px;
+            padding: 2px 6px;
+            color: $muted;
+        }
+    }
+}
+
+.clock {
+    font-size: 12px;
+    color: $muted;
+    margin: 8px 0 10px;
+}
+
+/* ========== Status（放在 main 內、最多 3 行、可捲動） ========== */
+.oh-status {
+    margin-bottom: 12px;
+    background: $card-bg;
+    color: $ink;
+    border: 1px solid $bd;
+    border-radius: $radius;
+    box-shadow: $shadow-sm;
+    padding: 8px 10px;
+    font-size: 12px;
+
+    &__head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        b {
+            font-weight: 700;
+        }
+
+        .oh-status__clear {
+            margin-left: auto;
+            font-size: 12px;
+            padding: 2px 8px;
+            background: transparent;
+            border: 1px solid $bd;
+            color: $muted;
+            border-radius: $radius-sm;
+            cursor: pointer;
+
+            &:hover {
+                color: $ink;
+                background: $bg-soft;
+            }
+        }
+    }
+
+    &__prog {
+        margin-top: 6px;
+        height: 4px;
+        background: $bg-soft;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    &__bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, $primary, $primary-weak);
+        transition: width .25s ease;
+    }
+
+    &__list {
+        margin-top: 6px;
+        max-height: calc(1.6em * 3 + 6px);
+        overflow: auto;
+    }
+
+    &__line {
+        border-left: 3px solid $ok;
+        padding-left: 6px;
+        margin: 4px 0;
+
+        &.warn {
+            border-color: $warn;
+        }
+
+        &.err {
+            border-color: $err;
+        }
+    }
+}
+
+/* 表單基礎 */
+.field {
+    display: grid;
+    gap: 4px;
+    margin: 6px 0;
+
+    label {
+        font-size: 12px;
+        color: $muted;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        font: inherit;
+        color: $ink;
+        background: #fff;
+        border: 1px solid $bd;
+        border-radius: $radius;
+        padding: 6px 8px;
+        line-height: 1.4;
+
+        &:focus {
+            outline: none;
+            border-color: $primary;
+            box-shadow: 0 0 0 3px color.change($primary, $alpha: .12);
+        }
+    }
+
+    select {
+        appearance: none;
+        background-image: none;
+    }
+}

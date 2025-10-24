@@ -60,6 +60,15 @@
         return { isDev: false, isStaging: false, label: 'PROD' };
     };
 
+    // DEV/STAGING 顯示徽章（可點擊移除）
+    APP.showEnvBadge_ = function(env) {
+        if (!(env.isDev || env.isStaging)) return;
+        if (document.getElementById('env-badge')) return;
+        var frag = TPL.tpl('tpl-badge', { label: env.label });
+        TPL.mount(document.body, frag, false);
+        $('#env-badge').on('click', function() { $(this).remove(); });
+    };
+
     // LIFF 初始化（本機與未設定 LIFF_ID 時，一律略過登入）
     APP.initLiff = function() {
         var self = this;
@@ -155,6 +164,7 @@
         this.var.isDev = env.isDev;
         this.var.isStaging = env.isStaging;
         this.var.envLabel = env.label;
+        this.showEnvBadge_({ isDev: env.isDev, isStaging: env.isStaging, label: env.label });
 
         var self = this;
         this.initLiff().then(function() {
@@ -162,7 +172,31 @@
             self.el.$win.on('hashchange', function() { self.route(); });
         });
 
-        // APP.clock
-        if (APP.clock && typeof APP.clock.init === 'function') APP.clock.init();
+        APP.clock.init();
     };
+
+    var WEEK = ['日', '一', '二', '三', '四', '五', '六'];
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    APP.clock = {
+        init: function() {
+            var el = document.getElementById('clock');
+            if (!el) return;
+
+            function tick() {
+                var now = new Date();
+                var y = now.getFullYear();
+                var m = pad(now.getMonth() + 1);
+                var d = pad(now.getDate());
+                var hh = pad(now.getHours());
+                var mm = pad(now.getMinutes());
+                var wk = WEEK[now.getDay()];
+                el.textContent = y + '/' + m + '/' + d + ' ' + hh + ':' + mm + '（週' + wk + '）';
+            }
+            tick();
+            setInterval(tick, 30 * 1000); // 每 30 秒更新一次
+        }
+    };
+
 })(window, jQuery);

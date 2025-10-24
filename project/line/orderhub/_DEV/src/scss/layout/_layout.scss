@@ -1,18 +1,43 @@
-/* =======================
-layout/layout
-======================= */
-html {
-    width: 100%;
-    height: 100%;
+@use "utilities/config"as *;
+@use "utilities/mixins"as *;
+/* Main（原 pages/_main.scss 可合併至此） */
+.main {
+    @include container();
+    padding-block: 12px 32px;
 }
-body {
-    position: relative;
-    width: 100%;
-    min-height: 100%;
-    -webkit-text-size-adjust: none;
-    font-size: $fontsize;
-    font-family: $fontfamily-primary;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-display: swap;
+
+/* Panel（常用容器；原 pages/_common.scss 若有，可併進來） */
+.panel {
+    background: $card-bg;
+    border: 1px solid $bd;
+    border-radius: $radius;
+
+    &-h {
+        padding: 10px 12px;
+        border-bottom: 1px solid $bd;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &-b {
+        padding: 12px;
+    }
+
+    &-f {
+        padding: 8px 12px;
+        border-top: 1px dashed $bd;
+        color: $muted;
+        font-size: 12px;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .sub {
+        color: $muted;
+        font-size: 12px;
+    }
 }
