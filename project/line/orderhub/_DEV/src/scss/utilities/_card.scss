@@ -113,34 +113,51 @@
 	/* 詳細內容（展開區） */
 	.detail {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 6px 12px;
+		gap: 10px;
 		padding-top: 6px;
 		margin-top: 4px;
 		border-top: 1px dashed $bd;
 		font-size: 12px;
-		@media (max-width: 640px) {
-			grid-template-columns: 1fr;
-		}
 
-		.kv {
-			display: grid;
-			grid-template-columns: 100px 1fr;
-			gap: 4px 8px;
-			padding: 1px 0;
-			align-items: start;
-
-			b {
-				font-weight: 600;
-				color: $muted;
-				white-space: nowrap;
+		&-group {
+			border-bottom: 1px solid $bd;
+			padding: 3px;
+			&:last-child {
+				border-bottom: 0;
 			}
 
-			span {
-				color: $ink;
-				word-break: break-word;
-				flex: 1;
-				text-align: right;
+			.g-body {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+
+				@media (max-width: 640px) {
+					grid-template-columns: 1fr;
+				}
+
+				.kv {
+					display: grid;
+					grid-template-columns: minmax(0, 80px) 1fr;
+					gap: 0 7px;
+					align-items: start;
+					padding: 1px 0;
+
+					@media (max-width: 640px) {
+						// grid-template-columns: 100px 1fr;
+					}
+
+					b {
+						font-weight: 600;
+						color: $muted;
+						white-space: nowrap;
+					}
+
+					span {
+						color: $ink;
+						word-break: break-word;
+						flex: 1;
+						text-align: justify;
+					}
+				}
 			}
 		}
 	}

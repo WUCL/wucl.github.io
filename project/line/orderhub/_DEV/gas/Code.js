@@ -56,12 +56,27 @@ function doPost(e) {
         return _json({ ok:true, orderId: orderId });
       }
 
+      // === List (with filters) ===
+      // if (action === 'list') {
+      //   var params = req || {};
+      //   // 保留上限，避免一次回太多筆（可自行調整預設/上限）
+      //   params.limit = Math.min(Number(params.limit || 20), 200);
+      //   var result = Orders_list(params);
+      //   return _json(result); // { ok, items, total }
+      // }
       if (action === 'list') {
-        var limit = Number(req.limit || 20);
-        var q     = String(req.q || '');
-        var items = Orders_listLatest(limit, q);
-        return _json({ ok:true, items: items });
+        var params = {
+          shipStatus: String(req.shipStatus || ''), // '已出貨' / '未出貨'（UI用詞）
+          payStatus:  String(req.payStatus  || ''), // '已付款' / '未付款'
+          range:      String(req.range      || ''), // '', 'this-week', 'this-month', 'month'
+          month:      String(req.month      || ''), // 'YYYY-MM'
+          year:       Number(req.year || 0) || null,
+          limit:      Math.min(Number(req.limit || 20), 200)
+        };
+        var result = Orders_list(params);
+        return _json(result);
       }
+
 
       if (action === 'get') {
         var id = String(req.id || '').trim();

@@ -21,41 +21,41 @@
                 <input name="訂單日期" type="date">
             </div>
             <!-- <div class="field">
-                <label>交貨日期</label>
-                <input name="交貨日期" type="date">
-            </div> -->
+				<label>交貨日期</label>
+				<input name="交貨日期" type="date">
+			</div> -->
             <!-- <div class="field">
-                <label>是否已交貨</label>
-                <select name="是否已交貨" data-opt="isDelivery">
-                    <option value="" selected disabled>請選擇</option>
-                </select>
-            </div> -->
+				<label>是否已交貨</label>
+				<select name="是否已交貨" data-opt="isDelivery">
+					<option value="" selected disabled>請選擇</option>
+				</select>
+			</div> -->
             <!-- <div class="field">
-                <label>是否已付款</label>
-                <select name="是否已付款" data-opt="isPay">
-                    <option value="" selected disabled>請選擇</option>
-                </select>
-            </div> -->
+				<label>是否已付款</label>
+				<select name="是否已付款" data-opt="isPay">
+					<option value="" selected disabled>請選擇</option>
+				</select>
+			</div> -->
             <!-- <div class="field">
-                <label>商品項目</label>
-                <textarea name="商品項目" rows="1"></textarea>
-            </div> -->
+				<label>商品項目</label>
+				<textarea name="商品項目" rows="1"></textarea>
+			</div> -->
             <!-- <div class="field">
-                <label>訂單金額</label>
-                <input name="訂單金額" type="number" min="0" step="1">
-            </div> -->
+				<label>訂單金額</label>
+				<input name="訂單金額" type="number" min="0" step="1">
+			</div> -->
             <!-- <div class="field">
-                <label>訂購人姓名</label>
-                <input name="訂購人姓名" required>
-            </div>
-            <div class="field">
-                <label>訂購人電話</label>
-                <input name="訂購人電話" inputmode="tel" required>
-            </div>
-            <div class="field">
-                <label>訂單備註</label>
-                <textarea name="訂單備註" rows="3"></textarea>
-            </div> -->
+				<label>訂購人姓名</label>
+				<input name="訂購人姓名" required>
+			</div>
+			<div class="field">
+				<label>訂購人電話</label>
+				<input name="訂購人電話" inputmode="tel" required>
+			</div>
+			<div class="field">
+				<label>訂單備註</label>
+				<textarea name="訂單備註" rows="3"></textarea>
+			</div> -->
         </div>
         <button type="submit" class="btn primary">送出</button>
         <div data-slot="msg"></div>
@@ -114,10 +114,17 @@
             <div class="filters">
                 <span class="year-tag"></span>
                 <label>
-                    <select id="filterStatus">
-                        <option value="">全部狀態</option>
-                        <option value="未出貨">未出貨</option>
+                    <select id="filterShipStatus">
+                        <option value="">出貨狀態</option>
+                        <option value="未出貨">未交貨</option>
+                        <option value="已出貨">已交貨</option>
+                    </select>
+                </label>
+                <label>
+                    <select id="filterPayStatus">
+                        <option value="">付款狀態</option>
                         <option value="未付款">未付款</option>
+                        <option value="已付款">已付款</option>
                     </select>
                 </label>
                 <label>
@@ -129,7 +136,7 @@
                     </select>
                 </label>
                 <label id="filterMonthWrap" style="display:none;">
-                    <input id="filterMonth" type="month" min="2025-01" max="2025-12" value="2025-10">
+                    <input id="filterMonth" type="month" min="2025-01" max="2025-12">
                 </label>
             </div>
         </div>
