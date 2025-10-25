@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "../utilities/config"as *;
+@use "utilities/config"as *;
 
 /* ========== Meta / DEV 提示（極小） ========== */
 .meta--tiny {
@@ -78,102 +78,9 @@
     }
 }
 
-/* Tag：未出貨 / 未付款 */
-.tag {
-    display: inline-block;
-    padding: 2px 6px;
-    font-size: 11px;
-    border: 1px solid $bd;
-    border-radius: 999px;
-    color: $muted;
-
-    &+.tag {
-        margin-left: 6px;
-    }
-}
-
-/* ========== 清單卡片（兩行極簡 + 間距更小） ========== */
-.card.order {
-    background: $card-bg;
-    border: 1px solid $bd;
-    border-radius: $radius;
-    box-shadow: $shadow-sm;
-    padding: 6px 8px;
-
-    &+.card.order {
-        margin-top: 8px;
-    }
-
-    .row {
-        padding: 2px 0;
-        gap: 6px;
-    }
-
-    /* 行 A：ID | 交貨日 | 右側：tag + 編輯 */
-    .row.a {
-        display: grid;
-        grid-template-columns: auto auto 1fr auto;
-        /* ID, 交貨日, 空白, actions */
-        gap: 6px 8px;
-        align-items: center;
-
-        .cell.id {
-            font-weight: 700;
-            color: $ink;
-        }
-    }
-
-    /* 行 B：平台 | 客戶 | 分類 | 金額 | 右側 詳細 */
-    .row.b {
-        display: grid;
-        grid-template-columns: auto auto 1fr auto auto;
-        /* 平台, 人, 分類, 金額, 詳細 */
-        gap: 6px 8px;
-        align-items: center;
-
-        .amount {
-            font-weight: 700;
-            color: $ink;
-        }
-    }
-
-    .icon-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 26px;
-        height: 26px;
-        border: 1px solid $bd;
-        border-radius: $radius-sm;
-        color: $muted;
-        background: #fff;
-        cursor: pointer;
-
-        &:hover {
-            background: $bg-soft;
-            color: $ink;
-        }
-    }
-
-    .tags-inline {
-        display: inline-flex;
-        gap: 6px;
-        margin-right: 6px;
-
-        .tag {
-            font-size: 11px;
-            border: 1px solid $bd;
-            border-radius: 999px;
-            padding: 2px 6px;
-            color: $muted;
-        }
-    }
-}
-
 .clock {
     font-size: 12px;
     color: $muted;
-    margin: 8px 0 10px;
 }
 
 /* ========== Status（放在 main 內、最多 3 行、可捲動） ========== */
@@ -184,7 +91,7 @@
     border: 1px solid $bd;
     border-radius: $radius;
     box-shadow: $shadow-sm;
-    padding: 8px 10px;
+    padding: 5px 9px;
     font-size: 12px;
 
     &__head {
@@ -199,7 +106,7 @@
         .oh-status__clear {
             margin-left: auto;
             font-size: 12px;
-            padding: 2px 8px;
+            padding: 1px 7px;
             background: transparent;
             border: 1px solid $bd;
             color: $muted;
@@ -214,8 +121,8 @@
     }
 
     &__prog {
-        margin-top: 6px;
-        height: 4px;
+        margin-top: 3px;
+        height: 3px;
         background: $bg-soft;
         border-radius: 999px;
         overflow: hidden;
@@ -230,14 +137,14 @@
 
     &__list {
         margin-top: 6px;
-        max-height: calc(1.6em * 3 + 6px);
+        max-height: calc(1.6em * 2 + 5px);
         overflow: auto;
     }
 
     &__line {
         border-left: 3px solid $ok;
         padding-left: 6px;
-        margin: 4px 0;
+        margin: 3px 0;
 
         &.warn {
             border-color: $warn;
@@ -275,7 +182,7 @@
         &:focus {
             outline: none;
             border-color: $primary;
-            box-shadow: 0 0 0 3px color.change($primary, $alpha: .12);
+            // box-shadow: 0 0 0 3px color.change($primary, $alpha: .12);
         }
     }
 
@@ -283,4 +190,29 @@
         appearance: none;
         background-image: none;
     }
+}
+
+/* ===== Panel ===== */
+// .panel-h {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 8px;
+//     margin-bottom: 6px;
+
+//     .head {
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: baseline;
+//     }
+
+//     .filters {
+//         display: flex;
+//         flex-wrap: wrap;
+//         gap: 8px 12px;
+//     }
+// }
+
+/* 與下方清單的間距 */
+.list-wrap {
+    margin-top: 6px;
 }

@@ -2,6 +2,7 @@
 @use "utilities/config";
 @use "utilities/mixins";
 @use "utilities/components"; // 按鈕、表單、狀態列、清單卡片等（你目前集中到一檔的話）
+@use "utilities/card"; // card
 
 @use "base";
 

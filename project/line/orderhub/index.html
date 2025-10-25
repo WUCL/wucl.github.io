@@ -42,6 +42,7 @@
             <!-- 第 1 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
             <div class="header-row row-1">
                 <h1>訂單系統</h1>
+                <div id="clock" class="clock">—</div>
                 <div id="meta" class="meta meta--tiny">（DEV 模式，未登入）</div>
             </div>
             <!-- 第 2 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
@@ -63,7 +64,6 @@
             </div>
         </div>
     </header>
-    <div id="clock" class="clock">—</div>
     <main id="main" class="main"></main>
     <!-- 訊息（統一樣式） -->
     <template id="tpl-msg">
@@ -173,38 +173,34 @@
     <template id="tpl-list">
         <section class="panel">
             <div class="panel-h">
-                <h2>訂單清單</h2>
-                <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div>
+                <div class="head">
+                    <h2>訂單清單</h2>
+                    <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div>
+                </div>
+                <!-- ↓ 篩選列放入這裡 ↓ -->
+                <div class="filters">
+                    <span class="year-tag"></span>
+                    <label>
+                        <select id="filterStatus">
+                            <option value="">全部狀態</option>
+                            <option value="未出貨">未出貨</option>
+                            <option value="未付款">未付款</option>
+                        </select>
+                    </label>
+                    <label>
+                        <select id="filterRange">
+                            <option value="">全部區間</option>
+                            <option value="this-week">本週</option>
+                            <option value="this-month">本月</option>
+                            <option value="month">指定月</option>
+                        </select>
+                    </label>
+                    <label id="filterMonthWrap" style="display:none;">
+                        <input id="filterMonth" type="month" min="2025-01" max="2025-12" value="2025-10">
+                    </label>
+                </div>
             </div>
             <div class="panel-b">
-                <!-- 排序 / 篩選 -->
-                <div class="list-toolbar">
-                    <div class="filters">
-                        <span class="year-tag" data-year="2025">2025 年</span>
-                        <label>
-                            狀態
-                            <select id="filterStatus">
-                                <option value="">全部</option>
-                                <option value="未出貨">未出貨</option>
-                                <option value="未付款">未付款</option>
-                            </select>
-                        </label>
-                        <label>
-                            區間
-                            <select id="filterRange">
-                                <option value="">全部時間</option>
-                                <option value="this-week">這週</option>
-                                <option value="this-month">這個月</option>
-                                <option value="month">指定月份</option>
-                            </select>
-                        </label>
-                        <label id="filterMonthWrap" style="display:none;">
-                            月份
-                            <input id="filterMonth" type="month" min="2025-01" max="2025-12" value="2025-10">
-                        </label>
-                    </div>
-                    <div class="tools"></div>
-                </div>
                 <div class="list-wrap" id="listContainer"></div>
             </div>
         </section>
@@ -218,12 +214,14 @@
     <!-- 單筆卡片（兩行極簡） -->
     <template id="tpl-list-card">
         <div class="card order" data-id="">
-            <!-- 行 A：ID、交貨日、結果 Tag（未出貨/未付款） -->
+            <!-- 行 A：ID | [交貨日 + Tag] | (最右) 編輯 -->
             <div class="row a">
                 <div class="cell id">#<span data-bind="訂單編號">—</span></div>
-                <div class="cell meta"><span data-bind="交貨日期">—</span></div>
-                <div class="row d actions">
+                <div class="cell meta">
+                    <span class="date" data-bind="交貨日期">—</span>
                     <span class="tags-inline"></span>
+                </div>
+                <div class="cell actions">
                     <a class="icon-btn" data-action="edit" title="編輯" href="#" aria-label="編輯">
                         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor" />
@@ -231,13 +229,13 @@
                     </a>
                 </div>
             </div>
-            <!-- 行 B：平台、客戶、分類、金額（右邊詳細） -->
+            <!-- 行 B：平台 | 訂購人 | 分類 | 金額 | (最右) 詳細 -->
             <div class="row b">
                 <div class="cell meta"><span data-bind="接單平台">—</span></div>
                 <div class="cell meta"><span data-bind="訂購人姓名">—</span></div>
                 <div class="cell meta"><span data-bind="品項分類">—</span></div>
                 <div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
-                <div class="row d actions">
+                <div class="cell actions">
                     <a class="icon-btn" data-action="toggle" title="詳情" href="#" aria-label="詳情">
                         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />

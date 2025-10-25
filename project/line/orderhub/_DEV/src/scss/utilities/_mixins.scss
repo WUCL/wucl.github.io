@@ -11,8 +11,9 @@
 }
 
 /* 新增：container mixin（取代 @extend .container） */
-@mixin container($max: 960px, $pad: 16px) {
+@mixin container($max: 960px, $px: 14px, $py: 9px) {
 	width: min(100%, $max);
-	padding-inline: $pad;
+	padding-inline: $px;
+	padding-block: $py;
 	margin-inline: auto;
 }

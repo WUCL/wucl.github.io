@@ -1,43 +1,84 @@
 @use "utilities/config"as *;
 @use "utilities/mixins"as *;
+
 /* Main（原 pages/_main.scss 可合併至此） */
 .main {
-    @include container();
-    padding-block: 12px 32px;
+	@include container();
+	padding-block: 12px 32px;
 }
 
 /* Panel（常用容器；原 pages/_common.scss 若有，可併進來） */
 .panel {
-    background: $card-bg;
-    border: 1px solid $bd;
-    border-radius: $radius;
+	background: $card-bg;
+	border: 1px solid $bd;
+	border-radius: $radius;
 
-    &-h {
-        padding: 10px 12px;
-        border-bottom: 1px solid $bd;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
+	&-h {
+		padding: 10px 12px;
+		border-bottom: 1px solid $bd;
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 12px;
 
-    &-b {
-        padding: 12px;
-    }
+		/* ===== Filters ===== */
+		.filters {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 9px;
 
-    &-f {
-        padding: 8px 12px;
-        border-top: 1px dashed $bd;
-        color: $muted;
-        font-size: 12px;
-    }
+			.year-tag {
+				font-size: 12px;
+				color: $muted;
+				border: 1px solid $bd;
+				border-radius: $radius-sm;
+				padding: 1px 7px;
+				background: #fff;
+			}
 
-    h2 {
-        margin: 0;
-        font-size: 16px;
-    }
+			label {
+				display: inline-flex;
+				align-items: center;
+				gap: 5px;
+				font-size: 12px;
+				color: $muted;
+			}
 
-    .sub {
-        color: $muted;
-        font-size: 12px;
-    }
+			select,
+			input[type="month"] {
+				font: inherit;
+				color: $ink;
+				border: 1px solid $bd;
+				border-radius: $radius-sm;
+				padding: 1px 7px;
+				// height: 30px;
+
+				&:focus {
+					border-color: $ink;
+				}
+			}
+		}
+	}
+
+	&-b {
+		padding: 12px;
+	}
+
+	&-f {
+		padding: 8px 12px;
+		border-top: 1px dashed $bd;
+		color: $muted;
+		font-size: 12px;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 16px;
+	}
+
+	.sub {
+		color: $muted;
+		font-size: 12px;
+	}
 }

@@ -1,0 +1,147 @@
+@use "sass:color";
+@use "../utilities/config"as *;
+
+/* ========== 清單卡片（兩行極簡 + 間距更小） ========== */
+.card.order {
+	background: $card-bg;
+	border: 1px solid $bd;
+	border-radius: $radius;
+	padding: 5px 9px;
+
+	&+.card.order {
+		margin-top: 8px;
+	}
+
+	.row {
+		display: grid;
+		align-items: center;
+
+		/* 垂直置中 */
+		gap: 5px 9px;
+		padding: 1px 0;
+
+		.cell {
+			&.meta {
+				display: flex;
+				align-items: center;
+				color: $muted;
+				gap: 9px;
+			}
+		}
+
+		/* A 行：ID | [日期+標籤] | 右側編輯 */
+		&.a {
+			grid-template-columns: auto 1fr auto;
+
+			.cell {
+				&.id {
+					font-weight: 500;
+					color: $ink;
+				}
+			}
+
+			.date {
+				color: $ink;
+			}
+
+			/* 日期顏色稍深 */
+		}
+
+		/* B 行：平台 | 客戶 | 分類 | 金額 | 右側詳情 */
+		&.b {
+			grid-template-columns: repeat(3, auto) 1fr auto;
+
+			.amount {
+				font-weight: 500;
+				color: $ink;
+			}
+		}
+	}
+
+	.actions {
+		justify-self: end;
+	}
+
+	.tags-inline {
+		display: inline-flex;
+		gap: 6px;
+		align-items: center;
+
+		.tag {
+			display: inline-block;
+			padding: 1px 6px;
+			font-size: 11px;
+			border: 1px solid $bd;
+			border-radius: $radius-sm;
+			color: $muted;
+			background: #fff;
+			line-height: 1.3;
+			transition: all 0.2s ease;
+
+			&.warn {
+				border-color: mix($err, #fff, 30%);
+				color: #fff;
+				background: $err;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.actions {
+		justify-self: end;
+		/* 操作鈕固定靠最右 */
+	}
+
+	.icon-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 26px;
+		height: 26px;
+		border: 1px solid $bd;
+		border-radius: $radius-sm;
+		background: #fff;
+		color: $muted;
+		cursor: pointer;
+
+		&:hover {
+			background: $bg-soft;
+			color: $ink;
+		}
+	}
+
+	/* 詳細內容（展開區） */
+	.detail {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 6px 12px;
+		padding-top: 6px;
+		margin-top: 4px;
+		border-top: 1px dashed $bd;
+		font-size: 12px;
+		@media (max-width: 640px) {
+			grid-template-columns: 1fr;
+		}
+
+		.kv {
+			display: grid;
+			grid-template-columns: 100px 1fr;
+			gap: 4px 8px;
+			padding: 1px 0;
+			align-items: start;
+
+			b {
+				font-weight: 600;
+				color: $muted;
+				white-space: nowrap;
+			}
+
+			span {
+				color: $ink;
+				word-break: break-word;
+				flex: 1;
+				text-align: right;
+			}
+		}
+	}
+}
