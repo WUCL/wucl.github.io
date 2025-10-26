@@ -8,6 +8,17 @@
 	'use strict';
 	var APP = w.APP || (w.APP = {});
 
+	// filter control
+	// $(document).on('click', '.filter-dropdown .dropdown-toggle', function (e) {
+    //     e.stopPropagation();
+    //     var $menu = $(this).next('.dropdown-menu');
+    //     $('.filter-dropdown .dropdown-menu').not($menu).hide(); // 關閉其他
+    //     $menu.toggle();
+    // });
+    // $(document).on('click', function () {
+    //     $('.filter-dropdown .dropdown-menu').hide(); // 點擊外部自動關閉
+    // });
+
 	// 取表單物件
 	APP.formToObject = function($form) {
 		var out = {};

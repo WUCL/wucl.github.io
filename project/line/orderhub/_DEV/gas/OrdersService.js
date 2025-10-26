@@ -91,6 +91,7 @@ function Orders_updateByPatch(orderId, patch, actor, opt){
 function Orders_list(params){
   params = params || {};
   var limit      = Math.min(Number(params.limit || 20), 200);
+  var orderStatus = String(params.orderStatus || '');
   var shipStatus = String(params.shipStatus || '');
   var payStatus  = String(params.payStatus  || '');
   var range      = String(params.range      || '');
@@ -98,16 +99,23 @@ function Orders_list(params){
   var year       = Number(params.year || 0); // 你若要只看某年，可再用
 
   function _norm(s){ return String(s||'').trim(); }
-  // UI: 出貨 ↔ 表格: 交貨
-  var SHIP_MAP = { '已出貨':'已交貨', '未出貨':'未交貨' };
 
   var rows = ROWS(ENV.ORDERS_SHEET);
   // 以尾端為新 → 倒序，維持你目前清單習慣
   rows = rows.reverse();
+  
+  // === 訂單狀態 ===
+  if (orderStatus) {
+    // var wantedList = String(orderStatus).split(',').map(function(s){ return s.trim(); });
+    var wantedOrder = _norm(orderStatus); // 'doing' / 'done' / 'cancel'
+    rows = rows.filter(function(r){
+      return _norm(r['訂單狀態']).indexOf(wantedOrder) !== -1;
+    });
+  }
 
   // === 出貨狀態 ===
   if (shipStatus) {
-    var wantedShip = SHIP_MAP[_norm(shipStatus)] || _norm(shipStatus); // '未出貨' -> '未交貨'
+    var wantedShip = _norm(shipStatus); // '已交貨' / '未交貨'
     rows = rows.filter(function(r){
       return _norm(r['是否已交貨']).indexOf(wantedShip) !== -1;
     });
@@ -190,76 +198,3 @@ function findById_(orderId){
   try { return FINDROW(ENV.ORDERS_SHEET, '訂單編號', orderId); }
   catch(e){ throw new Error('請先在 Orders 表第1列建立「訂單編號」欄位'); }
 }
-
-
-var ORDERS = ORDERS || {};
-
-/**
- * 列出訂單（支援 shipStatus / payStatus / range / month 過濾）
- */
-ORDERS.list = function(params) {
-  params = params || {};
-  var year = params.year || 2025;
-  var shipStatus = params.shipStatus || '';
-  var payStatus = params.payStatus || '';
-  var range = params.range || '';
-  var month = params.month || '';
-
-  var rows = ROWS('訂單');
-  if (!rows.length) return { ok: true, items: [], total: 0 };
-
-  var result = rows.filter(function(r) {
-    var pass = true;
-
-    // === 出貨狀態 ===
-    if (shipStatus) {
-      rows = rows.filter(function(r){
-        return String(r['是否已交貨'] || '').indexOf(shipStatus) !== -1;
-      });
-    }
-
-    // === 付款狀態 ===
-    if (payStatus) {
-      rows = rows.filter(function(r){
-        return String(r['是否已付款'] || '').indexOf(payStatus) !== -1;
-      });
-    }
-
-    // === 區間 ===
-    if (range === 'this-week' || range === 'this-month' || range === 'month') {
-      var orderDate = new Date(r['交貨日期']);
-      if (isNaN(orderDate.getTime())) return false;
-
-      var now = new Date();
-      var y = orderDate.getFullYear();
-      var m = orderDate.getMonth() + 1;
-      var d = orderDate.getDate();
-
-      // 指定月份
-      if (range === 'month' && month) {
-        var ym = month.split('-'); // e.g. ['2025','10']
-        if (String(y) !== ym[0] || String(m).padStart(2, '0') !== ym[1]) pass = false;
-      }
-
-      // 本月
-      if (range === 'this-month' && (y !== now.getFullYear() || m !== (now.getMonth() + 1))) pass = false;
-
-      // 本週
-      if (range === 'this-week') {
-        var start = new Date(now);
-        start.setDate(now.getDate() - now.getDay());
-        var end = new Date(start);
-        end.setDate(start.getDate() + 7);
-        if (!(orderDate >= start && orderDate < end)) pass = false;
-      }
-    }
-
-    return pass;
-  });
-
-  return {
-    ok: true,
-    items: result,
-    total: result.length
-  };
-};

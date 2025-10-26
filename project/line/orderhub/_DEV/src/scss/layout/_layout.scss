@@ -3,82 +3,182 @@
 
 /* Main（原 pages/_main.scss 可合併至此） */
 .main {
-	@include container();
-	padding-block: 12px 32px;
+    @include container();
+    padding-block: 12px 32px;
 }
 
 /* Panel（常用容器；原 pages/_common.scss 若有，可併進來） */
 .panel {
-	background: $card-bg;
-	border: 1px solid $bd;
-	border-radius: $radius;
+    background: $card-bg;
+    border: 1px solid $bd;
+    border-radius: $radius;
 
-	&-h {
-		padding: 10px 12px;
-		border-bottom: 1px solid $bd;
-		display: flex;
-		align-items: end;
-		justify-content: space-between;
-		gap: 12px;
+    &-h {
+        padding: 10px 12px;
+        border-bottom: 1px solid $bd;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 12px;
 
-		/* ===== Filters ===== */
-		.filters {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			gap: 9px;
+        /* ===== Filters ===== */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 9px;
 
-			.year-tag {
-				font-size: 12px;
-				color: $muted;
-				border: 1px solid $bd;
-				border-radius: $radius-sm;
-				padding: 1px 7px;
-				background: #fff;
-			}
+            .year-tag {
+                font-size: 12px;
+                color: $muted;
+                border: 1px solid $bd;
+                border-radius: $radius-sm;
+                padding: 1px 7px;
+                background: #fff;
+            }
 
-			label {
-				display: inline-flex;
-				align-items: center;
-				gap: 5px;
-				font-size: 12px;
-				color: $muted;
-			}
+            label {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 12px;
+                color: $muted;
+            }
 
-			select,
-			input[type="month"] {
-				font: inherit;
-				color: $ink;
-				border: 1px solid $bd;
-				border-radius: $radius-sm;
-				padding: 1px 7px;
-				// height: 30px;
+            select,
+            input[type="month"] {
+                font: inherit;
+                color: $ink;
+                border: 1px solid $bd;
+                border-radius: $radius-sm;
+                padding: 1px 7px;
+                // height: 30px;
 
-				&:focus {
-					border-color: $ink;
-				}
-			}
-		}
-	}
+                &:focus {
+                    border-color: $ink;
+                }
+            }
 
-	&-b {
-		padding: 12px;
-	}
+            // .filter-checklist {
+            //     display: flex;
+            //     flex-wrap: wrap;
+            //     align-items: center;
+            //     gap: 8px;
+            //     font-size: 13px;
 
-	&-f {
-		padding: 8px 12px;
-		border-top: 1px dashed $bd;
-		color: $muted;
-		font-size: 12px;
-	}
+            //     .label {
+            //         font-weight: 600;
+            //         margin-right: 4px;
+            //     }
 
-	h2 {
-		margin: 0;
-		font-size: 16px;
-	}
+            //     input[type="checkbox"] {
+            //         margin-right: 3px;
+            //     }
 
-	.sub {
-		color: $muted;
-		font-size: 12px;
-	}
+            //     label {
+            //         display: flex;
+            //         align-items: center;
+            //         gap: 2px;
+            //         cursor: pointer;
+            //         user-select: none;
+            //     }
+            // }
+
+            .filter-dropdown {
+                position: relative;
+                display: inline-block;
+                font-size: 13px;
+
+                .dropdown-toggle {
+                    background: #fff;
+                    color: $ink;
+                    border: 1px solid $bd;
+                    border-radius: $radius-sm;
+                    padding: 1px 7px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #f9f9f9;
+                    }
+                }
+
+                .selected-count {
+                    color: #888;
+                    font-size: 12px;
+                }
+
+                .dropdown-menu {
+                    position: absolute;
+                    top: calc(100% + 4px);
+                    left: 0;
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                    padding: 6px 10px;
+                    display: none;
+                    z-index: 10;
+                    min-width: 140px;
+
+                    label {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        padding: 3px 0;
+                        cursor: pointer;
+                        user-select: none;
+
+                        &:hover {
+                            background: #f7f7f7;
+                        }
+                    }
+
+                    input {
+                        margin: 0;
+                    }
+                }
+            }
+
+            // .filter-multi {
+            // 	select {
+            // 		width: auto;
+            // 		border: 1px solid $bd;
+            // 		border-radius: 6px;
+            // 		padding: 1px 3px;
+            // 		font-size: 12px;
+            // 		background-color: #fff;
+            // 		height: 61px;
+            // 		&:focus {
+            // 			outline: none;
+            // 			border-color: #888;
+            // 			box-shadow: 0 0 0 2px rgba(100,100,100,0.1);
+            // 		}
+            // 	}
+            // 	option {
+            // 		padding: 2px 6px;
+            // 	}
+            // }
+        }
+    }
+
+    &-b {
+        padding: 12px;
+    }
+
+    &-f {
+        padding: 8px 12px;
+        border-top: 1px dashed $bd;
+        color: $muted;
+        font-size: 12px;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .sub {
+        color: $muted;
+        font-size: 12px;
+    }
 }

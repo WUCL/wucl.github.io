@@ -33,6 +33,7 @@
 
     function bindCardData($card, data) {
         $card.attr('data-id', data['訂單編號'] || '');
+        $card.attr('data-status', data['訂單狀態'] || '');
         $card.find('[data-bind]').each(function() {
             var key = $(this).attr('data-bind');
             var raw = data && Object.prototype.hasOwnProperty.call(data, key) ? data[key] : '';
@@ -108,6 +109,8 @@
 
         // 工具列元素
         var $container = $('#listContainer');
+        // var $filterOrderStatusGroup = $('#filterOrderStatusGroup');
+        var $filterOrderStatus = $('#filterOrderStatus');
         var $filterShipStatus = $('#filterShipStatus');
         var $filterPayStatus = $('#filterPayStatus');
         var $filterRange = $('#filterRange');
@@ -141,11 +144,30 @@
             // }
             var params = { limit: LIMIT, year: YEAR };
 
-            // 出貨/付款獨立條件
+            // 訂單狀態
+            // if ($filterOrderStatusGroup.length) {
+            //     var orderStatusValues = [];
+            //     $('#filterOrderStatusGroup input[name="orderStatus"]:checked').each(function(){
+            //         orderStatusValues.push($(this).val());
+            //     });
+            //     var status = String(orderStatusValues.join(',') || '');
+            //     console.log(status);
+            //     if (status) params.orderStatus = status; // 'doing' / 'done' / 'cancel'
+            // }
+
+            // 訂單狀態
+            if ($filterOrderStatus.length) {
+                var order = String($filterOrderStatus.val() || '');
+                if (order) params.orderStatus = order; // 'doing' / 'done' / 'cancel'
+            }
+
+            // 出貨狀態
             if ($filterShipStatus.length) {
                 var ship = String($filterShipStatus.val() || '');
                 if (ship) params.shipStatus = ship; // '已出貨' / '未出貨'
             }
+
+            // 付款狀態
             if ($filterPayStatus.length) {
                 var pay = String($filterPayStatus.val() || '');
                 if (pay) params.payStatus = pay; // '已付款' / '未付款'
@@ -170,6 +192,7 @@
 
             var params = getQueryParams();
             if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 40);
+            console.log(params);
 
             APP.api('list', params)
             .then(function(res) {
@@ -219,6 +242,14 @@
         fetchAndRender();
 
         // === 綁定條件事件 ===
+        // 訂單狀態：即時重刷
+        // if ($('#filterOrderStatusGroup input[name="orderStatus"]').length) {
+        //     $('#filterOrderStatusGroup input[name="orderStatus"]').off('change').on('change', fetchAndRender);
+        // }
+        if ($filterOrderStatus.length) {
+            $filterOrderStatus.off('change').on('change', fetchAndRender);
+        }
+
         // 出貨狀態：即時重刷
         if ($filterShipStatus.length) {
             $filterShipStatus.off('change').on('change', fetchAndRender);
@@ -264,5 +295,4 @@
             }
         });
     };
-
 })(window, jQuery);

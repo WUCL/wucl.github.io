@@ -66,7 +66,8 @@ function doPost(e) {
       // }
       if (action === 'list') {
         var params = {
-          shipStatus: String(req.shipStatus || ''), // '已出貨' / '未出貨'（UI用詞）
+          orderStatus: String(req.orderStatus || ''), // 'doing' / 'done' / 'cancel'
+          shipStatus: String(req.shipStatus || ''), // '已交貨' / '未交貨'
           payStatus:  String(req.payStatus  || ''), // '已付款' / '未付款'
           range:      String(req.range      || ''), // '', 'this-week', 'this-month', 'month'
           month:      String(req.month      || ''), // 'YYYY-MM'
