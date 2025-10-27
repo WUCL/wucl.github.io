@@ -64,6 +64,20 @@ function doPost(e) {
       //   var result = Orders_list(params);
       //   return _json(result); // { ok, items, total }
       // }
+      // === 週花：批次建立（同一訂單編號，建立 N 筆） ===
+      if (action === 'create_weekly') {
+        var data   = req.data || {};
+        var repeat = Math.max(1, Math.min(12, Number(req.repeat || 1)));
+        var actor  = req.actor || 'WEB';
+        var lineName = req.lineName || '';
+        var lineId   = req.lineId   || '';
+
+        var result = Orders_createWeekly(data, repeat, actor, { lineName: lineName, lineId: lineId });
+        // r = { ok:true, orderId:'YYMMDD-XXX', created:N }
+        return _json(result);
+      }
+
+
       if (action === 'list') {
         var params = {
           orderStatus: String(req.orderStatus || ''), // 'doing' / 'done' / 'cancel'

@@ -22,13 +22,10 @@
 		}
 
 		// 預設今天日期
-		$form.find('[name="訂單日期"]').each(function() {
-			if (!this.value) {
-				const today = new Date().toISOString().split('T')[0];
-				this.value = today;
-			}
-		});
-
+		// $form.find('[name="訂單日期"]').each(function() {
+		// 	if (!this.value) this.value = new Date().toISOString().split('T')[0];
+		// });
+		$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 
 		//=== 同訂購人資訊 ===
 		const $sameAsBuyer = $('#sameAsBuyer'),
@@ -63,7 +60,6 @@
 		$receiptType.on('change', mappingRecvAddr);
 
 		// === 週花 UI（顯示/隱藏「週期」欄，並預填商品項目） ===
-		/*
 		var $category   = $form.find('[name="品項分類"]');
 		var $period     = $form.find('[name="週期"]');           // 可沒有，安全檢查
 		var $periodWrap = $('#field-period');                    // 你模板裡包住週期欄位的容器
@@ -77,7 +73,6 @@
 			if (isWeekly) $item.val('週花');
 		}
 		$category.on('change', updateWeeklyUI);
-		*/
 
 
 		// submit 送出
@@ -92,19 +87,19 @@
 			// const $slot = $form.find('[data-slot="msg"]');
 
 			// 驗證
-			if (APP.status && APP.status.tick) APP.status.tick('驗證資料', 25);
-			const errs = this.validateAddData(data);
-			this.showFieldErrors($form, errs);
-			if (typeof this.logValidationDebug === 'function') {
-				this.logValidationDebug('新增訂單', data, errs);
-			}
+			// if (APP.status && APP.status.tick) APP.status.tick('驗證資料', 25);
+			// const errs = this.validateAddData(data);
+			// this.showFieldErrors($form, errs);
+			// if (typeof this.logValidationDebug === 'function') {
+			// 	this.logValidationDebug('新增訂單', data, errs);
+			// }
 
-			if (Object.keys(errs).length) {
-				this.renderErrorSummary($slot, errs);
-				this.scrollToFirstError($form);
-				if (APP.status && APP.status.done) APP.status.done(false, '驗證失敗');
-				return; // 停止送出
-			}
+			// if (Object.keys(errs).length) {
+			// 	this.renderErrorSummary($slot, errs);
+			// 	this.scrollToFirstError($form);
+			// 	if (APP.status && APP.status.done) APP.status.done(false, '驗證失敗');
+			// 	return; // 停止送出
+			// }
 
 			// 取得 LINE 使用者資訊（若已登入）
 			let lineName = '';
@@ -132,18 +127,16 @@
 			}
 
 
-			// 週花邏輯：是否批次建立
-			/*
+			// [週花]邏輯：是否批次建立
 			var isWeekly = String(data['品項分類'] || '') === '週花';
 			var repeatN  = 1;
 			if (isWeekly) {
+				console.log('[週花]');
 				var rawN = Number(data['週期'] || 1);
 				repeatN  = Math.max(1, Math.min(12, isNaN(rawN) ? 1 : rawN));
 				// 若使用者沒填商品項目，預設為「週花」
 				if (!data['商品項目']) data['商品項目'] = '週花';
 			}
-			*/
-
 
 			// 送出
 			if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 35);
@@ -151,16 +144,17 @@
 
 			let res;
 			try {
-				res = await this.api('create', {
-                    data,
-                    actor: this.var.actor,
-                    lineName,
-                    lineId
-                });
+				// 原建立單筆，待[週花]確認可刪除
+				// res = await this.api('create', {
+                //     data,
+                //     actor: this.var.actor,
+                //     lineName,
+                //     lineId
+                // });
 
-				// === 週花批次建立（後端會產單一 orderId + 拆 N 筆 + 商品項目 1/N…）===
-				/*
+				// === [週花]批次建立（後端會產單一 orderId + 拆 N 筆 + 商品項目 1/N…）===
 				if (isWeekly && repeatN > 1) {
+					console.log('[週花]123456');
 					res = await this.api('create_weekly', {
 						data: data,
 						repeat: repeatN,
@@ -170,6 +164,7 @@
 					});
 					} else {
 					// === 一般單筆建立（或週花但 n=1）===
+					console.log('[週花]1');
 					res = await this.api('create', {
 						data: data,
 						actor: this.var.actor,
@@ -177,7 +172,7 @@
 						lineId: lineId
 					});
 				}
-				*/
+
 			} catch (err) {
 				console.error('[API] create error:', err);
 				res = { ok: false, msg: 'network-error' };
@@ -193,13 +188,11 @@
 				$slot.removeClass('err').addClass('ok');
 
 				// 週花顯示建立成功訊息
-				/*
 				var html = (res.created && res.created > 1)
-					? ('<div class="msg-h">✅ 已建立訂單<sapn>' + res.orderId + '</span>（共 ' + res.created + ' 筆）</div>');
-					: ('<div class="msg-h">✅ 已建立訂單<sapn>' + res.orderId + '</span></div>');
-				*/
+					? ('<div class="msg-h">✅ 已建立訂單<span>' + res.orderId + '</span>（共 ' + res.created + ' 筆）</div>')
+					: ('<div class="msg-h">✅ 已建立訂單<span>' + res.orderId + '</span></div>');
 
-				var html = '<div class="msg-h">✅ 已建立訂單<sapn>' + res.orderId + '</span></div>';
+				// var html = '<div class="msg-h">✅ 已建立訂單<span>' + res.orderId + '</span></div>';
 				var lis = [];
 
 				for (let key in data) {
@@ -210,7 +203,7 @@
 				html += '<div class="msg-b"><ul class="confirm-list">' + lis.join('') + '</ul></div>';
 				$slot.html(html);
 
-				document.querySelector(`[data-slot="msg"]`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+				document.querySelector(`body`).scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 				try {
 					if (window.liff) {
@@ -223,21 +216,24 @@
 				}
 
 				// 清空表單與錯誤
+				// done & reset
 				if ($form[0] && $form[0].reset) $form[0].reset();
-				this.showFieldErrors($form, {}); // 清錯
-				if (typeof this.populateAllSelects === 'function') this.populateAllSelects($form);
+				$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
+				$periodWrap.css('display', 'none');
+
+				// this.showFieldErrors($form, {}); // 清錯
+				// if (typeof this.populateAllSelects === 'function') this.populateAllSelects($form);
 
 				if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
 
-				// 週花顯示方式
-				/*
+				// [週花]顯示方式
 				if (APP.status && APP.status.done) {
 					var okMsg = (res.created && res.created > 1)
 					? ('完成（' + res.orderId + '，共 ' + res.created + ' 筆）')
 					: ('完成（' + res.orderId + '）');
 					APP.status.done(true, okMsg);
 				}
-				*/
+
 			} else {
 				// 額外診斷（若 api() 回傳 invalid-json 會有補充欄位）
 				if (res && res.msg === 'invalid-json') {
@@ -247,10 +243,7 @@
 						snippet: res.snippet
 					});
 				}
-				$slot
-					.removeClass('ok')
-					.addClass('err')
-					.text('❌ 失敗：' + ((res && res.msg) || '未知錯誤'));
+				$slot.removeClass('ok').addClass('err').text('❌ 失敗：' + ((res && res.msg) || '未知錯誤'));
 
 				if (APP.status && APP.status.done) APP.status.done(false, (res && res.msg) || '未知錯誤');
 			}

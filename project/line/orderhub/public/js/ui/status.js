@@ -37,7 +37,7 @@
     function now() {
         var d = new Date();
         var p = function(n, w) { n = String(n); return ('000' + n).slice(-w); };
-        return p(d.getHours(), 2) + ':' + p(d.getMinutes(), 2) + ':' + p(d.getSeconds(), 2); // + '.' + p(d.getMilliseconds(), 3);
+        return p(d.getHours(), 2) + ':' + p(d.getMinutes(), 2) + ':' + p(d.getSeconds(), 2) + '.' + p(d.getMilliseconds(), 3);
     }
 
     function pushLine(text, level) {

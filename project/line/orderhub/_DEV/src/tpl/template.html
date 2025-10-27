@@ -36,6 +36,7 @@
 			<h3>訂單商品</h3>
 			<div class="row">
 				<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat"><option value="" selected disabled>請選擇</option></select></div>
+				<div class="field" id="field-period" style="display:none;"><label>週花週期（1–12）</label><input name="週期" type="number" min="1" max="12" value="1" inputmode="numeric"></div>
 				<div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
 				<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1"></textarea></div>
 				<div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
@@ -48,7 +49,7 @@
 			<h3>收件資訊
 			<label class="same-check"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
 			<div class="row">
-				<div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType"><option value="" selected disabled>請選擇</option></select></div>
+				<div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType" required><option value="" selected disabled>請選擇</option></select></div>
 				<div class="field"><label>姓名</label><input name="收件者姓名" required></div>
 				<div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
 				<div class="field"><label>地址</label><input name="收件者地址" required></div>

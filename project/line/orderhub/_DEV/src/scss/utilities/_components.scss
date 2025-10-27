@@ -49,28 +49,6 @@
     font-size: $font-size-base;
 }
 
-/* 圖示按鈕（小一點） */
-.icon-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    border: 1px solid $bd;
-    border-radius: $radius-sm;
-    color: $muted;
-    background: #fff;
-    cursor: pointer;
-
-    &:hover {
-        background: $bg-soft;
-        color: $ink;
-    }
-
-    svg {
-        display: block;
-    }
-}
 
 /* ========== Status（放在 main 內、最多 3 行、可捲動） ========== */
 .oh-status {

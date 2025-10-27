@@ -7,34 +7,108 @@
 function Orders_newOrder(payload, actor){
   ensureHeader_('訂單編號');
   var obj = Object.assign({
-    '接單日期': Utilities.formatDate(new Date(),'Asia/Taipei','yyyy/MM/dd'),
-    '訂單狀態': 'NEW',
-    '是否已付款': '未付款',
-    '是否已交貨': '未交貨'
+    '訂單日期': Utilities.formatDate(new Date(),'Asia/Taipei','yyyy/MM/dd'),
+    '訂單狀態': 'doing'
   }, payload || {});
 
-  var orderId = genId_();
+  var orderId = genId_(obj['訂單日期']);
   obj['訂單編號'] = orderId;
 
   APPEND(ENV.ORDERS_SHEET, obj);
   return orderId;
 }
 
-/** list：取最近 N 筆；若 q 有值做簡易過濾（編號/姓名/電話/品項/貨運單號/平台） */
-function Orders_listLatest(limit, q){
-  var rows = ROWS(ENV.ORDERS_SHEET);
-  // 以資料尾端為新 → 倒序
-  rows = rows.reverse();
-  if (q) {
-    var k = String(q).trim();
-    rows = rows.filter(function(r){
-      var s = [r['訂單編號'], r['訂購人姓名'], r['訂購人電話'], r['商品項目'], r['貨運單號'], r['接單平台']].join(' ');
-      return String(s).indexOf(k) >= 0;
-    });
+/**
+ * Orders_createWeekly：同一訂單編號，建立 N 筆週花訂單
+ * - data: 來源表單資料
+ * - repeat: 建立筆數（1–12）
+ * - actor / opt.lineName / opt.lineId：記錄 ChangeLog 用
+ * 回傳：{ ok:true, orderId:'YYMMDD-XXX', created:N }
+ */
+function Orders_createWeekly(data, repeat, actor, opt) {
+  repeat = Math.max(1, Math.min(12, Number(repeat || 1)));
+
+  // 產生「同一個」訂單編號：依「訂單日期」
+  var orderId = genId_(data['訂單日期']);
+
+  // 標準預設（與 Orders_newOrder 保持一致）
+  var baseDefaults = {
+    '訂單日期': Utilities.formatDate(new Date(),'Asia/Taipei','yyyy/MM/dd'),
+    '訂單狀態': 'doing'
+  };
+
+  for (var i = 1; i <= repeat; i++) {
+    var obj = Object.assign({}, baseDefaults, data || {});
+    obj['訂單編號'] = orderId;
+
+    // 商品項目：若是週花，做 1/N 標記；若不是或沒填，保留原值
+    if (String(obj['品項分類'] || '') === '週花') {
+      var baseName = (obj['商品項目'] && String(obj['商品項目']).trim()) || '週花';
+      obj['商品項目'] = baseName + (repeat > 1 ? (i + '/' + repeat) : '');
+    }
+
+    // --- [1] 訂單金額：僅第一筆保留，其餘設為 0 ---
+    if (i > 1) {
+      obj['訂單金額'] = 0;
+    }
+
+    // --- [2] 交貨日期：第1筆維持；第2筆起：先對齊最近週五，再逐週 +7 ---
+    if (repeat > 1) {
+      if (i === 1) {
+        // 1) 第1筆：若原始有給交貨日 → 直接用；沒有就「找最近週五」
+        var firstDate = obj['交貨日期']
+          ? new Date(obj['交貨日期'])
+          : getNextFriday_(new Date(obj['訂單日期'] || new Date()));
+        obj['交貨日期'] = Utilities.formatDate(firstDate, 'Asia/Taipei', 'yyyy/MM/dd');
+
+        // 2) 後續的基準：一定「對齊最近週五」（不影響第1筆顯示）
+        var baseFriday = getNextFriday_(firstDate);
+      } else {
+        // 3) 第2筆 = 最近週五；第3筆起每筆 +7
+        var nextFriday = new Date(baseFriday);
+        if (i > 2) nextFriday.setDate(baseFriday.getDate() + 7 * (i - 2));
+        obj['交貨日期'] = Utilities.formatDate(nextFriday, 'Asia/Taipei', 'yyyy/MM/dd');
+      }
+    }
+
+    APPEND(ENV.ORDERS_SHEET, obj);
   }
-  if (limit && rows.length > limit) rows = rows.slice(0, limit);
-  return rows;
+
+  // 寫一次 ChangeLog（快照）
+  try {
+    ChangeLog_append({
+      time: new Date(),
+      action: 'create_weekly',
+      orderId: orderId,
+      actor: actor || '',
+      lineName: (opt && opt.lineName) || '',
+      lineId:   (opt && opt.lineId)   || '',
+      snapshot: Object.assign({}, data, { repeat: repeat })
+    });
+  } catch (_){}
+
+  return { ok:true, orderId: orderId, created: repeat };
 }
+
+
+
+
+
+/** list：取最近 N 筆；若 q 有值做簡易過濾（編號/姓名/電話/品項/貨運單號/平台） */
+// function Orders_listLatest(limit, q){
+//   var rows = ROWS(ENV.ORDERS_SHEET);
+//   // 以資料尾端為新 → 倒序
+//   rows = rows.reverse();
+//   if (q) {
+//     var k = String(q).trim();
+//     rows = rows.filter(function(r){
+//       var s = [r['訂單編號'], r['訂購人姓名'], r['訂購人電話'], r['商品項目'], r['貨運單號'], r['接單平台']].join(' ');
+//       return String(s).indexOf(k) >= 0;
+//     });
+//   }
+//   if (limit && rows.length > limit) rows = rows.slice(0, limit);
+//   return rows;
+// }
 
 function Orders_getById(orderId){
   var row = findById_(orderId);
@@ -174,15 +248,30 @@ function Orders_list(params){
 }
 
 /** —— 工具 —— */
-function genId_(){
-  var y = Utilities.formatDate(new Date(),'Asia/Taipei','yyyyMM');
-  var key = 'SEQ_'+y;
+/**
+ * 產生訂單編號：YYMMDD-XXX
+ * 例如 2025/10/26 → 251026-001
+ */
+function genId_(orderDate) {
+  var date = orderDate ? new Date(orderDate) : new Date();
+  if (isNaN(date.getTime())) date = new Date();
+
+  // 取西元年後兩位 + 月 + 日
+  var y = String(date.getFullYear()).slice(-2);
+  var m = ('0' + (date.getMonth() + 1)).slice(-2);
+  var d = ('0' + date.getDate()).slice(-2);
+  var key = 'SEQ_' + y + m + d; // 每日唯一 key，例如 SEQ_251026
+
   var p = PropertiesService.getScriptProperties();
-  var lock = LockService.getScriptLock(); lock.tryLock(5000);
-  var n = Number(p.getProperty(key)||0) + 1;
+  var lock = LockService.getScriptLock();
+  lock.waitLock(5000); // 等候最多 5 秒以避免重複
+
+  var n = Number(p.getProperty(key) || 0) + 1;
   p.setProperty(key, String(n));
   lock.releaseLock();
-  return 'O-' + y + '-' + String(n).padStart(5, '0');
+
+  var seq = String(n).padStart(3, '0');
+  return y + m + d + '-' + seq; // 回傳例如 251026-001
 }
 
 function ensureHeader_(name){
@@ -197,4 +286,18 @@ function ensureHeader_(name){
 function findById_(orderId){
   try { return FINDROW(ENV.ORDERS_SHEET, '訂單編號', orderId); }
   catch(e){ throw new Error('請先在 Orders 表第1列建立「訂單編號」欄位'); }
+}
+
+/**
+ * 取得「指定日期之後」最近的週五（含當週）
+ * 例：週一傳入 → 當週五；週六傳入 → 下週五。
+ */
+function getNextFriday_(d) {
+  var date = new Date(d);
+  var day = date.getDay(); // 0=日, 5=五, 6=六
+  var diff = (5 - day + 7) % 7; // 距離週五的天數
+  if (diff === 0 && day !== 5) diff = 7; // 若已過週五，跳到下週
+  date.setDate(date.getDate() + diff);
+  date.setHours(0,0,0,0);
+  return date;
 }

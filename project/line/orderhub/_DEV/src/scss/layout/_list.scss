@@ -115,7 +115,7 @@
 		.tag {
 			display: inline-block;
 			padding: 1px 6px;
-			// font-size: $font-size-sm;
+			font-size: $font-size-sm;
 			border: 1px solid $bd;
 			border-radius: $radius-sm;
 			color: $muted;
@@ -124,9 +124,9 @@
 			transition: all 0.2s ease;
 
 			&.warn {
-				border-color: mix($err, #fff, 30%);
-				color: #fff;
-				background: $err;
+				// border-color: rgba($err, .3);
+				color: $err;
+				background: rgba($err, .3);
 				font-weight: 600;
 			}
 		}
@@ -150,6 +150,9 @@
 		&:hover {
 			background: $bg-soft;
 			color: $ink;
+		}
+		svg {
+			display: block;
 		}
 	}
 
