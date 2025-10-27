@@ -39,14 +39,17 @@
 <body>
     <header id="header" class="header">
         <div class="header__inner">
-            <!-- 第 1 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
+            <!-- 第 1 排：左 meta -->
             <div class="header-row row-1">
-                <h1>訂單系統</h1>
-                <div id="clock" class="clock">—</div>
                 <div id="meta" class="meta meta--tiny">（DEV 模式，未登入）</div>
             </div>
-            <!-- 第 2 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
+            <!-- 第 2 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
             <div class="header-row row-2">
+                <h1>訂單系統</h1>
+                <div id="clock" class="clock">—</div>
+            </div>
+            <!-- 第 3 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
+            <div class="header-row row-3">
                 <nav id="breadcrumb" class="breadcrumb" aria-label="Breadcrumb">
                     <ol>
                         <li><a href="#/list">首頁</a></li>
@@ -71,61 +74,58 @@
     </template>
     <!-- 新增表單 -->
     <template id="tpl-add">
-    	<form id="formAdd" class="form card vertical">
-    		<div class="row">
-    			<div class="field">
-    				<label>客戶</label>
-    				<select name="客戶類型" data-opt="cType"></select>
+    	<form id="formAdd" class="form formAdd">
+    		<div id="" class="msg" data-slot="msg"></div>
+    		<!-- === 區一 基本資料 === -->
+    		<section class="section basic">
+    			<h3>基本資訊</h3>
+    			<div class="row">
+    				<div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
+    				<div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
+    				<div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
+    				<div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
+    				<div class="field"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
+    				<div class="field"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
+    				<div class="field"><label>訂單金額</label><input name="訂單金額" type="number" min="0" step="1" required></div>
+    				<div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
     			</div>
-    			<div class="field">
-    				<label>接單平台</label>
-    				<select name="接單平台" data-opt="platforms">
-    					<option value="" selected disabled>請選擇</option>
-    				</select>
+    		</section>
+
+    		<!-- === 區二 訂購人資訊 === -->
+    		<section class="section buyer">
+    			<h3>訂購人</h3>
+    			<div class="row">
+    				<div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
+    				<div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
+    				<div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
     			</div>
-    			<div class="field">
-    				<label>訂單日期<span class="hint">（預設今天）</span></label>
-    				<input name="訂單日期" type="date">
+    		</section>
+
+    		<!-- === 區三 訂單商品 === -->
+    		<section class="section product">
+    			<h3>訂單商品</h3>
+    			<div class="row">
+    				<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat"><option value="" selected disabled>請選擇</option></select></div>
+    				<div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
+    				<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1"></textarea></div>
+    				<div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
+    				<div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
     			</div>
-    			<!-- <div class="field">
-    				<label>交貨日期</label>
-    				<input name="交貨日期" type="date">
-    			</div> -->
-    			<!-- <div class="field">
-    				<label>是否已交貨</label>
-    				<select name="是否已交貨" data-opt="isDelivery">
-    					<option value="" selected disabled>請選擇</option>
-    				</select>
-    			</div> -->
-    			<!-- <div class="field">
-    				<label>是否已付款</label>
-    				<select name="是否已付款" data-opt="isPay">
-    					<option value="" selected disabled>請選擇</option>
-    				</select>
-    			</div> -->
-    			<!-- <div class="field">
-    				<label>商品項目</label>
-    				<textarea name="商品項目" rows="1"></textarea>
-    			</div> -->
-    			<!-- <div class="field">
-    				<label>訂單金額</label>
-    				<input name="訂單金額" type="number" min="0" step="1">
-    			</div> -->
-    			<!-- <div class="field">
-    				<label>訂購人姓名</label>
-    				<input name="訂購人姓名" required>
+    		</section>
+
+    		<!-- === 區四 收件人 === -->
+    		<section class="section receipt">
+    			<h3>收件資訊
+    			<label class="same-check"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
+    			<div class="row">
+    				<div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType"><option value="" selected disabled>請選擇</option></select></div>
+    				<div class="field"><label>姓名</label><input name="收件者姓名" required></div>
+    				<div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
+    				<div class="field"><label>地址</label><input name="收件者地址" required></div>
     			</div>
-    			<div class="field">
-    				<label>訂購人電話</label>
-    				<input name="訂購人電話" inputmode="tel" required>
-    			</div>
-    			<div class="field">
-    				<label>訂單備註</label>
-    				<textarea name="訂單備註" rows="3"></textarea>
-    			</div> -->
-    		</div>
+    		</section>
+
     		<button type="submit" class="btn primary">送出</button>
-    		<div data-slot="msg"></div>
     	</form>
     </template>
     <!-- 編輯表單 -->
@@ -180,47 +180,31 @@
     			<!-- ↓ 篩選列放入這裡 ↓ -->
     			<div class="filters">
     				<span class="year-tag"></span>
-    				<!-- <div class="filter-dropdown" id="filterOrderStatusGroup">
-    					<button class="dropdown-toggle" type="button">訂單狀態</button>
-    					<div class="dropdown-menu">
-    						<label><input type="checkbox" name="orderStatus" value="doing" checked> doing</label>
-    						<label><input type="checkbox" name="orderStatus" value="done"> done</label>
-    						<label><input type="checkbox" name="orderStatus" value="cancel"> cancel</label>
-    					</div>
-    				</div> -->
-
     				<label>
     					<select id="filterOrderStatus">
-    						<option value="">訂單狀態</option>
+    						<option value="">訂單</option>
     						<option value="doing">doing</option>
     						<option value="done">done</option>
     						<option value="cancel">cancel</option>
     					</select>
     				</label>
-    				<!-- <label class="filter-multi">
-    					<select id="filterOrderStatus" multiple>
-    						<option value="doing">doing</option>
-    						<option value="done">done</option>
-    						<option value="cancel">cancel</option>
-    					</select>
-    				</label> -->
     				<label>
     					<select id="filterShipStatus">
-    						<option value="">出貨狀態</option>
+    						<option value="">出貨</option>
     						<option value="未出貨">未交貨</option>
     						<option value="已出貨">已交貨</option>
     					</select>
     				</label>
     				<label>
     					<select id="filterPayStatus">
-    						<option value="">付款狀態</option>
+    						<option value="">付款</option>
     						<option value="未付款">未付款</option>
     						<option value="已付款">已付款</option>
     					</select>
     				</label>
     				<label>
     					<select id="filterRange">
-    						<option value="">全部區間</option>
+    						<option value="">區間</option>
     						<option value="this-week">本週</option>
     						<option value="this-month">本月</option>
     						<option value="month">指定月</option>
@@ -245,31 +229,32 @@
     <!-- 單筆卡片（兩行極簡） -->
     <template id="tpl-list-card">
     	<div class="card order" data-id="" data-status="">
-    		<!-- 行 A：ID | [交貨日 + Tag] | (最右) 編輯 -->
-    		<div class="row a">
-    			<div class="cell status"><span data-bind="訂單狀態">—</span></div>
-    			<div class="cell id">#<span data-bind="訂單編號">—</span></div>
-    			<div class="cell meta">
-    				<span class="date" data-bind="交貨日期">—</span>
-    				<span class="tags-inline"></span>
+    		<div class="card__inner">
+    		<div class="col a">
+    			<!-- 行 A：ID | [交貨日 + Tag] | (最右) 編輯 -->
+    			<div class="row a">
+    				<div class="cell meta status"><span data-bind="訂單狀態">—</span></div>
+    				<div class="cell meta id">#<span data-bind="訂單編號">—</span></div>
+    				<div class="cell meta date"><span data-bind="交貨日期">—</span></div>
+    				<div class="cell meta shippay"><span class="tags-inline"></span></div>
     			</div>
+    			<!-- 行 B：平台 | 訂購人 | 分類 | 金額 | (最右) 詳細 -->
+    			<div class="row b">
+    				<div class="cell meta"><span data-bind="接單平台">—</span></div>
+    				<div class="cell meta oName"><span data-bind="訂購人姓名">—</span></div>
+    				<div class="cell meta"><span data-bind="品項分類">—</span></div>
+    				<div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
+    			</div>
+    		</div>
+    		<div class="col b">
     			<div class="cell actions">
     				<a class="icon-btn" data-action="edit" title="編輯" href="#" aria-label="編輯">
-    					<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+    					<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
     						<path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor" />
     					</svg>
     				</a>
-    			</div>
-    		</div>
-    		<!-- 行 B：平台 | 訂購人 | 分類 | 金額 | (最右) 詳細 -->
-    		<div class="row b">
-    			<div class="cell meta"><span data-bind="接單平台">—</span></div>
-    			<div class="cell meta"><span data-bind="訂購人姓名">—</span></div>
-    			<div class="cell meta"><span data-bind="品項分類">—</span></div>
-    			<div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
-    			<div class="cell actions">
     				<a class="icon-btn" data-action="toggle" title="詳情" href="#" aria-label="詳情">
-    					<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+    					<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
     						<path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
     					</svg>
     				</a>

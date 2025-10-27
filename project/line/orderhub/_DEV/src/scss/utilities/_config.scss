@@ -19,9 +19,15 @@ $err:            #c0392b !default; // 錯誤
 
 // ---- 字體/字級 ----
 $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC",
-              "PingFang TC", "Microsoft JhengHei", Arial, sans-serif !default;
+							"PingFang TC", "Microsoft JhengHei", Arial, sans-serif !default;
 
+$font-size-xs:   9px !default;
+$font-size-sm:   12px !default;
 $font-size-base: 14px !default;
+$font-size-lg:   16px !default;
+$font-size-xl:   18px !default;
+$font-size-xxl:   20px !default;
+
 $line-height:    1.6  !default;
 
 // ---- 圓角 / 陰影 ----
@@ -35,10 +41,10 @@ $shadow-lg: 0 12px 24px rgba(0,0,0,.18) !default;
 
 // ---- 斷點 ----
 $breakpoints: (
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
 ) !default;
 
 // ---- z-index ----

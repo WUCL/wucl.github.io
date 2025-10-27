@@ -4,7 +4,7 @@
 /* Main（原 pages/_main.scss 可合併至此） */
 .main {
     @include container();
-    padding-block: 12px 32px;
+    padding-top: 12px;
 }
 
 /* Panel（常用容器；原 pages/_common.scss 若有，可併進來） */
@@ -14,12 +14,22 @@
     border-radius: $radius;
 
     &-h {
-        padding: 10px 12px;
+        @include container();
         border-bottom: 1px solid $bd;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto;
         align-items: end;
-        justify-content: space-between;
-        gap: 12px;
+        @include respond(md) {
+            grid-template-columns: 1fr;
+            // align-items: start;
+        }
+        > .head {
+            // width: 100%;
+            @include respond(md) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
 
         /* ===== Filters ===== */
         .filters {
@@ -27,14 +37,21 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 9px;
+            @include respond(md) {
+                margin-top: 7px;
+                gap: 7px;
+            }
 
             .year-tag {
-                font-size: 12px;
+                font-size: $font-size-sm;
                 color: $muted;
                 border: 1px solid $bd;
                 border-radius: $radius-sm;
                 padding: 1px 7px;
                 background: #fff;
+                @include respond(md) {
+                    display: block;
+                }
             }
 
             label {
@@ -162,19 +179,19 @@
     }
 
     &-b {
-        padding: 12px;
+        @include container();
     }
 
-    &-f {
-        padding: 8px 12px;
-        border-top: 1px dashed $bd;
-        color: $muted;
-        font-size: 12px;
-    }
+    // &-f {
+    //     padding: 8px 12px;
+    //     border-top: 1px dashed $bd;
+    //     color: $muted;
+    //     font-size: 12px;
+    // }
 
     h2 {
         margin: 0;
-        font-size: 16px;
+        font-size: $font-size-base;
     }
 
     .sub {

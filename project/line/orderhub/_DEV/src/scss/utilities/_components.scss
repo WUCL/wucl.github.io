@@ -1,16 +1,10 @@
 @use "sass:color";
 @use "utilities/config"as *;
-
-/* ========== Meta / DEV 提示（極小） ========== */
-.meta--tiny {
-    font-size: 11px;
-    color: $muted;
-    opacity: .85;
-}
+@use "utilities/mixins"as *;
 
 /* ========== 麵包屑 ========== */
 .breadcrumb {
-    font-size: 12px;
+    font-size: $font-size-base;
     color: $muted;
 
     ol {
@@ -52,7 +46,7 @@
     border-radius: $radius-sm;
     background: #fff;
     color: $muted;
-    font-size: 12px;
+    font-size: $font-size-base;
 }
 
 /* 圖示按鈕（小一點） */
@@ -78,21 +72,17 @@
     }
 }
 
-.clock {
-    font-size: 12px;
-    color: $muted;
-}
-
 /* ========== Status（放在 main 內、最多 3 行、可捲動） ========== */
 .oh-status {
+    @include container();
+
     margin-bottom: 12px;
     background: $card-bg;
     color: $ink;
     border: 1px solid $bd;
     border-radius: $radius;
     box-shadow: $shadow-sm;
-    padding: 5px 9px;
-    font-size: 12px;
+    font-size: $font-size-sm;
 
     &__head {
         display: flex;
@@ -101,11 +91,12 @@
 
         b {
             font-weight: 700;
+            font-size: $font-size-base;
         }
 
         .oh-status__clear {
             margin-left: auto;
-            font-size: 12px;
+            font-size: $font-size-sm;
             padding: 1px 7px;
             background: transparent;
             border: 1px solid $bd;
@@ -137,7 +128,7 @@
 
     &__list {
         margin-top: 6px;
-        max-height: calc(1.6em * 1 + 5px);
+        max-height: calc(1.4em * 1 + 5px);
         overflow: auto;
     }
 
@@ -145,6 +136,7 @@
         border-left: 3px solid $ok;
         padding-left: 6px;
         margin: 3px 0;
+        letter-spacing: -.3px;
 
         &.warn {
             border-color: $warn;
@@ -154,65 +146,4 @@
             border-color: $err;
         }
     }
-}
-
-/* 表單基礎 */
-.field {
-    display: grid;
-    gap: 4px;
-    margin: 6px 0;
-
-    label {
-        font-size: 12px;
-        color: $muted;
-    }
-
-    input,
-    select,
-    textarea {
-        width: 100%;
-        font: inherit;
-        color: $ink;
-        background: #fff;
-        border: 1px solid $bd;
-        border-radius: $radius;
-        padding: 6px 8px;
-        line-height: 1.4;
-
-        &:focus {
-            outline: none;
-            border-color: $primary;
-            // box-shadow: 0 0 0 3px color.change($primary, $alpha: .12);
-        }
-    }
-
-    select {
-        appearance: none;
-        background-image: none;
-    }
-}
-
-/* ===== Panel ===== */
-// .panel-h {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 8px;
-//     margin-bottom: 6px;
-
-//     .head {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: baseline;
-//     }
-
-//     .filters {
-//         display: flex;
-//         flex-wrap: wrap;
-//         gap: 8px 12px;
-//     }
-// }
-
-/* 與下方清單的間距 */
-.list-wrap {
-    margin-top: 6px;
 }

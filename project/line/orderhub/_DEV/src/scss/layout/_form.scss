@@ -1,0 +1,128 @@
+@use "sass:color";
+@use "utilities/config"as *;
+@use "utilities/mixins"as *;
+
+form {
+	.msg {
+		&.ok {
+			@include container();
+
+			margin-bottom: 12px;
+			background: $card-bg;
+			color: $ink;
+			border: 1px solid $bd;
+			border-radius: $radius;
+			box-shadow: $shadow-sm;
+			font-size: $font-size-base;
+		}
+		&-h {
+			&:after {
+				content: "";
+				width: 100%;
+				height: 1px;
+				background: $bd;
+				display: block;
+				margin: 7px 0;
+			}
+			span {
+				font-weight: 600;
+				margin-left: 7px;
+			}
+		}
+		&-b {
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				li {
+					display: grid;
+					grid-template-columns: repeat(2, auto) 1fr;
+					gap: 7px;
+					b {
+						font-weight: 600;
+						min-width: 77px;
+					}
+					span {
+
+					}
+				}
+			}
+		}
+	}
+	section.section {
+		margin-bottom: 20px;
+		&:after {
+			content: "";
+			width: 100%;
+			height: 1px;
+			background: $bd;
+			display: block;
+			margin-top: 20px;
+		}
+		&:nth-child(4) {
+			&:after {
+				display: none;
+			}
+		}
+		h3 {
+			margin: 0;
+			font-size: $font-size-base;
+		}
+		.row {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 7px 9px;
+		}
+	}
+	.same-check {
+		font-size: $font-size-sm;
+		color: $muted;
+		border: 1px solid $bd;
+		border-radius: $radius-sm;
+		padding: 3px 5px;
+		background: #fff;
+		margin-left: 7px;
+		input {
+			vertical-align: middle;
+			margin: 0 3px 0 0;
+		}
+	}
+}
+
+/* 表單基礎 */
+.field {
+	display: grid;
+
+	label {
+		font-size: $font-size-base;
+		color: $muted;
+		letter-spacing: -.3px;
+	}
+
+	input,
+	select,
+	textarea {
+		width: 100%;
+		min-width: 100%;
+		max-width: fit-content;
+		min-height: fit-content;
+		font: inherit;
+		color: $ink;
+		background: #fff;
+		border: 1px solid $bd;
+		border-radius: $radius-sm;
+		padding: 1px 7px;
+		// line-height: 1.4;
+
+		&:focus {
+			outline: none;
+			border-color: $ink;
+			// box-shadow: 0 0 0 3px color.change($primary, $alpha: .12);
+		}
+	}
+
+	select {
+		// appearance: none;
+		// background-image: none;
+	}
+}

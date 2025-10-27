@@ -11,10 +11,8 @@
 
     .header__inner {
     	@include container();
-
         display: grid;
         grid-template-rows: auto auto;
-        gap: 8px;
     }
 
     .header-row {
@@ -22,35 +20,44 @@
         align-items: center;
     }
 
-    /* 第 1 排：左標題、右 meta */
+    /* 第 1 排：meta */
     .row-1 {
-        grid-template-columns: 1fr repeat(2, auto);
-
-        h1 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 700;
-            color: $ink;
-        }
-
         .meta--tiny {
-            justify-self: end;
-            font-size: 12px;
+            justify-self: start;
+            font-size: $font-size-xs;
             color: $muted;
             background: $bg-soft;
             border: 1px solid $bd;
             border-radius: $radius-sm;
-            padding: 2px 8px;
-            line-height: 1.6;
+            padding: 3px 1px;
+            line-height: 1;
+            opacity: .7;
         }
     }
 
-    /* 第 2 排：左麵包屑、右新增按鈕（字級一致） */
+    /* 第 2 排：左標題、右 clock */
     .row-2 {
+        grid-template-columns: 1fr 1fr;
+
+        h1 {
+            margin: 0;
+            font-size: $font-size-xxl;
+            font-weight: 700;
+            color: $ink;
+        }
+        .clock {
+            font-size: $font-size-sm;
+            color: $muted;
+            justify-self: end;
+        }
+    }
+
+    /* 第 3 排：左麵包屑、右新增按鈕（字級一致） */
+    .row-3 {
         grid-template-columns: 1fr auto;
 
         .breadcrumb {
-            font-size: 14px;
+            font-size: $font-size-base;
             color: $muted;
 
             ol {
@@ -84,7 +91,7 @@
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            font-size: 14px;
+            font-size: $font-size-base;
             color: $ink;
             border: 1px solid $bd;
             border-radius: $radius-sm;

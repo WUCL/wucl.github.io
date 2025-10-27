@@ -2,7 +2,6 @@
 @use "utilities/config";
 @use "utilities/mixins";
 @use "utilities/components"; // 按鈕、表單、狀態列、清單卡片等（你目前集中到一檔的話）
-@use "utilities/card"; // card
 
 @use "base";
 
@@ -10,3 +9,6 @@
 @use "layout/footer";
 // 如果你有 main/panel 放在 pages/_main.scss、pages/_common.scss，建議合併成 _layout.scss 再 @use
 @use "layout/layout"; // ← 這檔若暫時沒有，可先註解掉
+
+@use "layout/list";
+@use "layout/form";

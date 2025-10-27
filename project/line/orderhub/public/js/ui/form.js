@@ -27,39 +27,34 @@
 		return out;
 	};
 
-	// select 填充
+	// select 填充（優先保留 HTML 內原有選項）
 	APP.populateSelect = function($select, items) {
-		var el = $select && $select[0];
-		if (!el) return;
+		if (!$select || !$select.length) return;
+
+		var el = $select[0];
 		var doc = document;
-		var ph = $select.attr('data-placeholder') || '請選擇';
-		var withOther = $select.attr('data-with-other') === '1';
-		el.innerHTML = '';
-
-		var phOpt = doc.createElement('option');
-		phOpt.value = '';
-		phOpt.text = ph;
-		phOpt.disabled = true;
-		phOpt.selected = true;
-		el.appendChild(phOpt);
-
 		var list = items || [];
+
 		for (var i = 0; i < list.length; i++) {
 			var it = list[i];
 			var v = (typeof it === 'string') ? it : (it && (it.value || it.label));
 			var l = (typeof it === 'string') ? it : (it && (it.label || it.value));
 			if (!v) continue;
+
 			var opt = doc.createElement('option');
 			opt.value = v;
 			opt.text = l;
+
+			if (!(el.options && el.options.length > 0)) {
+				if (i === 0) opt.selected = true;
+			}
+
 			el.appendChild(opt);
 		}
 
-		if (withOther) { var o = doc.createElement('option');
-			o.value = '__OTHER__';
-			o.text = '其他（請填備註）';
-			el.appendChild(o); }
+		// console.log('[populateSelect] 已自動建立 options:', el.name, list.length);
 	};
+
 
 	// 取靜態選項（之後可改為遠端）
 	APP.getOptionsStatic = function(key) {
@@ -142,9 +137,9 @@
 		var keys = Object.keys(errs);
 		if (!keys.length) { $slot.empty(); return keys; }
 		var list = '';
-		for (var i = 0; i < keys.length; i++) list += '<li><strong>' + keys[i] + '</strong>：' + errs[keys[i]] + '</li>';
-		var html = '<div class="msg err">請修正下列欄位後再送出：<ul style="margin:6px 0 0 18px">' + list + '</ul></div>';
-		$slot.html(html);
+		for (var i = 0; i < keys.length; i++) list += '<li><b>' + keys[i] + '</b><span>' + errs[keys[i]] + '</span></li>';
+		var html = '<div class="msg-h">❌ 請修正下列欄位後再送出</div><div class="msg-b"><ul>' + list + '</ul></div>';
+		$slot.removeClass('ok').addClass('err').html(html);
 		return keys;
 	};
 

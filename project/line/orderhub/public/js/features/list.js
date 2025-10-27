@@ -12,7 +12,7 @@
 
     // === 詳情要顯示、且可調整順序的欄位 ===
     var DETAIL_GROUPS = [
-        ['訂單日期', '付款方式', '訂購人姓名', '訂購人電話', '訂購人Email'],
+        ['訂單日期', '交貨日期', '付款方式', '訂購人姓名', '訂購人電話', '訂購人Email'],
         ['品項分類', '購買用途', '商品項目', '訂單備註', '小卡內容'],
         ['取貨方式', '貨運單號', '收件者姓名', '收件者電話', '收件者地址'],
     ];
@@ -60,7 +60,7 @@
         if (shipStatus) tags.push(shipStatus);
         if (payStatus) tags.push(payStatus);
 
-        var $tags = $card.find('.tags-inline').empty();
+        var $tags = $card.find('.shippay .tags-inline').empty();
         tags.forEach(function(t) {
             var cls = (t.indexOf('未') !== -1 ? 'warn' : ''); // 未出貨或未付款 → 標示警告色
             $tags.append('<span class="tag ' + cls + '">' + t + '</span>');

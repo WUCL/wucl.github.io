@@ -3,15 +3,16 @@
 
 // 你的斷點可以在 config.scss 定義，例如：
 // $breakpoints: (sm: 576px, md: 768px, lg: 992px, xl: 1200px);
+// @include respond(md) { font-size: 12px; }
 
 @mixin respond($point) { // 你原本的斷點工具可留著
   	$val: map.get($breakpoints, $point);
-  	@if $val { @media (min-width: $val) { @content; } }
+  	@if $val { @media (max-width: $val) { @content; } }
   	@else { @warn "Unknown breakpoint: #{$point}"; }
 }
 
 /* 新增：container mixin（取代 @extend .container） */
-@mixin container($max: 960px, $px: 14px, $py: 9px) {
+@mixin container($max: 960px, $px: 14px, $py: 7px) {
 	width: min(100%, $max);
 	padding-inline: $px;
 	padding-block: $py;
