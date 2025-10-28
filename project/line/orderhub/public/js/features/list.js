@@ -7,7 +7,7 @@
     'use strict';
     var APP = w.APP || (w.APP = {});
 
-    var LIMIT = 20;
+    var LIMIT = 15;
     var YEAR = 2025; // 固定 2025（之後要換年就改這裡）
     var currentPage = 1;
     var totalPages = 1;
@@ -134,25 +134,36 @@
             $filterMonthWrap.toggle(v === 'month');
         }
 
-        function updatePager(total, page, pages, pageSize) {
+        function updatePager(total, page, pages, pageSize, pageCount) {
 			page = Number(page) || 1;
 			pages = Number(pages) || 1;
 			pageSize = Number(pageSize) || LIMIT;
+			pageCount = Number(pageCount) || 0;
 
-			// === 上方統計顯示 ===
-			// $('[data-bind="count"]').text(String(total || 0));
-			// $('[data-bind="pageInfo"]').text('第 ' + page + '/' + pages + ' 頁');
+			// === 計算本頁範圍 ===
+			var totalCount = String(total || 0);
+			var startIdx = total === 0 ? 0 : (page - 1) * pageSize + 1;
+			var endIdx = total === 0 ? 0 : Math.min(total, startIdx + pageCount - 1);
+
+			var rangeText = '0 / 0'; // 0 筆時的處理
+
+			if (total !== 0) {
+				// 範例 A：21–40 / 110 筆（本頁 20 筆）
+				rangeText = startIdx + ' – ' + endIdx + ' / ' + totalCount + ' 筆';
+				// 範例 B：本頁 20 筆｜第 2/6 頁｜合計 110 筆（如果你也想把頁數帶進來）
+				// var pageText = '本頁 ' + items.length + ' 筆｜第 ' + currentPage + '/' + totalPages + ' 頁｜合計 ' + total + ' 筆';
+				// $('[data-bind="pageRange"]').text(pageText);
+			}
 
 			// === 下方分頁按鈕 ===
 			var $pager = $('#pager');
 			if (!$pager.length) $pager = $('<div id="pager" class="pager"></div>').insertAfter($container);
 
-			var totalCount = String(total || 0);
 			var prevDisabled = page <= 1 ? 'disabled' : '';
 			var nextDisabled = page >= pages ? 'disabled' : '';
 
 			var html = `
-				<div class="pager-count totalCount"><span>${totalCount}筆</span></div>
+				<div class="pager-range pageRange"><span>${rangeText}</span></div>
 				<div class="pager-btns">
 				<button class="pager-btn prev" ${prevDisabled}></button>
 				<span class="pager-info">${page} / ${pages}</span>
@@ -269,7 +280,7 @@
                         });
 
                         // renderPager();
-                        updatePager(total, currentPage, totalPages, LIMIT);
+                        updatePager(total, currentPage, totalPages, LIMIT, items.length);
 
                         if (APP.status && APP.status.done) APP.status.done(true, '完成（' + items.length + ' 筆）');
                         return;

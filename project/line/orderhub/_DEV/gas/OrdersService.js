@@ -177,7 +177,7 @@ function Orders_list(params){
   var rows = ROWS(ENV.ORDERS_SHEET);
   // 以尾端為新 → 倒序，維持你目前清單習慣
   rows = rows.reverse();
-  
+
   // === 訂單狀態 ===
   if (orderStatus) {
     // var wantedList = String(orderStatus).split(',').map(function(s){ return s.trim(); });
@@ -244,12 +244,13 @@ function Orders_list(params){
   var total = rows.length;
 
   // === 新增分頁邏輯 ===
+  var pages = Math.ceil(total / limit);
   var page = Math.max(1, Number(params.page || 1));
   var startIdx = (page - 1) * limit;
   var endIdx = startIdx + limit;
   var pagedRows = rows.slice(startIdx, endIdx);
 
-  return { ok: true, items: pagedRows, total: total, page: page, pages: Math.ceil(total / limit) };
+  return { ok: true, items: pagedRows, total: total, page: page, pages: pages };
 
   // if (rows.length > limit) rows = rows.slice(0, limit);
   // return { ok:true, items: rows, total: total };
