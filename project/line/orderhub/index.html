@@ -82,7 +82,7 @@
     			<div class="row">
     				<div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
     				<div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
-    				<div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date" required></div>
+    				<div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
     				<div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
     				<div class="field"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
     				<div class="field"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
@@ -176,7 +176,8 @@
     		<div class="panel-h">
     			<div class="head">
     				<h2>訂單清單</h2>
-    				<div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div>
+    				<div id="pager" class="pager sub"></div>
+    				<!-- <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div> -->
     			</div>
     			<!-- ↓ 篩選列放入這裡 ↓ -->
     			<div class="filters">

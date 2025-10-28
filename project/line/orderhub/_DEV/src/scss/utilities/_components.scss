@@ -125,3 +125,43 @@
         }
     }
 }
+
+.pager {
+    font-size: $font-size-sm;
+    display: flex;
+    // grid-template-columns: 1fr;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 7px;
+    &-count {
+        // margin-right: 7px;
+    }
+    &-btn {
+        padding: 0 9px;
+        border: 1px solid $bd;
+        border-radius: $radius-sm;
+        background: #fff;
+        cursor: pointer;
+
+        &.prev::before {
+            content: '←';
+        }
+
+        &.next::after {
+            content: '→';
+        }
+
+        &:disabled {
+            opacity: .5;
+            cursor: default;
+        }
+        &:not(:disabled):hover {
+            color: $ink;
+            background: $bg-soft;
+        }
+    }
+
+    &-info {
+        color: $muted;
+    }
+}

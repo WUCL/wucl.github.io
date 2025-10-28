@@ -242,9 +242,17 @@ function Orders_list(params){
   // }
 
   var total = rows.length;
-  if (rows.length > limit) rows = rows.slice(0, limit);
 
-  return { ok:true, items: rows, total: total };
+  // === 新增分頁邏輯 ===
+  var page = Math.max(1, Number(params.page || 1));
+  var startIdx = (page - 1) * limit;
+  var endIdx = startIdx + limit;
+  var pagedRows = rows.slice(startIdx, endIdx);
+
+  return { ok: true, items: pagedRows, total: total, page: page, pages: Math.ceil(total / limit) };
+
+  // if (rows.length > limit) rows = rows.slice(0, limit);
+  // return { ok:true, items: rows, total: total };
 }
 
 /** —— 工具 —— */

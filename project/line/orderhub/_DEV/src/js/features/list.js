@@ -9,6 +9,9 @@
 
     var LIMIT = 20;
     var YEAR = 2025; // 固定 2025（之後要換年就改這裡）
+    var currentPage = 1;
+    var totalPages = 1;
+
 
     // === 詳情要顯示、且可調整順序的欄位 ===
     var DETAIL_GROUPS = [
@@ -131,10 +134,49 @@
             $filterMonthWrap.toggle(v === 'month');
         }
 
-        function setCount(total, page, pages, pageSize) {
-            $('[data-bind="count"]').text(String(total || 0));
-            $('[data-bind="pageInfo"]').text('第 ' + (page || 1) + '/' + (pages || 1) + ' 頁');
-        }
+        function updatePager(total, page, pages, pageSize) {
+			page = Number(page) || 1;
+			pages = Number(pages) || 1;
+			pageSize = Number(pageSize) || LIMIT;
+
+			// === 上方統計顯示 ===
+			// $('[data-bind="count"]').text(String(total || 0));
+			// $('[data-bind="pageInfo"]').text('第 ' + page + '/' + pages + ' 頁');
+
+			// === 下方分頁按鈕 ===
+			var $pager = $('#pager');
+			if (!$pager.length) $pager = $('<div id="pager" class="pager"></div>').insertAfter($container);
+
+			var totalCount = String(total || 0);
+			var prevDisabled = page <= 1 ? 'disabled' : '';
+			var nextDisabled = page >= pages ? 'disabled' : '';
+
+			var html = `
+				<div class="pager-count totalCount"><span>${totalCount}筆</span></div>
+				<div class="pager-btns">
+				<button class="pager-btn prev" ${prevDisabled}></button>
+				<span class="pager-info">${page} / ${pages}</span>
+				<button class="pager-btn next" ${nextDisabled}></button>
+				</div>
+			`;
+
+			$pager.html(html);
+
+			// === 綁定事件 ===
+			$pager.off('click').on('click', '.pager-btn', function (e) {
+				e.preventDefault();
+
+				if ($(this).hasClass('prev') && currentPage > 1) {
+					currentPage -= 1;
+				} else if ($(this).hasClass('next') && currentPage < totalPages) {
+					currentPage += 1;
+				}
+
+				fetchAndRender(currentPage);
+			});
+		}
+
+
 
         function getQueryParams() {
             // var params = { limit: LIMIT };
@@ -189,52 +231,59 @@
         function fetchAndRender() {
             if (APP.status && APP.status.start) APP.status.start('載入清單');
             $container.html('<div class="loading">讀取中…</div>');
+            console.log("fetchAndRender :: " + currentPage);
 
             var params = getQueryParams();
+            params.page = currentPage; // Number(page) || 1;
+            params.limit = LIMIT;
+
             if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 40);
             console.log(params);
 
             APP.api('list', params)
-            .then(function(res) {
-            	console.log(res);
-            	// return;
-                $container.find('.loading').remove();
+                .then(function(res) {
+                    console.log(res);
+                    // return;
+                    $container.find('.loading').remove();
 
-                if (res && res.ok && Array.isArray(res.items)) {
-                    var items = res.items;
-                    var total = Number(res.total || items.length || 0);
-                    var pageSize = LIMIT;
-                    var pages = Math.max(1, Math.ceil(total / pageSize));
-                    var page = 1;
+                    if (res && res.ok && Array.isArray(res.items)) {
+                        var items = res.items;
+                        var total = Number(res.total || items.length || 0);
 
-                    setCount(total, page, pages, pageSize);
+                        totalPages = Math.max(1, Math.ceil(total / LIMIT));
+                        currentPage = res.page || params.page || 1;
 
-                    if (!items.length) {
-                        renderEmpty($container);
-                        if (APP.status && APP.status.done) APP.status.done(true, '完成（0 筆）');
+                        // setCount(total, page, pages, pageSize);
+                        // setCount(total, currentPage, totalPages, LIMIT);
+
+                        if (!items.length) {
+                            renderEmpty($container);
+                            if (APP.status && APP.status.done) APP.status.done(true, '完成（0 筆）');
+                            return;
+                        }
+
+                        $container.html('');
+                        items.forEach(function(item) {
+                            var $card = createCard(item);
+                            $container.append($card);
+                        });
+
+                        // renderPager();
+                        updatePager(total, currentPage, totalPages, LIMIT);
+
+                        if (APP.status && APP.status.done) APP.status.done(true, '完成（' + items.length + ' 筆）');
                         return;
                     }
 
-                    $container.html('');
-                    for (var i = 0; i < items.length; i++) {
-                        var $card = createCard(items[i]);
-                        $container.append($card);
-                    }
-                    if (APP.status && APP.status.done) APP.status.done(true, '完成（' + items.length + ' 筆）');
-                    return;
-                }
-
-                setCount(0, 1, 1, LIMIT);
-                renderEmpty($container);
-                if (APP.status && APP.status.done) APP.status.done(false, 'API not ready');
-                console.warn('[List] API not ready or bad response:', res);
-            })
-            .catch(function(err) {
-                setCount(0, 1, 1, LIMIT);
-                renderEmpty($container);
-                if (APP.status && APP.status.done) APP.status.done(false, '讀取錯誤');
-                console.error('[List] fetch error:', err);
-            });
+                    renderEmpty($container);
+                    if (APP.status && APP.status.done) APP.status.done(false, 'API not ready');
+                    console.warn('[List] API not ready or bad response:', res);
+                })
+                .catch(function(err) {
+                    renderEmpty($container);
+                    if (APP.status && APP.status.done) APP.status.done(false, '讀取錯誤');
+                    console.error('[List] fetch error:', err);
+                });
         }
 
         // 初次

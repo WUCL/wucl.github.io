@@ -86,7 +86,8 @@ function doPost(e) {
           range:      String(req.range      || ''), // '', 'this-week', 'this-month', 'month'
           month:      String(req.month      || ''), // 'YYYY-MM'
           year:       Number(req.year || 0) || null,
-          limit:      Math.min(Number(req.limit || 20), 200)
+          limit:      Math.min(Number(req.limit || 20), 200),
+          page:        Math.max(1, Number(req.page || 1))  // 🟢 加上 page
         };
         var result = Orders_list(params);
         return _json(result);
