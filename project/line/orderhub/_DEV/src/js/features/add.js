@@ -22,9 +22,6 @@
 		}
 
 		// 預設今天日期
-		// $form.find('[name="訂單日期"]').each(function() {
-		// 	if (!this.value) this.value = new Date().toISOString().split('T')[0];
-		// });
 		$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 
 		//=== 同訂購人資訊 ===
@@ -84,22 +81,6 @@
 
 			const data = this.formToObject($form);
 			const $btn = $form.find('button[type="submit"]');
-			// const $slot = $form.find('[data-slot="msg"]');
-
-			// 驗證
-			// if (APP.status && APP.status.tick) APP.status.tick('驗證資料', 25);
-			// const errs = this.validateAddData(data);
-			// this.showFieldErrors($form, errs);
-			// if (typeof this.logValidationDebug === 'function') {
-			// 	this.logValidationDebug('新增訂單', data, errs);
-			// }
-
-			// if (Object.keys(errs).length) {
-			// 	this.renderErrorSummary($slot, errs);
-			// 	this.scrollToFirstError($form);
-			// 	if (APP.status && APP.status.done) APP.status.done(false, '驗證失敗');
-			// 	return; // 停止送出
-			// }
 
 			// 取得 LINE 使用者資訊（若已登入）
 			let lineName = '';
@@ -144,17 +125,8 @@
 
 			let res;
 			try {
-				// 原建立單筆，待[週花]確認可刪除
-				// res = await this.api('create', {
-                //     data,
-                //     actor: this.var.actor,
-                //     lineName,
-                //     lineId
-                // });
-
 				// === [週花]批次建立（後端會產單一 orderId + 拆 N 筆 + 商品項目 1/N…）===
 				if (isWeekly && repeatN > 1) {
-					console.log('[週花]123456');
 					res = await this.api('create_weekly', {
 						data: data,
 						repeat: repeatN,
@@ -164,7 +136,6 @@
 					});
 					} else {
 					// === 一般單筆建立（或週花但 n=1）===
-					console.log('[週花]1');
 					res = await this.api('create', {
 						data: data,
 						actor: this.var.actor,
@@ -184,7 +155,6 @@
 				if (APP.status && APP.status.tick) APP.status.tick('處理回應', 30);
 				console.log(data);
 				console.log(res);
-				// $slot.removeClass('err').addClass('ok').text('✅ 已建立：' + res.orderId);
 				$slot.removeClass('err').addClass('ok');
 
 				// 週花顯示建立成功訊息
@@ -192,12 +162,10 @@
 					? ('<div class="msg-h">✅ 已建立訂單<span>' + res.orderId + '</span>（共 ' + res.created + ' 筆）</div>')
 					: ('<div class="msg-h">✅ 已建立訂單<span>' + res.orderId + '</span></div>');
 
-				// var html = '<div class="msg-h">✅ 已建立訂單<span>' + res.orderId + '</span></div>';
 				var lis = [];
 
 				for (let key in data) {
 					if (!data.hasOwnProperty(key)) return;
-					console.log(key + ":" + data[key]);
 					lis.push('<li><b>' + key + '</b><span>' + data[key] + '</span></li>');
 				}
 				html += '<div class="msg-b"><ul class="confirm-list">' + lis.join('') + '</ul></div>';
@@ -220,9 +188,6 @@
 				if ($form[0] && $form[0].reset) $form[0].reset();
 				$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 				$periodWrap.css('display', 'none');
-
-				// this.showFieldErrors($form, {}); // 清錯
-				// if (typeof this.populateAllSelects === 'function') this.populateAllSelects($form);
 
 				if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
 

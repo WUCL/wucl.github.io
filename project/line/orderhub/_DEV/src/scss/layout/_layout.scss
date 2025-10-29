@@ -1,13 +1,15 @@
+// ==========================================
+// layout/_layout.scss
+// Main 和 Panel
+// ==========================================
 @use "utilities/config"as *;
 @use "utilities/mixins"as *;
 
-/* Main（原 pages/_main.scss 可合併至此） */
 .main {
     @include container();
-    padding-top: 12px;
+    padding-top: $space-3;
 }
 
-/* Panel（常用容器；原 pages/_common.scss 若有，可併進來） */
 .panel {
     background: $card-bg;
     border: 1px solid $bd;
@@ -19,24 +21,24 @@
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: end;
+
         @include respond(md) {
             grid-template-columns: 1fr;
-            // align-items: start;
         }
-        > .head {
-            // width: 100%;
+
+        >.head {
             @include respond(md) {
-                display: flex;
-                justify-content: space-between;
+                @include flex-between;
             }
         }
 
-        /* ===== Filters ===== */
+        // 篩選器
         .filters {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 9px;
+
             @include respond(md) {
                 margin-top: 7px;
                 gap: 7px;
@@ -49,6 +51,7 @@
                 border-radius: $radius-sm;
                 padding: 1px 7px;
                 background: #fff;
+
                 @include respond(md) {
                     display: block;
                 }
@@ -58,7 +61,7 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 5px;
-                font-size: 12px;
+                font-size: $font-size-sm;
                 color: $muted;
             }
 
@@ -69,10 +72,12 @@
                 border: 1px solid $bd;
                 border-radius: $radius-sm;
                 padding: 1px 7px;
-                letter-spacing: -.5px;
+                letter-spacing: -0.5px;
                 line-height: $font-size-base;
+                transition: border-color 0.2s ease;
 
                 &:focus {
+                    outline: none;
                     border-color: $ink;
                 }
             }
@@ -90,6 +95,6 @@
 
     .sub {
         color: $muted;
-        font-size: 12px;
+        font-size: $font-size-sm;
     }
 }

@@ -1,20 +1,57 @@
+// ==========================================
+// utilities/_mixins.scss
+// ==========================================
 @use "sass:map";
 @use "config"as *;
 
-// 你的斷點可以在 config.scss 定義，例如：
-// $breakpoints: (sm: 576px, md: 768px, lg: 992px, xl: 1200px);
-// @include respond(md) { font-size: 12px; }
+// 響應式斷點 // @include respond(md) { font-size: 12px; }
+@mixin respond($point) {
+    $val: map.get($breakpoints, $point);
 
-@mixin respond($point) { // 你原本的斷點工具可留著
-  	$val: map.get($breakpoints, $point);
-  	@if $val { @media (max-width: $val) { @content; } }
-  	@else { @warn "Unknown breakpoint: #{$point}"; }
+    @if $val {
+        @media (max-width: $val) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Unknown breakpoint: #{$point}";
+    }
 }
 
-/* 新增：container mixin（取代 @extend .container） */
+// 容器
 @mixin container($max: 960px, $px: 14px, $py: 7px) {
-	width: min(100%, $max);
-	padding-inline: $px;
-	padding-block: $py;
-	margin-inline: auto;
+    width: min(100%, $max);
+    padding-inline: $px;
+    padding-block: $py;
+    margin-inline: auto;
+}
+
+// 截斷文字
+@mixin truncate($lines: 1) {
+    @if $lines==1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @else {
+        display: -webkit-box;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+// Flexbox 快捷方式
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

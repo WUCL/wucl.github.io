@@ -1,13 +1,12 @@
-/** =======================
- * Orders Service
- * - create / list / get / update
- * - genId / ensureHeader
- * ======================= */
+// ==========================================
+// OrdersService.js - 訂單業務邏輯
+// ==========================================
 
-function Orders_newOrder(payload, actor){
+function Orders_newOrder(payload, actor) {
   ensureHeader_('訂單編號');
+  
   var obj = Object.assign({
-    '訂單日期': Utilities.formatDate(new Date(),'Asia/Taipei','yyyy/MM/dd'),
+    '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy/MM/dd'),
     '訂單狀態': 'doing'
   }, payload || {});
 
@@ -19,386 +18,191 @@ function Orders_newOrder(payload, actor){
 }
 
 /**
- * Orders_createWeekly：同一訂單編號，建立 N 筆週花訂單
- * - data: 來源表單資料
- * - repeat: 建立筆數（1–12）
- * - actor / opt.lineName / opt.lineId：記錄 ChangeLog 用
- * 回傳：{ ok:true, orderId:'YYMMDD-XXX', created:N }
+ * 建立週花訂單：同一訂單編號，建立 N 筆
+ * @param {Object} data - 來源表單資料
+ * @param {number} repeat - 建立筆數（1-12）
+ * @param {string} actor - 操作者
+ * @param {Object} opt - 額外選項 { lineName, lineId }
+ * @returns {Object} { ok:true, orderId, created }
  */
 function Orders_createWeekly(data, repeat, actor, opt) {
-  repeat = Math.max(1, Math.min(12, Number(repeat || 1)));
+  repeat = Math.max(1, Math.min(LIMITS.MAX_WEEKLY_REPEAT, Number(repeat || 1)));
+  opt = opt || {};
 
-  // 產生「同一個」訂單編號：依「訂單日期」
   var orderId = genId_(data['訂單日期']);
 
-  // 標準預設（與 Orders_newOrder 保持一致）
   var baseDefaults = {
-    '訂單日期': Utilities.formatDate(new Date(),'Asia/Taipei','yyyy/MM/dd'),
+    '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy/MM/dd'),
     '訂單狀態': 'doing'
   };
+
+  // 計算第一筆的基準週五
+  var firstDate = data['交貨日期']
+    ? new Date(data['交貨日期'])
+    : getNextFriday_(new Date(data['訂單日期'] || new Date()));
+  
+  var baseFriday = getNextFriday_(firstDate);
 
   for (var i = 1; i <= repeat; i++) {
     var obj = Object.assign({}, baseDefaults, data || {});
     obj['訂單編號'] = orderId;
 
-    // 商品項目：若是週花，做 1/N 標記；若不是或沒填，保留原值
+    // 商品項目：週花標記
     if (String(obj['品項分類'] || '') === '週花') {
       var baseName = (obj['商品項目'] && String(obj['商品項目']).trim()) || '週花';
-      obj['商品項目'] = baseName + (repeat > 1 ? (i + '/' + repeat) : '');
+      obj['商品項目'] = baseName + (repeat > 1 ? (' ' + i + '/' + repeat) : '');
     }
 
-    // --- [1] 訂單金額：僅第一筆保留，其餘設為 0 ---
+    // 訂單金額：僅第一筆保留
     if (i > 1) {
       obj['訂單金額'] = 0;
     }
 
-    // --- [2] 交貨日期：第1筆維持；第2筆起：先對齊最近週五，再逐週 +7 ---
-    if (repeat > 1) {
-      if (i === 1) {
-        // 1) 第1筆：若原始有給交貨日 → 直接用；沒有就「找最近週五」
-        var firstDate = obj['交貨日期']
-          ? new Date(obj['交貨日期'])
-          : getNextFriday_(new Date(obj['訂單日期'] || new Date()));
-        obj['交貨日期'] = Utilities.formatDate(firstDate, 'Asia/Taipei', 'yyyy/MM/dd');
-
-        // 2) 後續的基準：一定「對齊最近週五」（不影響第1筆顯示）
-        var baseFriday = getNextFriday_(firstDate);
-      } else {
-        // 3) 第2筆 = 最近週五；第3筆起每筆 +7
-        var nextFriday = new Date(baseFriday);
-        if (i > 2) nextFriday.setDate(baseFriday.getDate() + 7 * (i - 2));
-        obj['交貨日期'] = Utilities.formatDate(nextFriday, 'Asia/Taipei', 'yyyy/MM/dd');
-      }
+    // 交貨日期：第1筆維持原值或最近週五，後續逐週 +7
+    if (i === 1) {
+      obj['交貨日期'] = Utilities.formatDate(firstDate, 'Asia/Taipei', 'yyyy/MM/dd');
+    } else {
+      var nextFriday = new Date(baseFriday);
+      nextFriday.setDate(baseFriday.getDate() + 7 * (i - 1));
+      obj['交貨日期'] = Utilities.formatDate(nextFriday, 'Asia/Taipei', 'yyyy/MM/dd');
     }
 
     APPEND(ENV.ORDERS_SHEET, obj);
   }
 
-  // 寫一次 ChangeLog（快照）
+  // 寫 ChangeLog
   try {
     ChangeLog_append({
       time: new Date(),
       action: 'create_weekly',
       orderId: orderId,
       actor: actor || '',
-      lineName: (opt && opt.lineName) || '',
-      lineId:   (opt && opt.lineId)   || '',
+      lineName: opt.lineName || '',
+      lineId: opt.lineId || '',
       snapshot: Object.assign({}, data, { repeat: repeat })
     });
-  } catch (_){}
+  } catch (_) {}
 
-  return { ok:true, orderId: orderId, created: repeat };
+  return { ok: true, orderId: orderId, created: repeat };
 }
 
-function Orders_getById(orderId){
+function Orders_getById(orderId) {
   var row = findById_(orderId);
   if (row === -1) return null;
+  
   var headers = HDR(ENV.ORDERS_SHEET).headers;
   var vals = SH(ENV.ORDERS_SHEET).getRange(row, 1, 1, headers.length).getValues()[0];
+  
   var obj = {};
-  headers.forEach(function(h, i){ obj[h] = vals[i]; });
+  headers.forEach(function(h, i) {
+    obj[h] = vals[i];
+  });
+  
   return obj;
 }
 
-/** update：patch 指定欄位，並寫入 ChangeLog（diff） */
-function Orders_updateByPatch(orderId, patch, actor, opt){
+/**
+ * 更新訂單並記錄差異
+ */
+function Orders_updateByPatch(orderId, patch, actor, opt) {
   var row = findById_(orderId);
-  if (row === -1) return { ok:false, msg:'not-found' };
+  if (row === -1) return { ok: false, msg: 'not-found' };
 
+  opt = opt || {};
   var before = Orders_getById(orderId) || {};
   UPDATE(ENV.ORDERS_SHEET, row, patch);
   var after = Orders_getById(orderId) || {};
 
-  // 建 diff
+  // 建立差異紀錄
   var diff = {};
-  Object.keys(patch).forEach(function(k){
+  Object.keys(patch).forEach(function(k) {
     var o = (before[k] != null ? String(before[k]) : '');
-    var n = (after[k]  != null ? String(after[k])  : '');
-    if (o !== n) diff[k] = { old:o, new:n };
+    var n = (after[k] != null ? String(after[k]) : '');
+    if (o !== n) {
+      diff[k] = { old: o, new: n };
+    }
   });
 
   // 記錄異動
-  ChangeLog_append({
-    time: new Date(),
-    action: 'update',
-    orderId: orderId,
-    actor: actor || '',
-    lineName: (opt && opt.lineName) || '',
-    lineId:   (opt && opt.lineId)   || '',
-    diff: diff
-  });
+  if (Object.keys(diff).length > 0) {
+    ChangeLog_append({
+      time: new Date(),
+      action: 'update',
+      orderId: orderId,
+      actor: actor || '',
+      lineName: opt.lineName || '',
+      lineId: opt.lineId || '',
+      diff: diff
+    });
+  }
 
-  return { ok:true, order: after };
+  return { ok: true, order: after };
 }
 
 /**
- * Orders_list：支援前端 filters
- * 參數：
- * - limit:     最大回傳筆數（預設 20，上限 200）
- * - shipStatus:'已出貨' | '未出貨' | '' (不過濾)
- * - payStatus: '已付款' | '未付款' | '' (不過濾)
- * - range_order:     '' | 'this-week' | 'this-month' | 'month'
- * - range_ship:     '' | 'this-week' | 'this-month' | 'month'
- * - month_order:     'YYYY-MM'（當 range==='month' 時才會用到）
- * - month_ship:     'YYYY-MM'（當 range==='month' 時才會用到）
- * - year:      例如 2025（目前不強制；你要可再限制）
- * 回傳：{ ok:true, items:[], total:n }
+ * 訂單列表查詢（支援篩選與分頁）
  */
-function Orders_list(params){
+function Orders_list(params) {
   params = params || {};
-  var limit      = Math.min(Number(params.limit || 20), 200);
+  
+  var limit = Math.min(Number(params.limit || LIMITS.DEFAULT_LIST_ITEMS), LIMITS.MAX_LIST_ITEMS);
   var orderStatus = String(params.orderStatus || '');
   var shipStatus = String(params.shipStatus || '');
-  var payStatus  = String(params.payStatus  || '');
-  var range_order      = String(params.range_order      || '');
-  var range_ship      = String(params.range_ship      || '');
-  var month_order      = String(params.month_order      || '');
-  var month_ship      = String(params.month_ship      || '');
-  var year       = Number(params.year || 0); // 你若要只看某年，可再用
+  var payStatus = String(params.payStatus || '');
+  var range_order = String(params.range_order || '');
+  var range_ship = String(params.range_ship || '');
+  var month_order = String(params.month_order || '');
+  var month_ship = String(params.month_ship || '');
 
-  function _norm(s){ return String(s||'').trim(); }
+  function _norm(s) {
+    return String(s || '').trim();
+  }
 
   var rows = ROWS(ENV.ORDERS_SHEET);
-  // 以尾端為新 → 倒序，維持你目前清單習慣
-  rows = rows.reverse();
+  rows = rows.reverse(); // 最新在前
 
-  // === 訂單狀態 ===
+  // 訂單狀態篩選
   if (orderStatus) {
-    // var wantedList = String(orderStatus).split(',').map(function(s){ return s.trim(); });
-    var wantedOrder = _norm(orderStatus); // 'doing' / 'done' / 'cancel'
-    rows = rows.filter(function(r){
+    var wantedOrder = _norm(orderStatus);
+    rows = rows.filter(function(r) {
       return _norm(r['訂單狀態']).indexOf(wantedOrder) !== -1;
     });
   }
 
-  // === 出貨狀態 ===
+  // 出貨狀態篩選
   if (shipStatus) {
-    var wantedShip = _norm(shipStatus); // '已交貨' / '未交貨'
-    rows = rows.filter(function(r){
+    var wantedShip = _norm(shipStatus);
+    rows = rows.filter(function(r) {
       return _norm(r['是否已交貨']).indexOf(wantedShip) !== -1;
     });
   }
 
-  // === 付款狀態 ===
+  // 付款狀態篩選
   if (payStatus) {
-    var wantedPay = _norm(payStatus); // '已付款' / '未付款'
-    rows = rows.filter(function(r){
+    var wantedPay = _norm(payStatus);
+    rows = rows.filter(function(r) {
       return _norm(r['是否已付款']).indexOf(wantedPay) !== -1;
     });
   }
 
-  // === order區間過濾（依「訂單日期」）===
-  /*
-  if (range_order === 'this-week' || range_order === 'this-month' || (range_order === 'month' && month_order)) {
-    var now = new Date();
-    var start, end;
-
-    if (range_order === 'this-week') {
-      start = new Date(now); start.setHours(0,0,0,0);
-      start.setDate(start.getDate() - start.getDay()); // 週日為0
-      end = new Date(start); end.setDate(end.getDate() + 7);
-    } else if (range_order === 'this-month') {
-      start = new Date(now.getFullYear(), now.getMonth(), 1);
-      end   = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-    } else if (range_order === 'month' && month_order) {
-      var ym = String(month_order).split('-'); // e.g. ['2025','10']
-      var yy = Number(ym[0] || 0);
-      var mm = Number(ym[1] || 0) - 1;   // JS 月份 0-based
-      start = new Date(yy, mm, 1);
-      end   = new Date(yy, mm + 1, 1);
-    }
-
-    rows = rows.filter(function(r){
-      var d = new Date(r['訂單日期']);
-      if (isNaN(d.getTime())) return false;
-      if (start && end) {
-        return (d >= start && d < end);
-      }
-      return true;
-    });
-  }
-  */
-
-  // === ship區間過濾（依「交貨日期」）===
-  /*
-  if (range_ship === 'this-week' || range_ship === 'this-month' || (range_ship === 'month' && month_ship)) {
-    var now = new Date();
-    var start, end;
-
-    if (range_ship === 'this-week') {
-      start = new Date(now); start.setHours(0,0,0,0);
-      start.setDate(start.getDate() - start.getDay()); // 週日為0
-      end = new Date(start); end.setDate(end.getDate() + 7);
-    } else if (range_ship === 'this-month') {
-      start = new Date(now.getFullYear(), now.getMonth(), 1);
-      end   = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-    } else if (range_ship === 'month' && month_ship) {
-      var ym = String(month_ship).split('-'); // e.g. ['2025','10']
-      var yy = Number(ym[0] || 0);
-      var mm = Number(ym[1] || 0) - 1;   // JS 月份 0-based
-      start = new Date(yy, mm, 1);
-      end   = new Date(yy, mm + 1, 1);
-    }
-
-    rows = rows.filter(function(r){
-      var d = new Date(r['交貨日期']);
-      if (isNaN(d.getTime())) return false;
-      if (start && end) {
-        return (d >= start && d < end);
-      }
-      return true;
-    });
-  }
-  */
-
-  /**
-   * 根據指定的時間範圍計算起始和結束日期
-   * @param {string} range - 時間範圍類型: 'this-week', 'this-month', 'month'
-   * @param {string} customMonth - 自定義月份 (格式: 'YYYY-MM')
-   * @returns {Object|null} 包含 start 和 end 的物件,或 null
-   */
-  function getDateRange(range, customMonth) {
-      if (!range || (range !== 'this-week' && range !== 'this-month' && range !== 'month')) {
-          return null;
-      }
-
-      if (range === 'month' && !customMonth) {
-          return null;
-      }
-
-      var now = new Date();
-      var start, end;
-
-      switch (range) {
-          case 'this-week':
-              start = new Date(now);
-              start.setHours(0, 0, 0, 0);
-              start.setDate(start.getDate() - start.getDay()); // 週日為0
-              end = new Date(start);
-              end.setDate(end.getDate() + 7);
-              break;
-
-          case 'this-month':
-              start = new Date(now.getFullYear(), now.getMonth(), 1);
-              end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-              break;
-
-          case 'month':
-              var ym = String(customMonth).split('-');
-              var yy = Number(ym[0] || 0);
-              var mm = Number(ym[1] || 0) - 1; // JS 月份 0-based
-              start = new Date(yy, mm, 1);
-              end = new Date(yy, mm + 1, 1);
-              break;
-      }
-
-      return { start: start, end: end };
-  }
-
-  /**
-   * 根據日期欄位和時間範圍過濾資料列
-   * @param {Array} rows - 要過濾的資料列陣列
-   * @param {string} dateField - 要檢查的日期欄位名稱
-   * @param {string} range - 時間範圍類型
-   * @param {string} customMonth - 自定義月份
-   * @returns {Array} 過濾後的資料列
-   */
-  function filterByDateRange(rows, dateField, range, customMonth) {
-      var dateRange = getDateRange(range, customMonth);
-
-      if (!dateRange) {
-          return rows; // 沒有有效的日期範圍,返回原始資料
-      }
-
-      return rows.filter(function(r) {
-          var d = new Date(r[dateField]);
-          if (isNaN(d.getTime())) return false;
-          return (d >= dateRange.start && d < dateRange.end);
-      });
-  }
-
-  // === 使用範例 ===
-
-  // order區間過濾（依「訂單日期」）
-  rows = filterByDateRange(rows, '訂單日期', range_order, month_order);
-
-  // ship區間過濾（依「交貨日期」）
-  rows = filterByDateRange(rows, '交貨日期', range_ship, month_ship);
-
-  //（可選）若要限定年份：
-  // if (year) {
-  //   rows = rows.filter(function(r){
-  //     var d = new Date(r['交貨日期']);
-  //     return !isNaN(d.getTime()) && d.getFullYear() === year;
-  //   });
-  // }
+  // 日期區間篩選（使用優化後的函數）
+  rows = filterByDateRange_(rows, '訂單日期', range_order, month_order);
+  rows = filterByDateRange_(rows, '交貨日期', range_ship, month_ship);
 
   var total = rows.length;
 
-  // === 新增分頁邏輯 ===
+  // 分頁處理
   var pages = Math.ceil(total / limit);
   var page = Math.max(1, Number(params.page || 1));
   var startIdx = (page - 1) * limit;
   var endIdx = startIdx + limit;
   var pagedRows = rows.slice(startIdx, endIdx);
 
-  return { ok: true, items: pagedRows, total: total, page: page, pages: pages };
-
-  // if (rows.length > limit) rows = rows.slice(0, limit);
-  // return { ok:true, items: rows, total: total };
-}
-
-/** —— 工具 —— */
-/**
- * 產生訂單編號：YYMMDD-XXX
- * 例如 2025/10/26 → 251026-001
- */
-function genId_(orderDate) {
-  var date = orderDate ? new Date(orderDate) : new Date();
-  if (isNaN(date.getTime())) date = new Date();
-
-  // 取西元年後兩位 + 月 + 日
-  var y = String(date.getFullYear()).slice(-2);
-  var m = ('0' + (date.getMonth() + 1)).slice(-2);
-  var d = ('0' + date.getDate()).slice(-2);
-  var key = 'SEQ_' + y + m + d; // 每日唯一 key，例如 SEQ_251026
-
-  var p = PropertiesService.getScriptProperties();
-  var lock = LockService.getScriptLock();
-  lock.waitLock(5000); // 等候最多 5 秒以避免重複
-
-  var n = Number(p.getProperty(key) || 0) + 1;
-  p.setProperty(key, String(n));
-  lock.releaseLock();
-
-  var seq = String(n).padStart(3, '0');
-  return y + m + d + '-' + seq; // 回傳例如 251026-001
-}
-
-function ensureHeader_(name){
-  var sh = SH(ENV.ORDERS_SHEET);
-  var headers = HDR(ENV.ORDERS_SHEET).headers;
-  if (headers.indexOf(name) === -1){
-    sh.insertColumnAfter(headers.length || 1);
-    sh.getRange(1, headers.length+1).setValue(name);
-  }
-}
-
-function findById_(orderId){
-  try { return FINDROW(ENV.ORDERS_SHEET, '訂單編號', orderId); }
-  catch(e){ throw new Error('請先在 Orders 表第1列建立「訂單編號」欄位'); }
-}
-
-/**
- * 取得「指定日期之後」最近的週五（含當週）
- * 例：週一傳入 → 當週五；週六傳入 → 下週五。
- */
-function getNextFriday_(d) {
-  var date = new Date(d);
-  var day = date.getDay(); // 0=日, 5=五, 6=六
-  var diff = (5 - day + 7) % 7; // 距離週五的天數
-  if (diff === 0 && day !== 5) diff = 7; // 若已過週五，跳到下週
-  date.setDate(date.getDate() + diff);
-  date.setHours(0,0,0,0);
-  return date;
+  return {
+    ok: true,
+    items: pagedRows,
+    total: total,
+    page: page,
+    pages: pages
+  };
 }

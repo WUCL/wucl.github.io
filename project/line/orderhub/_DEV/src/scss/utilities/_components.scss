@@ -1,199 +1,244 @@
+// ==========================================
+// utilities/_components.scss
+// 通用元件
+// ==========================================
 @use "sass:color";
-@use "utilities/config"as *;
-@use "utilities/mixins"as *;
+@use "config"as *;
+@use "mixins"as *;
 
-/* ========== 麵包屑 ========== */
+// ========== 麵包屑 ==========
 .breadcrumb {
-	font-size: $font-size-base;
-	color: $muted;
+    font-size: $font-size-base;
+    color: $muted;
 
-	ol {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: inline-flex;
-		gap: 6px;
-		align-items: center;
-	}
+    ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+    }
 
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
+    a {
+        color: inherit;
+        text-decoration: none;
 
-	li::after {
-		content: '/';
-		margin-left: 6px;
-		color: $bd;
-	}
+        &:hover {
+            color: $ink;
+        }
+    }
 
-	li:last-child::after {
-		content: '';
-		margin: 0;
-	}
+    li {
+        &::after {
+            content: '/';
+            margin-left: 6px;
+            color: $bd;
+        }
 
-	li.current {
-		color: $ink;
-		font-weight: 600;
-	}
+        &:last-child::after {
+            content: '';
+            margin: 0;
+        }
+
+        &.current {
+            color: $ink;
+            font-weight: 600;
+        }
+    }
 }
 
-/* ========== 工具列 / 年份標籤 ========== */
+// ========== 年份標籤 ==========
 .year-tag {
-	display: inline-block;
-	padding: 2px 8px;
-	border: 1px solid $bd;
-	border-radius: $radius-sm;
-	background: #fff;
-	color: $muted;
-	font-size: $font-size-base;
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid $bd;
+    border-radius: $radius-sm;
+    background: #fff;
+    color: $muted;
+    font-size: $font-size-base;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: $ink;
+        color: $ink;
+    }
 }
 
-
-/* ========== Status（放在 main 內、最多 3 行、可捲動） ========== */
+// ========== 狀態列 ==========
 .oh-status {
-	@include container();
+    @include container();
+    margin-bottom: $space-3;
+    background: $card-bg;
+    color: $ink;
+    border: 1px solid $bd;
+    border-radius: $radius;
+    box-shadow: $shadow-sm;
+    font-size: $font-size-sm;
+    padding-bottom: 9px;
 
-	margin-bottom: 12px;
-	background: $card-bg;
-	color: $ink;
-	border: 1px solid $bd;
-	border-radius: $radius;
-	box-shadow: $shadow-sm;
-	font-size: $font-size-sm;
+    &__head {
+        @include flex-between;
 
-	padding-bottom: 9px;
+        b {
+            font-weight: 700;
+            font-size: $font-size-base;
+        }
+    }
 
-	&__head {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+    &__ctrl {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
 
-		b {
-			font-weight: 700;
-			font-size: $font-size-base;
-		}
-		.oh-status__ctrl {
-			display: flex;
-			align-items: center;
-			gap: 7px;
-		}
-		.oh-status__clear {
-			margin-left: auto;
-			font-size: $font-size-sm;
-			padding: 1px 7px;
-			background: transparent;
-			border: 1px solid $bd;
-			color: $muted;
-			border-radius: $radius-sm;
-			cursor: pointer;
+    &__clear {
+        margin-left: auto;
+        font-size: $font-size-sm;
+        padding: 1px 7px;
+        background: transparent;
+        border: 1px solid $bd;
+        color: $muted;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: all 0.2s ease;
 
-			&:hover {
-				color: $ink;
-				background: $bg-soft;
-			}
-		}
-	}
+        &:hover {
+            color: $ink;
+            background: $bg-soft;
+        }
+    }
 
-	&__prog {
-		margin-top: 5px;
-		height: 3px;
-		background: $bg-soft;
-		border-radius: 999px;
-		overflow: hidden;
-	}
+    &__prog {
+        margin-top: 5px;
+        height: 3px;
+        background: $bg-soft;
+        border-radius: 999px;
+        overflow: hidden;
+    }
 
-	&__bar {
-		height: 100%;
-		width: 0%;
-		background: linear-gradient(90deg, $primary, $primary-weak);
-		transition: width .25s ease;
-	}
+    &__bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, $primary, $primary-weak);
+        transition: width 0.25s ease;
+    }
 
-	&__list {
-		margin-top: 6px;
-		max-height: calc(1.5em * 3 + 5px);
-		overflow: auto;
-	}
+    &__list {
+        margin-top: 6px;
+        max-height: calc(1.5em * 3 + 5px);
+        overflow: auto;
+    }
 
-	&__line {
-		border-left: 3px solid $ok;
-		padding-left: 6px;
-		margin: 3px 0;
-		letter-spacing: -.3px;
-		line-height: normal;
+    &__line {
+        border-left: 3px solid $ok;
+        padding-left: 6px;
+        margin: 3px 0;
+        letter-spacing: -0.3px;
+        line-height: normal;
 
-		&.warn {
-			border-color: $warn;
-		}
+        &.warn {
+            border-color: $warn;
+        }
 
-		&.err {
-			border-color: $err;
-		}
-	}
+        &.err {
+            border-color: $err;
+        }
+    }
 }
 
+// ========== 圖標按鈕 ==========
 .icon-btn {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 22px;
-	height: 22px;
-	border: 1px solid $bd;
-	border-radius: $radius-sm;
-	background: #fff;
-	color: $muted;
-	cursor: pointer;
-	@include respond(md) {
-		width: 25px;
-		height: 25px;
-	}
-	&:hover {
-		background: $bg-soft;
-		color: $ink;
-	}
-	svg {
-		display: block;
-	}
+    @include flex-center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid $bd;
+    border-radius: $radius-sm;
+    background: #fff;
+    color: $muted;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    @include respond(md) {
+        width: 25px;
+        height: 25px;
+    }
+
+    &:hover {
+        background: $bg-soft;
+        color: $ink;
+    }
+
+    svg {
+        display: block;
+    }
 }
 
+// ========== 分頁器 ==========
 .pager {
-	font-size: $font-size-sm;
-	display: flex;
-	// grid-template-columns: 1fr;
-	justify-content: flex-start;
-	align-items: center;
-	gap: 7px;
-	&-range {
-		letter-spacing: -.5px;
-	}
-	&-btn {
-		padding: 0 7px;
-		border: 1px solid $bd;
-		border-radius: $radius-sm;
-		background: #fff;
-		cursor: pointer;
-		font-size: $font-size-sm;
+    font-size: $font-size-sm;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 7px;
 
-		&.prev::before {
-			content: '←';
-		}
+    &-range {
+        letter-spacing: -0.5px;
+    }
 
-		&.next::after {
-			content: '→';
-		}
+    &-btn {
+        padding: 0 7px;
+        border: 1px solid $bd;
+        border-radius: $radius-sm;
+        background: #fff;
+        cursor: pointer;
+        font-size: $font-size-sm;
+        transition: all 0.2s ease;
 
-		&:disabled {
-			opacity: .5;
-			cursor: default;
-		}
-		&:not(:disabled):hover {
-			color: $ink;
-			background: $bg-soft;
-		}
-	}
+        &.prev::before {
+            content: '←';
+        }
 
-	&-info {
-		color: $muted;
-	}
+        &.next::after {
+            content: '→';
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &:not(:disabled):hover {
+            color: $ink;
+            background: $bg-soft;
+        }
+    }
+
+    &-info {
+        color: $muted;
+    }
+}
+
+// ========== 標籤組 ==========
+.tags-inline {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+
+    .tag {
+        display: inline-block;
+        padding: 1px 6px;
+        font-size: $font-size-sm;
+        border: 1px solid $bd;
+        border-radius: $radius-sm;
+        color: $muted;
+        line-height: 1.3;
+        transition: all 0.2s ease;
+
+        &.warn {
+            color: $err;
+            background: rgba($err, 0.3);
+            font-weight: 600;
+        }
+    }
 }
