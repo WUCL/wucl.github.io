@@ -90,26 +90,6 @@ function Orders_createWeekly(data, repeat, actor, opt) {
   return { ok:true, orderId: orderId, created: repeat };
 }
 
-
-
-
-
-/** list：取最近 N 筆；若 q 有值做簡易過濾（編號/姓名/電話/品項/貨運單號/平台） */
-// function Orders_listLatest(limit, q){
-//   var rows = ROWS(ENV.ORDERS_SHEET);
-//   // 以資料尾端為新 → 倒序
-//   rows = rows.reverse();
-//   if (q) {
-//     var k = String(q).trim();
-//     rows = rows.filter(function(r){
-//       var s = [r['訂單編號'], r['訂購人姓名'], r['訂購人電話'], r['商品項目'], r['貨運單號'], r['接單平台']].join(' ');
-//       return String(s).indexOf(k) >= 0;
-//     });
-//   }
-//   if (limit && rows.length > limit) rows = rows.slice(0, limit);
-//   return rows;
-// }
-
 function Orders_getById(orderId){
   var row = findById_(orderId);
   if (row === -1) return null;
@@ -207,7 +187,8 @@ function Orders_list(params){
     });
   }
 
-  // === order區間過濾（依「交貨日期」）===
+  // === order區間過濾（依「訂單日期」）===
+  /*
   if (range_order === 'this-week' || range_order === 'this-month' || (range_order === 'month' && month_order)) {
     var now = new Date();
     var start, end;
@@ -236,8 +217,10 @@ function Orders_list(params){
       return true;
     });
   }
+  */
 
   // === ship區間過濾（依「交貨日期」）===
+  /*
   if (range_ship === 'this-week' || range_ship === 'this-month' || (range_ship === 'month' && month_ship)) {
     var now = new Date();
     var start, end;
@@ -266,6 +249,81 @@ function Orders_list(params){
       return true;
     });
   }
+  */
+
+  /**
+   * 根據指定的時間範圍計算起始和結束日期
+   * @param {string} range - 時間範圍類型: 'this-week', 'this-month', 'month'
+   * @param {string} customMonth - 自定義月份 (格式: 'YYYY-MM')
+   * @returns {Object|null} 包含 start 和 end 的物件,或 null
+   */
+  function getDateRange(range, customMonth) {
+      if (!range || (range !== 'this-week' && range !== 'this-month' && range !== 'month')) {
+          return null;
+      }
+
+      if (range === 'month' && !customMonth) {
+          return null;
+      }
+
+      var now = new Date();
+      var start, end;
+
+      switch (range) {
+          case 'this-week':
+              start = new Date(now);
+              start.setHours(0, 0, 0, 0);
+              start.setDate(start.getDate() - start.getDay()); // 週日為0
+              end = new Date(start);
+              end.setDate(end.getDate() + 7);
+              break;
+
+          case 'this-month':
+              start = new Date(now.getFullYear(), now.getMonth(), 1);
+              end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+              break;
+
+          case 'month':
+              var ym = String(customMonth).split('-');
+              var yy = Number(ym[0] || 0);
+              var mm = Number(ym[1] || 0) - 1; // JS 月份 0-based
+              start = new Date(yy, mm, 1);
+              end = new Date(yy, mm + 1, 1);
+              break;
+      }
+
+      return { start: start, end: end };
+  }
+
+  /**
+   * 根據日期欄位和時間範圍過濾資料列
+   * @param {Array} rows - 要過濾的資料列陣列
+   * @param {string} dateField - 要檢查的日期欄位名稱
+   * @param {string} range - 時間範圍類型
+   * @param {string} customMonth - 自定義月份
+   * @returns {Array} 過濾後的資料列
+   */
+  function filterByDateRange(rows, dateField, range, customMonth) {
+      var dateRange = getDateRange(range, customMonth);
+
+      if (!dateRange) {
+          return rows; // 沒有有效的日期範圍,返回原始資料
+      }
+
+      return rows.filter(function(r) {
+          var d = new Date(r[dateField]);
+          if (isNaN(d.getTime())) return false;
+          return (d >= dateRange.start && d < dateRange.end);
+      });
+  }
+
+  // === 使用範例 ===
+
+  // order區間過濾（依「訂單日期」）
+  rows = filterByDateRange(rows, '訂單日期', range_order, month_order);
+
+  // ship區間過濾（依「交貨日期」）
+  rows = filterByDateRange(rows, '交貨日期', range_ship, month_ship);
 
   //（可選）若要限定年份：
   // if (year) {
