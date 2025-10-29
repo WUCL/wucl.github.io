@@ -112,25 +112,48 @@
 
         // 工具列元素
         var $container = $('#listContainer');
-        var $filterOrderStatus = $('#filterOrderStatus');
-        var $filterShipStatus = $('#filterShipStatus');
-        var $filterPayStatus = $('#filterPayStatus');
-        var $filterRange = $('#filterRange');
-        var $filterMonth = $('#filterMonth');
-        var $filterMonthWrap = $('#filterMonthWrap');
+        var FL = {}; // 篩選器容器
+
+        var $fl_orderStatus = $('#fl_orderStatus');
+        var $fl_shipStatus = $('#fl_shipStatus');
+        var $fl_payStatus = $('#fl_payStatus');
+
+        var $fl_rangeOrder = $('#fl_rangeOrder');
+        // var $fl_rangeOrderMonthWrap = $('#fl_rangeOrderMonthWrap');
+        var $fl_rangeOrderMonth = $('#fl_rangeOrderMonth');
+
+        var $fl_rangeShip = $('#fl_rangeShip');
+        // var $fl_rangeShipMonthWrap = $('#fl_rangeShipMonthWrap');
+        var $fl_rangeShipMonth = $('#fl_rangeShipMonth');
+
+		FL.$fl_rangeShip = $('#fl_rangeShip');
+		FL.$fl_rangeOrder = $('#fl_rangeOrder');
+
+		FL.$fl_rangeOrderMonthWrap = $('#fl_rangeOrderMonthWrap');
+		FL.$fl_rangeShipMonthWrap = $('#fl_rangeShipMonthWrap');
+
+		FL.$fl_rangeOrderMonth = $('#fl_rangeOrderMonth');
+		FL.$fl_rangeShipMonth = $('#fl_rangeShipMonth');
+
         var $yearTag = $('.year-tag');
 
         // 顯示固定年份
         if ($yearTag.length) { $yearTag.text(YEAR).attr('data-year', YEAR); }
-        if ($filterMonth.length) {
-            $filterMonth.attr('min', YEAR + '-01').attr('max', YEAR + '-12');
-            // 若外面帶了 2025-xx，保留；否則維持預設 value
-        }
+        [
+			FL.$fl_rangeOrderMonth,
+			FL.$fl_rangeShipMonth
+		].forEach(function ($el) {
+			$el.attr('min', YEAR + '-01').attr('max', YEAR + '-12');
+		});
 
-        function updateMonthVisibility() {
-            if (!$filterRange.length || !$filterMonthWrap.length) return;
-            var v = $filterRange.val();
-            $filterMonthWrap.toggle(v === 'month');
+        function updateMonthVisibility(range) {
+        	console.log(range);
+        	var $range = FL[`$${range}`],
+        		$wrap = FL[`$${range}MonthWrap`];
+
+            if (!$range.length || !$wrap.length) return;
+            var v = $range.val();
+            $wrap.toggle(v === 'month');
         }
 
         function updatePager(total, page, pages, pageSize, pageCount) {
@@ -187,9 +210,9 @@
             var params = { limit: LIMIT, year: YEAR };
             // 取得篩選結果 訂單狀態/出貨狀態/付款狀態
 			[
-				{ el: $filterOrderStatus, key: 'orderStatus' },
-				{ el: $filterShipStatus,  key: 'shipStatus'  },
-				{ el: $filterPayStatus,   key: 'payStatus'   }
+				{ el: $fl_orderStatus, key: 'orderStatus' },
+				{ el: $fl_shipStatus,  key: 'shipStatus'  },
+				{ el: $fl_payStatus,   key: 'payStatus'   }
 			].forEach(function (f) {
 				if (f.el && f.el.length) {
 					var val = String(f.el.val() || '');
@@ -197,13 +220,22 @@
 				}
 			});
 
-            // 區間
-            if ($filterRange.length) {
-                var r = String($filterRange.val() || '');
-                if (r) params.range = r; // 'this-week' / 'this-month' / 'month'
-                if (r === 'month' && $filterMonth.length) {
-                    var m = String($filterMonth.val() || '');
-                    if (m) params.month = m; // '2025-10'
+            // order區間
+            if ($fl_rangeOrder.length) {
+                var r_rangeOrder = String($fl_rangeOrder.val() || '');
+                if (r_rangeOrder) params.range_order = r_rangeOrder; // 'this-week' / 'this-month' / 'month'
+                if (r_rangeOrder === 'month' && $fl_rangeOrderMonth.length) {
+                    var m_rangeOrder = String($fl_rangeOrderMonth.val() || '');
+                    if (m_rangeOrder) params.month_order = m_rangeOrder; // '2025-10'
+                }
+            }
+            // ship區間
+            if ($fl_rangeShip.length) {
+                var r_rangeShip = String($fl_rangeShip.val() || '');
+                if (r_rangeShip) params.range_ship = r_rangeShip; // 'this-week' / 'this-month' / 'month'
+                if (r_rangeShip === 'month' && $fl_rangeShipMonth.length) {
+                    var m_rangeShip = String($fl_rangeShipMonth.val() || '');
+                    if (m_rangeShip) params.month_ship = m_rangeShip; // '2025-10'
                 }
             }
             // params.year = YEAR; // 先傳給後端（即便未用）
@@ -221,7 +253,7 @@
 
             if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 40);
             console.log(params);
-
+            // return;
             APP.api('list', params)
                 .then(function(res) {
                     console.log(res);
@@ -276,31 +308,61 @@
         // === 綁定條件事件 ===
         // 即時重刷：訂單狀態/出貨狀態/付款狀態
         [
-			$filterOrderStatus,
-			$filterShipStatus,
-			$filterPayStatus
+			$fl_orderStatus,
+			$fl_shipStatus,
+			$fl_payStatus
 		].forEach(function ($el) {
 			$el.off('change').on('change', function () {
 				currentPage = 1;
 				fetchAndRender();
 			});
 		});
-        // 區間：若選「指定月」→ 只顯示月份輸入，不立即重刷；其他選項→ 立即重刷
-        $filterRange.off('change').on('change', function() {
-            updateMonthVisibility();
-            var r = String($filterRange.val() || '');
-            if (r === 'month') return; // 等月份選擇後再重刷
-        	currentPage = 1;
-            fetchAndRender();
-        });
-        // 指定月份：只有在 range===month 時才重刷
-        $filterMonth.off('change').on('change', function() {
-            var r = String($filterRange.val() || '');
-            if (r === 'month') {
-        		currentPage = 1;
-            	fetchAndRender();
-            }
-        });
+
+		[
+			$fl_rangeOrder,
+			$fl_rangeShip
+		].forEach(function ($el) {
+			// 區間：若選「指定月」→ 只顯示月份輸入，不立即重刷；其他選項→ 立即重刷
+			$el.off('change').on('change', function(e) {
+				var $name = e.target.id;
+			    updateMonthVisibility($name);
+
+				var r = String($el.val() || '');
+				if (r === 'month') return; // 等月份選擇後再重刷
+				currentPage = 1;
+				fetchAndRender();
+			});
+			// 指定月份：只有在 range===month 時才重刷
+			var $rangMonth = FL[`$${$el.attr('id')}Month`];
+			$rangMonth.off('change').on('change', function(e) {
+				var $name = e.target.id;
+				console.log($name);
+				var r = String($el.val() || '');
+				if (r === 'month') {
+					currentPage = 1;
+					fetchAndRender();
+				}
+			});
+		});
+        // // 區間：若選「指定月」→ 只顯示月份輸入，不立即重刷；其他選項→ 立即重刷
+        // $fl_rangeShip.off('change').on('change', function(e) {
+        // 	console.log(e.target.name);
+        //     updateMonthVisibility();
+
+        //     var r = String($fl_rangeShip.val() || '');
+        //     if (r === 'month') return; // 等月份選擇後再重刷
+        // 	currentPage = 1;
+        //     fetchAndRender();
+        // });
+        // // 指定月份：只有在 range===month 時才重刷
+        // $fl_rangeShipMonth.off('change').on('change', function(e) {
+        // 	console.log(e.target.name);
+        //     var r = String($fl_rangeShip.val() || '');
+        //     if (r === 'month') {
+        // 		currentPage = 1;
+        //     	fetchAndRender();
+        //     }
+        // });
 
         // 卡片行為：詳情 / 編輯
         $container.off('click').on('click', '.icon-btn', function(e) {

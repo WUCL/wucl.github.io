@@ -168,11 +168,12 @@
 		letter-spacing: -.5px;
 	}
 	&-btn {
-		padding: 0 9px;
+		padding: 0 7px;
 		border: 1px solid $bd;
 		border-radius: $radius-sm;
 		background: #fff;
 		cursor: pointer;
+		font-size: $font-size-sm;
 
 		&.prev::before {
 			content: '←';

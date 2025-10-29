@@ -83,8 +83,10 @@ function doPost(e) {
           orderStatus: String(req.orderStatus || ''), // 'doing' / 'done' / 'cancel'
           shipStatus: String(req.shipStatus || ''), // '已交貨' / '未交貨'
           payStatus:  String(req.payStatus  || ''), // '已付款' / '未付款'
-          range:      String(req.range      || ''), // '', 'this-week', 'this-month', 'month'
-          month:      String(req.month      || ''), // 'YYYY-MM'
+          range_order:      String(req.range_order      || ''), // '', 'this-week', 'this-month', 'month'
+          range_ship:      String(req.range_ship      || ''), // '', 'this-week', 'this-month', 'month'
+          month_order:      String(req.month_order      || ''), // 'YYYY-MM'
+          month_ship:      String(req.month_ship      || ''), // 'YYYY-MM'
           year:       Number(req.year || 0) || null,
           limit:      Math.min(Number(req.limit || 20), 200),
           page:        Math.max(1, Number(req.page || 1))  // 🟢 加上 page

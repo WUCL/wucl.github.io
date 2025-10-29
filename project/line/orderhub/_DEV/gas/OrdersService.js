@@ -157,8 +157,10 @@ function Orders_updateByPatch(orderId, patch, actor, opt){
  * - limit:     最大回傳筆數（預設 20，上限 200）
  * - shipStatus:'已出貨' | '未出貨' | '' (不過濾)
  * - payStatus: '已付款' | '未付款' | '' (不過濾)
- * - range:     '' | 'this-week' | 'this-month' | 'month'
- * - month:     'YYYY-MM'（當 range==='month' 時才會用到）
+ * - range_order:     '' | 'this-week' | 'this-month' | 'month'
+ * - range_ship:     '' | 'this-week' | 'this-month' | 'month'
+ * - month_order:     'YYYY-MM'（當 range==='month' 時才會用到）
+ * - month_ship:     'YYYY-MM'（當 range==='month' 時才會用到）
  * - year:      例如 2025（目前不強制；你要可再限制）
  * 回傳：{ ok:true, items:[], total:n }
  */
@@ -168,8 +170,10 @@ function Orders_list(params){
   var orderStatus = String(params.orderStatus || '');
   var shipStatus = String(params.shipStatus || '');
   var payStatus  = String(params.payStatus  || '');
-  var range      = String(params.range      || '');
-  var month      = String(params.month      || '');
+  var range_order      = String(params.range_order      || '');
+  var range_ship      = String(params.range_ship      || '');
+  var month_order      = String(params.month_order      || '');
+  var month_ship      = String(params.month_ship      || '');
   var year       = Number(params.year || 0); // 你若要只看某年，可再用
 
   function _norm(s){ return String(s||'').trim(); }
@@ -203,20 +207,50 @@ function Orders_list(params){
     });
   }
 
-  // === 區間過濾（依「交貨日期」）===
-  if (range === 'this-week' || range === 'this-month' || (range === 'month' && month)) {
+  // === order區間過濾（依「交貨日期」）===
+  if (range_order === 'this-week' || range_order === 'this-month' || (range_order === 'month' && month_order)) {
     var now = new Date();
     var start, end;
 
-    if (range === 'this-week') {
+    if (range_order === 'this-week') {
       start = new Date(now); start.setHours(0,0,0,0);
       start.setDate(start.getDate() - start.getDay()); // 週日為0
       end = new Date(start); end.setDate(end.getDate() + 7);
-    } else if (range === 'this-month') {
+    } else if (range_order === 'this-month') {
       start = new Date(now.getFullYear(), now.getMonth(), 1);
       end   = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-    } else if (range === 'month' && month) {
-      var ym = String(month).split('-'); // e.g. ['2025','10']
+    } else if (range_order === 'month' && month_order) {
+      var ym = String(month_order).split('-'); // e.g. ['2025','10']
+      var yy = Number(ym[0] || 0);
+      var mm = Number(ym[1] || 0) - 1;   // JS 月份 0-based
+      start = new Date(yy, mm, 1);
+      end   = new Date(yy, mm + 1, 1);
+    }
+
+    rows = rows.filter(function(r){
+      var d = new Date(r['訂單日期']);
+      if (isNaN(d.getTime())) return false;
+      if (start && end) {
+        return (d >= start && d < end);
+      }
+      return true;
+    });
+  }
+
+  // === ship區間過濾（依「交貨日期」）===
+  if (range_ship === 'this-week' || range_ship === 'this-month' || (range_ship === 'month' && month_ship)) {
+    var now = new Date();
+    var start, end;
+
+    if (range_ship === 'this-week') {
+      start = new Date(now); start.setHours(0,0,0,0);
+      start.setDate(start.getDate() - start.getDay()); // 週日為0
+      end = new Date(start); end.setDate(end.getDate() + 7);
+    } else if (range_ship === 'this-month') {
+      start = new Date(now.getFullYear(), now.getMonth(), 1);
+      end   = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    } else if (range_ship === 'month' && month_ship) {
+      var ym = String(month_ship).split('-'); // e.g. ['2025','10']
       var yy = Number(ym[0] || 0);
       var mm = Number(ym[1] || 0) - 1;   // JS 月份 0-based
       start = new Date(yy, mm, 1);

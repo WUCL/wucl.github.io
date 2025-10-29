@@ -183,37 +183,49 @@
     			<div class="filters">
     				<span class="year-tag"></span>
     				<label>
-    					<select id="filterOrderStatus">
-    						<option value="">訂單狀態</option>
+    					<select id="fl_orderStatus">
+    						<option value="">訂單</option>
     						<option value="doing">doing</option>
     						<option value="done">done</option>
     						<option value="cancel">cancel</option>
     					</select>
     				</label>
     				<label>
-    					<select id="filterShipStatus">
-    						<option value="">交貨狀態</option>
+    					<select id="fl_shipStatus">
+    						<option value="">交貨</option>
     						<option value="未交貨">未交貨</option>
     						<option value="已交貨">已交貨</option>
     					</select>
     				</label>
     				<label>
-    					<select id="filterPayStatus">
-    						<option value="">付款狀態</option>
+    					<select id="fl_payStatus">
+    						<option value="">付款</option>
     						<option value="未付款">未付款</option>
     						<option value="已付款">已付款</option>
     					</select>
     				</label>
     				<label>
-    					<select id="filterRange">
-    						<option value="">交貨區間</option>
+    					<select id="fl_rangeOrder" name="fl_rangeOrder">
+    						<option value="">訂單間</option>
     						<option value="this-week">本週</option>
     						<option value="this-month">本月</option>
     						<option value="month">指定月</option>
     					</select>
     				</label>
-    				<label id="filterMonthWrap" style="display:none;">
-    					<input id="filterMonth" type="month" min="2025-01" max="2025-12">
+    				<label id="fl_rangeOrderMonthWrap" style="display:none;">
+    					<input id="fl_rangeOrderMonth" type="month">
+    				</label>
+
+    				<label>
+    					<select id="fl_rangeShip">
+    						<option value="">交貨間</option>
+    						<option value="this-week">本週</option>
+    						<option value="this-month">本月</option>
+    						<option value="month">指定月</option>
+    					</select>
+    				</label>
+    				<label id="fl_rangeShipMonthWrap" style="display:none;">
+    					<input id="fl_rangeShipMonth" type="month">
     				</label>
     			</div>
     		</div>
