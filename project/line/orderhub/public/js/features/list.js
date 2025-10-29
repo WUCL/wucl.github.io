@@ -96,7 +96,7 @@
             if (rows.length) groupHtml.push('<div class="detail-group"><div class="g-body">' + rows.join('') + '</div></div>');
         });
 
-        if (groupHtml.length) detailHtml = '<div class="detail" style="display:none; margin-top:6px;">' + groupHtml.join('') + '</div>';
+        if (groupHtml.length) detailHtml = '<div class="detail" style="display:none;">' + groupHtml.join('') + '</div>';
         if (detailHtml) $card.append(detailHtml);
         return $card;
     }
@@ -112,7 +112,6 @@
 
         // 工具列元素
         var $container = $('#listContainer');
-        // var $filterOrderStatusGroup = $('#filterOrderStatusGroup');
         var $filterOrderStatus = $('#filterOrderStatus');
         var $filterShipStatus = $('#filterShipStatus');
         var $filterPayStatus = $('#filterPayStatus');
@@ -141,19 +140,14 @@
 			pageCount = Number(pageCount) || 0;
 
 			// === 計算本頁範圍 ===
-			var totalCount = String(total || 0);
+			var totalCount = String(total || 0);  // 總筆數
 			var startIdx = total === 0 ? 0 : (page - 1) * pageSize + 1;
 			var endIdx = total === 0 ? 0 : Math.min(total, startIdx + pageCount - 1);
 
 			var rangeText = '0 / 0'; // 0 筆時的處理
 
-			if (total !== 0) {
-				// 範例 A：21–40 / 110 筆（本頁 20 筆）
-				rangeText = startIdx + ' – ' + endIdx + ' / ' + totalCount + ' 筆';
-				// 範例 B：本頁 20 筆｜第 2/6 頁｜合計 110 筆（如果你也想把頁數帶進來）
-				// var pageText = '本頁 ' + items.length + ' 筆｜第 ' + currentPage + '/' + totalPages + ' 頁｜合計 ' + total + ' 筆';
-				// $('[data-bind="pageRange"]').text(pageText);
-			}
+			// 21–40 / 110 筆（本頁 20 筆）
+			if (totalCount !== 0) rangeText = startIdx + ' – ' + endIdx + ' / ' + totalCount + ' 筆';
 
 			// === 下方分頁按鈕 ===
 			var $pager = $('#pager');
@@ -190,41 +184,18 @@
 
 
         function getQueryParams() {
-            // var params = { limit: LIMIT };
-            // if ($filterStatus.length) {
-            //     var s = String($filterStatus.val() || '');
-            //     if (s) params.status = s;
-            // }
             var params = { limit: LIMIT, year: YEAR };
-
-            // 訂單狀態
-            // if ($filterOrderStatusGroup.length) {
-            //     var orderStatusValues = [];
-            //     $('#filterOrderStatusGroup input[name="orderStatus"]:checked').each(function(){
-            //         orderStatusValues.push($(this).val());
-            //     });
-            //     var status = String(orderStatusValues.join(',') || '');
-            //     console.log(status);
-            //     if (status) params.orderStatus = status; // 'doing' / 'done' / 'cancel'
-            // }
-
-            // 訂單狀態
-            if ($filterOrderStatus.length) {
-                var order = String($filterOrderStatus.val() || '');
-                if (order) params.orderStatus = order; // 'doing' / 'done' / 'cancel'
-            }
-
-            // 出貨狀態
-            if ($filterShipStatus.length) {
-                var ship = String($filterShipStatus.val() || '');
-                if (ship) params.shipStatus = ship; // '已出貨' / '未出貨'
-            }
-
-            // 付款狀態
-            if ($filterPayStatus.length) {
-                var pay = String($filterPayStatus.val() || '');
-                if (pay) params.payStatus = pay; // '已付款' / '未付款'
-            }
+            // 取得篩選結果 訂單狀態/出貨狀態/付款狀態
+			[
+				{ el: $filterOrderStatus, key: 'orderStatus' },
+				{ el: $filterShipStatus,  key: 'shipStatus'  },
+				{ el: $filterPayStatus,   key: 'payStatus'   }
+			].forEach(function (f) {
+				if (f.el && f.el.length) {
+					var val = String(f.el.val() || '');
+					if (val) params[f.key] = val;
+				}
+			});
 
             // 區間
             if ($filterRange.length) {
@@ -259,13 +230,18 @@
 
                     if (res && res.ok && Array.isArray(res.items)) {
                         var items = res.items;
-                        var total = Number(res.total || items.length || 0);
+                        var total = Number(res.total || items.length || 0); // 總筆數
 
                         totalPages = Math.max(1, Math.ceil(total / LIMIT));
                         currentPage = res.page || params.page || 1;
 
-                        // setCount(total, page, pages, pageSize);
-                        // setCount(total, currentPage, totalPages, LIMIT);
+                        if (!items.length && total > 0 && currentPage > 1) {
+							currentPage = 1;
+							return fetchAndRender(); // 再拉一次第 1 頁
+						}
+
+                        // renderPager();
+                        updatePager(total, currentPage, totalPages, LIMIT, items.length);
 
                         if (!items.length) {
                             renderEmpty($container);
@@ -278,9 +254,6 @@
                             var $card = createCard(item);
                             $container.append($card);
                         });
-
-                        // renderPager();
-                        updatePager(total, currentPage, totalPages, LIMIT, items.length);
 
                         if (APP.status && APP.status.done) APP.status.done(true, '完成（' + items.length + ' 筆）');
                         return;
@@ -298,42 +271,36 @@
         }
 
         // 初次
-        updateMonthVisibility();
         fetchAndRender();
 
         // === 綁定條件事件 ===
-        // 訂單狀態：即時重刷
-        // if ($('#filterOrderStatusGroup input[name="orderStatus"]').length) {
-        //     $('#filterOrderStatusGroup input[name="orderStatus"]').off('change').on('change', fetchAndRender);
-        // }
-        if ($filterOrderStatus.length) {
-            $filterOrderStatus.off('change').on('change', fetchAndRender);
-        }
-
-        // 出貨狀態：即時重刷
-        if ($filterShipStatus.length) {
-            $filterShipStatus.off('change').on('change', fetchAndRender);
-        }
-        // 付款狀態：即時重刷
-        if ($filterPayStatus.length) {
-            $filterPayStatus.off('change').on('change', fetchAndRender);
-        }
+        // 即時重刷：訂單狀態/出貨狀態/付款狀態
+        [
+			$filterOrderStatus,
+			$filterShipStatus,
+			$filterPayStatus
+		].forEach(function ($el) {
+			$el.off('change').on('change', function () {
+				currentPage = 1;
+				fetchAndRender();
+			});
+		});
         // 區間：若選「指定月」→ 只顯示月份輸入，不立即重刷；其他選項→ 立即重刷
-        if ($filterRange.length) {
-            $filterRange.off('change').on('change', function() {
-                updateMonthVisibility();
-                var r = String($filterRange.val() || '');
-                if (r === 'month') return; // 等月份選擇後再重刷
-                fetchAndRender();
-            });
-        }
+        $filterRange.off('change').on('change', function() {
+            updateMonthVisibility();
+            var r = String($filterRange.val() || '');
+            if (r === 'month') return; // 等月份選擇後再重刷
+        	currentPage = 1;
+            fetchAndRender();
+        });
         // 指定月份：只有在 range===month 時才重刷
-        if ($filterMonth.length) {
-            $filterMonth.off('change').on('change', function() {
-                var r = String($filterRange.val() || '');
-                if (r === 'month') fetchAndRender();
-            });
-        }
+        $filterMonth.off('change').on('change', function() {
+            var r = String($filterRange.val() || '');
+            if (r === 'month') {
+        		currentPage = 1;
+            	fetchAndRender();
+            }
+        });
 
         // 卡片行為：詳情 / 編輯
         $container.off('click').on('click', '.icon-btn', function(e) {

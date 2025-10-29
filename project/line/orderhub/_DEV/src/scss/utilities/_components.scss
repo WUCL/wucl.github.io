@@ -4,164 +4,195 @@
 
 /* ========== 麵包屑 ========== */
 .breadcrumb {
-    font-size: $font-size-base;
-    color: $muted;
+	font-size: $font-size-base;
+	color: $muted;
 
-    ol {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: inline-flex;
-        gap: 6px;
-        align-items: center;
-    }
+	ol {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: inline-flex;
+		gap: 6px;
+		align-items: center;
+	}
 
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 
-    li::after {
-        content: '/';
-        margin-left: 6px;
-        color: $bd;
-    }
+	li::after {
+		content: '/';
+		margin-left: 6px;
+		color: $bd;
+	}
 
-    li:last-child::after {
-        content: '';
-        margin: 0;
-    }
+	li:last-child::after {
+		content: '';
+		margin: 0;
+	}
 
-    li.current {
-        color: $ink;
-        font-weight: 600;
-    }
+	li.current {
+		color: $ink;
+		font-weight: 600;
+	}
 }
 
 /* ========== 工具列 / 年份標籤 ========== */
 .year-tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border: 1px solid $bd;
-    border-radius: $radius-sm;
-    background: #fff;
-    color: $muted;
-    font-size: $font-size-base;
+	display: inline-block;
+	padding: 2px 8px;
+	border: 1px solid $bd;
+	border-radius: $radius-sm;
+	background: #fff;
+	color: $muted;
+	font-size: $font-size-base;
 }
 
 
 /* ========== Status（放在 main 內、最多 3 行、可捲動） ========== */
 .oh-status {
-    @include container();
+	@include container();
 
-    margin-bottom: 12px;
-    background: $card-bg;
-    color: $ink;
-    border: 1px solid $bd;
-    border-radius: $radius;
-    box-shadow: $shadow-sm;
-    font-size: $font-size-sm;
+	margin-bottom: 12px;
+	background: $card-bg;
+	color: $ink;
+	border: 1px solid $bd;
+	border-radius: $radius;
+	box-shadow: $shadow-sm;
+	font-size: $font-size-sm;
 
-    &__head {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+	padding-bottom: 9px;
 
-        b {
-            font-weight: 700;
-            font-size: $font-size-base;
-        }
+	&__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
-        .oh-status__clear {
-            margin-left: auto;
-            font-size: $font-size-sm;
-            padding: 1px 7px;
-            background: transparent;
-            border: 1px solid $bd;
-            color: $muted;
-            border-radius: $radius-sm;
-            cursor: pointer;
+		b {
+			font-weight: 700;
+			font-size: $font-size-base;
+		}
+		.oh-status__ctrl {
+			display: flex;
+			align-items: center;
+			gap: 7px;
+		}
+		.oh-status__clear {
+			margin-left: auto;
+			font-size: $font-size-sm;
+			padding: 1px 7px;
+			background: transparent;
+			border: 1px solid $bd;
+			color: $muted;
+			border-radius: $radius-sm;
+			cursor: pointer;
 
-            &:hover {
-                color: $ink;
-                background: $bg-soft;
-            }
-        }
-    }
+			&:hover {
+				color: $ink;
+				background: $bg-soft;
+			}
+		}
+	}
 
-    &__prog {
-        margin-top: 5px;
-        height: 3px;
-        background: $bg-soft;
-        border-radius: 999px;
-        overflow: hidden;
-    }
+	&__prog {
+		margin-top: 5px;
+		height: 3px;
+		background: $bg-soft;
+		border-radius: 999px;
+		overflow: hidden;
+	}
 
-    &__bar {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, $primary, $primary-weak);
-        transition: width .25s ease;
-    }
+	&__bar {
+		height: 100%;
+		width: 0%;
+		background: linear-gradient(90deg, $primary, $primary-weak);
+		transition: width .25s ease;
+	}
 
-    &__list {
-        margin-top: 6px;
-        max-height: calc(1.4em * 1 + 5px);
-        overflow: auto;
-    }
+	&__list {
+		margin-top: 6px;
+		max-height: calc(1.5em * 3 + 5px);
+		overflow: auto;
+	}
 
-    &__line {
-        border-left: 3px solid $ok;
-        padding-left: 6px;
-        margin: 3px 0;
-        letter-spacing: -.3px;
+	&__line {
+		border-left: 3px solid $ok;
+		padding-left: 6px;
+		margin: 3px 0;
+		letter-spacing: -.3px;
+		line-height: normal;
 
-        &.warn {
-            border-color: $warn;
-        }
+		&.warn {
+			border-color: $warn;
+		}
 
-        &.err {
-            border-color: $err;
-        }
-    }
+		&.err {
+			border-color: $err;
+		}
+	}
+}
+
+.icon-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border: 1px solid $bd;
+	border-radius: $radius-sm;
+	background: #fff;
+	color: $muted;
+	cursor: pointer;
+	@include respond(md) {
+		width: 25px;
+		height: 25px;
+	}
+	&:hover {
+		background: $bg-soft;
+		color: $ink;
+	}
+	svg {
+		display: block;
+	}
 }
 
 .pager {
-    font-size: $font-size-sm;
-    display: flex;
-    // grid-template-columns: 1fr;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 7px;
-    &-range {
-        letter-spacing: -.5px;
-    }
-    &-btn {
-        padding: 0 9px;
-        border: 1px solid $bd;
-        border-radius: $radius-sm;
-        background: #fff;
-        cursor: pointer;
+	font-size: $font-size-sm;
+	display: flex;
+	// grid-template-columns: 1fr;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 7px;
+	&-range {
+		letter-spacing: -.5px;
+	}
+	&-btn {
+		padding: 0 9px;
+		border: 1px solid $bd;
+		border-radius: $radius-sm;
+		background: #fff;
+		cursor: pointer;
 
-        &.prev::before {
-            content: '←';
-        }
+		&.prev::before {
+			content: '←';
+		}
 
-        &.next::after {
-            content: '→';
-        }
+		&.next::after {
+			content: '→';
+		}
 
-        &:disabled {
-            opacity: .5;
-            cursor: default;
-        }
-        &:not(:disabled):hover {
-            color: $ink;
-            background: $bg-soft;
-        }
-    }
+		&:disabled {
+			opacity: .5;
+			cursor: default;
+		}
+		&:not(:disabled):hover {
+			color: $ink;
+			background: $bg-soft;
+		}
+	}
 
-    &-info {
-        color: $muted;
-    }
+	&-info {
+		color: $muted;
+	}
 }
