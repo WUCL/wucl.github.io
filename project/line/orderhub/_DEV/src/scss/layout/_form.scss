@@ -87,15 +87,18 @@ form {
         }
     }
 
-    .same-check {
+    .extra-check {
         font-size: $font-size-sm;
         color: $muted;
         border: 1px solid $bd;
         border-radius: $radius-sm;
-        padding: 3px 5px;
+        padding: 1px 3px;
         background: #fff;
         margin-left: 7px;
+		line-height: 12px;
 
+        @include flex-center;
+		display: inline-flex;
         input {
             vertical-align: middle;
             margin: 0 3px 0 0;
@@ -131,6 +134,30 @@ form {
         &:focus {
             outline: none;
             border-color: $ink;
+        }
+    }
+
+    input {
+    	&[disabled] {
+    		color: $muted;
+    		background: rgba($muted, .1);
+    	}
+    }
+
+	select {
+		option[value="週花"],
+		option[value="宅配"] {
+			color: $mh;
+		}
+	}
+
+    &.showhide {
+        label {
+            color: $mh;
+        }
+
+        input {
+            border-color: $mh;
         }
     }
 }

@@ -24,9 +24,22 @@
 		// 預設今天日期
 		$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 
+		//=== 是陌生人 ===
+		const $isStranger = $('#isStranger'),
+			$buyerName = $form.find('[name="訂購人姓名"]');
+
+		$isStranger.on('change', function() {
+			if (this.checked) {
+				$buyerName.val('陌生人').attr('disabled', 'disabled');
+				syncBuyerToReceiver();
+			}
+			else $buyerName.removeAttr('disabled');
+			return;
+		});
+
 		//=== 同訂購人資訊 ===
 		const $sameAsBuyer = $('#sameAsBuyer'),
-			$buyerName = $form.find('[name="訂購人姓名"]'),
+			// $buyerName = $form.find('[name="訂購人姓名"]'),
 			$buyerPhone = $form.find('[name="訂購人電話"]'),
 			$recvName = $form.find('[name="收件者姓名"]'),
 			$recvPhone = $form.find('[name="收件者電話"]');
@@ -57,19 +70,30 @@
 		$receiptType.on('change', mappingRecvAddr);
 
 		// === 週花 UI（顯示/隱藏「週期」欄，並預填商品項目） ===
-		var $category   = $form.find('[name="品項分類"]');
-		var $period     = $form.find('[name="週期"]');           // 可沒有，安全檢查
-		var $periodWrap = $('#field-period');                    // 你模板裡包住週期欄位的容器
+		var $pCat   = $form.find('[name="品項分類"]');
+		// var $weeklyFlower     = $form.find('[name="週期"]');           // 可沒有，安全檢查
+		var $weeklyFlowerWrap = $('#field-weeklyFlower');                    // 你模板裡包住週期欄位的容器
 		var $item       = $form.find('[name="商品項目"]');
 
 		function updateWeeklyUI() {
-			if (!$category.length) return;
-			var isWeekly = String($category.val() || '') === '週花';
+			if (!$pCat.length) return;
+			var isWeekly = String($pCat.val() || '') === '週花';
 
-			$periodWrap.css('display', isWeekly ? '' : 'none');
+			$weeklyFlowerWrap.css('display', isWeekly ? '' : 'none');
 			if (isWeekly) $item.val('週花');
 		}
-		$category.on('change', updateWeeklyUI);
+		$pCat.on('change', updateWeeklyUI);
+
+		// === 宅配物流單號新增 ===
+		// var $receiptType   = $form.find('[name="取貨方式"]');
+		var $trackingNumberWrap = $('#field-trackingNumber');                    // 你模板裡包住週期欄位的容器
+
+		function updateTrackingNumberUI() {
+			if (!$receiptType.length) return;
+			var isDelivery = String($receiptType.val() || '') === '宅配';
+			$trackingNumberWrap.css('display', isDelivery ? '' : 'none');
+		}
+		$receiptType.on('change', updateTrackingNumberUI);
 
 
 		// submit 送出
@@ -187,7 +211,8 @@
 				// done & reset
 				if ($form[0] && $form[0].reset) $form[0].reset();
 				$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
-				$periodWrap.css('display', 'none');
+				$weeklyFlowerWrap.css('display', 'none');
+				$trackingNumberWrap.css('display', 'none');
 
 				if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
 

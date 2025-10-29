@@ -1,3 +1,6 @@
+<!-- ==========================================
+	index.html - 主頁面
+========================================== -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 	<head>
@@ -8,17 +11,22 @@
 		<title>Order Hub</title>
 		<meta name="keywords" content="" />
 		<meta name="description" content="A lightweight order management hub" />
-		<meta property="og:url" content="" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="" />
-		<meta property="og:description" content="" />
-		<meta property="og:image" content="" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Order Hub - 訂單管理系統">
+		<meta property="og:description" content="輕量級訂單管理中心">
+		<meta property="og:image" content="">
+		<meta property="og:url" content="">
+
 		<link rel="icon" type="image/png" href="@@webRoot/favicon.ico" />
 
+		<!-- Styles -->
 		@@include('../src/tpl/_fonts.html')
 		@@include('../src/tpl/_style.html')
-		<link rel="stylesheet" type="text/css" href="@@webRoot/public/css/style.min.css" />
+		<link rel="stylesheet" href="@@webRoot/public/css/style.min.css">
 
+		<!-- LINE LIFF SDK -->
 		<link rel="preconnect" href="https://static.line-scdn.net">
 		<script src="https://static.line-scdn.net/liff/edge/2/sdk.js" defer></script>
 	</head>
