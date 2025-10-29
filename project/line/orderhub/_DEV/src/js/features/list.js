@@ -114,20 +114,24 @@
         var $container = $('#listContainer');
         var FL = {}; // 篩選器容器
 
-        var $fl_orderStatus = $('#fl_orderStatus');
-        var $fl_shipStatus = $('#fl_shipStatus');
-        var $fl_payStatus = $('#fl_payStatus');
+        // var $fl_orderStatus = $('#fl_orderStatus');
+        // var $fl_shipStatus = $('#fl_shipStatus');
+        // var $fl_payStatus = $('#fl_payStatus');
 
-        var $fl_rangeOrder = $('#fl_rangeOrder');
+        // var $fl_rangeOrder = $('#fl_rangeOrder');
         // var $fl_rangeOrderMonthWrap = $('#fl_rangeOrderMonthWrap');
-        var $fl_rangeOrderMonth = $('#fl_rangeOrderMonth');
+        // var $fl_rangeOrderMonth = $('#fl_rangeOrderMonth');
 
-        var $fl_rangeShip = $('#fl_rangeShip');
+        // var $fl_rangeShip = $('#fl_rangeShip');
         // var $fl_rangeShipMonthWrap = $('#fl_rangeShipMonthWrap');
-        var $fl_rangeShipMonth = $('#fl_rangeShipMonth');
+        // var $fl_rangeShipMonth = $('#fl_rangeShipMonth');
 
-		FL.$fl_rangeShip = $('#fl_rangeShip');
+        FL.$fl_orderStatus = $('#fl_orderStatus');
+        FL.$fl_shipStatus = $('#fl_shipStatus');
+        FL.$fl_payStatus = $('#fl_payStatus');
+
 		FL.$fl_rangeOrder = $('#fl_rangeOrder');
+		FL.$fl_rangeShip = $('#fl_rangeShip');
 
 		FL.$fl_rangeOrderMonthWrap = $('#fl_rangeOrderMonthWrap');
 		FL.$fl_rangeShipMonthWrap = $('#fl_rangeShipMonthWrap');
@@ -147,7 +151,6 @@
 		});
 
         function updateMonthVisibility(range) {
-        	console.log(range);
         	var $range = FL[`$${range}`],
         		$wrap = FL[`$${range}MonthWrap`];
 
@@ -209,32 +212,47 @@
         function getQueryParams() {
             var params = { limit: LIMIT, year: YEAR };
             // 取得篩選結果 訂單狀態/出貨狀態/付款狀態
-			[
-				{ el: $fl_orderStatus, key: 'orderStatus' },
-				{ el: $fl_shipStatus,  key: 'shipStatus'  },
-				{ el: $fl_payStatus,   key: 'payStatus'   }
-			].forEach(function (f) {
-				if (f.el && f.el.length) {
-					var val = String(f.el.val() || '');
-					if (val) params[f.key] = val;
-				}
-			});
+			// [
+			// 	{ el: FL.$fl_orderStatus, key: 'orderStatus' },
+			// 	{ el: FL.$fl_shipStatus,  key: 'shipStatus'  },
+			// 	{ el: FL.$fl_payStatus,   key: 'payStatus'   }
+			// ].forEach(function (f) {
+			// 	if (f.el && f.el.length) {
+			// 		var val = String(f.el.val() || '');
+			// 		if (val) params[f.key] = val;
+			// 	}
+			// });
+
+            [
+                FL.$fl_orderStatus,
+                FL.$fl_shipStatus,
+                FL.$fl_payStatus
+            ].forEach(function ($el) {
+                if (!$el || !$el.length) return;
+                const val = String($el.val() || '');
+                if (!val) return;
+
+                // 自動由 id 推導 key
+                const id = $el.attr('id');               // e.g. "fl_orderStatus"
+                const key = id.replace(/^fl_/, '');      // → "orderStatus"
+                params[key] = val;
+            });
 
             // order區間
-            if ($fl_rangeOrder.length) {
-                var r_rangeOrder = String($fl_rangeOrder.val() || '');
+            if (FL.$fl_rangeOrder.length) {
+                var r_rangeOrder = String(FL.$fl_rangeOrder.val() || '');
                 if (r_rangeOrder) params.range_order = r_rangeOrder; // 'this-week' / 'this-month' / 'month'
-                if (r_rangeOrder === 'month' && $fl_rangeOrderMonth.length) {
-                    var m_rangeOrder = String($fl_rangeOrderMonth.val() || '');
+                if (r_rangeOrder === 'month' && FL.$fl_rangeOrderMonth.length) {
+                    var m_rangeOrder = String(FL.$fl_rangeOrderMonth.val() || '');
                     if (m_rangeOrder) params.month_order = m_rangeOrder; // '2025-10'
                 }
             }
             // ship區間
-            if ($fl_rangeShip.length) {
-                var r_rangeShip = String($fl_rangeShip.val() || '');
+            if (FL.$fl_rangeShip.length) {
+                var r_rangeShip = String(FL.$fl_rangeShip.val() || '');
                 if (r_rangeShip) params.range_ship = r_rangeShip; // 'this-week' / 'this-month' / 'month'
-                if (r_rangeShip === 'month' && $fl_rangeShipMonth.length) {
-                    var m_rangeShip = String($fl_rangeShipMonth.val() || '');
+                if (r_rangeShip === 'month' && FL.$fl_rangeShipMonth.length) {
+                    var m_rangeShip = String(FL.$fl_rangeShipMonth.val() || '');
                     if (m_rangeShip) params.month_ship = m_rangeShip; // '2025-10'
                 }
             }
@@ -245,7 +263,7 @@
         function fetchAndRender() {
             if (APP.status && APP.status.start) APP.status.start('載入清單');
             $container.html('<div class="loading">讀取中…</div>');
-            console.log("fetchAndRender :: " + currentPage);
+            // console.log("fetchAndRender :: " + currentPage);
 
             var params = getQueryParams();
             params.page = currentPage; // Number(page) || 1;
@@ -308,9 +326,9 @@
         // === 綁定條件事件 ===
         // 即時重刷：訂單狀態/出貨狀態/付款狀態
         [
-			$fl_orderStatus,
-			$fl_shipStatus,
-			$fl_payStatus
+			FL.$fl_orderStatus,
+			FL.$fl_shipStatus,
+			FL.$fl_payStatus
 		].forEach(function ($el) {
 			$el.off('change').on('change', function () {
 				currentPage = 1;
@@ -319,13 +337,13 @@
 		});
 
 		[
-			$fl_rangeOrder,
-			$fl_rangeShip
+			FL.$fl_rangeOrder,
+			FL.$fl_rangeShip
 		].forEach(function ($el) {
 			// 區間：若選「指定月」→ 只顯示月份輸入，不立即重刷；其他選項→ 立即重刷
 			$el.off('change').on('change', function(e) {
-				var $name = e.target.id;
-			    updateMonthVisibility($name);
+				var $id = e.target.id;
+			    updateMonthVisibility($id);
 
 				var r = String($el.val() || '');
 				if (r === 'month') return; // 等月份選擇後再重刷
@@ -335,8 +353,8 @@
 			// 指定月份：只有在 range===month 時才重刷
 			var $rangMonth = FL[`$${$el.attr('id')}Month`];
 			$rangMonth.off('change').on('change', function(e) {
-				var $name = e.target.id;
-				console.log($name);
+				var $id = e.target.id;
+				console.log($id);
 				var r = String($el.val() || '');
 				if (r === 'month') {
 					currentPage = 1;
