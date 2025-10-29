@@ -1,308 +1,308 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Order Hub</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="A lightweight order management hub" />
+		<meta property="og:url" content="" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="" />
+		<meta property="og:description" content="" />
+		<meta property="og:image" content="" />
+		<link rel="icon" type="image/png" href="./favicon.ico" />
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Order Hub</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="" />
-    <link rel="icon" type="image/png" href="./favicon.ico" />
-    <!-- BEGIN google noto sans tc -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
-    <!-- END google noto sans tc -->
+		<!-- BEGIN google noto sans tc -->
+		<!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+		<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+		<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+		<!-- END google noto sans tc -->
 
-    <!-- BEGIN google noto serif -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
-    <!-- END google noto serif -->
+		<!-- BEGIN google noto serif -->
+		<!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+		<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+		<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet"> -->
+		<!-- END google noto serif -->
 
 
-    <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
-    
-    <link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
-    <link rel="preconnect" href="https://static.line-scdn.net">
-    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js" defer></script>
-</head>
-<body>
-    <header id="header" class="header">
-        <div class="header__inner">
-            <!-- 第 1 排：左 meta -->
-            <div class="header-row row-1">
-                <div id="meta" class="meta meta--tiny">（DEV 模式，未登入）</div>
-            </div>
-            <!-- 第 2 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
-            <div class="header-row row-2">
-                <h1>訂單系統</h1>
-                <div id="clock" class="clock">—</div>
-            </div>
-            <!-- 第 3 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
-            <div class="header-row row-3">
-                <nav id="breadcrumb" class="breadcrumb" aria-label="Breadcrumb">
-                    <ol>
-                        <li><a href="#/list">首頁</a></li>
-                        <li class="current" aria-current="page">訂單列表</li>
-                    </ol>
-                </nav>
-                <nav class="nav">
-                    <a href="#/add" class="btn btn--icon" data-nav="add" aria-label="新增訂單">
-                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor" />
-                        </svg>
-                        <span>新增訂單</span>
-                    </a>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <main id="main" class="main"></main>
-    <!-- 訊息（統一樣式） -->
-    <template id="tpl-msg">
-    	<div class="msg {{cls}}">{{text}}</div>
-    </template>
-    <!-- 新增表單 -->
-    <template id="tpl-add">
-    	<form id="formAdd" class="form formAdd">
-    		<div id="" class="msg" data-slot="msg"></div>
-    		<!-- === 區一 基本資料 === -->
-    		<section class="section basic">
-    			<h3>基本資訊</h3>
-    			<div class="row">
-    				<div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
-    				<div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
-    				<div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
-    				<div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
-    				<div class="field"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
-    				<div class="field"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
-    				<div class="field"><label>訂單金額</label><input name="訂單金額" type="number" min="0" step="1" required></div>
-    				<div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
-    			</div>
-    		</section>
+		<!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&amp;subset=chinese-traditional" rel="stylesheet"> -->
+		<!-- <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet"> -->
+		<!-- <link href="https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap" rel="stylesheet"> -->
+		
+		<link rel="stylesheet" type="text/css" href="./public/css/style.min.css" />
 
-    		<!-- === 區二 訂購人資訊 === -->
-    		<section class="section buyer">
-    			<h3>訂購人</h3>
-    			<div class="row">
-    				<div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
-    				<div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
-    				<div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
-    			</div>
-    		</section>
+		<link rel="preconnect" href="https://static.line-scdn.net">
+		<script src="https://static.line-scdn.net/liff/edge/2/sdk.js" defer></script>
+	</head>
+	<body>
+		<header id="header" class="header">
+		    <div class="header__inner">
+		        <!-- 第 1 排：左 meta -->
+		        <div class="header-row row-1">
+		            <div id="meta" class="meta meta--tiny">（DEV 模式，未登入）</div>
+		        </div>
+		        <!-- 第 2 排：左 標題 ｜ 右 DEV/登入狀態（保留括號） -->
+		        <div class="header-row row-2">
+		            <h1>訂單系統</h1>
+		            <div id="clock" class="clock">—</div>
+		        </div>
+		        <!-- 第 3 排：左 麵包屑 ｜ 右 新增訂單按鈕 -->
+		        <div class="header-row row-3">
+		            <nav id="breadcrumb" class="breadcrumb" aria-label="Breadcrumb">
+		                <ol>
+		                    <li><a href="#/list">首頁</a></li>
+		                    <li class="current" aria-current="page">訂單列表</li>
+		                </ol>
+		            </nav>
+		            <nav class="nav">
+		                <a href="#/add" class="btn btn--icon" data-nav="add" aria-label="新增訂單">
+		                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+		                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor" />
+		                    </svg>
+		                    <span>新增訂單</span>
+		                </a>
+		            </nav>
+		        </div>
+		    </div>
+		</header>
+		<main id="main" class="main"></main>
+		<!-- 訊息（統一樣式） -->
+		<template id="tpl-msg">
+			<div class="msg {{cls}}">{{text}}</div>
+		</template>
+		<!-- 新增表單 -->
+		<template id="tpl-add">
+			<form id="formAdd" class="form formAdd">
+				<div id="" class="msg" data-slot="msg"></div>
+				<!-- === 區一 基本資料 === -->
+				<section class="section basic">
+					<h3>基本資訊</h3>
+					<div class="row">
+						<div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
+						<div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
+						<div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
+						<div class="field"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
+						<div class="field"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
+						<div class="field"><label>訂單金額</label><input name="訂單金額" type="number" min="0" step="1" required></div>
+						<div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
+					</div>
+				</section>
 
-    		<!-- === 區三 訂單商品 === -->
-    		<section class="section product">
-    			<h3>訂單商品</h3>
-    			<div class="row">
-    				<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat"><option value="" selected disabled>請選擇</option></select></div>
-    				<div class="field" id="field-period" style="display:none;"><label>週花週期（1–12）</label><input name="週期" type="number" min="1" max="12" value="1" inputmode="numeric"></div>
-    				<div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
-    				<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1"></textarea></div>
-    				<div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
-    				<div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
-    			</div>
-    		</section>
+				<!-- === 區二 訂購人資訊 === -->
+				<section class="section buyer">
+					<h3>訂購人</h3>
+					<div class="row">
+						<div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
+						<div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
+						<div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
+					</div>
+				</section>
 
-    		<!-- === 區四 收件人 === -->
-    		<section class="section receipt">
-    			<h3>收件資訊
-    			<label class="same-check"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
-    			<div class="row">
-    				<div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType" required><option value="" selected disabled>請選擇</option></select></div>
-    				<div class="field"><label>姓名</label><input name="收件者姓名" required></div>
-    				<div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
-    				<div class="field"><label>地址</label><input name="收件者地址" required></div>
-    			</div>
-    		</section>
+				<!-- === 區三 訂單商品 === -->
+				<section class="section product">
+					<h3>訂單商品</h3>
+					<div class="row">
+						<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat"><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field" id="field-period" style="display:none;"><label>週花週期（1–12）</label><input name="週期" type="number" min="1" max="12" value="1" inputmode="numeric"></div>
+						<div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1"></textarea></div>
+						<div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
+						<div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
+					</div>
+				</section>
 
-    		<button type="submit" class="btn primary">送出</button>
-    	</form>
-    </template>
-    <!-- 編輯表單 -->
-    <template id="tpl-edit">
-    	<section class="card">
-    		<div class="row">
-    			<div class="field">
-    				<label>訂單編號</label>
-    				<input id="oid" placeholder="O-YYYYMM-00001" value="{{orderId}}">
-    			</div>
-    			<div class="field" style="display:flex;align-items:end">
-    				<button type="button" id="btnLoad" class="btn">載入</button>
-    			</div>
-    		</div>
-    		<form id="formEdit" style="display:none">
-    			<div class="field">
-    				<label>是否已付款</label>
-    				<select name="是否已付款">
-    					<option>未付款</option>
-    					<option>已付款</option>
-    					<option>貨到付款</option>
-    				</select>
-    			</div>
-    			<div class="field">
-    				<label>是否已交貨</label>
-    				<select name="是否已交貨">
-    					<option>未交貨</option>
-    					<option>已交貨</option>
-    				</select>
-    			</div>
-    			<div class="field">
-    				<label>貨運單號</label>
-    				<input name="貨運單號">
-    			</div>
-    			<div class="field">
-    				<label>訂單備註</label>
-    				<textarea name="訂單備註" rows="3"></textarea>
-    			</div>
-    			<button type="submit" class="btn primary">儲存更新</button>
-    			<div data-slot="msg"></div>
-    		</form>
-    	</section>
-    </template>
-    <!-- ========== List: 首頁清單 ========== -->
-    <template id="tpl-list">
-    	<section class="panel">
-    		<div class="panel-h">
-    			<div class="head">
-    				<h2>訂單清單</h2>
-    				<div id="pager" class="pager sub"></div>
-    				<!-- <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div> -->
-    			</div>
-    			<!-- ↓ 篩選列放入這裡 ↓ -->
-    			<div class="filters">
-    				<span class="year-tag"></span>
-    				<label>
-    					<select id="fl_orderStatus">
-    						<option value="">訂單狀態</option>
-    						<option value="doing">doing</option>
-    						<option value="done">done</option>
-    						<option value="cancel">cancel</option>
-    					</select>
-    				</label>
-    				<label>
-    					<select id="fl_shipStatus">
-    						<option value="">交貨狀態</option>
-    						<option value="未交貨" selected>未交貨</option>
-    						<option value="已交貨">已交貨</option>
-    					</select>
-    				</label>
-    				<label>
-    					<select id="fl_payStatus">
-    						<option value="">付款狀態</option>
-    						<option value="未付款">未付款</option>
-    						<option value="已付款">已付款</option>
-    					</select>
-    				</label>
-    				<label>
-    					<select id="fl_rangeOrder" name="fl_rangeOrder">
-    						<option value="">訂單區間</option>
-    						<option value="this-week">本週</option>
-    						<option value="this-month">本月</option>
-    						<option value="month">指定月</option>
-    					</select>
-    				</label>
-    				<label id="fl_rangeOrderMonthWrap" style="display:none;">
-    					<input id="fl_rangeOrderMonth" type="month">
-    				</label>
+				<!-- === 區四 收件人 === -->
+				<section class="section receipt">
+					<h3>收件資訊
+					<label class="same-check"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
+					<div class="row">
+						<div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType" required><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field"><label>姓名</label><input name="收件者姓名" required></div>
+						<div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
+						<div class="field"><label>地址</label><input name="收件者地址" required></div>
+					</div>
+				</section>
 
-    				<label>
-    					<select id="fl_rangeShip">
-    						<option value="">交貨區間</option>
-    						<option value="this-week">本週</option>
-    						<option value="this-month">本月</option>
-    						<option value="month">指定月</option>
-    					</select>
-    				</label>
-    				<label id="fl_rangeShipMonthWrap" style="display:none;">
-    					<input id="fl_rangeShipMonth" type="month">
-    				</label>
-    			</div>
-    		</div>
-    		<div class="panel-b">
-    			<div class="list-wrap" id="listContainer"></div>
-    		</div>
-    	</section>
-    </template>
-    <template id="tpl-list-empty">
-    	<div class="empty">
-    		<p>目前沒有資料。</p>
-    	</div>
-    </template>
-    <!-- 單張卡片（由 JS 動態組，不一定要 template；給你參考） -->
-    <!-- 單筆卡片（兩行極簡） -->
-    <template id="tpl-list-card">
-    	<div class="card order" data-id="" data-status="">
-    		<div class="card__inner">
-    		<div class="col a">
-    			<!-- 行 A：ID | [交貨日 + Tag] | (最右) 編輯 -->
-    			<div class="row a">
-    				<div class="cell meta status"><span data-bind="訂單狀態">—</span></div>
-    				<div class="cell meta id">#<span data-bind="訂單編號">—</span></div>
-    				<div class="cell meta date"><span data-bind="交貨日期">—</span></div>
-    				<div class="cell meta shippay"><span class="tags-inline"></span></div>
-    			</div>
-    			<!-- 行 B：平台 | 訂購人 | 分類 | 金額 | (最右) 詳細 -->
-    			<div class="row b">
-    				<div class="cell meta"><span data-bind="接單平台">—</span></div>
-    				<div class="cell meta oName"><span data-bind="訂購人姓名">—</span></div>
-    				<div class="cell meta"><span data-bind="品項分類">—</span></div>
-    				<div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
-    			</div>
-    		</div>
-    		<div class="col b">
-    			<div class="cell actions">
-    				<a class="icon-btn" data-action="edit" title="編輯" href="#" aria-label="編輯">
-    					<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-    						<path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor" />
-    					</svg>
-    				</a>
-    				<a class="icon-btn" data-action="toggle" title="詳情" href="#" aria-label="詳情">
-    					<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-    						<path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
-    					</svg>
-    				</a>
-    			</div>
-    		</div>
-    	</div>
-    </template>
-    <footer class="footer">
-        <div class="footer__inner">
-            <small>Copyright © 2025 WUCL.</small>
-        </div>
-    </footer>
-    
-    <script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
+				<button type="submit" class="btn primary">送出</button>
+			</form>
+		</template>
+		<!-- 編輯表單 -->
+		<template id="tpl-edit">
+			<section class="card">
+				<div class="row">
+					<div class="field">
+						<label>訂單編號</label>
+						<input id="oid" placeholder="O-YYYYMM-00001" value="{{orderId}}">
+					</div>
+					<div class="field" style="display:flex;align-items:end">
+						<button type="button" id="btnLoad" class="btn">載入</button>
+					</div>
+				</div>
+				<form id="formEdit" style="display:none">
+					<div class="field">
+						<label>是否已付款</label>
+						<select name="是否已付款">
+							<option>未付款</option>
+							<option>已付款</option>
+							<option>貨到付款</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>是否已交貨</label>
+						<select name="是否已交貨">
+							<option>未交貨</option>
+							<option>已交貨</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>貨運單號</label>
+						<input name="貨運單號">
+					</div>
+					<div class="field">
+						<label>訂單備註</label>
+						<textarea name="訂單備註" rows="3"></textarea>
+					</div>
+					<button type="submit" class="btn primary">儲存更新</button>
+					<div data-slot="msg"></div>
+				</form>
+			</section>
+		</template>
+		<!-- ========== List: 首頁清單 ========== -->
+		<template id="tpl-list">
+			<section class="panel">
+				<div class="panel-h">
+					<div class="head">
+						<h2>訂單清單</h2>
+						<div id="pager" class="pager sub"></div>
+						<!-- <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div> -->
+					</div>
+					<!-- ↓ 篩選列放入這裡 ↓ -->
+					<div class="filters">
+						<span class="year-tag"></span>
+						<label>
+							<select id="fl_orderStatus">
+								<option value="">訂單狀態</option>
+								<option value="doing">doing</option>
+								<option value="done">done</option>
+								<option value="cancel">cancel</option>
+							</select>
+						</label>
+						<label>
+							<select id="fl_shipStatus">
+								<option value="">交貨狀態</option>
+								<option value="未交貨" selected>未交貨</option>
+								<option value="已交貨">已交貨</option>
+							</select>
+						</label>
+						<label>
+							<select id="fl_payStatus">
+								<option value="">付款狀態</option>
+								<option value="未付款">未付款</option>
+								<option value="已付款">已付款</option>
+							</select>
+						</label>
+						<label>
+							<select id="fl_rangeOrder" name="fl_rangeOrder">
+								<option value="">訂單區間</option>
+								<option value="this-week">本週</option>
+								<option value="this-month">本月</option>
+								<option value="month">指定月</option>
+							</select>
+						</label>
+						<label id="fl_rangeOrderMonthWrap" style="display:none;">
+							<input id="fl_rangeOrderMonth" type="month">
+						</label>
 
-    <!-- UI 與靜態資料 -->
-    <script src="./public/js/ui/eventdevice.js"></script>
-    <script src="./public/js/ui/templates.js"></script>
-    <script src="./public/js/core/app.clock.js"></script>
-    <script src="./public/js/data/options.js"></script>
+						<label>
+							<select id="fl_rangeShip">
+								<option value="">交貨區間</option>
+								<option value="this-week">本週</option>
+								<option value="this-month">本月</option>
+								<option value="month">指定月</option>
+							</select>
+						</label>
+						<label id="fl_rangeShipMonthWrap" style="display:none;">
+							<input id="fl_rangeShipMonth" type="month">
+						</label>
+					</div>
+				</div>
+				<div class="panel-b">
+					<div class="list-wrap" id="listContainer"></div>
+				</div>
+			</section>
+		</template>
+		<template id="tpl-list-empty">
+			<div class="empty">
+				<p>目前沒有資料。</p>
+			</div>
+		</template>
+		<!-- 單張卡片（由 JS 動態組，不一定要 template；給你參考） -->
+		<!-- 單筆卡片（兩行極簡） -->
+		<template id="tpl-list-card">
+			<div class="card order" data-id="" data-status="">
+				<div class="card__inner">
+				<div class="col a">
+					<!-- 行 A：ID | [交貨日 + Tag] | (最右) 編輯 -->
+					<div class="row a">
+						<div class="cell meta status"><span data-bind="訂單狀態">—</span></div>
+						<div class="cell meta id">#<span data-bind="訂單編號">—</span></div>
+						<div class="cell meta date"><span data-bind="交貨日期">—</span></div>
+						<div class="cell meta shippay"><span class="tags-inline"></span></div>
+					</div>
+					<!-- 行 B：平台 | 訂購人 | 分類 | 金額 | (最右) 詳細 -->
+					<div class="row b">
+						<div class="cell meta"><span data-bind="接單平台">—</span></div>
+						<div class="cell meta oName"><span data-bind="訂購人姓名">—</span></div>
+						<div class="cell meta"><span data-bind="品項分類">—</span></div>
+						<div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
+					</div>
+				</div>
+				<div class="col b">
+					<div class="cell actions">
+						<a class="icon-btn" data-action="edit" title="編輯" href="#" aria-label="編輯">
+							<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor" />
+							</svg>
+						</a>
+						<a class="icon-btn" data-action="toggle" title="詳情" href="#" aria-label="詳情">
+							<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</template>
+		<footer class="footer">
+		    <div class="footer__inner">
+		        <small>Copyright © 2025 WUCL.</small>
+		    </div>
+		</footer>
+		<!-- === Libraries === -->
+		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 
-    <!-- Core / Services / UI Helpers -->
-    <script src="./public/js/core/app.core.js"></script>
-    <script src="./public/js/services/api.js"></script>
-    <script src="./public/js/ui/form.js"></script>
+		<!-- === UI Core === -->
+		<script src="./public/js/ui/eventdevice.js"></script>
+		<script src="./public/js/ui/templates.js"></script>
+		<script src="./public/js/ui/status.js"></script>
+		<script src="./public/js/ui/form.js"></script>
+		<script src="./public/js/core/app.clock.js"></script>
 
-    <script src="./public/js/ui/status.js"></script>
+		<!-- === Data / Core / Services === -->
+		<script src="./public/js/data/options.js"></script>
+		<script src="./public/js/core/app.core.js"></script>
+		<script src="./public/js/services/api.js"></script>
 
-    <!-- Features -->
-    <script src="./public/js/features/list.js"></script>
-    <script src="./public/js/features/add.js"></script>
+		<!-- === Features === -->
+		<script src="./public/js/features/list.js"></script>
+		<script src="./public/js/features/add.js"></script>
 
-    <!-- 啟動 -->
-    <script src="./public/js/boot.js"></script>
-</body>
+		<!-- === Boot === -->
+		<script src="./public/js/boot.js"></script>
 
+	</body>
 </html>
