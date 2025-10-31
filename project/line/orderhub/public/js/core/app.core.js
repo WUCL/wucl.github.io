@@ -135,8 +135,18 @@
         var name = h.split('?')[0];
         this.updateBreadcrumb(name);
         if (name === 'add') { this.renderAdd(); return; }
+        if (name === 'edit') { this.renderEdit(); return; }
         if (this.renderList) this.renderList();
         else this.renderAdd();
+    };
+
+    // app.router.js
+    APP.route = function() {
+        const h = location.hash || '#/list';
+        if (h.indexOf('#/list') === 0) return APP.renderList();
+        if (h.indexOf('#/add') === 0) return APP.renderAdd();
+        if (h.indexOf('#/edit') === 0) return APP.renderEdit();
+        location.hash = '#/list';
     };
 
     /* ========== Common Utilities ========== */

@@ -24,56 +24,19 @@
 		// 預設今天日期
 		$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 
-		//=== 是陌生人 ===
-		const $isStranger = $('#isStranger'),
-			$buyerName = $form.find('[name="訂購人姓名"]');
+		// === checkbox，是陌生人 ===
+		APP.bindIsStranger($form);
 
-		$isStranger.on('change', function() {
-			if (this.checked) {
-				$buyerName.val('陌生人').attr('disabled', 'disabled');
-				syncBuyerToReceiver();
-			}
-			else $buyerName.removeAttr('disabled');
-			return;
-		});
+		// === checkbox，同訂購人資訊 ===
+		APP.bindSameAsBuyer($form);
 
-		//=== 同訂購人資訊 ===
-		const $sameAsBuyer = $('#sameAsBuyer'),
-			// $buyerName = $form.find('[name="訂購人姓名"]'),
-			$buyerPhone = $form.find('[name="訂購人電話"]'),
-			$recvName = $form.find('[name="收件者姓名"]'),
-			$recvPhone = $form.find('[name="收件者電話"]');
-		// 同步函式：即時把訂購人資訊複製到收件人
-		function syncBuyerToReceiver() {
-			if (!$sameAsBuyer.prop('checked')) return;
-			$recvName.val($buyerName.val());
-			$recvPhone.val($buyerPhone.val());
-		}
-		// 當訂購人欄位變動時，即時同步 & 當勾選狀態改變時
-		$buyerName.on('input', syncBuyerToReceiver);
-		$buyerPhone.on('input', syncBuyerToReceiver);
-		$sameAsBuyer.on('change', function() { if (this.checked) syncBuyerToReceiver(); return; });
+		// === 取貨方式，自取自動帶入地址 / 宅配顯示物流單號 ===
+		APP.bindMappingRecvAddr($form);
 
-
-		//=== 取貨方式，自動帶入地址 ===
-		const $receiptType = $form.find('[name="取貨方式"]'),
-			$recvAddr = $form.find('[name="收件者地址"]');
-
-		function mappingRecvAddr() {
-			var v   = $receiptType.val() || '',
-				map = (w.MAPPING_receiptType) || {},
-				mapped = map.hasOwnProperty(v) ? map[v] : '';
-			if (mapped === '') return;
-			$recvAddr.val(mapped);
-		}
-
-		$receiptType.on('change', mappingRecvAddr);
-
-		// === 週花 UI（顯示/隱藏「週期」欄，並預填商品項目） ===
-		var $pCat   = $form.find('[name="品項分類"]');
-		// var $weeklyFlower     = $form.find('[name="週期"]');           // 可沒有，安全檢查
-		var $weeklyFlowerWrap = $('#field-weeklyFlower');                    // 你模板裡包住週期欄位的容器
-		var $item       = $form.find('[name="商品項目"]');
+		// === 週花 UI（顯示/隱藏「週期」欄，並預填商品項目），只在 add 發生 ===
+		var $pCat = $form.find('[name="品項分類"]');
+		var $weeklyFlowerWrap = $('#field-weeklyFlower');
+		var $item = $form.find('[name="商品項目"]');
 
 		function updateWeeklyUI() {
 			if (!$pCat.length) return;
@@ -83,17 +46,6 @@
 			if (isWeekly) $item.val('週花');
 		}
 		$pCat.on('change', updateWeeklyUI);
-
-		// === 宅配物流單號新增 ===
-		// var $receiptType   = $form.find('[name="取貨方式"]');
-		var $trackingNumberWrap = $('#field-trackingNumber');                    // 你模板裡包住週期欄位的容器
-
-		function updateTrackingNumberUI() {
-			if (!$receiptType.length) return;
-			var isDelivery = String($receiptType.val() || '') === '宅配';
-			$trackingNumberWrap.css('display', isDelivery ? '' : 'none');
-		}
-		$receiptType.on('change', updateTrackingNumberUI);
 
 
 		// submit 送出

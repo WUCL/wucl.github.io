@@ -14,6 +14,7 @@
     receiptType : 取貨方式
     */
     w.ORDER_OPTIONS = {
+        orderStatus: ["doing", "done", "cancel"],
         cType: ["新客", "複購", "親友", "員工", "公關", "合作"],
         platforms: ["IG","LINE","MH","FB","官網","廣告","表單","市集","快閃","電話","面談","Google","email","OT","JG"],
         isDelivery: ["未交貨", "已交貨", "不交貨", "部分交"],
