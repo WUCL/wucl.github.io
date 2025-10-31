@@ -14,26 +14,18 @@
 
 	function ensureBar() {
 		if (document.getElementById(ROOT_ID)) return;
-		var html = '' +
-			'<div id="oh-status" class="oh-status">' +
-			'	<div class="oh-status__head">' +
-			'		<b>狀態</b>' +
-			'		<div class="oh-status__ctrl">' +
-			'	    	<button type="button" class="oh-status__clear">清空</button>' +
-			'			<a class="icon-btn oh-status__toggle" data-action="toggle" title="展開狀態列表" href="#" aria-label="展開狀態列表"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" /></svg></a>' +
-			'		</div>' +
-			'  	</div>' +
-			'  	<div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>' +
-			'  	<div class="oh-status__list" style="display:none;"></div>' +
-			'</div>';
+
+		const frag = TPL.tpl('tpl-status');
+
+	 	// 插入到 #main 最前面；若沒有 #main 則插到 body 開頭
 		var main = document.getElementById('main');
 		if (main) {
-			var wrap = document.createElement('div');
-			wrap.innerHTML = html;
-			main.insertBefore(wrap.firstElementChild, main.firstChild || null);
+			main.insertBefore(frag, main.firstChild);
 		} else {
-			document.body.insertAdjacentHTML('afterbegin', html);
+			// 你也可以用 TPL.mount(document.body, frag, false)（append），但這裡要插到最前面
+			document.body.insertBefore(frag, document.body.firstChild);
 		}
+
 		$('.oh-status__clear').on('click', function() { $('.oh-status__list').empty(); });
         $('.oh-status__toggle').on('click', function(e) {
 			e.preventDefault();

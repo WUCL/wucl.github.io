@@ -17,15 +17,15 @@ function genId_(orderDate) {
 
   var p = PropertiesService.getScriptProperties();
   var lock = LockService.getScriptLock();
-  
+
   try {
     lock.waitLock(LIMITS.LOCK_TIMEOUT);
     var n = Number(p.getProperty(key) || 0) + 1;
     p.setProperty(key, String(n));
     lock.releaseLock();
-    
+
     var seq = String(n).padStart(3, '0');
-    return y + m + d + '-' + seq;
+    return y + m + d + '-' + seq + '-00';
   } catch (e) {
     Logger.log('Lock error in genId_: ' + e);
     throw new Error('無法生成訂單編號，請稍後再試');
@@ -35,7 +35,7 @@ function genId_(orderDate) {
 function ensureHeader_(name) {
   var sh = SH(ENV.ORDERS_SHEET);
   var headers = HDR(ENV.ORDERS_SHEET).headers;
-  
+
   if (headers.indexOf(name) === -1) {
     sh.insertColumnAfter(headers.length || 1);
     sh.getRange(1, headers.length + 1).setValue(name);

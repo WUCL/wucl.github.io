@@ -31,6 +31,9 @@
 			return;
 		}
 
+		// === 狀態列：開始 ===
+		if (APP.status && APP.status.start) APP.status.start('編輯訂單，' + orderId);
+
 		// 自動灌入 select
 		if (typeof this.populateAllSelects === 'function') {
 			this.populateAllSelects($form);
@@ -46,9 +49,13 @@
 		APP.bindMappingRecvAddr($form);
 
 
-
 		// === Step 1. 讀取資料 ===
-		$slot.removeClass('ok err').addClass('msg').text('讀取中…');
+		// $slot.removeClass('ok err').addClass('msg').text('讀取中…');
+		var html = '<div class="msg-h">編輯訂單<span>' + orderId + '</span></div><div class="msg-b">讀取中…</div>';
+		$slot.removeClass('ok err').addClass('msg').html(html);
+		APP.lockForm($form, true);
+
+		if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 40);
 
 		APP.api('get', { id: orderId })
 			.then(function(res) {
@@ -56,44 +63,61 @@
 					console.log(res);
 					fillForm(res.item);
 					$slot.removeClass('msg err ok').empty();
+					APP.lockForm($form, false);
+                    if (APP.status && APP.status.done) APP.status.done(true, '完成載入');
 				} else {
 					const note = res && res.msg ? `（${res.msg}）` : '';
-					$slot.removeClass('ok').addClass('msg err')
-						.text('❌ 讀取失敗 ' + note);
+					const hint = '❌ 讀取失敗 ' + note;
+					$slot.removeClass('ok').addClass('msg err').text(hint);
+					if (APP.status && APP.status.done) APP.status.done(false, hint);
 				}
 			})
 			.catch(function(err) {
-				$slot.removeClass('ok').addClass('msg err')
-					.text('❌ 錯誤：' + String(err && err.message || err || 'network-error'));
+				const hint = '❌ 錯誤：' + String(err && err.message || err || 'network-error');
+				$slot.removeClass('ok').addClass('msg err').text(hint);
+				if (APP.status && APP.status.done) APP.status.done(false, hint);
 			});
 
 		// === Step 2. 表單送出 ===
 		$form.off('submit').on('submit', function(e) {
 			e.preventDefault();
 			const patch = APP.formToObject($form);
+			const $btn = $form.find('button[type="submit"]');
 
 			// 移除空字串欄位
 			Object.keys(patch).forEach(k => {
 				if (patch[k] == null || patch[k] === '') delete patch[k];
 			});
 
-			const $btn = $form.find('button[type="submit"]');
-			$btn.prop('disabled', true).text('更新中…');
+			if (APP.status && APP.status.start) APP.status.start('送出更新，' + orderId);
+			$slot.removeClass('err').removeClass('ok').empty();
+			APP.lockForm($form, true);
+			$btn.text('更新中…');
+
+			// $btn.prop('disabled', true).text('更新中…');
+			if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 35);
 
 			APP.api('update', { id: orderId, patch: patch, actor: APP.var.actor })
 				.then(function(res) {
-					$btn.prop('disabled', false).text('儲存變更');
+
+					$btn.text('儲存變更');
+					APP.lockForm($form, false);
+
 					if (res && res.ok) {
 						renderConfirmSummary($slot, orderId, patch);
+            			if (APP.status && APP.status.done) APP.status.done(true, '完成更新，' + id);
 					} else {
 						const hint = (res && res.msg) ? ('❌ 失敗：' + res.msg) : '❌ 未知錯誤';
 						$slot.removeClass('ok').addClass('msg err').text(hint);
+						if (APP.status && APP.status.done) APP.status.done(false, hint);
 					}
 				})
 				.catch(function(err) {
 					$btn.prop('disabled', false).text('儲存變更');
+					const hint = '❌ 錯誤：' + String(err && err.message || err);
 					$slot.removeClass('ok').addClass('msg err')
-						.text('❌ 錯誤：' + String(err && err.message || err));
+						.text(hint);
+					if (APP.status && APP.status.done) APP.status.done(false, hint);
 				});
 		});
 

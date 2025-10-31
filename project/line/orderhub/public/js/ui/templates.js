@@ -21,6 +21,7 @@
         }
     }
 
+    // === 載入模板、回傳 DOM 節點 ===
     function tpl(id, data) {
         var t = document.getElementById(id);
         if (!t) throw new Error('template not found: ' + id);
@@ -29,6 +30,7 @@
         return node;
     }
 
+    // === 掛載模板到指定容器 ===
     function mount(container, node, replace) {
         var el = (container && container.nodeType === 1) ? container : document.querySelector(container);
         if (!el) throw new Error('mount target not found');

@@ -5,23 +5,25 @@
 <template id="tpl-msg">
     <div class="msg {{cls}}" role="alert">{{text}}</div>
 </template>
+
 <!-- 狀態列模板 -->
-<!--
-<template id="tpl-status">
-    <div class="oh-status" role="status" aria-live="polite">
+ <template id="tpl-status">
+    <div id="oh-status" class="oh-status" role="status" aria-live="polite">
         <div class="oh-status__head">
-            <b>處理中</b>
+            <b>狀態</b>
             <div class="oh-status__ctrl">
-                <button type="button" class="oh-status__clear" aria-label="清除所有訊息">清除</button>
+                <button type="button" class="oh-status__clear">清空</button>
+                <a class="icon-btn oh-status__toggle" data-action="toggle" title="展開狀態列表" href="#" aria-label="展開狀態列表">
+                    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                </a>
             </div>
         </div>
-        <div class="oh-status__prog">
-            <div class="oh-status__bar"></div>
-        </div>
-        <div class="oh-status__list"></div>
+        <div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
+        <div class="oh-status__list" style="display:none;"></div>
     </div>
 </template>
- -->
 
 <!-- ========== 新增訂單表單 ========== -->
 <template id="tpl-add">
@@ -56,10 +58,10 @@
 		<section class="section product">
 			<h3>訂單商品</h3>
 			<div class="row">
-				<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat"><option value="" selected disabled>請選擇</option></select></div>
+				<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat" required><option value="" selected disabled>請選擇</option></select></div>
 				<div class="field showhide" id="field-weeklyFlower" style="display:none;"><label>週花週期（1–12）</label><input name="週期" type="number" min="1" max="12" value="1" inputmode="numeric"></div>
 				<div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
-				<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1"></textarea></div>
+				<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1" required></textarea></div>
 				<div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
 				<div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
 			</div>
@@ -85,30 +87,6 @@
 <template id="tpl-edit">
 	<form id="formEdit" editForm class="form formEdit">
 		<div id="" class="msg" data-slot="msg"></div>
-		<!-- <div data-slot="msg" id="editMsg"></div> -->
-		<!-- <div class="row">
-			<div class="field">
-				<label>訂單編號</label>
-				<input name="訂單編號" readonly>
-			</div>
-			<div class="field">
-				<label>是否已付款</label>
-				<select name="是否已付款" data-opt="isPay"></select>
-			</div>
-			<div class="field">
-				<label>是否已交貨</label>
-				<select name="是否已交貨" data-opt="isDelivery"></select>
-			</div>
-			<div class="field">
-				<label>貨運單號</label>
-				<input name="貨運單號" type="text">
-			</div>
-			<div class="field">
-				<label>訂單備註</label>
-				<textarea name="訂單備註" rows="2"></textarea>
-			</div>
-		</div> -->
-
 		<!-- 訂單編號 -->
 		<section class="section orderNumber">
 			<div class="row">

@@ -40,25 +40,29 @@ function Orders_createWeekly(data, repeat, actor, opt) {
   var firstDate = data['交貨日期']
     ? new Date(data['交貨日期'])
     : getNextFriday_(new Date(data['訂單日期'] || new Date()));
-  
+
   var baseFriday = getNextFriday_(firstDate);
 
   for (var i = 1; i <= repeat; i++) {
     var obj = Object.assign({}, baseDefaults, data || {});
-    obj['訂單編號'] = orderId;
 
-    // 商品項目：週花標記
+    // === 生成唯一編號 ===
+    var suffix = String(i).padStart(2, '0');
+    var subId = orderId.replace(/-00$/, '-' + suffix);
+    obj['訂單編號'] = subId;
+
+    // === 商品項目 ===
     if (String(obj['品項分類'] || '') === '週花') {
       var baseName = (obj['商品項目'] && String(obj['商品項目']).trim()) || '週花';
       obj['商品項目'] = baseName + (repeat > 1 ? (' ' + i + '/' + repeat) : '');
     }
 
-    // 訂單金額：僅第一筆保留
+    // === 訂單金額：只有第1筆有金額 ===
     if (i > 1) {
       obj['訂單金額'] = 0;
     }
 
-    // 交貨日期：第1筆維持原值或最近週五，後續逐週 +7
+    // === 交貨日期 === 第1筆維持原值或最近週五，後續逐週 +7
     if (i === 1) {
       obj['交貨日期'] = Utilities.formatDate(firstDate, 'Asia/Taipei', 'yyyy/MM/dd');
     } else {
@@ -89,15 +93,15 @@ function Orders_createWeekly(data, repeat, actor, opt) {
 function Orders_getById(orderId) {
   var row = findById_(orderId);
   if (row === -1) return null;
-  
+
   var headers = HDR(ENV.ORDERS_SHEET).headers;
   var vals = SH(ENV.ORDERS_SHEET).getRange(row, 1, 1, headers.length).getValues()[0];
-  
+
   var obj = {};
   headers.forEach(function(h, i) {
     obj[h] = vals[i];
   });
-  
+
   return obj;
 }
 

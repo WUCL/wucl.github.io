@@ -96,8 +96,12 @@
 			}
 
 			// 送出
+			// $btn.prop('disabled', true).text('送出中…');
+			// 先鎖表單 + 換按鈕文字
 			if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 35);
-			$btn.prop('disabled', true).text('送出中…');
+			$slot.removeClass('ok err').empty();
+			APP.lockForm($form, true);
+			$btn.text('送出中…');
 
 			let res;
 			try {
@@ -125,7 +129,10 @@
 				res = { ok: false, msg: 'network-error' };
 			}
 
-			$btn.prop('disabled', false).text('送出');
+			// $btn.prop('disabled', false).text('送出');
+			// 還原按鈕 & 解鎖表單（不論成功/失敗都會執行）
+			$btn.text('送出');
+			APP.lockForm($form, false);
 
 			if (res && res.ok) {
 				if (APP.status && APP.status.tick) APP.status.tick('處理回應', 30);
@@ -163,8 +170,7 @@
 				// done & reset
 				if ($form[0] && $form[0].reset) $form[0].reset();
 				$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
-				$weeklyFlowerWrap.css('display', 'none');
-				$trackingNumberWrap.css('display', 'none');
+        		$form.find('.field.showhide').css('display', 'none');
 
 				if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
 
