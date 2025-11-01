@@ -4,7 +4,7 @@
 
 function Orders_newOrder(payload, actor) {
   ensureHeader_('訂單編號');
-  
+
   var obj = Object.assign({
     '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy/MM/dd'),
     '訂單狀態': 'doing'
@@ -12,6 +12,9 @@ function Orders_newOrder(payload, actor) {
 
   var orderId = genId_(obj['訂單日期']);
   obj['訂單編號'] = orderId;
+
+  if (obj['訂購人電話']) obj['訂購人電話'] = "'" + String(obj['訂購人電話']);
+  if (obj['收件者電話']) obj['收件者電話'] = "'" + String(obj['收件者電話']);
 
   APPEND(ENV.ORDERS_SHEET, obj);
   return orderId;

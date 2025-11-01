@@ -83,7 +83,7 @@
 		if (!$isStranger.length || !$buyerName.length) return;
 
 		$isStranger.off('.isStranger').on('change.isStranger', function() {
-			if (this.checked) $buyerName.data('prevName', $buyerName.val() || '').val('陌生人').prop('readonly', true);
+			if (this.checked) $buyerName.data('prevName', $buyerName.val() || '').val(APP.var.stranger).prop('readonly', true);
 			else $buyerName.val($buyerName.data('prevName')).prop('readonly', false);
 			self.syncBuyerToReceiver($form);
 		});

@@ -64,6 +64,10 @@
 					fillForm(res.item);
 					$slot.removeClass('msg err ok').empty();
 					APP.lockForm($form, false);
+
+					let pCat_el = $form.find('[name="品項分類"]');
+					if (pCat_el.val() === '週花') pCat_el.prop('disabled', true);
+
                     if (APP.status && APP.status.done) APP.status.done(true, '完成載入');
 				} else {
 					const note = res && res.msg ? `（${res.msg}）` : '';
@@ -123,28 +127,40 @@
 
 		// === 輔助：填入欄位 ===
 		function fillForm(data) {
-			console.log("fillForm ::", data);
-			const $sameAsBuyer = $form.find('#sameAsBuyer');
+			const $sameAsBuyer_check = $form.find('#sameAsBuyer');
+			const $isStranger_check = $form.find('#isStranger');
 
 			let buyerName = '';
 			let recvName = '';
 
 			Object.keys(data).forEach(function (k) {
-				console.log(k);
 				const $field = $form.find('[name="' + k + '"]');
-				const val = data[k];
-				console.log(k);
-				if ($field.length) $field.val(val);
+				let v = data[k];
+				if (!$field.length) return;
 
-				if (k === '貨運單號' && val !== '') $form.find('#field-trackingNumber').toggle(true);
-				if (k === '訂購人姓名') buyerName = val;
-				if (k === '收件者姓名') recvName = val;
+                if ($field.attr('type') === 'date' && v) v = toDateInputValue(v);
+
+				if (k === '訂購人姓名' && v === APP.var.stranger) $isStranger_check.prop('checked', true).trigger('change');
+				if (k === '貨運單號' && v !== '') $form.find('#field-trackingNumber').toggle(true);
+				if (k === '訂購人姓名') buyerName = v;
+				if (k === '收件者姓名') recvName = v;
+
+				$field.val(v);
 			});
 
 			// === 檢查是否「同訂購人資訊」 ===
 			if (buyerName && recvName && buyerName === recvName) {
-				$sameAsBuyer.prop('checked', true).trigger('change');
+				$sameAsBuyer_check.prop('checked', true).trigger('change');
 			}
+		}
+
+		function toDateInputValue(isoString) {
+			if (!isoString) return '';
+			const d = new Date(isoString);
+			// 修正為本地時間
+			const offset = d.getTimezoneOffset();
+			const local = new Date(d.getTime() - offset * 60000);
+			return local.toISOString().split('T')[0]; // 取 YYYY-MM-DD
 		}
 
 		// === 成功摘要顯示 ===
