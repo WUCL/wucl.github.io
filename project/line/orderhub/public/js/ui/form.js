@@ -158,23 +158,10 @@
 
 		if (lock) {
 			$form.addClass('is-busy');
-			$fields.each(function() {
-				var $el = $(this);
-				if (this.disabled) {
-					$el.data('wasDisabled', true); // 記錄原本就被禁用
-				}
-				this.disabled = true;
-			});
+			$fields.each(function() { this.disabled = true; });
 		} else {
 			$form.removeClass('is-busy');
-			$fields.each(function() {
-				var $el = $(this);
-				var was = $el.data('wasDisabled');
-				// 還原：原本就 disabled 的維持；其它解除
-				this.disabled = !!was;
-				if (was) $el.removeData('wasDisabled');
-				this.disabled = false;
-			});
+			$fields.each(function() { this.disabled = false; });
  		}
  	};
 
