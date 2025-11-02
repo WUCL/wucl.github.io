@@ -7,163 +7,176 @@
 @use "utilities/mixins"as *;
 
 form {
-    .msg {
+	.msg {
 
-        &:not(:empty) {
-            @include container();
-            margin-bottom: $space-3;
-            background: $card-bg;
-            color: $ink;
-            border: 1px solid $bd;
-            border-radius: $radius;
-            box-shadow: $shadow-sm;
-            font-size: $font-size-base;
-        }
+		&:not(:empty) {
+			@include container();
+			margin-bottom: $space-3;
+			background: $card-bg;
+			color: $ink;
+			border: 1px solid $bd;
+			border-radius: $radius;
+			box-shadow: $shadow-sm;
+			font-size: $font-size-base;
+		}
 
-        &-h {
-            &::after {
-                content: "";
-                width: 100%;
-                height: 1px;
-                background: $bd;
-                display: block;
-                margin: 7px 0;
-            }
+		&-h {
+			&::after {
+				content: "";
+				width: 100%;
+				height: 1px;
+				background: $bd;
+				display: block;
+				margin: 7px 0;
+			}
 
-            span {
-                font-weight: 600;
-                margin-left: 7px;
-            }
-        }
+			span {
+				font-weight: 600;
+				margin-left: 7px;
+			}
+		}
 
-        &-b {
-            ul {
-                margin: 0;
-                padding: 0;
-                list-style: none;
+		&-b {
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
 
-                li {
-                    display: grid;
-                    grid-template-columns: repeat(2, auto) 1fr;
-                    gap: 7px;
+				li {
+					display: grid;
+					grid-template-columns: repeat(2, auto) 1fr;
+					gap: 7px;
 
-                    b {
-                        font-weight: 600;
-                        min-width: 77px;
-                    }
-                }
-            }
-        }
-    }
-
-    section.section {
-        margin-bottom: $space-5;
-
-        &::after {
-            content: "";
-            width: 100%;
-            height: 1px;
-            background: $bd;
-            display: block;
-            margin-top: $space-5;
-        }
-
-        &:last-child::after {
-            display: none;
-        }
-
-        h3 {
-            margin: 0;
-            font-size: $font-size-base;
-        }
-
-        .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 7px 9px;
-
-            @include respond(md) {
-                grid-template-columns: 1fr;
-            }
-        }
-    }
-
-    .extra-check {
-        font-size: $font-size-sm;
-        color: $muted;
-        border: 1px solid $bd;
-        border-radius: $radius-sm;
-        padding: 1px 3px;
-        background: #fff;
-        margin-left: 7px;
-		line-height: 12px;
-
-        @include flex-center;
-		display: inline-flex;
-        input {
-            vertical-align: middle;
-            margin: 0 3px 0 0;
-        }
-    }
-
-    &.is-busy {
-        opacity: .7;
-        cursor: progress;
-    }
-}
-
-// 表單欄位
-.field {
-    display: grid;
-
-    label {
-        font-size: $font-size-base;
-        color: $muted;
-        letter-spacing: -0.3px;
-    }
-
-    input,
-    select,
-    textarea {
-        width: 100%;
-        min-width: 100%;
-        max-width: fit-content;
-        min-height: fit-content;
-        font: inherit;
-        color: $ink;
-        background: #fff;
-        border: 1px solid $bd;
-        border-radius: $radius-sm;
-        padding: 1px 7px;
-        transition: border-color 0.2s ease;
-
-        &:focus {
-            outline: none;
-            border-color: $ink;
-        }
-
-        &[disabled],
-        &[readonly] {
-            color: $muted;
-            cursor: not-allowed;
-            background: rgba($muted, .1);
-        }
-    }
-
-	select {
-		option[value="週花"],
-		option[value="宅配"] {
-			color: $mh;
+					b {
+						font-weight: 600;
+						min-width: 77px;
+					}
+				}
+			}
 		}
 	}
 
-    &.showhide {
-        label {
-            color: $mh;
-        }
+	section.section {
+		margin-bottom: $space-5;
 
-        input {
-            border-color: $mh;
-        }
-    }
+		&::after {
+			content: "";
+			width: 100%;
+			height: 1px;
+			background: $bd;
+			display: block;
+			margin-top: $space-5;
+		}
+
+		&:last-child::after {
+			display: none;
+		}
+
+		h3 {
+			margin: 0;
+			font-size: $font-size-base;
+		}
+
+		.row {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 7px 9px;
+
+			@include respond(md) {
+				grid-template-columns: 1fr;
+			}
+		}
+	}
+
+	.extra-check {
+		font-size: $font-size-sm;
+		color: $muted;
+		border: 1px solid $bd;
+		border-radius: $radius-sm;
+		padding: 1px 3px;
+		background: #fff;
+		margin-left: 7px;
+		line-height: 12px;
+
+		@include flex-center;
+		display: inline-flex;
+		input {
+			vertical-align: middle;
+			margin: 0 3px 0 0;
+		}
+	}
+
+	&.is-busy {
+		opacity: .7;
+		cursor: progress;
+	}
+
+	// 表單欄位
+	.field {
+		display: grid;
+
+		label {
+			font-size: $font-size-base;
+			color: $muted;
+			letter-spacing: -0.3px;
+		}
+
+		input,
+		select,
+		textarea {
+			width: 100%;
+			min-width: 100%;
+			max-width: fit-content;
+			min-height: fit-content;
+			font: inherit;
+			color: $ink;
+			background: #fff;
+			border: 1px solid $bd;
+			border-radius: $radius-sm;
+			padding: 1px 7px;
+			transition: border-color 0.2s ease;
+
+			&:focus {
+				outline: none;
+				border-color: $ink;
+			}
+
+			&[disabled],
+			&[readonly] {
+				color: $muted;
+				cursor: not-allowed;
+				background: rgba($muted, .1);
+			}
+		}
+
+		select {
+			option[value="週花"],
+			option[value="宅配"] {
+				color: $mh;
+			}
+		}
+
+		&.showhide {
+			label {
+				color: $mh;
+			}
+			input {
+				border-color: $mh;
+			}
+		}
+	}
+
+	&.formEdit {
+		.field.field-orderStatus,
+		.field.field-isDelivery {
+			label {
+				color: $err;
+			}
+			input,
+			select,
+			textarea {
+				border-color: $err;
+			}
+		}
+	}
 }

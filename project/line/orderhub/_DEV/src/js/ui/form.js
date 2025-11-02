@@ -75,6 +75,34 @@
 		});
 	};
 
+	// === 付款方式 UI（show/hide「匯款後五碼」） ===
+	APP.bindIsPaied = function($form) {
+		var $isPayWrap = $form.find('[name="是否已付款"]');
+		var $payTypeWrap = $form.find('[name="付款方式"]');
+
+		$isPayWrap.on('change', function() {
+			if (!$isPayWrap.length) return;
+			var $isPaied = $(this).val();
+			if ($isPaied !== '未付款') $payTypeWrap.prop('required', true);
+			else $payTypeWrap.prop('required', false);
+			return;
+		});
+	};
+
+	// === 付款方式 UI（show/hide「匯款後五碼」） ===
+	APP.bindIsMoneyTransfer = function($form) {
+		var $payTypeWrap = $form.find('[name="付款方式"]');
+		var $moneyTransferWrap = $('#field-moneyTransfer');
+
+		$payTypeWrap.on('change', function() {
+			if (!$payTypeWrap.length) return;
+			var isTransfer = String($payTypeWrap.val() || '') === '匯款';
+			$moneyTransferWrap.toggle(isTransfer);
+			if (!isTransfer) $moneyTransferWrap.find('[name="匯款後五碼"]').val('');
+			return;
+		});
+	};
+
 	// === checkbox，是陌生人 ===
 	APP.bindIsStranger = function($form, $buyerName) {
 		var self = this;
@@ -140,7 +168,7 @@
 
 			// === 宅配：顯示物流單號欄位 ===
 			if ($trackingNumberWrap.length) {
-				const isDelivery = v === '宅配';
+				const isDelivery = (v === '宅配' || v === '郵寄');
 				$trackingNumberWrap.toggle(isDelivery);
 			}
 		}

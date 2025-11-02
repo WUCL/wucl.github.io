@@ -33,20 +33,34 @@
 		// === 取貨方式，自取自動帶入地址 / 宅配顯示物流單號 ===
 		APP.bindMappingRecvAddr($form);
 
-		// === 週花 UI（顯示/隱藏「週期」欄，並預填商品項目），只在 add 發生 ===
-		var $pCat = $form.find('[name="品項分類"]');
-		var $weeklyFlowerWrap = $('#field-weeklyFlower');
+		// === 週花 UI（show/hide[週花週期]，並預填商品項目），只在 add 發生 ===
+		var $pCatWrap = $form.find('[name="品項分類"]');
 		var $item = $form.find('[name="商品項目"]');
+		var $weeklyFlowerWrap = $('#field-weeklyFlower');
 
 		function updateWeeklyUI() {
-			if (!$pCat.length) return;
-			var isWeekly = String($pCat.val() || '') === '週花';
-
-			$weeklyFlowerWrap.css('display', isWeekly ? '' : 'none');
-			if (isWeekly) $item.val('週花');
+			if (!$pCatWrap.length) return;
+			var isWeekly = String($pCatWrap.val() || '') === '週花';
+			var wasWeekly = $item.hasClass('wasWeekly');
+			$weeklyFlowerWrap.toggle(isWeekly);
+			if (isWeekly && !wasWeekly) {
+				$item.data('ORIG_KEY', $item.val()).addClass('wasWeekly');
+				$item.val('週花');
+			}
+			if (!isWeekly && wasWeekly) {
+				$item.val($item.data('ORIG_KEY'));
+				$item.removeData('ORIG_KEY').removeClass('wasWeekly');
+			}
+			return;
 		}
-		$pCat.on('change', updateWeeklyUI);
+		$pCatWrap.on('change', updateWeeklyUI);
 
+
+		// === 付款方式 UI（show/hide「匯款後五碼」） ===
+		APP.bindIsPaied($form);
+
+		// === 付款方式 UI（show/hide「匯款後五碼」） ===
+		APP.bindIsMoneyTransfer($form);
 
 		// submit 送出
 		$form.off('submit').on('submit', async (e) => {
@@ -84,12 +98,11 @@
 			}
 
 
-			// [週花]邏輯：是否批次建立
+			// [週花週期]邏輯：是否批次建立
 			var isWeekly = String(data['品項分類'] || '') === '週花';
 			var repeatN  = 1;
 			if (isWeekly) {
-				console.log('[週花]');
-				var rawN = Number(data['週期'] || 1);
+				var rawN = Number(data['週花週期'] || 1);
 				repeatN  = Math.max(1, Math.min(12, isNaN(rawN) ? 1 : rawN));
 				// 若使用者沒填商品項目，預設為「週花」
 				if (!data['商品項目']) data['商品項目'] = '週花';
