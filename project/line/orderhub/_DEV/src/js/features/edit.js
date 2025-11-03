@@ -26,7 +26,8 @@
 		const $form = $('#formEdit');
 		const $slot = $form.find('.msg[data-slot="msg"]');
 
-		let originalData = {}; // 確認 diff 存取比對用
+		let $originalData = {}; // 確認 diff 存取比對用
+		const $diff = {};
 
 		if (!orderId) {
 			$slot.addClass('msg err').text('❌ 缺少訂單編號 id');
@@ -95,7 +96,7 @@
 		// === Step 2. 表單送出 ===
 		$form.off('submit').on('submit', function(e) {
 			e.preventDefault();
-			const patch = APP.formToObject($form);
+			const $patch = APP.formToObject($form);
 			const $btn = $form.find('button[type="submit"]');
 
 			// 若需要，這裡可做型別/格式正規化（數字、日期、去頭尾空白…）
@@ -106,24 +107,24 @@
 			}
 
 			// 只保留真的有變更的鍵（允許空字串作為「清空」）
-			const diff = {};
-			Object.keys(patch).forEach(k => {
-				const oldVal = normalize(originalData[k]);
-				const newVal = normalize(patch[k]);
-				if (oldVal !== newVal) diff[k] = patch[k]; // 注意：保留原樣（不要 normalize 往後送）
+			Object.keys($patch).forEach(k => {
+				const oldVal = normalize($originalData[k]);
+				const newVal = normalize($patch[k]);
+				if (oldVal !== newVal) $diff[k] = $patch[k]; // 注意：保留原樣（不要 normalize 往後送）
 			});
 
 			// 不送 undefined（通常不會有，但保險）
-			Object.keys(diff).forEach(k => {
-				if (diff[k] === undefined) delete diff[k];
+			Object.keys($diff).forEach(k => {
+				if ($diff[k] === undefined) delete $diff[k];
 			});
 
 			// 若完全沒有變更
-			if (Object.keys(diff).length === 0) {
+			if (Object.keys($diff).length === 0) {
 				$slot.removeClass('ok').addClass('msg err').text('⚠️ 沒有變更任何欄位');
 				document.querySelector(`body`).scrollIntoView({ behavior: 'smooth', block: 'start' });
 				return;
 			}
+			console.log($diff);
 
 			if (APP.status && APP.status.start) APP.status.start('送出更新，' + orderId);
 			$slot.removeClass('err').removeClass('ok').empty();
@@ -133,13 +134,13 @@
 			// $btn.prop('disabled', true).text('更新中…');
 			if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 35);
 
-			APP.api('update', { id: orderId, patch: patch, actor: APP.var.actor })
+			APP.api('update', { id: orderId, patch: $diff, actor: APP.var.actor })
 			.then(function(res) {
 				$btn.text('儲存變更');
 				APP.lockForm($form, false);
 
 				if (res && res.ok) {
-					renderConfirmSummary($slot, orderId, patch, 1);
+					renderConfirmSummary($slot, orderId, $diff, 1);
 					if (APP.status && APP.status.done) APP.status.done(true, '完成更新，' + orderId);
 				} else {
 					const hint = (res && res.msg) ? ('❌ 失敗：' + res.msg) : '❌ 未知錯誤';
@@ -172,7 +173,7 @@
 
 				// format date
                 if ($field.attr('type') === 'date' && v) v = toDateInputValue(v);
-				originalData[k] = v; // 確認日期格式後才存入
+				$originalData[k] = v; // 確認日期格式後才存入
 
 				// show/hide field
 				if (k === '付款方式' && v === '匯款') $form.find('#field-moneyTransfer').toggle(true);
@@ -210,9 +211,12 @@
 				: (`<div class="msg-h">✅ 已建立訂單<span>${$id}</span></div>`);
 
 			var lis = [];
-			Object.keys($data).forEach(function(k) {
-				lis.push('<li><b>' + k + '</b><span>' + $data[k] + '</span></li>');
+			Object.keys($data).forEach(k => {
+				lis.push(`<li><b>${k}</b><span class="span-old">${$originalData[k]}</span><span class="span-new">${$data[k]}</span></li>`);
 			});
+			// Object.keys($data).forEach(function(k) {
+			// 	lis.push('<li><b>' + k + '</b><span>' + $data[k] + '</span></li>');
+			// });
 			html += '<div class="msg-b"><ul class="confirm-list">' + lis.join('') + '</ul></div>';
 			$slot.removeClass('err').addClass('msg ok').html(html);
 			document.querySelector(`body`).scrollIntoView({ behavior: 'smooth', block: 'start' });

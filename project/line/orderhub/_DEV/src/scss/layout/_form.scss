@@ -8,7 +8,6 @@
 
 form {
 	.msg {
-
 		&:not(:empty) {
 			@include container();
 			margin-bottom: $space-3;
@@ -50,6 +49,20 @@ form {
 					b {
 						font-weight: 600;
 						min-width: 77px;
+					}
+					span {
+						&.span-old {
+							color: $old;
+							&:after {
+								content: ">";
+								display: inline-block;
+								margin: 0 3px;
+								font-size: $font-size-xs;
+							}
+						}
+						&.span-new {
+							color: $new;
+						}
 					}
 				}
 			}
