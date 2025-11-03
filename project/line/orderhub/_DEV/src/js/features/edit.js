@@ -51,6 +51,8 @@
 		// === 取貨方式，自取自動帶入地址 / 宅配顯示物流單號 ===
 		APP.bindMappingRecvAddr($form);
 
+		// === 訂單狀態，判斷done之前是否已付款已出貨 ===
+		APP.bindIsPayShip($form);
 
 		// === Step 1. 讀取資料 ===
 		// $slot.removeClass('ok err').addClass('msg').text('讀取中…');

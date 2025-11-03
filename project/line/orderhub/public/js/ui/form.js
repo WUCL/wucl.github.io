@@ -77,7 +77,7 @@
 
 	// === 付款方式 UI（show/hide「匯款後五碼」） ===
 	APP.bindIsPaied = function($form) {
-		var $isPayWrap = $form.find('[name="是否已付款"]');
+		var $isOrderStateWrap = $form.find('[name="是否已付款"]');
 		var $payTypeWrap = $form.find('[name="付款方式"]');
 
 		$isPayWrap.on('change', function() {
@@ -178,6 +178,51 @@
 		mappingRecvAddr(); // 初始執行一次
 	};
 
+	// === 訂單狀態，判斷done之前是否已付款已出貨 ===
+	APP.bindIsPayShip = function($form) {
+		var $isOrderStateWrap = $form.find('[name="訂單狀態"]');
+		var $isPaidWrap = $form.find('[name="是否已付款"]');
+		var $isShippedWrap = $form.find('[name="是否已交貨"]');
+
+		$isOrderStateWrap.on('change', function() {
+			if (!$isOrderStateWrap.length) return;
+			var $isOrderState = String($(this).val() || '').trim(); // done / cancel / doing
+			var $isPaied = String($isPaidWrap.val() || '');
+			var $isShipped = String($isShippedWrap.val() || '');
+
+			// === 狀態：完成（done）===
+			if ($isOrderState === 'done') {
+				if ($isPaied !== '已付款' || $isShipped !== '已交貨') {
+					alert('⚠️ 無法將狀態改為完成，請先確認訂單「已付款」與「已交貨」。');
+					// 回復原狀
+					$(this).val('doing');
+					return false;
+				}
+			}
+
+			// === 狀態：取消（cancel）===
+			if ($isOrderState === 'cancel') {
+				var confirmCancel = confirm('⚠️ 確定要取消此訂單嗎？');
+				if (!confirmCancel) {
+					// 若使用者按取消，還原舊值
+					$(this).val('doing');
+					return false;
+				}
+			}
+
+			return;
+		});
+
+		[
+			$isPaidWrap,
+			$isShippedWrap
+		].forEach(function ($el) {
+			$el.off('change.statusSync').on('change.statusSync', function () {
+				$isOrderStateWrap.trigger('change');
+			});
+		});
+	};
+
 	// 鎖住/解鎖整個表單（會保留原本已 disabled 的欄位狀態）
 	APP.lockForm = function($form, lock) {
 		if (!$form || !$form.length) return;
@@ -190,7 +235,7 @@
 		} else {
 			$form.removeClass('is-busy');
 			$fields.each(function() { this.disabled = false; });
- 		}
- 	};
+		}
+	};
 
 })(window, jQuery);

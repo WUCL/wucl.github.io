@@ -181,14 +181,17 @@ form {
 
 	&.formEdit {
 		.field.field-orderStatus,
-		.field.field-isDelivery {
+		.field.field-isPay,
+		.field.field-isShip {
 			label {
 				color: $err;
 			}
 			input,
 			select,
 			textarea {
+				color: $err;
 				border-color: $err;
+				font-weight: bold;
 			}
 		}
 	}
