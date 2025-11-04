@@ -10,10 +10,20 @@
 	var APP = w.APP || (w.APP = {});
 
 	APP.renderAdd = function() {
-		const frag = TPL.tpl('tpl-add');
+		APP.var.featureMode = 'add';
+		const frag = TPL.tpl('tpl-form');
+		const $form = $(frag).find('form');
 		const node = TPL.mount('#main', frag);
 
-		const $form = $('#formAdd');
+		//
+		console.log(APP.var.featureMode);
+
+		$form.attr('data-mode', APP.var.featureMode);
+		$form.find('[data-show="edit"]').remove();
+		const $btn = $form.find('button[type="submit"]');
+		$btn.text('送出'); // 預設文字
+		//
+
 		const $slot = $form.find('.msg[data-slot="msg"]');
 
 		// 自動灌入 select
@@ -22,7 +32,7 @@
 		}
 
 		// 預設今天日期
-		$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
+		$form.find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 
 		// === checkbox，是陌生人 ===
 		APP.bindIsStranger($form);
@@ -70,7 +80,7 @@
 			if (APP.status && APP.status.start) APP.status.start('新增訂單');
 
 			const data = this.formToObject($form);
-			const $btn = $form.find('button[type="submit"]');
+			// const $btn = $form.find('button[type="submit"]');
 
 			// 取得 LINE 使用者資訊（若已登入）
 			let lineName = '';
@@ -115,6 +125,7 @@
 			$slot.removeClass('ok err').empty();
 			APP.lockForm($form, true);
 			$btn.text('送出中…');
+			document.querySelector(`body`).scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 			let res;
 			try {
@@ -136,7 +147,6 @@
 						lineId: lineId
 					});
 				}
-
 			} catch (err) {
 				console.error('[API] create error:', err);
 				res = { ok: false, msg: 'network-error' };
@@ -167,8 +177,6 @@
 				html += '<div class="msg-b"><ul class="confirm-list">' + lis.join('') + '</ul></div>';
 				$slot.html(html);
 
-				document.querySelector(`body`).scrollIntoView({ behavior: 'smooth', block: 'start' });
-
 				try {
 					if (window.liff) {
 						await liff.sendMessages([
@@ -182,7 +190,7 @@
 				// 清空表單與錯誤
 				// done & reset
 				if ($form[0] && $form[0].reset) $form[0].reset();
-				$('#formAdd').find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
+				$form.find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
         		$form.find('.field.showhide').css('display', 'none');
 
 				if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
@@ -194,7 +202,6 @@
 					: ('完成（' + res.orderId + '）');
 					APP.status.done(true, okMsg);
 				}
-
 			} else {
 				// 額外診斷（若 api() 回傳 invalid-json 會有補充欄位）
 				if (res && res.msg === 'invalid-json') {
@@ -209,6 +216,5 @@
 				if (APP.status && APP.status.done) APP.status.done(false, (res && res.msg) || '未知錯誤');
 			}
 		});
-
 	};
 })(window, jQuery);

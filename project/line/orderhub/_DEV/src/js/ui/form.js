@@ -80,8 +80,8 @@
 		var $isOrderStateWrap = $form.find('[name="是否已付款"]');
 		var $payTypeWrap = $form.find('[name="付款方式"]');
 
-		$isPayWrap.on('change', function() {
-			if (!$isPayWrap.length) return;
+		$isOrderStateWrap.on('change', function() {
+			if (!$isOrderStateWrap.length) return;
 			var $isPaied = $(this).val();
 			if ($isPaied !== '未付款') $payTypeWrap.prop('required', true);
 			else $payTypeWrap.prop('required', false);

@@ -19,11 +19,19 @@
 	}
 
 	APP.renderEdit = function() {
+		APP.var.featureMode = 'edit';
 		const orderId = fromHashId();
-		const frag = TPL.tpl('tpl-edit', { orderId: orderId || '' });
+		const frag = TPL.tpl('tpl-form', { orderId: orderId || '' });
+		const $form = $(frag).find('form');
 		const node = TPL.mount('#main', frag);
 
-		const $form = $('#formEdit');
+		//
+		$form.attr('data-mode', APP.var.featureMode);
+		$form.find('[data-show="edit"]').toggle(APP.var.featureMode === 'edit');
+		const $btn = $form.find('button[type="submit"]');
+		$btn.text('儲存變更'); // 預設文字
+		//
+
 		const $slot = $form.find('.msg[data-slot="msg"]');
 
 		let $originalData = {}; // 確認 diff 存取比對用
@@ -99,7 +107,7 @@
 		$form.off('submit').on('submit', function(e) {
 			e.preventDefault();
 			const $patch = APP.formToObject($form);
-			const $btn = $form.find('button[type="submit"]');
+			// const $btn = $form.find('button[type="submit"]');
 
 			// 若需要，這裡可做型別/格式正規化（數字、日期、去頭尾空白…）
 			function normalize(v) {

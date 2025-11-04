@@ -112,11 +112,79 @@
 		    </div>
 		</template>
 
+		<!-- ========== 通用表單模板 ========== -->
+		<template id="tpl-form">
+		    <form class="form" data-mode>
+		        <div class="msg" data-slot="msg"></div>
+
+		        <!-- 訂單編號（僅編輯模式顯示） -->
+		        <section class="section orderNumber" data-show="edit">
+		            <div class="row">
+		                <div class="field"><label>訂單編號</label><input name="訂單編號" readonly></div>
+		                <div class="field field-orderStatus"><label>訂單狀態</label><select name="訂單狀態" data-opt="orderStatus"></select></div>
+		            </div>
+		        </section>
+
+		        <!-- 基本資訊 -->
+		        <section class="section basic">
+		            <h3>基本資訊</h3>
+		            <div class="row">
+		                <div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
+		                <div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
+		                <div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
+		                <div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
+		                <div class="field field-isPay"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
+		                <div class="field field-isShip"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
+		                <div class="field"><label>訂單金額</label><input name="訂單金額" type="number" min="0" step="1" required></div>
+		                <div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
+		                <div class="field showhide" id="field-moneyTransfer" style="display:none;"><label>匯款後五碼</label><input name="匯款後五碼" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="請輸入5位數字"></div>
+		            </div>
+		        </section>
+
+		        <!-- 訂購人資訊 -->
+		        <section class="section buyer">
+		            <h3>訂購人<label class="extra-check isStranger"><input type="checkbox" id="isStranger">是陌生人</label></h3>
+		            <div class="row">
+		                <div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
+		                <div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
+		                <div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
+		            </div>
+		        </section>
+
+		        <!-- 訂單商品 -->
+		        <section class="section product">
+		            <h3>訂單商品</h3>
+		            <div class="row">
+		                <div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat" required><option value="" selected disabled>請選擇</option></select></div>
+		                <div class="field showhide" id="field-weeklyFlower" style="display:none;"><label>週花週期（1–12）</label><input name="週花週期" type="number" min="1" max="12" value="1" inputmode="numeric"></div>
+		                <div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
+		                <div class="field"><label>商品項目</label><textarea name="商品項目" rows="1" required></textarea></div>
+		                <div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
+		                <div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
+		            </div>
+		        </section>
+
+		        <!-- 收件資訊 -->
+		        <section class="section receipt">
+		            <h3>收件資訊<label class="extra-check sameAsBuyer"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
+		            <div class="row">
+		                <div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType" required><option value="" selected disabled>請選擇</option></select></div>
+		                <div class="field showhide" id="field-trackingNumber" style="display:none;"><label>貨運單號</label><input name="貨運單號" type="text"></div>
+		                <div class="field"><label>姓名</label><input name="收件者姓名" required></div>
+		                <div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
+		                <div class="field"><label>地址</label><input name="收件者地址" required></div>
+		            </div>
+		        </section>
+
+		        <button type="submit" class="btn primary"></button>
+		    </form>
+		</template>
+
 		<!-- ========== 新增訂單表單 ========== -->
+		<!--
 		<template id="tpl-add">
 			<form id="formAdd" class="form formAdd">
 				<div id="" class="msg" data-slot="msg"></div>
-				<!-- 基本資訊 -->
 				<section class="section basic">
 					<h3>基本資訊</h3>
 					<div class="row">
@@ -132,7 +200,6 @@
 					</div>
 				</section>
 
-				<!-- 訂購人資訊 -->
 				<section class="section buyer">
 					<h3>訂購人<label class="extra-check isStranger"><input type="checkbox" id="isStranger">是陌生人</label></h3>
 					<div class="row">
@@ -142,7 +209,6 @@
 					</div>
 				</section>
 
-				<!-- 訂單商品 -->
 				<section class="section product">
 					<h3>訂單商品</h3>
 					<div class="row">
@@ -155,7 +221,6 @@
 					</div>
 				</section>
 
-				<!-- 收件資訊 -->
 				<section class="section receipt">
 					<h3>收件資訊<label class="extra-check sameAsBuyer"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
 					<div class="row">
@@ -170,19 +235,19 @@
 				<button type="submit" class="btn primary">送出</button>
 			</form>
 		</template>
+		-->
 
 		<!-- ========== 編輯訂單表單 ========== -->
+		<!--
 		<template id="tpl-edit">
 			<form id="formEdit" editForm class="form formEdit">
 				<div id="" class="msg" data-slot="msg"></div>
-				<!-- 訂單編號 -->
 				<section class="section orderNumber">
 					<div class="row">
 						<div class="field"><label>訂單編號</label><input name="訂單編號" readonly></div>
 						<div class="field field-orderStatus"><label>訂單狀態</label><select name="訂單狀態" data-opt="orderStatus"></select></div>
 					</div>
 				</section>
-				<!-- 基本資訊 -->
 				<section class="section basic">
 					<h3>基本資訊</h3>
 					<div class="row">
@@ -197,8 +262,6 @@
 						<div class="field showhide" id="field-moneyTransfer" style="display:none;"><label>匯款後五碼</label><input name="匯款後五碼" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="請輸入5位數字"></div>
 					</div>
 				</section>
-
-				<!-- 訂購人資訊 -->
 				<section class="section buyer">
 					<h3>訂購人<label class="extra-check isStranger"><input type="checkbox" id="isStranger">是陌生人</label></h3>
 					<div class="row">
@@ -207,8 +270,6 @@
 						<div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
 					</div>
 				</section>
-
-				<!-- 訂單商品 -->
 				<section class="section product">
 					<h3>訂單商品</h3>
 					<div class="row">
@@ -220,8 +281,6 @@
 						<div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
 					</div>
 				</section>
-
-				<!-- 收件資訊 -->
 				<section class="section receipt">
 					<h3>收件資訊<label class="extra-check sameAsBuyer"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
 					<div class="row">
@@ -236,6 +295,7 @@
 				<button type="submit" class="btn primary">儲存變更</button>
 			</form>
 		</template>
+		-->
 
 		<!--
 		<template id="tpl-edit">

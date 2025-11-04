@@ -22,6 +22,8 @@
     // 可調整參數（依環境）
     APP.var = {
         stranger: '陌生人',
+        featureMode: '',
+
         actor: 'LIFF',
         isDev: false,
         isStaging: false,
