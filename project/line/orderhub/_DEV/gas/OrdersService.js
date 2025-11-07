@@ -13,8 +13,9 @@ function Orders_newOrder(payload, actor) {
   var orderId = genId_(obj['訂單日期']);
   obj['訂單編號'] = orderId;
 
-  if (obj['訂購人電話']) obj['訂購人電話'] = "'" + String(obj['訂購人電話']);
-  if (obj['收件者電話']) obj['收件者電話'] = "'" + String(obj['收件者電話']);
+  Object.keys(obj).forEach(k => {
+    if (/電話/.test(k)) obj[k] = "'" + String(obj[k]); // 防止電話變數字
+  });
 
   APPEND(ENV.ORDERS_SHEET, obj);
   return orderId;
@@ -74,6 +75,10 @@ function Orders_createWeekly(data, repeat, actor, opt) {
       obj['交貨日期'] = Utilities.formatDate(nextFriday, 'Asia/Taipei', 'yyyy/MM/dd');
     }
 
+    Object.keys(obj).forEach(k => {
+      if (/電話/.test(k)) obj[k] = "'" + String(obj[k]); // 防止電話變數字
+    });
+
     APPEND(ENV.ORDERS_SHEET, obj);
   }
 
@@ -116,6 +121,14 @@ function Orders_updateByPatch(orderId, patch, actor, opt) {
   if (row === -1) return { ok: false, msg: 'not-found' };
 
   opt = opt || {};
+
+  Object.keys(patch).forEach(k => {
+    if (/電話/.test(k)) patch[k] = "'" + String(patch[k]); // 防止電話變數字
+  });
+
+  // if (patch['訂購人電話']) patch['訂購人電話'] = "'" + String(patch['訂購人電話']);
+  // if (patch['收件者電話']) patch['收件者電話'] = "'" + String(patch['收件者電話']);
+
   var before = Orders_getById(orderId) || {};
   UPDATE(ENV.ORDERS_SHEET, row, patch);
   var after = Orders_getById(orderId) || {};

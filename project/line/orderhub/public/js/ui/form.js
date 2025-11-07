@@ -75,7 +75,7 @@
 		});
 	};
 
-	// === 付款方式 UI（show/hide「匯款後五碼」） ===
+	// === 是否已付款 UI（已付款 > 付款方式為必填） ===
 	APP.bindIsPaied = function($form) {
 		var $isOrderStateWrap = $form.find('[name="是否已付款"]');
 		var $payTypeWrap = $form.find('[name="付款方式"]');
@@ -89,7 +89,7 @@
 		});
 	};
 
-	// === 付款方式 UI（show/hide「匯款後五碼」） ===
+	// === 付款方式 UI（匯款 > show/hide「匯款後五碼」） ===
 	APP.bindIsMoneyTransfer = function($form) {
 		var $payTypeWrap = $form.find('[name="付款方式"]');
 		var $moneyTransferWrap = $('#field-moneyTransfer');
@@ -238,4 +238,16 @@
 		}
 	};
 
+
+	APP.bindSharedForm = function($form) {
+		var self = this;
+
+		self.bindIsPaied($form);
+		self.bindIsMoneyTransfer($form);
+
+		self.bindIsStranger($form);
+		self.bindSameAsBuyer($form);
+
+		self.bindMappingRecvAddr($form);
+	};
 })(window, jQuery);

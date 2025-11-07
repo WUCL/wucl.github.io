@@ -50,14 +50,7 @@
 			this.populateAllSelects($form);
 		}
 
-		// === checkbox，是陌生人 ===
-		APP.bindIsStranger($form);
-
-		// === checkbox，同訂購人資訊 ===
-		APP.bindSameAsBuyer($form);
-
-		// === 取貨方式，自取自動帶入地址 / 宅配顯示物流單號 ===
-		APP.bindMappingRecvAddr($form);
+		APP.bindSharedForm($form);
 
 		// === 訂單狀態，判斷done之前是否已付款已出貨 ===
 		APP.bindIsPayShip($form);
@@ -79,15 +72,7 @@
 					$slot.removeClass('msg err ok').empty();
 					APP.lockForm($form, false);
 
-					let pCat_el = $form.find('[name="品項分類"]');
-					if (pCat_el.val() === '週花') {
-						[
-							pCat_el,
-							$form.find('[name="週花週期"]')
-						].forEach(function ($el) {
-							$el.prop('disabled', true);
-						});
-					}
+					disabledWeeklyFlower($form);
 
                     if (APP.status && APP.status.done) APP.status.done(true, '完成載入');
 				} else {
@@ -134,7 +119,7 @@
 				document.querySelector(`body`).scrollIntoView({ behavior: 'smooth', block: 'start' });
 				return;
 			}
-			console.log($diff);
+			// console.log($diff);
 
 			if (APP.status && APP.status.start) APP.status.start('送出更新，' + orderId);
 			$slot.removeClass('err').removeClass('ok').empty();
@@ -148,6 +133,8 @@
 			.then(function(res) {
 				$btn.text('儲存變更');
 				APP.lockForm($form, false);
+
+				disabledWeeklyFlower($form);
 
 				if (res && res.ok) {
 					renderConfirmSummary($slot, orderId, $diff, 1);
@@ -174,7 +161,9 @@
 			const $isStranger_check = $form.find('#isStranger');
 
 			let buyerName = '';
+			let buyerPhone = '';
 			let recvName = '';
+			let recvPhone = '';
 
 			Object.keys(data).forEach(function (k) {
 				const $field = $form.find('[name="' + k + '"]');
@@ -190,18 +179,21 @@
 				if (k === '品項分類' && v === '週花') $form.find('#field-weeklyFlower').toggle(true);
 				if (k === '取貨方式' && (v === '宅配' || v === '郵寄')) $form.find('#field-trackingNumber').toggle(true);
 
-				// extra check
+				// extra check 確認是否為陌生人
 				if (k === '訂購人姓名' && v === APP.var.stranger) $isStranger_check.prop('checked', true).trigger('change');
+
+				// extra check 紀錄判斷是否為同訂購人資訊
 				if (k === '訂購人姓名') buyerName = v;
 				if (k === '收件者姓名') recvName = v;
+				if (k === '訂購人電話') buyerPhone = v;
+				if (k === '收件者電話') recvPhone = v;
 
 				$field.val(v);
 			});
 
 			// === 檢查是否「同訂購人資訊」 ===
-			if (buyerName && recvName && buyerName === recvName) {
-				$sameAsBuyer_check.prop('checked', true).trigger('change');
-			}
+			if (buyerName === recvName && buyerPhone === recvPhone) $sameAsBuyer_check.prop('checked', true).trigger('change');
+			else $sameAsBuyer_check.prop('checked', false);
 		}
 
 		function toDateInputValue(isoString) {
@@ -211,6 +203,25 @@
 			const offset = d.getTimezoneOffset();
 			const local = new Date(d.getTime() - offset * 60000);
 			return local.toISOString().split('T')[0]; // 取 YYYY-MM-DD
+		}
+
+		function disabledWeeklyFlower($f) {
+			console.log('123')
+			let pPrice_el = $f.find('[name="訂單金額"]');
+			let pCat_el = $f.find('[name="品項分類"]');
+			let pWeeklyFlower_el = $f.find('[name="週花週期"]');
+			let pItem_el = $f.find('[name="商品項目"]');
+
+			if (pCat_el.val() === '週花') {
+				[
+					pPrice_el,
+					pCat_el,
+					pWeeklyFlower_el,
+					pItem_el
+				].forEach(function ($el) {
+					$el.prop('disabled', true);
+				});
+			}
 		}
 
 

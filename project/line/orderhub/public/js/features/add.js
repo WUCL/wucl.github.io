@@ -34,14 +34,7 @@
 		// 預設今天日期
 		$form.find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
 
-		// === checkbox，是陌生人 ===
-		APP.bindIsStranger($form);
-
-		// === checkbox，同訂購人資訊 ===
-		APP.bindSameAsBuyer($form);
-
-		// === 取貨方式，自取自動帶入地址 / 宅配顯示物流單號 ===
-		APP.bindMappingRecvAddr($form);
+		APP.bindSharedForm($form);
 
 		// === 週花 UI（show/hide[週花週期]，並預填商品項目），只在 add 發生 ===
 		var $pCatWrap = $form.find('[name="品項分類"]');
@@ -64,13 +57,6 @@
 			return;
 		}
 		$pCatWrap.on('change', updateWeeklyUI);
-
-
-		// === 付款方式 UI（show/hide「匯款後五碼」） ===
-		APP.bindIsPaied($form);
-
-		// === 付款方式 UI（show/hide「匯款後五碼」） ===
-		APP.bindIsMoneyTransfer($form);
 
 		// submit 送出
 		$form.off('submit').on('submit', async (e) => {
@@ -191,6 +177,8 @@
 				// done & reset
 				if ($form[0] && $form[0].reset) $form[0].reset();
 				$form.find('[name="訂單日期"]').val(new Date().toISOString().split('T')[0]);
+				// $form.find('[name="訂購人姓名"]').prop('readonly', false);
+				$form.find('#isStranger').prop('checked', false).trigger('change');
         		$form.find('.field.showhide').css('display', 'none');
 
 				if (APP.status && APP.status.done) APP.status.done(true, '完成（' + res.orderId + '）');
