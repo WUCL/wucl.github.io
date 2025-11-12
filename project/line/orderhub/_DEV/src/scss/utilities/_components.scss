@@ -181,9 +181,15 @@
     justify-content: flex-start;
     align-items: center;
     gap: 7px;
+    @include respond(md) {
+        font-size: $font-size-base !important;
+    }
 
     &-range {
-        letter-spacing: -0.5px;
+        letter-spacing: -.5px;
+        @include respond(md) {
+            letter-spacing: -1px;
+        }
     }
 
     &-btn {
@@ -193,7 +199,11 @@
         background: #fff;
         cursor: pointer;
         font-size: $font-size-sm;
-        transition: all 0.2s ease;
+        transition: all .2s ease;
+        @include respond(md) {
+            padding: 0 9px;
+            font-size: $font-size-base !important;
+        }
 
         &.prev::before {
             content: '←';
@@ -204,7 +214,7 @@
         }
 
         &:disabled {
-            opacity: 0.5;
+            opacity: .5;
             cursor: not-allowed;
         }
 
@@ -217,6 +227,11 @@
     &-info {
         color: $muted;
     }
+
+    &.bottom {
+        justify-content: center;
+        padding: 15px 0;
+    }
 }
 
 // ========== 標籤組 ==========
@@ -224,6 +239,9 @@
     display: inline-flex;
     gap: 7px;
     align-items: center;
+    @include respond(md) {
+        gap: 3px;
+    }
 
     .tag {
         display: inline-block;
@@ -233,11 +251,11 @@
         border-radius: $radius-sm;
         color: $muted;
         line-height: 1.3;
-        transition: all 0.2s ease;
+        transition: all .2s ease;
 
         &.warn {
             color: $err;
-            background: rgba($err, 0.3);
+            background: rgba($err, .2);
             font-weight: 600;
         }
     }

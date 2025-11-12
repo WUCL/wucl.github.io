@@ -88,15 +88,24 @@ form {
 		h3 {
 			margin: 0;
 			font-size: $font-size-base;
+			display: flex;
+			align-items: center;
+			line-height: normal;
+			@include respond(md) {
+				font-size: $font-size-lg;
+				margin-bottom: 3px;
+			}
 		}
 
 		.row {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
 			gap: 7px 9px;
+			width: 100%;
 
 			@include respond(md) {
-				grid-template-columns: 1fr;
+				grid-template-columns: 1fr 1fr;
+				gap: 11px 9px;
 			}
 		}
 	}
@@ -127,11 +136,12 @@ form {
 	// 表單欄位
 	.field {
 		display: grid;
+		width: 100%;
 
 		label {
 			font-size: $font-size-base;
 			color: $muted;
-			letter-spacing: -0.3px;
+			letter-spacing: -.3px;
 		}
 
 		input,
@@ -147,7 +157,27 @@ form {
 			border: 1px solid $bd;
 			border-radius: $radius-sm;
 			padding: 1px 7px;
-			transition: border-color 0.2s ease;
+			transition: border-color .2s ease;
+			@include respond(md) {
+				font-size: $font-size-lg;
+			}
+
+			// 針對 iOS 日期欄位修正
+			&[type="date"],
+			&[type="time"],
+			&[type="datetime-local"] {
+				appearance: none; /* 移除 iOS 預設樣式 */
+				-webkit-appearance: none;
+
+				box-sizing: border-box;
+				width: 100%;
+				min-width: 100%;
+				text-align: left;
+				@supports (-webkit-touch-callout: none) {
+					font-size: inherit; /* 防止 iOS 自動縮放 */
+					width: 100%;
+				}
+			}
 
 			&:focus {
 				outline: none;
@@ -193,6 +223,15 @@ form {
 				border-color: $err;
 				font-weight: bold;
 			}
+		}
+	}
+	button.primary {
+		@include respond(md) {
+			width: 98px;
+			height: fit-content;
+			line-height: normal;
+			padding: 5px 7px;
+			font-size: $font-size-lg;
 		}
 	}
 }

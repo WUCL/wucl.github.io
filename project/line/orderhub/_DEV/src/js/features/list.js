@@ -176,8 +176,8 @@
 			if (totalCount !== 0) rangeText = startIdx + ' – ' + endIdx + ' / ' + totalCount + ' 筆';
 
 			// === 下方分頁按鈕 ===
-			var $pager = $('#pager');
-			if (!$pager.length) $pager = $('<div id="pager" class="pager"></div>').insertAfter($container);
+			var $pager = $('.pager');
+			if (!$pager.length) $pager = $('<div class="pager"></div>').insertAfter($container);
 
 			var prevDisabled = page <= 1 ? 'disabled' : '';
 			var nextDisabled = page >= pages ? 'disabled' : '';

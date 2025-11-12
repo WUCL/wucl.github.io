@@ -15,9 +15,12 @@
     border: 1px solid $bd;
     border-radius: $radius;
 
-    &-h {
+    &-h,
+    &-b {
         @include container();
         border-bottom: 1px solid $bd;
+    }
+    &-h {
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: end;
@@ -51,9 +54,12 @@
                 border-radius: $radius-sm;
                 padding: 1px 7px;
                 background: #fff;
+                letter-spacing: -1px;
 
                 @include respond(md) {
                     display: block;
+                    padding: 0 7px;
+                    font-size: $font-size-base;
                 }
             }
 
@@ -63,6 +69,9 @@
                 gap: 5px;
                 font-size: $font-size-sm;
                 color: $muted;
+                @include respond(md) {
+                    font-size: $font-size-base;
+                }
             }
 
             select,
@@ -72,9 +81,12 @@
                 border: 1px solid $bd;
                 border-radius: $radius-sm;
                 padding: 1px 7px;
-                letter-spacing: -0.5px;
+                letter-spacing: -.5px;
                 line-height: $font-size-base;
-                transition: border-color 0.2s ease;
+                transition: border-color .2s ease;
+                @include respond(md) {
+                    padding: 0 7px;
+                }
 
                 &:focus {
                     outline: none;
@@ -85,7 +97,6 @@
     }
 
     &-b {
-        @include container();
     }
 
     h2 {
