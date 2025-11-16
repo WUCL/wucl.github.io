@@ -129,7 +129,13 @@
 			// $btn.prop('disabled', true).text('更新中…');
 			if (APP.status && APP.status.tick) APP.status.tick('呼叫 API', 35);
 
-			APP.api('update', { id: orderId, patch: $diff, actor: APP.var.actor })
+			APP.api('update', {
+				id: orderId,
+				patch: $diff,
+				actor: APP.var.actor,
+				lineName: APP.var.lineName || '',
+				lineId: APP.var.lineId || ''
+			})
 			.then(function(res) {
 				$btn.text('儲存變更');
 				APP.lockForm($form, false);
