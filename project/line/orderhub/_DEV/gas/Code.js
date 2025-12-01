@@ -2,109 +2,109 @@
 // Code.js - Entry & API Router
 // ==========================================
 
-function _json(obj) {
+const _json = (obj) => {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
-}
+};
 
 function doGet(e) {
-  var isApi = e && e.parameter && e.parameter.api == '1';
+  const isApi = e?.parameter?.api === '1';
   if (isApi) return _json({ ok: true, pong: true, ts: new Date() });
   return ContentService.createTextOutput('OK');
 }
 
 function doPost(e) {
+  // log("doPost Raw", e); // 視需求開啟
+
+  let req = {};
   try {
-    // 探測模式：POST .../exec?api=1&probe=1
-    if (e && e.parameter && e.parameter.api == '1' && e.parameter.probe == '1') {
-      return handleProbeRequest_(e);
-    }
-
-    // LIFF 前端 API
-    if (e && e.parameter && e.parameter.api == '1') {
-      return handleApiRequest_(e);
-    }
-
-    // LINE Webhook (保留最小可運作)
-    return handleLineWebhook_(e);
+    req = JSON.parse(e.postData.contents || '{}');
   } catch (err) {
-    Logger.log('ERROR doPost: ' + err + '\n' + (err && err.stack));
-    return ContentService.createTextOutput('OK');
+    return _json({ ok: false, msg: 'bad-json' });
   }
+
+  // 探測模式
+  if (e?.parameter?.probe === '1') {
+    return handleProbeRequest_(e);
+  }
+
+  // LIFF 前端 API
+  if (e?.parameter?.api === '1') {
+    return handleApiRequest_(req);
+  }
+
+  // LINE Webhook
+  return handleLineWebhook_(req);
 }
 
 function handleProbeRequest_(e) {
-  var ct = e.postData ? e.postData.type : null;
-  var raw = e.postData ? e.postData.contents : null;
-  return _json({ 
-    ok: true, 
-    probe: true, 
-    contentType: ct, 
-    rawSnippet: (raw || '').slice(0, 200) 
+  return _json({
+    ok: true,
+    probe: true,
+    contentType: e.postData?.type,
+    rawSnippet: (e.postData?.contents || '').slice(0, 200)
   });
 }
 
-function handleApiRequest_(e) {
-  var raw = (e.postData && e.postData.contents) || '{}';
-  var req = {};
-  
-  try { 
-    req = JSON.parse(raw); 
-  } catch (_) { 
-    return _json({ ok: false, msg: 'bad-json' }); 
-  }
-
-  var action = String(req.action || '').trim();
-  var actor = req.actor || 'WEB';
-  var lineName = req.lineName || '';
-  var lineId = req.lineId || '';
+function handleApiRequest_(req) {
+  const action = String(req.action || '').trim();
+  const actor = req.actor || 'WEB';
+  const lineName = req.lineName || '';
+  const lineId = req.lineId || ''; // ⚠️ 確保前端有傳這個，編輯通知才會響
 
   // 路由分發
   switch (action) {
     case 'create':
       return handleCreateOrder_(req, actor, lineName, lineId);
-    
     case 'create_weekly':
       return handleCreateWeekly_(req, actor, lineName, lineId);
-    
     case 'list':
       return handleListOrders_(req);
-    
     case 'get':
       return handleGetOrder_(req);
-    
     case 'update':
       return handleUpdateOrder_(req, actor, lineName, lineId);
-    
     default:
       return _json({ ok: false, msg: 'unknown-action' });
   }
 }
 
+// --- Handlers ---
+
 function handleCreateOrder_(req, actor, lineName, lineId) {
-  var orderId = Orders_newOrder(req.data || {}, actor);
+  const orderId = Orders_newOrder(req.data || {}, actor);
+
   ChangeLog_append({
     time: new Date(),
     action: 'create',
-    orderId: orderId,
-    actor: actor,
-    lineName: lineName,
-    lineId: lineId,
+    orderId, actor, lineName, lineId,
     snapshot: req.data || {}
   });
-  return _json({ ok: true, orderId: orderId });
+
+  // 建構通知訊息
+  const infoList = [];
+  const breakKeywords = ['訂購人', '取貨方式'];
+
+  Object.entries(req.data || {}).forEach(([k, v]) => {
+    if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
+    infoList.push(`${k}：${v || '-'}`);
+  });
+
+  const msg = `🆕 新增訂單\n${orderId}\n─\n${infoList.join('\n')}`;
+  sendLinePush_(lineId, msg);
+
+  return _json({ ok: true, orderId });
 }
 
 function handleCreateWeekly_(req, actor, lineName, lineId) {
-  var data = req.data || {};
-  var repeat = Math.max(1, Math.min(LIMITS.MAX_WEEKLY_REPEAT, Number(req.repeat || 1)));
-  var result = Orders_createWeekly(data, repeat, actor, { lineName: lineName, lineId: lineId });
+  const repeat = Math.max(1, Math.min(LIMITS.MAX_WEEKLY_REPEAT, Number(req.repeat || 1)));
+  const result = Orders_createWeekly(req.data || {}, repeat, actor, { lineName, lineId });
   return _json(result);
 }
 
 function handleListOrders_(req) {
-  var params = {
+  const params = {
     orderStatus: String(req.orderStatus || ''),
     shipStatus: String(req.shipStatus || ''),
     payStatus: String(req.payStatus || ''),
@@ -116,65 +116,74 @@ function handleListOrders_(req) {
     limit: Math.min(Number(req.limit || LIMITS.DEFAULT_LIST_ITEMS), LIMITS.MAX_LIST_ITEMS),
     page: Math.max(1, Number(req.page || 1))
   };
-  var result = Orders_list(params);
-  return _json(result);
+  return _json(Orders_list(params));
 }
 
 function handleGetOrder_(req) {
-  var id = String(req.id || '').trim();
+  const id = String(req.id || '').trim();
   if (!id) return _json({ ok: false, msg: 'missing-id' });
-  
-  var item = Orders_getById(id);
-  if (!item) return _json({ ok: false, msg: 'not-found' });
-  
-  return _json({ ok: true, item: item });
+
+  const item = Orders_getById(id);
+  return item ? _json({ ok: true, item }) : _json({ ok: false, msg: 'not-found' });
 }
 
 function handleUpdateOrder_(req, actor, lineName, lineId) {
-  var id = String(req.id || '').trim();
-  var patch = req.patch || {};
-  
+  const id = String(req.id || '').trim();
   if (!id) return _json({ ok: false, msg: 'missing-id' });
-  
-  var r = Orders_updateByPatch(id, patch, actor, { lineName: lineName, lineId: lineId });
-  return _json(r);
+
+  const result = Orders_updateByPatch(id, req.patch || {}, actor, { lineName, lineId });
+  return _json(result);
 }
 
-function handleLineWebhook_(e) {
-  var body = {};
-  try { 
-    body = JSON.parse(e.postData.contents || '{}'); 
-  } catch (_) {}
-  
-  var ev = (body.events && body.events[0]) || null;
-  if (!ev || !ev.replyToken) {
-    return ContentService.createTextOutput('OK');
-  }
+function handleLineWebhook_(body) {
+  const ev = body.events?.[0];
+  if (!ev || !ev.replyToken) return ContentService.createTextOutput('OK');
 
   replyMessage(ev.replyToken, [{
     type: 'text',
-    text: '您好!請從 LIFF 頁面操作清單/新增/編輯。'
+    text: '您好! 請從 LIFF 頁面操作清單/新增/編輯。'
   }]);
-  
+
   return ContentService.createTextOutput('OK');
 }
 
+// --- Utils ---
+
 function replyMessage(replyToken, msgs) {
-  var token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
-  if (!token) {
-    Logger.log('缺少 LINE_CHANNEL_ACCESS_TOKEN');
-    return;
-  }
-  
-  var url = 'https://api.line.me/v2/bot/message/reply';
-  var payload = { replyToken: replyToken, messages: msgs };
-  var params = {
+  const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
+  if (!token) return console.error('缺少 LINE_CHANNEL_ACCESS_TOKEN');
+
+  UrlFetchApp.fetch('https://api.line.me/v2/bot/message/reply', {
     method: 'post',
     contentType: 'application/json',
-    payload: JSON.stringify(payload),
+    payload: JSON.stringify({ replyToken, messages: msgs }),
     headers: { Authorization: 'Bearer ' + token },
     muteHttpExceptions: true
-  };
-  
-  UrlFetchApp.fetch(url, params);
+  });
+}
+
+function sendLinePush_(to, text) {
+  if (!to) return console.warn('sendLinePush_ skipped: no "to" userId');
+
+  const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
+  if (!token) throw new Error('Missing LINE_CHANNEL_ACCESS_TOKEN');
+
+  try {
+    UrlFetchApp.fetch('https://api.line.me/v2/bot/message/push', {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify({
+        to: to,
+        messages: [{ type: 'text', text: text }]
+      }),
+      headers: { Authorization: 'Bearer ' + token },
+      muteHttpExceptions: true
+    });
+  } catch (err) {
+    console.error('[sendLinePush_] error:', err);
+  }
+}
+
+function log(title, obj) {
+  console.log(`=== ${title} ===`, JSON.stringify(obj, null, 2));
 }

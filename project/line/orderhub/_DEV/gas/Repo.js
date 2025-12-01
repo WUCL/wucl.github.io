@@ -2,103 +2,64 @@
 // Repo.js - Sheets Repository Utils
 // ==========================================
 
-function SS() {
-  return SpreadsheetApp.openById(ENV.SPREADSHEET_ID);
-}
-
-function SH(name) {
-  return SS().getSheetByName(name);
-}
+const SS = () => SpreadsheetApp.openById(ENV.SPREADSHEET_ID);
+const SH = (name) => SS().getSheetByName(name);
 
 function HDR(name) {
-  var sh = SH(name);
-  if (!sh) throw new Error('找不到試算表分頁：' + name);
+  const sh = SH(name);
+  if (!sh) throw new Error(`找不到試算表分頁：${name}`);
 
-  var lastCol = sh.getLastColumn() || 1;
-  var headers = sh.getRange(1, 1, 1, lastCol)
-      .getValues()[0]
-      .map(function(v) {
-          return String(v).trim();
-      });
+  const lastCol = sh.getLastColumn() || 1;
+  const headers = sh.getRange(1, 1, 1, lastCol).getValues()[0].map(String);
+  const map = headers.reduce((acc, h, i) => ({ ...acc, [h]: i }), {});
 
-  var map = {};
-  headers.forEach(function(h, i) {
-      if (h) map[h] = i;
-  });
-
-  return { sh: sh, headers: headers, map: map };
+  return { sh, headers, map };
 }
 
 function ROWS(name) {
-  var hh = HDR(name);
-  var sh = hh.sh;
-  var headers = hh.headers;
-  var lastRow = sh.getLastRow();
-
+  const { sh, headers } = HDR(name);
+  const lastRow = sh.getLastRow();
   if (lastRow < 2) return [];
 
-  var vals = sh.getRange(2, 1, lastRow - 1, headers.length).getValues();
-
-  return vals.map(function(row, i) {
-      var o = { __row: i + 2 };
-      headers.forEach(function(h, idx) {
-          o[h] = row[idx];
-      });
-      return o;
+  const vals = sh.getRange(2, 1, lastRow - 1, headers.length).getValues();
+  return vals.map((row, i) => {
+    const o = { __row: i + 2 };
+    headers.forEach((h, idx) => o[h] = row[idx]);
+    return o;
   });
 }
 
 function APPEND(name, obj) {
-  var hh = HDR(name);
-  var sh = hh.sh;
-  var headers = hh.headers;
-
-  var row = headers.map(function(h) {
-      return (obj[h] != null ? obj[h] : '');
-  });
-
+  const { sh, headers } = HDR(name);
+  const row = headers.map(h => (obj[h] != null ? obj[h] : ''));
   sh.appendRow(row);
   return sh.getLastRow();
 }
 
 function UPDATE(name, rowIdx, patch) {
-  var hh = HDR(name);
-  var sh = hh.sh;
-  var headers = hh.headers;
+  const { sh, headers } = HDR(name);
+  const range = sh.getRange(rowIdx, 1, 1, headers.length);
+  const curr = range.getValues()[0];
 
-  var curr = sh.getRange(rowIdx, 1, 1, headers.length).getValues()[0];
-
-  headers.forEach(function(h, i) {
-      if (h in patch) curr[i] = patch[h];
+  headers.forEach((h, i) => {
+    if (h in patch) curr[i] = patch[h];
   });
 
-  sh.getRange(rowIdx, 1, 1, headers.length).setValues([curr]);
+  range.setValues([curr]);
 }
 
 function FINDROW(name, header, value) {
-  var hh = HDR(name);
-  var sh = hh.sh;
-  var map = hh.map;
+  const { sh, map } = HDR(name);
+  const col = map[header];
+  if (col == null) throw new Error(`缺少欄位：${header}`);
 
-  var col = map[header];
-  if (col == null) throw new Error('缺少欄位：' + header);
-
-  var last = sh.getLastRow();
+  const last = sh.getLastRow();
   if (last < 2) return -1;
 
-  var vals = sh.getRange(2, col + 1, last - 1, 1)
-      .getValues()
-      .map(function(r) {
-          return r[0];
-      });
+  // 抓取單欄比較，效能較佳
+  const vals = sh.getRange(2, col + 1, last - 1, 1).getValues().flat();
+  const target = String(value).trim();
 
-  var target = String(value).trim();
-
-  for (var i = 0; i < vals.length; i++) {
-      if (String(vals[i]).trim() === target) {
-          return i + 2;
-      }
-  }
-
-  return -1;
+  const idx = vals.findIndex(v => String(v).trim() === target);
+  return idx !== -1 ? idx + 2 : -1;
 }
