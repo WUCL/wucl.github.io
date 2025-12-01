@@ -1,3 +1,33 @@
+[Name]
+LINE/orderhub
+
+-
+[Language]
+HTML
+javascript
+jQuery
+css
+scss
+
+-
+
+[Featured]
+（壓縮檔內 public/ & index.html）
+
+透過 LINE LIFF 連動 Google Sheet data
+處理訂單事宜，包含訂單的新增/編輯
+與未來延展的基本數據統計
+另外也因為使用 LINE LIFF 所以也可以即時的在聊天視窗中做更新的動態（透過 messenger api）
+
+
+-
+[Google Sheet]
+（壓縮檔內的 gas/）
+
+這邊主要代碼是寫在Google Apps Script
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 # Module-Gulp
 此為 Gulp 的 Module 開發環境
 
