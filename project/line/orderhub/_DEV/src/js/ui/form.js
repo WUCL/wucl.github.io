@@ -33,6 +33,9 @@
 		if (!$select || !$select.length) return;
 
 		var el = $select[0];
+		// ⚠️ 建議加入：清空現有選項，以防重複呼叫造成選項堆疊
+		el.innerHTML = '';
+
 		var doc = document;
 		var list = items || [];
 
