@@ -37,7 +37,7 @@ function Orders_newOrder(payload, actor, opt = {}) {
   const breakKeywords = ['訂購人', '取貨方式'];
 
   Object.entries(payload).forEach(([k, v]) => {
-    if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
+    if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('=-=-=-=');
     infoList.push(`${k}：${v || '-'}`);
   });
 
