@@ -203,11 +203,81 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         return out;
     };
 
+    // === [優化] 統一取得 LINE Profile (支援 Dev 模擬) ===
+    APP.getLineProfile = async function() {
+        let lineName = '';
+        let lineId = '';
+        try {
+            // 判斷是否為開發環境
+            const isDev = location.hostname === 'localhost' ||
+                          location.hostname.startsWith('192.168.') ||
+                          location.hostname.startsWith('127.0.');
+
+            // 優先讀取全域變數 (如果 boot.js 有先做)
+            if (APP.var && APP.var.lineId && !APP.var.lineId.startsWith('REPLACE_')) {
+                return { lineName: APP.var.actor || APP.var.lineName, lineId: APP.var.lineId };
+            }
+
+            // 嘗試從 LIFF 取得
+            if (!isDev && window.liff && liff.isInClient() && liff.isLoggedIn()) {
+                const profile = await liff.getProfile();
+                lineName = profile.displayName || '';
+                lineId = profile.userId || '';
+            } else if (isDev) {
+                lineName = 'DEV-LOCAL';
+                lineId = 'LOCAL-TEST-ID';
+            } else {
+                // 瀏覽器開啟但非 Dev (例如外部瀏覽器開啟正式站)
+                lineName = 'WEB-GUEST';
+                lineId = 'WEB-GUEST-ID';
+            }
+        } catch (e) {
+            console.warn('getProfile error', e);
+            lineName = 'DEV-FALLBACK';
+            lineId = 'FALLBACK-ID';
+        }
+        return { lineName, lineId };
+    };
+
+    // === [優化] 日期顯示格式化 (YY/MM/DD 週X) ===
+    APP.fmtDateDisplay = function(input) {
+        if (!input) return '—';
+        const d = new Date(input);
+        if (isNaN(d.getTime())) return String(input);
+
+        // 取得當地時間元件
+        const yy = String(d.getFullYear()).slice(-2);
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const WEEK = ['日', '一', '二', '三', '四', '五', '六'];
+        const wk = WEEK[d.getDay()];
+
+        return `${yy}/${mm}/${dd} 週${wk}`;
+    };
+
+    // === [優化] 統一日期格式轉 Input Value (解決時區問題) ===
+    APP.toDateInputValue = function(dateInput) {
+        if (!dateInput) return '';
+        const d = new Date(dateInput);
+        if (isNaN(d.getTime())) return '';
+        // 透過扣除時區偏移來取得正確的當地 ISO 日期字串
+        const offset = d.getTimezoneOffset();
+        const local = new Date(d.getTime() - offset * 60000);
+        return local.toISOString().split('T')[0];
+    };
+
+    // === [優化] 頁面滾動至頂部 ===
+    APP.scrollTop = function() {
+        // 嘗試多種兼容寫法
+        if (window.scrollTo) window.scrollTo({ top: 0, behavior: 'smooth' });
+        else document.body.scrollTop = 0;
+    };
+
     // === select 填充（優先保留 HTML 內原有選項） ===
     APP.populateSelect = function($select, items) {
         if (!$select || !$select.length) return;
         var el = $select[0];
-        el.innerHTML = '';
+        // el.innerHTML = '';
         var doc = document;
         var list = items || [];
         for (var i = 0; i < list.length; i++) {
