@@ -1,25 +1,13 @@
 // ==========================================
-// OrdersService.js - 訂單業務邏輯
+// App.Service.gs - 訂單業務邏輯 (Service Layer)
+// 職責：處理資料邏輯、寫入資料庫、發送通知
 // ==========================================
-
-/**
- * 內部工具：強制將電話欄位轉為字串（防止 Excel/Sheets 自動去零或變科學記號）
- */
-const sanitizePhone_ = (obj) => {
-  Object.keys(obj).forEach(k => {
-    if (/電話/.test(k) && obj[k] != null && obj[k] !== '') {
-      obj[k] = "'" + String(obj[k]);
-    }
-  });
-  return obj;
-};
 
 /**
  * 建立單筆訂單
  */
 function Orders_newOrder(payload, actor, opt = {}) {
   ensureHeader_('訂單編號');
-
   const updater = opt.lineName || actor || '';
 
   const obj = {
@@ -34,6 +22,27 @@ function Orders_newOrder(payload, actor, opt = {}) {
 
   sanitizePhone_(obj);
   APPEND(ENV.ORDERS_SHEET, obj);
+
+  // 記錄 Log
+  ChangeLog_append({
+    time: new Date(),
+    action: 'create',
+    orderId, actor,
+    lineName: opt.lineName, lineId: opt.lineId,
+    snapshot: payload
+  });
+
+  // === ✨ 發送通知 (邏輯從 Code.js 搬移至此，統一管理) ===
+  const infoList = [];
+  const breakKeywords = ['訂購人', '取貨方式'];
+
+  Object.entries(payload).forEach(([k, v]) => {
+    if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
+    infoList.push(`${k}：${v || '-'}`);
+  });
+
+  const msg = `🆕 新增訂單\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
+  sendLinePush_(opt.lineId, msg);
 
   return orderId;
 }
@@ -61,14 +70,17 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
       ...data
     };
 
+    // ID 處理
     const suffix = String(i).padStart(2, '0');
     obj['訂單編號'] = orderId.replace(/-00$/, '-' + suffix);
 
+    // 商品名稱處理
     if (String(obj['品項分類'] || '') === '週花') {
       const baseName = (obj['商品項目'] && String(obj['商品項目']).trim()) || '週花';
       obj['商品項目'] = baseName + (safeRepeat > 1 ? ` ${i}/${safeRepeat}` : '');
     }
 
+    // 金額與日期處理
     if (i > 1) obj['訂單金額'] = 0;
 
     if (i === 1) {
@@ -90,28 +102,22 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
     ChangeLog_append({
       time: new Date(),
       action: 'create_weekly',
-      orderId,
-      actor: actor || '',
-      lineName: opt.lineName || '',
-      lineId: opt.lineId || '',
+      orderId, actor,
+      lineName: opt.lineName, lineId: opt.lineId,
       snapshot: { ...data, repeat: safeRepeat }
     });
 
-    // === ✨ 優化排版邏輯 (與單筆訂單一致) ===
+    // 通知排版 (與單筆一致)
     const infoList = [];
     const breakKeywords = ['訂購人', '取貨方式'];
-    
-    // 依序輸出欄位
-    Object.keys(firstOrderObj || {}).forEach(k => {
-      // 排除不需要重複顯示的系統欄位
-      if (k === '訂單編號' || k === '更新者') return;
 
+    Object.keys(firstOrderObj || {}).forEach(k => {
+      if (k === '訂單編號' || k === '更新者') return;
       if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
       infoList.push(`${k}：${firstOrderObj[k] || '-'}`);
     });
 
     const msg = `🆕 新增訂單 (週花 x${safeRepeat})\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
-
     sendLinePush_(opt.lineId, msg);
   } catch (e) {
     console.error('Create Weekly Log Error', e);
@@ -120,29 +126,28 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
   return { ok: true, orderId, created: safeRepeat };
 }
 
+/**
+ * 取得訂單
+ */
 function Orders_getById(orderId) {
   const row = findById_(orderId);
   if (row === -1) return null;
-
   const { headers } = HDR(ENV.ORDERS_SHEET);
   const vals = SH(ENV.ORDERS_SHEET).getRange(row, 1, 1, headers.length).getValues()[0];
-
   const obj = {};
   headers.forEach((h, i) => obj[h] = vals[i]);
   return obj;
 }
 
 /**
- * 更新訂單並記錄差異
+ * 更新訂單
  */
 function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
   const row = findById_(orderId);
   if (row === -1) return { ok: false, msg: 'not-found' };
 
   const updater = opt.lineName || actor || '';
-  if (updater) {
-    patch['更新者'] = updater;
-  }
+  if (updater) patch['更新者'] = updater;
 
   sanitizePhone_(patch);
 
@@ -150,10 +155,10 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
   UPDATE(ENV.ORDERS_SHEET, row, patch);
   const after = Orders_getById(orderId) || {};
 
+  // Diff Log
   const diff = {};
   Object.keys(patch).forEach(k => {
-    if (k === '更新者') return; // 不顯示更新者的變更紀錄
-
+    if (k === '更新者') return;
     const o = (before[k] != null ? String(before[k]) : '');
     const n = (after[k] != null ? String(after[k]) : '');
     if (o !== n) diff[k] = { old: o, new: n };
@@ -163,10 +168,8 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
     ChangeLog_append({
       time: new Date(),
       action: 'update',
-      orderId,
-      actor: actor || '',
-      lineName: opt.lineName || '',
-      lineId: opt.lineId || '',
+      orderId, actor,
+      lineName: opt.lineName, lineId: opt.lineId,
       diff
     });
 
@@ -175,7 +178,6 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
       .join('\n');
 
     const msg = `✏️ 修改訂單\n${orderId}\n-\n${updater} 編輯\n-\n${diffText}`;
-    
     console.log("Push Update:", { to: opt.lineId, msg });
     sendLinePush_(opt.lineId, msg);
   }
@@ -183,6 +185,9 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
   return { ok: true, order: after };
 }
 
+/**
+ * 訂單列表
+ */
 function Orders_list(params = {}) {
   const limit = Math.min(Number(params.limit || LIMITS.DEFAULT_LIST_ITEMS), LIMITS.MAX_LIST_ITEMS);
   const _norm = (s) => String(s || '').trim();

@@ -4,22 +4,19 @@
 <!-- Libraries -->
 <script src="@@webRoot/public/lib/jquery/1.12.4/jquery.min.js"></script>
 
-<!-- UI Core -->
-<script src="@@webRoot/public/js/ui/eventdevice.js"></script>
-<script src="@@webRoot/public/js/ui/templates.js"></script>
-<script src="@@webRoot/public/js/ui/status.js"></script>
-<script src="@@webRoot/public/js/ui/form.js"></script>
-<script src="@@webRoot/public/js/core/app.clock.js"></script>
+<!-- 1. Data (資料層) -->
+<script src="@@webRoot/public/js/app.data.js"></script>
 
-<!-- Data / Core / Services -->
-<script src="@@webRoot/public/js/data/options.js"></script>
-<script src="@@webRoot/public/js/core/app.core.js"></script>
-<script src="@@webRoot/public/js/services/api.js"></script>
+<!-- 2. Base (基礎層: 包含 API, Template, Status, Form, Device) -->
+<script src="@@webRoot/public/js/app.base.js"></script>
 
-<!-- Features -->
+<!-- 3. Features (業務層: List, Add, Edit) -->
 <script src="@@webRoot/public/js/features/list.js"></script>
 <script src="@@webRoot/public/js/features/add.js"></script>
 <script src="@@webRoot/public/js/features/edit.js"></script>
+
+<!-- 4. Main (核心層: Init, Router, Clock) -->
+<script src="@@webRoot/public/js/app.main.js"></script>
 
 <!-- Boot -->
 <script src="@@webRoot/public/js/boot.js"></script>

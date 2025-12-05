@@ -463,24 +463,22 @@
 		<!-- Libraries -->
 		<script src="./public/lib/jquery/1.12.4/jquery.min.js"></script>
 
-		<!-- UI Core -->
-		<script src="./public/js/ui/eventdevice.js"></script>
-		<script src="./public/js/ui/templates.js"></script>
-		<script src="./public/js/ui/status.js"></script>
-		<script src="./public/js/ui/form.js"></script>
-		<script src="./public/js/core/app.clock.js"></script>
+		<!-- 1. Data (資料層) -->
+		<script src="./public/js/app.data.js"></script>
 
-		<!-- Data / Core / Services -->
-		<script src="./public/js/data/options.js"></script>
-		<script src="./public/js/core/app.core.js"></script>
-		<script src="./public/js/services/api.js"></script>
+		<!-- 2. Base (基礎層: 包含 API, Template, Status, Form, Device) -->
+		<script src="./public/js/app.base.js"></script>
 
-		<!-- Features -->
+		<!-- 3. Features (業務層: List, Add, Edit) -->
 		<script src="./public/js/features/list.js"></script>
 		<script src="./public/js/features/add.js"></script>
 		<script src="./public/js/features/edit.js"></script>
 
+		<!-- 4. Main (核心層: Init, Router, Clock) -->
+		<script src="./public/js/app.main.js"></script>
+
 		<!-- Boot -->
 		<script src="./public/js/boot.js"></script>
+		
 	</body>
 </html>

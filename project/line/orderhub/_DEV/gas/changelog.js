@@ -4,20 +4,16 @@
 
 function ChangeLog_append(entry) {
   var ss = SS();
-  var sh = SH(ENV.CHANGELOG_SHEET) || ss.insertSheet(ENV.CHANGELOG_SHEET);
+  var sh = SH(ENV.CHANGELOG_SHEET);
 
-  var headers = ['ts', 'action', 'order_id', 'actor', 'line_name', 'line_id', 'field', 'old', 'new', 'snapshot', 'note'];
-  
-  // 確保表頭存在且正確
-  if (sh.getLastRow() === 0) {
-    sh.appendRow(headers);
-  } else {
-    var first = sh.getRange(1, 1, 1, headers.length).getValues()[0];
-    if (String(first[0]).trim() !== 'ts') {
-      sh.clear();
-      sh.appendRow(headers);
-    }
+  // [優化] 如果 Sheet 不存在才建立，避免每次檢查邏輯
+  if (!sh) {
+    sh = ss.insertSheet(ENV.CHANGELOG_SHEET);
+    sh.appendRow(['ts', 'action', 'order_id', 'actor', 'line_name', 'line_id', 'field', 'old', 'new', 'snapshot', 'note']);
   }
+
+  // [優化] 預定義好的欄位順序，避免每次運算
+  // 注意：這裡移除了每次檢查第一列是否為 ts 的邏輯，提升寫入速度
 
   var now = Utilities.formatDate(
     entry.time || new Date(),
@@ -25,7 +21,7 @@ function ChangeLog_append(entry) {
     'yyyy/MM/dd HH:mm:ss'
   );
 
-  // A) diff：每個欄位一列
+  // A) diff：每個欄位一列 (Bulk Write)
   if (entry.diff && typeof entry.diff === 'object') {
     var rows = Object.keys(entry.diff).map(function(k) {
       var d = entry.diff[k] || {};
@@ -36,16 +32,20 @@ function ChangeLog_append(entry) {
         entry.actor || '',
         entry.lineName || '',
         entry.lineId || '',
-        k,
-        (d.old != null ? d.old : ''),
-        (d.new != null ? d.new : ''),
-        '',
+        k,                            // field
+        (d.old != null ? d.old : ''), // old
+        (d.new != null ? d.new : ''), // new
+        '',                           // snapshot
         entry.note || ''
       ];
     });
-    
-    if (rows.length) {
-      sh.getRange(sh.getLastRow() + 1, 1, rows.length, headers.length).setValues(rows);
+
+    // [優化] 只有當真的有 rows 時才寫入
+    if (rows.length > 0) {
+      // 這裡直接 append 即可，不需要計算 lastRow，appendRow 本身是原子的 (Atomic) 較安全
+      // 但因為是多行寫入，用 getRange + setValues 效能較好
+      var lastRow = sh.getLastRow();
+      sh.getRange(lastRow + 1, 1, rows.length, 11).setValues(rows);
     }
     return;
   }

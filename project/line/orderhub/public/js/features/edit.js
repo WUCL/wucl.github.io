@@ -156,8 +156,8 @@
 				id: orderId,
 				patch: $diff,
 				actor: APP.var.actor,
-				lineName: lineProfile.lineName, // 這裡原本是空的，現在修復了
-				lineId: lineProfile.lineId      // 這裡原本是空的，現在修復了
+				lineName: lineProfile.lineName,
+				lineId: lineProfile.lineId
 			})
 			.then(function(res) {
 				$btn.text('儲存變更');
@@ -176,7 +176,7 @@
 					// 嘗試使用 LIFF 前端發送訊息 (做為後端 Push 的備援)
 					if (window.liff && liff.isInClient()) {
 						liff.sendMessages([{
-							type: 'text', 
+							type: 'text',
 							text: `✅ 訂單已更新：${orderId}`
 						}]).catch(err => console.warn('LIFF send msg fail', err));
 					}
@@ -255,6 +255,8 @@
 		}
 
 		function renderConfirmSummary($slot, $id, $data, $orderCount) {
+			console.log($orderCount);
+			console.log($data);
 			let html = `<div class="msg-h">✅ 已更新訂單<span>${$id}</span></div>`;
 
 			const lis = Object.keys($data).map(k =>
