@@ -12,7 +12,7 @@ $(function() {
         },
         var: {
             $survey_step: 1, // init 1, 2, 3, 99
-            $testmode: true,
+            $testmode: false,
             $testuid: 'test-250924-2346',
             $LIFF_ID: '1655858494-nlrKQZ3Z', // 1655858494-nlrKQZ3Z // test > 2007975476-OnJ2DKGJ
             $GS_WEBAPP_URL: 'https://script.google.com/macros/s/AKfycbxkdgErafqbqJvq5wz7H2jWGlu9OGJXAZv317TeCN1DoEWqSLIHJmfHF8m-ppvbk0qZ/exec',
