@@ -48,7 +48,20 @@
 			.description {
 				font-size: $fontsize-2;
 				p {
-
+					&.lastdate {
+						color: #555;
+						margin-top: 15px;
+						font-size: $fontsize;
+						padding: 3px 15px;
+						border-radius: 15px;
+						display: inline-block;
+						background: $color-white;
+						letter-spacing: -.3px;
+						span {
+							margin: 0 7px;
+							color: #ccc;
+						}
+					}
 				}
 			}
 			span {
