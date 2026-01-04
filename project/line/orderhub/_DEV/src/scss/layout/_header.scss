@@ -25,6 +25,7 @@
 
     // 第 1 排：meta
     .row-1 {
+        grid-template-columns: 1fr 1fr;
         .meta--tiny {
             justify-self: start;
             font-size: $font-size-xs;
@@ -36,12 +37,14 @@
             line-height: 1;
             opacity: .7;
         }
+        .metaEnv {
+            justify-self: end;
+        }
     }
 
     // 第 2 排：標題 + 時鐘
     .row-2 {
         grid-template-columns: 1fr 1fr;
-
         h1 {
             margin: 0;
             font-size: $font-size-xxl;
