@@ -11,7 +11,7 @@ function Orders_newOrder(payload, actor, opt = {}) {
   const updater = opt.lineName || actor || '';
 
   const obj = {
-    '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy/MM/dd'),
+    '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd'),
     '訂單狀態': 'doing',
     '更新者': updater,
     ...payload
@@ -33,15 +33,23 @@ function Orders_newOrder(payload, actor, opt = {}) {
   });
 
   // === ✨ 發送通知 (邏輯從 Code.js 搬移至此，統一管理) ===
-  const infoList = [];
-  const breakKeywords = ['訂購人', '取貨方式'];
+  // const infoList = [];
+  // const breakKeywords = ['訂購人', '取貨方式'];
 
-  Object.entries(payload).forEach(([k, v]) => {
-    if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('=-=-=-=');
-    infoList.push(`${k}：${v || '-'}`);
-  });
+  // Object.entries(payload).forEach(([k, v]) => {
+  //   if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('=-=-=-=');
+  //   infoList.push(`${k}：${v || '-'}`);
+  // });
 
-  const msg = `🆕 新增訂單\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
+  // const msg = `🆕 新增訂單\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
+  // sendLinePush_(opt.lineId, msg);
+
+
+  // === ✨ 通知的排版優化 ===
+  // 使用專門的排版函式，確保順序與分隔線正確
+  const infoText = formatNewOrderMsg_(obj);
+  const msg = `🆕 新增訂單\n${orderId}\n-\n${updater} 編輯\n-\n${infoText}`;
+
   sendLinePush_(opt.lineId, msg);
 
   return orderId;
@@ -64,7 +72,7 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
 
   for (let i = 1; i <= safeRepeat; i++) {
     const obj = {
-      '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy/MM/dd'),
+      '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd'),
       '訂單狀態': 'doing',
       '更新者': updater,
       ...data
@@ -84,11 +92,11 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
     if (i > 1) obj['訂單金額'] = 0;
 
     if (i === 1) {
-      obj['交貨日期'] = Utilities.formatDate(firstDate, 'Asia/Taipei', 'yyyy/MM/dd');
+      obj['交貨日期'] = Utilities.formatDate(firstDate, 'Asia/Taipei', 'yyyy-MM-dd');
     } else {
       const nextFriday = new Date(baseFriday);
       nextFriday.setDate(baseFriday.getDate() + 7 * (i - 1));
-      obj['交貨日期'] = Utilities.formatDate(nextFriday, 'Asia/Taipei', 'yyyy/MM/dd');
+      obj['交貨日期'] = Utilities.formatDate(nextFriday, 'Asia/Taipei', 'yyyy-MM-dd');
     }
 
     sanitizePhone_(obj);
@@ -96,6 +104,16 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
 
     if (i === 1) firstOrderObj = obj;
   }
+
+  // 假設已執行完迴圈並寫入 DB，且 firstOrderObj 已被賦值
+  // 這裡需要重新取得 firstOrderObj 或是利用 data 組合出第一筆的樣子來做通知
+  // 為求精確，我們可以用 data + orderId + updater 組合一個臨時物件給通知用
+  const notifyObj = {
+    ...data,
+    '訂單編號': orderId,
+    '更新者': updater,
+    '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd')
+  };
 
   // Log & Notify
   try {
@@ -108,20 +126,27 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
     });
 
     // 通知排版 (與單筆一致)
-    const infoList = [];
-    const breakKeywords = ['訂購人', '取貨方式'];
+    // const infoList = [];
+    // const breakKeywords = ['訂購人', '取貨方式'];
 
-    Object.keys(firstOrderObj || {}).forEach(k => {
-      if (k === '訂單編號' || k === '更新者') return;
-      if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
-      infoList.push(`${k}：${firstOrderObj[k] || '-'}`);
-    });
+    // Object.keys(firstOrderObj || {}).forEach(k => {
+    //   if (k === '訂單編號' || k === '更新者') return;
+    //   if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
+    //   infoList.push(`${k}：${firstOrderObj[k] || '-'}`);
+    // });
 
-    const msg = `🆕 新增訂單 (週花 x${safeRepeat})\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
-    sendLinePush_(opt.lineId, msg);
+    // const msg = `🆕 新增訂單 (週花 x${safeRepeat})\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
+    // sendLinePush_(opt.lineId, msg);
+
   } catch (e) {
     console.error('Create Weekly Log Error', e);
   }
+
+  // === ✨ 通知的排版優化 ===
+  const infoText = formatNewOrderMsg_(notifyObj);
+  const msg = `🆕 新增訂單 (週花 x${safeRepeat})\n${orderId}\n-\n${updater} 編輯\n-\n${infoText}`;
+
+  sendLinePush_(opt.lineId, msg);
 
   return { ok: true, orderId, created: safeRepeat };
 }
@@ -135,7 +160,14 @@ function Orders_getById(orderId) {
   const { headers } = HDR(ENV.ORDERS_SHEET);
   const vals = SH(ENV.ORDERS_SHEET).getRange(row, 1, 1, headers.length).getValues()[0];
   const obj = {};
-  headers.forEach((h, i) => obj[h] = vals[i]);
+  headers.forEach((h, i) => {
+    let v = vals[i];
+    // 如果從 Sheet 讀出來的是 Date 物件，轉成字串傳給前端，避免 JSON 格式問題
+    if (v instanceof Date) {
+        v = Utilities.formatDate(v, 'Asia/Taipei', 'yyyy-MM-dd');
+    }
+    obj[h] = v;
+  });
   return obj;
 }
 
@@ -173,12 +205,21 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
       diff
     });
 
+    // const diffText = Object.keys(diff)
+    //   .map(k => `${k}：${diff[k].old || '-'} > ${diff[k].new || '-'}`)
+    //   .join('\n');
+
+    // const msg = `✏️ 修改訂單\n${orderId}\n-\n${updater} 編輯\n-\n${diffText}`;
+    // console.log("Push Update:", { to: opt.lineId, msg });
+    // sendLinePush_(opt.lineId, msg);
+
+    // === Update 這裡維持原本的 diff 顯示，或是您想特別分組也可以 ===
+    // 目前建議維持簡單列出差異即可，因為修改通常只改少數欄位
     const diffText = Object.keys(diff)
-      .map(k => `${k}：${diff[k].old || '-'} > ${diff[k].new || '-'}`)
+      .map(k => `${k}：${diff[k].old || '-'} ➝ ${diff[k].new || '-'}`)
       .join('\n');
 
     const msg = `✏️ 修改訂單\n${orderId}\n-\n${updater} 編輯\n-\n${diffText}`;
-    console.log("Push Update:", { to: opt.lineId, msg });
     sendLinePush_(opt.lineId, msg);
   }
 
@@ -210,6 +251,14 @@ function Orders_list(params = {}) {
   const total = rows.length;
   const page = Math.max(1, Number(params.page || 1));
   const startIdx = (page - 1) * limit;
+
+  // 格式化輸出日期
+  const items = rows.slice(startIdx, startIdx + limit).map(item => {
+      // 確保回傳給前端的日期格式統一
+      if (item['訂單日期'] instanceof Date) item['訂單日期'] = Utilities.formatDate(item['訂單日期'], 'Asia/Taipei', 'yyyy-MM-dd');
+      if (item['交貨日期'] instanceof Date) item['交貨日期'] = Utilities.formatDate(item['交貨日期'], 'Asia/Taipei', 'yyyy-MM-dd');
+      return item;
+  });
 
   return {
     ok: true,

@@ -137,3 +137,56 @@ const sanitizePhone_ = (obj) => {
   });
   return obj;
 };
+
+// ==========================================
+// 專用排版函式 (放在檔案最下方或 Utils 裡)
+// ==========================================
+function formatNewOrderMsg_(data) {
+  // 定義顯示群組與順序
+  const groups = [
+    // Group 1: 訂單核心資訊
+    ['客戶類型', '接單平台', '訂單日期', '交貨日期'],
+
+    ['是否已付款', '是否已交貨', '訂單金額', '付款方式', '匯款後五碼'],
+
+    // Group 2: 訂購人 (開頭加分隔線)
+    ['訂購人姓名', '訂購人電話', '訂購人Email'],
+
+    // Group 3: 商品內容
+    ['品項分類', '週花週期', '購買用途', '商品項目'],
+
+    // Group 4: 收件/取貨 (開頭加分隔線)
+    ['取貨方式','貨運單號','收件者姓名','收件者電話','收件者地址'],
+
+    // Group 5: 備註
+    ['訂單備註', '小卡內容']
+  ];
+
+  const lines = [];
+
+  groups.forEach((fields, groupIndex) => {
+    // 1. 判斷是否需要分隔線
+    // 邏輯：如果是「訂購人」或「取貨方式」群組，且不是第一組，就加分隔線
+    const isSpecialGroup = fields.includes('訂購人姓名') || fields.includes('取貨方式');
+
+    if (groupIndex > 0 && isSpecialGroup) {
+       lines.push('━');
+    }
+
+    // 2. 遍歷該群組所有欄位
+    fields.forEach(k => {
+      let v = data[k];
+
+      // [修正] 判斷是否為空值 (null, undefined, 或空字串)
+      // 如果是空值，就顯示 '-'，否則顯示原值
+      if (v == null || String(v).trim() === '') {
+        v = '-';
+      }
+
+      // [修正] 不論是否有值，都強制加入列表
+      lines.push(`${k}：${v}`);
+    });
+  });
+
+  return lines.join('\n');
+}
