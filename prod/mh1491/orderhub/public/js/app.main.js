@@ -12,11 +12,28 @@
     'use strict';
     var APP = w.APP || (w.APP = {});
     APP.el = { $win: $(window), $body: $('body'), $main: $('#main'), $meta: $('#meta') };
+
+    const currentUrl = window.location.href;
+
+    // 這裡填入你「正式站」的 Script ID 部分字串或完整的 LIFF ID
+    const isProd = currentUrl.includes('https://liff.line.me/2008815338-ikQAWeY4');
+
     APP.var = {
-        stranger: '陌生人', featureMode: '',
-        actor: 'LIFF', isDev: false, isStaging: false, envLabel: 'PROD', liffReady: false,
-        LIFF_ID: '2008325627-Nk6d1Z64',
-        API_URL: 'https://script.google.com/macros/s/AKfycbys--UCUGCa5VAIXf_Gc6uBnT2Ix8_UzeABt-YQ4Fy5Yz4v2JAiVuV-b8-QRLT1LSxL/exec?api=1'
+        stranger: '陌生人',
+        featureMode: '',
+        actor: 'LIFF',
+        isStaging: false,
+
+        liffReady: false,
+        envLabel: isProd ? 'PROD' : 'DEV',
+        isDev: !isProd,
+        // 根據環境自動選取 ID
+        LIFF_ID: isProd
+            ? '2008815338-ikQAWeY4'  // prod
+            : '2008325627-Nk6d1Z64', // dev
+        API_URL: isProd
+            ? 'https://script.google.com/macros/s/AKfycbxORq8QbKIyaWptrhjQfipCRMhysXck4N_s4UTCcRWRsUWVvP_tfePLUIz56sG-L1hQwg/exec' // prod
+            : 'https://script.google.com/macros/s/AKfycbys--UCUGCa5VAIXf_Gc6uBnT2Ix8_UzeABt-YQ4Fy5Yz4v2JAiVuV-b8-QRLT1LSxL/exec?api=1' // dev
     };
 
     /* ========== Env & LIFF ========== */
