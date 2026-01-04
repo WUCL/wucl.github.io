@@ -59,7 +59,7 @@
             var isPrivate = (proto === 'file:' || h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(h));
             if (self.var.isDev || self.var.isStaging || isPrivate) {
                 self.var.actor = (self.var.envLabel || 'LOCAL') + '-TEST';
-                self.setMetaUser('（' + (self.var.envLabel || 'DEV') + ' 模式，未登入）');
+                self.setMetaUser((self.var.envLabel || 'DEV') + ' 模式，未登入');
                 self.setMetaEnv(self.var.envLabel);
                 resolve(); return;
             }
@@ -109,8 +109,8 @@
 
     /* ========== Common Utilities ========== */
     APP.qs = function(k) { try { var part = (location.hash.split('?')[1] || ''); var usp = new URLSearchParams(part); return usp.get(k); } catch (_e) { return null; } };
-    APP.setMetaUser = function(t) { if (this.el.$meta && this.el.$meta.length) this.el.$meta.text(t || ''); };
-    APP.setMetaEnv = function(t) { if (this.el.$meta && this.el.$meta.length) this.el.$meta.text(t || ''); };
+    APP.setMetaUser = function(t) { if (this.el.$metaUser && this.el.$metaUser.length) this.el.$metaUser.text(t || ''); };
+    APP.setMetaEnv = function(t) { if (this.el.$metaEnv && this.el.$metaEnv.length) this.el.$metaEnv.text(t || ''); };
 
     APP.init = function() {
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
