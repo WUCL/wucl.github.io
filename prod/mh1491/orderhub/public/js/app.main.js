@@ -14,10 +14,9 @@
     APP.el = { $win: $(window), $body: $('body'), $main: $('#main'), $meta: $('#meta') };
 
     const currentUrl = window.location.href;
-    alert(currentUrl);
 
     // 這裡填入你「正式站」的 Script ID 部分字串或完整的 LIFF ID
-    const isProd = currentUrl.includes('https://liff.line.me/2008815338-ikQAWeY4');
+    const isProd = currentUrl.includes('https://wucl.github.io/prod/mh1491/orderhub/index.html');
 
     APP.var = {
         stranger: '陌生人',
