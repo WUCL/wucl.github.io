@@ -162,7 +162,13 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
     }
     APP.api = function(action, payload) {
         var url = this.var.API_URL;
-        var bodyStr = JSON.stringify($.extend({ action: action }, payload || {}));
+        // var bodyStr = JSON.stringify($.extend({ action: action }, payload || {}));
+
+        var bodyStr = JSON.stringify($.extend({
+            action: action,
+            targetId: this.var.targetId || '' // 自動帶入群組 ID
+        }, payload || {}));
+
         return new Promise(function(resolve) {
             fetch(url, {
                     method: 'POST',

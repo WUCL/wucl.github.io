@@ -17,12 +17,15 @@
 
     // 這裡填入你「正式站」的 Script ID 部分字串或完整的 LIFF ID
     const isProd = currentUrl.includes('https://wucl.github.io/prod/mh1491/orderhub/index.html');
+    // const isProd = true;
 
     APP.var = {
         stranger: '陌生人',
         featureMode: '',
         actor: 'LIFF',
         isStaging: false,
+
+        targetId: '',
 
         liffReady: false,
         envLabel: isProd ? 'PROD' : 'DEV',
@@ -69,6 +72,14 @@
             try {
                 liff.init({ liffId: self.var.LIFF_ID }).then(function() {
                     if (!liff.isLoggedIn()) { liff.login(); resolve(); return; }
+
+                    var context = liff.getContext();
+                    if (context) {
+                        // 如果是在群組(group)或多人聊天室(room)，把 ID 存到全域變數
+                        self.var.targetId = context.groupId || context.roomId || '';
+                        console.log('[LIFF] Target ID:', self.var.targetId);
+                    }
+
                     liff.getProfile().then(function(p) {
                         self.var.actor = 'LIFF'; self.var.liffReady = true;
                         self.setMetaUser('使用者：' + ((p && p.displayName) || '')); resolve();
