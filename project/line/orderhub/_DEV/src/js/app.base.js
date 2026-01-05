@@ -166,7 +166,7 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
 
         var bodyStr = JSON.stringify($.extend({
             action: action,
-            targetId: this.var.targetId || '' // 自動帶入群組 ID
+            targetId: APP.var.targetId || '' // 把剛才存好的群組 ID 塞進去
         }, payload || {}));
 
         return new Promise(function(resolve) {
