@@ -75,13 +75,16 @@
 
                     var context = liff.getContext();
                     if (context) {
-                        // 如果是在群組(group)或多人聊天室(room)，把 ID 存到全域變數
+                        // 嚴格抓取 groupId 或 roomId
+                        // 不要直接用 context.id，那個是 LIFF 的內部 ID，機器人無法識別
                         self.var.targetId = context.groupId || context.roomId || '';
-                        $('#metaUser').after('<span id="debug-tid" style="display: block; color:red; font-size:9px; margin-left:5px;">TID: ' + self.var.targetId + '</span>');
-                    }
-                    if (context) {
-                        // 抓取群組 ID (groupId) 或 多人聊天室 ID (roomId)
-                        self.var.targetId = context.groupId || context.roomId || '';
+
+                        // 加上這行 Debug，確保我們知道抓到的是哪一種 ID
+                        var debugInfo = '';
+                        if (context.groupId) debugInfo = 'Group: ' + context.groupId;
+                        else if (context.roomId) debugInfo = 'Room: ' + context.roomId;
+                        else debugInfo = 'User/External: ' + (context.userId || 'Unknown');
+                        $('#metaEnv').after('<div id="debug-tid" style="color:red; font-size:10px;">' + debugInfo + '</div>');
                     }
 
                     liff.getProfile().then(function(p) {
