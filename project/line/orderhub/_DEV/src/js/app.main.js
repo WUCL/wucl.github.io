@@ -75,16 +75,17 @@
 
                     var context = liff.getContext();
                     if (context) {
-                        // 嚴格抓取 groupId 或 roomId
-                        // 不要直接用 context.id，那個是 LIFF 的內部 ID，機器人無法識別
+                        // 【關鍵修改】只抓取以 C 開頭的 groupId 或以 R 開頭的 roomId
+                        // 如果這兩個都是空值，代表當前環境不支援主動群組通知
                         self.var.targetId = context.groupId || context.roomId || '';
 
-                        // 加上這行 Debug，確保我們知道抓到的是哪一種 ID
-                        var debugInfo = '';
-                        if (context.groupId) debugInfo = 'Group: ' + context.groupId;
-                        else if (context.roomId) debugInfo = 'Room: ' + context.roomId;
-                        else debugInfo = 'User/External: ' + (context.userId || 'Unknown');
-                        $('#metaEnv').after('<div id="debug-tid" style="color:red; font-size:10px;">' + debugInfo + '</div>');
+                        // 修改 Debug 顯示，讓我們看清楚
+                        var debugLabel = "";
+                        if (context.groupId) debugLabel = "【群組】" + context.groupId;
+                        else if (context.roomId) debugLabel = "【聊天室】" + context.roomId;
+                        else debugLabel = "【個人/外部】" + (context.userId || "無ID");
+
+                        $('#metaEnv').after('<div id="debug-tid" style="color:red; font-size:10px; font-weight:bold;">目標 ID: ' + debugLabel + '</div>');
                     }
 
                     liff.getProfile().then(function(p) {
