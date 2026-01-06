@@ -77,7 +77,11 @@
                     if (context) {
                         // 如果是在群組(group)或多人聊天室(room)，把 ID 存到全域變數
                         self.var.targetId = context.groupId || context.roomId || '';
-                        alert('[LIFF] Target ID:', self.var.targetId);
+                        $('#metaUser').after('<span id="debug-tid" style="display: block; color:red; font-size:9px; margin-left:5px;">TID: ' + self.var.targetId + '</span>');
+                    }
+                    if (context) {
+                        // 抓取群組 ID (groupId) 或 多人聊天室 ID (roomId)
+                        self.var.targetId = context.groupId || context.roomId || '';
                     }
 
                     liff.getProfile().then(function(p) {
