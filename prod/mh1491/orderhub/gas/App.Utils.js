@@ -147,7 +147,7 @@ function formatNewOrderMsg_(data) {
     // Group 1: 訂單核心資訊
     ['客戶類型', '接單平台', '訂單日期', '交貨日期'],
 
-    ['是否已付款', '是否已交貨', '訂單金額', '付款方式', '匯款後五碼'],
+    ['是否已付款', '是否已交貨', '訂單金額', '商品金額', '運費金額', '付款方式', '匯款後五碼'],
 
     // Group 2: 訂購人 (開頭加分隔線)
     ['訂購人姓名', '訂購人電話', '訂購人Email'],
@@ -156,7 +156,7 @@ function formatNewOrderMsg_(data) {
     ['品項分類', '週花週期', '購買用途', '商品項目'],
 
     // Group 4: 收件/取貨 (開頭加分隔線)
-    ['取貨方式','貨運單號','收件者姓名','收件者電話','收件者地址'],
+    ['取貨方式', '貨運單號', '收件者姓名', '收件者電話', '收件者地址'],
 
     // Group 5: 備註
     ['訂單備註', '小卡內容']
@@ -167,7 +167,7 @@ function formatNewOrderMsg_(data) {
   groups.forEach((fields, groupIndex) => {
     // 1. 判斷是否需要分隔線
     // 邏輯：如果是「訂購人」或「取貨方式」群組，且不是第一組，就加分隔線
-    const isSpecialGroup = fields.includes('訂購人姓名') || fields.includes('取貨方式');
+    const isSpecialGroup = fields.includes('訂購人姓名') || fields.includes('取貨方式') || fields.includes('訂單備註');
 
     if (groupIndex > 0 && isSpecialGroup) {
        lines.push('━');
@@ -189,4 +189,65 @@ function formatNewOrderMsg_(data) {
   });
 
   return lines.join('\n');
+}
+
+/**
+ * 在 Google 日曆建立全天事件
+ * @param {Object} obj 訂單資料物件 (包含訂單編號、交貨日期等)
+ */
+function createCalendarEvent_(obj) {
+  try {
+    // 1. 取得日曆 ID (若沒設定則使用主日曆)
+    const props = PropertiesService.getScriptProperties();
+    const calendarId = props.getProperty('CALENDAR_ID') || 'primary';
+    const calendar = CalendarApp.getCalendarById(calendarId);
+
+    if (!calendar) {
+      console.error('找不到指定的日曆：' + calendarId);
+      return;
+    }
+
+    // 2. 準備事件內容
+    const title = `[訂單] ${obj['訂購人姓名']} - ${obj['商品項目']}`;
+    const date = new Date(obj['交貨日期']);
+
+    // 檢查日期是否有效
+    if (isNaN(date.getTime())) {
+      console.warn('交貨日期無效，無法建立日曆事件：', obj['交貨日期']);
+      return;
+    }
+
+    const description = [
+      `訂單編號：${obj['訂單編號']}`,
+      `客戶：${obj['客戶類型']} (${obj['接單平台']})`,
+      `金額：${obj['訂單金額']}`,
+      `取貨方式：${obj['取貨方式']}`,
+      `收件人：${obj['收件者姓名']} (${obj['收件者電話']})`,
+      `收件地址：${obj['收件者地址']}`,
+      `備註：${obj['訂單備註'] || '-'}`
+    ].join('\n');
+
+    // 3. 建立全天事件
+    const event = calendar.createAllDayEvent(title, date, {
+      description: description
+    });
+
+    // 針對特定的品項分類上色（例如週花用橘色，其他用綠色）
+    if (String(obj['品項分類']) === '週花') {
+      event.setColor(CalendarApp.EventColor.ORANGE);
+    } else {
+      event.setColor(CalendarApp.EventColor.PALE_GREEN);
+    }
+
+    console.log('日曆事件建立成功，ID:', event.getId());
+  } catch (e) {
+    // 使用 try-catch 確保日曆失敗不會導致整個訂單儲存失敗
+    console.error('建立日曆事件時發生錯誤:', e.toString());
+  }
+}
+
+function triggerAuth() {
+  // 隨便呼叫一個日曆功能，強迫觸發授權
+  CalendarApp.getDefaultCalendar().getName();
+  Logger.log('授權成功！');
 }

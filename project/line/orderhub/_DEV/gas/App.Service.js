@@ -23,6 +23,9 @@ function Orders_newOrder(payload, actor, opt = {}) {
   sanitizePhone_(obj);
   APPEND(ENV.ORDERS_SHEET, obj);
 
+  // 【新增：連動日曆】
+  createCalendarEvent_(obj);
+
   // 記錄 Log
   ChangeLog_append({
     time: new Date(),
