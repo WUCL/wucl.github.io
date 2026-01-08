@@ -28,7 +28,8 @@ function Orders_newOrder(payload, actor, opt = {}) {
     time: new Date(),
     action: 'create',
     orderId, actor,
-    lineName: opt.lineName, lineId: opt.lineId,
+    lineName: opt.lineName,
+    lineId: opt.lineId,
     snapshot: payload
   });
 
@@ -50,7 +51,11 @@ function Orders_newOrder(payload, actor, opt = {}) {
   const infoText = formatNewOrderMsg_(obj);
   const msg = `🆕 新增訂單\n${orderId}\n-\n${updater} 編輯\n-\n${infoText}`;
 
-  sendLinePush_(opt.lineId, msg);
+  const notifyTarget = opt.targetId || opt.lineId; // 有群組發群組，沒群組發個人
+  if (notifyTarget) {
+    sendLinePush_(notifyTarget, msg);
+  }
+  // sendLinePush_(opt.lineId, msg);
 
   return orderId;
 }
@@ -121,7 +126,8 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
       time: new Date(),
       action: 'create_weekly',
       orderId, actor,
-      lineName: opt.lineName, lineId: opt.lineId,
+      lineName: opt.lineName,
+      lineId: opt.lineId,
       snapshot: { ...data, repeat: safeRepeat }
     });
 
@@ -146,7 +152,11 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
   const infoText = formatNewOrderMsg_(notifyObj);
   const msg = `🆕 新增訂單 (週花 x${safeRepeat})\n${orderId}\n-\n${updater} 編輯\n-\n${infoText}`;
 
-  sendLinePush_(opt.lineId, msg);
+  const notifyTarget = opt.targetId || opt.lineId; // 有群組發群組，沒群組發個人
+  if (notifyTarget) {
+    sendLinePush_(notifyTarget, msg);
+  }
+  // sendLinePush_(opt.lineId, msg);
 
   return { ok: true, orderId, created: safeRepeat };
 }
@@ -201,7 +211,8 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
       time: new Date(),
       action: 'update',
       orderId, actor,
-      lineName: opt.lineName, lineId: opt.lineId,
+      lineName: opt.lineName,
+      lineId: opt.lineId,
       diff
     });
 
@@ -220,7 +231,12 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
       .join('\n');
 
     const msg = `✏️ 修改訂單\n${orderId}\n-\n${updater} 編輯\n-\n${diffText}`;
-    sendLinePush_(opt.lineId, msg);
+
+    const notifyTarget = opt.targetId || opt.lineId; // 有群組發群組，沒群組發個人
+    if (notifyTarget) {
+      sendLinePush_(notifyTarget, msg);
+    }
+    // sendLinePush_(opt.lineId, msg);
   }
 
   return { ok: true, order: after };

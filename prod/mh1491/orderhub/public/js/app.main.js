@@ -17,12 +17,15 @@
 
     // 這裡填入你「正式站」的 Script ID 部分字串或完整的 LIFF ID
     const isProd = currentUrl.includes('https://wucl.github.io/prod/mh1491/orderhub/index.html');
+    // const isProd = true;
 
     APP.var = {
         stranger: '陌生人',
         featureMode: '',
         actor: 'LIFF',
         isStaging: false,
+
+        targetId: '',
 
         liffReady: false,
         envLabel: isProd ? 'PROD' : 'DEV',
@@ -69,6 +72,22 @@
             try {
                 liff.init({ liffId: self.var.LIFF_ID }).then(function() {
                     if (!liff.isLoggedIn()) { liff.login(); resolve(); return; }
+
+                    var context = liff.getContext();
+                    if (context) {
+                        // 【關鍵修改】只抓取以 C 開頭的 groupId 或以 R 開頭的 roomId
+                        // 如果這兩個都是空值，代表當前環境不支援主動群組通知
+                        self.var.targetId = context.groupId || context.roomId || '';
+
+                        // 修改 Debug 顯示，讓我們看清楚
+                        var debugLabel = "";
+                        if (context.groupId) debugLabel = "【群組】" + context.groupId;
+                        else if (context.roomId) debugLabel = "【聊天室】" + context.roomId;
+                        else debugLabel = "【個人/外部】" + (context.userId || "無ID");
+
+                        $('#metaEnv').after('<div id="debug-tid" style="color:red;font-size:9px;">目標 ID: ' + debugLabel + '</div>');
+                    }
+
                     liff.getProfile().then(function(p) {
                         self.var.actor = 'LIFF'; self.var.liffReady = true;
                         self.setMetaUser('使用者：' + ((p && p.displayName) || '')); resolve();

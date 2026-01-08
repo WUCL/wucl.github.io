@@ -38,8 +38,15 @@ function handleApiRequest_(req) {
   const lineName = req.lineName || '';
   const lineId = req.lineId || '';
 
+  // 【關鍵修改：增加 targetId】
+  const targetId = req.targetId || '';
+
   // 統一參數物件，傳遞給 Service
-  const opt = { lineName, lineId };
+  const opt = {
+    lineName,
+    lineId,
+    targetId: targetId // 讓後面的 Service 知道要發給誰
+  };
 
   switch (action) {
     case 'create':
