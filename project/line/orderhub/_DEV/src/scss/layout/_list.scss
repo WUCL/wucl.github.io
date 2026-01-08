@@ -105,6 +105,10 @@
 
             &.date {
                 color: $ink;
+                background: $bg-soft;
+                padding: 0 3px;
+                border-radius: $radius-sm;
+                letter-spacing: -.3px;
             }
 
             &.amount {
