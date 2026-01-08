@@ -74,14 +74,6 @@
             liff.init({ liffId: self.var.LIFF_ID }).then(function() {
                 if (!liff.isLoggedIn()) { liff.login(); resolve(); return; }
 
-                // 抓取 Group / Room ID
-                // var context = liff.getContext();
-                // if (context) {
-                //     self.var.targetId = context.groupId || context.roomId || '';
-                //     var debugLabel = context.groupId ? "【群組】" + context.groupId : (context.roomId ? "【聊天室】" + context.roomId : "【個人/外部】");
-                //     $('.for-debug').append('<div>' + debugLabel + self.var.targetId + '</div>');
-                // }
-
                 // 抓取 Group / Room / User ID
                 var context = liff.getContext();
                 if (context) {
@@ -94,7 +86,6 @@
                     else if (context.roomId) { debugLabel = "【聊天室】"; }
                     else { debugLabel = "【個人/外部】"; }
 
-                    // 清除舊的 debug 資訊並顯示新的
                     $('.for-debug').append('<div>' + debugLabel + (self.var.targetId || '無法取得ID') + '</div>');
 
                     console.log('[LIFF] Context Type:', context.type);
