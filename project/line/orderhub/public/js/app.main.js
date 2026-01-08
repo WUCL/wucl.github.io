@@ -79,7 +79,7 @@
                 if (context) {
                     self.var.targetId = context.groupId || context.roomId || '';
                     var debugLabel = context.groupId ? "【群組】" + context.groupId : (context.roomId ? "【聊天室】" + context.roomId : "【個人/外部】");
-                    $('.for-debug').append('<div>目標 ID: ' + debugLabel + '</div>');
+                    $('.for-debug').append('<div>' + debugLabel + ' :: ' + self.var.targetId + '</div>');
                 }
 
                 liff.getProfile().then(function(p) {
@@ -106,9 +106,6 @@
         var config = (env.label === 'PROD') ? ENV_CONFIG.PROD : ENV_CONFIG.DEV;
         this.var.LIFF_ID = config.LIFF_ID;
         this.var.API_URL = config.API_URL;
-
-        // Debug 資訊
-        $('.for-debug').empty().append('<div>環境偵測: ' + JSON.stringify(env) + '</div>');
 
         if (w.deviceObj) this.el.$body.addClass(deviceObj.name);
 
