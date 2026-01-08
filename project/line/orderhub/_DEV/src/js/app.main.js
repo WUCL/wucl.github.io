@@ -85,7 +85,7 @@
                         else if (context.roomId) debugLabel = "【聊天室】" + context.roomId;
                         else debugLabel = "【個人/外部】" + (context.userId || "無ID");
 
-                        $('#metaEnv').after('<div id="debug-tid" style="color:red; font-size:10px; font-weight:bold;">目標 ID: ' + debugLabel + '</div>');
+                        $('#metaEnv').after('<div id="debug-tid" style="color:red;font-size:9px;">目標 ID: ' + debugLabel + '</div>');
                     }
 
                     liff.getProfile().then(function(p) {

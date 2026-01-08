@@ -444,6 +444,24 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         else { $form.removeClass('is-busy'); $fields.each(function() { this.disabled = false; }); }
     };
 
+    // === [新增] 自動計算總金額：消費金額 + 運費金額 = 訂單金額 ===
+    APP.bindAmountCalculation = function($form) {
+        var $subtotal = $form.find('[name="消費金額"]');
+        var $shipping = $form.find('[name="運費金額"]');
+        var $total = $form.find('[name="訂單金額"]');
+
+        if (!$subtotal.length || !$shipping.length || !$total.length) return;
+
+        function calc() {
+            var v1 = parseInt($subtotal.val(), 10) || 0;
+            var v2 = parseInt($shipping.val(), 10) || 0;
+            $total.val(v1 + v2);
+        }
+
+        // 監聽消費與運費的輸入事件
+        $subtotal.add($shipping).on('input change', calc);
+    };
+
     APP.bindSharedForm = function($form) {
         var self = this;
         self.bindIsPaied($form);
@@ -451,6 +469,7 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         self.bindIsStranger($form);
         self.bindSameAsBuyer($form);
         self.bindMappingRecvAddr($form);
+        self.bindAmountCalculation($form);
     };
 })(window, jQuery);
 

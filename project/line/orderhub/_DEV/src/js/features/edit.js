@@ -176,7 +176,7 @@
         function checkWeeklyLock($f) {
             // 如果是週花，鎖定特定欄位
             if ($f.find('[name="品項分類"]').val() === '週花') {
-                const locks = ['訂單金額', '品項分類', '週花週期', '商品項目'];
+                const locks = ['消費金額', '品項分類', '週花週期', '商品項目'];
                 locks.forEach(n => $f.find(`[name="${n}"]`).prop('disabled', true));
             }
         }

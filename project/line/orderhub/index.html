@@ -137,7 +137,9 @@
 		                <div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
 		                <div class="field field-isPay"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
 		                <div class="field field-isShip"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
-		                <div class="field"><label>訂單金額</label><input name="訂單金額" type="number" min="0" step="1" required></div>
+		                <div class="field display-n-i"><input name="訂單金額" type="number" min="0" step="1" hidden></div>
+		                <div class="field"><label>消費金額</label><input name="消費金額" type="number" min="0" step="1" required></div>
+		                <div class="field"><label>運費金額</label><input name="運費金額" type="number" min="0" step="1" required></div>
 		                <div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
 		                <div class="field showhide" id="field-moneyTransfer" style="display:none;"><label>匯款後五碼</label><input name="匯款後五碼" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="請輸入5位數字"></div>
 		            </div>
@@ -148,6 +150,7 @@
 		            <h3>訂購人<label class="extra-check isStranger"><input type="checkbox" id="isStranger">是陌生人</label></h3>
 		            <div class="row">
 		                <div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
+		                <div class="field"><label>ID</label><input name="訂購人ID" required></div>
 		                <div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
 		                <div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
 		            </div>
