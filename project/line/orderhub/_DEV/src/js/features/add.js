@@ -38,8 +38,10 @@
             // 自動帶入或還原「商品項目」
             if (isWeekly && !$item.hasClass('wasWeekly')) {
                 $item.data('ORIG_KEY', $item.val()).addClass('wasWeekly').val('週花');
+                $('input[name="週花週期"]').val('1');
             } else if (!isWeekly && $item.hasClass('wasWeekly')) {
                 $item.val($item.data('ORIG_KEY') || '').removeClass('wasWeekly');
+                $('input[name="週花週期"]').val('');
             }
         });
 
