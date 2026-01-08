@@ -75,17 +75,37 @@
                 if (!liff.isLoggedIn()) { liff.login(); resolve(); return; }
 
                 // 抓取 Group / Room ID
+                // var context = liff.getContext();
+                // if (context) {
+                //     self.var.targetId = context.groupId || context.roomId || '';
+                //     var debugLabel = context.groupId ? "【群組】" + context.groupId : (context.roomId ? "【聊天室】" + context.roomId : "【個人/外部】");
+                //     $('.for-debug').append('<div>' + debugLabel + self.var.targetId + '</div>');
+                // }
+
+                // 抓取 Group / Room / User ID
                 var context = liff.getContext();
                 if (context) {
-                    self.var.targetId = context.groupId || context.roomId || '';
-                    var debugLabel = context.groupId ? "【群組】" + context.groupId : (context.roomId ? "【聊天室】" + context.roomId : "【個人/外部】");
-                    $('.for-debug').append('<div>' + debugLabel + ' :: ' + self.var.targetId + '</div>');
+                    // 優先順序：群組 ID > 聊天室 ID > 個人 User ID > 空值
+                    self.var.targetId = context.groupId || context.roomId || context.userId || '';
+
+                    // 根據 type 決定顯示的標籤名稱
+                    var debugLabel = "";
+                    if (context.groupId) { debugLabel = "【群組】"; }
+                    else if (context.roomId) { debugLabel = "【聊天室】"; }
+                    else { debugLabel = "【個人/外部】"; }
+
+                    // 清除舊的 debug 資訊並顯示新的
+                    $('.for-debug').append('<div>' + debugLabel + (self.var.targetId || '無法取得ID') + '</div>');
+
+                    console.log('[LIFF] Context Type:', context.type);
+                    console.log('[LIFF] Target ID:', self.var.targetId);
                 }
+
 
                 liff.getProfile().then(function(p) {
                     self.var.actor = 'LIFF';
                     self.var.liffReady = true;
-                    self.setMetaUser('使用者：' + (p.displayName || ''));
+                    self.setMetaUser(p.displayName || '');
                     resolve();
                 }).catch(function() { self.setMetaUser('(讀取個資失敗)'); resolve(); });
             }).catch(function(err) {
