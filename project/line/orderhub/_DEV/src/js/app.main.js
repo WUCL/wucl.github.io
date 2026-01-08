@@ -57,15 +57,30 @@
     APP.initLiff = function() {
         var self = this;
         return new Promise(function(resolve) {
-            var h = location.hostname || '';
-            var proto = location.protocol || '';
-            var isPrivate = (proto === 'file:' || h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(h));
-            if (self.var.isDev || self.var.isStaging || isPrivate) {
+            // var h = location.hostname || '';
+            // var proto = location.protocol || '';
+            // var isPrivate = (proto === 'file:' || h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(h));
+            // if (self.var.isDev || self.var.isStaging || isPrivate) {
+            //     self.var.actor = (self.var.envLabel || 'LOCAL') + '-TEST';
+            //     self.setMetaUser((self.var.envLabel || 'DEV') + ' 模式，未登入');
+            //     self.setMetaEnv(self.var.envLabel);
+            //     resolve(); return;
+            // }
+            // if (!w.liff || !self.var.LIFF_ID || self.var.LIFF_ID.indexOf('REPLACE_') === 0) {
+            //     self.setMetaUser('(未啟用 LIFF)'); resolve(); return;
+            // }
+
+
+            // 這裡直接判斷：如果不是正式站 (PROD)，就進入測試模擬模式
+            // 建議只判斷 isDev，因為正式站絕對不應該是 isDev
+            if (self.var.isDev || self.var.isStaging) {
                 self.var.actor = (self.var.envLabel || 'LOCAL') + '-TEST';
-                self.setMetaUser((self.var.envLabel || 'DEV') + ' 模式，未登入');
+                self.setMetaUser('未登入');
                 self.setMetaEnv(self.var.envLabel);
                 resolve(); return;
             }
+
+            // 如果是正式站，才執行真正的 LIFF 初始化
             if (!w.liff || !self.var.LIFF_ID || self.var.LIFF_ID.indexOf('REPLACE_') === 0) {
                 self.setMetaUser('(未啟用 LIFF)'); resolve(); return;
             }
