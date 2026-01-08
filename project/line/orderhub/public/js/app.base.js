@@ -446,7 +446,7 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
 
     // === [新增] 自動計算總金額：消費金額 + 運費金額 = 訂單金額 ===
     APP.bindAmountCalculation = function($form) {
-        var $subtotal = $form.find('[name="消費金額"]');
+        var $subtotal = $form.find('[name="商品金額"]');
         var $shipping = $form.find('[name="運費金額"]');
         var $total = $form.find('[name="訂單金額"]');
 
