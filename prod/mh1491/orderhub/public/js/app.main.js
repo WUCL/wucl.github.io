@@ -1,161 +1,147 @@
 /* ==========================================
    FILE: app.main.js
-   INCLUDES: app.core, app.clock
-   包含 APP 初始化邏輯、環境偵測、LIFF 初始化、Router 路由控制，以及 DOM Ready 後的啟動指令。
+   包含 APP 初始化邏輯、環境偵測、LIFF 初始化。
    ========================================== */
 
-/* --- SOURCE: app.core.js --- */
-/* eslint-env browser, jquery, es2020 */
-/*! OrderHub — Core */
-;
-(function(w, $) {
+;(function(w, $) {
     'use strict';
     var APP = w.APP || (w.APP = {});
-    APP.el = { $win: $(window), $body: $('body'), $main: $('#main'), $metaUser: $('#metaUser'), $metaEnv: $('#metaEnv') };
 
-    const currentUrl = window.location.href;
+    // --- 1. 環境配置 (正式與測試兩套 ID) ---
+    const ENV_CONFIG = {
+        PROD: {
+            LIFF_ID: '2008815338-ikQAWeY4',
+            API_URL: 'https://script.google.com/macros/s/AKfycbxORq8QbKIyaWptrhjQfipCRMhysXck4N_s4UTCcRWRsUWVvP_tfePLUIz56sG-L1hQwg/exec?api=1'
+        },
+        DEV: {
+            LIFF_ID: '2008325627-Nk6d1Z64',
+            API_URL: 'https://script.google.com/macros/s/AKfycbys--UCUGCa5VAIXf_Gc6uBnT2Ix8_UzeABt-YQ4Fy5Yz4v2JAiVuV-b8-QRLT1LSxL/exec?api=1'
+        }
+    };
 
-    // 這裡填入你「正式站」的 Script ID 部分字串或完整的 LIFF ID
-    const isProd = currentUrl.includes('https://wucl.github.io/prod/mh1491/orderhub/index.html');
-    // const isProd = true;
+    APP.el = {
+        $win: $(window),
+        $body: $('body'),
+        $main: $('#main'),
+        $metaUser: $('#metaUser'),
+        $metaEnv: $('#metaEnv')
+    };
 
     APP.var = {
         stranger: '陌生人',
-        featureMode: '',
         actor: 'LIFF',
-        isStaging: false,
-
         targetId: '',
-
         liffReady: false,
-        envLabel: isProd ? 'PROD' : 'DEV',
-        isDev: !isProd,
-        // 根據環境自動選取 ID
-        LIFF_ID: isProd
-            ? '2008815338-ikQAWeY4'  // prod
-            : '2008325627-Nk6d1Z64', // dev
-        API_URL: isProd
-            ? 'https://script.google.com/macros/s/AKfycbxORq8QbKIyaWptrhjQfipCRMhysXck4N_s4UTCcRWRsUWVvP_tfePLUIz56sG-L1hQwg/exec?api=1' // prod
-            : 'https://script.google.com/macros/s/AKfycbys--UCUGCa5VAIXf_Gc6uBnT2Ix8_UzeABt-YQ4Fy5Yz4v2JAiVuV-b8-QRLT1LSxL/exec?api=1' // dev
+        envLabel: 'DEV', // 只有 DEV 或 PROD
+        LIFF_ID: '',
+        API_URL: ''
     };
 
-    /* ========== Env & LIFF ========== */
+    /* ========== A. 環境偵測 ========== */
     APP.detectEnv_ = function() {
         var h = location.hostname || '';
-        var proto = location.protocol || '';
-        var qs = ''; try { qs = location.search || ''; } catch (_) {}
-        var q; try { q = new URLSearchParams(qs); } catch (_) { q = { get: function() { return null; } }; }
-        if (q.get && q.get('dev') === '1') return { isDev: true, isStaging: false, label: 'DEV' };
-        if (q.get && q.get('staging') === '1') return { isDev: false, isStaging: true, label: 'STAGING' };
-        var isLocal = (proto === 'file:' || h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(h) || /\.local$/.test(h) || /\.test$/.test(h));
-        var looksStaging = /ngrok\.io$/.test(h) || /ngrok-free\.app$/.test(h) || (/\.vercel\.app$/.test(h) && /-(git|preview)/i.test(h)) || (/\.netlify\.app$/.test(h) && /--/.test(h)) || /\.cloudfront\.net$/.test(h);
-        if (isLocal) return { isDev: true, isStaging: false, label: 'DEV' };
-        if (looksStaging) return { isDev: false, isStaging: true, label: 'STAGING' };
-        return { isDev: false, isStaging: false, label: 'PROD' };
+        var currentUrl = window.location.href;
+
+        // 1. 判斷是否為正式站路徑
+        var isProd = currentUrl.includes('/prod/mh1491/orderhub/');
+
+        // 2. 判斷是否為本機開發環境 (localhost / 127.0.0.1 / 192.168.x.x)
+        var isLocal = (h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h));
+
+        return {
+            label: isProd ? 'PROD' : 'DEV',
+            isLocal: isLocal
+        };
     };
 
-    APP.initLiff = function() {
+    /* ========== B. LIFF 初始化 ========== */
+    APP.initLiff = function(isLocal) {
         var self = this;
         return new Promise(function(resolve) {
-            // var h = location.hostname || '';
-            // var proto = location.protocol || '';
-            // var isPrivate = (proto === 'file:' || h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(h));
-            // if (self.var.isDev || self.var.isStaging || isPrivate) {
-            //     self.var.actor = (self.var.envLabel || 'LOCAL') + '-TEST';
-            //     self.setMetaUser((self.var.envLabel || 'DEV') + ' 模式，未登入');
-            //     self.setMetaEnv(self.var.envLabel);
-            //     resolve(); return;
-            // }
-            // if (!w.liff || !self.var.LIFF_ID || self.var.LIFF_ID.indexOf('REPLACE_') === 0) {
-            //     self.setMetaUser('(未啟用 LIFF)'); resolve(); return;
-            // }
+            // 顯示當前環境標籤 (DEV 或 PROD)
+            self.setMetaEnv(self.var.envLabel);
 
-
-            // 這裡直接判斷：如果不是正式站 (PROD)，就進入測試模擬模式
-            // 建議只判斷 isDev，因為正式站絕對不應該是 isDev
-            if (self.var.isDev || self.var.isStaging) {
-                self.var.actor = (self.var.envLabel || 'LOCAL') + '-TEST';
-                self.setMetaUser('未登入');
-                self.setMetaEnv(self.var.envLabel);
+            // 【邏輯：只有在本機且是 DEV 模式時，才跳過登入】
+            if (isLocal && self.var.envLabel === 'DEV') {
+                self.var.actor = 'LOCAL-TEST';
+                self.setMetaUser('本地開發模式 (未登入)');
                 resolve(); return;
             }
 
-            // 如果是正式站，才執行真正的 LIFF 初始化
-            if (!w.liff || !self.var.LIFF_ID || self.var.LIFF_ID.indexOf('REPLACE_') === 0) {
-                self.setMetaUser('(未啟用 LIFF)'); resolve(); return;
-            }
-            try {
-                liff.init({ liffId: self.var.LIFF_ID }).then(function() {
-                    if (!liff.isLoggedIn()) { liff.login(); resolve(); return; }
+            // 只要不是本機，或是正式站，就執行 LINE 登入
+            if (!w.liff) { self.setMetaUser('(未載入 SDK)'); resolve(); return; }
 
-                    var context = liff.getContext();
-                    if (context) {
-                        // 【關鍵修改】只抓取以 C 開頭的 groupId 或以 R 開頭的 roomId
-                        // 如果這兩個都是空值，代表當前環境不支援主動群組通知
-                        self.var.targetId = context.groupId || context.roomId || '';
+            liff.init({ liffId: self.var.LIFF_ID }).then(function() {
+                if (!liff.isLoggedIn()) { liff.login(); resolve(); return; }
 
-                        // 修改 Debug 顯示，讓我們看清楚
-                        var debugLabel = "";
-                        if (context.groupId) debugLabel = "【群組】" + context.groupId;
-                        else if (context.roomId) debugLabel = "【聊天室】" + context.roomId;
-                        else debugLabel = "【個人/外部】" + (context.userId || "無ID");
+                // 抓取 Group / Room ID
+                var context = liff.getContext();
+                if (context) {
+                    self.var.targetId = context.groupId || context.roomId || '';
+                    var debugLabel = context.groupId ? "【群組】" + context.groupId : (context.roomId ? "【聊天室】" + context.roomId : "【個人/外部】");
+                    $('.for-debug').append('<div>目標 ID: ' + debugLabel + '</div>');
+                }
 
-                        $('#metaEnv').after('<div id="debug-tid" style="color:red;font-size:9px;">目標 ID: ' + debugLabel + '</div>');
-                    }
-
-                    liff.getProfile().then(function(p) {
-                        self.var.actor = 'LIFF'; self.var.liffReady = true;
-                        self.setMetaUser('使用者：' + ((p && p.displayName) || '')); resolve();
-                    }).catch(function() { self.setMetaUser('(LIFF 取用個資失敗)'); resolve(); });
-                }).catch(function() { self.setMetaUser('(LIFF 初始化失敗)'); resolve(); });
-            } catch (_e) { self.setMetaUser('(LIFF 初始化例外)'); resolve(); }
+                liff.getProfile().then(function(p) {
+                    self.var.actor = 'LIFF';
+                    self.var.liffReady = true;
+                    self.setMetaUser('使用者：' + (p.displayName || ''));
+                    resolve();
+                }).catch(function() { self.setMetaUser('(讀取個資失敗)'); resolve(); });
+            }).catch(function(err) {
+                self.setMetaUser('(LIFF 啟動失敗)');
+                console.error(err);
+                resolve();
+            });
         });
     };
 
-    /* ========== Router ========== */
+    /* ========== C. 啟動核心 ========== */
+    APP.init = function() {
+        // 1. 偵測環境
+        var env = this.detectEnv_();
+        this.var.envLabel = env.label;
+
+        // 2. 根據環境標籤分配 ID 與 API
+        var config = (env.label === 'PROD') ? ENV_CONFIG.PROD : ENV_CONFIG.DEV;
+        this.var.LIFF_ID = config.LIFF_ID;
+        this.var.API_URL = config.API_URL;
+
+        // Debug 資訊
+        $('.for-debug').empty().append('<div>環境偵測: ' + JSON.stringify(env) + '</div>');
+
+        if (w.deviceObj) this.el.$body.addClass(deviceObj.name);
+
+        var self = this;
+        // 傳入是否為本機的判斷
+        this.initLiff(env.isLocal).then(function() {
+            self.route();
+            self.el.$win.on('hashchange', function() { self.route(); });
+        });
+
+        if (APP.clock) APP.clock.init();
+    };
+
+    /* ========== D. Router & UI Helpers (保持不變) ========== */
     APP.navHighlight = function() {
         var name = (location.hash || '').replace(/^#\//, '').split('?')[0] || 'list';
-        var links = document.querySelectorAll('.nav-link');
-        for (var i = 0; i < links.length; i++) {
-            var el = links[i];
-            el.classList.toggle('active', el.getAttribute('data-nav') === name);
-        }
+        $('.nav-link').each(function() { $(this).toggleClass('active', $(this).attr('data-nav') === name); });
     };
     APP.updateBreadcrumb = function(name) {
         var map = { list: '訂單列表', add: '新增訂單', edit: '編輯訂單' };
-        var label = map[name] || '訂單列表';
-        var el = document.querySelector('#breadcrumb .current');
-        if (el) el.textContent = label;
+        $('#breadcrumb .current').text(map[name] || '訂單列表');
     };
     APP.route = function() {
         const h = location.hash || '#/list';
         this.navHighlight();
         var name = (h.replace(/^#\//, '')).split('?')[0];
         this.updateBreadcrumb(name);
-
-        if (h.indexOf('#/list') === 0) { if (APP.renderList) return APP.renderList(); }
-        if (h.indexOf('#/add') === 0) { if (APP.renderAdd) return APP.renderAdd(); }
-        if (h.indexOf('#/edit') === 0) { if (APP.renderEdit) return APP.renderEdit(); }
-        // Default
-        if (APP.renderList) APP.renderList();
-        else if (APP.renderAdd) APP.renderAdd();
+        if (h.indexOf('#/list') === 0) { if (this.renderList) return this.renderList(); }
+        if (h.indexOf('#/add') === 0) { if (this.renderAdd) return this.renderAdd(); }
+        if (h.indexOf('#/edit') === 0) { if (this.renderEdit) return this.renderEdit(); }
+        if (this.renderList) this.renderList();
     };
+    APP.setMetaUser = function(t) { if (this.el.$metaUser.length) this.el.$metaUser.text(t || ''); };
+    APP.setMetaEnv = function(t) { if (this.el.$metaEnv.length) this.el.$metaEnv.text(t || ''); };
 
-    /* ========== Common Utilities ========== */
-    APP.qs = function(k) { try { var part = (location.hash.split('?')[1] || ''); var usp = new URLSearchParams(part); return usp.get(k); } catch (_e) { return null; } };
-    APP.setMetaUser = function(t) { if (this.el.$metaUser && this.el.$metaUser.length) this.el.$metaUser.text(t || ''); };
-    APP.setMetaEnv = function(t) { if (this.el.$metaEnv && this.el.$metaEnv.length) this.el.$metaEnv.text(t || ''); };
-
-    APP.init = function() {
-        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-        if (w.deviceObj && deviceObj.name) { this.el.$body.addClass(deviceObj.name); }
-        var env = this.detectEnv_();
-        this.var.isDev = env.isDev; this.var.isStaging = env.isStaging; this.var.envLabel = env.label;
-        var self = this;
-        this.initLiff().then(function() {
-            self.route();
-            self.el.$win.on('hashchange', function() { self.route(); });
-        });
-        if (APP.clock && typeof APP.clock.init === 'function') APP.clock.init();
-    };
 })(window, jQuery);
