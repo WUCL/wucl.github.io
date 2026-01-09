@@ -107,19 +107,53 @@
                 APP.lockForm($form, false);
                 checkWeeklyLock($form);
 
+                // edit.js 內部的 submit 處理區塊
                 if (res && res.ok) {
-                    // [修正] 先渲染訊息 (此時 $originalData 仍為舊值)
+                    // 1. 渲染畫面上的訊息
                     renderSuccessSummary(orderId, $diff);
 
-                    // 渲染完後，才更新本地原始資料
+                    // --- [新增] 準備傳送到 LINE 群組的變更摘要 ---
+                    if (window.liff && liff.isLoggedIn() && liff.isInClient()) {
+                        const userName = APP.var.userName || '使用者'; // 確保有抓到名字
+
+                        // 組裝訊息字串
+                        let diffMsg = [
+                            `✏️ 已更新訂單`,
+                            `${orderId}`,
+                            `-`,
+                            `${userName} 編輯`,
+                            `-`
+                        ];
+
+                        // 只遍歷有變動的欄位 ($diff 裡面只存放有變動的 key)
+                        Object.keys($diff).forEach(k => {
+                            const oldV = $originalData[k] || '(空)';
+                            const newV = $diff[k];
+                            diffMsg.push(`${k}：${oldV} ➝ ${newV}`);
+                        });
+
+                        const fullText = diffMsg.join('\n');
+
+                        // 2. 執行 LINE 傳送 (使用者本人回話)
+                        liff.sendMessages([
+                            {
+                                type: 'text',
+                                text: fullText
+                            }
+                        ]).then(() => {
+                            console.log('修改摘要已傳送');
+                        }).catch((err) => {
+                            console.error('發送失敗', err);
+                            // 備援：如果詳細版失敗，發送簡易版
+                            liff.sendMessages([{ type: 'text', text: `✏️ 已更新訂單：${orderId}` }]).catch(()=>{});
+                        });
+                    }
+
+                    // 3. 更新本地原始資料 (這行原本就在你的 code 裡)
                     Object.assign($originalData, $diff);
 
                     if (APP.status?.done) APP.status.done(true, '更新成功');
 
-                    // LINE 通知
-                    if (window.liff && liff.isInClient()) {
-                        liff.sendMessages([{ type: 'text', text: `✅ 訂單已更新：${orderId}` }]).catch(()=>{});
-                    }
                 } else {
                     $slot.removeClass('ok').addClass('msg err').text('❌ 失敗：' + (res.msg || '未知'));
                 }
@@ -182,7 +216,7 @@
         }
 
         function renderSuccessSummary(id, diffData) {
-            let html = `<div class="msg-h">✅ 已更新訂單<span>${id}</span></div>`;
+            let html = `<div class="msg-h">✏️ 已更新訂單<span>${id}</span></div>`;
             const items = Object.keys(diffData).map(k => {
                 // 處理顯示文字，避免 undefined
                 const oldV = $originalData[k] || '(空)';

@@ -28,6 +28,7 @@
     };
 
     APP.var = {
+        userName: '',
         stranger: '陌生人',
         actor: 'LIFF',
         targetId: '',
@@ -92,10 +93,10 @@
                     console.log('[LIFF] Target ID:', self.var.targetId);
                 }
 
-
                 liff.getProfile().then(function(p) {
                     self.var.actor = 'LIFF';
                     self.var.liffReady = true;
+                    self.var.userName = p.displayName;
                     self.setMetaUser(p.displayName || '');
                     resolve();
                 }).catch(function() { self.setMetaUser('(讀取個資失敗)'); resolve(); });
