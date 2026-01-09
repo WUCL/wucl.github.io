@@ -52,6 +52,11 @@
 
             const data = APP.formToObject($form);
 
+            // 運費為空，則補 0
+            if (!data['運費金額'] || String(data['運費金額']).trim() === '') {
+                data['運費金額'] = '0';
+            }
+
             // [優化] 使用共用函式取得 LINE 資訊
             const profile = await APP.getLineProfile();
 
