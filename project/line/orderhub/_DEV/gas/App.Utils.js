@@ -193,37 +193,54 @@ function formatNewOrderMsg_(data) {
 
 /**
  * 在 Google 日曆建立全天事件
- * @param {Object} obj 訂單資料物件 (包含訂單編號、交貨日期等)
+ * @param {Object} obj 訂單資料物件
  */
 function createCalendarEvent_(obj) {
   try {
-    // 1. 取得日曆 ID (若沒設定則使用主日曆)
+    // 0. 取得日曆 ID (若沒設定則使用主日曆)
     const props = PropertiesService.getScriptProperties();
     const calendarId = props.getProperty('CALENDAR_ID') || 'primary';
     const calendar = CalendarApp.getCalendarById(calendarId);
 
-    if (!calendar) {
-      console.error('找不到指定的日曆：' + calendarId);
-      return;
+    if (!calendar) return console.error('找不到指定的日曆：' + calendarId);
+
+    // --- 1. 處理支付資訊邏輯 ---
+    let payStatus = obj['是否已付款'];
+    if (payStatus === '已付款') {
+      const payMethod = obj['付款方式'] || '';
+      const last5 = obj['匯款後五碼'] || '';
+
+      if (payMethod === '匯款' && last5) {
+        payStatus = `已付款（匯款，${last5}）`;
+      } else if (payMethod) {
+        payStatus = `已付款（${payMethod}）`;
+      } else {
+        payStatus = `已付款`;
+      }
     }
 
-    // 2. 準備事件內容
-    const title = `[訂單] ${obj['訂購人姓名']} - ${obj['商品項目']}`;
-    const date = new Date(obj['交貨日期']);
+    // --- 2. 處理訂購人 ID 邏輯 ---
+    // 註：這裡假設你的資料物件中有 'lineId' 或是您想顯示的 ID 欄位
+    const bName = obj['訂購人姓名'] || '-';
+    const bPhone = obj['訂購人電話'] || '-';
+    const bId = obj['訂購人ID'] || '';
+    const buyerInfo = bId ? `${bName}（${bId}）(${bPhone})` : `${bName}(${bPhone})`;
 
-    // 檢查日期是否有效
-    if (isNaN(date.getTime())) {
-      console.warn('交貨日期無效，無法建立日曆事件：', obj['交貨日期']);
-      return;
-    }
+    // --- 3. 準備事件內容 ---
+    const title = `[訂單][${obj['取貨方式']}] ${bName} - ${obj['商品項目']}`;
+    const deliveryDate = new Date(obj['交貨日期']);
+
+    if (isNaN(deliveryDate.getTime())) return console.warn('日期無效');
 
     const description = [
       `訂單編號：${obj['訂單編號']}`,
       `訂單日期：${obj['訂單日期'] || '-'}`,
       `交貨日期：${obj['交貨日期'] || '-'}`,
       `-`,
-      `客戶：${obj['客戶類型']}（${obj['接單平台']}）`,
-      `訂購人：${obj['訂購人姓名']}（${obj['訂購人電話'] || '-'}）`,
+      `客戶類型：${obj['客戶類型']}（${obj['接單平台']}）`,
+      `訂購人：${buyerInfo}`,
+      `商品：${obj['商品項目'] || '-'}`,
+      `支付：${payStatus}`,
       `金額：${obj['訂單金額']}（${obj['商品金額']} + 運 ${obj['運費金額'] || '0'}）`,
       `-`,
       `取貨方式：${obj['取貨方式']}`,
@@ -234,8 +251,8 @@ function createCalendarEvent_(obj) {
       `小卡：${obj['小卡內容'] || '-'}`
     ].join('\n');
 
-    // 3. 建立全天事件
-    const event = calendar.createAllDayEvent(title, date, {
+    // --- 4. 建立事件 ---
+    const event = calendar.createAllDayEvent(title, deliveryDate, {
       description: description
     });
 
@@ -248,8 +265,7 @@ function createCalendarEvent_(obj) {
 
     console.log('日曆事件建立成功，ID:', event.getId());
   } catch (e) {
-    // 使用 try-catch 確保日曆失敗不會導致整個訂單儲存失敗
-    console.error('建立日曆事件時發生錯誤:', e.toString());
+    console.error('日曆錯誤:', e.toString());
   }
 }
 
