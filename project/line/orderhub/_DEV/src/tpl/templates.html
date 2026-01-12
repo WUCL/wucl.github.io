@@ -10,7 +10,7 @@
  <template id="tpl-status">
     <div id="oh-status" class="oh-status" role="status" aria-live="polite">
         <div class="oh-status__head">
-            <b>狀態</b>
+            <div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
             <div class="oh-status__ctrl">
                 <button type="button" class="oh-status__clear">清空</button>
                 <a class="icon-btn oh-status__toggle" data-action="toggle" title="展開狀態列表" href="#" aria-label="展開狀態列表">
@@ -20,7 +20,6 @@
                 </a>
             </div>
         </div>
-        <div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
         <div class="oh-status__list" style="display:none;"></div>
     </div>
 </template>

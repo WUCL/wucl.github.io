@@ -80,16 +80,17 @@
     &__head {
         @include flex-between;
 
-        b {
-            font-weight: 700;
-            font-size: $font-size-base;
-        }
+        // b {
+        //     font-weight: 700;
+        //     font-size: $font-size-base;
+        // }
     }
 
     &__ctrl {
         display: flex;
         align-items: center;
         gap: 7px;
+        width: 9%;
     }
 
     &__clear {
@@ -111,6 +112,7 @@
 
     &__prog {
         margin-top: 5px;
+        width: 100%;
         height: 3px;
         background: $bg-soft;
         border-radius: 999px;

@@ -148,6 +148,7 @@
 
                 lines.push(`━`);
                 lines.push(`訂購人姓名：${data['訂購人姓名'] || '-'}`);
+                lines.push(`訂購人ID：${data['訂購人ID'] || '-'}`);
                 lines.push(`訂購人電話：${data['訂購人電話'] || '-'}`);
                 lines.push(`訂購人Email：${data['訂購人Email'] || '-'}`);
                 lines.push(`品項分類：${data['品項分類'] || '-'}`);
