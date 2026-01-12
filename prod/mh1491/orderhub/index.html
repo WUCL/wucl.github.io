@@ -100,7 +100,7 @@
 		 <template id="tpl-status">
 		    <div id="oh-status" class="oh-status" role="status" aria-live="polite">
 		        <div class="oh-status__head">
-		            <b>狀態</b>
+		            <div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
 		            <div class="oh-status__ctrl">
 		                <button type="button" class="oh-status__clear">清空</button>
 		                <a class="icon-btn oh-status__toggle" data-action="toggle" title="展開狀態列表" href="#" aria-label="展開狀態列表">
@@ -110,7 +110,6 @@
 		                </a>
 		            </div>
 		        </div>
-		        <div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
 		        <div class="oh-status__list" style="display:none;"></div>
 		    </div>
 		</template>
@@ -427,13 +426,13 @@
 							<div class="cell meta status"><span data-bind="訂單狀態">—</span></div>
 							<div class="cell meta id">#<span data-bind="訂單編號">—</span></div>
 							<div class="cell meta date"><span data-bind="交貨日期">—</span></div>
-							<div class="cell meta shippay"><span class="tags-inline"></span></div>
+							<div class="cell meta shippay"><span data-bind="取貨方式">—</span><span class="tags-inline"></span></div>
 						</div>
 			            <!-- 行 B: 平台 | 客戶 | 分類 | 金額 -->
 						<div class="row b">
 							<div class="cell meta"><span data-bind="接單平台">—</span></div>
 							<div class="cell meta oName"><span data-bind="訂購人姓名">—</span></div>
-							<div class="cell meta"><span data-bind="品項分類">—</span></div>
+							<div class="cell meta"><span data-bind="商品項目">—</span></div>
 							<div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
 						</div>
 					</div>
