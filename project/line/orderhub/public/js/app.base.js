@@ -415,8 +415,12 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
 
             // === 狀態：完成（done）===
             if ($isOrderState === 'done') {
-                if ($isPaied !== '已付款' || $isShipped !== '已交貨') {
-                    alert('⚠️ 無法將狀態改為完成，請先確認訂單「已付款」與「已交貨」。');
+                // 定義允許完成的付款狀態
+                var allowedPayStatus = ['已付款', '公關', '付訂金'];
+
+                // 判斷：如果付款狀態不在允許清單內，或者尚未交貨
+                if (allowedPayStatus.indexOf($isPaied) === -1 || $isShipped !== '已交貨') {
+                    alert('⚠️ 請確認訂單「付款狀態（已付款/公關/付訂金）」與「已交貨」。');
                     // 回復原狀
                     $(this).val('doing');
                     return false;
