@@ -63,6 +63,11 @@
     .row-3 {
         grid-template-columns: 1fr auto;
 
+        .nav {
+            @include flex-center;
+            gap: 7px; // 讓重新整理跟新增訂單之間有空隙
+        }
+
         .btn.btn--icon {
             @include flex-center;
             gap: 3px;
@@ -81,6 +86,20 @@
 
             &:hover {
                 background: $bg-soft;
+            }
+
+            &.btn-refresh {
+                transition: background-color 2s ease, filter 2s ease, color 2s ease, border-color 2s ease;
+                filter: grayscale(0%);
+
+                &.is-loading {
+                    transition: none;             // 【點擊瞬間】立刻變色，不等待動畫
+                    background-color: #e5e7eb !important; // 明顯的深灰底
+                    border-color: #d1d5db !important;     // 邊框同步變灰
+                    color: #9ca3af !important;            // SVG 圖示變淡灰
+                    filter: grayscale(100%);      // 徹底去色
+                    pointer-events: none;         // 鎖定按鈕不可連點
+                }
             }
         }
     }
