@@ -62,68 +62,50 @@ function getNextFriday_(d) {
 }
 
 function filterByDateRange_(rows, dateField, range, customMonth) {
-  // 修改判斷條件，加入新的 key
   if (!range || (range !== 'last-7-days' && range !== 'last-30-days' && range !== 'month')) return rows;
   if (range === 'month' && !customMonth) return rows;
 
   var now = new Date();
+  var currentYear = now.getFullYear();
+
+  // 取得今天的凌晨 00:00:00 (本地時間)，作為起始點
+  var todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
   var start, end;
 
-  // 設定結束時間為「今天的午夜 23:59:59」，確保包含今天的單
-  end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+  if (range === 'month') {
+    // 【指定月】邏輯保持不變：該月 1 號 00:00 ~ 下個月 1 號 00:00
+    var ym = String(customMonth).split('-');
+    var yy = Number(ym[0]), mm = Number(ym[1]) - 1;
+    start = new Date(yy, mm, 1);
+    end = new Date(yy, mm + 1, 1);
+  } else {
+    // 【未來天數】邏輯：從今天凌晨開始往後算
+    var dayCount = (range === 'last-7-days') ? 7 : 30;
 
-  switch (range) {
-    case 'last-7-days':
-      // 取得 7 天前的 00:00:00
-      start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6, 0, 0, 0, 0);
-      break;
-    case 'last-30-days':
-      // 取得 30 天前的 00:00:00
-      start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 29, 0, 0, 0, 0);
-      break;
-    case 'month':
-      var ym = String(customMonth).split('-');
-      var yy = Number(ym[0] || 0), mm = Number(ym[1] || 0) - 1;
-      start = new Date(yy, mm, 1);
-      end = new Date(yy, mm + 1, 0, 23, 59, 59, 999); // 該月最後一秒
-      break;
+    // 開始 1/1
+    start = new Date(currentYear, 0, 1);
+
+    // 結束時間：今天 + N 天後的凌晨 00:00
+    // 例如：14 號看「近 7 天」，範圍會是 14 號凌晨 ~ 21 號凌晨 (包含 14, 15, 16, 17, 18, 19, 20 整天)
+    end = new Date(todayMidnight.getTime() + dayCount * 24 * 60 * 60 * 1000);
   }
 
   return rows.filter(function(r) {
-    var d = new Date(r[dateField]);
-    return !isNaN(d.getTime()) && (d >= start && d <= end);
+    var val = r[dateField];
+    if (!val) return false;
+
+    // 將資料中的日期轉換成 Date 物件
+    var d = (val instanceof Date) ? val : new Date(val);
+    if (isNaN(d.getTime())) return false;
+
+    // 將比對資料的時間也歸零，確保只比對日期
+    var targetDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+    // 判斷是否在區間內： start <= targetDate < end
+    return targetDate >= start && targetDate < end;
   });
 }
-
-// function filterByDateRange_(rows, dateField, range, customMonth) {
-//   if (!range || (range !== 'this-week' && range !== 'this-month' && range !== 'month')) return rows;
-//   if (range === 'month' && !customMonth) return rows;
-
-//   var now = new Date();
-//   var start, end;
-
-//   switch (range) {
-//     case 'this-week':
-//       start = new Date(now); start.setHours(0, 0, 0, 0);
-//       start.setDate(start.getDate() - start.getDay());
-//       end = new Date(start); end.setDate(end.getDate() + 7);
-//       break;
-//     case 'this-month':
-//       start = new Date(now.getFullYear(), now.getMonth(), 1);
-//       end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-//       break;
-//     case 'month':
-//       var ym = String(customMonth).split('-');
-//       var yy = Number(ym[0] || 0), mm = Number(ym[1] || 0) - 1;
-//       start = new Date(yy, mm, 1); end = new Date(yy, mm + 1, 1);
-//       break;
-//   }
-
-//   return rows.filter(function(r) {
-//     var d = new Date(r[dateField]);
-//     return !isNaN(d.getTime()) && (d >= start && d < end);
-//   });
-// }
 
 // --- ID & Sheet Utils ---
 function genId_(orderDate) {
