@@ -268,6 +268,21 @@
             }
         });
 
+        // 【新增邏輯】監聽篩選器變色
+        APP.el.$main.off('change.filterColor').on('change.filterColor', '.filters select', function() {
+            var $el = $(this);
+            // 如果值不為空，就加上 is-active，否則移除
+            if ($el.val() !== "") {
+                $el.addClass('is-active');
+            } else {
+                $el.removeClass('is-active');
+            }
+        });
+        // 初始化：進入頁面時先跑一遍，確保有預設值的（如：doing）會先變色
+        $('.filters select').each(function() {
+            $(this).trigger('change.filterColor');
+        });
+
         // 啟動首次載入
         fetchAndRender();
     };
