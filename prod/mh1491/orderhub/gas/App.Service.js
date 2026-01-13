@@ -4,50 +4,6 @@
 // ==========================================
 
 /**
- * 訂單列表 (GAS 端)
- */
-function Orders_list(params = {}) {
-
-  // === 【重點修改：根據交貨日期排序】 ===
-  rows.sort((a, b) => {
-    // 轉化為 Date 物件進行比對
-    let dateA = new Date(a['交貨日期']);
-    let dateB = new Date(b['交貨日期']);
-    
-    // 如果日期無效，則放到最後面
-    if (isNaN(dateA)) return 1;
-    if (isNaN(dateB)) return -1;
-    
-    // 由舊到新排序 (Ascending)
-    if (dateA - dateB !== 0) {
-      return dateA - dateB;
-    }
-    
-    // 如果交貨日期相同，則按訂單編號排序 (讓顯示更穩定)
-    return String(a['訂單編號']).localeCompare(String(b['訂單編號']));
-  });
-  // =====================================
-
-
-  return {
-    ok: true,
-    items: items,
-    total,
-    page,
-    pages: Math.ceil(total / limit)
-  };
-}
-
-
-
-
-
-
-
-
-
-
-/**
  * 建立單筆訂單
  */
 function Orders_newOrder(payload, actor, opt = {}) {
