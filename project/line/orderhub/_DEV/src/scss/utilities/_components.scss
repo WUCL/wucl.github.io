@@ -67,7 +67,7 @@
 
 // ========== 狀態列 ==========
 .oh-status {
-    @include container();
+    @include container($py: 3px);
     margin-bottom: $space-3;
     background: $card-bg;
     color: $ink;
@@ -75,7 +75,7 @@
     border-radius: $radius;
     box-shadow: $shadow-sm;
     font-size: $font-size-sm;
-    padding-bottom: 9px;
+    // padding-bottom: 9px;
 
     &__head {
         @include flex-between;
@@ -89,13 +89,13 @@
     &__ctrl {
         display: flex;
         align-items: center;
-        gap: 7px;
+        gap: 5px;
     }
 
     &__clear {
         margin-left: auto;
-        font-size: $font-size-sm;
-        padding: 1px 7px;
+        font-size: $font-size-xs;
+        padding: 1px 4px;
         background: transparent;
         border: 1px solid $bd;
         color: $muted;
@@ -110,14 +110,14 @@
     }
 
     &__prog {
-        margin-top: 5px;
-        width: 91%;
+        margin-top: 1.5px;
+        width: 94%;
         height: 3px;
         background: $bg-soft;
         border-radius: 999px;
         overflow: hidden;
         @include respond(md) {
-            width: 73%;
+            width: 84%;
         }
     }
 
@@ -129,7 +129,7 @@
     }
 
     &__list {
-        margin-top: 6px;
+        // margin-top: 6px;
         max-height: calc(1.5em * 3 + 5px);
         overflow: auto;
     }
@@ -154,18 +154,18 @@
 // ========== 圖標按鈕 ==========
 .icon-btn {
     @include flex-center;
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
     border: 1px solid $bd;
     border-radius: $radius-sm;
     background: #fff;
     color: $muted;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all .2s ease;
 
     @include respond(md) {
-        width: 25px;
-        height: 25px;
+        // width: 25px;
+        // height: 25px;
     }
 
     &:hover {
