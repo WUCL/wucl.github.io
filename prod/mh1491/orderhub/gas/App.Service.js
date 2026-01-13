@@ -4,6 +4,50 @@
 // ==========================================
 
 /**
+ * 訂單列表 (GAS 端)
+ */
+function Orders_list(params = {}) {
+
+  // === 【重點修改：根據交貨日期排序】 ===
+  rows.sort((a, b) => {
+    // 轉化為 Date 物件進行比對
+    let dateA = new Date(a['交貨日期']);
+    let dateB = new Date(b['交貨日期']);
+    
+    // 如果日期無效，則放到最後面
+    if (isNaN(dateA)) return 1;
+    if (isNaN(dateB)) return -1;
+    
+    // 由舊到新排序 (Ascending)
+    if (dateA - dateB !== 0) {
+      return dateA - dateB;
+    }
+    
+    // 如果交貨日期相同，則按訂單編號排序 (讓顯示更穩定)
+    return String(a['訂單編號']).localeCompare(String(b['訂單編號']));
+  });
+  // =====================================
+
+
+  return {
+    ok: true,
+    items: items,
+    total,
+    page,
+    pages: Math.ceil(total / limit)
+  };
+}
+
+
+
+
+
+
+
+
+
+
+/**
  * 建立單筆訂單
  */
 function Orders_newOrder(payload, actor, opt = {}) {
@@ -252,14 +296,16 @@ function Orders_list(params = {}) {
   const limit = Math.min(Number(params.limit || LIMITS.DEFAULT_LIST_ITEMS), LIMITS.MAX_LIST_ITEMS);
   const _norm = (s) => String(s || '').trim();
 
-  let rows = ROWS(ENV.ORDERS_SHEET).reverse();
+  // 1. 取得所有原始資料 (先不 reverse)
+  // let rows = ROWS(ENV.ORDERS_SHEET).reverse();
+  let rows = ROWS(ENV.ORDERS_SHEET);
 
+  // 2. 執行過濾 (狀態、篩選條件等...)
   const filters = [
     { key: '訂單狀態', val: _norm(params.orderStatus) },
     { key: '是否已交貨', val: _norm(params.shipStatus) },
     { key: '是否已付款', val: _norm(params.payStatus) }
   ];
-
   filters.forEach(f => {
     if (f.val) rows = rows.filter(r => _norm(r[f.key]).includes(f.val));
   });
@@ -267,13 +313,32 @@ function Orders_list(params = {}) {
   rows = filterByDateRange_(rows, '訂單日期', params.range_order, params.month_order);
   rows = filterByDateRange_(rows, '交貨日期', params.range_ship, params.month_ship);
 
+  // === 【重點修改：根據交貨日期排序】 ===
+  rows.sort((a, b) => {
+    // 轉化為 Date 物件進行比對
+    let dateA = new Date(a['交貨日期']);
+    let dateB = new Date(b['交貨日期']);
+
+    // 如果日期無效，則放到最後面
+    if (isNaN(dateA)) return 1;
+    if (isNaN(dateB)) return -1;
+
+    // 由舊到新排序 (Ascending)
+    if (dateA - dateB !== 0) {
+      return dateA - dateB;
+    }
+
+    // 如果交貨日期相同，則按訂單編號排序 (讓顯示更穩定)
+    return String(a['訂單編號']).localeCompare(String(b['訂單編號']));
+  });
+  // =====================================
+
   const total = rows.length;
   const page = Math.max(1, Number(params.page || 1));
   const startIdx = (page - 1) * limit;
 
-  // 格式化輸出日期
+  // 格式化輸出日期 // 確保回傳給前端的日期格式統一
   const items = rows.slice(startIdx, startIdx + limit).map(item => {
-      // 確保回傳給前端的日期格式統一
       if (item['訂單日期'] instanceof Date) item['訂單日期'] = Utilities.formatDate(item['訂單日期'], 'Asia/Taipei', 'yyyy-MM-dd');
       if (item['交貨日期'] instanceof Date) item['交貨日期'] = Utilities.formatDate(item['交貨日期'], 'Asia/Taipei', 'yyyy-MM-dd');
       return item;
@@ -281,7 +346,7 @@ function Orders_list(params = {}) {
 
   return {
     ok: true,
-    items: rows.slice(startIdx, startIdx + limit),
+    items: items,
     total,
     page,
     pages: Math.ceil(total / limit)
