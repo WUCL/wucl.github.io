@@ -129,6 +129,27 @@
         });
 
         if (APP.clock) APP.clock.init();
+
+        // --- 綁定重新整理按鈕 ---
+        $(document).on('click', '#btn-refresh', function(e) {
+            e.preventDefault();
+            var $btn = $(this);
+
+            // 1. 瞬間變灰 (加上 class)
+            $btn.addClass('is-loading');
+
+            // 2. 啟動狀態列 (如果有啟動 APP.status)
+            if (APP.status?.start) APP.status.start('手動更新資料');
+
+            // 3. 執行路由刷新 (重新抓取當前頁面資料)
+            // 因為 APP.route() 會觸發 API 請求，我們稍微延遲移除 class，讓使用者有感
+            APP.route();
+
+            // 4. 0.8秒後移除 class，觸發 CSS 的漸進式恢復彩色
+            setTimeout(function() {
+                $btn.removeClass('is-loading');
+            }, 1000);
+        });
     };
 
     /* ========== D. Router & UI Helpers (保持不變) ========== */
