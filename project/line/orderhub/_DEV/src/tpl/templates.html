@@ -259,13 +259,12 @@
 	<section class="panel">
 		<div class="panel-h">
 			<div class="head">
-				<h2>訂單清單</h2>
+				<h2>訂單清單<span class="year-tag"></span></h2>
 				<div class="pager sub"></div>
 				<!-- <div class="sub"><span data-bind="count">0</span> 筆 · <span data-bind="pageInfo">第 1/1 頁</span></div> -->
 			</div>
-			<!-- ↓ 篩選列放入這裡 ↓ -->
+			<!-- 篩選列 -->
 			<div class="filters">
-				<span class="year-tag"></span>
 				<label>
 					<select id="fl_orderStatus">
 						<option value="">訂單狀態</option>
@@ -291,8 +290,8 @@
 				<label>
 					<select id="fl_rangeOrder" name="fl_rangeOrder">
 						<option value="">訂單區間</option>
-						<option value="this-week">本週</option>
-						<option value="this-month">本月</option>
+						<option value="last-7-days">近 7 天</option>
+						<option value="last-30-days">近 30 天</option>
 						<option value="month">指定月</option>
 					</select>
 				</label>
@@ -303,8 +302,8 @@
 				<label>
 					<select id="fl_rangeShip">
 						<option value="">交貨區間</option>
-						<option value="this-week">本週</option>
-						<option value="this-month">本月</option>
+						<option value="last-7-days">近 7 天</option>
+						<option value="last-30-days">近 30 天</option>
 						<option value="month">指定月</option>
 					</select>
 				</label>

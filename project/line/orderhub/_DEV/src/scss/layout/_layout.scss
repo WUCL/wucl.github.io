@@ -28,8 +28,25 @@
         @include respond(md) {
             grid-template-columns: 1fr;
         }
+        .year-tag {
+            font-size: $font-size-sm;
+            color: $muted;
+            border: 1px solid $bd;
+            border-radius: $radius-sm;
+            padding: 1px 5px;
+            background: #fff;
+            letter-spacing: -.5px;
+            margin-left: 7px;
+            font-weight: 400;
 
-        >.head {
+            @include respond(md) {
+                display: block;
+                padding: 0 7px;
+                font-size: $font-size-base;
+            }
+        }
+
+        > .head {
             @include respond(md) {
                 @include flex-between;
             }
@@ -45,22 +62,6 @@
             @include respond(md) {
                 margin-top: 7px;
                 gap: 7px;
-            }
-
-            .year-tag {
-                font-size: $font-size-sm;
-                color: $muted;
-                border: 1px solid $bd;
-                border-radius: $radius-sm;
-                padding: 1px 7px;
-                background: #fff;
-                letter-spacing: -1px;
-
-                @include respond(md) {
-                    display: block;
-                    padding: 0 7px;
-                    font-size: $font-size-base;
-                }
             }
 
             label {

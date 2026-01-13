@@ -62,34 +62,68 @@ function getNextFriday_(d) {
 }
 
 function filterByDateRange_(rows, dateField, range, customMonth) {
-  if (!range || (range !== 'this-week' && range !== 'this-month' && range !== 'month')) return rows;
+  // 修改判斷條件，加入新的 key
+  if (!range || (range !== 'last-7-days' && range !== 'last-30-days' && range !== 'month')) return rows;
   if (range === 'month' && !customMonth) return rows;
 
   var now = new Date();
   var start, end;
 
+  // 設定結束時間為「今天的午夜 23:59:59」，確保包含今天的單
+  end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+
   switch (range) {
-    case 'this-week':
-      start = new Date(now); start.setHours(0, 0, 0, 0);
-      start.setDate(start.getDate() - start.getDay());
-      end = new Date(start); end.setDate(end.getDate() + 7);
+    case 'last-7-days':
+      // 取得 7 天前的 00:00:00
+      start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6, 0, 0, 0, 0);
       break;
-    case 'this-month':
-      start = new Date(now.getFullYear(), now.getMonth(), 1);
-      end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    case 'last-30-days':
+      // 取得 30 天前的 00:00:00
+      start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 29, 0, 0, 0, 0);
       break;
     case 'month':
       var ym = String(customMonth).split('-');
       var yy = Number(ym[0] || 0), mm = Number(ym[1] || 0) - 1;
-      start = new Date(yy, mm, 1); end = new Date(yy, mm + 1, 1);
+      start = new Date(yy, mm, 1);
+      end = new Date(yy, mm + 1, 0, 23, 59, 59, 999); // 該月最後一秒
       break;
   }
 
   return rows.filter(function(r) {
     var d = new Date(r[dateField]);
-    return !isNaN(d.getTime()) && (d >= start && d < end);
+    return !isNaN(d.getTime()) && (d >= start && d <= end);
   });
 }
+
+// function filterByDateRange_(rows, dateField, range, customMonth) {
+//   if (!range || (range !== 'this-week' && range !== 'this-month' && range !== 'month')) return rows;
+//   if (range === 'month' && !customMonth) return rows;
+
+//   var now = new Date();
+//   var start, end;
+
+//   switch (range) {
+//     case 'this-week':
+//       start = new Date(now); start.setHours(0, 0, 0, 0);
+//       start.setDate(start.getDate() - start.getDay());
+//       end = new Date(start); end.setDate(end.getDate() + 7);
+//       break;
+//     case 'this-month':
+//       start = new Date(now.getFullYear(), now.getMonth(), 1);
+//       end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+//       break;
+//     case 'month':
+//       var ym = String(customMonth).split('-');
+//       var yy = Number(ym[0] || 0), mm = Number(ym[1] || 0) - 1;
+//       start = new Date(yy, mm, 1); end = new Date(yy, mm + 1, 1);
+//       break;
+//   }
+
+//   return rows.filter(function(r) {
+//     var d = new Date(r[dateField]);
+//     return !isNaN(d.getTime()) && (d >= start && d < end);
+//   });
+// }
 
 // --- ID & Sheet Utils ---
 function genId_(orderDate) {

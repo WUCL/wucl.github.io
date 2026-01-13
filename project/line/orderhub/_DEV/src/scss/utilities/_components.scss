@@ -48,23 +48,6 @@
     }
 }
 
-// ========== 年份標籤 ==========
-.year-tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border: 1px solid $bd;
-    border-radius: $radius-sm;
-    background: #fff;
-    color: $muted;
-    font-size: $font-size-base;
-    transition: all 0.2s ease;
-
-    &:hover {
-        border-color: $ink;
-        color: $ink;
-    }
-}
-
 // ========== 狀態列 ==========
 .oh-status {
     @include container($py: 3px);
