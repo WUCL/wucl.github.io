@@ -66,8 +66,8 @@
 		        <div class="header-row row-3">
 		            <nav id="breadcrumb" class="breadcrumb" aria-label="頁面位置">
 		                <ol>
-		                    <li><a href="#/list">首頁</a></li>
-		                    <li class="current" aria-current="page">訂單列表</li>
+		                    <li data-route="dashboard"><a href="#/dashboard">數據總覽</a></li>
+		                    <li data-route="list"><a href="#/list">訂單列表</a></li>
 		                </ol>
 		            </nav>
 		            <nav class="nav" aria-label="主要操作">
@@ -119,6 +119,101 @@
 		        </div>
 		        <div class="oh-status__list" style="display:none;"></div>
 		    </div>
+		</template>
+
+		<!-- Dashboard -->
+		<template id="tpl-dashboard">
+		    <section class="dashboard">
+		        <div id="db-monthly-stats" class="db-section db-monthly-stats">
+		            <div class="db-section-h">
+		                <h3>經營指標</h3>
+		                <span class="sub" id="stat-month-label">2026 / 01</span>
+		            </div>
+		            <div class="db-section-b stat-grid">
+		            	<!-- 第一排：核心業績 -->
+		                <!-- <div class="stat-item">
+		                    <label>本月營業收入</label>
+		                    <div class="value primary" data-bind="revenue">$0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>本月目標 / 達成率</label>
+		                    <div class="value" data-bind="month_progress">-</div>
+		                </div> -->
+
+		                <!-- 第二排：訂單統計 -->
+		                <!-- <div class="stat-item">
+		                    <label>本月總訂單</label>
+		                    <div class="value" data-bind="totalOrders">0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>較上月增減</label>
+		                    <div class="value" data-bind="momDiff">0</div>
+		                </div> -->
+
+		                <!-- 第三排：財務健康 -->
+		                <!-- <div class="stat-item">
+		                    <label>未收款金額</label>
+		                    <div class="value highlight" data-bind="unpaid">$0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>年度累計業績</label>
+		                    <div class="value" data-bind="year_goal_info">-</div>
+		                </div> -->
+
+						<!-- <div class="stat-item">
+		                    <label>月訂單數 / 上月相差</label>
+		                    <div class="value"><span data-bind="totalOrders">0</span> / <span data-bind="momDiff">0</span></div>
+		                </div> -->
+
+		                <div class="stat-item">
+		                    <label>月訂單數</label>
+		                    <div class="value" data-bind="totalOrders">0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>訂單較上月增減</label>
+		                    <div class="value" data-bind="momDiff">0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>未完成訂單數</label>
+		                    <div class="value" data-bind="unfinish">0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>未收款金額</label>
+		                    <div class="value highlight" data-bind="unpaid">0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>平均客單價</label>
+		                    <div class="value" data-bind="aov">0</div>
+		                </div>
+		                <div class="stat-item">
+		                    <label>月業績</label>
+		                    <div class="value" data-bind="revenue">0</div>
+		                </div>
+		                <div class="stat-item month-progress-box">
+		                    <label>本月目標達成</label>
+		                    <div class="value">
+			                    <div class="perf-percentBar">
+		                        	<div class="progress-bg"><div class="progress-bar"></div></div>
+		                        	<span class="percent" data-bind="monthPercent">0%</span>
+		                        </div>
+			                    <div class="perf-values">
+			                        <span class="actual" data-bind="revenue">$0</span> / <span class="goal" data-bind="monthGoal">$0</span>
+			                    </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <div id="db-unfinish"  class="db-section db-unfinish">
+		            <div class="db-section-h">
+		                <h3>待辦交貨清單</h3>
+		                <span class="sub">顯示尚未完成的所有時程</span>
+		            </div>
+		            <div class="db-section-b c-list" id="unfinish-list">
+		                <!-- 數據將注入此處 -->
+		                <div class="loading-msg">數據讀取中...</div>
+		            </div>
+		        </div>
+		    </section>
 		</template>
 
 		<!-- ========== 通用表單模板 ========== -->
@@ -478,6 +573,8 @@
 
 		<!-- 2. Base (基礎層: 包含 API, Template, Status, Form, Device) -->
 		<script src="./public/js/app.base.js"></script>
+
+		<script src="./public/js/features/dashboard.js"></script>
 
 		<!-- 3. Features (業務層: List, Add, Edit) -->
 		<script src="./public/js/features/list.js"></script>

@@ -49,6 +49,9 @@ function handleApiRequest_(req) {
   };
 
   switch (action) {
+    case 'summary':
+      return _json(Orders_getSummary());
+
     case 'create':
       // 現在 Code.js 不用管通知格式了，直接交給 Service
       const orderId = Orders_newOrder(req.data || {}, actor, opt);
@@ -71,7 +74,7 @@ function handleApiRequest_(req) {
         month_order: String(req.month_order || ''),
         month_ship: String(req.month_ship || ''),
         year: Number(req.year || 0) || null,
-        limit: req.limit, 
+        limit: req.limit,
         page: req.page
       };
       return _json(Orders_list(params));
