@@ -1,0 +1,239 @@
+// ==========================================
+// layout/_dashboard.scss
+// 訂單卡片列表
+// ==========================================
+@use "sass:color";
+@use "utilities/config"as *;
+@use "utilities/mixins"as *;
+
+.dashboard {
+    display: grid;
+    // grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto;
+    grid-gap: $space-4;
+    // @include respond(md) {
+    //     grid-template-columns: auto;
+    // }
+
+    .db-section {
+        height: fit-content;
+        background: #fff;
+        border-radius: $radius;
+        border: 1px solid $bd;
+        box-shadow: $shadow-sm;
+        overflow: hidden;
+
+        &-h {
+            line-height: normal;
+            padding-inline: 14px;
+            padding-block: 7px;
+            background: $bg-soft;
+            border-bottom: 1px solid $bd;
+            h3 {
+                margin: 0;
+                font-size: $font-size-lg;
+                display: inline-block;
+            }
+            .sub {
+                font-size: $font-size-xs;
+                color: $muted;
+                margin-left: 7px;
+            }
+        }
+        &-b {
+        }
+    }
+
+
+    .db-performance {
+        .db-section-b {
+            @include container();
+        }
+
+        .perf-item {
+            margin-top: $space-2;
+            padding-bottom: $space-2;
+            border-bottom: 1px solid $bg-soft;
+            &:first-child { margin-top: 0; }
+            &:last-child { padding-bottom: 0; border-bottom: none; }
+            .perf-info {
+                line-height: normal;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                .label,
+                .percent {
+                    font-size: $font-size-base;
+                }
+                .label {
+                    color: $muted;
+                }
+                .percent {
+                    color: $primary;
+                    font-weight: 500;
+                }
+            }
+
+            .progress-bg {
+                margin: 5px 0;
+                height: 7px;
+                background: $bg-soft;
+                border-radius: 99px;
+                overflow: hidden;
+                .progress-bar {
+                    height: 100%;
+                    background: linear-gradient(90deg, $primary-weak, $primary);
+                    width: 0%;
+                    transition: width 1s ease-out;
+                    &.is-complete { background: #f59e0b; } // 達成目標變金色
+                }
+            }
+
+            .perf-values {
+                font-size: $font-size-base;
+                color: $muted;
+                .actual { color: $ink; font-weight: 600; }
+            }
+        }
+    }
+
+    .db-monthly-stats {
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1px; // 產生細線格子的感覺
+            background-color: $bd; // 背景色作為格子線
+            border-top: 1px solid $bd;
+            @include respond(md) {
+                grid-template-columns: 1fr 1fr;
+                & > *:last-child {
+                    grid-column: 1 / span 2;
+                    // 或者寫 grid-column: 1 / 3; 意思一樣
+                }
+            }
+
+            .stat-item {
+                @include container($py: 14px);
+                background-color: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                label {
+                    font-size: $font-size-base;
+                    color: $muted;
+                    margin-bottom: 5px;
+                }
+                .value {
+                    font-size: $font-size-xl;
+                    font-weight: 700;
+                    color: $ink;
+                    font-family: 'Oswald', sans-serif;
+                    line-height: normal;
+                    &.highlight {
+                        color: $err; // 未收款用紅色
+                    }
+                }
+                &.month-progress-box {
+                    .perf-percentBar {
+                        display: grid;
+                        grid-template-columns: 1fr auto;
+                        grid-gap: 7px;
+                        align-items: center;
+                        .percent {
+                            // font-size: $font-size-base;
+                        }
+                        .progress-bg {
+                            margin: 5px 0;
+                            height: 7px;
+                            background: $bg-soft;
+                            border-radius: 99px;
+                            overflow: hidden;
+                            .progress-bar {
+                                height: 100%;
+                                background: linear-gradient(90deg, $primary-weak, $primary);
+                                width: 0%;
+                                transition: width 1s ease-out;
+                                &.is-complete { background: #f59e0b; } // 達成目標變金色
+                            }
+                        }
+                    }
+                    .perf-values {
+                        font-size: $font-size-xs;
+                        color: $muted;
+                        .actual { color: $ink; font-weight: 600; }
+                    }
+                }
+            }
+        }
+    }
+
+    .db-unfinish {
+        .c-list {
+            .loading-msg {
+                padding-inline: 14px;
+                padding-block: 7px;
+            }
+            .c-row {
+                @include container($py: 5px);
+                line-height: normal;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                transition: background-color .2s;
+                border-bottom: 1px solid $bg-soft;
+                &:last-child { border-bottom: none; }
+                &:hover { background-color: $bg-soft; }
+
+                // 左側：日期與標籤
+                .c-col-date {
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+                    .u-date {
+                        font-weight: 500;
+                        color: $ink;
+                    }
+                    .u-tag {
+                        font-size: $font-size-xs;
+                        padding: 3px 5px;
+                        border-radius: $radius-sm;
+                        background: $muted;
+                        color: #fff;
+                        line-height: 1;
+                        &:empty {
+                            display: none;
+                        }
+                    }
+                }
+
+                // 右側：數量
+                .c-col-count {
+                    color: $muted;
+                    .u-num {
+                        font-size: $font-size-lg;
+                    }
+
+                    &.is-heavy {
+                        color: $err; // 數量多變紅色
+                        transform: scale(1.1);
+                        font-weight: 700;
+                    }
+                }
+
+                // 狀態顏色分支
+                &.state-overdue {
+                    background: #fff5f5;
+                    .u-tag { background: $err; }
+                    .c-col-count, .u-date { color: $err; font-weight: 700; }
+                }
+                &.state-today {
+                    background: #f0fdf4;
+                    border-left: 5px solid $primary;
+                    .u-tag { background: $primary; }
+                    .c-col-count, .u-date { color: $primary; font-weight: 700; }
+                }
+            }
+        }
+    }
+}

@@ -308,3 +308,129 @@ function Orders_list(params = {}) {
     pages: Math.ceil(total / limit)
   };
 }
+
+// for dashboard
+/**
+ * Dashboard 數據統計中控函式
+ */
+function Orders_getSummary() {
+  const result = {
+    ok: true,
+    data: {},
+    ts: new Date().getTime()
+  };
+
+  try {
+    // 定義所有的數據收集任務
+    // 未來想加新的數據，只需在此處增加一列
+    const tasks = {
+      unfinished: getUnfinishedOrdersList_,
+      goals: getSalesGoals_,
+      monthlyStats: getMonthlyDashboardStats_
+    };
+
+    // 執行所有註冊的任務
+    Object.keys(tasks).forEach(key => {
+      try {
+        result.data[key] = tasks[key]();
+      } catch (e) {
+        console.error(`Task [${key}] failed:`, e.toString());
+        result.data[key] = null; // 單一任務失敗不影響整體回傳
+      }
+    });
+
+    return result;
+
+  } catch (e) {
+    return { ok: false, msg: e.toString() };
+  }
+}
+
+// ==========================================
+// 數據收集器區域 (Collectors)
+// ==========================================
+/**
+ * 收集器: 列出訂單未完成數
+ */
+function getUnfinishedOrdersList_() {
+  const sheetName = 'Dashboard_訂單未完成數';
+  const sh = SS().getSheetByName(sheetName);
+  if (!sh) return [];
+
+  const lastRow = sh.getLastRow();
+  if (lastRow < 2) return [];
+
+  // 取得所有資料 (日期, 數量)
+  const rawData = sh.getRange(2, 1, lastRow - 1, 2).getValues();
+
+  return rawData.map(row => {
+    let dateVal = row[0];
+    // 確保日期轉為字串 YYYY-MM-DD
+    if (dateVal instanceof Date) {
+      dateVal = Utilities.formatDate(dateVal, 'Asia/Taipei', 'yyyy-MM-dd');
+    }
+    return {
+      date: dateVal,
+      count: Number(row[1] || 0)
+    };
+  });
+}
+
+/**
+ * 收集器：僅抓取當年度的月目標與年目標
+ */
+function getSalesGoals_() {
+  const sheetName = 'Dashboard_目標';
+  const sh = SS().getSheetByName(sheetName);
+  if (!sh) return { monthGoal: 0, yearGoal: 0 };
+
+  const currYear = new Date().getFullYear();
+  const data = sh.getDataRange().getValues();
+
+  // 尋找符合今年的那一行 (第0欄是年份)
+  const targetRow = data.find(r => r[0] == currYear);
+
+  return {
+    monthGoal: targetRow ? Number(targetRow[1] || 0) : 0,
+    yearGoal: targetRow ? Number(targetRow[2] || 0) : 0
+  };
+}
+
+
+/**
+ * 收集器：從 "Dashboard" 抓取特定年份與月份的指標
+ */
+function getMonthlyDashboardStats_() {
+  const sheetName = 'Dashboard';
+  const sh = SS().getSheetByName(sheetName);
+  if (!sh) return null;
+
+  const data = sh.getDataRange().getValues();
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  // 定義目前的目標：2026 年 1 月 (之後可以改為動態抓取當月)
+  const targetYear = 2026;
+  const targetMonth = 1;
+
+  // 尋找符合條件的那一列
+  const targetRow = rows.find(r => r[0] == targetYear && r[1] == targetMonth);
+  if (!targetRow) return null;
+
+  // 輔助函式：根據標題名稱抓取該列對應的值
+  const getV = (name) => {
+    const idx = headers.indexOf(name);
+    return (idx > -1) ? targetRow[idx] : 0;
+  };
+
+  // 僅抓取目前需要的欄位，擴充性極佳
+  return {
+    year: targetYear,
+    month: targetMonth,
+    totalOrders: getV('月訂單'),
+    momDiff: getV('上月相差'),
+    revenue: getV('營業收入'),
+    unpaid: getV('未收款'),
+    aov: getV('平均客單')
+  };
+}

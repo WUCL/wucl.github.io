@@ -152,24 +152,52 @@
         });
     };
 
-    /* ========== D. Router & UI Helpers (保持不變) ========== */
+    /* ========== D. Router & UI Helpers ========== */
     APP.navHighlight = function() {
         var name = (location.hash || '').replace(/^#\//, '').split('?')[0] || 'list';
         $('.nav-link').each(function() { $(this).toggleClass('active', $(this).attr('data-nav') === name); });
     };
+
+    // APP.updateBreadcrumb = function(name) {
+    //     var map = { list: '訂單列表', add: '新增訂單', edit: '編輯訂單' };
+    //     $('#breadcrumb .current').text(map[name] || '訂單列表');
+    // };
     APP.updateBreadcrumb = function(name) {
-        var map = { list: '訂單列表', add: '新增訂單', edit: '編輯訂單' };
-        $('#breadcrumb .current').text(map[name] || '訂單列表');
+        // var map = { dashboard: '數據總覽', list: '訂單列表', add: '新增訂單', edit: '編輯訂單' };
+        // $('#breadcrumb .current').text(map[name] || '數據總覽');
+
+        // 1. 先移除所有 li 的 current 類別
+        var $breadcrumb = $('#breadcrumb');
+        $breadcrumb.find('li').removeClass('current');
+
+        // 2. 決定誰該亮起來
+        // 如果是 add 或 edit，通常邏輯上屬於「訂單列表」的子項目，所以讓「訂單列表」亮起
+        var activeRoute = name;
+        if (name === 'add' || name === 'edit') {
+            activeRoute = 'list';
+        }
+
+        // 3. 根據 activeRoute 找到對應的 li 並加上 current
+        $breadcrumb.find('li[data-route="' + activeRoute + '"]').addClass('current');
     };
+
     APP.route = function() {
         const h = location.hash || '#/list';
+        // const h = location.hash || '#/dashboard'; // 改為 dashboard
+
         this.navHighlight();
         var name = (h.replace(/^#\//, '')).split('?')[0];
         this.updateBreadcrumb(name);
+
+        if (h.indexOf('#/dashboard') === 0) { if (this.renderDashboard) return this.renderDashboard(); }
+
         if (h.indexOf('#/list') === 0) { if (this.renderList) return this.renderList(); }
         if (h.indexOf('#/add') === 0) { if (this.renderAdd) return this.renderAdd(); }
         if (h.indexOf('#/edit') === 0) { if (this.renderEdit) return this.renderEdit(); }
-        if (this.renderList) this.renderList();
+
+        // 預設回首頁
+        // if (this.renderList) this.renderList();
+        if (this.renderDashboard) this.renderDashboard();
     };
     APP.setMetaUser = function(t) { if (this.el.$metaUser.length) this.el.$metaUser.text(t || ''); };
     APP.setMetaEnv = function(t) { if (this.el.$metaEnv.length) this.el.$metaEnv.text(t || ''); };
