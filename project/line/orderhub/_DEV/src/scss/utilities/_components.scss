@@ -21,12 +21,10 @@
     }
 
     a {
-        color: inherit;
+        color: $muted;
         text-decoration: none;
-
-        &:hover {
-            color: $ink;
-        }
+        transition: color .2s;
+        &:hover { color: $ink; }
     }
 
     li {
@@ -42,8 +40,14 @@
         }
 
         &.current {
-            color: $ink;
-            font-weight: 600;
+            a {
+                color: $ink;       // 亮色
+                font-weight: 700;  // 加粗
+                pointer-events: none; // 已經在該頁了，不准再點
+            }
+            &::after {
+                color: $bd; // 分隔線顏色保持
+            }
         }
     }
 }
