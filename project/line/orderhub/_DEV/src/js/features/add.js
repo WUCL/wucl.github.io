@@ -178,7 +178,7 @@
             const fullText = formatMsg(res, data);
 
             // 2. LINE 通知 (發送給群組)
-            if (window.liff && liff.isInClient()) {
+            if (APP.var.liffReady && window.liff && liff.isInClient()) {
                 liff.sendMessages([{ type: 'text', text: fullText }])
                 .then(() => console.log('詳細清單已發送'))
                 .catch((err) => {

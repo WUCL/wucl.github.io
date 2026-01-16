@@ -72,6 +72,13 @@
             Object.keys(rawData).forEach(k => {
                 const oldV = String($originalData[k] || '').trim();
                 const newV = String(rawData[k] || '').trim();
+
+                if (['運費金額', '商品金額', '訂單金額'].includes(k)) {
+                    if ((oldV === '' || oldV === '0') && (newV === '' || newV === '0')) {
+                        return; // 跳過，不計入 diff
+                    }
+                }
+
                 if (oldV !== newV) {
                     $diff[k] = newV;
                     hasChange = true;
@@ -113,7 +120,7 @@
                     renderSuccessSummary(orderId, $diff);
 
                     // --- [新增] 準備傳送到 LINE 群組的變更摘要 ---
-                    if (window.liff && liff.isLoggedIn() && liff.isInClient()) {
+                    if (APP.var.liffReady && window.liff && liff.isInClient()) {
                         const userName = APP.var.userName || '使用者'; // 確保有抓到名字
 
                         // 組裝訊息字串
