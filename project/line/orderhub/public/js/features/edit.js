@@ -73,12 +73,6 @@
                 const oldV = String($originalData[k] || '').trim();
                 const newV = String(rawData[k] || '').trim();
 
-                if (['運費金額', '商品金額', '訂單金額'].includes(k)) {
-                    if ((oldV === '' || oldV === '0') && (newV === '' || newV === '0')) {
-                        return; // 跳過，不計入 diff
-                    }
-                }
-
                 if (oldV !== newV) {
                     $diff[k] = newV;
                     hasChange = true;
