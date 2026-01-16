@@ -9,7 +9,7 @@
 
     // [優化] 預設為當年，避免明年還要手動改 Code
     var CURRENT_YEAR = new Date().getFullYear();
-    var LIMIT = 15;
+    var LIMIT = 10; // 筆數
 
     var currentPage = 1;
     var totalPages = 1;
