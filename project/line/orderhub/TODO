@@ -4,6 +4,10 @@ DONE
 ok. [列表頁]修正列表載入數15改為10
 ok. [編輯頁]修正，運費金額會有空直的錯誤bug
 ok. [編輯頁]修正，號碼存檔會刪掉開頭0的錯誤
+ok. [Dashboard]新增，數字跑動動畫工具
+ok. [Dashboard]新增，數據快取，避免多次request
+ok. 重新整理按鈕，清空數據快取，強迫下次進入 Dashboard 重新跑 API
+
 
 1/14
 ok. 更新select和breadcrumb樣式
