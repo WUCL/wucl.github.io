@@ -65,6 +65,8 @@
             e.preventDefault();
             const rawData = APP.formToObject($form);
 
+            if (rawData['運費金額'] === '') rawData['運費金額'] = '0';
+
             // 計算差異
             Object.keys($diff).forEach(k => delete $diff[k]); // 清空舊 diff
             let hasChange = false;
@@ -184,10 +186,18 @@
                 if (!$el.length) return;
 
                 let v = data[k];
+                // 【修正】金額欄位：若資料庫是空值(null/undefined/"")，強迫標準化為 "0"
+                if (['運費金額'].includes(k)) { if (v === '' || v == null) v = '0'; }
+
+                // 如果是電話欄位，且值不是以 0 開頭 (代表被轉成數字了)，幫它補回來
+                if (k.includes('電話') && v && !String(v).startsWith('0')) {
+                    v = '0' + v;
+                }
+
                 // [優化] 使用共用日期轉換
                 if ($el.attr('type') === 'date') v = APP.toDateInputValue(v);
 
-                $originalData[k] = (v == null ? '' : v); // 確保不為 null
+                $originalData[k] = (v == null ? '' : String(v).trim());
                 $el.val(v);
 
                 // 觸發 UI 連動 (如: 匯款顯示欄位)

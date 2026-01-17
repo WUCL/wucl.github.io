@@ -58,19 +58,43 @@ function UPDATE(name, rowIdx, patch) {
   const { sh, headers } = HDR(name);
   // [優化] 只讀取需要的那一行，而非整個範圍
   const range = sh.getRange(rowIdx, 1, 1, headers.length);
-  const curr = range.getValues()[0];
+  // const curr = range.getValues()[0];
+  const curr = range.getDisplayValues()[0];
 
   let isChanged = false;
   headers.forEach((h, i) => {
     // 只有當 patch 有該欄位且值不同時才更新
-    if (h in patch && patch[h] != curr[i]) {
-      curr[i] = patch[h];
-      isChanged = true;
+    // if (h in patch && patch[h] != curr[i]) {
+    //   curr[i] = patch[h];
+    //   isChanged = true;
+    // }
+
+    if (h in patch) {
+      // 統一轉成字串並去除空白後比對
+      let newVal = String(patch[h]).trim();
+      let oldVal = String(curr[i]).trim();
+
+      if (newVal !== oldVal) {
+        curr[i] = patch[h];
+        isChanged = true;
+      }
     }
   });
 
   if (isChanged) {
-    range.setValues([curr]);
+    // 在寫回 Sheets 之前，對整行所有「電話」欄位進行二次檢查
+    // 防止那些「沒被 patch 改到」的電話號碼因為讀取轉型而丟失 0
+    const rowToSave = curr.map((val, idx) => {
+      const headerName = headers[idx];
+      if (/電話/.test(headerName) && val != null && val !== '') {
+        // 移除可能存在的重複單引號，並強制加上單引號
+        let cleanVal = String(val).replace(/^'/, '');
+        return "'" + cleanVal;
+      }
+      return val;
+    });
+
+    range.setValues([rowToSave]);
   }
 }
 
