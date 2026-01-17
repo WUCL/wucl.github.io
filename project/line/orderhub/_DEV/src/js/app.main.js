@@ -35,7 +35,11 @@
         liffReady: false,
         envLabel: 'DEV', // 只有 DEV 或 PROD
         LIFF_ID: '',
-        API_URL: ''
+        API_URL: '',
+
+        cache: {
+            summary: null // 用來存放 Dashboard 的數據
+        }
     };
 
     /* ========== A. 環境偵測 ========== */
