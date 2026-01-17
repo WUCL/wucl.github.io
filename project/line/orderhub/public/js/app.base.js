@@ -466,6 +466,54 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         $subtotal.add($shipping).on('input change', calc);
     };
 
+    /**
+     * 數字跑動動畫工具
+     * @param {jQuery} $el jQuery 物件
+     * @param {Number} target 目標數值
+     * @param {String} prefix 前綴 (如 $)
+     * @param {String} suffix 後綴 (如 筆)
+     */
+    APP.animateNumber = function($el, target, options = {}) {
+        if (!$el.length) return;
+
+        // 將 target 轉為純數字，防止傳入字串
+        const finalValue = parseFloat(target) || 0;
+
+        // --- 自動隨機設定 ---
+        const settings = $.extend({
+            prefix: '',
+            suffix: '',
+            // 隨機持續時間：800ms ~ 1200ms (讓每個數字跑完的時間點不同)
+            duration: 800 + Math.random() * 700,
+            // 隨機延遲時間：0ms ~ 500ms (讓每個數字開始跳動的時間點錯開)
+            delay: Math.random() * 1000
+        }, options);
+
+        setTimeout(() => {
+            let startTimestamp = null;
+            const startValue = 0;
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / settings.duration, 1);
+
+                // 使用 Ease-out Expo 公式 (前快後慢，非常有動感)
+                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+
+                const currentValue = Math.floor(easeProgress * (finalValue - startValue) + startValue);
+
+                // 渲染文字
+                $el.text(settings.prefix + currentValue.toLocaleString() + settings.suffix);
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+
+            window.requestAnimationFrame(step);
+        }, settings.delay);
+    };
+
     APP.bindSharedForm = function($form) {
         var self = this;
         self.bindIsPaied($form);

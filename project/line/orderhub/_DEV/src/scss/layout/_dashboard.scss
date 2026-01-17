@@ -118,6 +118,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
+                white-space: nowrap;
 
                 label {
                     font-size: $font-size-base;
@@ -128,10 +129,19 @@
                     font-size: $font-size-xl;
                     font-weight: 700;
                     color: $ink;
-                    font-family: 'Oswald', sans-serif;
                     line-height: normal;
+                    font-family: 'Oswald', sans-serif;
+                    font-family: 'Oswald', 'Roboto Mono', monospace; // 使用等寬數字字體
+                    font-variant-numeric: tabular-nums; // 強制開啟等寬數字特性
                     &.highlight {
                         color: $err; // 未收款用紅色
+                    }
+                    &:after {
+                        content: attr(data-prediction);
+                        display: block;
+                        position: relative;
+                        font-size: $font-size-xs;
+                        color: $info;
                     }
                 }
                 &.month-progress-box {
@@ -159,9 +169,13 @@
                         }
                     }
                     .perf-values {
-                        font-size: $font-size-xs;
+                        line-height: 1;
+                        font-size: $font-size-sm;
                         color: $muted;
                         .actual { color: $ink; font-weight: 600; }
+                        @include respond(md) {
+                            font-size: $font-size-xl;
+                        }
                     }
                 }
             }
@@ -175,7 +189,7 @@
                 padding-block: 7px;
             }
             .c-row {
-                @include container($py: 5px);
+                @include container($py: 7px);
                 line-height: normal;
                 display: flex;
                 align-items: center;
@@ -228,6 +242,7 @@
                     .c-col-count, .u-date { color: $err; font-weight: 700; }
                 }
                 &.state-today {
+                    padding-block: $space-3;
                     background: #f0fdf4;
                     border-left: 5px solid $primary;
                     .u-tag { background: $primary; }
