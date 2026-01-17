@@ -34,38 +34,58 @@
 
     };
 
+    function renderMonthlyStats(stats) {
+        $('#stat-month-label').text(`${stats.year} / ${stats.month.toString().padStart(2, '0')}`);
+        const $el = APP.db_el.$monthly_stats;
+        // $el.find('[data-bind="totalOrders"]').text(stats.totalOrders);
+        APP.animateNumber($el.find('[data-bind="totalOrders"]'), stats.totalOrders);
+
+        // 上月相差處理 (正數加個 + 號)
+        const diff = stats.momDiff || 0;
+        // $el.find('[data-bind="momDiff"]').text((diff >= 0 ? '+' : '') + diff);
+        APP.animateNumber($el.find('[data-bind="momDiff"]'), diff, { prefix: (diff >= 0 ? '+' : '') });
+
+        // 金額類加上千分位
+        // $el.find('[data-bind="revenue"]').text('$' + (parseInt(stats.revenue) || 0).toLocaleString());
+        // $el.find('[data-bind="unpaid"]').text('$' + (parseInt(stats.unpaid) || 0).toLocaleString());
+        // $el.find('[data-bind="aov"]').text('$' + (parseInt(stats.aov) || 0).toLocaleString());
+
+        APP.animateNumber($el.find('[data-bind="revenue"]'), stats.revenue, { prefix: '$' });
+        APP.animateNumber($el.find('[data-bind="unpaid"]'), stats.unpaid, { prefix: '$' });
+        APP.animateNumber($el.find('[data-bind="aov"]'), stats.aov, { prefix: '$' });
+    }
+
     function renderGoals(goals, stats) {
+        const $el = APP.db_el.$monthly_stats;
         const mGoal = goals.monthGoal || 0;
         const yGoal = goals.yearGoal || 0;
         const actual = (stats && stats.revenue) ? stats.revenue : 0;
 
+        // 客單價大於0，顯示預期訂單數
+        // 公式為 ((月目標 - 目前營業額) / 平均客單價) = 預期在完成幾筆達成本月目標
+        if (stats && parseInt(stats.aov) > 0) {
+            const prediction_orders = Math.round((goals.monthGoal - stats.revenue) / stats.aov);
+            if (prediction_orders > 0) {
+                // 還沒達標：顯示還差幾筆
+                $el.find('[data-bind="totalOrders"]').attr('data-prediction', '再完成 ' + prediction_orders + ' 筆達標');
+            } else {
+                // 已經達標：顯示恭喜資訊
+                $el.find('[data-bind="totalOrders"]').attr('data-prediction', '🎉 本月已達標');
+            }
+        }
+
         // 計算達成率
         const percent = mGoal > 0 ? Math.round((actual / mGoal) * 100) : 0;
 
-        // APP.db_el.$monthly_stats.find('[data-bind="monthGoal"]').text('$' + (mGoal / 10000).toFixed(0) + '萬');
-        // APP.db_el.$monthly_stats.find('[data-bind="yearGoal"]').text('$' + (yGoal / 10000).toFixed(0) + '萬');
-        APP.db_el.$monthly_stats.find('[data-bind="monthGoal"]').text('$' + (parseInt(mGoal) || 0).toLocaleString());
-        APP.db_el.$monthly_stats.find('[data-bind="monthPercent"]').text(percent + '%');
-        APP.db_el.$monthly_stats.find('.month-progress-box .progress-bar').css('width', Math.min(percent, 100) + '%');
-        APP.db_el.$monthly_stats.find('[data-bind="yearGoal"]').text('$' + (parseInt(yGoal) || 0).toLocaleString());
+        // $el.find('[data-bind="monthGoal"]').text('$' + (mGoal / 10000).toFixed(0) + '萬');
+        // $el.find('[data-bind="yearGoal"]').text('$' + (yGoal / 10000).toFixed(0) + '萬');
+        $el.find('[data-bind="monthGoal"]').text('$' + (parseInt(mGoal) || 0).toLocaleString());
+        $el.find('[data-bind="monthPercent"]').text(percent + '%');
+        $el.find('.month-progress-box .progress-bar').css('width', Math.min(percent, 100) + '%');
+        $el.find('[data-bind="yearGoal"]').text('$' + (parseInt(yGoal) || 0).toLocaleString());
 
         // 達成 100% 給予金色效果
         if (percent >= 100) $el.find('.progress-bar').addClass('is-complete');
-    }
-
-    function renderMonthlyStats(stats) {
-        $('#stat-month-label').text(`${stats.year} / ${stats.month.toString().padStart(2, '0')}`);
-
-        APP.db_el.$monthly_stats.find('[data-bind="totalOrders"]').text(stats.totalOrders);
-
-        // 上月相差處理 (正數加個 + 號)
-        const diff = stats.momDiff || 0;
-        APP.db_el.$monthly_stats.find('[data-bind="momDiff"]').text((diff >= 0 ? '+' : '') + diff);
-
-        // 金額類加上千分位
-        APP.db_el.$monthly_stats.find('[data-bind="revenue"]').text('$' + (parseInt(stats.revenue) || 0).toLocaleString());
-        APP.db_el.$monthly_stats.find('[data-bind="unpaid"]').text('$' + (parseInt(stats.unpaid) || 0).toLocaleString());
-        APP.db_el.$monthly_stats.find('[data-bind="aov"]').text('$' + (parseInt(stats.aov) || 0).toLocaleString());
     }
 
     function renderUnfinishedList(list) {
@@ -102,6 +122,7 @@
             `;
             $container.append(html);
         });
-        APP.db_el.$monthly_stats.find('[data-bind="unfinish"]').text(APP.db_var.unfinish);
+        // APP.db_el.$monthly_stats.find('[data-bind="unfinish"]').text(APP.db_var.unfinish);
+        APP.animateNumber(APP.db_el.$monthly_stats.find('[data-bind="unfinish"]'), APP.db_var.unfinish);
     }
 })(window, jQuery);

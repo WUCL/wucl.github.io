@@ -147,8 +147,13 @@ function findById_(orderId) {
 
 const sanitizePhone_ = (obj) => {
   Object.keys(obj).forEach(k => {
+    // if (/電話/.test(k) && obj[k] != null && obj[k] !== '') {
+    //   obj[k] = "'" + String(obj[k]);
+    // }
     if (/電話/.test(k) && obj[k] != null && obj[k] !== '') {
-      obj[k] = "'" + String(obj[k]);
+      let val = String(obj[k]).trim();
+      val = val.replace(/^'/, '');
+      obj[k] = "'" + val;
     }
   });
   return obj;
