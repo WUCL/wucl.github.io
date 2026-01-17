@@ -139,6 +139,9 @@
             e.preventDefault();
             var $btn = $(this);
 
+            // 清空快取，強迫下次進入 Dashboard 重新跑 API
+            APP.var.cache.summary = null;
+
             // 1. 瞬間變灰 (加上 class)
             $btn.addClass('is-loading');
 
