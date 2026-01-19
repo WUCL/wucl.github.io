@@ -113,3 +113,14 @@ function FINDROW(name, header, value) {
   }
   return -1;
 }
+
+/**
+ * Repo.js 新增函式
+ * 只抓取原始資料不轉物件，效能最快
+ */
+function RAW_DATA(name) {
+  const { sh, headers } = HDR(name);
+  const lastRow = sh.getLastRow();
+  if (lastRow < 2) return [];
+  return sh.getRange(2, 1, lastRow - 1, headers.length).getValues();
+}

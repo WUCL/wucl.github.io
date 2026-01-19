@@ -248,65 +248,101 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
 /**
  * 訂單列表
  */
+/**
+ * 訂單列表 (GAS 端 - 已修正索引排序)
+ */
 function Orders_list(params = {}) {
   const limit = Math.min(Number(params.limit || LIMITS.DEFAULT_LIST_ITEMS), LIMITS.MAX_LIST_ITEMS);
+  const { headers, map } = HDR(ENV.ORDERS_SHEET);
+
+  // 1. 取得原始 2D 陣列 (請確保 Repo.js 有 RAW_DATA 函式)
+  let rows = RAW_DATA(ENV.ORDERS_SHEET);
+
+  const idxStatus = map['訂單狀態'];
+  const idxShip = map['是否已交貨'];
+  const idxPay = map['是否已付款'];
+  const idxOrderDate = map['訂單日期'];
+  const idxShipDate = map['交貨日期'];
+  const idxId = map['訂單編號'];
+
+  // 2. 執行過濾
   const _norm = (s) => String(s || '').trim();
+  const fStatus = _norm(params.orderStatus);
+  const fShip = _norm(params.shipStatus);
+  const fPay = _norm(params.payStatus);
 
-  // 1. 取得所有原始資料 (先不 reverse)
-  // let rows = ROWS(ENV.ORDERS_SHEET).reverse();
-  let rows = ROWS(ENV.ORDERS_SHEET);
-
-  // 2. 執行過濾 (狀態、篩選條件等...)
-  const filters = [
-    { key: '訂單狀態', val: _norm(params.orderStatus) },
-    { key: '是否已交貨', val: _norm(params.shipStatus) },
-    { key: '是否已付款', val: _norm(params.payStatus) }
-  ];
-  filters.forEach(f => {
-    if (f.val) rows = rows.filter(r => _norm(r[f.key]).includes(f.val));
+  let filteredRows = rows.filter(row => {
+    if (fStatus && !_norm(row[idxStatus]).includes(fStatus)) return false;
+    if (fShip && !_norm(row[idxShip]).includes(fShip)) return false;
+    if (fPay && !_norm(row[idxPay]).includes(fPay)) return false;
+    return true;
   });
 
-  rows = filterByDateRange_(rows, '訂單日期', params.range_order, params.month_order);
-  rows = filterByDateRange_(rows, '交貨日期', params.range_ship, params.month_ship);
+  filteredRows = filterByRawDateRange_(filteredRows, idxOrderDate, params.range_order, params.month_order);
+  filteredRows = filterByRawDateRange_(filteredRows, idxShipDate, params.range_ship, params.month_ship);
 
-  // === 【重點修改：根據交貨日期排序】 ===
-  rows.sort((a, b) => {
-    // 轉化為 Date 物件進行比對
-    let dateA = new Date(a['交貨日期']);
-    let dateB = new Date(b['交貨日期']);
+  // === 【重點修復：使用索引排序】 ===
+  filteredRows.sort((a, b) => {
+    let dateA = new Date(a[idxShipDate]);
+    let dateB = new Date(b[idxShipDate]);
 
-    // 如果日期無效，則放到最後面
     if (isNaN(dateA)) return 1;
     if (isNaN(dateB)) return -1;
 
-    // 由舊到新排序 (Ascending)
-    if (dateA - dateB !== 0) {
-      return dateA - dateB;
-    }
+    if (dateA - dateB !== 0) return dateA - dateB;
 
-    // 如果交貨日期相同，則按訂單編號排序 (讓顯示更穩定)
-    return String(a['訂單編號']).localeCompare(String(b['訂單編號']));
+    // 如果日期相同，比對訂單編號 (索引 idxId)
+    return String(a[idxId]).localeCompare(String(b[idxId]));
   });
-  // =====================================
 
-  const total = rows.length;
+  // 3. 分頁與物件化
+  const total = filteredRows.length;
   const page = Math.max(1, Number(params.page || 1));
   const startIdx = (page - 1) * limit;
+  const slicedRows = filteredRows.slice(startIdx, startIdx + limit);
 
-  // 格式化輸出日期 // 確保回傳給前端的日期格式統一
-  const items = rows.slice(startIdx, startIdx + limit).map(item => {
-      if (item['訂單日期'] instanceof Date) item['訂單日期'] = Utilities.formatDate(item['訂單日期'], 'Asia/Taipei', 'yyyy-MM-dd');
-      if (item['交貨日期'] instanceof Date) item['交貨日期'] = Utilities.formatDate(item['交貨日期'], 'Asia/Taipei', 'yyyy-MM-dd');
-      return item;
+  const items = slicedRows.map(row => {
+    let obj = {};
+    headers.forEach((h, i) => {
+      let val = row[i];
+      if (val instanceof Date) val = Utilities.formatDate(val, 'Asia/Taipei', 'yyyy-MM-dd');
+      obj[h] = val;
+    });
+    return obj;
   });
 
-  return {
-    ok: true,
-    items: items,
-    total,
-    page,
-    pages: Math.ceil(total / limit)
-  };
+  return { ok: true, items, total, page, pages: Math.ceil(total / limit) };
+}
+
+/**
+ * 針對原始陣列優化的日期過濾器
+ */
+function filterByRawDateRange_(rows, colIdx, range, customMonth) {
+  if (!range) return rows;
+
+  var now = new Date();
+  var currentYear = now.getFullYear();
+  var todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var start, end;
+
+  if (range === 'month') {
+    var ym = String(customMonth).split('-');
+    start = new Date(Number(ym[0]), Number(ym[1]) - 1, 1);
+    end = new Date(Number(ym[0]), Number(ym[1]), 1);
+  } else {
+    var dayCount = (range === 'last-7-days') ? 7 : 30;
+    start = new Date(currentYear, 0, 1);
+    end = new Date(todayMidnight.getTime() + dayCount * 24 * 60 * 60 * 1000);
+  }
+
+  return rows.filter(row => {
+    var val = row[colIdx];
+    if (!val) return false;
+    var d = (val instanceof Date) ? val : new Date(val);
+    if (isNaN(d.getTime())) return false;
+    var targetDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    return targetDate >= start && targetDate < end;
+  });
 }
 
 // for dashboard
