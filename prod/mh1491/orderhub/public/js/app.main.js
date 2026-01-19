@@ -38,7 +38,8 @@
         API_URL: '',
 
         cache: {
-            summary: null // 用來存放 Dashboard 的數據
+            summary: null, // 用來存放 Dashboard 的數據
+            list: {} // 改為物件，用來儲存不同篩選條件的結果
         }
     };
 
@@ -141,6 +142,7 @@
 
             // 清空快取，強迫下次進入 Dashboard 重新跑 API
             APP.var.cache.summary = null;
+            APP.var.cache.list = {};
 
             // 1. 瞬間變灰 (加上 class)
             $btn.addClass('is-loading');
