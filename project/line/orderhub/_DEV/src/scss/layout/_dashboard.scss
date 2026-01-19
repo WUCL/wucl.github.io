@@ -124,6 +124,7 @@
                     font-size: $font-size-base;
                     color: $muted;
                     margin-bottom: 5px;
+                    line-height: normal;
                 }
                 .value {
                     font-size: $font-size-xl;
@@ -140,8 +141,9 @@
                         content: attr(data-prediction);
                         display: block;
                         position: relative;
-                        font-size: $font-size-xs;
+                        font-size: $font-size-sm;
                         color: $info;
+                        line-height: 1;
                     }
                 }
                 &.month-progress-box {

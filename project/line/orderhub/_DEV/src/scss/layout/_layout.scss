@@ -43,12 +43,22 @@
                 display: block;
                 padding: 0 7px;
                 font-size: $font-size-base;
+                line-height: normal;
             }
         }
 
         > .head {
             @include respond(md) {
                 @include flex-between;
+                align-items: flex-start;
+                border-bottom: 1px solid $bd;
+                padding-bottom: 7px;
+                margin-bottom: 3px;
+            }
+            > h2 {
+                @include respond(md) {
+                    @include flex-between;
+                }
             }
         }
 
