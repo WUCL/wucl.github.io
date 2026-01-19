@@ -130,6 +130,19 @@
 
         // 執行查詢
         function fetchAndRender() {
+            var params = getQueryParams();
+            params.page = currentPage;
+
+            // 【核心邏輯】產生唯一的 Cache Key (將參數轉為字串)
+            const cacheKey = JSON.stringify(params);
+
+            // 檢查是否有快取資料
+            if (APP.var.cache.list && APP.var.cache.list[cacheKey]) {
+                console.log('[List] 使用快取數據顯示');
+                renderListUI(APP.var.cache.list[cacheKey]);
+                return; // 跳過 API 請求
+            }
+
             if (APP.status?.start) APP.status.start('載入清單');
             $container.html('<div class="loading">讀取中…</div>');
 
@@ -137,40 +150,15 @@
             if (typeof APP.scrollTop === 'function') APP.scrollTop();
 
             if (APP.status?.tick) APP.status.tick('查詢中', 20);
-            var params = getQueryParams();
-            params.page = currentPage;
 
             APP.api('list', params)
                 .then(function(res) {
                     $container.find('.loading').remove();
 
                     if (res && res.ok && Array.isArray(res.items)) {
-                        var items = res.items;
-                        var total = Number(res.total || 0);
-
-                        // 頁碼修正
-                        totalPages = Math.max(1, Math.ceil(total / LIMIT));
-
-                        // 若所在頁數超過總頁數，自動跳回第一頁
-                        if (currentPage > totalPages && total > 0) {
-                            currentPage = 1;
-                            return fetchAndRender();
-                        }
-
-                        updatePager(total, currentPage, totalPages);
-
-                        if (items.length === 0) {
-                            renderEmpty($container);
-                            if (APP.status?.done) APP.status.done(true, '查無資料');
-                            return;
-                        }
-
-                        $container.empty();
-                        items.forEach(function(item) {
-                            $container.append(createCard(item));
-                        });
-
-                        if (APP.status?.done) APP.status.done(true, `完成（${items.length} 筆）`);
+                        // 【存入快取】
+                        APP.var.cache.list[cacheKey] = res;
+                        renderListUI(res);
                     } else {
                         renderEmpty($container);
                         var msg = res?.msg || 'API 回應異常';
@@ -183,6 +171,28 @@
                     console.error('[List] Fetch Error:', err);
                     if (APP.status?.done) APP.status.done(false, '網路錯誤');
                 });
+        }
+
+        /**
+         * 【新增封裝函式】統一渲染 UI 邏輯，供 API 或快取呼叫
+         */
+        function renderListUI(res) {
+            var items = res.items;
+            var total = Number(res.total || 0);
+            totalPages = Math.max(1, Math.ceil(total / LIMIT));
+
+            updatePager(total, currentPage, totalPages);
+
+            if (items.length === 0) {
+                renderEmpty($container);
+                if (APP.status?.done) APP.status.done(true, '查無資料');
+            } else {
+                $container.empty();
+                items.forEach(function(item) {
+                    $container.append(createCard(item));
+                });
+                if (APP.status?.done) APP.status.done(true, `完成（${items.length} 筆）`);
+            }
         }
 
         // 分頁控制 UI
