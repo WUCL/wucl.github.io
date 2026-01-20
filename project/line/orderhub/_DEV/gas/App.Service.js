@@ -325,13 +325,21 @@ function filterByRawDateRange_(rows, colIdx, range, customMonth) {
   var todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   var start, end;
 
-  if (range === 'month') {
+  // 使用正確的鏈接判斷，確保一旦匹配就不再執行其他邏輯
+  if (range === 'date') {
+    // A. 單一日期模式
+    var dParts = String(customMonth).split('-'); // 2026-01-22
+    start = new Date(dParts[0], dParts[1] - 1, dParts[2], 0, 0, 0);
+    end = new Date(dParts[0], dParts[1] - 1, dParts[2], 23, 59, 59, 999);
+  } else if (range === 'month') {
+    // B. 指定月份模式
     var ym = String(customMonth).split('-');
     start = new Date(Number(ym[0]), Number(ym[1]) - 1, 1);
     end = new Date(Number(ym[0]), Number(ym[1]), 1);
   } else {
+    // C. 天數區間模式 (last-7-days, last-30-days)
     var dayCount = (range === 'last-7-days') ? 7 : 30;
-    start = new Date(currentYear, 0, 1);
+    start = new Date(currentYear, 0, 1); // 1/1
     end = new Date(todayMidnight.getTime() + dayCount * 24 * 60 * 60 * 1000);
   }
 
@@ -341,7 +349,9 @@ function filterByRawDateRange_(rows, colIdx, range, customMonth) {
     var d = (val instanceof Date) ? val : new Date(val);
     if (isNaN(d.getTime())) return false;
     var targetDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    return targetDate >= start && targetDate < end;
+
+    // 關鍵比對：落在 start 與 end 之間
+    return targetDate >= start && targetDate <= end;
   });
 }
 

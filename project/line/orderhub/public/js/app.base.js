@@ -514,6 +514,21 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         }, settings.delay);
     };
 
+    /**
+     * [新增] 取得網址 Hash 中的參數 (Querystring in Hash)
+     * 範例: #/list?ship_date=2026-01-15 -> APP.qs('ship_date') 得到 '2026-01-15'
+     */
+    APP.qs = function(k) {
+        try {
+            var hash = window.location.hash;
+            var part = hash.indexOf('?') !== -1 ? hash.split('?')[1] : '';
+            var usp = new URLSearchParams(part);
+            return usp.get(k);
+        } catch (_e) {
+            return null;
+        }
+    };
+
     APP.bindSharedForm = function($form) {
         var self = this;
         self.bindIsPaied($form);

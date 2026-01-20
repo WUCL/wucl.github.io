@@ -115,7 +115,7 @@
             const isHeavy = item.count >= 5 ? 'is-heavy' : '';
 
             const html = `
-                <div class="c-row state-${dateStatus}">
+                <a href="#/list?ship_date=${item.date}" class="c-row state-${dateStatus}">
                     <div class="c-col-date">
                         <span class="u-date">${APP.fmtDateDisplay(item.date)}</span>
                         <span class="u-tag">${dateLabel}</span>
@@ -123,7 +123,7 @@
                     <div class="c-col-count ${isHeavy}">
                         <span class="u-num">${item.count}</span>
                     </div>
-                </div>
+                </a>
             `;
             $container.append(html);
         });

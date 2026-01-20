@@ -83,6 +83,11 @@
         var frag = TPL.tpl('tpl-list', {});
         TPL.mount('#main', frag);
 
+        // 【新增：如果是帶參數進入，清空一次快取確保資料準確】
+        if (APP.qs('ship_date')) {
+            APP.var.cache.list = {};
+        }
+
         // UI 參考
         var $container = $('#listContainer');
         var FL = {
@@ -105,24 +110,35 @@
         function getQueryParams() {
             var params = { limit: LIMIT, year: CURRENT_YEAR };
 
-            // 狀態篩選 (自動抓取 id 後綴作為 key)
-            FL.status.forEach($el => {
-                const v = $el.val();
-                if (v) params[$el.attr('id').replace('fl_', '')] = v;
-            });
+            // 【核心修改】優先讀取 URL 參數
+            const urlShipDate = (typeof APP.qs === 'function') ? APP.qs('ship_date') : null;
 
-            // 區間篩選 (Order)
-            const rOrder = FL.rangeOrder.val();
-            if (rOrder) {
-                params.range_order = rOrder;
-                if (rOrder === 'month') params.month_order = FL.rangeOrderMonth.val();
-            }
+            if (urlShipDate) {
+                // 如果是從 Dashboard 點過來的
+                params.range_ship = 'date';
+                params.month_ship = urlShipDate;
+                params.orderStatus = 'doing';
 
-            // 區間篩選 (Ship)
-            const rShip = FL.rangeShip.val();
-            if (rShip) {
-                params.range_ship = rShip;
-                if (rShip === 'month') params.month_ship = FL.rangeShipMonth.val();
+                // 在 UI 上給一點反饋（可選）：清空目前的 select 顯示
+                $('.filters select').val('').removeClass('is-active');
+            } else {
+                // 原本的 Select 抓取邏輯
+                FL.status.forEach($el => {
+                    const v = $el.val();
+                    if (v) params[$el.attr('id').replace('fl_', '')] = v;
+                });
+
+                const rOrder = FL.rangeOrder.val();
+                if (rOrder) {
+                    params.range_order = rOrder;
+                    if (rOrder === 'month') params.month_order = FL.rangeOrderMonth.val();
+                }
+
+                const rShip = FL.rangeShip.val();
+                if (rShip) {
+                    params.range_ship = rShip;
+                    if (rShip === 'month') params.month_ship = FL.rangeShipMonth.val();
+                }
             }
 
             return params;
