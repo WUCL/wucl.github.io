@@ -33,6 +33,7 @@
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
+        gap: 0 7px;
     }
 
     .col {
@@ -82,11 +83,13 @@
                 align-items: center;
                 color: $muted;
                 gap: 9px;
+                text-align: justify;
+                letter-spacing: -.5px;
 
                 &.shippay {
                     @include respond(md) {
                         grid-column: 1 / -1;
-                        padding: 5px 0 2px;
+                        padding: 3px 0 3px;
                     }
                 }
 
@@ -100,7 +103,7 @@
                 display: inline-block;
                 font-weight: 500;
                 color: rgba($muted, .7);
-                letter-spacing: -1px;
+                letter-spacing: -1.5px;
             }
 
             &.date {

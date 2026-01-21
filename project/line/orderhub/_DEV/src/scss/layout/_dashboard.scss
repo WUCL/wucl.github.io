@@ -113,7 +113,7 @@
             }
 
             .stat-item {
-                @include container($py: 14px);
+                @include container($py: 9px);
                 background-color: #fff;
                 display: flex;
                 flex-direction: column;
@@ -123,7 +123,7 @@
                 label {
                     font-size: $font-size-base;
                     color: $muted;
-                    margin-bottom: 5px;
+                    margin-bottom: 3px;
                     line-height: normal;
                 }
                 .value {
@@ -131,9 +131,11 @@
                     font-weight: 700;
                     color: $ink;
                     line-height: normal;
-                    font-family: 'Oswald', sans-serif;
-                    font-family: 'Oswald', 'Roboto Mono', monospace; // 使用等寬數字字體
+                    font-family: 'Oswald', 'Roboto Mono', sans-serif, monospace; // 使用等寬數字字體
                     font-variant-numeric: tabular-nums; // 強制開啟等寬數字特性
+                    @include respond(md) {
+                        font-size: $font-size-xxl;
+                    }
                     &.highlight {
                         color: $err; // 未收款用紅色
                     }
@@ -150,14 +152,14 @@
                     .perf-percentBar {
                         display: grid;
                         grid-template-columns: 1fr auto;
-                        grid-gap: 7px;
+                        grid-gap: $space-3;
                         align-items: center;
                         .percent {
                             // font-size: $font-size-base;
                         }
                         .progress-bg {
                             margin: 5px 0;
-                            height: 7px;
+                            height: 9px;
                             background: $bg-soft;
                             border-radius: 99px;
                             overflow: hidden;
@@ -191,7 +193,7 @@
                 padding-block: 7px;
             }
             .c-row {
-                @include container($py: 7px);
+                @include container($py: 5px);
                 line-height: normal;
                 display: flex;
                 align-items: center;
@@ -238,17 +240,36 @@
                 }
 
                 // 狀態顏色分支
+                &.state-today,
+                &.state-tomorrow,
                 &.state-overdue {
-                    background: #fff5f5;
-                    .u-tag { background: $err; }
-                    .c-col-count, .u-date { color: $err; font-weight: 700; }
+                    .c-col-count, .u-date { font-weight: 700; }
                 }
+                &.state-today,
+                &.state-tomorrow {
+                    padding-left: 9px;
+                    border-left: 5px solid;
+                }
+                // 今日/綠色
                 &.state-today {
                     padding-block: $space-3;
                     background: #f0fdf4;
-                    border-left: 5px solid $primary;
+                    border-left-color: $primary;
                     .u-tag { background: $primary; }
-                    .c-col-count, .u-date { color: $primary; font-weight: 700; }
+                    .c-col-count, .u-date { color: $primary; }
+                }
+                // 明天/橘色
+                &.state-tomorrow {
+                    background: #fff9f0; // 極淡的橘底
+                    border-left-color: #f59e0b; // 橘色側邊條
+                    .u-tag { background: #f59e0b; } // 橘色標籤
+                    .c-col-count, .u-date { color: #d97706; }
+                }
+                // 逾期/紅色
+                &.state-overdue {
+                    background: #fff5f5;
+                    .u-tag { background: $err; }
+                    .c-col-count, .u-date { color: $err; }
                 }
             }
         }

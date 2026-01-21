@@ -94,10 +94,17 @@
 
     function renderUnfinishedList(list) {
         const $container = $('#unfinish-list').empty();
-        const today = new Date().toISOString().split('T')[0];
+
+        // 取得今天與明天的 YYYY-MM-DD 字串
+        const now = new Date();
+        const today = now.toISOString().split('T')[0];
+
+        const tmr = new Date();
+        tmr.setDate(now.getDate() + 1);
+        const tomorrow = tmr.toISOString().split('T')[0];
 
         if (list.length === 0) {
-            $container.html('<div class="empty">目前沒有待辦訂單 ☕️</div>');
+            $container.html('<div class="empty">糟糕！沒單啦？</div>');
             return;
         }
 
@@ -110,9 +117,23 @@
             if (item.date < today) { dateStatus = 'overdue'; dateLabel = '逾期'; }
             else if (item.date === today) { dateStatus = 'today'; dateLabel = '今日'; }
 
-            APP.db_var.unfinish += item.count;
+            // 判斷邏輯順序：逾期 -> 今日 -> 明日 -> 未來
+            if (item.date < today) {
+                dateStatus = 'overdue';
+                dateLabel = '逾期';
+            } else if (item.date === today) {
+                dateStatus = 'today';
+                dateLabel = '今日';
+            } else if (item.date === tomorrow) {
+                dateStatus = 'tomorrow';
+                dateLabel = '明天';
+            } else {
+                dateStatus = 'future';
+                dateLabel = ''; // '預計'; // 或者維持空字串
+            }
 
-            const isHeavy = item.count >= 5 ? 'is-heavy' : '';
+            APP.db_var.unfinish += item.count;
+            const isHeavy = item.count >= 5 ? 'is-heavy' : ''; // 當日大量訂單
 
             const html = `
                 <a href="#/list?ship_date=${item.date}" class="c-row state-${dateStatus}">
