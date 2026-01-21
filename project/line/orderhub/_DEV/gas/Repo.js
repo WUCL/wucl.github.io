@@ -48,54 +48,47 @@ function ROWS(name) {
 
 function APPEND(name, obj) {
   const { sh, headers } = HDR(name);
-  // [優化] 確保寫入順序與表頭一致，不存在的欄位補空字串
-  const row = headers.map(h => (obj[h] != null ? obj[h] : ''));
+
+  // [優化] 關鍵：如果欄位不存在於 obj 中，回傳 null 而不是 ''
+  // 這能確保 ARRAYFORMULA 欄位保持真空，公式才能正常運算
+  const row = headers.map(h => (obj[h] !== undefined ? obj[h] : null));
   sh.appendRow(row);
   return sh.getLastRow();
 }
 
 function UPDATE(name, rowIdx, patch) {
   const { sh, headers } = HDR(name);
-  // [優化] 只讀取需要的那一行，而非整個範圍
+
+  // 1. 取得該行範圍
   const range = sh.getRange(rowIdx, 1, 1, headers.length);
-  // const curr = range.getValues()[0];
+  // 2. 取得目前在試算表看到的樣子 (用於比對)
   const curr = range.getDisplayValues()[0];
 
-  let isChanged = false;
+  // 3. 遍歷標題，找出哪些欄位在 patch 裡且值有變動
   headers.forEach((h, i) => {
-    // 只有當 patch 有該欄位且值不同時才更新
-    // if (h in patch && patch[h] != curr[i]) {
-    //   curr[i] = patch[h];
-    //   isChanged = true;
-    // }
-
     if (h in patch) {
-      // 統一轉成字串並去除空白後比對
       let newVal = String(patch[h]).trim();
       let oldVal = String(curr[i]).trim();
 
+      // 4. 只有當值真的不同時，才執行寫入
       if (newVal !== oldVal) {
-        curr[i] = patch[h];
-        isChanged = true;
+
+        // --- 【這就是你提到的那段邏輯，我把它整合在這裡】 ---
+        // 如果欄位名稱包含「電話」，且內容不為空
+        if (/電話/.test(h) && newVal !== '') {
+          // 移除可能存在的重複單引號，並強迫加上一個單引號
+          let cleanVal = newVal.replace(/^'/, '');
+          newVal = "'" + cleanVal;
+        }
+        // --------------------------------------------------
+
+        // 執行「單格」寫入，避開後方的公式欄
+        sh.getRange(rowIdx, i + 1).setValue(newVal);
+
+        console.log('欄位已更新:', h, '舊值:', oldVal, '新值:', newVal);
       }
     }
   });
-
-  if (isChanged) {
-    // 在寫回 Sheets 之前，對整行所有「電話」欄位進行二次檢查
-    // 防止那些「沒被 patch 改到」的電話號碼因為讀取轉型而丟失 0
-    const rowToSave = curr.map((val, idx) => {
-      const headerName = headers[idx];
-      if (/電話/.test(headerName) && val != null && val !== '') {
-        // 移除可能存在的重複單引號，並強制加上單引號
-        let cleanVal = String(val).replace(/^'/, '');
-        return "'" + cleanVal;
-      }
-      return val;
-    });
-
-    range.setValues([rowToSave]);
-  }
 }
 
 function FINDROW(name, header, value) {
