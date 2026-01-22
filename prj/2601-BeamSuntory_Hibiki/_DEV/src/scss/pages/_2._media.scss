@@ -1,0 +1,18 @@
+/* =======================
+   pages/_media
+   ======================= */
+.main {
+	section._media {
+		.inner {
+			.content {
+				.video {
+					width: 100%;
+					> img {
+						display: block;
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}

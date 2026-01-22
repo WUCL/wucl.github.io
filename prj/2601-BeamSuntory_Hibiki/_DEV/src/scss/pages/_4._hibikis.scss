@@ -1,0 +1,43 @@
+/* =======================
+   pages/_hibikis
+   ======================= */
+.main {
+	section._hibikis {
+		.inner {
+			.content {
+				._hibiki {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					column-gap: 40px;
+					> .product {
+						> img {
+							display: block;
+							width: 100%;
+						}
+					}
+					> .introduce {
+						.title {
+
+						}
+						.description {
+
+						}
+						.imgs {
+							margin-block: 24px;
+							display: grid;
+							grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+							column-gap: 16px;
+							img {
+								display: block;
+								width: 100%;
+							}
+						}
+						.feature {
+
+						}
+					}
+				}
+			}
+		}
+	}
+}
