@@ -7,20 +7,41 @@
 			.content {
 				._hibiki {
 					display: grid;
-					grid-template-columns: 1fr 1fr;
+					grid-template-columns: 4.5fr 5.5fr;
 					column-gap: 40px;
+					margin-bottom: 60px;
+					&:nth-child(2) {
+						> .product {
+							order: 2;
+						}
+					}
 					> .product {
-						> img {
+						img {
 							display: block;
 							width: 100%;
+							height: auto;
 						}
 					}
 					> .introduce {
 						.title {
-
+							margin-bottom: 24px;
+							border-bottom: 1px solid #824C98;
+							// background: linear-gradient(90deg, #824C98 -3.14%, #D6BCD5 48.43%, #824C98 100%);
+							h2 {
+								font-size: $fontsize-5;
+								font-weight: 700;
+								white-space: pre-line;
+								padding-bottom: 16px;
+							}
 						}
 						.description {
-
+							p {
+								white-space: pre-line;
+							}
+						}
+						.imgs,
+						.features {
+							padding-inline: 5%;
 						}
 						.imgs {
 							margin-block: 24px;
@@ -30,10 +51,38 @@
 							img {
 								display: block;
 								width: 100%;
+								height: auto;
 							}
 						}
-						.feature {
-
+						.features {
+							width: 100%;
+							.feature {
+								width: 100%;
+								margin-bottom: 16px;
+								display: grid;
+								grid-template-columns: minmax(auto, 110px) 1fr;
+								column-gap: 16px;
+								align-items: baseline; // 讓不同字數的文字對齊基準線
+								&:last-child {
+									margin-bottom: 0;
+								}
+								> span {
+									font-size: $fontsize + 2px;
+									text-align: justify;
+									line-height: 1;
+									&:first-child {
+										text-align: center;
+										max-width: 110px;
+										background: #470E27;
+										border-radius: 12px 0;
+										padding: 8px 16px;
+										color: $color-white;
+									}
+									&:last-child {
+										letter-spacing: -1px;
+									}
+								}
+							}
 						}
 					}
 				}

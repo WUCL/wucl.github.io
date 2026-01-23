@@ -30,8 +30,9 @@
 		.inner {
 			max-width: $bp-2;
 			margin: 0 auto;
-			font-size: $fontsize-1;
+			font-size: $fontsize + 2px;
 			text-align: center;
+			line-height: normal;
 			@include mq($max-width: $bp-2) {
 				max-width: 90vw;
 			}
