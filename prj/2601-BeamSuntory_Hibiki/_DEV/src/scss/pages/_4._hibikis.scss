@@ -23,17 +23,7 @@
 						}
 					}
 					> .introduce {
-						.title {
-							margin-bottom: 24px;
-							border-bottom: 1px solid #824C98;
-							// background: linear-gradient(90deg, #824C98 -3.14%, #D6BCD5 48.43%, #824C98 100%);
-							h2 {
-								font-size: $fontsize-5;
-								font-weight: 700;
-								white-space: pre-line;
-								padding-bottom: 16px;
-							}
-						}
+						.title {}
 						.description {
 							p {
 								white-space: pre-line;

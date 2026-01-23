@@ -3,6 +3,12 @@
    ======================= */
 .main {
 	section._jp_info {
-		.inner {}
+		.inner {
+			.btn-less {
+				font-weight: 700;
+				margin-top: 24px;
+				color: #7D71AC;
+			}
+		}
 	}
 }

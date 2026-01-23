@@ -3,6 +3,46 @@
    ======================= */
 .main {
 	section._external_link {
-		.inner {}
+		margin-bottom: 100px;
+		.inner {
+			.content {
+				.btns {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					a {
+						margin-right: 40px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						column-gap: 5px;
+						padding: 9px 25px;
+						border-radius: 100px;
+						color: $color-white;
+						border: 2px solid;
+						border-image-source: linear-gradient(90deg, #1D0A36 0%, #DEC3FF 100%);
+						background: radial-gradient(56.48% 104.71% at 98.04% 100%, #A37CD1 2.05%, #523080 100%);
+						> span {
+							display: inline-block;
+							font-weight: 700;
+							letter-spacing: 3px;
+						}
+						&:last-child {
+							margin-right: 0;
+						}
+						&:after {
+							content: "";
+							position: relative;
+							display: inline-block;
+							top: 0;
+							width: 28.5px;
+							height: 8px;;
+							background: url(../img/cta-arrow.svg) left top no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+			}
+		}
 	}
 }
