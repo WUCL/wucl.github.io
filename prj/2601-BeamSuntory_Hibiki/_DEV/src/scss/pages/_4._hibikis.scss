@@ -7,10 +7,12 @@
 			.content {
 				._hibiki {
 					display: grid;
-					grid-template-columns: 4.5fr 5.5fr;
+					grid-template-columns: 4.6fr 5.4fr;
+					align-items: center;
 					column-gap: 40px;
 					margin-bottom: 60px;
 					&:nth-child(2) {
+						grid-template-columns: 5.4fr 4.6fr;
 						> .product {
 							order: 2;
 						}
@@ -27,6 +29,7 @@
 						.description {
 							p {
 								white-space: pre-line;
+								// letter-spacing: -1px;
 							}
 						}
 						.imgs,

@@ -5,12 +5,16 @@
 	section._media {
 		.inner {
 			.content {
-				.video {
+				> .video {
+					margin-bottom: 60px;
 					width: 100%;
 					> img {
 						display: block;
 						width: 100%;
 					}
+				}
+				> .text {
+					margin-bottom: 40px;
 				}
 			}
 		}

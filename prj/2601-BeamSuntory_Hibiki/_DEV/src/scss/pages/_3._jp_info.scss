@@ -4,10 +4,24 @@
 .main {
 	section._jp_info {
 		.inner {
-			.btn-less {
+			.btn-more {
+				font-family: "Noto Serif TC", serif;
 				font-weight: 700;
 				margin-top: 24px;
 				color: #7D71AC;
+			}
+			> .title {
+				 margin-bottom: 40px;
+			}
+			> .content {
+				margin-bottom: 60px;
+				> .text {
+					margin-bottom: 40px;
+					p {
+						font-size: $fontsize + 2px;
+						line-height: normal;
+					}
+				}
 			}
 		}
 	}

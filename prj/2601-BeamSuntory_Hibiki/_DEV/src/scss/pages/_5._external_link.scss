@@ -10,6 +10,7 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
+
 					a {
 						margin-right: 40px;
 						display: flex;
@@ -17,11 +18,22 @@
 						justify-content: center;
 						column-gap: 5px;
 						padding: 9px 25px;
+
+						// 1. 正常的圓角設定
 						border-radius: 100px;
 						color: $color-white;
-						border: 2px solid;
-						border-image-source: linear-gradient(90deg, #1D0A36 0%, #DEC3FF 100%);
-						background: radial-gradient(56.48% 104.71% at 98.04% 100%, #A37CD1 2.05%, #523080 100%);
+
+						// 2. 核心技術：使用兩層背景來模擬漸層邊框
+						// 第一層是內容背景 (Radial Gradient)
+						// 第二層是邊框漸層 (Linear Gradient)
+						border: 2px solid transparent; // 必須先設為透明
+						background-image:
+						radial-gradient(56.48% 104.71% at 98.04% 100%, #A37CD1 2.05%, #523080 100%),
+						linear-gradient(90deg, #1D0A36 0%, #DEC3FF 100%);
+
+						background-origin: border-box;
+						background-clip: padding-box, border-box; // 關鍵：內層剪裁到 padding，外層到 border
+
 						> span {
 							display: inline-block;
 							font-weight: 700;
@@ -33,12 +45,18 @@
 						&:after {
 							content: "";
 							position: relative;
-							display: inline-block;
-							top: 0;
-							width: 28.5px;
-							height: 8px;;
+							top: 1px;
+							width: 19px;
+							height: 8px;
 							background: url(../img/cta-arrow.svg) left top no-repeat;
-							background-size: cover;
+							background-size: contain; // 改用 contain 避免變形
+							transition: .2s ease;
+						}
+
+						&:hover {
+							&:after {
+								transform: translateX(9px);
+							}
 						}
 					}
 				}
