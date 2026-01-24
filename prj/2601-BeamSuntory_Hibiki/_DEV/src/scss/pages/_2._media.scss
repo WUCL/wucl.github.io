@@ -15,6 +15,20 @@
 				}
 				> .text {
 					margin-bottom: 40px;
+					p {
+						font-size: $fontsize + 2px;
+						line-height: 1.6;
+						span {
+							display: block;
+							@include mq($max-width: $bp-2m) {
+								display: inline;
+								&:nth-last-child(3) {
+									display: inline-block;
+									margin-top: $fontsize + 2px;
+								}
+							}
+						}
+					}
 				}
 			}
 		}

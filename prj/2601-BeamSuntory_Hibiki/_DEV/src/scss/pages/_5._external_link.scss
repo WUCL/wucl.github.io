@@ -10,7 +10,9 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
-
+					@include mq($max-width: $bp-3s) {
+						flex-direction: column;
+					}
 					a {
 						margin-right: 40px;
 						display: flex;
@@ -33,7 +35,10 @@
 
 						background-origin: border-box;
 						background-clip: padding-box, border-box; // 關鍵：內層剪裁到 padding，外層到 border
-
+						@include mq($max-width: $bp-3s) {
+							margin-right: 0;
+							margin-bottom: 32px;
+						}
 						> span {
 							display: inline-block;
 							font-weight: 700;
@@ -41,6 +46,7 @@
 						}
 						&:last-child {
 							margin-right: 0;
+							margin-bottom: 0;
 						}
 						&:after {
 							content: "";

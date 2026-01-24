@@ -11,10 +11,19 @@
 					align-items: center;
 					column-gap: 40px;
 					margin-bottom: 60px;
+					@include mq($max-width: $bp-2m) {
+						grid-template-columns: 1fr
+					}
 					&:nth-child(2) {
 						grid-template-columns: 5.4fr 4.6fr;
+						@include mq($max-width: $bp-2m) {
+							grid-template-columns: 1fr;
+						}
 						> .product {
 							order: 2;
+							@include mq($max-width: $bp-2m) {
+								order: 0;
+							}
 						}
 					}
 					> .product {
@@ -28,8 +37,12 @@
 						.title {}
 						.description {
 							p {
-								white-space: pre-line;
-								// letter-spacing: -1px;
+								span {
+									display: block;
+									@include mq($max-width: $bp-2m) {
+										display: inline;
+									}
+								}
 							}
 						}
 						.imgs,
@@ -55,7 +68,7 @@
 								display: grid;
 								grid-template-columns: minmax(auto, 110px) 1fr;
 								column-gap: 16px;
-								align-items: baseline; // 讓不同字數的文字對齊基準線
+						    	align-items: center;
 								&:last-child {
 									margin-bottom: 0;
 								}
@@ -63,6 +76,9 @@
 									font-size: $fontsize + 2px;
 									text-align: justify;
 									line-height: 1;
+									@include mq($max-width: $bp-2m) {
+										line-height: normal;
+									}
 									&:first-child {
 										text-align: center;
 										max-width: 110px;

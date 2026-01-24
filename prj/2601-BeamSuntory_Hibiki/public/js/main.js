@@ -24,12 +24,22 @@ $(function() {
             let $this = this;
 
             // btn-more
-            $this.el.$btn_more.on('click', function() {
-                if ($this.el.$box_more.attr('data-more') == 0) $this.el.$box_more.attr('data-more', 1);
-                else $this.el.$box_more.attr('data-more', 0);
-                return;
-            });
+            $this.el.$btn_more.on('click', function(e) {
+                e.preventDefault();
 
+                // 往上尋找最近的 section._jp_info
+                var $section = $(this).closest('section._jp_info');
+
+                // 切換 _more class
+                $section.toggleClass('_more');
+
+                // 專業細節：如果是縮回去(現在不含 _more)，自動捲動回 section 頂部
+                // if (!$section.hasClass('_more')) {
+                //     $('html, body').animate({
+                //         scrollTop: $section.offset().top - 100 // 減 100 是預留上方空間
+                //     }, 500);
+                // }
+            });
             // ytimg
             $this.el.$ytimg.on('click', function() {
                 let ytid = $(this).attr('data-youtube-id');

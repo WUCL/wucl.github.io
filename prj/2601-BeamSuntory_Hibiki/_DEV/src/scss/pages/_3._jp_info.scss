@@ -26,7 +26,13 @@
 					margin-bottom: 40px;
 					p {
 						font-size: $fontsize + 2px;
-						line-height: normal;
+						line-height: 1.6;
+						span {
+							display: block;
+							@include mq($max-width: $bp-2m) {
+								display: inline;
+							}
+						}
 					}
 				}
 				&._jp_artisan {
@@ -34,7 +40,8 @@
 					// 1. 初始狀態：限制整個容器的高度
 					max-height: 120px; // 設定一個你想讓使用者看到的預覽高度（含文字與部分圖片）
 					overflow: hidden;
-					transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+					// transition: max-height .1s cubic-bezier(0.4, 0, 0.2, 1);
+					transition: max-height .1s;
 
 					// 2. 處理不規則背景下的消失感 (使用 Mask)
 					// 這會讓底部文字/圖片呈現透明消失，而不是白色遮蓋
