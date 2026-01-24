@@ -7,8 +7,15 @@
 			.btn-more {
 				font-family: "Noto Serif TC", serif;
 				font-weight: 700;
-				margin-top: 24px;
 				color: #7D71AC;
+
+				display: block;
+				margin: 24px auto;
+				cursor: pointer;
+
+				&:after {
+					content: "MORE +";
+				}
 			}
 			> .title {
 				 margin-bottom: 40px;
@@ -20,6 +27,39 @@
 					p {
 						font-size: $fontsize + 2px;
 						line-height: normal;
+					}
+				}
+				&._jp_artisan {
+					position: relative;
+					// 1. 初始狀態：限制整個容器的高度
+					max-height: 120px; // 設定一個你想讓使用者看到的預覽高度（含文字與部分圖片）
+					overflow: hidden;
+					transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+					// 2. 處理不規則背景下的消失感 (使用 Mask)
+					// 這會讓底部文字/圖片呈現透明消失，而不是白色遮蓋
+					-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+					mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+
+					// 2. 展開狀態 (_more)
+					// &._more {
+					// 	max-height: 3000px; // 展開後的高度限制，設大一點
+					// 	-webkit-mask-image: none; // 展開後取消漸層透明
+					// 	mask-image: none;
+					// }
+				}
+			}
+		}
+		&._more {
+			.inner {
+				> .content._jp_artisan {
+					max-height: 3000px; // 展開後的高度限制，設大一點
+					-webkit-mask-image: none; // 展開後取消漸層透明
+					mask-image: none;
+				}
+				.btn-more {
+					&:after {
+						content: "LESS -";
 					}
 				}
 			}
