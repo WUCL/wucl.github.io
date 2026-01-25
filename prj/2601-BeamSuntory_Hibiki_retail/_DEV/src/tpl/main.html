@@ -1,7 +1,37 @@
 <main id="main" class="main">
-    <section class="kv" data-scroll-index="1">
-    	<div class="inner"></div>
+    <section class="_kv">
+        <div class="inner"></div>
+    </section>
+    <section class="_stores" data-step="1">
+        <div class="inner">
+            <div class="title _main"><h2><span>響Hibiki</span><span>全台銷售通路</span></h2></div>
+            <div class="content">
+                <div class="steps">
+                    <div class="step"><span data-count="01">選擇您所在城市</span></div>
+                    <div class="step"><span data-count="02">選擇您所在區域</span></div>
+                    <div class="step"><span data-count="03">查看菸酒專賣店</span></div>
+                </div>
+                <div class="selecter">
+                    <div class="select _city">
+                        <div class="subtitle">
+                            <h2><span>請選擇城市</span><span>Select City</span></h2>
+                        </div>
+                        <div id="select_city" class="options city-layer"></div>
+                    </div>
+                    <div class="select _dist">
+                        <div class="subtitle">
+                            <h2><span>請選擇區域</span><span>Select District</span></h2>
+                        </div>
+                        <div id="select_dist" class="options dist-layer"></div>
+                    </div>
+                    <div class="select _address">
+                        <div id="select_address" class="options address-layer"></div>
+                        <button type="button" id="btn-clear" class="btn-clear">重新選擇</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    @@include('../tpl/_protection.html')
+    <!-- @@include('../tpl/_protection.html') -->
 </main>

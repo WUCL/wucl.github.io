@@ -1,0 +1,317 @@
+/* =======================
+   pages/_stores
+   ======================= */
+.main {
+	section._stores {
+		.inner {
+			.content {
+				margin-top: 80px;
+				.steps {
+					max-width: $bp-2;
+					margin-bottom: 60px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					// grid-template-columns: 1fr 1fr 1fr;
+					// grid-row-gap: 32px;
+					.step {
+						color: #470E27;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: $fontsize-1;
+						font-weight: 700;
+						@include mq($max-width: $bp-2s) {
+							font-size: $fontsize;
+						}
+						&:after {
+							content: "";
+							position: relative;
+							display: block;
+							background: #8F5399;
+							height: 1px;
+							width: 50px;
+							margin: 0 32px;
+							@include mq($max-width: $bp-2l) {
+								margin: 0 22px;
+							}
+							@include mq($max-width: $bp-2s) {
+								margin: 0 10px;
+							}
+						}
+						&:last-child {
+							&:after {
+								content: none;
+							}
+						}
+						span {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							@include mq($max-width: $bp-2l) {
+								flex-direction: column;
+							}
+							&:before {
+								content: "";
+								position: relative;
+								display: block;
+								background: #8F5399;
+								content: attr(data-count);
+								margin-right: 10px;
+								border-radius: 50%;
+								font-style: italic;
+								width: 40px;
+								height: 40px;
+								color: $color-white;
+								line-height: normal;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								@include mq($max-width: $bp-2l) {
+									margin-right: 0;
+									margin-bottom: 10px;
+								}
+							}
+						}
+					}
+				}
+				.selecter {
+					&:after {
+						content: "請選擇區域查看菸酒專賣店列表";
+						display: block;
+						font-size: $fontsize-1;
+						line-height: normal;
+						letter-spacing: 3.5px;
+						font-weight: 700;
+						color: #AEAEAE;
+					}
+					.select {
+						margin-bottom: 60px;
+						.subtitle {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							margin-bottom: 32px;
+							&:before,
+							&:after {
+								content: "";
+								background: #AA7BAC;
+								width: 100px;
+								height: 1px;
+								display: inline-block;
+								@include mq($max-width: $bp-2m) {
+									width: 70px;
+								}
+							}
+							h2 {
+								display: flex;
+								flex-direction: column;
+								align-items: center;
+								justify-content: center;
+								padding-inline: 24px;
+							}
+							span {
+								line-height: normal;
+								font-weight: 700;
+								&:first-child {
+									font-size: $fontsize-3;
+									color: #470E27;
+									letter-spacing: 3px;
+								}
+								&:last-child {
+									font-size: $fontsize-b;
+									color: #AA7BAC;
+								}
+							}
+						}
+
+						&._dist,
+						&._address {
+							display: none;
+						}
+						.options {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							flex-wrap: wrap;
+							gap: 24px;
+							width: 100%;
+							margin: 0 auto;
+							@include mq($max-width: $bp-2l) {
+								gap: 18px;
+							}
+							@include mq($max-width: $bp-2s) {
+								gap: 14px;
+							}
+							> div {
+								color: #6A3859;
+								background: #E1D6E3;
+								padding: 8px 24px;
+								border-radius: 20px;
+								line-height: normal;
+								text-align: center;
+								cursor: pointer;
+								white-space: nowrap; // 確保縣市名稱不會被擠壓換行
+								transition: all .3s ease;
+								&:hover {
+									background: rgba(#8F5399, .5);
+								}
+								// 選中狀態的樣式預留
+								&._active {
+									background: #8F5399;
+									color: $color-white;
+								}
+							}
+							&.address-layer {
+								width: $bp-l;
+								max-width: 100%;
+								margin: 0 auto;
+
+								display: grid;
+								// grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+								grid-template-columns: 1fr 1fr;
+    							justify-items: center;
+								justify-content: center;
+								align-items: center;
+								@include mq($max-width: $bp-l) {
+									grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+								}
+								.store-card {
+									cursor: auto;
+									position: relative;
+									top: 0;
+									margin: 0 auto;
+									padding: 32px 24px;
+									width: 100%;
+									max-width: 360px;
+
+									text-align: justify;
+									z-index: 1;
+									border-radius: 16px;
+									box-shadow: 0 10px 30px -5px rgba(71, 14, 39, 0.12);
+
+									border: 1px solid transparent; // 1. 先設一個透明邊框當作容器空間
+									background-image:
+									  linear-gradient($color-white, $color-white), // 第一層：你的內層底色
+									  linear-gradient(180deg, #D6BCD5 0%, #824C98 100%); // 第二層：你的漸層邊框色
+
+									background-origin: border-box; // 讓背景從邊框外緣開始算
+									background-clip: padding-box, border-box; // 核心：第一層裁切到內容，第二層延伸到邊框
+									transition: all .4s cubic-bezier(0.165, 0.84, 0.44, 1);
+									@include mq($max-width: $bp-2l) {
+										padding: 24px;
+									}
+									&:hover {
+										transform: translateY(-5px);
+										box-shadow: 0 20px 40px -10px rgba(71, 14, 39, 0.18);
+										filter: brightness(1.02);
+									}
+									> div {
+										line-height: normal;
+										&.name {
+											font-size: $fontsize-1;
+											font-weight: 500;
+											color: #231816;
+										}
+										&.addr,
+										&.tel {
+											display: flex;
+											align-items: center;
+											font-size: $fontsize;
+											font-weight: 400;
+											color: #626262;
+											margin-top: 9px;
+											&:before {
+												content: "";
+												display: inline-block;
+												width: 24px;
+												height: 24px;
+												margin-right: 5px;
+											}
+										}
+										&.addr {
+											&:before {
+												background: url(../img/icon-pin.svg) left top no-repeat;
+												background-size: contain; // 改用 contain 避免變形
+											}
+										}
+										&.tel {
+											&:before {
+												background: url(../img/icon-tel.svg) left top no-repeat;
+												background-size: contain; // 改用 contain 避免變形
+											}
+											a {
+												font-size: inherit;
+												color: inherit;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				.btn-clear {
+					@extend %notosanstc;
+					background: #8F5399;
+					border-radius: 200px;
+					padding: 8px 24px;
+					color: $color-white;
+					margin-top: 60px;
+					transition: .3s ease;
+					&:hover {
+						background: rgba(#8F5399, .9);
+					}
+				}
+			}
+		}
+		&[data-step="1"] {
+			.steps .step {
+				&:nth-child(1) {
+					&:after {
+						background: linear-gradient(to right, #8F5399 50%, #D3D3D3 50%);
+					}
+				}
+				&:nth-child(2),
+				&:nth-child(3) {
+					color: #D3D3D3;
+					&:before,
+					&:after {
+						background: #D3D3D3;
+					}
+				}
+			}
+		}
+		&[data-step="2"] {
+			.steps .step {
+				&:nth-child(2) {
+						&:after {
+							background: linear-gradient(to right, #8F5399 50%, #D3D3D3 50%);
+						}
+				}
+				&:nth-child(3) {
+					color: #D3D3D3;
+					&:after {
+						background: #D3D3D3;
+					}
+				}
+			}
+			.selecter {
+				.select._dist {
+					display: block !important;
+				}
+			}
+		}
+		&[data-step="3"] {
+			.selecter {
+				&:after {
+					display: none !important;
+				}
+				.select._dist,
+				.select._address {
+					display: block !important;
+				}
+			}
+		}
+	}
+}
