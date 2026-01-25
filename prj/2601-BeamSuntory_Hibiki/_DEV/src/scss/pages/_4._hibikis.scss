@@ -68,7 +68,7 @@
 								display: grid;
 								grid-template-columns: minmax(auto, 110px) 1fr;
 								column-gap: 16px;
-						    	align-items: center;
+								align-items: center;
 								&:last-child {
 									margin-bottom: 0;
 								}
@@ -86,9 +86,27 @@
 										border-radius: 12px 0;
 										padding: 8px 16px;
 										color: $color-white;
+										overflow: hidden; // 確保滑出效果不會超出圓角
+										z-index: 1;
+										&:after {
+											content: "";
+											position: absolute;
+											top: 0;
+											left: -100%; // 初始位置在左邊外面
+											width: 100%;
+											height: 100%;
+											background: rgba(255, 255, 255, 0.25); // 極淡的白光
+											transition: left .2s ease;
+											z-index: -1;
+										}
 									}
 									&:last-child {
 										letter-spacing: -1px;
+									}
+								}
+								&:hover {
+									> span:first-child:after {
+										left: 0; // 滑入
 									}
 								}
 							}

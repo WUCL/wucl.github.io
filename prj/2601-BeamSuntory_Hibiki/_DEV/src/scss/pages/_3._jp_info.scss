@@ -13,8 +13,19 @@
 				margin: 24px auto;
 				cursor: pointer;
 
+				&:before {
+					content: "MORE";
+				}
 				&:after {
-					content: "MORE +";
+					content: "+";
+					display: inline-block;
+					margin-left: 5px;
+					transition: .2s ease;
+				}
+				&:hover {
+					&:after {
+						transform: translateX(5px);
+					}
 				}
 			}
 			> .title {
@@ -65,8 +76,11 @@
 					mask-image: none;
 				}
 				.btn-more {
+					&:before {
+						content: "LESS";
+					}
 					&:after {
-						content: "LESS -";
+						content: "-";
 					}
 				}
 			}
