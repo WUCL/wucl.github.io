@@ -153,6 +153,7 @@
 								cursor: pointer;
 								white-space: nowrap; // 確保縣市名稱不會被擠壓換行
 								transition: all .3s ease;
+								text-decoration: none !important;
 								&:hover {
 									background: rgba(#8F5399, .5);
 								}

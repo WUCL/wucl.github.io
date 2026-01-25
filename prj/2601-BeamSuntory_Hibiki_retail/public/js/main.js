@@ -61,7 +61,12 @@ $(function() {
                 $this.el.$_stores.attr('data-step', '2');
                 $(this).addClass('_active').siblings().removeClass('_active');
                 const cityName = $(this).data('value');
+
                 renderDistricts(cityName);
+                window.scrollTo({
+                    top:  $this.el.$s_dist.offset().top - 180,
+                    behavior: 'smooth' // 這就是滑動感的關鍵
+                });
             });
             // 第二步：點擊區域 (確保這裡能抓到正確的 cityName)
             $this.el.$s_dist.on('click', 'div', function() {
@@ -72,6 +77,10 @@ $(function() {
                 const distName = $(this).data('value');
 
                 renderStores(cityName, distName);
+                window.scrollTo({
+                    top:  $this.el.$s_address.offset().top - 180,
+                    behavior: 'smooth' // 這就是滑動感的關鍵
+                });
             });
 
             $this.el.$btn_clear.on('click', function() {
