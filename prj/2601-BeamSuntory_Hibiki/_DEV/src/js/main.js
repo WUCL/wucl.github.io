@@ -32,6 +32,12 @@ $(function() {
 
                 // 切換 _more class
                 $section.toggleClass('_more');
+                // if (!$section.hasClass('_more')) {
+                //     window.scrollTo({
+                //         top:  $('.content._jp_artisan').offset().top - 180,
+                //         behavior: 'smooth' // 這就是滑動感的關鍵
+                //     });
+                // }
 
                 // 專業細節：如果是縮回去(現在不含 _more)，自動捲動回 section 頂部
                 // if (!$section.hasClass('_more')) {

@@ -48,12 +48,21 @@
 						.imgs,
 						.features {
 							padding-inline: 5%;
+							@include mq($max-width: $bp-2s) {
+								padding-inline: 0;
+							}
 						}
 						.imgs {
 							margin-block: 24px;
 							display: grid;
 							grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 							column-gap: 16px;
+							@include mq($max-width: $bp-2m) {
+								column-gap: 14px;
+							}
+							@include mq($max-width: $bp-2s) {
+								column-gap: 9px;
+							}
 							img {
 								display: block;
 								width: 100%;

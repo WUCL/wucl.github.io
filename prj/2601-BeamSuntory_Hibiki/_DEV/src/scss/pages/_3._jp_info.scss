@@ -48,30 +48,22 @@
 				}
 				&._jp_artisan {
 					position: relative;
-					// 1. 初始狀態：限制整個容器的高度
 					max-height: 120px; // 設定一個你想讓使用者看到的預覽高度（含文字與部分圖片）
 					overflow: hidden;
-					// transition: max-height .1s cubic-bezier(0.4, 0, 0.2, 1);
-					transition: max-height .1s;
+					transition: max-height .25s ease-in-out;
 
-					// 2. 處理不規則背景下的消失感 (使用 Mask)
-					// 這會讓底部文字/圖片呈現透明消失，而不是白色遮蓋
 					-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 					mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 
-					// 2. 展開狀態 (_more)
-					// &._more {
-					// 	max-height: 3000px; // 展開後的高度限制，設大一點
-					// 	-webkit-mask-image: none; // 展開後取消漸層透明
-					// 	mask-image: none;
-					// }
+					will-change: max-height;
+					backface-visibility: hidden;
 				}
 			}
 		}
 		&._more {
 			.inner {
 				> .content._jp_artisan {
-					max-height: 3000px; // 展開後的高度限制，設大一點
+					max-height: 700px; // 展開後的高度限制，設大一點
 					-webkit-mask-image: none; // 展開後取消漸層透明
 					mask-image: none;
 				}

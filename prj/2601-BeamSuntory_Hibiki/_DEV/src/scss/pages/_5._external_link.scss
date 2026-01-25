@@ -38,6 +38,7 @@
 						@include mq($max-width: $bp-3s) {
 							margin-right: 0;
 							margin-bottom: 32px;
+							font-size: 24px;
 						}
 						> span {
 							display: inline-block;
@@ -57,6 +58,10 @@
 							background: url(../img/cta-arrow.svg) left top no-repeat;
 							background-size: contain; // 改用 contain 避免變形
 							transition: .2s ease;
+							@include mq($max-width: $bp-3s) {
+								width: calc(19px * 1.6);
+								height: calc(8px * 1.6);
+							}
 						}
 
 						&:hover {

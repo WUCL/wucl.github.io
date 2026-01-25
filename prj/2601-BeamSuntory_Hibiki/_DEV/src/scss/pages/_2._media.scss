@@ -8,6 +8,25 @@
 				> .video {
 					margin-bottom: 60px;
 					width: 100%;
+					&:after {
+						content: "";
+						position: absolute;
+						inset: 0;
+						z-index: 1;
+						box-sizing: border-box;
+
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						z-index: 1;
+						border: 6px solid;
+						border-image-source: linear-gradient(180deg, #D6BCD5 0%, #824C98 100%);
+						border-image-slice: 1; // 必須加上這一行，漸層才會填滿邊框寬度
+						@include mq($max-width: $bp-2s) {
+							border-width: 5px;
+						}
+					}
 					> img {
 						display: block;
 						width: 100%;
