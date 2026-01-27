@@ -46,22 +46,63 @@ $(function() {
                 //     }, 500);
                 // }
             });
-            // ytimg
+            // // ytimg
+            // $this.el.$ytimg.on('click', function() {
+            //     let ytid = $(this).attr('data-youtube-id'); // 目前點擊的那部 ID
+            //     let playlistIds = ['Bl0wCc87ZSE', '7z0i-BJSTCY'];
+
+            //     let video =
+            //       ''
+            //       + '<iframe width="100%" class="ytimg_video ' + ytid + '"'
+            //       + 'src="'+ $(this).attr('data-video') +'"'
+            //       + 'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"'
+            //       + ' webkitAllowFullScreen mozallowfullscreen allowFullScreen'
+            //       + ' frameBorder="0" data-ytid="' + ytid + '"></iframe>';
+
+            //     // $(this).replaceWith(video);
+            //     $(this).addClass('_with_iframe').append(video);
+            // });
+
             $this.el.$ytimg.on('click', function() {
-                let ytid = $(this).attr('data-youtube-id');
-                console.log(ytid);
+                if ($(this).hasClass('_with_iframe')) return;
 
-// <iframe width="560" height="315" src="https://www.youtube.com/embed/1mNctcAyEEc?si=AwgGHlNBsQrDZ7aC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                // 1. 取得清單
+                let playlistAttr = $(this).attr('data-playlist') || '';
+                let ids = playlistAttr.split(',').filter(id => id.trim() !== '');
+                if (ids.length === 0) return;
 
-                let video =
-                  ''
-                  + '<iframe width="100%" class="ytimg_video ' + ytid + '"'
-                  + 'src="'+ $(this).attr('data-video') +'"'
-                  + 'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"'
-                  + ' webkitAllowFullScreen mozallowfullscreen allowFullScreen'
-                  + ' frameBorder="0" data-ytid="' + ytid + '"></iframe>';
+                let firstId = ids[0];
 
-                // $(this).replaceWith(video);
+                // 2. 基礎參數設定
+                let params = [
+                    'autoplay=1',
+                    'rel=0',
+                    'modestbranding=1',
+                    'loop=1' // 開啟循環播放
+                ];
+
+                // 3. 循環邏輯處理
+                // YouTube 規定：要循環播放，必須在 playlist 參數中填入要循環的 IDs
+                if (ids.length > 1) { // 多部影片輪播循環
+                    params.push('playlist=' + ids.join(','));
+                } else { // 單部影片無限循環，也要把自己的 ID 傳給 playlist 參數，loop 才會生效
+                    params.push('playlist=' + firstId);
+                }
+
+                // <iframe width="560" height="315" src="https://www.youtube.com/embed/1mNctcAyEEc?si=AwgGHlNBsQrDZ7aC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                let videoSrc = 'https://www.youtube.com/embed/' + firstId + '?' + params.join('&');
+
+                let video = `
+                    <iframe
+                        width="100%"
+                        class="ytimg_video"
+                        src="${videoSrc}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        webkitAllowFullScreen mozallowfullscreen allowFullScreen
+                        frameBorder="0">
+                    </iframe>`;
+
                 $(this).addClass('_with_iframe').append(video);
             });
         },
