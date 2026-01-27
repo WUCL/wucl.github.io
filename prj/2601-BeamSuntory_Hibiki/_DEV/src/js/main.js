@@ -75,6 +75,7 @@ $(function() {
 
                 // 2. 基礎參數設定
                 let params = [
+                    'hd=1',
                     'autoplay=1',
                     'rel=0',
                     'modestbranding=1',
