@@ -37,6 +37,8 @@
         LIFF_ID: '',
         API_URL: '',
 
+        isFetchingList: false,
+        isFetchingSummary: false,
         cache: {
             summary: null, // 用來存放 Dashboard 的數據
             list: {} // 改為物件，用來儲存不同篩選條件的結果
@@ -51,8 +53,22 @@
         // 1. 判斷是否為正式站路徑
         var isProd = currentUrl.includes('/prod/mh1491/orderhub/');
 
-        // 2. 判斷是否為本機開發環境 (localhost / 127.0.0.1 / 192.168.x.x)
-        var isLocal = (h === 'localhost' || h === '127.0.0.1' || /^192\.168\./.test(h));
+        // 2. 判斷是否為本機環境 (isLocal)
+        // 涵蓋範圍：
+        // - localhost / 127.0.0.1
+        // - 10.x.x.x (內網)
+        // - 172.16.x.x ~ 172.31.x.x (內網，涵蓋你的 172.20.10.4)
+        // - 192.168.x.x (內網)
+        // - *.local (Mac/iOS 常用域名)
+        var isLocal = (
+            h === 'localhost' ||
+            h === '127.0.0.1' ||
+            h.endsWith('.local') ||
+            /^10\./.test(h) ||
+            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(h) ||
+            /^172\.20\./.test(h) || // 針對你目前的網段加強判斷
+            /^192\.168\./.test(h)
+        );
 
         return {
             label: isProd ? 'PROD' : 'DEV',
@@ -70,7 +86,9 @@
             // 【邏輯：只有在本機且是 DEV 模式時，才跳過登入】
             if (isLocal && self.var.envLabel === 'DEV') {
                 self.var.actor = 'LOCAL-TEST';
+                self.var.liffReady = false;
                 self.setMetaUser('本地開發模式 (未登入)');
+                console.log('--- [Local Mode Detected] Skip LIFF ---');
                 resolve(); return;
             }
 
@@ -118,6 +136,7 @@
         // 1. 偵測環境
         var env = this.detectEnv_();
         this.var.envLabel = env.label;
+        console.log(env);
 
         // 2. 根據環境標籤分配 ID 與 API
         var config = (env.label === 'PROD') ? ENV_CONFIG.PROD : ENV_CONFIG.DEV;
@@ -140,9 +159,16 @@
             e.preventDefault();
             var $btn = $(this);
 
-            // 清空快取，強迫下次進入 Dashboard 重新跑 API
+            // 1. 清空記憶體快取
             APP.var.cache.summary = null;
             APP.var.cache.list = {};
+
+            // 2. 清空手機儲存空間 (Persistent Cache)
+            localStorage.removeItem('CACHE_SUMMARY');
+            // 移除所有以 CACHE_LIST_ 開頭的項目
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('CACHE_LIST_')) localStorage.removeItem(key);
+            });
 
             // 1. 瞬間變灰 (加上 class)
             $btn.addClass('is-loading');

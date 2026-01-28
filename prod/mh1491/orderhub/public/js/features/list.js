@@ -146,54 +146,63 @@
 
         // 執行查詢
         function fetchAndRender() {
+            if (APP.var.isFetchingList) return;
+
             var params = getQueryParams();
             params.page = currentPage;
-
-            // 【核心邏輯】產生唯一的 Cache Key (將參數轉為字串)
             const cacheKey = JSON.stringify(params);
+            const storageKey = 'CACHE_LIST_' + cacheKey;
 
-            // 檢查是否有快取資料
+            // A. 檢查記憶體快取 (這是一進即出的，直接結束)
             if (APP.var.cache.list && APP.var.cache.list[cacheKey]) {
-                console.log('[List] 使用快取數據顯示');
-                renderListUI(APP.var.cache.list[cacheKey]);
-                return; // 跳過 API 請求
+                if (APP.status?.start) APP.status.start('讀取快取清單');
+                renderListUI(APP.var.cache.list[cacheKey], true); // 真正的結束
+                return;
             }
 
+            // B. 需要執行背景同步或重新讀取
             if (APP.status?.start) APP.status.start('載入清單');
-            $container.html('<div class="loading">讀取中…</div>');
 
-            // [優化] 換頁或重整時，滾動到最上方
-            if (typeof APP.scrollTop === 'function') APP.scrollTop();
+            // 1. 優先從手機儲存讀取 (秒開)
+            const localList = localStorage.getItem(cacheKey);
+            if (localList) {
+                console.log('[List] 顯示持久化快取');
+                // 先渲染，但不結束進度條
+                renderListUI(JSON.parse(localList), false);
+                // 將進度條推到 77%，提示正在同步
+                if (APP.status?.tick) APP.status.tick('同步最新資料中', 77);
+            } else {
+                $container.html('<div class="loading">讀取中…</div>');
+            }
 
-            if (APP.status?.tick) APP.status.tick('查詢中', 20);
+            // 2. 背景請求最新資料
+            APP.var.isFetchingList = true;
+            APP.api('list', params).then(res => {
+                if (res && res.ok && Array.isArray(res.items)) {
+                    // 更新快取
+                    if (!APP.var.cache.list) APP.var.cache.list = {};
+                    APP.var.cache.list[cacheKey] = res;
+                    localStorage.setItem(cacheKey, JSON.stringify(res));
 
-            APP.api('list', params)
-                .then(function(res) {
-                    $container.find('.loading').remove();
-
-                    if (res && res.ok && Array.isArray(res.items)) {
-                        // 【存入快取】
-                        APP.var.cache.list[cacheKey] = res;
-                        renderListUI(res);
-                    } else {
-                        renderEmpty($container);
-                        var msg = res?.msg || 'API 回應異常';
-                        console.warn('[List] API Error:', res);
-                        if (APP.status?.done) APP.status.done(false, msg);
-                    }
-                })
-                .catch(function(err) {
+                    // 真正完成，傳入 true 讓進度條跑完
+                    renderListUI(res, true);
+                } else {
                     renderEmpty($container);
-                    console.error('[List] Fetch Error:', err);
-                    if (APP.status?.done) APP.status.done(false, '網路錯誤');
-                });
+                    if (APP.status?.done) APP.status.done(false, '連線異常');
+                }
+            }).catch(err => {
+                console.error('[List] Fetch Error:', err);
+                if (APP.status?.done) APP.status.done(false, '網路錯誤');
+            }).finally(() => {
+                APP.var.isFetchingList = false;
+            });
         }
 
         /**
-         * 【新增封裝函式】統一渲染 UI 邏輯，供 API 或快取呼叫
+         * 統一渲染 UI 邏輯
          */
-        function renderListUI(res) {
-            var items = res.items;
+        function renderListUI(res, isFinal) {
+            var items = res.items || [];
             var total = Number(res.total || 0);
             totalPages = Math.max(1, Math.ceil(total / LIMIT));
 
@@ -201,13 +210,20 @@
 
             if (items.length === 0) {
                 renderEmpty($container);
-                if (APP.status?.done) APP.status.done(true, '查無資料');
+                // 【修正點】查無資料時，也要判斷是否為最終狀態才結束進度條
+                if (isFinal && APP.status?.done) {
+                    APP.status.done(true, '查無資料');
+                }
             } else {
                 $container.empty();
                 items.forEach(function(item) {
                     $container.append(createCard(item));
                 });
-                if (APP.status?.done) APP.status.done(true, `完成（${items.length} 筆）`);
+
+                // 【修正點】正常渲染後，也要判斷是否為最終狀態
+                if (isFinal && APP.status?.done) {
+                    APP.status.done(true, `完成（${items.length} 筆）`);
+                }
             }
         }
 
