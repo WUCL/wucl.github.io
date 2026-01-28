@@ -33,8 +33,8 @@ a {
 
 select {
     &.is-active {
-        background-color: $primary-weak !important;
-        border-color: $primary !important;
+        background-color: $status-doing !important;
+        border-color: dark($status-doing, 1.1) !important;
     }
 }
 

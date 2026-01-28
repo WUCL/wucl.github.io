@@ -1,0 +1,10 @@
+// ==========================================
+// utilities/_animation.scss
+// ==========================================
+
+/* 定義呼吸動畫 */
+@keyframes bar-pulse {
+    0%   { filter: brightness(.9); opacity: .8; }
+    50%  { filter: brightness(1.2); opacity: 1; }   // 呼吸最深處，微亮
+    100% { filter: brightness(.9); opacity: .8; }
+}

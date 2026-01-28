@@ -252,6 +252,18 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
  * 訂單列表 (GAS 端 - 已修正索引排序)
  */
 function Orders_list(params = {}) {
+  // --- 【新增：後端快取讀取】 ---
+  const cache = CacheService.getScriptCache();
+  // 根據傳入的參數（頁碼、狀態等）產生唯一的 Key
+  const cacheKey = "List_" + Utilities.base64Encode(JSON.stringify(params));
+  const cached = cache.get(cacheKey);
+
+  if (cached) {
+    console.log("使用後端快取回傳清單");
+    return JSON.parse(cached);
+  }
+  // --------------------------
+
   const limit = Math.min(Number(params.limit || LIMITS.DEFAULT_LIST_ITEMS), LIMITS.MAX_LIST_ITEMS);
   const { headers, map } = HDR(ENV.ORDERS_SHEET);
 
@@ -311,7 +323,16 @@ function Orders_list(params = {}) {
     return obj;
   });
 
-  return { ok: true, items, total, page, pages: Math.ceil(total / limit) };
+  // return { ok: true, items, total, page, pages: Math.ceil(total / limit) };
+  const result = { ok: true, items, total, page, pages: Math.ceil(total / limit) };
+
+  // --- 【新增：存入後端快取】 ---
+  // 存儲 600 秒 (10 分鐘)
+  // 注意：CacheService 單筆限制為 100KB，對於分頁後的 10 筆數據綽綽有餘
+  cache.put(cacheKey, JSON.stringify(result), 600);
+  // --------------------------
+
+  return result;
 }
 
 /**

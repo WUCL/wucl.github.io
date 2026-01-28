@@ -8,36 +8,64 @@
     var APP = w.APP || (w.APP = {});
 
     APP.renderDashboard = function() {
-        // 1. 渲染基礎模板
+        // 1. 渲染模板 (必須先渲染，才能抓到裡面的 DOM 元件)
         var frag = TPL.tpl('tpl-dashboard');
         TPL.mount('#main', frag);
 
-        // 2. 初始化 Dashboard 專用元件參考與變數
-        APP.db_el = {
-            $monthly_stats: $('#db-monthly-stats'),
-        };
-        // 每次進入頁面都要重置統計數值，防止切換頁面時數字翻倍
-        APP.db_var = {
-            unfinish: 0,
-        };
+        // 無論有沒有快取，都要先抓到這些 jQuery 物件
+        APP.db_el = { $monthly_stats: $('#db-monthly-stats') };
+        APP.db_var = { unfinish: 0 };
 
-        // 3. 【核心邏輯】檢查全域快取是否存在
-        // 註：需確保 app.main.js 的 APP.var 裡有定義 cache: { summary: null }
+        if (APP.status?.start) APP.status.start('讀取數據總覽');
+
+        // 2. 檢查「記憶體快取」 (切換頁面秒開)
         if (APP.var.cache && APP.var.cache.summary) {
-            console.log('[Dashboard] 使用快取數據');
+            console.log('[Dashboard] 使用記憶體快取');
             renderAllWidgets(APP.var.cache.summary);
-            return; // 直接結束，不再發送 API 請求
+
+            // 如果是秒開，直接結束進度條
+            if (APP.status?.done) APP.status.done(true, '快取載入完成');
+            return;
         }
 
-        // 4. 若無快取，則執行 API 請求
+        // 3. 檢查「手機持久化快取」 (重新開啟 App 秒開)
+        const localData = localStorage.getItem('CACHE_SUMMARY');
+        if (localData) {
+            console.log('[Dashboard] 使用手機持久化快取');
+            renderAllWidgets(JSON.parse(localData));
+            // 這裡不 return，讓它繼續跑 API 同步最新資料
+        }
+
+        // 4. 【核心優化】請求鎖定邏輯
+        if (APP.var.isFetchingSummary) {
+            console.log('[Dashboard] 已經有請求在跑了，取消重複請求');
+            if (APP.status?.done) APP.status.done(true, '同步中...');
+            return;
+        }
+
+        // 上鎖
+        APP.var.isFetchingSummary = true;
+        if (APP.status?.tick) APP.status.tick('同步最新資料中', 77);
+
+        // 5. 執行 API 請求
         APP.api('summary', {}).then(res => {
-            if (!res || !res.ok) return;
+            if (res && res.ok) {
+                // 更新快取
+                APP.var.cache.summary = res.data;
+                localStorage.setItem('CACHE_SUMMARY', JSON.stringify(res.data));
+                renderAllWidgets(res.data); // 靜默更新最新數據
 
-            // 將結果存入全域快取
-            if (!APP.var.cache) APP.var.cache = {};
-            APP.var.cache.summary = res.data;
-
-            renderAllWidgets(res.data);
+                // 【完成狀態列】
+                if (APP.status?.done) APP.status.done(true, '同步完成');
+            } else {
+                 // 【失敗狀態列】
+                if (APP.status?.done) APP.status.done(false, '同步失敗：' + (res.msg || '未知錯誤'));
+            }
+        }).catch(err => {
+            if (APP.status?.done) APP.status.done(false, '網路連線異常');
+        }).finally(() => {
+            // 【關鍵】不論成功或失敗，最後都要解鎖
+            APP.var.isFetchingSummary = false;
         });
     };
 
@@ -56,7 +84,7 @@
     function renderMonthlyStats(stats) {
         $('#stat-month-label').text(`${stats.year} / ${stats.month.toString().padStart(2, '0')}`);
         const $el = APP.db_el.$monthly_stats;
-        
+
         APP.animateNumber($el.find('[data-bind="totalOrders"]'), stats.totalOrders);
 
         const diff = stats.momDiff || 0;

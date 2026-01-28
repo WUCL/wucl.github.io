@@ -86,12 +86,12 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
     function ensureBar() {
         if (document.getElementById(ROOT_ID)) return;
         const frag = TPL.tpl('tpl-status');
-        var main = document.getElementById('main');
-        if (main) {
-            main.insertBefore(frag, main.firstChild);
-        } else {
-            document.body.insertBefore(frag, document.body.firstChild);
-        }
+
+        var _wrapper = document.getElementById('oh-status-wrapper');
+
+        if (_wrapper) { _wrapper.appendChild(frag);
+        } else { document.body.insertBefore(frag, document.body.firstChild); }
+
         $('.oh-status__clear').on('click', function() { $('.oh-status__list').empty(); });
         $('.oh-status__toggle').on('click', function(e) {
             e.preventDefault();
@@ -102,45 +102,54 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
     }
     function now() {
         var d = new Date();
-        var p = function(n, w) { n = String(n); return ('000' + n).slice(-w); };
-        return p(d.getHours(), 2) + ':' + p(d.getMinutes(), 2) + ':' + p(d.getSeconds(), 2) + '.' + p(d.getMilliseconds(), 3);
+        var p = function(n, w) { return ('000' + n).slice(-w); };
+        var ms = p(Math.floor(d.getMilliseconds() / 10), 2); // 999ms -> 99
+        return p(d.getHours(), 2) + ':' + p(d.getMinutes(), 2) + ':' + p(d.getSeconds(), 2) + '.' + ms;
     }
-    function pushLine(text, level) {
+    function _getAutoPage() {
+        var h = window.location.hash || '';
+        var path = h.replace(/^#\//, '').split('?')[0] || 'list';
+        var map = { 'dashboard': 'Dashboard', 'list': 'List', 'add': 'Add', 'edit': 'Edit' };
+        return map[path] || 'App';
+    }
+    function pushLine(page, text, level) {
         var $list = $('.oh-status__list');
         if (!$list.length) return;
         var cls = (level === 'error') ? 'err' : (level === 'warn' ? 'warn' : 'ok');
-        var line = '<div class="oh-status__line ' + cls + '">[' + now() + '] ' + text + '</div>';
+        var pageTag = page ? '[' + page + '] ' : '';
+        var line = '<div class="oh-status__line ' + cls + '">[' + now() + '] ' + pageTag + text + '</div>';
         $list.append(line);
         $list[0].scrollTop = $list[0].scrollHeight;
     }
     APP.status = {
-        _t0: 0, _pct: 0,
+        _t0: 0, _pct: 0, _page: '',
+
         start: function(label) {
             ensureBar();
+            this._page = _getAutoPage();
             this._t0 = (w.performance && performance.now) ? performance.now() : Date.now();
             this._pct = 0;
-            $('.oh-status__bar').css('width', '0%');
-            pushLine('開始：' + (label || ''), 'ok');
-            console.log('[STATUS] start:', label);
+            $('.oh-status__bar').css('width', '0%').removeClass('is-done');
+            pushLine(this._page, '開始：' + (label || ''), 'ok');
+            console.log('[STATUS]', this._page, 'start:', label);
         },
         tick: function(label, inc) {
             ensureBar();
             var step = (typeof inc === 'number') ? inc : 20;
             this._pct = Math.max(0, Math.min(100, this._pct + step));
             $('.oh-status__bar').css('width', this._pct + '%');
-            if (label) pushLine('進度：' + label, 'warn');
-            console.log('[STATUS] tick:', label, step);
+            if (label) pushLine(this._page, '進度：' + label, 'warn');
+            console.log('[STATUS]', this._page, 'tick:', label, step);
         },
         done: function(ok, label) {
             ensureBar();
             this._pct = 100;
-            $('.oh-status__bar').css('width', '100%');
+            $('.oh-status__bar').css('width', '100%').addClass('is-done');
             var t1 = (w.performance && performance.now) ? performance.now() : Date.now();
-            var ms = Math.max(0, Math.round(t1 - this._t0));
-            var s = (ms / 1000).toFixed(2);
+            var s = ((Math.max(0, t1 - this._t0)) / 1000).toFixed(2);
             var msg = (ok ? '完成' : '失敗') + '：' + (label || '') + '（' + s + 's）';
-            pushLine(msg, ok ? 'ok' : 'error');
-            console.log('[STATUS] done:', ok, label, s + 's');
+            pushLine(this._page, msg, ok ? 'ok' : 'error');
+            console.log('[STATUS]', this._page, 'done:', ok, label, s + 's');
         }
     };
 })(window, jQuery);
@@ -474,44 +483,116 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
      * @param {String} suffix 後綴 (如 筆)
      */
     APP.animateNumber = function($el, target, options = {}) {
+        // if (!$el.length) return;
+
+        // // 1. 取得目前畫面上的數值作為起點 (去掉 $ , 筆 等非數字字元)
+        // const currentText = $el.text().replace(/[^\d.-]/g, '');
+        // const startValue = parseFloat(currentText) || 0;
+        // const finalValue = parseFloat(target) || 0;
+
+        // // 如果數值完全沒變，就不要跑動畫了，直接結束
+        // if (startValue === finalValue) return;
+
+        // const settings = $.extend({
+        //     prefix: '',
+        //     suffix: '',
+        //     duration: 800 + Math.random() * 700,
+        //     delay: Math.random() * 500
+        // }, options);
+
+        // setTimeout(() => {
+        //     let startTimestamp = null;
+
+        //     const step = (timestamp) => {
+        //         if (!startTimestamp) startTimestamp = timestamp;
+        //         const progress = Math.min((timestamp - startTimestamp) / settings.duration, 1);
+
+        //         // Ease-out Expo 公式
+        //         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+
+        //         // 【關鍵】從 startValue 跑到 finalValue
+        //         const currentValue = Math.floor(easeProgress * (finalValue - startValue) + startValue);
+        //         $el.text(settings.prefix + currentValue.toLocaleString() + settings.suffix);
+
+        //         if (progress < 1) {
+        //             window.requestAnimationFrame(step);
+        //         }
+        //     };
+        //     window.requestAnimationFrame(step);
+        // }, settings.delay);
+
+
         if (!$el.length) return;
 
-        // 將 target 轉為純數字，防止傳入字串
-        const finalValue = parseFloat(target) || 0;
+        // 確保目標值是整數
+        const finalValue = Math.floor(parseFloat(target) || 0);
 
-        // --- 自動隨機設定 ---
-        const settings = $.extend({
-            prefix: '',
-            suffix: '',
-            // 隨機持續時間：800ms ~ 1200ms (讓每個數字跑完的時間點不同)
-            duration: 800 + Math.random() * 700,
-            // 隨機延遲時間：0ms ~ 500ms (讓每個數字開始跳動的時間點錯開)
-            delay: Math.random() * 1000
-        }, options);
+        $el.each(function() {
+            const $this = $(this);
 
-        setTimeout(() => {
-            let startTimestamp = null;
-            const startValue = 0;
+            // 1. 徹底清理舊動畫與定時器
+            if ($this.data('pendingTimeout')) clearTimeout($this.data('pendingTimeout'));
+            if ($this.data('aniTimer')) cancelAnimationFrame($this.data('aniTimer'));
 
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / settings.duration, 1);
+            // 2. 取得起點 (優先從 data 讀取，確保是純數字)
+            let startValue = $this.data('raw-val');
+            if (startValue === undefined || startValue === null) {
+                // 如果沒 data，才從畫面文字解析，並強迫取整數
+                const rawText = $this.text().replace(/[^\d.-]/g, '');
+                startValue = Math.floor(parseFloat(rawText) || 0);
+            }
 
-                // 使用 Ease-out Expo 公式 (前快後慢，非常有動感)
-                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            // 如果數值沒變，直接格式化顯示並結束
+            if (startValue === finalValue) {
+                $this.text((options.prefix || '') + finalValue.toLocaleString('zh-TW', { maximumFractionDigits: 0 }) + (options.suffix || ''));
+                $this.data('raw-val', finalValue);
+                return;
+            }
 
-                const currentValue = Math.floor(easeProgress * (finalValue - startValue) + startValue);
+            const settings = $.extend({
+                prefix: '',
+                suffix: '',
+                duration: 1000,
+                delay: Math.random() * 500
+            }, options);
 
-                // 渲染文字
-                $el.text(settings.prefix + currentValue.toLocaleString() + settings.suffix);
+            // 3. 設定新動畫
+            const timer = setTimeout(() => {
+                let startTimestamp = null;
 
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / settings.duration, 1);
 
-            window.requestAnimationFrame(step);
-        }, settings.delay);
+                    // Ease-out Expo 公式
+                    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+
+                    // 計算當前數值，並確保一定是整數
+                    const currentValue = Math.floor(easeProgress * (finalValue - startValue) + startValue);
+
+                    // 【核心修正】強迫 toLocaleString 不顯示小數點
+                    const formattedNumber = currentValue.toLocaleString('zh-TW', {
+                        maximumFractionDigits: 0
+                    });
+
+                    $this.text(settings.prefix + formattedNumber + settings.suffix);
+                    $this.data('raw-val', currentValue);
+
+                    if (progress < 1) {
+                        const requestID = window.requestAnimationFrame(step);
+                        $this.data('aniTimer', requestID);
+                    } else {
+                        // 結束時確保數值精準
+                        $this.data('raw-val', finalValue);
+                        $this.text(settings.prefix + finalValue.toLocaleString('zh-TW', { maximumFractionDigits: 0 }) + settings.suffix);
+                        $this.removeData('aniTimer');
+                    }
+                };
+                const firstID = window.requestAnimationFrame(step);
+                $this.data('aniTimer', firstID);
+            }, settings.delay);
+            $this.data('pendingTimeout', timer);
+        });
     };
 
     /**

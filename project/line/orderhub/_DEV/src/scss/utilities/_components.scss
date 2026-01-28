@@ -52,16 +52,19 @@
 }
 
 // ========== 狀態列 ==========
+#oh-status-wrapper {
+    @include container($py: 3px);
+    // background: transparent;
+    margin-top: $space-2;
+}
 .oh-status {
     @include container($py: 3px);
-    margin-bottom: $space-3;
     background: $card-bg;
     color: $ink;
     border: 1px solid $bd;
     border-radius: $radius;
     box-shadow: $shadow-sm;
     font-size: $font-size-sm;
-    // padding-bottom: 9px;
 
     &__head {
         @include flex-between;
@@ -109,8 +112,18 @@
     &__bar {
         height: 100%;
         width: 0%;
+        // background: linear-gradient(90deg, $primary, $primary-weak);
+        // transition: width .25s ease;
+
+        /* 保持原本的顏色設定 */
         background: linear-gradient(90deg, $primary, $primary-weak);
-        transition: width 0.25s ease;
+
+        /* 平滑的寬度變動 */
+        transition: width .4s ease;
+
+        /* 核心：只使用一個簡單的明暗動畫 */
+        /* 3秒一周期，ease-in-out 讓過渡更像生物呼吸 */
+        animation: bar-pulse 7s ease-in-out infinite;
     }
 
     &__list {
@@ -122,8 +135,8 @@
     &__line {
         border-left: 3px solid $ok;
         padding-left: 6px;
-        margin: 3px 0;
-        letter-spacing: -0.3px;
+        margin-bottom: 1px;
+        letter-spacing: -.3px;
         line-height: normal;
 
         &.warn {
@@ -139,8 +152,8 @@
 // ========== 圖標按鈕 ==========
 .icon-btn {
     @include flex-center;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 20px;
     border: 1px solid $bd;
     border-radius: $radius-sm;
     background: #fff;
