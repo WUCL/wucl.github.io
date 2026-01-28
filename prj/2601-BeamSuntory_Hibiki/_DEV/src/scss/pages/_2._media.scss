@@ -9,11 +9,18 @@
 					position: relative;
 					margin-bottom: 60px;
 					width: 100%;
+					padding: 6px;
+					box-sizing: border-box;
+					@include mq($max-width: $bp-2s) {
+						padding: 4px;
+					}
 					&:after {
 						content: "";
 						position: absolute;
-						inset: 0;
 						z-index: 1;
+						pointer-events: none;
+
+						inset: 0;
 						box-sizing: border-box;
 
 						pointer-events: none;

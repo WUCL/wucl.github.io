@@ -94,6 +94,13 @@
 			}
 		}
 		.ytimg {
+				position: relative;
+				width: 100%;
+				// 核心：保持 16:9 比例，避免載入時畫面跳動
+				aspect-ratio: 16 / 9;
+				background-color: #000;
+				overflow: hidden;
+
 				display: block;
 				width: 100%;
 				height: 100%;
