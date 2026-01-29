@@ -477,12 +477,13 @@ function getMonthlyDashboardStats_() {
   const rows = data.slice(1);
 
   // 定義目前的目標：2026 年 1 月 (之後可以改為動態抓取當月)
-  const targetYear = 2026;
-  const targetMonth = 1;
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1);
 
   // 尋找符合條件的那一列
-  const targetRow = rows.find(r => r[0] == targetYear && r[1] == targetMonth);
-  if (!targetRow) return null;
+  const targetRow = rows.find(r => r[0] == year && r[1] == month);
+  if (!targetRow) return { year, month, noData: true };
 
   // 輔助函式：根據標題名稱抓取該列對應的值
   const getV = (name) => {
@@ -492,8 +493,7 @@ function getMonthlyDashboardStats_() {
 
   // 僅抓取目前需要的欄位，擴充性極佳
   return {
-    year: targetYear,
-    month: targetMonth,
+    year, month,
     totalOrders: getV('月訂單'),
     momDiff: getV('上月相差'),
     revenue: getV('營業收入'),
