@@ -74,7 +74,10 @@
      */
     function renderAllWidgets(data) {
         // 月份經營指標
-        if (data.monthlyStats) renderMonthlyStats(data.monthlyStats);
+        if (data.monthlyStats) {
+            renderMonthlyStats(data.monthlyStats);
+            renderCustomerSegments(data.monthlyStats);
+        }
         // 處理目標數據
         if (data.goals) renderGoals(data.goals, data.monthlyStats);
         // 待辦清單
@@ -82,7 +85,6 @@
     }
 
     function renderMonthlyStats(stats) {
-        console.log(stats);
         $('#stat-month-label').text(`${stats.year} / ${stats.month.toString().padStart(2, '0')}`);
         const $el = APP.dbEl.$monthly_stats;
 
@@ -94,6 +96,80 @@
         APP.animateNumber($el.find('[data-bind="amtRevenue"]'), stats.amtRevenue, { prefix: '$' });
         APP.animateNumber($el.find('[data-bind="amtUnpaid"]'), stats.amtUnpaid, { prefix: (stats.amtUnpaid > 0 ? '$' : '') });
         APP.animateNumber($el.find('[data-bind="amtAov"]'), stats.amtAov, { prefix: '$' });
+    }
+
+    /**
+     * 渲染客戶分佈
+     */
+    function renderCustomerSegments(stats) {
+        const dataArr = [
+            { key: 'custNew', val: stats.custNew || 0, label: '新客' },
+            { key: 'custRepeat', val: stats.custRepeat || 0, label: '複購' },
+            { key: 'custRel', val: stats.custRel || 0, label: '親友' },
+            { key: 'custOther', val: stats.custOther || 0, label: '其他' }
+        ];
+
+        const custTotal = dataArr.reduce((sum, item) => sum + item.val, 0);
+        const $box = $('.db-cust-segment');
+
+        // 1. 初始化：先把所有寬度歸零，確保是留白的
+        const $allSegs = $box.find('.bar-segment');
+        $allSegs.css({ width: '0%', opacity: 0 });
+        $allSegs.find('.bar-label').css('opacity', 0);
+
+        if (custTotal === 0) {
+            $box.find('[data-bind="custSegment"]').attr('data-prediction', '目前尚無客戶數據');
+            return;
+        }
+
+        const MIN_WIDTH = 15; // 預設最小寬度百分比
+        let activeSegments = dataArr.filter(item => item.val > 0);
+
+        // 2. 計算視覺寬度
+        activeSegments.forEach(item => {
+            item.realPct = Math.round((item.val / custTotal) * 100);
+            item.visualWidth = MIN_WIDTH;
+        });
+
+        let remainingWidth = 100 - (activeSegments.length * MIN_WIDTH);
+        if (remainingWidth > 0) {
+            activeSegments.forEach(item => {
+                item.visualWidth += (item.realPct / 100) * remainingWidth;
+            });
+        }
+
+        // 3. 【核心優化】序列動畫邏輯
+        const ANIM_DURATION = 1000; // 與 CSS 的 1s 對應
+
+        activeSegments.forEach((item, index) => {
+            const $segEl = $box.find('.seg-' + item.key);
+            const $label = $segEl.find('.bar-label');
+
+            // 準備文字內容
+            $label.html(`${item.label} <em class="num-target">0</em>%`);
+
+            // 計算此項目的啟動延遲：前一個人的動畫結束時間
+            const startDelay = index * ANIM_DURATION;
+
+            setTimeout(() => {
+                // A. 顯示容器
+                $segEl.css({ opacity: 1 });
+
+                // B. 寬度開始增長 (觸發 CSS 1s 動畫)
+                $segEl.css('width', item.visualWidth + '%');
+
+                // C. 數字開始跳動
+                // 我們讓數字在 1 秒內跳完，與寬度同步
+                APP.animateNumber($label.find('.num-target'), item.realPct, { duration: ANIM_DURATION });
+
+                // D. 文字淡入
+                $label.css('opacity', 1);
+
+            }, startDelay + 100); // 額外加 100ms 緩衝，讓銜接更自然
+        });
+
+        // 4. 更新總人數
+        $box.find('[data-bind="custSegment"]').attr('data-prediction', '本月客戶總數：' + custTotal.toLocaleString());
     }
 
     function renderGoals(goals, stats) {

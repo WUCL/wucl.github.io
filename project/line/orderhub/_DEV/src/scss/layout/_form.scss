@@ -52,7 +52,7 @@ form {
 					}
 					span {
 						&.span-old {
-							color: $old;
+							color: $diffOld;
 							&:after {
 								content: ">";
 								display: inline-block;
@@ -61,7 +61,7 @@ form {
 							}
 						}
 						&.span-new {
-							color: $new;
+							color: $diffNew;
 						}
 					}
 				}

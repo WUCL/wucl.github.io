@@ -19,8 +19,13 @@ $warn: #b7791f !default; // 警告
 $err: #c0392b !default; // 錯誤
 $info: #0284c7 !default;
 
-$old: #999;
-$new: #2b8a3e;
+$diffOld: #999; // 編輯顯示差異值-舊
+$diffNew: #2b8a3e;
+
+$custNew: lighten($mh, 15%); // 顧客分佈-新客
+$custRepeat: $mh;
+$custRel: #f472b6;
+$custOther: $muted; //#94a3b8;
 
 // 訂單狀態色
 $status-doing: #A0C5E9 !default;
