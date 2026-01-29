@@ -13,8 +13,8 @@
         TPL.mount('#main', frag);
 
         // 無論有沒有快取，都要先抓到這些 jQuery 物件
-        APP.db_el = { $monthly_stats: $('#db-monthly-stats') };
-        APP.db_var = { unfinish: 0 };
+        APP.dbEl = { $monthly_stats: $('#db-monthly-stats') };
+        APP.dbVar = { ordUnfinish: 0 };
 
         if (APP.status?.start) APP.status.start('讀取數據總覽');
 
@@ -82,31 +82,32 @@
     }
 
     function renderMonthlyStats(stats) {
+        console.log(stats);
         $('#stat-month-label').text(`${stats.year} / ${stats.month.toString().padStart(2, '0')}`);
-        const $el = APP.db_el.$monthly_stats;
+        const $el = APP.dbEl.$monthly_stats;
 
-        APP.animateNumber($el.find('[data-bind="totalOrders"]'), stats.totalOrders);
+        APP.animateNumber($el.find('[data-bind="ordTotal"]'), stats.ordTotal);
 
-        const diff = stats.momDiff || 0;
-        APP.animateNumber($el.find('[data-bind="momDiff"]'), diff, { prefix: (diff >= 0 ? '+' : '') });
+        const diff = stats.ordMomDiff || 0;
+        APP.animateNumber($el.find('[data-bind="ordMomDiff"]'), diff, { prefix: (diff >= 0 ? '+' : '') });
 
-        APP.animateNumber($el.find('[data-bind="revenue"]'), stats.revenue, { prefix: '$' });
-        APP.animateNumber($el.find('[data-bind="unpaid"]'), stats.unpaid, { prefix: (stats.unpaid > 0 ? '$' : '') });
-        APP.animateNumber($el.find('[data-bind="aov"]'), stats.aov, { prefix: '$' });
+        APP.animateNumber($el.find('[data-bind="amtRevenue"]'), stats.amtRevenue, { prefix: '$' });
+        APP.animateNumber($el.find('[data-bind="amtUnpaid"]'), stats.amtUnpaid, { prefix: (stats.amtUnpaid > 0 ? '$' : '') });
+        APP.animateNumber($el.find('[data-bind="amtAov"]'), stats.amtAov, { prefix: '$' });
     }
 
     function renderGoals(goals, stats) {
-        const $el = APP.db_el.$monthly_stats;
+        const $el = APP.dbEl.$monthly_stats;
         const mGoal = goals.monthGoal || 0;
         const yGoal = goals.yearGoal || 0;
-        const actual = (stats && stats.revenue) ? stats.revenue : 0;
+        const actual = (stats && stats.amtRevenue) ? stats.amtRevenue : 0;
 
-        if (stats && parseInt(stats.aov) > 0) {
-            const prediction_orders = Math.round((goals.monthGoal - stats.revenue) / stats.aov);
+        if (stats && parseInt(stats.amtAov) > 0) {
+            const prediction_orders = Math.round((goals.monthGoal - stats.amtRevenue) / stats.amtAov);
             if (prediction_orders > 0) {
-                $el.find('[data-bind="totalOrders"]').attr('data-prediction', '再完成 ' + prediction_orders + ' 筆達標');
+                $el.find('[data-bind="ordTotal"]').attr('data-prediction', '再完成 ' + prediction_orders + ' 筆達標');
             } else {
-                $el.find('[data-bind="totalOrders"]').attr('data-prediction', '🎉 本月已達標');
+                $el.find('[data-bind="ordTotal"]').attr('data-prediction', '🎉 本月已達標');
             }
         }
 
@@ -137,7 +138,7 @@
         }
 
         // 確保計算前歸零
-        APP.db_var.unfinish = 0;
+        APP.dbVar.ordUnfinish = 0;
 
         list.forEach(item => {
             let dateStatus = 'future';
@@ -160,7 +161,7 @@
                 dateLabel = ''; // '預計'; // 或者維持空字串
             }
 
-            APP.db_var.unfinish += item.count;
+            APP.dbVar.ordUnfinish += item.count;
             const isHeavy = item.count >= 5 ? 'is-heavy' : ''; // 當日大量訂單
 
             const html = `
@@ -176,6 +177,6 @@
             `;
             $container.append(html);
         });
-        APP.animateNumber(APP.db_el.$monthly_stats.find('[data-bind="unfinish"]'), APP.db_var.unfinish);
+        APP.animateNumber(APP.dbEl.$monthly_stats.find('[data-bind="ordUnfinish"]'), APP.dbVar.ordUnfinish);
     }
 })(window, jQuery);
