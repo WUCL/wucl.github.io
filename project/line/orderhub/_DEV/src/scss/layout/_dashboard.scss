@@ -234,8 +234,8 @@
 
                     &.is-heavy {
                         color: $err; // 數量多變紅色
-                        transform: scale(1.1);
-                        font-weight: 700;
+                        // transform: scale(1.1);
+                        font-weight: 900;
                     }
                 }
 
@@ -243,16 +243,12 @@
                 &.state-today,
                 &.state-tomorrow,
                 &.state-overdue {
-                    .c-col-count, .u-date { font-weight: 700; }
-                }
-                &.state-today,
-                &.state-tomorrow {
-                    padding-left: 9px;
+                    padding-block: $space-2;
                     border-left: 5px solid;
+                    .c-col-count, .u-date { font-weight: 700; }
                 }
                 // 今日/綠色
                 &.state-today {
-                    padding-block: $space-3;
                     background: #f0fdf4;
                     border-left-color: $primary;
                     .u-tag { background: $primary; }
@@ -268,6 +264,7 @@
                 // 逾期/紅色
                 &.state-overdue {
                     background: #fff5f5;
+                    border-left-color: $err; // 橘色側邊條
                     .u-tag { background: $err; }
                     .c-col-count, .u-date { color: $err; }
                 }
