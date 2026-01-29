@@ -103,160 +103,177 @@
 			Loading...
 		</main>
 		<!-- ==========================================
-		    templates.html - 所有模板
+			templates.html - 所有模板
 		========================================== -->
 		<!-- 通用訊息模板 -->
 		<template id="tpl-msg">
-		    <div class="msg {{cls}}" role="alert">{{text}}</div>
+			<div class="msg {{cls}}" role="alert">{{text}}</div>
 		</template>
 
 		<!-- 狀態列模板 -->
 		 <template id="tpl-status">
-		    <div id="oh-status" class="oh-status" role="status" aria-live="polite">
-		        <div class="oh-status__head">
-		            <div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
-		            <div class="oh-status__ctrl">
-		                <a class="icon-btn oh-status__clear" data-action="clear" title="清空狀態列表" href="#" aria-label="清空狀態列表">&#8998;</a>
-		                <a class="icon-btn oh-status__toggle" data-action="toggle" title="展開狀態列表" href="#" aria-label="展開狀態列表">
-		                    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-		                        <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
-		                    </svg>
-		                </a>
-		            </div>
-		        </div>
-		        <div class="oh-status__list" style="display:none;"></div>
-		    </div>
+			<div id="oh-status" class="oh-status" role="status" aria-live="polite">
+				<div class="oh-status__head">
+					<div class="oh-status__prog"><div class="oh-status__bar" style="width:0%"></div></div>
+					<div class="oh-status__ctrl">
+						<a class="icon-btn oh-status__clear" data-action="clear" title="清空狀態列表" href="#" aria-label="清空狀態列表">&#8998;</a>
+						<a class="icon-btn oh-status__toggle" data-action="toggle" title="展開狀態列表" href="#" aria-label="展開狀態列表">
+							<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" />
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="oh-status__list" style="display:none;"></div>
+			</div>
 		</template>
 
 		<!-- Dashboard -->
 		<template id="tpl-dashboard">
-		    <section class="dashboard">
-		        <div id="db-monthly-stats" class="db-section db-monthly-stats">
-		            <div class="db-section-h">
-		                <h3>經營指標</h3>
-		                <span class="sub" id="stat-month-label">2026 / 01</span>
-		            </div>
-		            <div class="db-section-b stat-grid">
-		                <div class="stat-item">
-		                    <label>月訂單數</label>
-		                    <div class="value" data-bind="ordTotal">0</div>
-		                </div>
-		                <div class="stat-item">
-		                    <label>訂單較上月增減</label>
-		                    <div class="value" data-bind="ordMomDiff">0</div>
-		                </div>
-		                <div class="stat-item">
-		                    <label>未完成訂單數</label>
-		                    <div class="value" data-bind="ordUnfinish">0</div>
-		                </div>
-		                <div class="stat-item">
-		                    <label>未收款金額</label>
-		                    <div class="value highlight" data-bind="amtUnpaid">0</div>
-		                </div>
-		                <div class="stat-item">
-		                    <label>平均客單價</label>
-		                    <div class="value" data-bind="amtAov">0</div>
-		                </div>
-		                <div class="stat-item">
-		                    <label>月業績</label>
-		                    <div class="value" data-bind="amtRevenue">0</div>
-		                </div>
-		                <div class="stat-item month-progress-box">
-		                    <label>本月目標達成</label>
-		                    <div class="value">
-			                    <div class="perf-percentBar">
-		                        	<div class="progress-bg"><div class="progress-bar"></div></div>
-		                        	<span class="percent" data-bind="monthPercent">0%</span>
-		                        </div>
-			                    <div class="perf-values">
-			                        <span class="actual" data-bind="amtRevenue">$0</span> / <span class="goal" data-bind="monthGoal">$0</span>
-			                    </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		        <div id="db-unfinish"  class="db-section db-unfinish">
-		            <div class="db-section-h">
-		                <h3>待辦交貨清單</h3>
-		                <span class="sub">顯示尚未完成的所有時程</span>
-		            </div>
-		            <div class="db-section-b c-list" id="unfinish-list">
-		                <!-- 數據將注入此處 -->
-		                <div class="loading-msg">數據讀取中...</div>
-		            </div>
-		        </div>
-		    </section>
+			<section class="dashboard">
+				<div id="db-monthly-stats" class="db-section db-monthly-stats">
+					<div class="db-section-h">
+						<div class="db-section-h-title">
+							<h3>經營指標</h3>
+							<span class="sub" id="stat-month-label"></span>
+						</div>
+						<div class="db-section-h-actions"></div>
+					</div>
+					<div class="db-section-b stat-grid">
+						<div class="stat-item">
+							<label>月訂單數</label>
+							<div class="value" data-bind="ordTotal">0</div>
+						</div>
+						<div class="stat-item">
+							<label>訂單較上月增減</label>
+							<div class="value" data-bind="ordMomDiff">0</div>
+						</div>
+						<div class="stat-item">
+							<label>未完成訂單數</label>
+							<div class="value" data-bind="ordUnfinish">0</div>
+						</div>
+						<div class="stat-item">
+							<label>未收款金額</label>
+							<div class="value highlight" data-bind="amtUnpaid">0</div>
+						</div>
+						<div class="stat-item">
+							<label>平均客單價</label>
+							<div class="value" data-bind="amtAov">0</div>
+						</div>
+						<div class="stat-item">
+							<label>月業績</label>
+							<div class="value" data-bind="amtRevenue">0</div>
+						</div>
+						<div class="stat-item span-2 month-progress-box">
+							<label>本月目標達成</label>
+							<div class="value">
+								<div class="perf-percentBar">
+									<div class="progress-bg"><div class="progress-bar"></div></div>
+									<span class="percent" data-bind="monthPercent">0%</span>
+								</div>
+								<div class="perf-values">
+									<span class="actual" data-bind="amtRevenue">$0</span> / <span class="goal" data-bind="monthGoal">$0</span>
+								</div>
+							</div>
+						</div>
+						<div class="stat-item span-4 db-cust-segment">
+						    <label>客戶分類佔比</label>
+						    <div class="value cust-bar-container" data-bind="custSegment">
+						        <div class="cust-bar-main">
+						            <div class="bar-segment seg-custNew"><span class="bar-label"></span></div>
+						            <div class="bar-segment seg-custRepeat"><span class="bar-label"></span></div>
+						            <div class="bar-segment seg-custRel"><span class="bar-label"></span></div>
+						            <div class="bar-segment seg-custOther"><span class="bar-label"></span></div>
+						        </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+				<div id="db-unfinish"  class="db-section db-unfinish">
+					<div class="db-section-h">
+						<div class="db-section-h-title">
+							<h3>待辦交貨清單</h3>
+							<span class="sub">顯示尚未完成的所有時程</span>
+						</div>
+						<div class="db-section-h-actions"></div>
+					</div>
+					<div class="db-section-b c-list" id="unfinish-list">
+						<!-- 數據將注入此處 -->
+						<div class="loading-msg">數據讀取中...</div>
+					</div>
+				</div>
+			</section>
 		</template>
 
 		<!-- ========== 通用表單模板 ========== -->
 		<template id="tpl-form">
-		    <form class="form" data-mode>
-		        <div class="msg" data-slot="msg"></div>
+			<form class="form" data-mode>
+				<div class="msg" data-slot="msg"></div>
 
-		        <!-- 訂單編號（僅編輯模式顯示） -->
-		        <section class="section orderNumber" data-show="edit">
-		            <div class="row">
-		                <div class="field"><label>訂單編號</label><input name="訂單編號" readonly></div>
-		                <div class="field field-orderStatus"><label>訂單狀態</label><select name="訂單狀態" data-opt="orderStatus"></select></div>
-		            </div>
-		        </section>
+				<!-- 訂單編號（僅編輯模式顯示） -->
+				<section class="section orderNumber" data-show="edit">
+					<div class="row">
+						<div class="field"><label>訂單編號</label><input name="訂單編號" readonly></div>
+						<div class="field field-orderStatus"><label>訂單狀態</label><select name="訂單狀態" data-opt="orderStatus"></select></div>
+					</div>
+				</section>
 
-		        <!-- 基本資訊 -->
-		        <section class="section basic">
-		            <h3>基本資訊</h3>
-		            <div class="row">
-		                <div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
-		                <div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
-		                <div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
-		                <div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
-		                <div class="field field-isPay"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
-		                <div class="field field-isShip"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
-		                <div class="field display-n-i"><input name="訂單金額" type="number" min="0" step="1" hidden></div>
-		                <div class="field"><label>商品金額</label><input name="商品金額" type="number" min="0" step="1" required></div>
-		                <div class="field"><label>運費金額</label><input name="運費金額" type="number" min="0" step="1"></div>
-		                <div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
-		                <div class="field showhide" id="field-moneyTransfer" style="display:none;"><label>匯款後五碼</label><input name="匯款後五碼" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="請輸入5位數字"></div>
-		            </div>
-		        </section>
+				<!-- 基本資訊 -->
+				<section class="section basic">
+					<h3>基本資訊</h3>
+					<div class="row">
+						<div class="field"><label>客戶</label><select name="客戶類型" data-opt="cType"></select></div>
+						<div class="field"><label>接單平台</label><select name="接單平台" data-opt="platforms" required><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field"><label>收單日<span class="hint">（預設今天）</span></label><input name="訂單日期" type="date"></div>
+						<div class="field"><label>交貨日</label><input name="交貨日期" type="date" required></div>
+						<div class="field field-isPay"><label>是否已付款</label><select name="是否已付款" data-opt="isPay"></select></div>
+						<div class="field field-isShip"><label>是否已交貨</label><select name="是否已交貨" data-opt="isDelivery"></select></div>
+						<div class="field display-n-i"><input name="訂單金額" type="number" min="0" step="1" hidden></div>
+						<div class="field"><label>商品金額</label><input name="商品金額" type="number" min="0" step="1" required></div>
+						<div class="field"><label>運費金額</label><input name="運費金額" type="number" min="0" step="1"></div>
+						<div class="field"><label>付款方式</label><select name="付款方式" data-opt="payType"><option value="" selected>請選擇</option></select></div>
+						<div class="field showhide" id="field-moneyTransfer" style="display:none;"><label>匯款後五碼</label><input name="匯款後五碼" type="text" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="請輸入5位數字"></div>
+					</div>
+				</section>
 
-		        <!-- 訂購人資訊 -->
-		        <section class="section buyer">
-		            <h3>訂購人<label class="extra-check isStranger"><input type="checkbox" id="isStranger">是陌生人</label></h3>
-		            <div class="row">
-		                <div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
-		                <div class="field"><label>ID</label><input name="訂購人ID"></div>
-		                <div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
-		                <div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
-		            </div>
-		        </section>
+				<!-- 訂購人資訊 -->
+				<section class="section buyer">
+					<h3>訂購人<label class="extra-check isStranger"><input type="checkbox" id="isStranger">是陌生人</label></h3>
+					<div class="row">
+						<div class="field"><label>姓名</label><input name="訂購人姓名" required></div>
+						<div class="field"><label>ID</label><input name="訂購人ID"></div>
+						<div class="field"><label>電話</label><input name="訂購人電話" inputmode="tel"></div>
+						<div class="field"><label>Email</label><input name="訂購人Email" inputmode="email"></div>
+					</div>
+				</section>
 
-		        <!-- 訂單商品 -->
-		        <section class="section product">
-		            <h3>訂單商品</h3>
-		            <div class="row">
-		                <div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat" required><option value="" selected disabled>請選擇</option></select></div>
-		                <div class="field showhide" id="field-weeklyFlower" style="display:none;"><label>週花週期（1–12）</label><input name="週花週期" type="number" min="1" max="12" inputmode="numeric"></div>
-		                <div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
-		                <div class="field"><label>商品項目</label><textarea name="商品項目" rows="1" required></textarea></div>
-		                <div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
-		                <div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
-		            </div>
-		        </section>
+				<!-- 訂單商品 -->
+				<section class="section product">
+					<h3>訂單商品</h3>
+					<div class="row">
+						<div class="field"><label>品項分類</label><select name="品項分類" data-opt="pCat" required><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field showhide" id="field-weeklyFlower" style="display:none;"><label>週花週期（1–12）</label><input name="週花週期" type="number" min="1" max="12" inputmode="numeric"></div>
+						<div class="field"><label>購買用途</label><select name="購買用途" data-opt="pFor"><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field"><label>商品項目</label><textarea name="商品項目" rows="1" required></textarea></div>
+						<div class="field"><label>訂單備註</label><textarea name="訂單備註" rows="1"></textarea></div>
+						<div class="field"><label>小卡內容</label><textarea name="小卡內容" rows="1"></textarea></div>
+					</div>
+				</section>
 
-		        <!-- 收件資訊 -->
-		        <section class="section receipt">
-		            <h3>收件資訊<label class="extra-check sameAsBuyer"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
-		            <div class="row">
-		                <div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType" required><option value="" selected disabled>請選擇</option></select></div>
-		                <div class="field showhide" id="field-trackingNumber" style="display:none;"><label>貨運單號</label><input name="貨運單號" type="text"></div>
-		                <div class="field"><label>姓名</label><input name="收件者姓名" required></div>
-		                <div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
-		                <div class="field"><label>地址</label><input name="收件者地址" required></div>
-		            </div>
-		        </section>
+				<!-- 收件資訊 -->
+				<section class="section receipt">
+					<h3>收件資訊<label class="extra-check sameAsBuyer"><input type="checkbox" id="sameAsBuyer" checked>同訂購人資訊</label></h3>
+					<div class="row">
+						<div class="field"><label>取貨方式</label><select name="取貨方式" data-opt="receiptType" required><option value="" selected disabled>請選擇</option></select></div>
+						<div class="field showhide" id="field-trackingNumber" style="display:none;"><label>貨運單號</label><input name="貨運單號" type="text"></div>
+						<div class="field"><label>姓名</label><input name="收件者姓名" required></div>
+						<div class="field"><label>電話</label><input name="收件者電話" inputmode="tel"></div>
+						<div class="field"><label>地址</label><input name="收件者地址" required></div>
+					</div>
+				</section>
 
-		        <button type="submit" class="btn primary"></button>
-		    </form>
+				<button type="submit" class="btn primary"></button>
+			</form>
 		</template>
 
 		<!-- ========== 新增訂單表單 ========== -->
@@ -494,14 +511,14 @@
 			<div class="card order" data-id="" data-status="">
 				<div class="card__inner">
 					<div class="col a">
-			            <!-- 行 A: 訂單狀態 | ID | 交貨日期 | 標籤 -->
+						<!-- 行 A: 訂單狀態 | ID | 交貨日期 | 標籤 -->
 						<div class="row a">
 							<div class="cell meta status"><span data-bind="訂單狀態">—</span></div>
 							<div class="cell meta id">#<span data-bind="訂單編號">—</span></div>
 							<div class="cell meta date"><span data-bind="交貨日期">—</span></div>
 							<div class="cell meta shippay"><span data-bind="取貨方式">—</span><span class="tags-inline"></span></div>
 						</div>
-			            <!-- 行 B: 平台 | 客戶 | 分類 | 金額 -->
+						<!-- 行 B: 平台 | 客戶 | 分類 | 金額 -->
 						<div class="row b">
 							<div class="cell meta"><span data-bind="接單平台">—</span></div>
 							<div class="cell meta oName"><span data-bind="訂購人姓名">—</span></div>
