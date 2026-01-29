@@ -139,27 +139,27 @@
 		            <div class="db-section-b stat-grid">
 		                <div class="stat-item">
 		                    <label>月訂單數</label>
-		                    <div class="value" data-bind="totalOrders">0</div>
+		                    <div class="value" data-bind="ordTotal">0</div>
 		                </div>
 		                <div class="stat-item">
 		                    <label>訂單較上月增減</label>
-		                    <div class="value" data-bind="momDiff">0</div>
+		                    <div class="value" data-bind="ordMomDiff">0</div>
 		                </div>
 		                <div class="stat-item">
 		                    <label>未完成訂單數</label>
-		                    <div class="value" data-bind="unfinish">0</div>
+		                    <div class="value" data-bind="ordUnfinish">0</div>
 		                </div>
 		                <div class="stat-item">
 		                    <label>未收款金額</label>
-		                    <div class="value highlight" data-bind="unpaid">0</div>
+		                    <div class="value highlight" data-bind="amtUnpaid">0</div>
 		                </div>
 		                <div class="stat-item">
 		                    <label>平均客單價</label>
-		                    <div class="value" data-bind="aov">0</div>
+		                    <div class="value" data-bind="amtAov">0</div>
 		                </div>
 		                <div class="stat-item">
 		                    <label>月業績</label>
-		                    <div class="value" data-bind="revenue">0</div>
+		                    <div class="value" data-bind="amtRevenue">0</div>
 		                </div>
 		                <div class="stat-item month-progress-box">
 		                    <label>本月目標達成</label>
@@ -169,7 +169,7 @@
 		                        	<span class="percent" data-bind="monthPercent">0%</span>
 		                        </div>
 			                    <div class="perf-values">
-			                        <span class="actual" data-bind="revenue">$0</span> / <span class="goal" data-bind="monthGoal">$0</span>
+			                        <span class="actual" data-bind="amtRevenue">$0</span> / <span class="goal" data-bind="monthGoal">$0</span>
 			                    </div>
 		                    </div>
 		                </div>

@@ -494,10 +494,20 @@ function getMonthlyDashboardStats_() {
   // 僅抓取目前需要的欄位，擴充性極佳
   return {
     year, month,
-    totalOrders: getV('月訂單'),
-    momDiff: getV('上月相差'),
-    revenue: getV('營業收入'),
-    unpaid: getV('未收款'),
-    aov: getV('平均客單')
+
+    // 訂單類 (Order)
+    ordTotal: getV('月訂單'),
+    ordMomDiff: getV('上月相差'),
+
+    // 金額類 (Amount)
+    amtRevenue: getV('營業收入'),
+    amtUnpaid: getV('未收款'),
+    amtAov: getV('平均客單'),
+
+    // 客戶類 (Customer)
+    custNew: getV('新客'),
+    custRepeat: getV('複購'),
+    custRel: getV('親友'),
+    custOther: getV('其他')
   };
 }
