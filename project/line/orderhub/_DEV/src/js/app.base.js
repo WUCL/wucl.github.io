@@ -27,11 +27,34 @@ window.deviceObj = {
 window.deviceObj.init();
 window.isMobile = function() { return window.deviceObj.isMobile(); };
 
+/* --- common --- */
+;(function(w, $) {
+    'use strict';
+    var APP = w.APP || (w.APP = {});
+
+    // 全域動態 Toggle 邏輯
+    $(document).on('click', '.ui-fold-group [data-action="toggle"]', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var $btn = $(this);
+        var $group = $btn.closest('.ui-fold-group');
+        var $content = $group.find('.ui-fold-content');
+
+        if (!$content.length) return;
+
+        $group.toggleClass('is-fold-open');
+
+        $content.stop(true, true).slideToggle(160);
+    });
+
+})(window, jQuery);
 
 /* --- SOURCE: templates.js --- */
 /* eslint-env browser, es2020 */
 /*! OrderHub — UI/Templates (TPL) */
-;(function(w) {
+;
+(function(w) {
     'use strict';
     function renderTextNodes(node, data) {
         // 把所有文字節點拿出來做 {{key}} 置換（ES5 寫法）
@@ -93,12 +116,12 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         } else { document.body.insertBefore(frag, document.body.firstChild); }
 
         $('.oh-status__clear').on('click', function() { $('.oh-status__list').empty(); });
-        $('.oh-status__toggle').on('click', function(e) {
-            e.preventDefault();
-            var $list = $('.oh-status__list').first();
-            $list.stop(true, true).slideToggle(160);
-            return;
-        });
+        // $('.oh-status__toggle').on('click', function(e) {
+        //     e.preventDefault();
+        //     var $list = $('.oh-status__list').first();
+        //     $list.stop(true, true).slideToggle(160);
+        //     return;
+        // });
     }
     function now() {
         var d = new Date();
@@ -158,7 +181,8 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
 /* --- SOURCE: api.js --- */
 /* eslint-env browser, jquery, es2020 */
 /*! OrderHub — Services/API */
-;(function(w) {
+;
+(function(w) {
     'use strict';
     var APP = w.APP || (w.APP = {});
     function parseJSONLoose(s) {

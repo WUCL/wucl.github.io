@@ -152,13 +152,17 @@
 // ========== 圖標按鈕 ==========
 .icon-btn {
     @include flex-center;
-    width: 24px;
-    height: 20px;
-    border: 1px solid $bd;
-    border-radius: $radius-sm;
+    appearance: none;
     background: #fff;
     color: $muted;
+    border: 1px solid $bd;
+    border-radius: $radius-sm;
+    padding: 0;
+    margin: 0;
     cursor: pointer;
+    outline: none;
+    width: 24px;
+    height: 20px;
     transition: all .2s ease;
 
     @include respond(md) {
@@ -172,7 +176,19 @@
     }
 
     svg {
+        width: 15px;
+        height: 15px;
         display: block;
+        color: inherit;
+        pointer-events: none;
+        transition: transform .3s ease;
+        transform-origin: center; // 確保繞著中心轉
+    }
+    &[data-action="edit"] {
+        svg {
+            width: 12px;
+            height: 12px;
+        }
     }
 }
 
@@ -260,5 +276,14 @@
             background: rgba($err, .2);
             font-weight: 600;
         }
+    }
+}
+
+// ========== ui ==========
+.ui-fold-group {
+    .icon-btn svg { transition: transform .3s; }
+
+    &.is-fold-open {
+        .icon-btn[data-action="toggle"] svg { transform: rotate(180deg); }
     }
 }

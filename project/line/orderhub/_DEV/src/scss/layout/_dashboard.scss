@@ -110,8 +110,6 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
             background-color: $bd;
-            border-top: 1px solid $bd;
-            border-bottom: 1px solid $bd;
 
             @include respond(md) {
                 grid-template-columns: repeat(2, 1fr);

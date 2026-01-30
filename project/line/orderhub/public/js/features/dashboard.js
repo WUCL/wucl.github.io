@@ -99,7 +99,7 @@
     }
 
     /**
-     * 渲染客戶分佈
+     * 渲染客戶分類佔比
      */
     function renderCustomerSegments(stats) {
         const dataArr = [
@@ -112,20 +112,16 @@
         const custTotal = dataArr.reduce((sum, item) => sum + item.val, 0);
         const $box = $('.db-cust-segment');
 
-        // 1. 初始化：先把所有寬度歸零，確保是留白的
-        const $allSegs = $box.find('.bar-segment');
-        $allSegs.css({ width: '0%', opacity: 0 });
-        $allSegs.find('.bar-label').css('opacity', 0);
-
         if (custTotal === 0) {
+            $box.find('.bar-segment').css({ width: '0%', opacity: 0 });
             $box.find('[data-bind="custSegment"]').attr('data-prediction', '目前尚無客戶數據');
             return;
         }
 
-        const MIN_WIDTH = 15; // 預設最小寬度百分比
+        const MIN_WIDTH = 11;
         let activeSegments = dataArr.filter(item => item.val > 0);
 
-        // 2. 計算視覺寬度
+        // 1. 計算視覺寬度
         activeSegments.forEach(item => {
             item.realPct = Math.round((item.val / custTotal) * 100);
             item.visualWidth = MIN_WIDTH;
@@ -138,34 +134,44 @@
             });
         }
 
-        // 3. 【核心優化】序列動畫邏輯
-        const ANIM_DURATION = 1000; // 與 CSS 的 1s 對應
+        // 2. 【核心修改】判斷是否為第一次載入 (檢查標籤內是否有數字)
+        // 如果畫面上已經有數字，代表這是 API 同步更新，不執行「歸零」動作
+        const isUpdate = $box.find('.num-target').length > 0 && parseFloat($box.find('.bar-segment').first().css('width')) > 0;
+
+        const ANIM_DURATION = 700;
+
+        if (!isUpdate) {
+            // 【首次載入】：先強制歸零並隱藏
+            $box.find('.bar-segment').css({ width: '0%', opacity: 0 });
+        }
 
         activeSegments.forEach((item, index) => {
             const $segEl = $box.find('.seg-' + item.key);
             const $label = $segEl.find('.bar-label');
 
-            // 準備文字內容
-            $label.html(`${item.label} <em class="num-target">0</em>%`);
+            if (isUpdate) {
+                // 【更新模式】：直接平滑滑動到新位置，不排隊
+                $segEl.show().css({ opacity: 1, width: item.visualWidth + '%' });
 
-            // 計算此項目的啟動延遲：前一個人的動畫結束時間
-            const startDelay = index * ANIM_DURATION;
+                // 如果標籤結構不見了(防呆)，補回去
+                if ($label.find('.num-target').length === 0) {
+                    $label.html(`${item.label} <em class="num-target">0</em>%`);
+                }
 
-            setTimeout(() => {
-                // A. 顯示容器
-                $segEl.css({ opacity: 1 });
-
-                // B. 寬度開始增長 (觸發 CSS 1s 動畫)
-                $segEl.css('width', item.visualWidth + '%');
-
-                // C. 數字開始跳動
-                // 我們讓數字在 1 秒內跳完，與寬度同步
                 APP.animateNumber($label.find('.num-target'), item.realPct, { duration: ANIM_DURATION });
-
-                // D. 文字淡入
                 $label.css('opacity', 1);
 
-            }, startDelay + 100); // 額外加 100ms 緩衝，讓銜接更自然
+            } else {
+                // 【首次載入模式】：執行序列式(一個接一個)動畫
+                $label.html(`${item.label} <em class="num-target">0</em>%`);
+                const startDelay = index * ANIM_DURATION;
+
+                setTimeout(() => {
+                    $segEl.show().css({ opacity: 1, width: item.visualWidth + '%' });
+                    APP.animateNumber($label.find('.num-target'), item.realPct, { duration: ANIM_DURATION });
+                    $label.css('opacity', 1);
+                }, startDelay + 100);
+            }
         });
 
         // 4. 更新總人數
