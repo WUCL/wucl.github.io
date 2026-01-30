@@ -1,4 +1,15 @@
-DONE
+1/30
+ok. 更新，icon-btn[data-action="toggle"]，結構規劃ui-fold-group/ui-fold-content
+ok. 更新，icon-btn結構統一改為buttn元素
+
+1/29
+ok. 更新數據回傳的命名ordTotal等駝峰式方式
+ok. [Dashboard]新增，客戶分類圖
+
+1/28
+ok. 做gas cache優化
+ok. 前端cache優化，先顯示暫存在手機的，背後做同步數據處理
+ok. 調整dashboard自動讀取當時年月
 
 1/22
 ok. [編輯頁]修正，會覆蓋掉訂單月年/出貨月年的bug
@@ -24,7 +35,6 @@ ok. [Dashboard]新增，數字跑動動畫工具
 ok. [Dashboard]新增，數據快取，避免多次request
 ok. 重新整理按鈕，清空數據快取，強迫下次進入 Dashboard 重新跑 API
 
-
 1/14
 ok. 更新select和breadcrumb樣式
 
@@ -48,7 +58,6 @@ ok. [LINE]新增/修改 更動資訊也同步要顯示在LINE上
 ok. [LINE]新增訂單時，顯示訂購人ID
 ok. [GAS]新增訂單時，自動加入行事曆
 
+-
 TODO
-1. [列表頁]新增，篩選近7天與近30天出貨清單
-2. 新增，列表頁，業績查看，本週/月/年
-2. 快速卡片，直接在line上面操作完成訂單
+. 快速卡片，直接在line上面操作完成訂單
