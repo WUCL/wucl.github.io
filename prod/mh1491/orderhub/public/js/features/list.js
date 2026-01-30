@@ -9,7 +9,7 @@
 
     // [優化] 預設為當年，避免明年還要手動改 Code
     var CURRENT_YEAR = new Date().getFullYear();
-    var LIMIT = 10; // 筆數
+    var LIMIT = 10; // 每次顯示筆數
 
     var currentPage = 1;
     var totalPages = 1;
@@ -67,7 +67,7 @@
         }).join('');
 
         if (groupHtml) {
-            $card.append(`<div class="detail" style="display:none;">${groupHtml}</div>`);
+            $card.append(`<div class="detail ui-fold-content" style="display:none;">${groupHtml}</div>`);
         }
 
         return $card;
@@ -294,20 +294,12 @@
             });
         });
 
-        // 4. 卡片操作 (展開詳情 / 編輯)
-        $container.off('click').on('click', '.icon-btn', function(e) {
-            var $btn = $(this);
-            var action = $btn.attr('data-action');
-            var $card = $btn.closest('.card.order');
-
-            if (action === 'toggle') {
-                e.preventDefault();
-                $card.find('.detail').stop(true, true).slideToggle(160);
-            } else if (action === 'edit') {
-                e.preventDefault();
-                var id = $card.attr('data-id');
-                if (id) location.hash = '#/edit?id=' + encodeURIComponent(id);
-            }
+        // 4. 卡片操作 (編輯)
+        $container.off('click').on('click', '.icon-btn[data-action="edit"]', function(e) {
+            e.preventDefault();
+            var $card = $(this).closest('.card.order');
+            var $id = $card.attr('data-id');
+            if ($id) location.hash = '#/edit?id=' + encodeURIComponent($id);
         });
 
         // 【新增邏輯】監聽篩選器變色
