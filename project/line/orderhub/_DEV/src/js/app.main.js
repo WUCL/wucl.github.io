@@ -184,6 +184,13 @@
                 $btn.removeClass('is-loading');
             }, 1000);
         });
+
+        // --- 綁定新增訂單按鈕 ---
+        $(document).on('click', '#btn-createOrder', function(e) {
+            // 如目前已在新增頁面時
+            if (window.location.hash.indexOf('#/add') === 0) { $('.msg[data-slot="msg"]').removeClass('ok err').empty(); }
+            if (typeof APP.scrollTop === 'function') { APP.scrollTop(); }
+        });
     };
 
     /* ========== D. Router & UI Helpers ========== */
