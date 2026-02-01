@@ -1,6 +1,18 @@
+[TODO]
+快速卡片，直接在line上面操作完成訂單
+新增過往dashboard記錄，先以今年為主就行
+
+2/1
+ok. 整理cache時機，避免已更新的訂單，列表還在舊狀態
+ok. log記錄更新，獨立targetId的欄位顯示
+
+1/31
+ok. 新增，gas系統log追蹤，systemlog
+
 1/30
 ok. 更新，icon-btn[data-action="toggle"]，結構規劃ui-fold-group/ui-fold-content
 ok. 更新，icon-btn結構統一改為buttn元素
+
 
 1/29
 ok. 更新數據回傳的命名ordTotal等駝峰式方式
@@ -57,7 +69,3 @@ ok. [templates.html]新增社群id
 ok. [LINE]新增/修改 更動資訊也同步要顯示在LINE上
 ok. [LINE]新增訂單時，顯示訂購人ID
 ok. [GAS]新增訂單時，自動加入行事曆
-
--
-TODO
-. 快速卡片，直接在line上面操作完成訂單
