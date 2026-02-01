@@ -26,6 +26,9 @@ function Orders_newOrder(payload, actor, opt = {}) {
   // 【新增：連動日曆】
   createCalendarEvent_(obj);
 
+  // 更新cache版本號
+  refreshDataVersion_();
+
   // 記錄 Log
   ChangeLog_append({
     time: new Date(),
@@ -134,19 +137,8 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
       snapshot: { ...data, repeat: safeRepeat }
     });
 
-    // 通知排版 (與單筆一致)
-    // const infoList = [];
-    // const breakKeywords = ['訂購人', '取貨方式'];
-
-    // Object.keys(firstOrderObj || {}).forEach(k => {
-    //   if (k === '訂單編號' || k === '更新者') return;
-    //   if (breakKeywords.some(kw => k.startsWith(kw))) infoList.push('─');
-    //   infoList.push(`${k}：${firstOrderObj[k] || '-'}`);
-    // });
-
-    // const msg = `🆕 新增訂單 (週花 x${safeRepeat})\n${orderId}\n-\n${updater} 編輯\n-\n${infoList.join('\n')}`;
-    // sendLinePush_(opt.lineId, msg);
-
+    // 更新cache版本號
+    refreshDataVersion_();
   } catch (e) {
     console.error('Create Weekly Log Error', e);
   }
@@ -219,13 +211,8 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
       diff
     });
 
-    // const diffText = Object.keys(diff)
-    //   .map(k => `${k}：${diff[k].old || '-'} > ${diff[k].new || '-'}`)
-    //   .join('\n');
-
-    // const msg = `✏️ 修改訂單\n${orderId}\n-\n${updater} 編輯\n-\n${diffText}`;
-    // console.log("Push Update:", { to: opt.lineId, msg });
-    // sendLinePush_(opt.lineId, msg);
+    // 更新cache版本號
+    refreshDataVersion_();
 
     // === Update 這裡維持原本的 diff 顯示，或是您想特別分組也可以 ===
     // 目前建議維持簡單列出差異即可，因為修改通常只改少數欄位
@@ -254,12 +241,13 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
 function Orders_list(params = {}) {
   // --- 【新增：後端快取讀取】 ---
   const cache = CacheService.getScriptCache();
+  const version = PropertiesService.getScriptProperties().getProperty('DATA_VERSION') || '1';
   // 根據傳入的參數（頁碼、狀態等）產生唯一的 Key
-  const cacheKey = "List_" + Utilities.base64Encode(JSON.stringify(params));
+  const cacheKey = "List_" + Utilities.base64Encode(JSON.stringify(params) + "_" + version);
   const cached = cache.get(cacheKey);
 
   if (cached) {
-    console.log("使用後端快取回傳清單");
+    console.log("使用後端快取回傳清單 (Version: " + version + ")");
     return JSON.parse(cached);
   }
   // --------------------------
@@ -510,4 +498,17 @@ function getMonthlyDashboardStats_() {
     custRel: getV('親友'),
     custOther: getV('其他')
   };
+}
+
+/**
+ * 私有函式：更新資料版本號，強迫所有後端快取失效
+ */
+function refreshDataVersion_() {
+  const cache = CacheService.getScriptCache();
+  // 產出一個新的時間戳記
+  const newVersion = Date.now().toString();
+  // 存入 ScriptProperties 作為全域版本標記
+  PropertiesService.getScriptProperties().setProperty('DATA_VERSION', newVersion);
+  // 同時清除那些已知的固定快取 (如有)
+  cache.remove("DEFAULT_LIST_PAGE");
 }
