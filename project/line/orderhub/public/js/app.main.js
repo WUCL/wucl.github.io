@@ -160,8 +160,7 @@
             var $btn = $(this);
 
             // 1. 清空記憶體快取
-            APP.var.cache.summary = null;
-            APP.var.cache.list = {};
+            APP.clearCache();
 
             // 2. 清空手機儲存空間 (Persistent Cache)
             localStorage.removeItem('CACHE_SUMMARY');

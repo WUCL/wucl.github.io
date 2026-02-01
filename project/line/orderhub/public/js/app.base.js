@@ -509,45 +509,6 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
      * @param {String} suffix 後綴 (如 筆)
      */
     APP.animateNumber = function($el, target, options = {}) {
-        // if (!$el.length) return;
-
-        // // 1. 取得目前畫面上的數值作為起點 (去掉 $ , 筆 等非數字字元)
-        // const currentText = $el.text().replace(/[^\d.-]/g, '');
-        // const startValue = parseFloat(currentText) || 0;
-        // const finalValue = parseFloat(target) || 0;
-
-        // // 如果數值完全沒變，就不要跑動畫了，直接結束
-        // if (startValue === finalValue) return;
-
-        // const settings = $.extend({
-        //     prefix: '',
-        //     suffix: '',
-        //     duration: 800 + Math.random() * 700,
-        //     delay: Math.random() * 500
-        // }, options);
-
-        // setTimeout(() => {
-        //     let startTimestamp = null;
-
-        //     const step = (timestamp) => {
-        //         if (!startTimestamp) startTimestamp = timestamp;
-        //         const progress = Math.min((timestamp - startTimestamp) / settings.duration, 1);
-
-        //         // Ease-out Expo 公式
-        //         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-
-        //         // 【關鍵】從 startValue 跑到 finalValue
-        //         const currentValue = Math.floor(easeProgress * (finalValue - startValue) + startValue);
-        //         $el.text(settings.prefix + currentValue.toLocaleString() + settings.suffix);
-
-        //         if (progress < 1) {
-        //             window.requestAnimationFrame(step);
-        //         }
-        //     };
-        //     window.requestAnimationFrame(step);
-        // }, settings.delay);
-
-
         if (!$el.length) return;
 
         // 確保目標值是整數
@@ -618,6 +579,29 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
                 $this.data('aniTimer', firstID);
             }, settings.delay);
             $this.data('pendingTimeout', timer);
+        });
+    };
+
+    /**
+     * 徹底清空所有清單與 Dashboard 的快取
+     */
+    APP.clearCache = function() {
+        console.log('[Cache] 正在執行全域快取清理...');
+
+        // 1. 清空記憶體快取
+        if (this.var.cache) {
+            this.var.cache.list = {};
+            this.var.cache.summary = null;
+        }
+
+        // 2. 清空手機儲存空間 (localStorage)
+        // 移除 Dashboard 快取
+        localStorage.removeItem('CACHE_SUMMARY');
+        // 移除所有清單快取 (比對 Key 開頭)
+        Object.keys(localStorage).forEach(key => {
+            if (key.startsWith('CACHE_LIST_') || key.startsWith('PERSIST_LIST_')) {
+                localStorage.removeItem(key);
+            }
         });
     };
 

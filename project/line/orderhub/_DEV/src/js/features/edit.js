@@ -115,9 +115,8 @@
                     // 1. 渲染畫面上的訊息
                     renderSuccessSummary(orderId, $diff);
 
-                    // 【重要】資料已異動，清空清單快取，確保回列表時看到最新的
-                    APP.var.cache.list = {};
-                    APP.var.cache.summary = null;
+                    // 統一清空清單快取
+                    APP.clearCache();
 
                     // --- [新增] 準備傳送到 LINE 群組的變更摘要 ---
                     if (APP.var.liffReady && window.liff && liff.isInClient()) {

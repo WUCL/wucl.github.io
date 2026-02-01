@@ -121,9 +121,8 @@
         async function handleSuccess(res, data, $f, $s) {
             if (APP.status?.done) APP.status.done(true, '完成 ' + res.orderId);
 
-            // 【重要】資料已異動，清空清單快取，確保回列表時看到最新的
-            APP.var.cache.list = {};
-            APP.var.cache.summary = null;
+            // 統一清空清單快取
+            APP.clearCache();
 
             // --- [新增] 組裝要發送到群組的詳細文字 ---
             const formatMsg = (res, data) => {
