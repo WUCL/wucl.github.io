@@ -3,7 +3,7 @@
 // ==========================================
 const ENV = {
   SPREADSHEET_ID: SpreadsheetApp.getActive().getId(),
-  ORDERS_SHEET: 'Orders',
+  ORDERS_SHEET: PropertiesService.getScriptProperties().getProperty('ORDERS_SHEET'),
   CHANGELOG_SHEET: '[LOG]Changes',
   SYSTEMLOG_SHEET: '[LOG]System'
 };
