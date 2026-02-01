@@ -8,33 +8,33 @@ function ChangeLog_append(entry) {
 
   if (!sh) {
     sh = ss.insertSheet(ENV.CHANGELOG_SHEET);
-    sh.appendRow(['ts', 'action', 'order_id', 'actor', 'line_name', 'line_id', 'field', 'old', 'new', 'snapshot', 'note']);
+    sh.appendRow(['ts', 'action', 'order_id', 'target_id', 'actor', 'line_name', 'line_id', 'field', 'old', 'new', 'snapshot', 'note']);
     sh.setFrozenRows(1);
   }
 
   var now = Utilities.formatDate(entry.time || new Date(), 'Asia/Taipei', 'yyyy/MM/dd HH:mm:ss');
+  var targetId = entry.targetId || '';
 
   // A) 修改模式：每個變動欄位寫一行
   if (entry.diff && typeof entry.diff === 'object') {
     var rows = Object.keys(entry.diff).map(function(k) {
       var d = entry.diff[k] || {};
       return [
-        now, 'update', entry.orderId || '', entry.actor || '',
+        now, 'update', entry.orderId || '', targetId, entry.actor || '',
         entry.lineName || '', entry.lineId || '',
         k, String(d.old || ''), String(d.new || ''), '', ''
       ];
     });
 
     if (rows.length > 0) {
-      var lastRow = sh.getLastRow();
-      sh.getRange(lastRow + 1, 1, rows.length, 11).setValues(rows);
+      sh.getRange(sh.getLastRow() + 1, 1, rows.length, 12).setValues(rows);
     }
     return;
   }
 
   // B) 新增/刪除模式：寫入一整列快照
   sh.appendRow([
-    now, entry.action || '', entry.orderId || '', entry.actor || '',
+    now, entry.action || '', entry.orderId || '', targetId, entry.actor || '',
     entry.lineName || '', entry.lineId || '',
     '', '', '', JSON.stringify(entry.snapshot || {}), entry.note || ''
   ]);
@@ -53,7 +53,7 @@ function SystemLog_append(level, action, opt) {
 
     if (!sh) {
       sh = ss.insertSheet(ENV.SYSTEMLOG_SHEET);
-      sh.appendRow(['ts', 'level', 'action', 'actor', 'platform', 'ms', 'details', 'status']);
+      sh.appendRow(['ts', 'level', 'action', 'target_id', 'actor', 'platform', 'ms', 'details', 'status']);
       sh.setFrozenRows(1);
     }
 
@@ -61,6 +61,7 @@ function SystemLog_append(level, action, opt) {
       new Date(),
       level || 'INFO',
       action || '',
+      opt.targetId || '',
       opt.actor || '',
       opt.platform || '',
       opt.ms || 0,
