@@ -199,8 +199,19 @@
 
             // 4. 重置表單
             if ($f[0].reset) $f[0].reset();
+
+            // 【新增修復邏輯】手動恢復被鎖定的欄位
+            const $buyerName = $f.find('[name="訂購人姓名"]');
+            $buyerName.prop('readonly', false); // 移除唯讀狀態
+            $buyerName.removeData('prevName');   // 清除「是陌生人」邏輯存的暫存名
+
+            // 確保「是陌生人」與「同訂購人」的勾選框回到預設狀態並觸發 UI 更新
+            $f.find('#isStranger').prop('checked', false);
+            $f.find('#sameAsBuyer').prop('checked', true); // 假設你預設是同訂購人
+
+            // 4. 其他預設值
             $f.find('[name="訂單日期"]').val(APP.toDateInputValue(new Date()));
-            $f.find('.field.showhide').hide(); // 隱藏所有條件欄位
+            $f.find('.field.showhide').hide(); // 隱藏所有條件欄位（如：匯款五碼、週花週期）
         }
     };
 })(window, jQuery);
