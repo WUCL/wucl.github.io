@@ -197,8 +197,10 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         var url = this.var.API_URL;
         // var bodyStr = JSON.stringify($.extend({ action: action }, payload || {}));
 
+        var platform = (window.liff && liff.isInClient()) ? 'LINE-App' : 'Browser';
         var bodyStr = JSON.stringify($.extend({
             action: action,
+            platform: platform,
             targetId: this.var.targetId || '' // 把剛才存好的群組 ID 塞進去
         }, payload || {}));
 
@@ -264,16 +266,16 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
                 lineId = profile.userId || '';
             } else if (isDev) {
                 lineName = 'DEV-LOCAL';
-                lineId = 'LOCAL-TEST-ID';
+                // lineId = 'LOCAL-TEST-ID';
             } else {
                 // 瀏覽器開啟但非 Dev (例如外部瀏覽器開啟正式站)
                 lineName = 'WEB-GUEST';
-                lineId = 'WEB-GUEST-ID';
+                // lineId = 'WEB-GUEST-ID';
             }
         } catch (e) {
             console.warn('getProfile error', e);
             lineName = 'DEV-FALLBACK';
-            lineId = 'FALLBACK-ID';
+            // lineId = 'FALLBACK-ID';
         }
         return { lineName, lineId };
     };
