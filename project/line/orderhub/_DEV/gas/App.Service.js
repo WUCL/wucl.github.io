@@ -14,6 +14,7 @@ function Orders_newOrder(payload, actor, opt = {}) {
     '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd'),
     '訂單狀態': 'doing',
     '更新者': updater,
+    '創建者': updater,
     ...payload
   };
 
@@ -87,6 +88,7 @@ function Orders_createWeekly(data, repeat, actor, opt = {}) {
       '訂單日期': Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd'),
       '訂單狀態': 'doing',
       '更新者': updater,
+      '創建者': updater,
       ...data
     };
 
