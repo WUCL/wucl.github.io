@@ -36,6 +36,7 @@ function Orders_newOrder(payload, actor, opt = {}) {
     orderId, actor,
     lineName: opt.lineName,
     lineId: opt.lineId,
+    targetId: opt.targetId,
     snapshot: payload
   });
 

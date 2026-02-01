@@ -133,10 +133,7 @@ function handleApiRequest_(req) {
   };
 
   var result;
-  var logData = {
-    targetId: targetId,
-    view: action
-  };
+  var logData = { view: action };
 
   try {
     switch (action) {
@@ -199,6 +196,7 @@ function handleApiRequest_(req) {
 
     // --- 【寫入 SystemLog (成功)】 ---
     SystemLog_append('INFO', action, {
+      targetId: targetId,
       actor: actorDisplay,
       platform: platform,
       ms: Date.now() - t0,
@@ -211,6 +209,7 @@ function handleApiRequest_(req) {
   } catch (err) {
     // --- 【寫入 SystemLog (失敗)】 ---
     SystemLog_append('ERROR', action, {
+      targetId: targetId,
       actor: actorDisplay,
       platform: platform,
       ms: Date.now() - t0,
