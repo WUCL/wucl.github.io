@@ -26,6 +26,28 @@
         var frag = TPL.tpl('tpl-list-card');
         var $card = $(frag).find('.card.order'); // 確保抓到 root
 
+        // --- 【新增：狀態標籤邏輯】 ---
+        const now = new Date();
+        const _fmt = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+        const today = _fmt(now);
+        const tmr = new Date();
+        tmr.setDate(now.getDate() + 1);
+        const tomorrow = _fmt(tmr);
+
+        const deliveryDate = data['交貨日期']; // 格式需為 "YYYY-MM-DD"
+        const isDoing = data['訂單狀態'] === 'doing';
+
+        if (isDoing && deliveryDate) {
+            if (deliveryDate < today) {
+                $card.addClass('state-overdue');
+            } else if (deliveryDate === today) {
+                $card.addClass('state-today');
+            } else if (deliveryDate === tomorrow) {
+                $card.addClass('state-tomorrow');
+            }
+        }
+
         // 綁定基礎資料
         $card.attr('data-id', data['訂單編號'] || '');
         $card.attr('data-status', data['訂單狀態'] || '');

@@ -28,6 +28,16 @@
         box-shadow: $shadow-sm;
     }
 
+    &.state-overdue {
+        border-color: $state-overdue;
+    }
+    &.state-tomorrow {
+        border-color: $state-tomorrow;
+    }
+    &.state-today {
+        border-color: $state-today;
+    }
+
     // 內層結構
     .card__inner {
         display: grid;

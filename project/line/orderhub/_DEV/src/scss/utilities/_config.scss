@@ -32,6 +32,10 @@ $status-doing: #A0C5E9 !default;
 $status-done: #EFEFEF !default;
 $status-cancel: #B7B7B7 !default;
 
+$state-overdue: $err;
+$state-tomorrow: #f59e0b;
+$state-today: $primary;
+
 // ---- 字體 ----
 $font-family: -apple-system,
 BlinkMacSystemFont,
