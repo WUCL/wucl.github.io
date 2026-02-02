@@ -197,12 +197,23 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         var url = this.var.API_URL;
         // var bodyStr = JSON.stringify($.extend({ action: action }, payload || {}));
 
+        // 自動偵測平台
         var platform = (window.liff && liff.isInClient()) ? 'LINE-App' : 'Browser';
-        var bodyStr = JSON.stringify($.extend({
-            action: action,
+
+        // 【核心優化】：統一注入使用者資訊
+        // 從全域變數 APP.var 抓取已經登入好的資訊
+        var identity = {
+            lineName: this.var.userName || '',
+            lineId: this.var.userId || '',
             platform: platform,
-            targetId: this.var.targetId || '' // 把剛才存好的群組 ID 塞進去
-        }, payload || {}));
+            actor: 'LIFF', // 標註這是從前端介面發出的
+            targetId: this.var.targetId || ''
+        };
+
+        // 合併： 基礎身分 + 動作名稱 + 原本的資料(payload)
+        var bodyStr = JSON.stringify($.extend({
+            action: action
+        }, identity, payload || {}));
 
         return new Promise(function(resolve) {
             fetch(url, {

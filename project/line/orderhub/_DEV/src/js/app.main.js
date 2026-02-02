@@ -120,6 +120,7 @@
                     self.var.actor = 'LIFF';
                     self.var.liffReady = true;
                     self.var.userName = p.displayName;
+                    self.var.userId = p.userId;
                     self.setMetaUser(p.displayName || '');
                     resolve();
                 }).catch(function() { self.setMetaUser('(讀取個資失敗)'); resolve(); });
