@@ -2,9 +2,17 @@
 快速卡片，直接在line上面操作完成訂單
 新增過往dashboard記錄，先以今年為主就行
 
+2/2
+ok. 新增，list card狀態標籤邏輯，class加入overdue/today/tomorrow
+ok. 更新system log，list/dashboard的actor只顯示system，整改應顯示使用者名稱
+ok. [GAS]將cache將密md5避免cache過大處理
+
 2/1
 ok. 整理cache時機，避免已更新的訂單，列表還在舊狀態
 ok. log記錄更新，獨立targetId的欄位顯示
+ok. 新增創建者欄位
+ok. 處理新增訂單完後的部分欄位未清空
+ok. 處理如目前已在新增頁面時，只將msg刪掉並滑到最上
 
 1/31
 ok. 新增，gas系統log追蹤，systemlog
