@@ -245,8 +245,10 @@ function Orders_list(params = {}) {
   // --- 【新增：後端快取讀取】 ---
   const cache = CacheService.getScriptCache();
   const version = PropertiesService.getScriptProperties().getProperty('DATA_VERSION') || '1';
+
   // 根據傳入的參數（頁碼、狀態等）產生唯一的 Key
-  const cacheKey = "List_" + Utilities.base64Encode(JSON.stringify(params) + "_" + version);
+  const paramString = JSON.stringify(params) + "_" + version;
+  const cacheKey = "List_" + md5_(paramString);
   const cached = cache.get(cacheKey);
 
   if (cached) {

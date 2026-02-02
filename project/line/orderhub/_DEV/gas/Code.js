@@ -114,6 +114,7 @@ function doPost(e) {
 function handleApiRequest_(req) {
   var t0 = Date.now();
   const action = String(req.action || '').trim();
+  const actor = req.actor || 'WEB';
 
   // 1. 身份與環境識別 (確保 targetId 被提取)
   const lineName = req.lineName || '';
@@ -142,20 +143,20 @@ function handleApiRequest_(req) {
         break;
 
       case 'create':
-        const newId = Orders_newOrder(req.data || {}, lineName, opt);
-        result = { ok: true, orderId: newId };
-        logData.orderId = newId;
+        const orderId = Orders_newOrder(req.data || {}, actor, opt);
+        result = { ok: true, orderId };
+        logData.orderId = orderId;
         logData.customer = req.data['訂購人姓名'] || 'N/A';
         break;
 
       case 'create_weekly':
-        result = Orders_createWeekly(req.data || {}, req.repeat, lineName, opt);
+        result = Orders_createWeekly(req.data || {}, req.repeat, actor, opt);
         logData.orderId = result.orderId;
         logData.repeat = req.repeat;
         break;
 
       case 'update':
-        result = Orders_updateByPatch(req.id, req.patch || {}, lineName, opt);
+        result = Orders_updateByPatch(req.id, req.patch || {}, actor, opt);
         logData.orderId = req.id;
         logData.changedFields = Object.keys(req.patch || {});
         break;

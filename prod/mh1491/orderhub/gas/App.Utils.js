@@ -159,6 +159,22 @@ const sanitizePhone_ = (obj) => {
   return obj;
 };
 
+/**
+ * 將字串轉化為 MD5 指紋 (固定長度，避免 Cache Key 過長)
+ */
+function md5_(str) {
+  var digest = Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, str, Utilities.Charset.UTF_8);
+  var hash = "";
+  for (i = 0; i < digest.length; i++) {
+    var byte = digest[i];
+    if (byte < 0) byte += 256;
+    var byteStr = byte.toString(16);
+    if (byteStr.length == 1) byteStr = "0" + byteStr;
+    hash += byteStr;
+  }
+  return hash;
+}
+
 // ==========================================
 // 專用排版函式 (放在檔案最下方或 Utils 裡)
 // ==========================================
