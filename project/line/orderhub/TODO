@@ -2,6 +2,9 @@
 快速卡片，直接在line上面操作完成訂單
 新增過往dashboard記錄，先以今年為主就行
 
+2/9
+ok. [dashboard]新增所有年月業績指標
+
 2/2
 ok. 新增，list card狀態標籤邏輯，class加入overdue/today/tomorrow
 ok. 更新system log，list/dashboard的actor只顯示system，整改應顯示使用者名稱
