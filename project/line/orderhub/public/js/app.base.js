@@ -42,10 +42,11 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
         var $content = $group.find('.ui-fold-content');
 
         if (!$content.length) return;
+        // $group.toggleClass('is-fold-open');
+        // $content.stop(true, true).slideToggle(160);
 
-        $group.toggleClass('is-fold-open');
-
-        $content.stop(true, true).slideToggle(160);
+        let isfoldopen = $group.attr('data-isfoldopen');
+        $group.attr('data-isfoldopen', isfoldopen == 1 ? 0 : 1);
     });
 
 })(window, jQuery);

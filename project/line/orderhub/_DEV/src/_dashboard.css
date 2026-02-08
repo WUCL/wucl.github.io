@@ -375,18 +375,6 @@
             -webkit-overflow-scrolling: touch; // 讓手機滑動更絲滑
         }
 
-        .history-all-list {
-            .db-history-year-group {
-                .history-all-row {
-                    &.is-year-subtotal {
-                        background: rgba($mh, .07);
-                    }
-                }
-                &[data-isfoldopen="1"] {
-                }
-            }
-        }
-
         .history-all-header,
         .history-all-row {
             @include container($px:0,$py:0);
@@ -473,41 +461,7 @@
                 > span {}
             }
 
-            .h-ym {
-                display: flex;
-                align-items: center;
-                justify-content: space-between; // 讓年份在左，箭頭在右
-                gap: 5px;
-
-                .y-text {
-                    font-weight: 800;
-                    color: $mh;
-                }
-
-                .icon-btn {
-                    width: 20px;
-                    height: 18px;
-                    border: none;
-                    background: transparent;
-                    padding: 0;
-                }
-            }
-
-            &.is-year-subtotal {
-                background-color: #f8fafc;
-                position: sticky; // 如果你想要捲動時年份小計也釘住，可以加這行
-                top: 0;
-                z-index: 5;
-                border-bottom: 2px solid $bd;
-                cursor: pointer; // 讓人家知道整行可以點
-
-                &:hover {
-                    background-color: #f1f5f9;
-                }
-            }
-
-
-
+            .h-ym {}
             .h-ord {
                 width: 85px;
             }

@@ -25,7 +25,7 @@
 <!-- Dashboard -->
 <template id="tpl-dashboard">
 	<section class="dashboard">
-		<div id="db-monthly-stats" class="db-section db-monthly-stats ui-fold-group is-fold-open">
+		<div id="db-monthly-stats" class="db-section db-monthly-stats ui-fold-group" data-isFoldOpen="1">
 			<div class="db-section-h ui-fold-header">
 				<div class="db-section-h-title">
 					<h3>經營指標</h3>
@@ -67,7 +67,7 @@
 					<div class="value">
 						<div class="perf-percentBar">
 							<div class="progress-bg"><div class="progress-bar"></div></div>
-							<span class="percent" data-bind="monthPercent">0%</span>
+							<span class="percent" data-bind="monthGoalPercent">0%</span>
 						</div>
 						<div class="perf-values">
 							<span class="actual" data-bind="amtRevenue">$0</span> / <span class="goal" data-bind="monthGoal">$0</span>
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="db-unfinish"  class="db-section db-unfinish ui-fold-group is-fold-open">
+		<div id="db-unfinish"  class="db-section db-unfinish ui-fold-group" data-isFoldOpen="1">
 			<div class="db-section-h ui-fold-header">
 				<div class="db-section-h-title">
 					<h3>待辦交貨清單</h3>
@@ -103,6 +103,37 @@
 				<!-- 數據將注入此處 -->
 				<div class="loading-msg">數據讀取中...</div>
 			</div>
+		</div>
+
+		<div id="db-history-all" class="db-section db-history-all ui-fold-group" data-isFoldOpen="1">
+		    <div class="db-section-h ui-fold-header">
+		        <div class="db-section-h-title">
+		            <h3>過往指標紀錄</h3>
+		            <span class="sub">2022 - 至今</span>
+		        </div>
+		        <div class="db-section-h-actions">
+		            <button type="button" class="icon-btn" data-action="toggle">
+		                <svg><use xlink:href="#icon-chevron-down"/></svg>
+		            </button>
+		        </div>
+		    </div>
+		    <div class="db-section-b ui-fold-content">
+		        <!-- 表頭：簡單明瞭 -->
+		        <div class="history-all-header">
+		            <div class="h-ym">年月</div>
+		            <div class="h-ordTotal">訂單</div>
+		            <div class="h-ordMomDiff">訂單增減</div>
+		            <div class="h-amtAov">平均客單價</div>
+		            <div class="h-amtRevenue">業績</div>
+		            <div class="h-monthGoal"><span>目標</span><span>達成率</span></div>
+                    <div class="h-amtExpenses"><span>支出</span></div>
+                    <div class="h-amtProfit"><span>利潤</span><span>利潤率</span></div>
+		            <div class="h-custSegment"><span>新客</span><span>舊客</span><span>親友</span><span>其他</span></div>
+		        </div>
+		        <div id="history-all-list" class="history-all-list">
+		            <!-- 數據注入 -->
+		        </div>
+		    </div>
 		</div>
 	</section>
 </template>

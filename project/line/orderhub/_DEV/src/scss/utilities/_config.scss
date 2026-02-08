@@ -36,6 +36,10 @@ $state-overdue: $err;
 $state-tomorrow: #f59e0b;
 $state-today: $primary;
 
+$state-complete: #f59e0b;
+$state-high: $err;
+$state-low: $primary;
+
 // ---- 字體 ----
 $font-family: -apple-system,
 BlinkMacSystemFont,

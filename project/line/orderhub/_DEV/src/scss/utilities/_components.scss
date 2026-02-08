@@ -283,7 +283,25 @@
 .ui-fold-group {
     .icon-btn svg { transition: transform .3s; }
 
-    &.is-fold-open {
-        .icon-btn[data-action="toggle"] svg { transform: rotate(180deg); }
+    > .ui-fold-content {
+        /* 1. 核心設定：收起來時高度為 0 */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+
+        /* 2. 平滑過渡 */
+        transition: max-height .35s cubic-bezier(0, 1, 0, 1), opacity .3s ease; // 關的速度
+    }
+
+    &[data-isFoldOpen="1"] {
+        > .ui-fold-content {
+            max-height: 2000px;
+            opacity: 1;
+            transition: max-height .4s cubic-bezier(1, 0, 1, 0), opacity .4s ease; // 開的速度
+        }
+        > .ui-fold-header .icon-btn[data-action="toggle"] > svg {
+            transform: rotate(180deg);
+        }
+
     }
 }

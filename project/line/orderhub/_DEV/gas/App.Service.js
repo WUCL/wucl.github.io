@@ -369,6 +369,21 @@ function filterByRawDateRange_(rows, colIdx, range, customMonth) {
   });
 }
 
+/**
+ * 私有函式：更新資料版本號，強迫所有後端快取失效
+ */
+function refreshDataVersion_() {
+  const cache = CacheService.getScriptCache();
+  // 產出一個新的時間戳記
+  const newVersion = Date.now().toString();
+  // 存入 ScriptProperties 作為全域版本標記
+  PropertiesService.getScriptProperties().setProperty('DATA_VERSION', newVersion);
+  // 同時清除那些已知的固定快取 (如有)
+  cache.remove("DEFAULT_LIST_PAGE");
+}
+
+// ==========================================
+
 // for dashboard
 /**
  * Dashboard 數據統計中控函式
@@ -385,8 +400,9 @@ function Orders_getSummary() {
     // 未來想加新的數據，只需在此處增加一列
     const tasks = {
       unfinished: getUnfinishedOrdersList_,
+      monthlyStats: getMonthlyDashboardStats_,
       goals: getSalesGoals_,
-      monthlyStats: getMonthlyDashboardStats_
+      historyAll: getFullHistoryStats_
     };
 
     // 執行所有註冊的任務
@@ -437,27 +453,6 @@ function getUnfinishedOrdersList_() {
 }
 
 /**
- * 收集器：僅抓取當年度的月目標與年目標
- */
-function getSalesGoals_() {
-  const sheetName = 'Dashboard_目標';
-  const sh = SS().getSheetByName(sheetName);
-  if (!sh) return { monthGoal: 0, yearGoal: 0 };
-
-  const currYear = new Date().getFullYear();
-  const data = sh.getDataRange().getValues();
-
-  // 尋找符合今年的那一行 (第0欄是年份)
-  const targetRow = data.find(r => r[0] == currYear);
-
-  return {
-    monthGoal: targetRow ? Number(targetRow[1] || 0) : 0,
-    yearGoal: targetRow ? Number(targetRow[2] || 0) : 0
-  };
-}
-
-
-/**
  * 收集器：從 "Dashboard" 抓取特定年份與月份的指標
  */
 function getMonthlyDashboardStats_() {
@@ -494,6 +489,7 @@ function getMonthlyDashboardStats_() {
 
     // 金額類 (Amount)
     amtRevenue: getV('營業收入'),
+    amtExpenses: getV('月支出'),
     amtUnpaid: getV('未收款'),
     amtAov: getV('平均客單'),
 
@@ -506,14 +502,104 @@ function getMonthlyDashboardStats_() {
 }
 
 /**
- * 私有函式：更新資料版本號，強迫所有後端快取失效
+ * 收集器：僅抓取當年度的月目標與年目標
  */
-function refreshDataVersion_() {
-  const cache = CacheService.getScriptCache();
-  // 產出一個新的時間戳記
-  const newVersion = Date.now().toString();
-  // 存入 ScriptProperties 作為全域版本標記
-  PropertiesService.getScriptProperties().setProperty('DATA_VERSION', newVersion);
-  // 同時清除那些已知的固定快取 (如有)
-  cache.remove("DEFAULT_LIST_PAGE");
+function getSalesGoals_() {
+  const sheetName = 'Dashboard_目標';
+  const sh = SS().getSheetByName(sheetName);
+  if (!sh) return { monthGoal: 0, yearGoal: 0 };
+
+  const currYear = new Date().getFullYear();
+  const data = sh.getDataRange().getValues();
+
+  // 尋找符合今年的那一行 (第0欄是年份)
+  const targetRow = data.find(r => r[0] == currYear);
+
+  return {
+    monthGoal: targetRow ? Number(targetRow[1] || 0) : 0,
+    yearGoal: targetRow ? Number(targetRow[2] || 0) : 0
+  };
+}
+
+/**
+ * 收集器：抓取當年度所有月份的業績與目標
+ */
+function getFullHistoryStats_() {
+  const now = new Date();
+  const currYear = now.getFullYear();
+  const currMonth = now.getMonth() + 1; // 1-12
+
+  // 1. 取得年度目標
+  const goalSheet = SS().getSheetByName('Dashboard_目標');
+  const goalData = goalSheet.getDataRange().getValues().slice(1);
+  const goalMap = {};
+  goalData.forEach(r => { goalMap[r[0]] = Number(r[1]) || 0; });
+
+  // 2. 取得 Dashboard 實績
+  const dashSheet = SS().getSheetByName('Dashboard');
+  if (!dashSheet) return [];
+
+  const dashData = dashSheet.getDataRange().getValues();
+  const headers = dashData[0];
+  const rows = dashData.slice(1);
+
+  // 定義索引位置
+  const idxYear = headers.indexOf('年');
+  const idxMonth = headers.indexOf('月份');
+  const idxOrder = headers.indexOf('月訂單');
+  const idxDiff = headers.indexOf('上月相差');
+  const idxRevenue = headers.indexOf('營業收入');
+  const idxAmtAov = headers.indexOf('平均客單');
+  const idxExpenses = headers.indexOf('月支出');
+
+  // 【客戶分類索引】
+  const idxCustNew = headers.indexOf('新客');
+  const idxCustRepeat = headers.indexOf('複購');
+  const idxCustRel = headers.indexOf('親友');
+  const idxCustOther = headers.indexOf('其他');
+
+  // 3. 處理並過濾
+  return rows
+    .filter(r => {
+      const rowYear = Number(r[idxYear]);
+      const rowMonth = Number(r[idxMonth]);
+      if (rowYear > currYear) return false; // 過濾未來時間
+      if (rowYear === currYear && rowMonth > currMonth) return false;
+      return true;
+    })
+    .map(r => {
+      const year = r[idxYear];
+      const revenue = Number(r[idxRevenue]) || 0;
+      const expenses = Number(r[idxExpenses]) || 0;
+      const goal = goalMap[year] || 0;
+
+      // 提取客戶數值
+      const cNew = Number(r[idxCustNew]) || 0;
+      const cRep = Number(r[idxCustRepeat]) || 0;
+      const cRel = Number(r[idxCustRel]) || 0;
+      const cOth = Number(r[idxCustOther]) || 0;
+
+      return {
+        ym: `${year} / ${String(r[idxMonth]).padStart(2, '0')}`,
+        year: year,
+        month: r[idxMonth],
+        ordTotal: r[idxOrder] || 0,
+        ordMomDiff: r[idxDiff] || 0,
+        amtAov: Number(r[idxAmtAov]) || 0,
+        amtRevenue: revenue,
+        amtExpenses: expenses,
+        amtProfit: revenue - expenses,
+        monthGoal: goal,
+        percent: goal > 0 ? Math.round((revenue / goal) * 100) : 0,
+
+        custNew: cNew,
+        custRepeat: cRep,
+        custRel: cRel,
+        custOther: cOth
+      };
+    })
+    .sort((a, b) => {
+      if (b.year !== a.year) return b.year - a.year;
+      return b.month - a.month;
+    });
 }
