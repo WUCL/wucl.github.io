@@ -89,7 +89,7 @@
         }).join('');
 
         if (groupHtml) {
-            $card.append(`<div class="detail ui-fold-content" style="display:none;">${groupHtml}</div>`);
+            $card.append(`<div class="detail ui-fold-content">${groupHtml}</div>`);
         }
 
         return $card;

@@ -28,14 +28,19 @@
         box-shadow: $shadow-sm;
     }
 
+    &.state-overdue,
+    &.state-tomorrow,
+    &.state-today {
+        border-inline-width: 2px;
+    }
     &.state-overdue {
-        border-color: $state-overdue;
+        border-inline-color: $state-overdue;
     }
     &.state-tomorrow {
-        border-color: $state-tomorrow;
+        border-inline-color: $state-tomorrow;
     }
     &.state-today {
-        border-color: $state-today;
+        border-inline-color: $state-today;
     }
 
     // 內層結構
@@ -175,9 +180,6 @@
     // 詳細內容展開區
     .detail {
         display: grid;
-        padding-top: 6px;
-        margin-top: 4px;
-        border-top: 1px dashed $bd;
         font-size: $font-size-sm;
 
         @include respond(md) {
@@ -185,27 +187,26 @@
         }
 
         &-group {
+            margin-top: $space-1;
             span {
-                margin-left: 7px;
+                margin-left: $space-1;
             }
-
-            &::after {
+            &::before {
                 content: "";
                 width: 100%;
                 height: 1px;
-                background: $bd;
                 display: block;
-                margin: 7px 0;
+                border-top: 1px dashed $bd;
             }
-
-            &:last-child::after {
-                display: none;
+            &:first-child::before {
+                border-top-style: solid;
             }
 
             .g-body {
                 display: grid;
                 grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 1px 7px;
+                margin-block: $space-1;
 
                 @include respond(md) {
                     grid-template-columns: 1fr;
