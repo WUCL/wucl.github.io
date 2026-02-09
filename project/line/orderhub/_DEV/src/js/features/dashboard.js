@@ -378,15 +378,14 @@
             const yearSubtotal = calculateSubtotal(yearItems, year);
 
             const isCurrentYear = (year == new Date().getFullYear());
-            const openCls = isCurrentYear ? 'is-fold-open' : '';
-            const displayStyle = isCurrentYear ? '' : 'style="display:none;"';
+            const isFoldOpen = isCurrentYear ? '1' : '';
 
             // 這裡將「年度小計」這一行作為 Toggle 標頭
             // 傳入 true 啟動箭頭顯示
             let yearGroupHtml = `
-                <div class="db-history-year-group ui-fold-group ${openCls}">
+                <div class="db-history-year-group ui-fold-group" data-isFoldOpen="${isFoldOpen}">
                     ${renderHistoryRow(yearSubtotal, 'is-year-subtotal ui-fold-header', true)}
-                    <div class="ui-fold-content" ${displayStyle}>
+                    <div class="db-history-year-content ui-fold-content">
                         ${yearItems.map(item => renderHistoryRow(item, '', false)).join('')}
                     </div>
                 </div>

@@ -51,6 +51,7 @@
         // 綁定基礎資料
         $card.attr('data-id', data['訂單編號'] || '');
         $card.attr('data-status', data['訂單狀態'] || '');
+        $card.attr('data-pay', data['是否已付款'] || '');
 
         $card.find('[data-bind]').each(function() {
             var key = $(this).attr('data-bind');
@@ -71,7 +72,7 @@
         if (data['是否已交貨']) tags.push(data['是否已交貨']);
         if (data['是否已付款']) tags.push(data['是否已付款']);
 
-        var $tags = $card.find('.shippay .tags-inline').empty();
+        var $tags = $card.find('.oShippay .tags-inline').empty();
         tags.forEach(function(t) {
             var cls = (t.indexOf('未') !== -1) ? 'warn' : '';
             $tags.append(`<span class="tag ${cls}">${t}</span>`);
@@ -317,11 +318,89 @@
         });
 
         // 4. 卡片操作 (編輯)
-        $container.off('click').on('click', '.icon-btn[data-action="edit"]', function(e) {
+        // $container.off('click').on('click', '.icon-btn[data-action="edit"]', function(e) {
+        //     e.preventDefault();
+        //     var $card = $(this).closest('.card.order');
+        //     var $id = $card.attr('data-id');
+        //     if ($id) location.hash = '#/edit?id=' + encodeURIComponent($id);
+        // });
+
+        // 4. 卡片操作
+        // $container.off('click').on('click', '.icon-btn', async function(e) {
+        $container.off('click.orderActions').on('click.orderActions', '.icon-btn', async function(e) {
+            var $btn = $(this);
+            var action = $btn.attr('data-action');
+            if (action === 'toggle') return;
+
             e.preventDefault();
-            var $card = $(this).closest('.card.order');
-            var $id = $card.attr('data-id');
-            if ($id) location.hash = '#/edit?id=' + encodeURIComponent($id);
+            e.stopPropagation(); // 防止觸發到外層
+
+            var $card = $btn.closest('.card.order');
+            var orderId = $card.attr('data-id');
+            var currentPayStatus = $card.attr('data-pay');
+
+            if (action === 'quick-done') {
+                // --- 【核心邏輯：快速完成】 ---
+                var allowedPayStatus = ['已付款', '公關', '付訂金'];
+                if (allowedPayStatus.indexOf(currentPayStatus) === -1) {
+                    alert(`⚠️ 無法快速結單！\n訂單 #${orderId} 目前狀態為「${currentPayStatus}」。\n請先確認款項後再進行操作。`);
+                    return; // 終止操作
+                }
+
+                // double confirm
+                const confirmDone = confirm(`確定要將訂單 #${orderId} 標記為「已完成」嗎？\n(這將同步將狀態改為 done 並設為已交貨)`);
+                if (!confirmDone) return;
+
+                if (APP.status?.start) APP.status.start('快速更新狀態');
+                $btn.prop('disabled', true).css('opacity', '.5'); // 防止重複點擊
+
+                try {
+                    const profile = await APP.getLineProfile();
+
+                    // 直接呼叫 update API
+                    // 強制將這三個關鍵欄位一次更新到位
+                    const res = await APP.api('update', {
+                        id: orderId,
+                        patch: {
+                            '訂單狀態': 'done',
+                            '是否已交貨': '已交貨'
+                        },
+                        actor: APP.var.actor,
+                        lineName: profile.lineName,
+                        lineId: profile.lineId
+                    });
+
+                    if (res && res.ok) {
+                        if (APP.status?.done) APP.status.done(true, `#${orderId} 已結案`);
+
+                        // 清除快取，否則回到 Dashboard 數字會不對
+                        if (typeof APP.clearCache === 'function') APP.clearCache();
+
+                        // 視覺回饋：讓卡片淡出並移除
+                        $card.fadeOut(400, function() {
+                            $(this).remove();
+                            // 如果這頁空了，重新刷一次
+                            if ($container.children().length === 0) fetchAndRender();
+                        });
+
+                        // LINE 通知 (選擇性：如果你想在群組噴出一句已結案)
+                        if (APP.var.liffReady && window.liff && liff.isInClient()) {
+                            liff.sendMessages([{ type: 'text', text: `✅ 訂單已快速結案：${orderId}` }]).catch(()=>{});
+                        }
+                    } else {
+                        alert('更新失敗：' + (res.msg || '請稍後再試'));
+                        $btn.prop('disabled', false).css('opacity', '1');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    if (APP.status?.done) APP.status.done(false, '連線異常');
+                    $btn.prop('disabled', false).css('opacity', '1');
+                }
+
+            } else if (action === 'edit') {
+                // ... 原本的編輯邏輯 ...
+                if (orderId) location.hash = '#/edit?id=' + encodeURIComponent(orderId);
+            }
         });
 
         // 【新增邏輯】監聽篩選器變色

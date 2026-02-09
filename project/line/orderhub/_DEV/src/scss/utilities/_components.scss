@@ -128,8 +128,11 @@
 
     &__list {
         // margin-top: 6px;
-        max-height: calc(1.5em * 3 + 5px);
+        max-height: calc(1.5em * 3 + 5px) !important;
         overflow: auto;
+    }
+    &:not([data-isFoldOpen="1"]) .oh-status__list {
+        max-height: 0 !important;
     }
 
     &__line {
@@ -295,13 +298,14 @@
 
     &[data-isFoldOpen="1"] {
         > .ui-fold-content {
-            max-height: 2000px;
+            max-height: 700px;
+            overflow-y: auto; // 關鍵：開啟橫向捲動
+            -webkit-overflow-scrolling: touch; // 讓手機滑動更絲滑
             opacity: 1;
             transition: max-height .4s cubic-bezier(1, 0, 1, 0), opacity .4s ease; // 開的速度
         }
         > .ui-fold-header .icon-btn[data-action="toggle"] > svg {
             transform: rotate(180deg);
         }
-
     }
 }

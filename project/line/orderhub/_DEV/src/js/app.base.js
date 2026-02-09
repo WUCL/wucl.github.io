@@ -35,15 +35,12 @@ window.isMobile = function() { return window.deviceObj.isMobile(); };
     // 全域動態 Toggle 邏輯
     $(document).on('click', '.ui-fold-group [data-action="toggle"]', function(e) {
         e.preventDefault();
-        e.stopPropagation();
 
         var $btn = $(this);
         var $group = $btn.closest('.ui-fold-group');
         var $content = $group.find('.ui-fold-content');
 
         if (!$content.length) return;
-        // $group.toggleClass('is-fold-open');
-        // $content.stop(true, true).slideToggle(160);
 
         let isfoldopen = $group.attr('data-isfoldopen');
         $group.attr('data-isfoldopen', isfoldopen == 1 ? 0 : 1);

@@ -3,6 +3,7 @@
 // ==========================================
 
 /* 定義呼吸動畫 */
+// animation: bar-pulse 7s ease-in-out infinite;
 @keyframes bar-pulse {
     0%   { filter: brightness(.9); opacity: .8; }
     50%  { filter: brightness(1.2); opacity: 1; }   // 呼吸最深處，微亮

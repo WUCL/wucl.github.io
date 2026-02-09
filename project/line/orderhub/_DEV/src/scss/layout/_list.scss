@@ -59,9 +59,31 @@
 
             .cell.actions {
                 display: grid;
+                // grid-template-columns: repeat(2, 1fr);
                 gap: 2px;
+                width: 65px;
                 height: 100%;
                 align-items: center;
+                @include respond(md) {
+                    grid-template-columns: 1fr;
+                    width: 28px;
+                }
+                .icon-btn {
+                    width: 100%;
+                    // height: 28px;
+                    &[data-action="quick-done"] {
+                        color: lighten($primary, 15%);
+                        // border-color: $primary-weak;
+                    }
+                    // 針對「收合」按鈕：強迫佔據兩欄寬度 (全寬)
+                    &[data-action="toggle"] {
+                        grid-column: 1 / -1;
+                        // height: 22px; // 第二排可以稍微矮一點點，比較精緻
+                        @include respond(md) {
+                            grid-column: auto;
+                        }
+                    }
+                }
             }
         }
     }
@@ -75,7 +97,7 @@
         line-height: normal;
 
         .cell {
-            &.status {
+            &.oStatus {
                 display: inline-block;
                 padding: 1px 6px;
                 font-size: $font-size-sm;
@@ -101,27 +123,36 @@
                 text-align: justify;
                 letter-spacing: -.5px;
 
-                &.shippay {
+                &.oShippay {
                     @include respond(md) {
                         grid-column: 1 / -1;
                         padding: 3px 0 3px;
                     }
                 }
-
                 &.oName {
-                    max-width: 120px;
-                    line-height: 1.2em;
+                }
+                &.oName,
+                &.oItem {
+                    span {
+                        @include respond(md) {
+                            max-width: 20vw;
+                            min-width: 0;   // 防止被內容撐爆
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
                 }
             }
 
-            &.id {
+            &.oId {
                 display: inline-block;
                 font-weight: 500;
                 color: rgba($muted, .7);
                 letter-spacing: -1.5px;
             }
 
-            &.date {
+            &.oDate {
                 color: $ink;
                 background: $bg-soft;
                 padding: 0 3px;
@@ -129,10 +160,10 @@
                 letter-spacing: -.3px;
             }
 
-            &.amount {
+            &.oAmount {
                 font-weight: 500;
                 color: $ink;
-                letter-spacing: -.3px;
+                letter-spacing: -.7px;
             }
         }
 
@@ -149,32 +180,43 @@
 
     // 訂單狀態樣式
     &[data-status="doing"] {
-        .row .cell.status {
+        .row .cell.oStatus {
             background: $status-doing;
         }
     }
 
     &[data-status="done"] {
-        opacity: 0.77;
+        opacity: .77;
         background: $status-done;
+        .row {
+            .cell {
+                &.oStatus {
+                    background: $status-done;
+                }
+                &.oDate,
+                &.oAmount {
+                    color: $muted;
+                }
 
-        .row .cell.status {
-            background: $status-done;
+            }
         }
-
-        .row .cell.date,
-        .row .cell.amount {
-            color: $muted;
+        .icon-btn[data-action="quick-done"] {
+            display: none;
         }
     }
 
     &[data-status="cancel"] {
         text-decoration: line-through;
 
-        .row .cell.status {
+        .row .cell.oStatus {
             background: $status-cancel;
             text-decoration: none;
         }
+    }
+    &[data-pay="未付款"] .icon-btn[data-action="quick-done"] {
+        opacity: .3;
+        filter: grayscale(1); // 變灰色
+        cursor: not-allowed;
     }
 
     // 詳細內容展開區

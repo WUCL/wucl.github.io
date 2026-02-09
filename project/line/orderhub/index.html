@@ -122,7 +122,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="oh-status__list ui-fold-content" style="display:none;"></div>
+				<div class="oh-status__list ui-fold-content"></div>
 			</div>
 		</template>
 
@@ -386,30 +386,33 @@
 
 		<!-- ========== 訂單卡片 ========== -->
 		<template id="tpl-list-card">
-			<div class="card order ui-fold-group" data-id="" data-status="">
+			<div class="card order ui-fold-group" data-id data-status data-isfoldopen>
 				<div class="card__inner ui-fold-header">
 					<div class="col a">
 						<!-- 行 A: 訂單狀態 | ID | 交貨日期 | 標籤 -->
 						<div class="row a">
-							<div class="cell meta status"><span data-bind="訂單狀態">—</span></div>
-							<div class="cell meta id">#<span data-bind="訂單編號">—</span></div>
-							<div class="cell meta date"><span data-bind="交貨日期">—</span></div>
-							<div class="cell meta shippay"><span data-bind="取貨方式">—</span><span class="tags-inline"></span></div>
+							<div class="cell meta oStatus"><span data-bind="訂單狀態">—</span></div>
+							<div class="cell meta oId">#<span data-bind="訂單編號">—</span></div>
+							<div class="cell meta oDate"><span data-bind="交貨日期">—</span></div>
+							<div class="cell meta oShippay"><span data-bind="取貨方式">—</span><span class="tags-inline"></span></div>
 						</div>
 						<!-- 行 B: 平台 | 客戶 | 分類 | 金額 -->
 						<div class="row b">
-							<div class="cell meta"><span data-bind="接單平台">—</span></div>
+							<div class="cell meta oPlat"><span data-bind="接單平台">—</span></div>
 							<div class="cell meta oName"><span data-bind="訂購人姓名">—</span></div>
-							<div class="cell meta"><span data-bind="商品項目">—</span></div>
-							<div class="cell meta amount"><span data-bind="訂單金額">—</span></div>
+							<div class="cell meta oItem"><span data-bind="商品項目">—</span></div>
+							<div class="cell meta oAmount"><span data-bind="訂單金額">—</span></div>
 						</div>
 					</div>
 					<div class="col b">
 						<div class="cell actions">
-							<button type="button" class="icon-btn" data-action="edit" aria-label="編輯">
+							<!-- <button type="button" class="icon-btn" data-action="quick-done" title="快速結單" aria-label="快速結單">
+								<svg><use xlink:href="#icon-check-circle"/></svg>
+							</button> -->
+							<button type="button" class="icon-btn" data-action="edit" title="編輯" aria-label="編輯">
 								<svg><use xlink:href="#icon-edit"/></svg>
 							</button>
-							<button type="button" class="icon-btn" data-action="toggle" aria-label="開合">
+							<button type="button" class="icon-btn" data-action="toggle" title="開合" aria-label="開合">
 								<svg><use xlink:href="#icon-chevron-down"/></svg>
 							</button>
 						</div>
@@ -424,6 +427,9 @@
 			</symbol>
 			<symbol id="icon-chevron-down" viewBox="0 0 24 24">
 				<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 10l5 5 5-5" />
+			</symbol>
+			<symbol id="icon-check-circle" viewBox="0 0 24 24">
+			    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
 			</symbol>
 		</svg>
 		<!-- ==========================================

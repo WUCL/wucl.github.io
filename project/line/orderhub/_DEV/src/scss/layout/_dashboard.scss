@@ -377,6 +377,11 @@
 
         .history-all-list {
             .db-history-year-group {
+                // border: 1px solid rgba($mh, .7);
+                // border-bottom: 0;
+                // &:last-child {
+                //     border-bottom: 0;
+                // }
                 .history-all-row {
                     &.is-year-subtotal {
                         background: rgba($mh, .07);
@@ -401,8 +406,8 @@
             35px  /* 訂單 */
             58px  /* 增減 */
             70px  /* 客單 */
-            70px  /* 業績 */
-            120px /* 目標/達成率 */
+            77px  /* 業績 */
+            119px /* 目標/達成率 */
             70px /* 支出 */
             119px /* 利潤 */
             180px /* 客戶佔比 */
@@ -460,14 +465,33 @@
             > div {
                 text-align: right;
                 background-color: $bg-soft;
+                border-right: 1px solid rgba(255,255,255,0.1);
             }
         }
 
         .history-all-row {
             border-bottom: 1px solid #f1f5f9;
             &:hover {
-                background-color: $bg-soft;
+                background-color: rgba($bg-soft, .7);
             }
+            &.is-grand-total {
+                // background-color: #f1f5f9; // 淺灰藍底
+                border-bottom: 2px solid #cbd5e1;
+                // font-weight: 800;
+                .h-ym span { color: $mh; } // 主色突顯
+                // .h-amtRevenue, .h-amtProfit { color: $ink; } // 總金額加重
+            }
+            &.is-year-subtotal {
+                background-color: #f8fafc;
+                // border-left: 3px solid $mh; // 加入左側色條引導視覺
+                // .y-text { font-size: 16px; color: $mh; }
+                // font-weight: 700;
+            }
+            &:not(.is-grand-total):not(.is-year-subtotal) {
+                color: $muted;
+            }
+
+
             > div {
                 &:last-child {}
                 > span {}
@@ -493,18 +517,18 @@
                 }
             }
 
-            &.is-year-subtotal {
-                background-color: #f8fafc;
-                position: sticky; // 如果你想要捲動時年份小計也釘住，可以加這行
-                top: 0;
-                z-index: 5;
-                border-bottom: 2px solid $bd;
-                cursor: pointer; // 讓人家知道整行可以點
+            // &.is-year-subtotal {
+            //     background-color: #f8fafc;
+            //     position: sticky; // 如果你想要捲動時年份小計也釘住，可以加這行
+            //     top: 0;
+            //     z-index: 5;
+            //     border-bottom: 2px solid $bd;
+            //     cursor: pointer; // 讓人家知道整行可以點
 
-                &:hover {
-                    background-color: #f1f5f9;
-                }
-            }
+            //     &:hover {
+            //         background-color: #f1f5f9;
+            //     }
+            // }
 
 
 
