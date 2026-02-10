@@ -351,8 +351,10 @@
                 const confirmDone = confirm(`確定要將訂單 #${orderId} 標記為「已完成」嗎？\n(這將同步將狀態改為 done 並設為已交貨)`);
                 if (!confirmDone) return;
 
-                if (APP.status?.start) APP.status.start('快速更新狀態');
+                $card.addClass('is-busy');
+                if (APP.status?.start) APP.status.start('快速更新狀態，結案執行中');
                 $btn.prop('disabled', true).css('opacity', '.5'); // 防止重複點擊
+
 
                 try {
                     const profile = await APP.getLineProfile();
@@ -371,21 +373,42 @@
                     });
 
                     if (res && res.ok) {
+                        $card.removeClass('is-busy').addClass('is-success');
+                        // 注入類似「新增/編輯成功」的訊息覆蓋層
+                        const successHtml = `
+                            <div class="card-success-overlay">
+                                <span class="check-icon">✅</span>
+                                <span>訂單 #${orderId} 已成功結案</span>
+                            </div>
+                        `;
+                        $card.append(successHtml);
+
+
                         if (APP.status?.done) APP.status.done(true, `#${orderId} 已結案`);
 
                         // 清除快取，否則回到 Dashboard 數字會不對
                         if (typeof APP.clearCache === 'function') APP.clearCache();
 
                         // 視覺回饋：讓卡片淡出並移除
-                        $card.fadeOut(400, function() {
-                            $(this).remove();
-                            // 如果這頁空了，重新刷一次
-                            if ($container.children().length === 0) fetchAndRender();
-                        });
+                        // $card.fadeOut(400, function() {
+                        //     $(this).remove();
+                        //     // 如果這頁空了，重新刷一次
+                        //     if ($container.children().length === 0) fetchAndRender();
+                        // });
+                        // --- 【最後階段：停留 1.5 秒後淡出移除】 ---
+                        // setTimeout(() => {
+                        //     $card.fadeOut(400, function() {
+                        //         $(this).remove();
+                        //         // 如果該頁空了，重刷
+                        //         if ($container.children('.card.order:visible').length === 0) {
+                        //             fetchAndRender();
+                        //         }
+                        //     });
+                        // }, 1500);
 
                         // LINE 通知 (選擇性：如果你想在群組噴出一句已結案)
                         if (APP.var.liffReady && window.liff && liff.isInClient()) {
-                            liff.sendMessages([{ type: 'text', text: `✅ 訂單已快速結案：${orderId}` }]).catch(()=>{});
+                            liff.sendMessages([{ type: 'text', text: `✏️ 已更新訂單，快速結案：${orderId}` }]).catch(()=>{});
                         }
                     } else {
                         alert('更新失敗：' + (res.msg || '請稍後再試'));
@@ -393,6 +416,7 @@
                     }
                 } catch (err) {
                     console.error(err);
+                    $card.removeClass('is-busy');
                     if (APP.status?.done) APP.status.done(false, '連線異常');
                     $btn.prop('disabled', false).css('opacity', '1');
                 }

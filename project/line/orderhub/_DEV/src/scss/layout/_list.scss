@@ -11,6 +11,7 @@
 }
 
 .card.order {
+    position: relative;
     background: $card-bg;
     border: 1px solid $bd;
     border-radius: $radius;
@@ -27,6 +28,59 @@
     &:hover {
         box-shadow: $shadow-sm;
     }
+
+    // --- 1. Loading 狀態 ---
+    &.is-busy {
+        cursor: wait;
+        pointer-events: none; // 鎖定所有按鈕
+        filter: grayscale(.5);
+        opacity: .7;
+
+        &::after {
+            content: '處理中...';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: $primary;
+            z-index: 10;
+        }
+    }
+
+    // --- 2. 成功完成狀態 ---
+    &.is-success {
+        border-color: $primary !important;
+        background-color: $primary-overly !important;
+        transform: scale(.98); // 輕微縮小，有收工的感覺
+        padding: 0;
+        opacity: .9;
+
+        .card-success-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: $primary-overly;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $primary;
+            font-weight: 700;
+            font-size: $font-size-base;
+            z-index: 20;
+            border-radius: $radius;
+
+            .check-icon {
+                font-size: $font-size-lg;
+                margin-right: $space-2;
+            }
+        }
+    }
+
 
     &.state-overdue,
     &.state-tomorrow,
@@ -59,7 +113,7 @@
 
             .cell.actions {
                 display: grid;
-                // grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: 2px;
                 width: 65px;
                 height: 100%;
