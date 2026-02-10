@@ -408,7 +408,9 @@
 
                         // LINE 通知 (選擇性：如果你想在群組噴出一句已結案)
                         if (APP.var.liffReady && window.liff && liff.isInClient()) {
-                            liff.sendMessages([{ type: 'text', text: `✏️ 已更新訂單，快速結案：${orderId}` }]).catch(()=>{});
+                            const userName = APP.var.userName || '使用者'; // 確保有抓到名字
+                            let $text = `✏️ 已更新訂單（快速結案）\n${orderId}\n-\n${userName} 編輯`;
+                            liff.sendMessages([{ type: 'text', text: $text }]).catch(()=>{});
                         }
                     } else {
                         alert('更新失敗：' + (res.msg || '請稍後再試'));
