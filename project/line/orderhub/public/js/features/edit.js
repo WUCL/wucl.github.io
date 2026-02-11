@@ -122,10 +122,13 @@
                     if (APP.var.liffReady && window.liff && liff.isInClient()) {
                         const userName = APP.var.userName || '使用者'; // 確保有抓到名字
 
+                        const orderName = $form.find('[name="訂購人姓名"]').val() || '未知';
+
                         // 組裝訊息字串
                         let diffMsg = [
                             `✏️ 已更新訂單`,
                             `${orderId}`,
+                            `${orderName}`,
                             `-`,
                             `${userName} 編輯`,
                             `-`
