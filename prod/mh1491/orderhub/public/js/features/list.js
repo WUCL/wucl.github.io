@@ -337,6 +337,7 @@
 
             var $card = $btn.closest('.card.order');
             var orderId = $card.attr('data-id');
+            var orderName = $card.find('[data-bind="訂購人姓名"]').text() || '未知';
             var currentPayStatus = $card.attr('data-pay');
 
             if (action === 'quick-done') {
@@ -389,28 +390,23 @@
                         // 清除快取，否則回到 Dashboard 數字會不對
                         if (typeof APP.clearCache === 'function') APP.clearCache();
 
-                        // 視覺回饋：讓卡片淡出並移除
-                        // $card.fadeOut(400, function() {
-                        //     $(this).remove();
-                        //     // 如果這頁空了，重新刷一次
-                        //     if ($container.children().length === 0) fetchAndRender();
-                        // });
-                        // --- 【最後階段：停留 1.5 秒後淡出移除】 ---
-                        // setTimeout(() => {
-                        //     $card.fadeOut(400, function() {
-                        //         $(this).remove();
-                        //         // 如果該頁空了，重刷
-                        //         if ($container.children('.card.order:visible').length === 0) {
-                        //             fetchAndRender();
-                        //         }
-                        //     });
-                        // }, 1500);
-
                         // LINE 通知 (選擇性：如果你想在群組噴出一句已結案)
                         if (APP.var.liffReady && window.liff && liff.isInClient()) {
                             const userName = APP.var.userName || '使用者'; // 確保有抓到名字
-                            let $text = `✏️ 已更新訂單（快速結案）\n${orderId}\n-\n${userName} 編輯`;
-                            liff.sendMessages([{ type: 'text', text: $text }]).catch(()=>{});
+                            // 1. 組裝文字陣列
+                            let textArray = [
+                                `✏️ 已更新訂單（快速結案）`,
+                                `${orderId}`,
+                                `${orderName}`,
+                                `-`,
+                                `${userName} 編輯`,
+                            ];
+
+                            // 2. 合併為字串
+                            const fullText = textArray.join('\n');
+                            liff.sendMessages([
+                                { type: 'text', text: fullText }
+                            ]).catch(err => console.error('LINE 傳送失敗', err));
                         }
                     } else {
                         alert('更新失敗：' + (res.msg || '請稍後再試'));
@@ -424,7 +420,6 @@
                 }
 
             } else if (action === 'edit') {
-                // ... 原本的編輯邏輯 ...
                 if (orderId) location.hash = '#/edit?id=' + encodeURIComponent(orderId);
             }
         });
