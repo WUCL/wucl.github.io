@@ -224,8 +224,8 @@
     };
 
     APP.route = function() {
-        const h = location.hash || '#/list';
-        // const h = location.hash || '#/dashboard'; // 改為 dashboard
+        // landing page
+        const h = location.hash || '#/dashboard'; // '#/list';
 
         this.navHighlight();
         var name = (h.replace(/^#\//, '')).split('?')[0];

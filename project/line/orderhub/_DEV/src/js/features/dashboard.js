@@ -55,6 +55,14 @@
                 localStorage.setItem('CACHE_SUMMARY', JSON.stringify(res.data));
                 renderAllWidgets(res.data); // 靜默更新最新數據
 
+                // pre fetch list
+                setTimeout(function() {
+                    if (typeof APP.preFetchList === 'function') {
+                        APP.preFetchList();
+                    }
+                }, 2000);
+
+
                 // 【完成狀態列】
                 if (APP.status?.done) APP.status.done(true, '同步完成');
             } else {
