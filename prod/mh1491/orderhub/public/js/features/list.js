@@ -279,6 +279,39 @@
             });
         }
 
+
+        /**
+         * [新增] 預讀取清單資料 (用於背景執行)
+         */
+        APP.preFetchList = function() {
+            // 預設參數：第一頁、進行中
+            var params = {
+                limit: 10,
+                year: new Date().getFullYear(),
+                orderStatus: 'doing',
+                page: 1
+            };
+
+            const cacheKey = JSON.stringify(params);
+            const storageKey = 'CACHE_LIST_' + cacheKey;
+
+            // 如果記憶體已經有快取了，就不重複抓
+            if (APP.var.cache.list && APP.var.cache.list[cacheKey]) return;
+
+            console.log('[Optimization] 開始背景預讀取清單...');
+
+            APP.api('list', params).then(function(res) {
+                if (res && res.ok && Array.isArray(res.items)) {
+                    // 存入雙層快取
+                    if (!APP.var.cache.list) APP.var.cache.list = {};
+                    APP.var.cache.list[cacheKey] = res;
+                    localStorage.setItem(storageKey, JSON.stringify(res));
+                    console.log('[Optimization] 清單預讀取完成');
+                }
+            });
+        };
+
+
         // === 事件綁定區 ===
 
         // 1. 狀態篩選 (立即重刷)
@@ -395,7 +428,7 @@
                             const userName = APP.var.userName || '使用者'; // 確保有抓到名字
                             // 1. 組裝文字陣列
                             let textArray = [
-                                `✏️ 已更新訂單（快速結案）`,
+                                `✏️ 已更新訂單（快結）`,
                                 `${orderId}`,
                                 `${orderName}`,
                                 `-`,
