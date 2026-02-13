@@ -242,7 +242,6 @@ function Orders_updateByPatch(orderId, patch, actor, opt = {}) {
  * 訂單列表 (GAS 端 - 已修正索引排序)
  */
 function Orders_list(params = {}) {
-  // --- 【新增：後端快取讀取】 ---
   const cache = CacheService.getScriptCache();
   const version = PropertiesService.getScriptProperties().getProperty('DATA_VERSION') || '1';
 
@@ -316,10 +315,15 @@ function Orders_list(params = {}) {
     return obj;
   });
 
-  // return { ok: true, items, total, page, pages: Math.ceil(total / limit) };
-  const result = { ok: true, items, total, page, pages: Math.ceil(total / limit) };
+  const result = {
+        ok: true,
+        items,
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+        serverVersion: version
+      };
 
-  // --- 【新增：存入後端快取】 ---
   // 存儲 600 秒 (10 分鐘)
   // 注意：CacheService 單筆限制為 100KB，對於分頁後的 10 筆數據綽綽有餘
   cache.put(cacheKey, JSON.stringify(result), 600);
@@ -389,15 +393,19 @@ function refreshDataVersion_() {
  * Dashboard 數據統計中控函式
  */
 function Orders_getSummary() {
+
+  const version = PropertiesService.getScriptProperties().getProperty('DATA_VERSION') || '1';
+
   const result = {
     ok: true,
-    data: {},
+    data: {
+      serverVersion: version
+    },
     ts: new Date().getTime()
   };
 
   try {
     // 定義所有的數據收集任務
-    // 未來想加新的數據，只需在此處增加一列
     const tasks = {
       unfinished: getUnfinishedOrdersList_,
       monthlyStats: getMonthlyDashboardStats_,
