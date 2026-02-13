@@ -49,22 +49,41 @@
 
         // 5. 執行 API 請求
         APP.api('summary', {}).then(res => {
-            if (res && res.ok) {
-                // 更新快取
-                APP.var.cache.summary = res.data;
-                localStorage.setItem('CACHE_SUMMARY', JSON.stringify(res.data));
-                renderAllWidgets(res.data); // 靜默更新最新數據
+             if (res && res.ok) {
+                const data = res.data;
 
-                // pre fetch list
+                // --- 【核心同步邏輯】 ---
+                // 取得 GAS 回傳的版本號與手機存的舊版本號
+                const serverVer = data.serverVersion;
+                const localVer = localStorage.getItem('LAST_DATA_VERSION');
+
+                // 如果版本號不同，代表遠端資料已被他人修改，執行清空快取
+                if (localVer && serverVer !== localVer) {
+                    console.warn('[Sync] 偵測到遠端資料已變動，執行快取清理');
+                    if (typeof APP.clearCache === 'function') {
+                        APP.clearCache(); // 清空記憶體與 localStorage
+                    }
+                }
+
+                // 更新本地端記錄的版本號
+                localStorage.setItem('LAST_DATA_VERSION', serverVer);
+                // -----------------------
+
+                // 更新當前的 Dashboard 快取
+                APP.var.cache.summary = data;
+                localStorage.setItem('CACHE_SUMMARY', JSON.stringify(data));
+                renderAllWidgets(data); // 靜默更新最新數據
+
+                // 2 秒後執行預讀清單
                 setTimeout(function() {
                     if (typeof APP.preFetchList === 'function') {
                         APP.preFetchList();
                     }
                 }, 2000);
 
-
                 // 【完成狀態列】
                 if (APP.status?.done) APP.status.done(true, '同步完成');
+
             } else {
                  // 【失敗狀態列】
                 if (APP.status?.done) APP.status.done(false, '同步失敗：' + (res.msg || '未知錯誤'));

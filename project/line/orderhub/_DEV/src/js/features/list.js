@@ -176,46 +176,55 @@
             const cacheKey = JSON.stringify(params);
             const storageKey = 'CACHE_LIST_' + cacheKey;
 
-            // A. 檢查記憶體快取 (這是一進即出的，直接結束)
-            if (APP.var.cache.list && APP.var.cache.list[cacheKey]) {
-                if (APP.status?.start) APP.status.start('讀取快取清單');
-                renderListUI(APP.var.cache.list[cacheKey], true); // 真正的結束
-                return;
+            // 【新增：多人同步關鍵】取得手機紀錄的最新版本號
+            const globalVer = localStorage.getItem('LAST_DATA_VERSION') || '0';
+
+            // A. 檢查記憶體快取 (需比對版本)
+            if (APP.var.cache.list[cacheKey]) {
+                const cachedRes = APP.var.cache.list[cacheKey];
+                if (cachedRes.serverVersion === globalVer) {
+                    if (APP.status?.start) APP.status.start('讀取快取清單');
+                    renderListUI(cachedRes, true);
+                    return;
+                } else {
+                    console.warn('[List] 偵測到新版本，記憶體快取失效');
+                    delete APP.var.cache.list[cacheKey];
+                }
             }
 
             // B. 需要執行背景同步或重新讀取
             if (APP.status?.start) APP.status.start('載入清單');
 
-            // 1. 優先從手機儲存讀取 (秒開)
-            const localList = localStorage.getItem(cacheKey);
-            if (localList) {
-                console.log('[List] 顯示持久化快取');
-                // 先渲染，但不結束進度條
-                renderListUI(JSON.parse(localList), false);
-                // 將進度條推到 77%，提示正在同步
-                if (APP.status?.tick) APP.status.tick('同步最新資料中', 77);
+            // 2. 檢查持久化快取 (localStorage)
+            const localListStr = localStorage.getItem(storageKey);
+            if (localListStr) {
+                const localRes = JSON.parse(localListStr);
+                if (localRes.serverVersion === globalVer) {
+                    console.log('[List] 使用持久化快取');
+                    renderListUI(localRes, false);
+                    if (APP.status?.tick) APP.status.tick('同步最新資料中', 77);
+                } else {
+                    console.warn('[List] 持久化快取版本過期');
+                    $container.html('<div class="loading">發現資料變動，重新讀取中…</div>');
+                }
             } else {
                 $container.html('<div class="loading">讀取中…</div>');
             }
 
-            // 2. 背景請求最新資料
+            // 3. 請求最新資料
             APP.var.isFetchingList = true;
             APP.api('list', params).then(res => {
                 if (res && res.ok && Array.isArray(res.items)) {
-                    // 更新快取
-                    if (!APP.var.cache.list) APP.var.cache.list = {};
-                    APP.var.cache.list[cacheKey] = res;
-                    localStorage.setItem(cacheKey, JSON.stringify(res));
+                    // 更新全域版本號 (這很重要！讓 Dashboard 也知道更新了)
+                    if (res.serverVersion) localStorage.setItem('LAST_DATA_VERSION', res.serverVersion);
 
-                    // 真正完成，傳入 true 讓進度條跑完
+                    APP.var.cache.list[cacheKey] = res;
+                    localStorage.setItem(storageKey, JSON.stringify(res));
                     renderListUI(res, true);
                 } else {
                     renderEmpty($container);
-                    if (APP.status?.done) APP.status.done(false, '連線異常');
+                    if (APP.status?.done) APP.status.done(false, '連線失敗');
                 }
-            }).catch(err => {
-                console.error('[List] Fetch Error:', err);
-                if (APP.status?.done) APP.status.done(false, '網路錯誤');
             }).finally(() => {
                 APP.var.isFetchingList = false;
             });

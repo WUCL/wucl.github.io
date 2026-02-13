@@ -164,23 +164,24 @@
             APP.clearCache();
 
             // 2. 清空手機儲存空間 (Persistent Cache)
+            localStorage.removeItem('LAST_DATA_VERSION');
             localStorage.removeItem('CACHE_SUMMARY');
-            // 移除所有以 CACHE_LIST_ 開頭的項目
+
+            // 3. 額外保險：清空所有以 CACHE_LIST_ 或 PERSIST_LIST_ 開頭的項目
             Object.keys(localStorage).forEach(key => {
-                if (key.startsWith('CACHE_LIST_')) localStorage.removeItem(key);
+                if (key.startsWith('CACHE_LIST_') || key.startsWith('PERSIST_LIST_')) {
+                    localStorage.removeItem(key);
+                }
             });
 
-            // 1. 瞬間變灰 (加上 class)
+            // 4. 視覺回饋與狀態啟動
             $btn.addClass('is-loading');
+            if (APP.status?.start) APP.status.start('手動強制更新全站資料');
 
-            // 2. 啟動狀態列 (如果有啟動 APP.status)
-            if (APP.status?.start) APP.status.start('手動更新資料');
-
-            // 3. 執行路由刷新 (重新抓取當前頁面資料)
-            // 因為 APP.route() 會觸發 API 請求，我們稍微延遲移除 class，讓使用者有感
+            // 5. 重新驅動路由 (這時因為快取已空，會強迫跑 API)
             APP.route();
 
-            // 4. 0.8秒後移除 class，觸發 CSS 的漸進式恢復彩色
+            // 6. 延遲恢復按鈕樣式
             setTimeout(function() {
                 $btn.removeClass('is-loading');
             }, 1000);
