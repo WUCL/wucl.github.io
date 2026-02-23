@@ -2,6 +2,18 @@
 快速卡片，直接在line上面操作完成訂單
 新增過往dashboard記錄，先以今年為主就行
 
+2/13
+ok. 更新landing page到dashboard並預先載入list頁面資料
+ok. 更新更新全域快取
+
+2/11
+ok. 新增quick done，快速結單操作
+ok. quick done且按下去後有一段loading的svg
+ok. edit/quick done，line message加入ordername
+
+2/10
+ok. 調整樣式，ui-folder/list card/order history
+
 2/9
 ok. [dashboard]新增所有年月業績指標
 
